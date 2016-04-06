@@ -1,0 +1,20 @@
+<module>
+	<rawname>calendar</rawname>
+	<repo>standard</repo>
+	<name>Blacklist</name>
+	<version>14.0.1alpha1</version>
+	<publisher>Sangoma Technologies Corporation</publisher>
+	<license>GPLv3+</license>
+	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
+	<category>Applications</category>
+	<description>This module is used to manage calendar and time based events for FreePBX</description>
+	<menuitems>
+		<calendar needsenginedb="yes">Calendar</calendar>
+	</menuitems>
+	<changelog>
+    *14.0.1alpha1* Development
+	</changelog>
+	<supported>
+		<version>13.0</version>
+	</supported>
+</module>
