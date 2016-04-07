@@ -40,7 +40,8 @@ class Calendar implements \BMO {
           'end' => '2016-04-07T16:12:36+00:00',
           'mydata' => 'foobar',
 					'color' => 'blue',
-					'textColor' => 'white'
+					'textColor' => 'white',
+					'type' => 'calendaronly'
         );
 				$return = $return + $this->parseTimegroups($_REQUEST['start'],$_REQUEST['end']);
 
@@ -108,13 +109,15 @@ class Calendar implements \BMO {
 	public function disableEvent(){}
 	public function deleteEvent(){}
 	public function updateEvent(){}
-	public function getEventTypes(){
-		return array(
-			'calendaronly',
-			'presence',
-			'callflow',
-			'hook'
-		);
+	public function getEventTypes($showhidden = false){
+		$ret = array();
+		$ret['calendaronly'] = array('desc' => _("Calendar Only"), 'type' => 'all', 'visible' => true);
+		$ret['presence'] = array('desc' => _("Presence"), 'type' => 'all', 'visible' => true);
+		$ret['callflow'] = array('desc' => _("Call Flow"), 'type' => 'admin', 'visible' => true);
+		if($showhidden){
+			$ret['hook'] = array('desc' => _("Hook"), 'type' => 'all', 'visible' => false);
+		}
+		return $ret;
 	}
 	public function buildRangeDays($start, $end, $hour, $days, $dom, $month){
 		$days = ($days == '*')?'sun-sat':$days;
@@ -135,7 +138,6 @@ class Calendar implements \BMO {
 		if($daysrange){
 			$sday = date('w', strtotime($days[0]));
 			$eday = date('w', strtotime($days[1]));
-			dbug(array($sday,$eday));
 			$dayArr = range($sday,$eday);
 		}else{
 			$dayArr = array(date('w', strtotime($days[0])));
@@ -175,7 +177,7 @@ class Calendar implements \BMO {
 						$istart += (7 * 24 * 3600);
 						continue;
 					}
-					if(!in_array(date('j',$istart)+1,$domArr)){
+					if(!in_array(date('j',$istart),$domArr)){
 						$istart += (7 * 24 * 3600);
 						continue;
 					}
@@ -203,6 +205,8 @@ class Calendar implements \BMO {
 					'title' => $tc['description'],
 					'start' => $item['start'],
 					'end' => $item['end'],
+					'type' => 'callflow',
+					'canedit' => false
 				);
 			}
 		}
