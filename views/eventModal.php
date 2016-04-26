@@ -6,6 +6,7 @@
                 <h4 id="modalTitle" class="modal-title"><?php echo _("Event")?></h4>
             </div>
             <div id="modalBody" class="modal-body">
+              <input type="hidden" name="eventid" id="eventid" value="">
               <!--Event Type-->
               <div class="element-container">
                 <div class="row">
@@ -113,7 +114,54 @@
                 </div>
               </div>
               <!--END End Event Date and Time-->
-
+              <!--Match Destination-->
+              <div class="element-container dest hidden">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="form-group">
+                        <div class="col-md-3">
+                          <label class="control-label" for="goto0"><?php echo _("Match Destination") ?></label>
+                          <i class="fa fa-question-circle fpbx-help-icon" data-for="goto0"></i>
+                        </div>
+                        <div class="col-md-9">
+                          <?php echo drawselects('', 0, false,true,'', false, false, false)?>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <span id="goto0-help" class="help-block fpbx-help-block"><?php echo _("Destination if time matches")?></span>
+                  </div>
+                </div>
+              </div>
+              <!--END Match Destination-->
+              <!--Non Match Destination-->
+              <div class="element-container dest hidden">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="form-group">
+                        <div class="col-md-3">
+                          <label class="control-label" for="goto1"><?php echo _("Non Match Destination") ?></label>
+                          <i class="fa fa-question-circle fpbx-help-icon" data-for="goto1"></i>
+                        </div>
+                        <div class="col-md-9">
+                          <?php echo drawselects('', 1, false,true,'', false, false, false)?>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <span id="goto1-help" class="help-block fpbx-help-block"><?php echo _("Destination if time does NOT match")?></span>
+                  </div>
+                </div>
+              </div>
+              <!--END Non Match Destination-->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo _("Close")?></button>

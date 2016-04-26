@@ -21,6 +21,7 @@ class Calendar implements \BMO {
       case 'events':
       case 'tpl':
 			case 'modal':
+			case 'destdetails':
         return true;
       break;
       default:
@@ -47,6 +48,11 @@ class Calendar implements \BMO {
 
         return $return;
       break;
+			case 'destdetails':
+				$dest = isset($_REQUEST['dest'])?$_REQUEST['dest']:'none';
+				\FreePBX::Modules()->loadAllFunctionsInc();
+				return \framework_identify_destinations($dest, false);
+			break;
     }
   }
 	public function ajaxCustomHandler() {
@@ -104,10 +110,56 @@ class Calendar implements \BMO {
 		$ret = $stmt->fetch(\PDO::FETCH_ASSOC);
 		return $ret;
 	}
-	public function addEvent(){}
+	public function addEvent($eventOBJ){
+		if(empty($eventOBJ)){
+			return array('status' => false, 'message' => _('Event object can not be empty'));
+		}
+		if(!is_array($eventOBJ)){
+			return array('status' => false, 'message' => _('Event object must be an array'));
+		}
+		$eventDefaults = array(
+			uid => '',
+			description => '',
+			hookdata => '',
+			active => true,
+			generatehint => false,
+			generatefc => false,
+			eventtype => 'calendaronly',
+			weekdays => '',
+			monthdays => '',
+			months => '',
+			startdate => '',
+			enddate => '',
+			repeatinterval => '',
+			frequency => '',
+			truedest => '',
+			falsedest => ''
+		);
+		$insertOBJ = array();
+		foreach($eventDefaults as $K => $V){
+			$value = isset($eventOBJ[$K])?$eventOBJ[$K]:$V;
+			$insertOBJ[':'.$K] = $value;
+		}
+		$sql = 'INSERT INTO calendar_events ('.implode(',',array_keys($eventDefaults)).') VALUES ('.implode(',',array_keys($insertOBJ)).')';
+		$stmt = $this->db->prepare($sql);
+		if($stmt->execute($insertOBJ)){
+			return array('status' => true, 'message' => _("Event added"));
+		}else{
+			return array('status' => false, 'message' => _("Failed to add event"), 'error' => $stmt->errorInfo());
+		}
+	}
 	public function enableEvent(){}
 	public function disableEvent(){}
 	public function deleteEvent(){}
+	public function deleteEventByUser($uid){
+		$sql = 'DELETE FROM calendar_events WHERE uid = :uid';
+		$stmt = $this->db->prepare($sql);
+		if($stmt->execute(array(':uid' => $uid))){
+			return array('status' => true, 'message' => _("Events Deleted"), 'count' => $stmt->rowCount());
+		}else{
+			return array('status' => false, 'message' => _("Failed to delete events"), 'error' => $stmt->errorInfo());
+		}
+	}
 	public function updateEvent(){}
 	public function getEventTypes($showhidden = false){
 		$ret = array();
