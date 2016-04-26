@@ -143,14 +143,22 @@ class Calendar implements \BMO {
 		$sql = 'INSERT INTO calendar_events ('.implode(',',array_keys($eventDefaults)).') VALUES ('.implode(',',array_keys($insertOBJ)).')';
 		$stmt = $this->db->prepare($sql);
 		if($stmt->execute($insertOBJ)){
-			return array('status' => true, 'message' => _("Event added"));
+			return array('status' => true, 'message' => _("Event added"),'id' => $this->db->lastInsertId());
 		}else{
 			return array('status' => false, 'message' => _("Failed to add event"), 'error' => $stmt->errorInfo());
 		}
 	}
 	public function enableEvent(){}
 	public function disableEvent(){}
-	public function deleteEvent(){}
+	public function deleteEventById($id){
+		$sql = 'DELETE FROM calendar_events WHERE id = :id LIMIT 1';
+		$stmt = $this->db->prepare($sql);
+		if($stmt->execute(array(':id' => $id))){
+			return array('status' => true, 'message' => _("Event Deleted"));
+		}else{
+			return array('status' => false, 'message' => _("Failed to delete event"), 'error' => $stmt->errorInfo());
+		}
+	}
 	public function deleteEventByUser($uid){
 		$sql = 'DELETE FROM calendar_events WHERE uid = :uid';
 		$stmt = $this->db->prepare($sql);
