@@ -9,13 +9,13 @@ $(document).ready(function() {
             text: 'Add Event',
             click: function() {
               $('#description').val('');
-              $("#type").val('');
+              $("#eventtype").val('');
               resetDrawselects()
               $('.dest').addClass('hidden');
-              $('#stime').val(moment(Date.now()).format("YYYY-MM-DD h:mm:ss"));
-              $('#etime').val(moment(Date.now()).format("YYYY-MM-DD h:mm:ss"));
-              $('#stime').datetimepicker('update');
-              $('#etime').datetimepicker('update');
+              $('#startdate').val(moment(Date.now()).format("YYYY-MM-DD h:mm:ss"));
+              $('#enddate').val(moment(Date.now()).format("YYYY-MM-DD h:mm:ss"));
+              $('#startdate').datetimepicker('update');
+              $('#enddate').datetimepicker('update');
               $('#eventid').val('new');
               $('#eventModal').modal('show');
               if(event.canedit !== false){
@@ -52,18 +52,24 @@ $(document).ready(function() {
     eventClick: function( event, jsEvent, view ) {
       $('#description').val(event.title);
       $('#eventid').val(event.id);
-      $("#type option[value='"+event.type+"']").prop('selected', true)
-      $('#stime').val(moment(event.start).format("YYYY-MM-DD h:mm:ss"));
-      $('#etime').val(moment(event.end).format("YYYY-MM-DD h:mm:ss"));
-      $('#stime').datetimepicker('update');
-      $('#etime').datetimepicker('update');
+      $("#eventtype option[value='"+event.eventtype+"']").prop('selected', true);
+      $('#startdate').val(moment(event.startdate).format("YYYY-MM-DD h:mm:ss"));
+      $('#enddate').val(moment(event.enddate).format("YYYY-MM-DD h:mm:ss"));
+      $('#startdate').datetimepicker('update');
+      $('#enddate').datetimepicker('update');
       $('#eventModal').modal('show');
+      if(typeof event.truedest !== "undefined"){
+        setDrawselect('goto0', event.truedest);
+      }
+      if(typeof event.falsedest !== "undefined"){
+        setDrawselect('goto1', event.falsedest);
+      }
       if(event.canedit !== false){
         $("#modalSubmit").show();
       }else{
         $("#modalSubmit").hide();
       }
-      if(event.type == 'calflow'){
+      if(event.type == 'callflow'){
         $('.dest').removeClass('hidden');
       }else{
         $('.dest').addClass('hidden');
@@ -72,10 +78,10 @@ $(document).ready(function() {
     dayClick: function( event, jsEvent, view ) { console.log(event); }
 
   });
-  $("#stime").datetimepicker({
+  $("#startdate").datetimepicker({
       format: "dd MM yyyy - hh:ii"
   });
-  $("#etime").datetimepicker({
+  $("#enddate").datetimepicker({
       format: "dd MM yyyy - hh:ii"
   });
   $('.fc-button').addClass('btn btn-default');
@@ -101,13 +107,32 @@ function resetDrawselects(){
 	});
 }
 function setDrawselect(id,val){
-  var vals = val.split(",");
-  var dataid = $(id).data('id');
-  $(id+" option[value='"+vals[0]+"']").prop('selected', true);
-  $(vals[0]+dataid+" option[value='"+val+"']").prop('selected', true);
-  console.log(vals[1]);
+  var item = destinations[val];
+  if(typeof item === "undefined"){
+    resetDrawselects();
+    return;
+  }
+  var idx = $('#'+id).data('id');
+  $('#'+id+' > option[value="'+item.name+'"]').prop("selected","selected");
+  $("#"+id).trigger("change");
+  $('#'+item.name+idx+' > option[value="'+item.destination+'"]').prop("selected","selected");
+  $('#'+item.name+idx).trigger("change");
 }
-
-$.get( "ajax.php?module=calendar&command=destdetails&dest=ext-callrecording%2C1%2C1", function( data ) {
-  console.log(data);
+$('#modalSubmit').on('click',function(e){
+  e.preventDefault();
+  var fields = $("#eventModal .form-control:visible").serializeArray();
+  var submitdata = {};
+  submitdata['module'] = 'calendar';
+  submitdata['command'] = 'eventform';
+  submitdata['id'] = $('#eventid').val();
+  for ( var i=0, l=fields.length; i<l; i++  ) {
+    submitdata[fields[i].name] = fields[i].value;
+  }
+  console.log(submitdata);
+  $.ajax({
+    type: "POST",
+    url: 'ajax.php',
+    data: submitdata,
+    success: function(){fpbxToast('Event Added');}
+  });
 });

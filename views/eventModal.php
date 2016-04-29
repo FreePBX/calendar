@@ -6,7 +6,7 @@
                 <h4 id="modalTitle" class="modal-title"><?php echo _("Event")?></h4>
             </div>
             <div id="modalBody" class="modal-body">
-              <input type="hidden" name="eventid" id="eventid" value="">
+              <input type="hidden" name="eventid" id="eventid" class="form-control" value="">
               <!--Event Type-->
               <div class="element-container">
                 <div class="row">
@@ -14,11 +14,11 @@
                     <div class="row">
                       <div class="form-group">
                         <div class="col-md-3">
-                          <label class="control-label" for="type"><?php echo _("Event Type") ?></label>
+                          <label class="control-label" for="eventtype"><?php echo _("Event Type") ?></label>
                           <i class="fa fa-question-circle fpbx-help-icon" data-for="type"></i>
                         </div>
                         <div class="col-md-9">
-                          <select id="type" class="form-control">
+                          <select id="evebttype" name="eventtype" class="form-control">
                             <option value=''><?php echo _("Choose One")?></option>
                             <?php foreach ($cal->getEventTypes() as $key => $value) {
                               echo '<option value="'.$key.'">'.$value['desc'].'</option>';
@@ -31,7 +31,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <span id="type-help" class="help-block fpbx-help-block"><?php echo _("")?></span>
+                    <span id="eventtype-help" class="help-block fpbx-help-block"><?php echo _("")?></span>
                   </div>
                 </div>
               </div>
@@ -67,12 +67,12 @@
                     <div class="row">
                       <div class="form-group">
                         <div class="col-md-3">
-                          <label class="control-label" for="stime"><?php echo _("Start Date and Time") ?></label>
-                          <i class="fa fa-question-circle fpbx-help-icon" data-for="stime"></i>
+                          <label class="control-label" for="startdate"><?php echo _("Start Date and Time") ?></label>
+                          <i class="fa fa-question-circle fpbx-help-icon" data-for="startdate"></i>
                         </div>
                         <div class="col-md-9">
                           <div class="input-group">
-                            <input type="text" class="form-control" id="stime" name="stime" value="" readonly>
+                            <input type="text" class="form-control" id="startdate" name="startdate" value="" readonly>
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                           </div>
                         </div>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <span id="stime-help" class="help-block fpbx-help-block"><?php echo _("The time to start the event")?></span>
+                    <span id="startdate-help" class="help-block fpbx-help-block"><?php echo _("The time to start the event")?></span>
                   </div>
                 </div>
               </div>
@@ -94,12 +94,12 @@
                     <div class="row">
                       <div class="form-group">
                         <div class="col-md-3">
-                          <label class="control-label" for="etime"><?php echo _("End Event Date and Time") ?></label>
-                          <i class="fa fa-question-circle fpbx-help-icon" data-for="etime"></i>
+                          <label class="control-label" for="enddate"><?php echo _("End Event Date and Time") ?></label>
+                          <i class="fa fa-question-circle fpbx-help-icon" data-for="enddate"></i>
                         </div>
                         <div class="col-md-9">
                           <div class="input-group">
-                            <input type="text" class="form-control" id="etime" name="etime" value="" readonly>
+                            <input type="text" class="form-control" id="enddate" name="enddate" value="" readonly>
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                           </div>
                         </div>
@@ -109,7 +109,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <span id="etime-help" class="help-block fpbx-help-block"><?php echo _("Time this event ends")?></span>
+                    <span id="enddate-help" class="help-block fpbx-help-block"><?php echo _("Time this event ends")?></span>
                   </div>
                 </div>
               </div>

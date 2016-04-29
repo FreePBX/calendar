@@ -22,6 +22,7 @@ class Calendar implements \BMO {
       case 'tpl':
 			case 'modal':
 			case 'destdetails':
+			case 'eventform':
         return true;
       break;
       default:
@@ -32,26 +33,20 @@ class Calendar implements \BMO {
 	public function ajaxHandler() {
     switch ($_REQUEST['command']) {
       case 'events':
-        $return = array();
-        $return[]= array(
-          'id' => 23,
-          'title' => 'TEST EVENT',
-          'class' => 'event-important',
-          'start' => '2016-04-06T16:02:36-07:00',
-          'end' => '2016-04-07T16:12:36+00:00',
-          'mydata' => 'foobar',
-					'color' => 'blue',
-					'textColor' => 'white',
-					'type' => 'calendaronly'
-        );
-				$return = $return + $this->parseTimegroups($_REQUEST['start'],$_REQUEST['end']);
+				$return = array();
+				foreach($this->listEvents($_REQUEST['start'],$_REQUEST['end']) as $event){
+					$return[] = $event;
+				}
+				foreach($this->parseTimeConditions($_REQUEST['start'],$_REQUEST['end']) as $event){
+					$return[] = $event;
+				}
 
         return $return;
       break;
-			case 'destdetails':
-				$dest = isset($_REQUEST['dest'])?$_REQUEST['dest']:'none';
-				\FreePBX::Modules()->loadAllFunctionsInc();
-				return \framework_identify_destinations($dest, false);
+			case 'eventform':
+				if(isset($_REQUEST['id']) && $_REQUEST['id'] == 'new'){
+					return $this->addEvent($_REQUEST);
+				}
 			break;
     }
   }
@@ -89,25 +84,39 @@ class Calendar implements \BMO {
 		$ret = $stmt->fetch(\PDO::FETCH_ASSOC);
 		return $ret;
 	}
-	public function listEvents($start = false, $stop = false){
-		$sqlstart = $start?date('Y-m-d',floor($start/1000)):'';
-		$sqlend = $stop?date('Y-m-d',floor($stop/1000)):'';
+
+	public function listEvents($start = '', $stop = ''){
+		$start = !empty($start)?strtotime($start):false;
+		$stop = !empty($stop)?strtotime($stop):false;
 		$params = array();
 		$sql = 'SELECT * FROM calendar_events ';
 		if($start && $stop){
 			$sql .= 'WHERE startdate >= ? AND enddate <= ?';
-			$params = array($sqlstart,$sqlend);
+			$params = array($start,$stop);
 		}elseif($start){
 			$sql .= 'WHERE startdate >= ?';
-			$params = array($sqlstart);
+			$params = array($start);
 		}elseif($stop){
 			$sql .= 'WHERE enddate <= ?';
-			$params = array($sqlend);
+			$params = array($stop);
 		}
 
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute($params);
-		$ret = $stmt->fetch(\PDO::FETCH_ASSOC);
+		$ret = $stmt->fetchall(\PDO::FETCH_ASSOC);
+		foreach ($ret as $key => $value) {
+			if(isset($value['description'])){
+				$ret[$key]['title'] = $value['description'];
+			}
+			if(isset($value['startdate'])){
+				$ret[$key]['startdate'] = date("Y-m-d\TH:i:sO",$value['startdate']);
+				$ret[$key]['start'] = date("Y-m-d\TH:i:sO",$value['startdate']);
+			}
+			if(isset($value['enddate'])){
+				$ret[$key]['enddate'] = date("Y-m-d\TH:i:sO",$value['enddate']);
+				$ret[$key]['end'] = date("Y-m-d\TH:i:sO",$value['enddate']);
+			}
+		}
 		return $ret;
 	}
 	public function addEvent($eventOBJ){
@@ -118,27 +127,36 @@ class Calendar implements \BMO {
 			return array('status' => false, 'message' => _('Event object must be an array'));
 		}
 		$eventDefaults = array(
-			uid => '',
-			description => '',
-			hookdata => '',
-			active => true,
-			generatehint => false,
-			generatefc => false,
-			eventtype => 'calendaronly',
-			weekdays => '',
-			monthdays => '',
-			months => '',
-			startdate => '',
-			enddate => '',
-			repeatinterval => '',
-			frequency => '',
-			truedest => '',
-			falsedest => ''
+			'uid' => '',
+			'description' => '',
+			'hookdata' => '',
+			'active' => true,
+			'generatehint' => false,
+			'generatefc' => false,
+			'eventtype' => 'calendaronly',
+			'weekdays' => '',
+			'monthdays' => '',
+			'months' => '',
+			'startdate' => '',
+			'enddate' => '',
+			'repeatinterval' => '',
+			'frequency' => '',
+			'truedest' => '',
+			'falsedest' => ''
 		);
 		$insertOBJ = array();
 		foreach($eventDefaults as $K => $V){
 			$value = isset($eventOBJ[$K])?$eventOBJ[$K]:$V;
-			$insertOBJ[':'.$K] = $value;
+			switch($K){
+				case 'startdate':
+				case 'enddate':
+					$value = strtotime($value);
+					$insertOBJ[':'.$K] = $value;
+				break;
+				default:
+					$insertOBJ[':'.$K] = $value;
+				break;
+			}
 		}
 		$sql = 'INSERT INTO calendar_events ('.implode(',',array_keys($eventDefaults)).') VALUES ('.implode(',',array_keys($insertOBJ)).')';
 		$stmt = $this->db->prepare($sql);
@@ -250,8 +268,8 @@ class Calendar implements \BMO {
 		}
 		return $ret;
 	}
-	public function parseTimegroups($start,$end){
-		$sql = 'SELECT timegroups_groups.description, timegroups_details.time, timegroups_details.id FROM timegroups_groups INNER JOIN timegroups_details WHERE timegroups_groups.id=timegroups_details.timegroupid';
+	public function parseTimeConditions($start,$end){
+		$sql = 'SELECT timeconditions.displayname, timegroups_details.time, timeconditions.timeconditions_id, timeconditions.truegoto, timeconditions.falsegoto FROM timegroups_groups INNER JOIN timegroups_details ON timegroups_groups.id=timegroups_details.timegroupid INNER JOIN timeconditions ON timeconditions.time=timegroups_groups.id';
 		$stmt = $this->db->prepare($sql);
 		$stmt->execute();
 		$ret = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -261,12 +279,14 @@ class Calendar implements \BMO {
 			$info = $this->buildRangeDays($start, $end, $hour, $dow, $dom, $month);
 			foreach ($info as $item) {
 				$results[] = array(
-					'id' => $tc['id'],
-					'title' => $tc['description'],
+					'id' => $tc['timeconditions_id'],
+					'title' => $tc['displayname'],
 					'start' => $item['start'],
 					'end' => $item['end'],
 					'type' => 'callflow',
-					'canedit' => false
+					'canedit' => false,
+					'truedest' => $tc['truegoto'],
+					'falsedest' => $tc['falsegoto'],
 				);
 			}
 		}

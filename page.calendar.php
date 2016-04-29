@@ -25,3 +25,6 @@ $content .= load_view(__DIR__.'/views/eventModal.php',array('cal'=>$cal));
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+var destinations = <?php echo json_encode(FreePBX::Modules()->getDestinations())?>;
+</script>
