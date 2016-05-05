@@ -18,7 +18,7 @@
                           <i class="fa fa-question-circle fpbx-help-icon" data-for="type"></i>
                         </div>
                         <div class="col-md-9">
-                          <select id="evebttype" name="eventtype" class="form-control">
+                          <select id="eventtype" name="eventtype" class="form-control">
                             <option value=''><?php echo _("Choose One")?></option>
                             <?php foreach ($cal->getEventTypes() as $key => $value) {
                               echo '<option value="'.$key.'">'.$value['desc'].'</option>';

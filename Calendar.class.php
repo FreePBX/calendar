@@ -19,9 +19,6 @@ class Calendar implements \BMO {
 	public function ajaxRequest($req, &$setting) {
     switch($req){
       case 'events':
-      case 'tpl':
-			case 'modal':
-			case 'destdetails':
 			case 'eventform':
         return true;
       break;
@@ -46,33 +43,13 @@ class Calendar implements \BMO {
 			case 'eventform':
 				if(isset($_REQUEST['id']) && $_REQUEST['id'] == 'new'){
 					return $this->addEvent($_REQUEST);
+				}else{
+					return $this->updateEvent($_REQUEST);
 				}
 			break;
     }
   }
-	public function ajaxCustomHandler() {
-		switch($_REQUEST['command']) {
-			case "tpl":
-				$file = basename($_REQUEST['file']);
-				show_view(__DIR__.'/views/tmpls/'.$file);
-				return true;
-			break;
-			case "modal":
-				$return = array(
-					'id' => 23,
-					'title' => 'TEST EVENT',
-					'url' => '',
-					'class' => 'event-important',
-					'start' => 1459795958277,
-					'stop' => 1459795959277,
-					'mydata' => 'foobar',
-					'url' => 'ajax.php?module=calendar&command=modal&id=23'
-				);
-				echo "<pre>".print_r($return)."</pre>";
-				return true;
-			break;
-		}
-	}
+
 	Public function myDialplanHooks(){
 		return '490';
 	}
@@ -186,7 +163,46 @@ class Calendar implements \BMO {
 			return array('status' => false, 'message' => _("Failed to delete events"), 'error' => $stmt->errorInfo());
 		}
 	}
-	public function updateEvent(){}
+	public function updateEvent($eventOBJ){
+		if(!isset($eventOBJ['id']) || empty($eventOBJ['id'])){
+			return array('status' => false, 'message' => _("No event ID received"));
+		}
+		$id = $eventOBJ['id'];
+		$valid_keys = array(
+			'uid',
+			'description',
+			'hookdata',
+			'active',
+			'generatehint',
+			'generatefc',
+			'eventtype',
+			'weekdays',
+			'monthdays',
+			'months',
+			'startdate',
+			'enddate',
+			'repeatinterval',
+			'frequency',
+			'truedest',
+			'falsedest'
+		);
+		$insertObJ = array();
+		$params = array();
+		foreach($eventOBJ as $key => $val){
+			if(in_array($key, $valid_keys)){
+				$insertOBJ[':'.$key] = $val;
+				$params[] = sprintf('%s=:%s ',$key,$key);
+			}
+			$insertOBJ[':id'] = $id;
+			$sql = sprintf('UPDATE calander_events set %s WHERE id = :id',implode(',', $params));
+			$stmt = $this->db->prepare($sql);
+			if($stmt->execute($insertOBJ)){
+				return array('status' => true, 'message' => _("Event Updated"), 'count' => $stmt->rowCount());
+			}else{
+				return array('status' => false, 'message' => _("Failed to update event"), 'error' => $stmt->errorInfo());
+			}
+		}
+	}
 	public function getEventTypes($showhidden = false){
 		$ret = array();
 		$ret['calendaronly'] = array('desc' => _("Calendar Only"), 'type' => 'all', 'visible' => true);
