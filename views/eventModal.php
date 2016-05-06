@@ -72,7 +72,7 @@
                         </div>
                         <div class="col-md-9">
                           <div class="input-group">
-                            <input type="text" class="form-control" id="startdate" name="startdate" value="" readonly>
+                            <input type="text" class="form-control" id="startdate" name="startdate" value="">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                           </div>
                         </div>
@@ -99,7 +99,7 @@
                         </div>
                         <div class="col-md-9">
                           <div class="input-group">
-                            <input type="text" class="form-control" id="enddate" name="enddate" value="" readonly>
+                            <input type="text" class="form-control" id="enddate" name="enddate" value="">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                           </div>
                         </div>

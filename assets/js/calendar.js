@@ -5,6 +5,7 @@ $(document).ready(function() {
 		dayNames: daysOfWeek,
 		dayNamesShort: daysOfWeekShort,
 		displayEventEnd: true,
+    nextDayThreshold: '00:00:01',
 		customButtons: {
 				addEvent: {
 						text: 'Add Event',
@@ -51,11 +52,12 @@ $(document).ready(function() {
 			error: function(){fpbxToast(_('There was an error fetching the events'),'','warning');},
 		}],
 		eventClick: function( event, jsEvent, view ) {
+			console.log(event);
 			$('#description').val(event.title);
 			$('#eventid').val(event.id);
 			$("#eventtype option[value='"+event.eventtype+"']").prop('selected', true);
-			$('#startdate').val(moment(event.startdate).format("YYYY-MM-DD h:mm:ss"));
-			$('#enddate').val(moment(event.enddate).format("YYYY-MM-DD h:mm:ss"));
+			$('#startdate').val(moment(event.startdate).format("YYYY-MM-DD hh:mm:ss A"));
+			$('#enddate').val(moment(event.enddate).format("YYYY-MM-DD hh:mm:ss A"));
 			$('#startdate').datetimepicker('update');
 			$('#enddate').datetimepicker('update');
 			$('#eventModal').modal('show');
@@ -70,7 +72,7 @@ $(document).ready(function() {
 			}else{
 				$("#modalSubmit").hide();
 			}
-			if(event.type == 'callflow'){
+			if(event.eventtype == 'callflow'){
 				$('.dest').removeClass('hidden');
 			}else{
 				$('.dest').addClass('hidden');
@@ -81,11 +83,11 @@ $(document).ready(function() {
 	});
 
 	$("#startdate").datetimepicker({
-			format: "dd MM yyyy - hh:ii"
+		format:"YYYY-MM-DD hh:mm:ss A"
 	});
 
 	$("#enddate").datetimepicker({
-			format: "dd MM yyyy - hh:ii"
+		format:"YYYY-MM-DD hh:mm:ss A"
 	});
 	//Add bootstrap classes to full calendar
   $('.fc-button').addClass('btn btn-default');

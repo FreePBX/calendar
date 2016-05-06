@@ -86,12 +86,12 @@ class Calendar implements \BMO {
 				$ret[$key]['title'] = $value['description'];
 			}
 			if(isset($value['startdate'])){
-				$ret[$key]['startdate'] = date("Y-m-d\TH:i:sO",$value['startdate']);
-				$ret[$key]['start'] = date("Y-m-d\TH:i:sO",$value['startdate']);
+				$ret[$key]['startdate'] = date("Y-m-d H:i:s",$value['startdate']);
+				$ret[$key]['start'] = date("Y-m-d H:i:s",$value['startdate']);
 			}
 			if(isset($value['enddate'])){
-				$ret[$key]['enddate'] = date("Y-m-d\TH:i:sO",$value['enddate']);
-				$ret[$key]['end'] = date("Y-m-d\TH:i:sO",$value['enddate']);
+				$ret[$key]['enddate'] = date("Y-m-d H:i:s",$value['enddate']);
+				$ret[$key]['end'] = date("Y-m-d H:i:s",$value['enddate']);
 			}
 		}
 		return $ret;
@@ -129,6 +129,12 @@ class Calendar implements \BMO {
 				case 'enddate':
 					$value = strtotime($value);
 					$insertOBJ[':'.$K] = $value;
+				break;
+				case 'truedest':
+					$insertOBJ[':'.$K] = isset($eventOBJ['goto0'])?$this->getGoto('goto0', $eventOBJ):'';
+				break;
+				case 'falsedest':
+					$insertOBJ[':'.$K] = isset($eventOBJ['goto1'])?$this->getGoto('goto1', $eventOBJ):'';
 				break;
 				default:
 					$insertOBJ[':'.$K] = $value;
@@ -186,23 +192,46 @@ class Calendar implements \BMO {
 			'truedest',
 			'falsedest'
 		);
-		$insertObJ = array();
+		$insertOBJ = array();
 		$params = array();
 		foreach($eventOBJ as $key => $val){
-			if(in_array($key, $valid_keys)){
-				$insertOBJ[':'.$key] = $val;
-				$params[] = sprintf('%s=:%s ',$key,$key);
-			}
-			$insertOBJ[':id'] = $id;
-			$sql = sprintf('UPDATE calander_events set %s WHERE id = :id',implode(',', $params));
-			$stmt = $this->db->prepare($sql);
-			if($stmt->execute($insertOBJ)){
-				return array('status' => true, 'message' => _("Event Updated"), 'count' => $stmt->rowCount());
-			}else{
-				return array('status' => false, 'message' => _("Failed to update event"), 'error' => $stmt->errorInfo());
+			dbug(array($key,$val));
+			switch ($key) {
+				case 'startdate':
+				case 'enddate':
+					$val = strtotime($val);
+					$insertOBJ[':'.$key] = $val;
+					$params[] = sprintf('%s=:%s ',$key,$key);
+				break;
+				case 'truedest':
+					$val = isset($eventOBJ['goto0'])?$this->getGoto('goto0', $eventOBJ):'';
+					$insertOBJ[':'.$key] = $val;
+					$params[] = sprintf('%s=:%s ',$key,$key);
+				break;
+				case 'falsedest':
+					$val = isset($eventOBJ['goto1'])?$this->getGoto('goto1', $eventOBJ):'';
+					$insertOBJ[':'.$key] = $val;
+					$params[] = sprintf('%s=:%s ',$key,$key);
+				break;
+				default:
+				if(in_array($key, $valid_keys)){
+					$insertOBJ[':'.$key] = $val;
+					$params[] = sprintf('%s=:%s ',$key,$key);
+				}
+				break;
 			}
 		}
+		$insertOBJ[':id'] = $id;
+		dbug($insertOBJ);
+		$sql = sprintf('UPDATE calendar_events set %s WHERE id = :id',implode(',', $params));
+		$stmt = $this->db->prepare($sql);
+		if($stmt->execute($insertOBJ)){
+			return array('status' => true, 'message' => _("Event Updated"), 'count' => $stmt->rowCount());
+		}else{
+			return array('status' => false, 'message' => _("Failed to update event"), 'error' => $stmt->errorInfo());
+		}
 	}
+
 	public function getEventTypes($showhidden = false){
 		$ret = array();
 		$ret['calendaronly'] = array('desc' => _("Calendar Only"), 'type' => 'all', 'visible' => true);
@@ -276,8 +305,8 @@ class Calendar implements \BMO {
 						continue;
 					}
 					$ret[] = array(
-						'start' => sprintf('%sT%s',date('Y-m-d', $istart),$stime),
-						'end' => sprintf('%sT%s',date('Y-m-d', $istart),$etime),
+						'start' => sprintf('%s %s',date('Y-m-d', $istart),$stime),
+						'end' => sprintf('%s %s',date('Y-m-d', $istart),$etime),
 					);
 					$istart += (7 * 24 * 3600); // add 7 days
 				}
@@ -298,8 +327,10 @@ class Calendar implements \BMO {
 					'id' => $tc['timeconditions_id'],
 					'title' => $tc['displayname'],
 					'start' => $item['start'],
+					'startdate' => $item['start'],
+					'enddate' => $item['end'],
 					'end' => $item['end'],
-					'type' => 'callflow',
+					'eventtype' => 'callflow',
 					'canedit' => false,
 					'truedest' => $tc['truegoto'],
 					'falsedest' => $tc['falsegoto'],
@@ -307,5 +338,13 @@ class Calendar implements \BMO {
 			}
 		}
 		return $results;
+	}
+	public function getGoto($id,$request){
+		if(isset($request[$id])){
+			$idx = substr($id, -1, 1);
+			return $request[$request[$id].$idx];
+		}else{
+			return false;
+		}
 	}
 }
