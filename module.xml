@@ -12,9 +12,9 @@
 		<calendar needsenginedb="yes">Calendar</calendar>
 	</menuitems>
 	<changelog>
-    *14.0.1alpha1* Development
+	    *14.0.1alpha1* Development
 	</changelog>
 	<supported>
-		<version>13.0</version>
+		<version>14.0</version>
 	</supported>
 </module>

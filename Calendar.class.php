@@ -1,5 +1,7 @@
 <?php
 namespace FreePBX\modules;
+use \Moment\Moment;
+use \Moment\CustomFormats\MomentJs;
 $setting = array('authenticate' => true, 'allowremote' => false);
 
 class Calendar implements \BMO {
@@ -9,6 +11,7 @@ class Calendar implements \BMO {
 		}
 		$this->FreePBX = $freepbx;
 		$this->db = $freepbx->Database;
+		$this->systemtz = $this->getSystemTZ();
 	}
 
 	public function backup() {}
@@ -16,6 +19,17 @@ class Calendar implements \BMO {
   public function install(){}
   public function uninstall(){}
 	public function doConfigPageInit($page) {}
+	public function getSystemTZ(){
+		$tz = \FreePBX::Config()->get('PHPTIMEZONE');
+		if($tz){
+			return $tz;
+		}
+		$tz = date_default_timezone_get();
+		if($tz){
+			return $tz;
+		}
+		return 'UTC';
+	}
 	public function ajaxRequest($req, &$setting) {
     switch($req){
       case 'events':
@@ -86,12 +100,14 @@ class Calendar implements \BMO {
 				$ret[$key]['title'] = $value['description'];
 			}
 			if(isset($value['startdate'])){
-				$ret[$key]['startdate'] = date("Y-m-d H:i:s",$value['startdate']);
-				$ret[$key]['start'] = date("Y-m-d H:i:s",$value['startdate']);
+				$sd = new Moment($value['startdate'],$this->systemtz);
+				$ret[$key]['start'] = $sd->format('YYYY-MM-DD h:mm:ss', new MomentJs());
+				$ret[$key]['startdate'] = $sd->format('YYYY-MM-DD h:mm:ss', new MomentJs());
 			}
 			if(isset($value['enddate'])){
-				$ret[$key]['enddate'] = date("Y-m-d H:i:s",$value['enddate']);
-				$ret[$key]['end'] = date("Y-m-d H:i:s",$value['enddate']);
+				$ed = new Moment($value['startdate'],$this->systemtz);
+				$ret[$key]['enddate'] = $ed->format('YYYY-MM-DD h:mm:ss', new MomentJs());
+				$ret[$key]['end'] = $ed->format('YYYY-MM-DD h:mm:ss', new MomentJs());
 			}
 		}
 		return $ret;

@@ -1,6 +1,8 @@
-
 $(document).ready(function() {
-
+	$('#dow').multiselect({
+		includeSelectAllOption: true,
+		allSelectedText: _('Every Day')
+	});
 	$('#calendar').fullCalendar({
 		dayNames: daysOfWeek,
 		dayNamesShort: daysOfWeekShort,
@@ -14,10 +16,10 @@ $(document).ready(function() {
 							$("#eventtype").val('');
 							resetDrawselects()
 							$('.dest').addClass('hidden');
-							$('#startdate').val(moment(Date.now()).format("YYYY-MM-DD h:mm:ss"));
-							$('#enddate').val(moment(Date.now()).format("YYYY-MM-DD h:mm:ss"));
-							$('#startdate').datetimepicker('update');
-							$('#enddate').datetimepicker('update');
+							$('#startdate').val(moment(Date.now()).format("YYYY-MM-DD"));
+							$('#enddate').val(moment(Date.now()).format("YYYY-MM-DD"));
+							$('#startdate').datepicker('update');
+							$('#enddate').datepicker('update');
 							$('#eventid').val('new');
 							$('#eventModal').modal('show');
 							if(event.canedit !== false){
@@ -56,10 +58,10 @@ $(document).ready(function() {
 			$('#description').val(event.title);
 			$('#eventid').val(event.id);
 			$("#eventtype option[value='"+event.eventtype+"']").prop('selected', true);
-			$('#startdate').val(moment(event.startdate).format("YYYY-MM-DD hh:mm:ss A"));
-			$('#enddate').val(moment(event.enddate).format("YYYY-MM-DD hh:mm:ss A"));
-			$('#startdate').datetimepicker('update');
-			$('#enddate').datetimepicker('update');
+			$('#startdate').val(moment(event.startdate).format("YYYY-MM-DD"));
+			$('#enddate').val(moment(event.enddate).format("YYYY-MM-DD"));
+			$('#startdate').datepicker('update');
+			$('#enddate').datepicker('update');
 			$('#eventModal').modal('show');
 			if(typeof event.truedest !== "undefined"){
 				setDrawselect('goto0', event.truedest);
@@ -82,12 +84,26 @@ $(document).ready(function() {
 
 	});
 
-	$("#startdate").datetimepicker({
-		format:"YYYY-MM-DD hh:mm:ss A"
+	$("#startdate").datepicker({
+		format: {
+			toDisplay: function (date, format, language) {
+					return moment(date).format("YYYY-MM-DD");
+			},
+			toValue: function (date, format, language) {
+				return moment(date).format("YYYY-MM-DD");
+			}
+		},
 	});
 
-	$("#enddate").datetimepicker({
-		format:"YYYY-MM-DD hh:mm:ss A"
+	$("#enddate").datepicker({
+		format: {
+			toDisplay: function (date, format, language) {
+					return moment(date).format("YYYY-MM-DD");
+			},
+			toValue: function (date, format, language) {
+				return moment(date).format("YYYY-MM-DD");
+			}
+		},
 	});
 	//Add bootstrap classes to full calendar
   $('.fc-button').addClass('btn btn-default');

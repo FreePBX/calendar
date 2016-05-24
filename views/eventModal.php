@@ -67,7 +67,7 @@
                     <div class="row">
                       <div class="form-group">
                         <div class="col-md-3">
-                          <label class="control-label" for="startdate"><?php echo _("Start Date and Time") ?></label>
+                          <label class="control-label" for="startdate"><?php echo _("Start Date") ?></label>
                           <i class="fa fa-question-circle fpbx-help-icon" data-for="startdate"></i>
                         </div>
                         <div class="col-md-9">
@@ -94,7 +94,7 @@
                     <div class="row">
                       <div class="form-group">
                         <div class="col-md-3">
-                          <label class="control-label" for="enddate"><?php echo _("End Event Date and Time") ?></label>
+                          <label class="control-label" for="enddate"><?php echo _("End Date") ?></label>
                           <i class="fa fa-question-circle fpbx-help-icon" data-for="enddate"></i>
                         </div>
                         <div class="col-md-9">
@@ -113,7 +113,39 @@
                   </div>
                 </div>
               </div>
-              <!--END End Event Date and Time-->
+              <!--END End Event-->
+              <!--Days of the Week-->
+              <div class="element-container">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="form-group">
+                        <div class="col-md-3">
+                          <label class="control-label" for="dow"><?php echo _("Days of the Week") ?></label>
+                          <i class="fa fa-question-circle fpbx-help-icon" data-for="dow"></i>
+                        </div>
+                        <div class="col-md-9">
+                          <select class="form-control" id="dow" name="dow" multiple="multiple">
+                            <option value="1"><?php echo _("Monday") ?> </option>
+                            <option value="2"><?php echo _("Tuesday") ?> </option>
+                            <option value="3"><?php echo _("Wednesday") ?> </option>
+                            <option value="4"><?php echo _("Thursday") ?> </option>
+                            <option value="5"><?php echo _("Friday") ?> </option>
+                            <option value="6"><?php echo _("Saturday") ?> </option>
+                            <option value="7"><?php echo _("Sunday") ?> </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <span id="dow-help" class="help-block fpbx-help-block"><?php echo _("Days of week that this matches event matches true")?></span>
+                  </div>
+                </div>
+              </div>
+              <!--END Days of the Week-->
               <!--Match Destination-->
               <div class="element-container dest hidden">
                 <div class="row">
