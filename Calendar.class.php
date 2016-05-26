@@ -4,7 +4,7 @@ use \Moment\Moment;
 use \Moment\CustomFormats\MomentJs;
 $setting = array('authenticate' => true, 'allowremote' => false);
 
-class Calendar implements \BMO {
+class Calendar extends \DB_Helper implements \BMO {
 	public function __construct($freepbx = null) {
 		if ($freepbx == null) {
 			throw new Exception("Not given a FreePBX Object");
@@ -69,11 +69,7 @@ class Calendar implements \BMO {
 	}
 	public function doDialplanHook(&$ext, $engine, $priority){}
 	public function getEvent($id){
-		$sql = 'SELECT * FROM calendar_events WHERE id = ? LIMIT 1';
-		$stmt = $this->db->prepare($sql);
-		$stmt->execute(array(':id' => $id));
-		$ret = $stmt->fetch(\PDO::FETCH_ASSOC);
-		return $ret;
+		return $this->getConfig('event',$id);
 	}
 
 	public function listEvents($start = '', $stop = ''){
@@ -120,7 +116,7 @@ class Calendar implements \BMO {
 			return array('status' => false, 'message' => _('Event object must be an array'));
 		}
 		$eventDefaults = array(
-			'uid' => '',
+			'uid' => uniqid('fpcal_'),
 			'description' => '',
 			'hookdata' => '',
 			'active' => true,
@@ -132,6 +128,8 @@ class Calendar implements \BMO {
 			'months' => '',
 			'startdate' => '',
 			'enddate' => '',
+			'starttime' => '',
+			'endtime' => '',
 			'repeatinterval' => '',
 			'frequency' => '',
 			'truedest' => '',
@@ -157,24 +155,14 @@ class Calendar implements \BMO {
 				break;
 			}
 		}
-		$sql = 'INSERT INTO calendar_events ('.implode(',',array_keys($eventDefaults)).') VALUES ('.implode(',',array_keys($insertOBJ)).')';
-		$stmt = $this->db->prepare($sql);
-		if($stmt->execute($insertOBJ)){
-			return array('status' => true, 'message' => _("Event added"),'id' => $this->db->lastInsertId());
-		}else{
-			return array('status' => false, 'message' => _("Failed to add event"), 'error' => $stmt->errorInfo());
-		}
+			$this->setConfig('event',$insertOBJ,$insertOBJ['uid']);
+			return array('status' => true, 'message' => _("Event added"),'id' => $insertOBJ['uid']);
 	}
 	public function enableEvent(){}
 	public function disableEvent(){}
 	public function deleteEventById($id){
-		$sql = 'DELETE FROM calendar_events WHERE id = :id LIMIT 1';
-		$stmt = $this->db->prepare($sql);
-		if($stmt->execute(array(':id' => $id))){
-			return array('status' => true, 'message' => _("Event Deleted"));
-		}else{
-			return array('status' => false, 'message' => _("Failed to delete event"), 'error' => $stmt->errorInfo());
-		}
+		$this->delById($id);
+		return array('status' => true, 'message' => _("Event Deleted"));
 	}
 	public function deleteEventByUser($uid){
 		$sql = 'DELETE FROM calendar_events WHERE uid = :uid';
