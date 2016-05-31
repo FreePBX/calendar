@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$('#dow').multiselect({
+	$('#weekdays').multiselect({
 		includeSelectAllOption: true,
 		allSelectedText: _('Every Day')
 	});
@@ -56,7 +56,7 @@ $(document).ready(function() {
 		eventClick: function( event, jsEvent, view ) {
 			console.log(event);
 			$('#description').val(event.title);
-			$('#eventid').val(event.id);
+			$('#eventid').val(event.uid);
 			$("#eventtype option[value='"+event.eventtype+"']").prop('selected', true);
 			$('#startdate').val(moment(event.startdate).format("YYYY-MM-DD"));
 			$('#enddate').val(moment(event.enddate).format("YYYY-MM-DD"));

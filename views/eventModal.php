@@ -121,11 +121,11 @@
                     <div class="row">
                       <div class="form-group">
                         <div class="col-md-3">
-                          <label class="control-label" for="dow"><?php echo _("Days of the Week") ?></label>
-                          <i class="fa fa-question-circle fpbx-help-icon" data-for="dow"></i>
+                          <label class="control-label" for="weekdays"><?php echo _("Days of the Week") ?></label>
+                          <i class="fa fa-question-circle fpbx-help-icon" data-for="weekdays"></i>
                         </div>
                         <div class="col-md-9">
-                          <select class="form-control" id="dow" name="dow" multiple="multiple">
+                          <select class="form-control" id="weekdays" name="weekdays" multiple="multiple">
                             <option value="1"><?php echo _("Monday") ?> </option>
                             <option value="2"><?php echo _("Tuesday") ?> </option>
                             <option value="3"><?php echo _("Wednesday") ?> </option>
@@ -141,7 +141,7 @@
                 </div>
                 <div class="row">
                   <div class="col-md-12">
-                    <span id="dow-help" class="help-block fpbx-help-block"><?php echo _("Days of week that this matches event matches true")?></span>
+                    <span id="weekdays-help" class="help-block fpbx-help-block"><?php echo _("Days of week that this matches event matches true")?></span>
                   </div>
                 </div>
               </div>

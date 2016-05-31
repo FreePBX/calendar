@@ -69,44 +69,30 @@ class Calendar extends \DB_Helper implements \BMO {
 	}
 	public function doDialplanHook(&$ext, $engine, $priority){}
 	public function getEvent($id){
-		return $this->getConfig('event',$id);
+		return $this->getConfig($id,'events');
 	}
 
-	public function listEvents($start = '', $stop = ''){
-		$start = !empty($start)?strtotime($start):false;
-		$stop = !empty($stop)?strtotime($stop):false;
-		$params = array();
-		$sql = 'SELECT * FROM calendar_events ';
+	public function listEvents($start = '', $stop = '', $tz = '', $filter = array('type' => '', 'data'=>'')){
+		$start = !empty($start)?$start:false;
+		$stop = !empty($stop)?$stop:false;
+		$tz = !empty($tz)?$tz:false;
+		$rawEvents = $this->getAll('events');
+		switch ($filter['type']) {
+			case 'user':
+				$events = $this->eventFilterUser($rawEvents, $filter['data']);
+			break;
+			case 'type':
+				$events = $this->eventFilterType($rawEvents, $filter['data']);
+			break;
+			default:
+				$events = $rawEvents;
+			break;
+		}
+		unset($rawEvents);
 		if($start && $stop){
-			$sql .= 'WHERE startdate >= ? AND enddate <= ?';
-			$params = array($start,$stop);
-		}elseif($start){
-			$sql .= 'WHERE startdate >= ?';
-			$params = array($start);
-		}elseif($stop){
-			$sql .= 'WHERE enddate <= ?';
-			$params = array($stop);
+			$events = $this->eventFilterDates($events, $start, $stop);
 		}
-
-		$stmt = $this->db->prepare($sql);
-		$stmt->execute($params);
-		$ret = $stmt->fetchall(\PDO::FETCH_ASSOC);
-		foreach ($ret as $key => $value) {
-			if(isset($value['description'])){
-				$ret[$key]['title'] = $value['description'];
-			}
-			if(isset($value['startdate'])){
-				$sd = new Moment($value['startdate'],$this->systemtz);
-				$ret[$key]['start'] = $sd->format('YYYY-MM-DD h:mm:ss', new MomentJs());
-				$ret[$key]['startdate'] = $sd->format('YYYY-MM-DD h:mm:ss', new MomentJs());
-			}
-			if(isset($value['enddate'])){
-				$ed = new Moment($value['startdate'],$this->systemtz);
-				$ret[$key]['enddate'] = $ed->format('YYYY-MM-DD h:mm:ss', new MomentJs());
-				$ret[$key]['end'] = $ed->format('YYYY-MM-DD h:mm:ss', new MomentJs());
-			}
-		}
-		return $ret;
+		return $events;
 	}
 	public function addEvent($eventOBJ){
 		if(empty($eventOBJ)){
@@ -117,6 +103,7 @@ class Calendar extends \DB_Helper implements \BMO {
 		}
 		$eventDefaults = array(
 			'uid' => uniqid('fpcal_'),
+			'user' => '',
 			'description' => '',
 			'hookdata' => '',
 			'active' => true,
@@ -126,6 +113,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			'weekdays' => '',
 			'monthdays' => '',
 			'months' => '',
+			'timezone' => $this->systemtz,
 			'startdate' => '',
 			'enddate' => '',
 			'starttime' => '',
@@ -139,30 +127,37 @@ class Calendar extends \DB_Helper implements \BMO {
 		foreach($eventDefaults as $K => $V){
 			$value = isset($eventOBJ[$K])?$eventOBJ[$K]:$V;
 			switch($K){
-				case 'startdate':
-				case 'enddate':
-					$value = strtotime($value);
-					$insertOBJ[':'.$K] = $value;
-				break;
 				case 'truedest':
-					$insertOBJ[':'.$K] = isset($eventOBJ['goto0'])?$this->getGoto('goto0', $eventOBJ):'';
+					$insertOBJ[$K] = isset($eventOBJ['goto0'])?$this->getGoto('goto0', $eventOBJ):'';
 				break;
 				case 'falsedest':
-					$insertOBJ[':'.$K] = isset($eventOBJ['goto1'])?$this->getGoto('goto1', $eventOBJ):'';
+					$insertOBJ[$K] = isset($eventOBJ['goto1'])?$this->getGoto('goto1', $eventOBJ):'';
 				break;
 				default:
-					$insertOBJ[':'.$K] = $value;
+					$insertOBJ[$K] = $value;
 				break;
 			}
 		}
-			$this->setConfig('event',$insertOBJ,$insertOBJ['uid']);
+			$this->setConfig($insertOBJ['uid'],$insertOBJ,'events');
 			return array('status' => true, 'message' => _("Event added"),'id' => $insertOBJ['uid']);
 	}
-	public function enableEvent(){}
-	public function disableEvent(){}
+	public function enableEvent($id){
+		$event = $this->getConfig($id,'events');
+		$event['active'] = true;
+		$this->setConfig($id,$event,'events');
+	}
+	public function disableEvent($id){
+		$event = $this->getConfig($id,'events');
+		$event['active'] = false;
+		$this->setConfig($id,$event,'events');
+	}
 	public function deleteEventById($id){
 		$this->delById($id);
-		return array('status' => true, 'message' => _("Event Deleted"));
+		if($this->getFirst($id)){
+			return array('status' => false, 'message' => _("Failed to delete event"));
+		}else{
+			return array('status' => true, 'message' => _("Event Deleted"));
+		}
 	}
 	public function deleteEventByUser($uid){
 		$sql = 'DELETE FROM calendar_events WHERE uid = :uid';
@@ -178,8 +173,10 @@ class Calendar extends \DB_Helper implements \BMO {
 			return array('status' => false, 'message' => _("No event ID received"));
 		}
 		$id = $eventOBJ['id'];
+		$event = $this->getConfig($id,'events');
 		$valid_keys = array(
 			'uid',
+			'user',
 			'description',
 			'hookdata',
 			'active',
@@ -189,51 +186,35 @@ class Calendar extends \DB_Helper implements \BMO {
 			'weekdays',
 			'monthdays',
 			'months',
+			'timezone',
 			'startdate',
 			'enddate',
+			'starttime',
+			'endtime',
 			'repeatinterval',
 			'frequency',
 			'truedest',
 			'falsedest'
 		);
-		$insertOBJ = array();
-		$params = array();
 		foreach($eventOBJ as $key => $val){
-			dbug(array($key,$val));
 			switch ($key) {
-				case 'startdate':
-				case 'enddate':
-					$val = strtotime($val);
-					$insertOBJ[':'.$key] = $val;
-					$params[] = sprintf('%s=:%s ',$key,$key);
-				break;
 				case 'truedest':
 					$val = isset($eventOBJ['goto0'])?$this->getGoto('goto0', $eventOBJ):'';
-					$insertOBJ[':'.$key] = $val;
-					$params[] = sprintf('%s=:%s ',$key,$key);
+					$event[$key] = $val;
 				break;
 				case 'falsedest':
 					$val = isset($eventOBJ['goto1'])?$this->getGoto('goto1', $eventOBJ):'';
-					$insertOBJ[':'.$key] = $val;
-					$params[] = sprintf('%s=:%s ',$key,$key);
+					$event[$key] = $val;
 				break;
 				default:
 				if(in_array($key, $valid_keys)){
-					$insertOBJ[':'.$key] = $val;
-					$params[] = sprintf('%s=:%s ',$key,$key);
+					$event[$key] = $val;
 				}
 				break;
 			}
 		}
-		$insertOBJ[':id'] = $id;
-		dbug($insertOBJ);
-		$sql = sprintf('UPDATE calendar_events set %s WHERE id = :id',implode(',', $params));
-		$stmt = $this->db->prepare($sql);
-		if($stmt->execute($insertOBJ)){
+			$this->setConfig($id,$event,'events');
 			return array('status' => true, 'message' => _("Event Updated"), 'count' => $stmt->rowCount());
-		}else{
-			return array('status' => false, 'message' => _("Failed to update event"), 'error' => $stmt->errorInfo());
-		}
 	}
 
 	public function getEventTypes($showhidden = false){
@@ -350,5 +331,58 @@ class Calendar extends \DB_Helper implements \BMO {
 		}else{
 			return false;
 		}
+	}
+	public function eventFilterUser($data, $user){
+		foreach ($data as $key => $value) {
+			if(!isset($value['user'])){
+				unset($data[$key]);
+				continue;
+			}
+			if(isset($value['user']) && $value['user'] != $user){
+				unset($data[$key]);
+			}
+		}
+		return $data;
+	}
+	public function eventFilterDates($data, $start, $end){
+		$mStart = new Moment($start);
+		$mEnd = new Moment($end);
+		foreach ($data as $key => $value) {
+			$startdate = new Moment($value['startdate']);
+			$stattdate = $startdate->format();
+			$enddate = new Moment($value['enddate']);
+			$enddate = $enddate->format();
+			if(!isset($startdate) || !isset($enddate)){
+				unset($data[$key]);
+				continue;
+			}
+
+			//Is the start date and start the same
+			$sSame = (!$mStart->isAfter($startdate, 'day') && !$mStart->isBefore($startdate, 'day'));
+			//Is the end date and end the same
+			$eSame = (!$mEnd->isAfter($enddate, 'day') && !$mEnd->isBefore($enddate, 'day'));
+			//If either start or end are a match we are in the range, move on.
+			if($eSame || $sSame){
+				continue;
+			}
+			//Now check if the dates are in range.
+			if((!$mStart->isAfter($startdate, 'day') || !$mEnd->isBefore($enddate, 'day'))){
+				unset($data[$key]);
+			}
+		}
+		return $data;
+	}
+
+	public function eventFilterType($data, $type){
+		foreach ($data as $key => $value) {
+			if(!isset($value['eventtype'])){
+				unset($data[$key]);
+				continue;
+			}
+			if($value['eventtype'] != $type){
+				unset($data[$key]);
+			}
+		}
+		return $data;
 	}
 }

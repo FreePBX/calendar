@@ -15,6 +15,7 @@ class addDelEvent extends PHPUnit_Framework_TestCase{
 	public function setup() {
 		$this->eventfull = array(
 			uid => '1234',
+			user => '1234',
 			description => 'Unit Test',
 			hookdata => json_encode(array('unitTest'=>true)),
 			active => true,
@@ -26,6 +27,9 @@ class addDelEvent extends PHPUnit_Framework_TestCase{
 			months => '1',
 			startdate => '1',
 			enddate => '1',
+			starttime => '1',
+			endtime => '1',
+			timezone => '1',
 			repeatinterval => '1',
 			frequency => '1',
 			truedest => '1',
@@ -33,7 +37,6 @@ class addDelEvent extends PHPUnit_Framework_TestCase{
 		);
 		$this->eventEmpty = array();
 		$this->eventString = 'Foo';
-		$this->addID = '';
 	}
 	public function testPHPUnit() {
 		$this->assertEquals("test", "test", "PHPUnit is broken.");
@@ -48,16 +51,6 @@ class addDelEvent extends PHPUnit_Framework_TestCase{
 		$this->assertArrayHasKey('status', $return, "Adding Event did not return an array with a status");
 		$this->assertTrue($return['status']);
 	}
-	/*This adds a event as a different uid that won't get nuked by testDeletebyUID*/
-	public function testaddEventOtherUID(){
-		$this->event['uid'] = '1235';
-		$return = self::$o->addEvent($this->eventfull);
-		$this->assertArrayHasKey('id', $return, "Adding Event did not return an array with insert id");
-		$this->addID = $return['id'];
-		$this->assertArrayHasKey('status', $return, "Adding Event did not return an array with a status");
-		$this->assertTrue($return['status']);
-
-	}
 
 	public function testAddEventEmpty(){
 		$return = self::$o->addEvent($this->eventEmpty);
@@ -69,13 +62,8 @@ class addDelEvent extends PHPUnit_Framework_TestCase{
 		$this->assertArrayHasKey('status', $return, "Adding Event did not return an array with a status");
 		$this->assertFalse($return['status']);
 	}
-	public function testDeletebyUID(){
-		$return = self::$o->deleteEventByUser('1234');
-		$this->assertArrayHasKey('status', $return, "Deleting Event did not return an array with a status");
-		$this->assertTrue($return['status']);
-	}
 	public function testDeletebyID(){
-		$return = self::$o->deleteEventByUser($this->addID);
+		$return = self::$o->deleteEventById('1234');
 		$this->assertArrayHasKey('status', $return, "Deleting Event did not return an array with a status");
 		$this->assertTrue($return['status']);
 	}
