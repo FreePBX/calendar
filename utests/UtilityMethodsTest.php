@@ -38,4 +38,62 @@ class UtilityMethods extends PHPUnit_Framework_TestCase{
 		$output = self::$o->buildRangeDays('01/01/2015', '01/02/2015', '01:00-23:59', 'mon-sat', '1-31', 'jan-feb');
 		$this->assertEquals($expect, $output, _("Time range not as expected"));
 	}
+	public function testCheckEventfail(){
+
+		$event = array(
+			'uid' => 'fpcal_574df432d74da_3',
+			'user' => '',
+			'description' => 'nintynint',
+			'hookdata' => '',
+			'active' => '1',
+			'generatehint' => '',
+			'generatefc' => '',
+			'eventtype' => 'callflow',
+			'weekdays' => '',
+			'monthdays' => '',
+			'months' => '',
+			'timezone' => 'America/Phoenix',
+			'startdate' => '2016-06-03',
+			'enddate' => '2016-06-03',
+			'starttime' => '',
+			'endtime' => '',
+			'repeatinterval' => '',
+			'frequency' => '',
+			'truedest' => 'app-announcement-1,s,1',
+			'falsedest' => 'from-did-direct,1000,1',
+			'title' => 'nintynint',
+			'start' => '2016-06-03T00:00:00',
+			'end' => '2016-06-03T23:59:59'
+		);
+		$this->assertFalse(self::$o->checkEvent($event), "checkEvent Should be FALSE here...");
+	}
+	public function testCheckEventpass(){
+		$date = date('Y-m-d');
+		$event = array(
+			'uid' => 'fpcal_574df432d74da_3',
+			'user' => '',
+			'description' => 'nintynint',
+			'hookdata' => '',
+			'active' => '1',
+			'generatehint' => '',
+			'generatefc' => '',
+			'eventtype' => 'callflow',
+			'weekdays' => '',
+			'monthdays' => '',
+			'months' => '',
+			'timezone' => 'America/Phoenix',
+			'startdate' => $date,
+			'enddate' => $date,
+			'starttime' => '',
+			'endtime' => '',
+			'repeatinterval' => '',
+			'frequency' => '',
+			'truedest' => 'app-announcement-1,s,1',
+			'falsedest' => 'from-did-direct,1000,1',
+			'title' => 'nintynint',
+			'start' => $date.'T00:00:00',
+			'end' => $date.'T23:59:59'
+		);
+		$this->assertTrue(self::$o->checkEvent($event), "checkEvent Should be True  here...");
+	}
 }

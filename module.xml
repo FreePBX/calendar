@@ -10,6 +10,7 @@
 	<description>This module is used to manage calendar and time based events for FreePBX</description>
 	<menuitems>
 		<calendar needsenginedb="yes">Calendar</calendar>
+		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
 	    *14.0.1alpha1* Development

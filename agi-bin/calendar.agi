@@ -1,0 +1,29 @@
+#!/usr/bin/php -q
+<?php
+$restrict_mods = true;
+if (!@include_once(getenv('FREEPBX_CONF') ? getenv('FREEPBX_CONF') : '/etc/freepbx.conf')) {
+	include_once('/etc/asterisk/freepbx.conf');
+}
+$agidir = FreePBX::Config()->get('ASTAGIDIR');
+require_once $agidir."/phpagi.php";
+
+function get_groups($var){
+	return (strpos($var,'agi_arg_') !== FALSE);
+}
+
+$base_dir = dirname(dirname(__FILE__));
+$agi = new AGI();
+$calendar = FreePBX::Calendar();
+$agi->verbose("Checking Calendar");
+$agi->set_variable("CALENDARRETURN", 'true');
+//dump off the script name.
+array_shift($argv);
+foreach ($argv as $event) {
+	if($calendar->checkEvent($event)){
+		$goto = $event['truedest'];
+	}else{
+		$goto = $event['falsedest'];
+	}
+}
+$agi->exec('Goto',$goto);
+exit();

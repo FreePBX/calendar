@@ -116,6 +116,7 @@ $(document).ready(function() {
 			$('.dest').addClass('hidden');
 		}
 	});
+	$('#starttime #endtime').clockpicker();
 });
 
 //Resets Drawselects

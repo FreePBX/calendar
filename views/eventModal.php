@@ -114,6 +114,56 @@
                 </div>
               </div>
               <!--END End Event-->
+              <!--Start Time-->
+              <div class="element-container">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="form-group">
+                        <div class="col-md-3">
+                          <label class="control-label" for="starttime"><?php echo _("Start Time") ?></label>
+                          <i class="fa fa-question-circle fpbx-help-icon" data-for="starttime"></i>
+                        </div>
+                        <div class="col-md-9">
+                          <input type="text" class="form-control" id="starttime" name="starttime" value="<?php echo isset($starttime)?$starttime:''?>">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <span id="starttime-help" class="help-block fpbx-help-block"><?php echo _("Time event starts")?></span>
+                  </div>
+                </div>
+              </div>
+              <!--END Start Time-->
+              <!--End Time-->
+              <div class="element-container">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="form-group">
+                        <div class="col-md-3">
+                          <label class="control-label" for="endtime"><?php echo _("End Time") ?></label>
+                          <i class="fa fa-question-circle fpbx-help-icon" data-for="endtime"></i>
+                        </div>
+                        <div class="col-md-9">
+                          <div class = 'input-group'>
+                            <input type="text" class="form-control" id="endtime" name="endtime" value="<?php echo isset($endtime)?$endtime:''?>">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <span id="endtime-help" class="help-block fpbx-help-block"><?php echo _("Time the event ends.")?></span>
+                  </div>
+                </div>
+              </div>
+              <!--END End Time-->
               <!--Days of the Week-->
               <div class="element-container">
                 <div class="row">

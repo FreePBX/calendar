@@ -13,28 +13,32 @@ class addDelEvent extends PHPUnit_Framework_TestCase{
 		self::$o = self::$f->Calendar;
 	}
 	public function setup() {
+		$date = date('Y-m-d');
 		$this->eventfull = array(
-			uid => '1234',
-			user => '1234',
-			description => 'Unit Test',
-			hookdata => json_encode(array('unitTest'=>true)),
-			active => true,
-			generatehint => false,
-			generatefc => false,
-			eventtype => 'unitTest',
-			weekdays => 'mon',
-			monthdays => '1',
-			months => '1',
-			startdate => '1',
-			enddate => '1',
-			starttime => '1',
-			endtime => '1',
-			timezone => '1',
-			repeatinterval => '1',
-			frequency => '1',
-			truedest => '1',
-			falsedest => '1'
-		);
+					'uid' => '1234',
+					'user' => '',
+					'description' => 'nintynint',
+					'hookdata' => '',
+					'active' => '1',
+					'generatehint' => '',
+					'generatefc' => '',
+					'eventtype' => 'callflow',
+					'weekdays' => '',
+					'monthdays' => '',
+					'months' => '',
+					'timezone' => 'America/Phoenix',
+					'startdate' => $date,
+					'enddate' => $date,
+					'starttime' => '',
+					'endtime' => '',
+					'repeatinterval' => '',
+					'frequency' => '',
+					'truedest' => 'app-announcement-1,s,1',
+					'falsedest' => 'from-did-direct,1000,1',
+					'title' => 'nintynint',
+					'start' => $date.'T00:00:00',
+					'end' => $date.'T23:59:59'
+				);
 		$this->eventEmpty = array();
 		$this->eventString = 'Foo';
 	}
