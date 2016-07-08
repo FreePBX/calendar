@@ -19,10 +19,11 @@ $agi->set_variable("CALENDARRETURN", 'true');
 //dump off the script name.
 array_shift($argv);
 foreach ($argv as $event) {
+	$info = $calendar->getEvent($event);
 	if($calendar->checkEvent($event)){
-		$goto = $event['truedest'];
+		$goto = $info['truedest'];
 	}else{
-		$goto = $event['falsedest'];
+		$goto = $info['falsedest'];
 	}
 }
 $agi->exec('Goto',$goto);
