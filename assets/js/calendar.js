@@ -7,14 +7,14 @@ $(document).ready(function() {
 		dayNames: daysOfWeek,
 		dayNamesShort: daysOfWeekShort,
 		displayEventEnd: true,
-    nextDayThreshold: '00:00:01',
+		nextDayThreshold: '00:00:01',
 		customButtons: {
 				addEvent: {
 						text: 'Add Event',
 						click: function() {
+							resetModalForm();
 							$('#description').val('');
 							$("#eventtype").val('');
-							resetDrawselects()
 							$('.dest').addClass('hidden');
 							$('#startdate').val(moment(Date.now()).format("YYYY-MM-DD"));
 							$('#enddate').val(moment(Date.now()).format("YYYY-MM-DD"));
@@ -24,8 +24,10 @@ $(document).ready(function() {
 							$('#eventModal').modal('show');
 							if(event.canedit !== false){
 								$("#modalSubmit").show();
+								$("modalDelete").hide();
 							}else{
 								$("#modalSubmit").hide();
+								$("modalDelete").hide();
 							}
 						}
 				}
@@ -54,27 +56,46 @@ $(document).ready(function() {
 			error: function(){fpbxToast(_('There was an error fetching the events'),'','warning');},
 		}],
 		eventClick: function( event, jsEvent, view ) {
-			console.log(event);
-			$('#description').val(event.title);
-			$('#eventid').val(event.uid);
-			$("#eventtype option[value='"+event.eventtype+"']").prop('selected', true);
-			$('#startdate').val(moment(event.startdate).format("YYYY-MM-DD"));
-			$('#enddate').val(moment(event.enddate).format("YYYY-MM-DD"));
+			var src = event;
+			if(typeof event.parent !== "undefined"){
+				src = event.parent;
+			}
+			console.log(src);
+			resetModalForm();
+			$('#description').val(src.title);
+			$('#eventid').val(src.uid);
+			$("#eventtype option[value='"+src.eventtype+"']").prop('selected', true);
+			$('#startdate').val(moment(src.startdate).format("YYYY-MM-DD"));
+			$('#enddate').val(moment(src.enddate).format("YYYY-MM-DD"));
 			$('#startdate').datepicker('update');
 			$('#enddate').datepicker('update');
+			$('#modalDelete').attr('data-id',src.uid);
+			if(typeof src.starttime !== "undefined"){
+				$('#starttime').val(src.starttime);
+			}
+			if(typeof src.endtime !== "undefined"){
+				$('#endtime').val(src.endtime);
+			}
 			$('#eventModal').modal('show');
-			if(typeof event.truedest !== "undefined"){
-				setDrawselect('goto0', event.truedest);
+			if(typeof src.truedest !== "undefined"){
+				setDrawselect('goto0', src.truedest);
 			}
-			if(typeof event.falsedest !== "undefined"){
-				setDrawselect('goto1', event.falsedest);
+			if(typeof src.weekdays !== "undefined"){
+				for (var key in src.weekdays) {
+					$('#weekdays').multiselect('select', key);
+				}
 			}
-			if(event.canedit !== false){
+			if(typeof src.falsedest !== "undefined"){
+				setDrawselect('goto1', src.falsedest);
+			}
+			if(src.canedit !== false){
 				$("#modalSubmit").show();
+				$("#modalDelete").show();
 			}else{
 				$("#modalSubmit").hide();
+				$("#modalDelete").hide();
 			}
-			if(event.eventtype == 'callflow'){
+			if(src.eventtype == 'callflow'){
 				$('.dest').removeClass('hidden');
 			}else{
 				$('.dest').addClass('hidden');
@@ -106,17 +127,18 @@ $(document).ready(function() {
 		},
 	});
 	//Add bootstrap classes to full calendar
-  $('.fc-button').addClass('btn btn-default');
+	$('.fc-button').addClass('btn btn-default');
 
-  //Handle show hide for event type hidden fields
-  $('#eventtype').on('change',function(){
+	//Handle show hide for event type hidden fields
+	$('#eventtype').on('change',function(){
 		if($('#eventtype').val() == 'callflow'){
 			$('.dest').removeClass('hidden');
 		}else{
 			$('.dest').addClass('hidden');
 		}
 	});
-	$('#starttime #endtime').clockpicker();
+	$('#starttime').clockpicker();
+	$('#endtime').clockpicker();
 });
 
 //Resets Drawselects
@@ -145,31 +167,40 @@ function setDrawselect(id,val){
 		return;
 	}
 	var idx = $('#'+id).data('id');
-	$('#'+id+' > option[value="'+item.name+'"]').prop("selected","selected");
+	$('#'+id+' > option[value="'+item.category+'"]').prop("selected","selected");
 	$("#"+id).trigger("change");
-	$('#'+item.name+idx+' > option[value="'+item.destination+'"]').prop("selected","selected");
-	$('#'+item.name+idx).trigger("change");
+	$('#'+item.category+idx+' > option[value="'+item.destination+'"]').prop("selected","selected");
+	$('#'+item.category+idx).trigger("change");
 }
 
-//Handle submition from modal. This submits a name value pair for id and any visible element
-//TODO: Need to return the message from the call rather than generic "Event Added" and error handling
-$('#modalSubmit').on('click',function(e){
+//Handle submition from modal.
+
+$("#eventForm").submit(function(e) {
 	e.preventDefault();
-	var fields = $("#eventModal .form-control:visible").serializeArray();
-	var submitdata = {};
-	submitdata['module'] = 'calendar';
-	submitdata['command'] = 'eventform';
-	submitdata['id'] = $('#eventid').val();
-	for ( var i=0, l=fields.length; i<l; i++	) {
-		submitdata[fields[i].name] = fields[i].value;
-	}
+	var frm = $(this);
+	var frmurl = frm.attr('action');
+	var frmdata = frm.serializeArray();
 	$.ajax({
+		url : frmurl,
 		type: "POST",
-		url: 'ajax.php',
-		data: submitdata,
-		success: function(){
-      fpbxToast('Event Added');
-      $("#calendar").fullCalendar( 'refetchEvents' );
-      }
+		data : frmdata,
+		success:function(data, status){
+			$('#eventModal').modal('hide');
+			fpbxToast(data.message);
+			$("#calendar").fullCalendar( 'refetchEvents' );
+		},
+		error: function(jqXHR, status, error){
+			fpbxToast('Something Failed Unable to submit')
+		}
 	});
 });
+$("#modalDelete").on('click',function(e){
+	console.log($(this));
+});
+
+function resetModalForm(){
+	resetDrawselects();
+	$('select').val('');
+	$('input').val('');
+	$('#weekdays').multiselect('rebuild');
+}

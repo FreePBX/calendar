@@ -4,7 +4,7 @@ $content = load_view(__DIR__.'/views/calendar.php',array());
 $content .= load_view(__DIR__.'/views/eventModal.php',array('cal'=>$cal));
 ?>
 <script>
-  var timezone = "<?php echo date_default_timezone_get()?>";
+  var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
   var daysOfWeek = ['<?php echo _("Sunday")?>', '<?php echo _("Monday")?>', '<?php echo _("Tuesday")?>', '<?php echo _("Wednesday")?>','<?php echo _("Thursday")?>', '<?php echo _("Friday")?>', '<?php echo _("Saturday")?>'];
   var daysOfWeekShort = ['<?php echo _("Sun")?>', '<?php echo _("Mon")?>', '<?php echo _("Tue")?>', '<?php echo _("Wed")?>','<?php echo _("Thu")?>', '<?php echo _("Fri")?>', '<?php echo _("Sat")?>'];
 </script>

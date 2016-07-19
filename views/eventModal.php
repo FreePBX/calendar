@@ -1,3 +1,4 @@
+
 <div id="eventModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -6,6 +7,7 @@
                 <h4 id="modalTitle" class="modal-title"><?php echo _("Event")?></h4>
             </div>
             <div id="modalBody" class="modal-body">
+              <form name="eventForm" id="eventForm" action="ajax.php?command=eventform&module=calendar" method="POST">
               <input type="hidden" name="eventid" id="eventid" class="form-control" value="">
               <!--Event Type-->
               <div class="element-container">
@@ -149,9 +151,7 @@
                           <i class="fa fa-question-circle fpbx-help-icon" data-for="endtime"></i>
                         </div>
                         <div class="col-md-9">
-                          <div class = 'input-group'>
-                            <input type="text" class="form-control" id="endtime" name="endtime" value="<?php echo isset($endtime)?$endtime:''?>">
-                          </div>
+                          <input type="text" class="form-control" id="endtime" name="endtime" value="<?php echo isset($endtime)?$endtime:''?>">
                         </div>
                       </div>
                     </div>
@@ -175,7 +175,7 @@
                           <i class="fa fa-question-circle fpbx-help-icon" data-for="weekdays"></i>
                         </div>
                         <div class="col-md-9">
-                          <select class="form-control" id="weekdays" name="weekdays" multiple="multiple">
+                          <select class="form-control" id="weekdays" name="weekdays[]" multiple="multiple">
                             <option value="1"><?php echo _("Monday") ?> </option>
                             <option value="2"><?php echo _("Tuesday") ?> </option>
                             <option value="3"><?php echo _("Wednesday") ?> </option>
@@ -244,10 +244,12 @@
                 </div>
               </div>
               <!--END Non Match Destination-->
+            </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo _("Close")?></button>
-                <button type="button" class="btn btn-default" data-dismiss="modal" id="modalSubmit"><?php echo _("Submit")?></button>
+              <button type="button" class="btn btn-danger pull-left" data-id='' data-dismiss="modal" id="modalDelete"><?php echo _("Delete Event")?></button>
+              <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo _("Close")?></button>
+              <button type="submit" class="btn btn-default" form='eventForm' id="modalSubmit"><?php echo _("Submit")?></button>
             </div>
         </div>
     </div>

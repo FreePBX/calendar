@@ -3,8 +3,6 @@ namespace FreePBX\modules;
 use \Moment\Moment;
 use \Moment\CustomFormats\MomentJs;
 
-$setting = array('authenticate' => true, 'allowremote' => false);
-
 class Calendar extends \DB_Helper implements \BMO {
 	public function __construct($freepbx = null) {
 		if ($freepbx == null) {
@@ -13,6 +11,28 @@ class Calendar extends \DB_Helper implements \BMO {
 		$this->FreePBX = $freepbx;
 		$this->db = $freepbx->Database;
 		$this->systemtz = $this->FreePBX->View()->getTimezone();
+		$this->eventDefaults = array(
+				'uid' => '',
+				'user' => '',
+				'description' => '',
+				'hookdata' => '',
+				'active' => true,
+				'generatehint' => false,
+				'generatefc' => false,
+				'eventtype' => 'calendaronly',
+				'weekdays' => '',
+				'monthdays' => '',
+				'months' => '',
+				'timezone' => $this->systemtz,
+				'startdate' => '',
+				'enddate' => '',
+				'starttime' => '',
+				'endtime' => '',
+				'repeatinterval' => '',
+				'frequency' => '',
+				'truedest' => '',
+				'falsedest' => ''
+			);
 	}
 
 	public function backup() {}
@@ -82,7 +102,7 @@ class Calendar extends \DB_Helper implements \BMO {
         return $return;
       break;
 			case 'eventform':
-				if(isset($_REQUEST['id']) && $_REQUEST['id'] == 'new'){
+				if(isset($_REQUEST['eventid']) && $_REQUEST['eventid'] == 'new'){
 					return $this->addEvent($_REQUEST);
 				}else{
 					return $this->updateEvent($_REQUEST);
@@ -92,7 +112,6 @@ class Calendar extends \DB_Helper implements \BMO {
 				$ret = array();
 				$groups =  $this->listGroups();
 				foreach ($groups as $key => $value) {
-					dbug($value);
 					$ret[] = array(
 						'id' => $key,
 						'description' => $value['description'],
@@ -176,13 +195,13 @@ class Calendar extends \DB_Helper implements \BMO {
 					$tempevent['start'] = sprintf('%sT%s',$tempevent['startdate'],$starttime);
 					$tempevent['end'] = sprintf('%sT%s',$tempevent['enddate'],$endtime);
 					$tempevent['parent'] = $event;
-					$return[$key.'_'.$i] = $tempevent;
+					$return[$tempevent['uid']] = $tempevent;
 					$i++;
 				}
 			}else{
 				$event['start'] = sprintf('%sT%s',$event['startdate'],$starttime);
 				$event['end'] = sprintf('%sT%s',$event['enddate'],$endtime);
-				$return[$key] = $event;
+				$return[$event['uid']] = $event;
 			}
 		}
 		return $return;
@@ -200,30 +219,9 @@ class Calendar extends \DB_Helper implements \BMO {
 		if(!is_array($eventOBJ)){
 			return array('status' => false, 'message' => _('Event object must be an array'));
 		}
-		$eventDefaults = array(
-			'uid' => uniqid('fpcal_'),
-			'user' => '',
-			'description' => '',
-			'hookdata' => '',
-			'active' => true,
-			'generatehint' => false,
-			'generatefc' => false,
-			'eventtype' => 'calendaronly',
-			'weekdays' => '',
-			'monthdays' => '',
-			'months' => '',
-			'timezone' => $this->systemtz,
-			'startdate' => '',
-			'enddate' => '',
-			'starttime' => '',
-			'endtime' => '',
-			'repeatinterval' => '',
-			'frequency' => '',
-			'truedest' => '',
-			'falsedest' => ''
-		);
+		$this->eventDefaults['uid'] = uniqid('fpcal_');
 		$insertOBJ = array();
-		foreach($eventDefaults as $K => $V){
+		foreach($this->eventDefaults as $K => $V){
 			$value = isset($eventOBJ[$K])?$eventOBJ[$K]:$V;
 			switch($K){
 				case 'truedest':
@@ -238,6 +236,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			}
 		}
 			$this->setConfig($insertOBJ['uid'],$insertOBJ,'events');
+			$this->eventDefaults['uid'] = '';
 			return array('status' => true, 'message' => _("Event added"),'id' => $insertOBJ['uid']);
 	}
 
@@ -281,57 +280,37 @@ class Calendar extends \DB_Helper implements \BMO {
 		}
 	}
 	public function updateEvent($eventOBJ){
-		if(!isset($eventOBJ['id']) || empty($eventOBJ['id'])){
+		if(!isset($eventOBJ['eventid']) || empty($eventOBJ['eventid'])){
 			return array('status' => false, 'message' => _("No event ID received"));
 		}
-		$id = $eventOBJ['id'];
+		$id = $eventOBJ['eventid'];
 		$event = $this->getConfig($id,'events');
-		$valid_keys = array(
-			'uid',
-			'user',
-			'description',
-			'hookdata',
-			'active',
-			'generatehint',
-			'generatefc',
-			'eventtype',
-			'weekdays',
-			'monthdays',
-			'months',
-			'timezone',
-			'startdate',
-			'enddate',
-			'starttime',
-			'endtime',
-			'repeatinterval',
-			'frequency',
-			'truedest',
-			'falsedest'
-		);
+
 		foreach($eventOBJ as $key => $val){
 			switch ($key) {
-				case 'truedest':
+				case 'goto0':
 					$val = isset($eventOBJ['goto0'])?$this->getGoto('goto0', $eventOBJ):'';
-					$event[$key] = $val;
+					$event['truedest'] = $val;
 				break;
-				case 'falsedest':
+				case 'goto1':
 					$val = isset($eventOBJ['goto1'])?$this->getGoto('goto1', $eventOBJ):'';
-					$event[$key] = $val;
+					$event['falsedest'] = $val;
 				break;
 				case 'weekdays':
 					$event[$key] = array();
-					$val = is_array($val)?$val:array();
+					$val = is_array($val)?$val:array($val);
 					foreach ($val as $k => $value) {
 						$event[$key][$value] = $value;
 					}
 				break;
 				default:
-				if(in_array($key, $valid_keys)){
+				if(isset($this->eventDefaults[$key])){
 					$event[$key] = $val;
 				}
 				break;
 			}
 		}
+		dbug($event);
 			$this->setConfig($id,$event,'events');
 			return array('status' => true, 'message' => _("Event Updated"));
 	}
@@ -493,11 +472,8 @@ class Calendar extends \DB_Helper implements \BMO {
 				continue;
 			}
 			$timezone = isset($value['timezone'])?$value['timezone']:$this->systemtz;
-			dbug($value);
 			$startdate = new Moment($value['startdate'],$timezone);
-			dbug($startdate);
 			$enddate = new Moment($value['enddate'],$timezone);
-			dbug($enddate);
 			//Is the start date and start the same
 			$sSame = (!$mStart->isAfter($startdate, 'day') && !$mStart->isBefore($startdate, 'day'));
 			//Is the end date and end the same
@@ -549,7 +525,6 @@ class Calendar extends \DB_Helper implements \BMO {
 		//Check if a end date is set and if we are after it.
 		if(isset($event['enddate']) && !empty($event['enddate'])){
 			$d = new Moment($event['enddate'], $tz);
-			dbug(array($d,$m));
 			if(!$m->isAfter($d, 'day')){
 				return false;
 			}
@@ -634,5 +609,54 @@ class Calendar extends \DB_Helper implements \BMO {
 			break;
 		}
 		return $buttons;
-}
+	}
+	//UCP STUFF
+	public function ucpConfigPage($mode, $user, $action) {
+		if(empty($user)) {
+			$enabled = ($mode == 'group') ? true : null;
+		} else {
+			if($mode == 'group') {
+				$enabled = $this->FreePBX->Ucp->getSettingByGID($user['id'],'Calendar','enabled');
+				$enabled = !($enabled) ? false : true;
+			} else {
+				$enabled = $this->FreePBX->Ucp->getSettingByID($user['id'],'Calendar','enabled');
+			}
+		}
+
+		$html = array();
+		$html[0] = array(
+			"title" => _("Calendar"),
+			"rawname" => "calendar",
+			"content" => load_view(dirname(__FILE__)."/views/ucp_config.php",array("mode" => $mode, "enabled" => $enabled))
+		);
+		return $html;
+	}
+	public function ucpAddUser($id, $display, $ucpStatus, $data) {
+		$this->ucpUpdateUser($id, $display, $ucpStatus, $data);
+	}
+	public function ucpUpdateUser($id, $display, $ucpStatus, $data) {
+		if($display == 'userman' && isset($_POST['type']) && $_POST['type'] == 'user') {
+			if(isset($_POST['calendar_enable']) && $_POST['calendar_enable'] == 'yes') {
+				$this->FreePBX->Ucp->setSettingByID($id,'Calendar','enabled',true);
+			}elseif(isset($_POST['calendar_enable']) && $_POST['calendar_enable'] == 'no') {
+				$this->FreePBX->Ucp->setSettingByID($id,'Calendar','enabled',false);
+			} elseif(isset($_POST['calendar_enable']) && $_POST['calendar_enable'] == 'inherit') {
+				$this->FreePBX->Ucp->setSettingByID($id,'Calendar','enabled',null);
+			}
+		}
+	}
+	public function ucpDelUser($id, $display, $ucpStatus, $data) {}
+	public function ucpAddGroup($id, $display, $data) {
+		$this->ucpUpdateGroup($id,$display,$data);
+	}
+	public function ucpUpdateGroup($id,$display,$data) {
+		if($display == 'userman' && isset($_POST['type']) && $_POST['type'] == 'group') {
+			if(isset($_POST['calendar_enable']) && $_POST['calendar_enable'] == 'yes') {
+				$this->FreePBX->Ucp->setSettingByGID($id,'Calendar','enabled',true);
+			} else {
+				$this->FreePBX->Ucp->setSettingByGID($id,'Calendar','enabled',false);
+			}
+		}
+	}
+	public function ucpDelGroup($id,$display,$data) {}
 }
