@@ -1,7 +1,7 @@
 <module>
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
-	<name>Blacklist</name>
+	<name>Calendar</name>
 	<version>14.0.1alpha1</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
@@ -16,16 +16,16 @@
 	    *14.0.1alpha1* Development
 	</changelog>
 	<hooks>
-	<ucp class="Ucp">
-		<method namespace="FreePBX\Modules" class="Calendar" callingMethod="constructModuleConfigPages">ucpConfigPage</method>
-		<method namespace="FreePBX\Modules" class="Calendar" callingMethod="addUser">ucpAddUser</method>
-		<method namespace="FreePBX\Modules" class="Calendar" callingMethod="updateUser">ucpUpdateUser</method>
-		<method namespace="FreePBX\Modules" class="Calendar" callingMethod="delUser">ucpDelUser</method>
-		<method namespace="FreePBX\Modules" class="Calendar" callingMethod="addGroup">ucpAddGroup</method>
-		<method namespace="FreePBX\Modules" class="Calendar" callingMethod="updateGroup">ucpUpdateGroup</method>
-		<method namespace="FreePBX\Modules" class="Calendar" callingMethod="delGroup">ucpDelGroup</method>
-</ucp>
-</hooks>
+		<ucp class="Ucp">
+			<method namespace="FreePBX\Modules" class="Calendar" callingMethod="constructModuleConfigPages">ucpConfigPage</method>
+			<method namespace="FreePBX\Modules" class="Calendar" callingMethod="addUser">ucpAddUser</method>
+			<method namespace="FreePBX\Modules" class="Calendar" callingMethod="updateUser">ucpUpdateUser</method>
+			<method namespace="FreePBX\Modules" class="Calendar" callingMethod="delUser">ucpDelUser</method>
+			<method namespace="FreePBX\Modules" class="Calendar" callingMethod="addGroup">ucpAddGroup</method>
+			<method namespace="FreePBX\Modules" class="Calendar" callingMethod="updateGroup">ucpUpdateGroup</method>
+			<method namespace="FreePBX\Modules" class="Calendar" callingMethod="delGroup">ucpDelGroup</method>
+		</ucp>
+	</hooks>
 	<supported>
 		<version>14.0</version>
 	</supported>

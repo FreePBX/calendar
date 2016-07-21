@@ -30,14 +30,14 @@ class Calendar extends Modules{
 	function __construct($Modules) {
 		$this->Modules = $Modules;
 		$this->user = $this->UCP->User->getUser();
-		public $allowed = array();
+		$allowed = array();
 		$allowed = $this->UCP->getCombinedSettingByID($this->user['id'],$this->module,'calendars');
 		if(!empty($allowed)) {
 			$this->allowed = is_array($allowed)?$allowed:array($allowed);
 		}
 	}
 	function getDisplay() {
-		return $this->load_view(__DIR__.'/views/calendar.php',array('user' => $this->user, 'allowed'=> $allowed)),
+		return $this->load_view(__DIR__.'/views/calendar.php' , array('user' => $this->user, 'allowed' => $allowed));
 	}
 	public function getSettingsDisplay($ext) {
 		$out = array(

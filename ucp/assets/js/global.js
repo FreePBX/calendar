@@ -4,10 +4,9 @@ var CalendarC = UCPMC.extend({
 	},
   display: function(event) {
     $('#calendar').fullCalendar({
-  		dayNames: daysOfWeek,
-  		dayNamesShort: daysOfWeekShort,
   		displayEventEnd: true,
-  		nextDayThreshold: '00:00:01'
+  		nextDayThreshold: '00:00:01',
+			width: 450
     });
   },
 	settingsDisplay: function() {
