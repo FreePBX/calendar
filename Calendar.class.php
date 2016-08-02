@@ -2,6 +2,10 @@
 namespace FreePBX\modules;
 use \Moment\Moment;
 use \Moment\CustomFormats\MomentJs;
+use \Ramsey\Uuid\Uuid;
+use \Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
+
+include __DIR__."/includes/class.iCalReader.php";
 
 class Calendar extends \DB_Helper implements \BMO {
 	public function __construct($freepbx = null) {
@@ -41,6 +45,33 @@ class Calendar extends \DB_Helper implements \BMO {
   public function uninstall(){}
 	public function doConfigPageInit($page) {
 		switch ($page) {
+			case 'calendar':
+				$action = isset($_REQUEST['action'])?$_REQUEST['action']:'';
+				switch($action) {
+					case "add":
+						if(isset($_POST['name'])) {
+							$name = $_POST['name'];
+							$description = $_POST['description'];
+							$url = $_POST['url'];
+							$type = $_POST['type'];
+							$this->addRemoteCalendar($name,$description,$type,$url);
+						}
+					break;
+					case "edit":
+						if(isset($_POST['name'])) {
+							$name = $_POST['name'];
+							$description = $_POST['description'];
+							$url = $_POST['url'];
+							$type = $_POST['type'];
+							$id = $_POST['id'];
+							$this->updateRemoteCalendar($id, $name,$description,$type,$url);
+						}
+					break;
+					case "delete":
+						$this->delCalendarByID($_REQUEST['id']);
+					break;
+				}
+			break;
 			case 'calendargroups':
 				$action = isset($_REQUEST['action'])?$_REQUEST['action']:'';
 				$_REQUEST['description'] = isset($_REQUEST['description'])?$_REQUEST['description']:'';
@@ -78,6 +109,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	}
 	public function ajaxRequest($req, &$setting) {
     switch($req){
+			case 'grid':
       case 'events':
 			case 'eventform':
 			case 'getJSON':
@@ -90,9 +122,18 @@ class Calendar extends \DB_Helper implements \BMO {
 	}
 	public function ajaxHandler() {
     switch ($_REQUEST['command']) {
+			case 'grid':
+				$calendars = $this->listCalendars();
+				$final = array();
+				foreach($calendars as $id => $data) {
+					$data['id'] = $id;
+					$final[] = $data;
+				}
+				return $final;
+			break;
       case 'events':
 				$return = array();
-				$events = $this->listEvents($_REQUEST['start'],$_REQUEST['end']);
+				$events = $this->listEvents($_REQUEST['calendarid'],$_REQUEST['start'],$_REQUEST['end']);
 				foreach($events as $event){
 					$return[] = $event;
 				}
@@ -123,6 +164,47 @@ class Calendar extends \DB_Helper implements \BMO {
     }
   }
 
+	public function showPage() {
+		$action = !empty($_GET['action']) ? $_GET['action'] : '';
+		switch($action) {
+			case "add":
+				$type = !empty($_GET['type']) ? $_GET['type'] : '';
+				switch($type) {
+					case "ical":
+					case "outlook":
+					case "caldav":
+					case "google":
+						return load_view(__DIR__."/views/remote_settings.php",array('action' => 'add', 'type' => $type));
+					break;
+					case "local":
+						return load_view(__DIR__."/views/local_settings.php",array('action' => 'add', 'type' => $type));
+					break;
+				}
+			break;
+			case "edit":
+				$data = $this->getCalendarByID($_GET['id']);
+				switch($data['type']) {
+					case "ical":
+					case "outlook":
+					case "caldav":
+					case "google":
+						return load_view(__DIR__."/views/remote_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data));
+					break;
+					case "local":
+						return load_view(__DIR__."/views/local_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data));
+					break;
+				}
+			break;
+			case "view":
+				$data = $this->getCalendarByID($_GET['id']);
+				return load_view(__DIR__."/views/calendar.php",array('action' => 'view', 'type' => $data['type'], 'data' => $data));
+			break;
+			default:
+				return load_view(__DIR__."/views/grid.php",array());
+			break;
+		}
+	}
+
 	Public function myDialplanHooks(){
 		return '490';
 	}
@@ -145,62 +227,68 @@ class Calendar extends \DB_Helper implements \BMO {
 		return $this->getConfig($id,'events');
 	}
 
+	public function listCalendars() {
+		$calendars = $this->getAll('calendars');
+		return $calendars;
+	}
+
+	public function delCalendarByID($id) {
+		$this->setConfig($id,false,'calendars');
+		$this->delById($id."-events");
+	}
+
+	public function getCalendarByID($id) {
+		$final = $this->getConfig($id,'calendars');
+		$final['id'] = $id;
+		return $final;
+	}
+
 	/**
 	 * List Events
 	 * @param  string $start  Start date
 	 * @param  string $stop   End Date
 	 * @param  string $tz     Timezone
-	 * @param  array  $filter Filer array('type' => 'type', 'data' => 'eventtype') or array('type' =>'user', 'data' => 'userid')
 	 * @param  bool $subevents Break date ranges in to daily events.
 	 * @return array  an array of events
 	 */
-	public function listEvents($start = '', $stop = '', $tz = '', $filter = array(),$subevents = true){
+	public function listEvents($calendarID, $start = '', $stop = '', $tz = '', $subevents = true){
 		$return = array();
 		$start = !empty($start)?$start:false;
 		$stop = !empty($stop)?$stop:false;
 		$tz = !empty($tz)?$tz:false;
-		$rawEvents = $this->getAll('events');
-		$filter['type'] = isset($filter['type'])?$filter['type']:'';
-		switch ($filter['type']) {
-			case 'user':
-				$events = $this->eventFilterUser($rawEvents, $filter['data']);
-			break;
-			case 'type':
-				$events = $this->eventFilterType($rawEvents, $filter['data']);
-			break;
-			default:
-				$events = $rawEvents;
-			break;
-		}
-		unset($rawEvents);
+		$events = $this->getAll($calendarID.'-events');
 		if(($start !== false) && ($stop !== false)){
 			$events = $this->eventFilterDates($events, $start, $stop);
 		}
-		foreach($events as $key => $event){
+		foreach($events as $uid => $event){
 			$starttime = !empty($event['starttime'])?$event['starttime']:'00:00:00';
 			$endtime = !empty($event['endtime'])?$event['endtime']:'23:59:59';
-			$event['title'] = $event['description'];
-			if(($event['startdate'] != $event['enddate']) && $subevents){
-				$startrange = new \DateTime($event['startdate']);
-				$endrange = new \DateTime($event['enddate']);
-				$endrange = $endrange->modify('+1 day');
+			$event['title'] = $event['name'];
+			if(($event['starttime'] != $event['endtime']) && $subevents){
+				$startrange = new \DateTime();
+				$startrange->setTimestamp($event['starttime']);
+				$endrange = new \DateTime();
+				$endrange->setTimestamp($event['endtime']);
 				$interval = new \DateInterval('P1D');
 				$daterange = new \DatePeriod($startrange, $interval ,$endrange);
 				$i = 0;
 				foreach($daterange as $d) {
 					$tempevent = $event;
-					$tempevent['uid'] = $event['uid'].'_'.$i;
+					$tempevent['uid'] = $uid.'_'.$i;
 					$tempevent['startdate'] = $d->format('Y-m-d');
 					$tempevent['enddate'] = $d->format('Y-m-d');
-					$tempevent['start'] = sprintf('%sT%s',$tempevent['startdate'],$starttime);
-					$tempevent['end'] = sprintf('%sT%s',$tempevent['enddate'],$endtime);
+					$tempevent['starttime'] = $d->format('H:i:s');
+					$tempevent['endtime'] = $d->format('H:i:s');
+					$tempevent['start'] = sprintf('%sT%s',$tempevent['startdate'],$tempevent['starttime']);
+					$tempevent['end'] = sprintf('%sT%s',$tempevent['enddate'],$tempevent['endtime']);
+					$tempevent['allDay'] = ($event['endtime'] - $event['starttime']) === 86400;
 					$tempevent['parent'] = $event;
 					$return[$tempevent['uid']] = $tempevent;
 					$i++;
 				}
 			}else{
-				$event['start'] = sprintf('%sT%s',$event['startdate'],$starttime);
-				$event['end'] = sprintf('%sT%s',$event['enddate'],$endtime);
+				$event['start'] = sprintf('%sT%s',$event['starttime'],$starttime);
+				$event['end'] = sprintf('%sT%s',$event['endtime'],$endtime);
 				$return[$event['uid']] = $event;
 			}
 		}
@@ -208,36 +296,102 @@ class Calendar extends \DB_Helper implements \BMO {
 	}
 
 	/**
-	 * Add Event
-	 * @param array $eventOBJ An array containing the event parameters;
-	 * @return array array('status' => bool, 'message' => string)
+	 * Add Event to specific calendar
+	 * @param string $calendarID  The Calendar ID
+	 * @param string $eventID     The Event ID, if null will auto generatefc
+	 * @param string $name        The event name
+	 * @param string $description The event description
+	 * @param string $starttime   The event start timezone
+	 * @param string $endtime     The event end time
 	 */
-	public function addEvent($eventOBJ){
-		if(empty($eventOBJ)){
-			return array('status' => false, 'message' => _('Event object can not be empty'));
+	public function addEvent($calendarID,$eventID=null,$name,$description,$starttime,$endtime){
+		$uuid = !is_null($eventID) ? $eventID : Uuid::uuid4();
+		$this->updateEvent($calendarID,$uuid,$name,$description,$starttime,$endtime);
+	}
+
+	/**
+	 * Update Event on specific calendar
+	 * @param string $calendarID  The Calendar ID
+	 * @param string $eventID     The Event ID, if null will auto generatefc
+	 * @param string $name        The event name
+	 * @param string $description The event description
+	 * @param string $starttime   The event start timezone
+	 * @param string $endtime     The event end time
+	 */
+	public function updateEvent($calendarID,$eventID,$name,$description,$starttime,$endtime) {
+		$event = array(
+			"name" => $name,
+			"description" => $description,
+			"starttime" => $starttime,
+			"endtime" => $endtime
+		);
+		$this->setConfig($eventID,$event,$calendarID."-events");
+		return $uuid;
+	}
+
+	/**
+	 * Delete event from specific calendar
+	 * @param  string $calendarID The Calendar ID
+	 * @param  string $eventID    The event ID
+	 */
+	public function deleteEvent($calendarID,$eventID) {
+		$this->setConfig($eventID,false,$calendarID."-events");
+	}
+
+	/**
+	 * Add a Remote Calendar
+	 * @param string $name        The Calendar name
+	 * @param string $description The Calendar description
+	 * @param string $type        The Calendar type
+	 * @param string $url         The Calendar URL
+	 */
+	public function addRemoteCalendar($name,$description,$type,$url) {
+		$uuid = Uuid::uuid4();
+		$calendar = array(
+			"name" => $name,
+			"description" => $description,
+			"type" => $type,
+			"url" => $url
+		);
+		$this->setConfig($uuid,$calendar,'calendars');
+		$calendar['id'] = $uuid;
+		$this->processCalendar($calendar);
+	}
+
+	/**
+	 * Update a Remote Calendar's settings
+	 * @param string $id          The Calendar ID
+	 * @param string $name        The Calendar name
+	 * @param string $description The Calendar description
+	 * @param string $type        The Calendar type
+	 * @param string $url         The Calendar URL
+	 */
+	public function updateRemoteCalendar($id, $name,$description,$type,$url) {
+		//TODO: make sure id exists!
+		$calendar = array(
+			"name" => $name,
+			"description" => $description,
+			"type" => $type,
+			"url" => $url
+		);
+		$this->setConfig($id,$calendar,'calendars');
+		$calendar['id'] = $id;
+		$this->processCalendar($calendar);
+	}
+
+	public function processCalendar($calendar) {
+		switch($calendar['type']) {
+			case "ical":
+				$ical = new \ICal($calendar['url']);
+				$events = $ical->events();
+				$processed = array();
+				foreach($events as $event) {
+					$event['UID'] = isset($event['UID']) ? $event['UID'] : 0;
+					$event['DESCRIPTION'] = !empty($event['DESCRIPTION']) ? $event['DESCRIPTION'] : "";
+					$this->updateEvent($calendar['id'],$event['UID'],htmlspecialchars_decode($event['SUMMARY'], ENT_QUOTES),htmlspecialchars_decode($event['DESCRIPTION'], ENT_QUOTES),$ical->iCalDateToUnixTimestamp($event['DTSTART']),$ical->iCalDateToUnixTimestamp($event['DTEND']));
+				}
+			break;
 		}
-		if(!is_array($eventOBJ)){
-			return array('status' => false, 'message' => _('Event object must be an array'));
-		}
-		$this->eventDefaults['uid'] = uniqid('fpcal_');
-		$insertOBJ = array();
-		foreach($this->eventDefaults as $K => $V){
-			$value = isset($eventOBJ[$K])?$eventOBJ[$K]:$V;
-			switch($K){
-				case 'truedest':
-					$insertOBJ[$K] = isset($eventOBJ['goto0'])?$this->getGoto('goto0', $eventOBJ):'';
-				break;
-				case 'falsedest':
-					$insertOBJ[$K] = isset($eventOBJ['goto1'])?$this->getGoto('goto1', $eventOBJ):'';
-				break;
-				default:
-					$insertOBJ[$K] = $value;
-				break;
-			}
-		}
-			$this->setConfig($insertOBJ['uid'],$insertOBJ,'events');
-			$this->eventDefaults['uid'] = '';
-			return array('status' => true, 'message' => _("Event added"),'id' => $insertOBJ['uid']);
 	}
 
 	/**
@@ -279,6 +433,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			return array('status' => false, 'message' => _("Failed to delete events"), 'error' => $stmt->errorInfo());
 		}
 	}
+	/*
 	public function updateEvent($eventOBJ){
 		if(!isset($eventOBJ['eventid']) || empty($eventOBJ['eventid'])){
 			return array('status' => false, 'message' => _("No event ID received"));
@@ -314,6 +469,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			$this->setConfig($id,$event,'events');
 			return array('status' => true, 'message' => _("Event Updated"));
 	}
+	*/
 
 	public function getEventTypes($showhidden = false){
 		$ret = array();
@@ -467,13 +623,13 @@ class Calendar extends \DB_Helper implements \BMO {
 		$mStart = new Moment($start,$this->systemtz);
 		$mEnd = new Moment($end,$this->systemtz);
 		foreach ($data as $key => $value) {
-			if(!isset($value['startdate']) || !isset($value['enddate'])){
+			if(!isset($value['starttime']) || !isset($value['endtime'])){
 				unset($data[$key]);
 				continue;
 			}
 			$timezone = isset($value['timezone'])?$value['timezone']:$this->systemtz;
-			$startdate = new Moment($value['startdate'],$timezone);
-			$enddate = new Moment($value['enddate'],$timezone);
+			$startdate = new Moment('@'.$value['starttime'],$timezone);
+			$enddate = new Moment('@'.$value['endtime'],$timezone);
 			//Is the start date and start the same
 			$sSame = (!$mStart->isAfter($startdate, 'day') && !$mStart->isBefore($startdate, 'day'));
 			//Is the end date and end the same
@@ -515,16 +671,16 @@ class Calendar extends \DB_Helper implements \BMO {
 		$tz = isset($event['timezone'])?$event['timezone']:$this->systemtz;
 		$m = new Moment('now', $tz);
 		//Check if a start date is set and if we are before it.
-		if(isset($event['startdate']) && !empty($event['startdate'])){
-			$d = new Moment($event['startdate'], $tz);
+		if(isset($event['starttime']) && !empty($event['starttime'])){
+			$d = new Moment($event['starttime'], $tz);
 			if($m->isBefore($d, 'day')){
 				return false;
 			}
 		}
 
 		//Check if a end date is set and if we are after it.
-		if(isset($event['enddate']) && !empty($event['enddate'])){
-			$d = new Moment($event['enddate'], $tz);
+		if(isset($event['endtime']) && !empty($event['endtime'])){
+			$d = new Moment($event['endtime'], $tz);
 			if(!$m->isAfter($d, 'day')){
 				return false;
 			}
@@ -582,6 +738,44 @@ class Calendar extends \DB_Helper implements \BMO {
 	public function getActionBar($request) {
 		$buttons = array();
 		switch($request['display']) {
+			case 'calendar':
+				$action = !empty($_GET['action']) ? $_GET['action'] : '';
+				switch($action) {
+					case "add":
+						$buttons = array(
+							'reset' => array(
+								'name' => 'reset',
+								'id' => 'reset',
+								'value' => _('Reset')
+							),
+							'submit' => array(
+								'name' => 'submit',
+								'id' => 'submit',
+								'value' => _('Submit')
+							)
+						);
+					break;
+					case "edit":
+						$buttons = array(
+							'delete' => array(
+								'name' => 'delete',
+								'id' => 'delete',
+								'value' => _('Delete')
+							),
+							'reset' => array(
+								'name' => 'reset',
+								'id' => 'reset',
+								'value' => _('Reset')
+							),
+							'submit' => array(
+								'name' => 'submit',
+								'id' => 'submit',
+								'value' => _('Submit')
+							)
+						);
+					break;
+				}
+			break;
 			case 'calendargroups':
 				$buttons = array(
 					'delete' => array(
@@ -659,4 +853,15 @@ class Calendar extends \DB_Helper implements \BMO {
 		}
 	}
 	public function ucpDelGroup($id,$display,$data) {}
+
+	public function getRightNav($request) {
+		$request['action'] = !empty($request['action']) ? $request['action'] : '';
+		switch($request['action']) {
+			case "add":
+			case "edit":
+			case "view":
+				return load_view(__DIR__."/views/rnav.php",array());
+			break;
+		}
+	}
 }

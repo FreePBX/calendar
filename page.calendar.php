@@ -1,8 +1,12 @@
 <?php
 $cal = FreePBX::Calendar();
-$content = load_view(__DIR__.'/views/calendar.php',array());
-$content .= load_view(__DIR__.'/views/eventModal.php',array('cal'=>$cal));
+echo $cal->showPage();
+//include __DIR__."/views/grid.php";
+//$cal = FreePBX::Calendar();
+//$content = load_view(__DIR__.'/views/calendar.php',array());
+//$content .= load_view(__DIR__.'/views/eventModal.php',array('cal'=>$cal));
 ?>
+<!--
 <script>
   var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
   var daysOfWeek = ['<?php echo _("Sunday")?>', '<?php echo _("Monday")?>', '<?php echo _("Tuesday")?>', '<?php echo _("Wednesday")?>','<?php echo _("Thursday")?>', '<?php echo _("Friday")?>', '<?php echo _("Saturday")?>'];
@@ -28,3 +32,4 @@ $content .= load_view(__DIR__.'/views/eventModal.php',array('cal'=>$cal));
 <script type="text/javascript">
 var destinations = <?php echo json_encode(FreePBX::Modules()->getDestinations())?>;
 </script>
+-->
