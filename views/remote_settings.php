@@ -1,0 +1,87 @@
+<div class = "display full-border">
+  <div class="container-fluid">
+    <h1>
+      <span><?php echo sprintf(_('%s %s Calendar'),$action,$type)?></span>
+    </h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="fpbx-container">
+        <div class="display full-border">
+          <form class="fpbx-submit" method="post" action="?display=calendar" data-fpbx-delete="config.php?display=calendar&amp;id=<?php echo $id ?>&amp;action=delete">
+            <input type="hidden" name="action" value="<?php echo $action?>">
+            <input type="hidden" name="type" value="<?php echo $type?>">
+            <input type="hidden" name="id" value="<?php echo !empty($data['id']) ? $data['id'] : ''?>">
+            <!--Name-->
+            <div class="element-container">
+            	<div class="row">
+            		<div class="col-md-12">
+            			<div class="row">
+            				<div class="form-group">
+            					<div class="col-md-3">
+            						<label class="control-label" for="name"><?php echo _("Name") ?></label>
+            						<i class="fa fa-question-circle fpbx-help-icon" data-for="name"></i>
+            					</div>
+            					<div class="col-md-9">
+            						<input type="text" class="form-control" id="name" name="name" value="<?php echo !empty($data['name']) ? $data['name'] : ''?>">
+            					</div>
+            				</div>
+            			</div>
+            		</div>
+            	</div>
+            	<div class="row">
+            		<div class="col-md-12">
+            			<span id="name-help" class="help-block fpbx-help-block"><?php echo _("The name of this calendar")?></span>
+            		</div>
+            	</div>
+            </div>
+            <div class="element-container">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="form-group">
+                      <div class="col-md-3">
+                        <label class="control-label" for="description"><?php echo _("Description") ?></label>
+                        <i class="fa fa-question-circle fpbx-help-icon" data-for="description"></i>
+                      </div>
+                      <div class="col-md-9">
+                        <input type="text" class="form-control" id="description" name="description" value="<?php echo !empty($data['description']) ? $data['description'] : ''?>">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <span id="description-help" class="help-block fpbx-help-block"><?php echo _("The name of this calendar")?></span>
+                </div>
+              </div>
+            </div>
+            <div class="element-container">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="form-group">
+                      <div class="col-md-3">
+                        <label class="control-label" for="url"><?php echo _("Remote URL") ?></label>
+                        <i class="fa fa-question-circle fpbx-help-icon" data-for="url"></i>
+                      </div>
+                      <div class="col-md-9">
+                        <input type="text" class="form-control" id="url" name="url" value="<?php echo !empty($data['url']) ? $data['url'] : ''?>">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <span id="url-help" class="help-block fpbx-help-block"><?php echo _("The remote url for this calendar")?></span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
