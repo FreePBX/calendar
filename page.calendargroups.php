@@ -1,5 +1,8 @@
 <?php
 $cal = FreePBX::Calendar();
+echo $cal->showCalendarGroupsPage();
+/*
+$cal = FreePBX::Calendar();
 if(isset($_REQUEST['view']) && $_REQUEST['view'] == 'form'){
   $vars = array();
   $id = isset($_REQUEST['id'])?$_REQUEST['id']:'';
@@ -34,3 +37,4 @@ if(isset($_REQUEST['view']) && $_REQUEST['view'] == 'form'){
 		</div>
 	</div>
 </div>
+*/
