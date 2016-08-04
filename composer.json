@@ -1,7 +1,6 @@
 {
     "require": {
         "google/apiclient": "^2.0",
-        "sabre/dav": "~3.2.0",
         "om/icalparser": "^0.2.0",
         "thecsea/simple-caldav-client": "^0.1.5"
     }
