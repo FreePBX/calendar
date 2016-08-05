@@ -24,6 +24,7 @@ class ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Cache\\' => 10,
         ),
@@ -52,6 +53,10 @@ class ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b
         'it\\thecsea\\simple_caldav_client\\' => 
         array (
             0 => __DIR__ . '/..' . '/thecsea/simple-caldav-client/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'Psr\\Http\\Message\\' => 
         array (
@@ -88,18 +93,11 @@ class ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b
     );
 
     public static $prefixesPsr0 = array (
-        'P' => 
-        array (
-            'Psr\\Log\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/psr/log',
-            ),
-        ),
         'G' => 
         array (
             'Google_Service_' => 
             array (
-                0 => __DIR__ . '/..' . '/google/apiclient-services',
+                0 => __DIR__ . '/..' . '/google/apiclient-services/src',
             ),
             'Google_' => 
             array (
