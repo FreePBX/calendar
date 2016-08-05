@@ -6,9 +6,10 @@ use \Ramsey\Uuid\Uuid;
 use \Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
+use it\thecsea\simple_caldav_client\SimpleCalDAVClient;
+use om\IcalParser;
 
 include __DIR__."/vendor/autoload.php";
-include __DIR__."/includes/class.iCalReader.php";
 
 class Calendar extends \DB_Helper implements \BMO {
 	private $now; //right now, private so it doesnt keep updating
@@ -61,11 +62,20 @@ class Calendar extends \DB_Helper implements \BMO {
 							$type = $_POST['type'];
 							switch($type) {
 								case "ical":
-								case "google":
-								case "caldav":
-								case "outlook":
 									$url = $_POST['url'];
-									$this->addRemoteCalendar($name,$description,$type,$url);
+									$this->addRemoteiCalCalendar($name,$description,$url);
+								break;
+								case "google":
+								break;
+								case "caldav":
+									$purl = $_POST['purl'];
+									$surl = $_POST['surl'];
+									$username = $_POST['username'];
+									$password = $_POST['password'];
+									$calendars = $_POST['calendars'];
+									$this->addRemoteCalDavCalendar($name,$description,$purl,$surl,$username,$password,$calendars);
+								break;
+								case "outlook":
 								break;
 								case "local":
 									$this->addLocalCalendar($name,$description);
@@ -81,11 +91,20 @@ class Calendar extends \DB_Helper implements \BMO {
 							$id = $_POST['id'];
 							switch($type) {
 								case "ical":
-								case "google":
-								case "caldav":
-								case "outlook":
 									$url = $_POST['url'];
-									$this->updateRemoteCalendar($id,$name,$description,$type,$url);
+									$this->updateRemoteiCalCalendar($id,$name,$description,$url);
+								break;
+								case "google":
+								break;
+								case "caldav":
+									$purl = $_POST['purl'];
+									$surl = $_POST['surl'];
+									$username = $_POST['username'];
+									$password = $_POST['password'];
+									$calendars = $_POST['calendars'];
+									$this->updateRemoteCalDavCalendar($id,$name,$description,$purl,$surl,$username,$password,$calendars);
+								break;
+								case "outlook":
 								break;
 								case "local":
 									$this->updateLocalCalendar($id,$name,$description);
@@ -138,6 +157,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			case 'delevent':
 			case 'groupsgrid':
 			case 'groupeventshtml':
+			case 'getcaldavcals':
 				return true;
 			break;
 			default:
@@ -147,6 +167,16 @@ class Calendar extends \DB_Helper implements \BMO {
 	}
 	public function ajaxHandler() {
 		switch ($_REQUEST['command']) {
+			case 'getcaldavcals':
+				$caldavClient = new SimpleCalDAVClient();
+				$caldavClient->connect($_POST['purl'], $_POST['username'], $_POST['password']);
+				$calendars = $caldavClient->findCalendars();
+				$chtml = '';
+				foreach($calendars as $calendar) {
+					$chtml .= '<option value="'.$calendar->getCalendarID().'">'.$calendar->getDisplayName().'</option>';
+				}
+				return array("calshtml" => $chtml);
+			break;
 			case 'groupeventshtml':
 				$allCalendars = $this->listCalendars();
 				$calendars = !empty($_POST['calendars']) ? $_POST['calendars'] : array();
@@ -266,10 +296,13 @@ class Calendar extends \DB_Helper implements \BMO {
 				$type = !empty($_GET['type']) ? $_GET['type'] : '';
 				switch($type) {
 					case "ical":
-					case "outlook":
+						return load_view(__DIR__."/views/remote_ical_settings.php",array('action' => 'add', 'type' => $type));
+					break;
 					case "caldav":
+						return load_view(__DIR__."/views/remote_caldav_settings.php",array('action' => 'add', 'type' => $type));
+					break;
+					case "outlook":
 					case "google":
-						return load_view(__DIR__."/views/remote_settings.php",array('action' => 'add', 'type' => $type));
 					break;
 					case "local":
 						return load_view(__DIR__."/views/local_settings.php",array('action' => 'add', 'type' => $type));
@@ -280,10 +313,25 @@ class Calendar extends \DB_Helper implements \BMO {
 				$data = $this->getCalendarByID($_GET['id']);
 				switch($data['type']) {
 					case "ical":
-					case "outlook":
+						return load_view(__DIR__."/views/remote_ical_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data));
+					break;
 					case "caldav":
+						$caldavClient = new SimpleCalDAVClient();
+						$caldavClient->connect($data['purl'], $data['username'], $data['password']);
+						$cals = $caldavClient->findCalendars();
+						$calendars = array();
+						foreach($cals as $calendar) {
+							$id = $calendar->getCalendarID();
+							$calendars[$id] = array(
+								"id" => $id,
+								"name" => $calendar->getDisplayName(),
+								"selected" => in_array($id,$data['calendars'])
+							);
+						}
+						return load_view(__DIR__."/views/remote_caldav_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data, 'calendars' => $calendars));
+					break;
+					case "outlook":
 					case "google":
-						return load_view(__DIR__."/views/remote_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data));
 					break;
 					case "local":
 						return load_view(__DIR__."/views/local_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data));
@@ -552,6 +600,30 @@ class Calendar extends \DB_Helper implements \BMO {
 		$this->setConfig($eventID,false,$calendarID."-events");
 	}
 
+	public function addRemoteCalDavCalendar($name,$description,$purl,$surl,$username,$password,$calendars) {
+		$uuid = Uuid::uuid4();
+		$this->updateRemoteCalDavCalendar($uuid,$name,$description,$purl,$surl,$username,$password,$calendars);
+	}
+
+	public function updateRemoteCalDavCalendar($id,$name,$description,$purl,$surl,$username,$password,$calendars) {
+		if(empty($id)) {
+			throw new \Exception("Calendar ID is empty");
+		}
+		$calendar = array(
+			"name" => $name,
+			"description" => $description,
+			"type" => "caldav",
+			"purl" => $purl,
+			"surl" => $surl,
+			"username" => $username,
+			"password" => $password,
+			"calendars" => $calendars
+		);
+		$this->setConfig($id,$calendar,'calendars');
+		$calendar['id'] = $id;
+		$this->processCalendar($calendar);
+	}
+
 	/**
 	 * Add a Remote Calendar
 	 * @param string $name        The Calendar name
@@ -559,9 +631,9 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param string $type        The Calendar type
 	 * @param string $url         The Calendar URL
 	 */
-	public function addRemoteCalendar($name,$description,$type,$url) {
+	public function addRemoteiCalCalendar($name,$description,$url) {
 		$uuid = Uuid::uuid4();
-		$this->updateRemoteCalendar($uuid,$name,$description,$type,$url);
+		$this->updateRemoteiCalCalendar($uuid,$name,$description,$url);
 	}
 
 	/**
@@ -592,14 +664,14 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param string $type        The Calendar type
 	 * @param string $url         The Calendar URL
 	 */
-	public function updateRemoteCalendar($id,$name,$description,$type,$url) {
+	public function updateRemoteiCalCalendar($id,$name,$description,$url) {
 		if(empty($id)) {
 			throw new \Exception("Calendar ID is empty");
 		}
 		$calendar = array(
 			"name" => $name,
 			"description" => $description,
-			"type" => $type,
+			"type" => "ical",
 			"url" => $url
 		);
 		$this->setConfig($id,$calendar,'calendars');
@@ -642,42 +714,66 @@ class Calendar extends \DB_Helper implements \BMO {
 		$this->delById($calendar['id']."-categories-events");
 
 		switch($calendar['type']) {
-			case "ical":
-				$cal = new \om\IcalParser();
-				$results = $cal->parseFile($calendar['url']);
-
-				$uuids = array();
-				foreach ($cal->getSortedEvents() as $event) {
-					if($event['DTSTART']->format('U') == 0) {
-						continue;
+			case "caldav":
+				$caldavClient = new SimpleCalDAVClient();
+				$caldavClient->connect($calendar['purl'], $calendar['username'], $calendar['password']);
+				$cals = $caldavClient->findCalendars();
+				foreach($calendar['calendars'] as $c) {
+					if(isset($cals[$c])) {
+						$caldavClient->setCalendar($cals[$c]);
+						$events = $caldavClient->getEvents();
+						foreach($events as $event) {
+							$ical = $event->getData();
+							$cal = new IcalParser();
+							$cal->parseString($ical);
+							$this->processiCalEvents($calendar['id'], $cal);
+						}
 					}
-
-					$event['UID'] = isset($event['UID']) ? $event['UID'] : 0;
-					$linkedID = $event['UID'];
-					if($event['RECURRING'] && !isset($uuids[$event['UID']])) {
-						$uuids[$event['UID']] = 0;
-						$event['UID'] = $event['UID']."_0";
-					} elseif($event['RECURRING'] && isset($uuids[$event['UID']])) {
-						$uuids[$event['UID']]++;
-						$event['UID'] = $event['UID']."_".$uuids[$event['UID']];
-					}
-
-					$recurring = !empty($event['RECURRING']) ? true : false;
-
-					$categories = is_array($event['CATEGORIES']) ? $event['CATEGORIES'] : array();
-
-					$event['DESCRIPTION'] = !empty($event['DESCRIPTION']) ? $event['DESCRIPTION'] : "";
-
-					if($event['DTSTART']->getTimezone() != $event['DTEND']->getTimezone()) {
-						throw new \Exception("Start timezone and end timezone are different! Not sure what to do here");
-					}
-					$tz = $event['DTSTART']->getTimezone();
-					$timezone = $tz->getName();
-					$this->updateEvent($calendar['id'],$event['UID'],htmlspecialchars_decode($event['SUMMARY'], ENT_QUOTES),htmlspecialchars_decode($event['DESCRIPTION'], ENT_QUOTES),$event['DTSTART']->format('U'),$event['DTEND']->format('U'),$timezone,$recurring,$linkedID,$categories);
 				}
+			break;
+			case "ical":
+				$cal = new IcalParser();
+				$cal->parseFile($calendar['url']);
+				$this->processiCalEvents($calendar['id'], $cal);
 		break;
 		}
 		$this->db->commit();
+	}
+
+	/**
+	 * Process iCal Type events
+	 * @param  string     $calendarID The Calendar ID
+	 * @param  IcalParser $cal        IcalParser Object reference of events
+	 */
+	private function processiCalEvents($calendarID, IcalParser $cal) {
+		foreach ($cal->getSortedEvents() as $event) {
+			if($event['DTSTART']->format('U') == 0) {
+				continue;
+			}
+
+			$event['UID'] = isset($event['UID']) ? $event['UID'] : 0;
+			$linkedID = $event['UID'];
+			if($event['RECURRING'] && !isset($uuids[$event['UID']])) {
+				$uuids[$event['UID']] = 0;
+				$event['UID'] = $event['UID']."_0";
+			} elseif($event['RECURRING'] && isset($uuids[$event['UID']])) {
+				$uuids[$event['UID']]++;
+				$event['UID'] = $event['UID']."_".$uuids[$event['UID']];
+			}
+
+			$recurring = !empty($event['RECURRING']) ? true : false;
+
+			$categories = is_array($event['CATEGORIES']) ? $event['CATEGORIES'] : array();
+
+			$event['DESCRIPTION'] = !empty($event['DESCRIPTION']) ? $event['DESCRIPTION'] : "";
+
+			if($event['DTSTART']->getTimezone() != $event['DTEND']->getTimezone()) {
+				throw new \Exception("Start timezone and end timezone are different! Not sure what to do here");
+			}
+			$tz = $event['DTSTART']->getTimezone();
+			$timezone = $tz->getName();
+			$this->updateEvent($calendarID,$event['UID'],htmlspecialchars_decode($event['SUMMARY'], ENT_QUOTES),htmlspecialchars_decode($event['DESCRIPTION'], ENT_QUOTES),$event['DTSTART']->format('U'),$event['DTEND']->format('U'),$timezone,$recurring,$linkedID,$categories);
+		}
 	}
 
 	/**

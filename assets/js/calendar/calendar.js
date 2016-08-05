@@ -1,18 +1,3 @@
-/*
-$(document).ready(function() {
-	//Handle show hide for event type hidden fields
-	$('#eventtype').on('change',function(){
-		if($('#eventtype').val() == 'callflow'){
-			$('.dest').removeClass('hidden');
-		}else{
-			$('.dest').addClass('hidden');
-		}
-	});
-});
-*/
-
-//Handle submition from modal.
-
 $("#eventForm").submit(function(e) {
 	e.preventDefault();
 	var frm = $(this);
