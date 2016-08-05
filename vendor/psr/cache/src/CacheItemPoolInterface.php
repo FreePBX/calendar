@@ -10,6 +10,7 @@ namespace Psr\Cache;
  * It is also the primary point of interaction with the entire cache collection.
  * All configuration and initialization of the Pool is left up to an
  * Implementing Library.
+ *
  */
 interface CacheItemPoolInterface
 {
@@ -34,8 +35,8 @@ interface CacheItemPoolInterface
     /**
      * Returns a traversable set of cache items.
      *
-     * @param string[] $keys
-     *   An indexed array of keys of items to retrieve.
+     * @param array $keys
+     * An indexed array of keys of items to retrieve.
      *
      * @throws InvalidArgumentException
      *   If any of the keys in $keys are not a legal value a \Psr\Cache\InvalidArgumentException
@@ -57,14 +58,14 @@ interface CacheItemPoolInterface
      * such situation use CacheItemInterface::isHit() instead.
      *
      * @param string $key
-     *   The key for which to check existence.
+     *    The key for which to check existence.
      *
      * @throws InvalidArgumentException
      *   If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
      *   MUST be thrown.
      *
      * @return bool
-     *   True if item exists in the cache, false otherwise.
+     *  True if item exists in the cache, false otherwise.
      */
     public function hasItem($key);
 
@@ -80,7 +81,7 @@ interface CacheItemPoolInterface
      * Removes the item from the pool.
      *
      * @param string $key
-     *   The key to delete.
+     *   The key for which to delete
      *
      * @throws InvalidArgumentException
      *   If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
@@ -94,7 +95,7 @@ interface CacheItemPoolInterface
     /**
      * Removes multiple items from the pool.
      *
-     * @param string[] $keys
+     * @param array $keys
      *   An array of keys that should be removed from the pool.
 
      * @throws InvalidArgumentException

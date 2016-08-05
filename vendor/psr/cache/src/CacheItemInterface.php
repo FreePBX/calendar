@@ -20,6 +20,7 @@ namespace Psr\Cache;
  * be requested from a Pool object via the getItem() method.  Calling Libraries
  * SHOULD NOT assume that an Item created by one Implementing Library is
  * compatible with a Pool from another Implementing Library.
+ *
  */
 interface CacheItemInterface
 {
@@ -77,7 +78,7 @@ interface CacheItemInterface
     /**
      * Sets the expiration time for this cache item.
      *
-     * @param \DateTimeInterface|null $expiration
+     * @param \DateTimeInterface $expiration
      *   The point in time after which the item MUST be considered expired.
      *   If null is passed explicitly, a default value MAY be used. If none is set,
      *   the value should be stored permanently or for as long as the
@@ -91,7 +92,7 @@ interface CacheItemInterface
     /**
      * Sets the expiration time for this cache item.
      *
-     * @param int|\DateInterval|null $time
+     * @param int|\DateInterval $time
      *   The period of time from the present after which the item MUST be considered
      *   expired. An integer parameter is understood to be the time in seconds until
      *   expiration. If null is passed explicitly, a default value MAY be used.

@@ -1,15 +1,5 @@
 # Changelog
 
-## 2.0.2 - 2016-06-04
-
-- All Ciphers: fix issue with CBC mode / OpenSSL / continuous buffers / decryption (#938)
-- Random: fix issues with serialize() (#932)
-- RC2: fix issue with decrypting
-- RC4: fix issue with key not being truncated correctly
-- SFTP: nlist() on a non-existant directory resulted in error
-- SFTP: add is_writable, is_writeable, is_readable
-- X509: add IPv6 support for subjectaltname extension (#936)
-
 ## 2.0.1 - 2016-01-18
 
 - RSA: fix regression in PSS mode ([#769](https://github.com/phpseclib/phpseclib/pull/769))
@@ -36,9 +26,9 @@
 - Random: fix issues with serialize() (#932)
 - RC2: fix issue with decrypting
 - RC4: fix issue with key not being truncated correctly
-- SFTP: nlist() on a non-existent directory resulted in error
+- SFTP: nlist() on a non-existant directory resulted in error
 - SFTP: add is_writable, is_writeable, is_readable
-- RSA: fix PHP4 compatibility issue
+- RSA: fix PHP4 compatability issue
 
 ## 1.0.1 - 2016-01-18
 
@@ -115,7 +105,7 @@
  - truncate
  - improved file type detection
  - put() can write to te middle of a file
- - mkdir accepts the same parameters that PHP's mkdir does
+ - mkdir accepts the same paramters that PHP's mkdir does
  - the ability to upload/download 2GB files
 - across-the-board speedups for the various encryption algorithms
 - multi-factor authentication support for Net_SSH2

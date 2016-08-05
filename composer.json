@@ -3,6 +3,5 @@
         "google/apiclient": "^2.0",
         "om/icalparser": "^0.2.0",
         "thecsea/simple-caldav-client": "^0.1.5"
-    },
-    "minimum-stability": "dev"
+    }
 }

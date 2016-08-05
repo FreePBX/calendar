@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Google_Service_' => array($vendorDir . '/google/apiclient-services/src'),
+    'Psr\\Log\\' => array($vendorDir . '/psr/log'),
+    'Google_Service_' => array($vendorDir . '/google/apiclient-services'),
     'Google_' => array($vendorDir . '/google/apiclient/src'),
 );
