@@ -248,7 +248,7 @@ class Calendar extends \DB_Helper implements \BMO {
 				$date = new Carbon($_POST['enddate']." ".$_POST['endtime'], $this->systemtz);
 				$endtime = $date->format('U');
 
-				$name = $_POST['description'];
+				$name = $_POST['title'];
 				$calendarID = $_POST['calendarid'];
 				$description = $_POST['description'];
 				if(isset($_REQUEST['eventid']) && $_REQUEST['eventid'] == 'new'){
@@ -404,6 +404,41 @@ class Calendar extends \DB_Helper implements \BMO {
 	}
 
 	/**
+	 * Expand Recurring Days
+	 * @param  string $id    Event ID
+	 * @param  array $event Array of event information
+	 * @return array        Array of Event information
+	 */
+	public function expandRecurring($id, $event) {
+		if(!$event['recurring']) {
+			$event['linkedid'] = $id;
+			$event['uid'] = $id;
+			$tmp['rstartdate'] = '';
+			return array($event['uid'] => $event);
+		}
+		$final = array();
+		$i = 0;
+		$startdate = null;
+		foreach($event['events'] as $evt) {
+			$tmp = $event;
+			unset($tmp['events']);
+			//TODO: This is ugly, work on it later
+			$tmp['starttime'] = $evt['starttime'];
+			$tmp['endtime'] = $evt['endtime'];
+			$tmp['linkedid'] = $id;
+			$tmp['uid'] = $id."_".$i;
+			if($i == 0){
+				$startdate = $tmp['starttime'];
+			}
+			$tmp['rstartdate'] = $startdate;
+			$final[$tmp['uid']] = $tmp;
+			$i++;
+		}
+
+		return $final;
+	}
+
+	/**
 	 * List Events
 	 * @param  string $calendarID The calendarID to reference
 	 * @param  object $start  Carbon Object
@@ -413,7 +448,12 @@ class Calendar extends \DB_Helper implements \BMO {
 	 */
 	public function listEvents($calendarID, $start = null, $stop = null, $subevents = false) {
 		$return = array();
-		$events = $this->getAll($calendarID.'-events');
+		$data = $this->getAll($calendarID.'-events');
+		$events = array();
+		foreach($data as $id => $event) {
+			$d = $this->expandRecurring($id, $event);
+			$events = array_merge($events,$d);
+		}
 
 		if(!empty($start) && !empty($stop)){
 			$events = $this->eventFilterDates($events, $start, $stop);
@@ -479,6 +519,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			}
 			return ($a['ustarttime'] < $b['ustarttime']) ? -1 : 1;
 		});
+		//dbug($return);
 		return $return;
 	}
 
@@ -531,12 +572,11 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param string $starttime   The event start timezone
 	 * @param string $endtime     The event end time
 	 * @param boolean $recurring  Is this a recurring event
-	 * @param string $linkedID    The master ID if the event is recurring
 	 * @param array $categories   The categories assigned to this event
 	 */
-	public function addEvent($calendarID,$eventID=null,$name,$description,$starttime,$endtime,$timezone=null,$recurring=false,$linkedID=null,$categories=array()){
-		$uuid = !is_null($eventID) ? $eventID : Uuid::uuid4();
-		$this->updateEvent($calendarID,$eventID,$name,$description,$starttime,$endtime,$timezone,$recurring,$linkedID,$categories);
+	public function addEvent($calendarID,$eventID=null,$name,$description,$starttime,$endtime,$timezone=null,$recurring=false,$rrules=array(),$categories=array()){
+		$eventID = !is_null($eventID) ? $eventID : Uuid::uuid4();
+		$this->updateEvent($calendarID,$eventID,$name,$description,$starttime,$endtime,$timezone,$recurring,$rrules,$categories);
 	}
 
 	/**
@@ -548,10 +588,9 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param string $starttime   The event start timezone
 	 * @param string $endtime     The event end time
 	 * @param boolean $recurring  Is this a recurring event
-	 * @param string $linkedID    The master ID if the event is recurring
 	 * @param array $categories   The categories assigned to this event
 	 */
-	public function updateEvent($calendarID,$eventID,$name,$description,$starttime,$endtime,$timezone=null,$recurring=false,$linkedID=null,$categories=array()) {
+	public function updateEvent($calendarID,$eventID,$name,$description,$starttime,$endtime,$timezone=null,$recurring=false,$rrules=array(),$categories=array()) {
 		if(!isset($eventID) || is_null($eventID) || trim($eventID) == "") {
 			throw new \Exception("Event ID can not be blank");
 		}
@@ -559,24 +598,26 @@ class Calendar extends \DB_Helper implements \BMO {
 		$event = array(
 			"name" => $name,
 			"description" => $description,
-			"starttime" => $starttime,
-			"endtime" => $endtime,
 			"recurring" => $recurring,
-			"linkedid" => $linkedID,
+			"rrules" => $rrules,
+			"events" => array(),
 			"categories" => $categories
 		);
-		$this->setConfig($eventID,$event,$calendarID."-events");
-
-		$linkedID = !empty($linkedID) ? $linkedID : $eventID;
-		$linked = $this->getConfig($linkedID,$calendarID."-linked-events");
-		if(empty($linked)) {
-			$linked = array(
-				$eventID
+		if($recurring) {
+			$oldEvent = $this->getConfig($eventID,$calendarID."-events");
+			if(!empty($oldEvent)) {
+				$event['events'] = $oldEvent['events'];
+			}
+			$event['events'][] = array(
+				"starttime" => $starttime,
+				"endtime" => $endtime
 			);
-		} elseif(!in_array($linkedID,$linked)) {
-			$linked[] = $eventID;
+		} else {
+			$event['starttime'] = $starttime;
+			$event['endtime'] = $endtime;
 		}
-		$this->setConfig($linkedID,$linked,$calendarID."-linked-events");
+
+		$this->setConfig($eventID,$event,$calendarID."-events");
 
 		foreach($categories as $category) {
 			$events = $this->getConfig($category,$calendarID."-categories-events");
@@ -707,12 +748,6 @@ class Calendar extends \DB_Helper implements \BMO {
 			throw new \Exception("Calendar ID can not be empty!");
 		}
 
-		$this->db->beginTransaction();
-
-		$this->delById($calendar['id']."-events");
-		$this->delById($calendar['id']."-linked-events");
-		$this->delById($calendar['id']."-categories-events");
-
 		switch($calendar['type']) {
 			case "caldav":
 				$caldavClient = new SimpleCalDAVClient();
@@ -726,7 +761,7 @@ class Calendar extends \DB_Helper implements \BMO {
 							$ical = $event->getData();
 							$cal = new IcalParser();
 							$cal->parseString($ical);
-							$this->processiCalEvents($calendar['id'], $cal);
+							$this->processiCalEvents($calendar['id'], $cal); //will ids clash? they shouldnt????
 						}
 					}
 				}
@@ -735,9 +770,81 @@ class Calendar extends \DB_Helper implements \BMO {
 				$cal = new IcalParser();
 				$cal->parseFile($calendar['url']);
 				$this->processiCalEvents($calendar['id'], $cal);
-		break;
+			break;
+			case "google":
+				//https://developers.google.com/api-client-library/php/auth/web-app
+				$client = getGoogleClient();
+				$service = new \Google_Service_Calendar($client);
+				// Print the next 10 events on the user's calendar.
+				$calendarId = 'primary';
+				$optParams = array(
+				  'maxResults' => 10,
+				  'orderBy' => 'startTime',
+				  'singleEvents' => TRUE,
+				  'timeMin' => date('c'),
+				);
+				$results = $service->events->listEvents($calendarId, $optParams);
+
+				if (count($results->getItems()) == 0) {
+				  print "No upcoming events found.\n";
+				} else {
+				  print "Upcoming events:\n";
+				  foreach ($results->getItems() as $event) {
+				    $start = $event->start->dateTime;
+				    if (empty($start)) {
+				      $start = $event->start->date;
+				    }
+				    printf("%s (%s)\n", $event->getSummary(), $start);
+				  }
+				}
+			break;
 		}
-		$this->db->commit();
+	}
+
+
+	private function getGoogleClient() {
+	  $client = new \Google_Client();
+	  $client->setApplicationName('Google Calendar API PHP Quickstart');
+	  $client->setScopes(implode(' ', array(
+			Google_Service_Calendar::CALENDAR_READONLY)
+		));
+		$client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/oauth2callback.php');
+	  $client->setAuthConfigFile(__DIR__ . '/client_secret.json');
+	  $client->setAccessType('offline');
+
+		$auth_url = $client->createAuthUrl();
+
+		//header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
+
+	  // Load previously authorized credentials from a file.
+	  $credentialsPath = expandHomeDirectory('~/.credentials/calendar-php-quickstart.json');
+	  if (file_exists($credentialsPath)) {
+	    $accessToken = file_get_contents($credentialsPath);
+	  } else {
+	    // Request authorization from the user.
+	    $authUrl = $client->createAuthUrl();
+	    printf("Open the following link in your browser:\n%s\n", $authUrl);
+	    print 'Enter verification code: ';
+	    $authCode = trim(fgets(STDIN));
+
+	    // Exchange authorization code for an access token.
+	    $accessToken = $client->authenticate($authCode);
+
+	    // Store the credentials to disk.
+	    if(!file_exists(dirname($credentialsPath))) {
+	      mkdir(dirname($credentialsPath), 0700, true);
+	    }
+	    file_put_contents($credentialsPath, $accessToken);
+	    printf("Credentials saved to %s\n", $credentialsPath);
+	  }
+	  $client->setAccessToken($accessToken);
+
+	  // Refresh the token if it's expired.
+	  if ($client->isAccessTokenExpired()) {
+	    $client->refreshToken($client->getRefreshToken());
+	    file_put_contents($credentialsPath, $client->getAccessToken());
+	  }
+	  return $client;
 	}
 
 	/**
@@ -746,22 +853,37 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param  IcalParser $cal        IcalParser Object reference of events
 	 */
 	private function processiCalEvents($calendarID, IcalParser $cal) {
+		//dont let sql update until the end of this
+		//This might be bad.. ok it probably is bad. We should just get a Range of events
+		//works for now though.
+		$this->db->beginTransaction();
+
+		//Trash old events because tracking by UIDs for Google is a whack-attack
+		//The UIDs for matching elements should still match unless the calendar
+		//has drastically changed and I couldn't track them even if I wanted to!!
+		$this->delById($calendarID."-events");
+		$this->delById($calendarID."-linked-events");
+		$this->delById($calendarID."-categories-events");
+
 		foreach ($cal->getSortedEvents() as $event) {
 			if($event['DTSTART']->format('U') == 0) {
 				continue;
 			}
 
 			$event['UID'] = isset($event['UID']) ? $event['UID'] : 0;
-			$linkedID = $event['UID'];
-			if($event['RECURRING'] && !isset($uuids[$event['UID']])) {
-				$uuids[$event['UID']] = 0;
-				$event['UID'] = $event['UID']."_0";
-			} elseif($event['RECURRING'] && isset($uuids[$event['UID']])) {
-				$uuids[$event['UID']]++;
-				$event['UID'] = $event['UID']."_".$uuids[$event['UID']];
-			}
 
-			$recurring = !empty($event['RECURRING']) ? true : false;
+			if(!empty($event['RECURRING'])) {
+				$recurring = true;
+				$rrules = array(
+					"frequency" => $event['RRULE']['FREQ'],
+					"days" => !empty($event['RRULE']['BYDAY']) ? explode(",",$event['RRULE']['BYDAY']) : array(),
+					"interval" => !empty($event['RRULE']['INTERVAL']) ? $event['RRULE']['INTERVAL'] : "",
+					"count" => !empty($event['RRULE']['COUNT']) ? $event['RRULE']['COUNT'] : ""
+				);
+			} else {
+				$recurring = false;
+				$rrules = array();
+			}
 
 			$categories = is_array($event['CATEGORIES']) ? $event['CATEGORIES'] : array();
 
@@ -772,8 +894,10 @@ class Calendar extends \DB_Helper implements \BMO {
 			}
 			$tz = $event['DTSTART']->getTimezone();
 			$timezone = $tz->getName();
-			$this->updateEvent($calendarID,$event['UID'],htmlspecialchars_decode($event['SUMMARY'], ENT_QUOTES),htmlspecialchars_decode($event['DESCRIPTION'], ENT_QUOTES),$event['DTSTART']->format('U'),$event['DTEND']->format('U'),$timezone,$recurring,$linkedID,$categories);
+			$this->updateEvent($calendarID,$event['UID'],htmlspecialchars_decode($event['SUMMARY'], ENT_QUOTES),htmlspecialchars_decode($event['DESCRIPTION'], ENT_QUOTES),$event['DTSTART']->format('U'),$event['DTEND']->format('U'),$timezone,$recurring,$rrules,$categories);
 		}
+
+		$this->db->commit(); //now update just incase this takes a long time
 	}
 
 	/**

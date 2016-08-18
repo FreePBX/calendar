@@ -149,7 +149,7 @@ $(document).ready(function() {
 				resetModalForm();
 				$('#title').val(src.title);
 				$('#description').val(src.description);
-				$('#eventid').val(src.uid);
+				$('#eventid').val(src.linkedid);
 				$("#eventtype option[value='"+src.eventtype+"']").prop('selected', true);
 				$('#startdate').val(ms.format("YYYY-MM-DD"));
 				$('#enddate').val(me.format("YYYY-MM-DD"));

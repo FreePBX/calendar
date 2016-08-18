@@ -195,6 +195,176 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 										</div>
 									</div>
 									<!--END End Time-->
+									<!--End Event Date and Time-->
+									<div class="element-container">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="row">
+													<div class="form-group">
+														<div class="col-md-3">
+															<label class="control-label" for="reoccurring"><?php echo _("Reoccurring") ?></label>
+															<i class="fa fa-question-circle fpbx-help-icon" data-for="reoccurring"></i>
+														</div>
+														<div class="col-md-9 radioset">
+															<input type="checkbox" class="form-control" id="reoccurring" name="reoccurring" value="yes">
+															<label for="reoccurring"><?php echo _("Reoccurring")?></label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span id="reoccurring-help" class="help-block fpbx-help-block"><?php echo _("Reoccurring Event")?></span>
+											</div>
+										</div>
+									</div>
+									<!--END End Event-->
+									<div class="element-container">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="row">
+													<div class="form-group">
+														<div class="col-md-3">
+															<label class="control-label" for="repeats"><?php echo _("Repeats") ?></label>
+															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeats"></i>
+														</div>
+														<div class="col-md-9">
+															<select class="form-control">
+																<option value="0" title="Daily">Daily</option>
+																<option value="1" title="Every weekday (Monday to Friday)">Every weekday (Monday to Friday)</option>
+																<option value="2" title="Every Monday, Wednesday, and Friday">Every Monday, Wednesday, and Friday</option>
+																<option value="3" title="Every Tuesday and Thursday">Every Tuesday and Thursday</option>
+																<option value="4" title="Weekly">Weekly</option>
+																<option value="5" title="Monthly">Monthly</option>
+																<option value="6" title="Yearly">Yearly</option>
+															</select>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span id="repeats-help" class="help-block fpbx-help-block"><?php echo _("Repeats")?></span>
+											</div>
+										</div>
+									</div>
+									<div class="element-container">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="row">
+													<div class="form-group">
+														<div class="col-md-3">
+															<label class="control-label" for="repeats"><?php echo _("Repeat Every") ?></label>
+															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeats"></i>
+														</div>
+														<div class="col-md-9">
+															<select class="form-control">
+																<option value="1" selected="selected">1</option>
+																<option value="2">2</option>
+																<option value="3">3</option>
+																<option value="4">4</option>
+																<option value="5">5</option>
+																<option value="6">6</option>
+																<option value="7">7</option>
+																<option value="8">8</option>
+																<option value="9">9</option>
+																<option value="10">10</option>
+																<option value="11">11</option>
+																<option value="12">12</option>
+																<option value="13">13</option>
+																<option value="14">14</option>
+																<option value="15">15</option>
+																<option value="16">16</option>
+																<option value="17">17</option>
+																<option value="18">18</option>
+																<option value="19">19</option>
+																<option value="20">20</option>
+																<option value="21">21</option>
+																<option value="22">22</option>
+																<option value="23">23</option>
+																<option value="24">24</option>
+																<option value="25">25</option>
+																<option value="26">26</option>
+																<option value="27">27</option>
+																<option value="28">28</option>
+																<option value="29">29</option>
+																<option value="30">30</option>
+															</select>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span id="repeats-help" class="help-block fpbx-help-block"><?php echo _("Repeats")?></span>
+											</div>
+										</div>
+									</div>
+									<div class="element-container">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="row">
+													<div class="form-group">
+														<div class="col-md-3">
+															<label class="control-label" for="repeats"><?php echo _("Repeat On") ?></label>
+															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeats"></i>
+														</div>
+														<div class="col-md-9 radioset">
+															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
+															<label for=":sj.dow0" title="Sunday">S</label>
+															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
+															<label for=":sj.dow0" title="Sunday">M</label>
+															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
+															<label for=":sj.dow0" title="Sunday">T</label>
+															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
+															<label for=":sj.dow0" title="Sunday">W</label>
+															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
+															<label for=":sj.dow0" title="Sunday">T</label>
+															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
+															<label for=":sj.dow0" title="Sunday">F</label>
+															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
+															<label for=":sj.dow0" title="Sunday">S</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span id="repeats-help" class="help-block fpbx-help-block"><?php echo _("Repeats")?></span>
+											</div>
+										</div>
+									</div>
+									<div class="element-container">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="row">
+													<div class="form-group">
+														<div class="col-md-3">
+															<label class="control-label" for="repeats"><?php echo _("Ends") ?></label>
+															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeats"></i>
+														</div>
+														<div class="col-md-9 radioset">
+															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
+															<label for=":sj.dow0" title="Sunday">Never</label>
+															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
+															<label for=":sj.dow0" title="Sunday">After</label>
+															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
+															<label for=":sj.dow0" title="Sunday">On</label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span id="repeats-help" class="help-block fpbx-help-block"><?php echo _("Repeats")?></span>
+											</div>
+										</div>
+									</div>
 								</form>
 							</div>
 							<div class="modal-footer">
