@@ -106,6 +106,13 @@ class ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b
                 0 => __DIR__ . '/..' . '/google/apiclient/src',
             ),
         ),
+        'E' => 
+        array (
+            'Eluceo\\iCal' => 
+            array (
+                0 => __DIR__ . '/..' . '/eluceo/ical/src',
+            ),
+        ),
     );
 
     public static $classMap = array (

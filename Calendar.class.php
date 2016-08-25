@@ -8,6 +8,9 @@ use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use it\thecsea\simple_caldav_client\SimpleCalDAVClient;
 use om\IcalParser;
+use Eluceo\iCal\Component\Calendar as iCalendar;
+use Eluceo\iCal\Component\Event;
+use Eluceo\iCal\Property\Event\RecurrenceRule;
 
 include __DIR__."/vendor/autoload.php";
 
@@ -242,19 +245,71 @@ class Calendar extends \DB_Helper implements \BMO {
 				return array_values($events);
 			break;
 			case 'eventform':
-				$date = new Carbon($_POST['startdate']." ".$_POST['starttime'], $this->systemtz);
-				$starttime = $date->format('U');
-
-				$date = new Carbon($_POST['enddate']." ".$_POST['endtime'], $this->systemtz);
-				$endtime = $date->format('U');
-
-				$name = $_POST['title'];
 				$calendarID = $_POST['calendarid'];
-				$description = $_POST['description'];
-				if(isset($_REQUEST['eventid']) && $_REQUEST['eventid'] == 'new'){
-					$this->addEvent($calendarID,null,$name,$description,$starttime,$endtime,$this->systemtz);
-				}else{
-					$this->updateEvent($calendarID,$_REQUEST['eventid'],$name,$description,$starttime,$endtime,$this->systemtz);
+				$vCalendar = new iCalendar($calendarID);
+				$vEvent = new Event();
+				$vEvent->setUseTimezone(true);
+				$vEvent->setSummary($_POST['title']);
+				$vEvent->setDescription($_POST['description']);
+				$vEvent->setDtStart(new Carbon($_POST['startdate']." ".$_POST['starttime'], $this->systemtz));
+				$vEvent->setDtEnd(new Carbon($_POST['enddate']." ".$_POST['endtime'], $this->systemtz));
+				if(!empty($_REQUEST['allday']) && $_REQUEST['allday'] == "yes") {
+					$vEvent->setNoTime(true);
+				}
+				if(!empty($_REQUEST['reoccurring']) && $_REQUEST['reoccurring'] == "yes") {
+					$recurrenceRule = new RecurrenceRule();
+					switch($_REQUEST['repeats']) {
+						case "0":
+							$recurrenceRule->setFreq(RecurrenceRule::FREQ_DAILY);
+						break;
+						case "1":
+							$recurrenceRule->setByDay("MO,TU,WE,TH,FR");
+							$recurrenceRule->setFreq(RecurrenceRule::FREQ_WEEKLY);
+						break;
+						case "2":
+							$recurrenceRule->setByDay("MO,WE,FR");
+							$recurrenceRule->setFreq(RecurrenceRule::FREQ_WEEKLY);
+						break;
+						case "3":
+							$recurrenceRule->setByDay("TU,TH");
+							$recurrenceRule->setFreq(RecurrenceRule::FREQ_WEEKLY);
+						break;
+						case "4":
+							if(!empty($_REQUEST['weekday']) && is_array($_REQUEST['weekday'])) {
+								$recurrenceRule->setByDay(implode(",",$_REQUEST['weekday']));
+							}
+							$recurrenceRule->setFreq(RecurrenceRule::FREQ_WEEKLY);
+						break;
+						case "5":
+							$recurrenceRule->setFreq(RecurrenceRule::FREQ_MONTHLY);
+						break;
+						case "6":
+							$recurrenceRule->setFreq(RecurrenceRule::FREQ_YEARLY);
+						break;
+						default:
+						break;
+					}
+					if(!empty($_REQUEST['repeat-count'])) {
+						$recurrenceRule->setInterval($_REQUEST['repeat-count']);
+					}
+					if(!empty($_REQUEST['occurrences'])) {
+						$recurrenceRule->setCount($_REQUEST['occurrences']);
+					}
+					if(!empty($_REQUEST['afterdate'])) {
+						$recurrenceRule->setUntil(new Carbon($_POST['afterdate'], $this->systemtz));
+					}
+
+					$vEvent->setRecurrenceRule($recurrenceRule);
+				}
+				$uuid = ($_REQUEST['eventid'] == 'new') ? (string)Uuid::uuid4() : $_REQUEST['eventid'];
+				$vEvent->setUniqueId($uuid);
+
+				$vCalendar->addComponent($vEvent);
+
+				$cal = new IcalParser();
+				$cal->parseString($vCalendar->render());
+				foreach($cal->getSortedEvents() as $event) {
+					$this->processiCalEvent($calendarID, $event);
 				}
 			break;
 			case 'groupsgrid':
@@ -521,7 +576,6 @@ class Calendar extends \DB_Helper implements \BMO {
 			}
 			return ($a['ustarttime'] < $b['ustarttime']) ? -1 : 1;
 		});
-		//dbug($return);
 		return $return;
 	}
 
@@ -876,32 +930,45 @@ class Calendar extends \DB_Helper implements \BMO {
 
 			$event['UID'] = isset($event['UID']) ? $event['UID'] : 0;
 
-			if(!empty($event['RECURRING'])) {
-				$recurring = true;
-				$rrules = array(
-					"frequency" => $event['RRULE']['FREQ'],
-					"days" => !empty($event['RRULE']['BYDAY']) ? explode(",",$event['RRULE']['BYDAY']) : array(),
-					"interval" => !empty($event['RRULE']['INTERVAL']) ? $event['RRULE']['INTERVAL'] : "",
-					"count" => !empty($event['RRULE']['COUNT']) ? $event['RRULE']['COUNT'] : ""
-				);
-			} else {
-				$recurring = false;
-				$rrules = array();
-			}
-
-			$categories = is_array($event['CATEGORIES']) ? $event['CATEGORIES'] : array();
-
-			$event['DESCRIPTION'] = !empty($event['DESCRIPTION']) ? $event['DESCRIPTION'] : "";
-
-			if($event['DTSTART']->getTimezone() != $event['DTEND']->getTimezone()) {
-				throw new \Exception("Start timezone and end timezone are different! Not sure what to do here");
-			}
-			$tz = $event['DTSTART']->getTimezone();
-			$timezone = $tz->getName();
-			$this->updateEvent($calendarID,$event['UID'],htmlspecialchars_decode($event['SUMMARY'], ENT_QUOTES),htmlspecialchars_decode($event['DESCRIPTION'], ENT_QUOTES),$event['DTSTART']->format('U'),$event['DTEND']->format('U'),$timezone,$recurring,$rrules,$categories);
+			$this->processiCalEvent($calendarID, $event);
 		}
 
 		$this->db->commit(); //now update just incase this takes a long time
+	}
+
+	/**
+	 * Process single iCalEvent
+	 * @param  string $calendarID The Calendar ID
+	 * @param  array $event      The iCal Event
+	 */
+	public function processiCalEvent($calendarID, $event) {
+		$event['UID'] = isset($event['UID']) ? $event['UID'] : 0;
+
+		if(!empty($event['RECURRING'])) {
+			$recurring = true;
+			$rrules = array(
+				"frequency" => $event['RRULE']['FREQ'],
+				"days" => !empty($event['RRULE']['BYDAY']) ? explode(",",$event['RRULE']['BYDAY']) : array(),
+				"byday" => !empty($event['RRULE']['BYDAY']) ? $event['RRULE']['BYDAY'] : array(),
+				"interval" => !empty($event['RRULE']['INTERVAL']) ? $event['RRULE']['INTERVAL'] : "",
+				"count" => !empty($event['RRULE']['COUNT']) ? $event['RRULE']['COUNT'] : "",
+				"until" => !empty($event['RRULE']['UNTIL']) ? $event['RRULE']['UNTIL']->format('U') : ""
+			);
+		} else {
+			$recurring = false;
+			$rrules = array();
+		}
+
+		$categories = (!empty($event['CATEGORIES']) && is_array($event['CATEGORIES'])) ? $event['CATEGORIES'] : array();
+
+		$event['DESCRIPTION'] = !empty($event['DESCRIPTION']) ? $event['DESCRIPTION'] : "";
+
+		if($event['DTSTART']->getTimezone() != $event['DTEND']->getTimezone()) {
+			throw new \Exception("Start timezone and end timezone are different! Not sure what to do here");
+		}
+		$tz = $event['DTSTART']->getTimezone();
+		$timezone = $tz->getName();
+		$this->updateEvent($calendarID,$event['UID'],htmlspecialchars_decode($event['SUMMARY'], ENT_QUOTES),htmlspecialchars_decode($event['DESCRIPTION'], ENT_QUOTES),$event['DTSTART']->format('U'),$event['DTEND']->format('U'),$timezone,$recurring,$rrules,$categories);
 	}
 
 	/**

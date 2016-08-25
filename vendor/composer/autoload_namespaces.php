@@ -9,4 +9,5 @@ return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log'),
     'Google_Service_' => array($vendorDir . '/google/apiclient-services'),
     'Google_' => array($vendorDir . '/google/apiclient/src'),
+    'Eluceo\\iCal' => array($vendorDir . '/eluceo/ical/src'),
 );

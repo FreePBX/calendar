@@ -21,7 +21,7 @@ $("#modalDelete").on('click',function(e){
 	if(readonly) {
 		return;
 	}
-	$.post( "ajax.php?module=calendar&command=delevent", {calendarid: calendarid, eventid: $(this).data("id")}, function( data ) {
+	$.post( "ajax.php?module=calendar&command=delevent", {calendarid: calendarid, eventid: $("#eventid").val()}, function( data ) {
 		$("#calendar").fullCalendar( 'refetchEvents' );
 	});
 });
@@ -77,9 +77,9 @@ if($('#calendar').length && !readonly) {
 $(document).ready(function() {
 	$("#allday").click(function() {
 		if($(this).is(":checked")) {
-			$(".time").hide();
+			$(".time").addClass("hidden");
 		} else {
-			$(".time").show();
+			$(".time").removeClass("hidden");
 		}
 	});
 	var daysOfWeek = moment.weekdays(),
@@ -92,6 +92,17 @@ $(document).ready(function() {
 	$('#endtime').clockpicker({
 		donetext: _('Done'),
 		twelvehour: true
+	});
+
+	$("#afterdate").datepicker({
+		format: {
+			toDisplay: function (date, format, language) {
+				return moment(date).tz('UTC').format("YYYY-MM-DD");
+			},
+			toValue: function (date, format, language) {
+				return moment(date).toDate();
+			}
+		}
 	});
 
 	$("#startdate").datepicker({
@@ -169,19 +180,60 @@ $(document).ready(function() {
 				$('#enddate').datepicker('update');
 				$('#modalDelete').data('id', src.uid);
 				$('#eventModal').modal('show');
-				$("#allday").prop("checked", allday);
-				if(allday) {
-					$('#eventForm .time').hide();
+				if(src.recurring) {
+					$("#reoccurring").prop("checked",true);
+					if(src.rrules.interval !== "") {
+						$("#repeat-count").val(src.rrules.interval);
+					}
+					if(src.rrules.count !== "") {
+						$("#repeat1").prop("checked",true);
+						$("#occurrences").val(src.rrules.count);
+					}
+					if(src.rrules.until !== "") {
+						$("#repeat2").prop("checked",true);
+						$('#afterdate').val(moment.unix(src.rrules.until).format("YYYY-MM-DD"));
+						$('#afterdate').datepicker('update');
+					}
+					switch(src.rrules.frequency) {
+						case "DAILY":
+							$("#repeats").val(0);
+						break;
+						case "WEEKLY":
+							if(src.rrules.interval === "") {
+								switch(src.rrules.byday) {
+									case "MO,TU,WE,TH,FR":
+										$("#repeats").val(1);
+									break;
+									case "MO,WE,FR":
+										$("#repeats").val(2);
+									break;
+									case "TU,TH":
+										$("#repeats").val(3);
+									break;
+								}
+							} else {
+								$("#repeats").val(4);
+							}
+						break;
+					}
+					var days = {"MO": 0, "TU": 1, "WE": 2, "TH": 3, "FR": 4, "SA": 5, "SU": 6};
+					$.each(src.rrules.days, function(i,v) {
+						$("#weekday"+days[v]).prop("checked",true);
+					});
 				}
 				if(!readonly){
 					$("#eventForm input").prop("disabled",false);
+					$("#eventForm select").prop("disabled",false);
 					$("#modalSubmit").show();
 					$("#modalDelete").show();
 				}else{
 					$("#eventForm input").prop("disabled",true);
+					$("#eventForm select").prop("disabled",true);
 					$("#modalSubmit").hide();
 					$("#modalDelete").hide();
 				}
+				updateReoccurring();
+				updateAllDay();
 			},
 			dayClick: function( event, jsEvent, view ) {
 				if(readonly) {
@@ -196,10 +248,26 @@ $(document).ready(function() {
 				$('#endtime').val(moment(Date.now()).add(1, 'h').format("kk:mm"));
 				$('#eventid').val('new');
 				$('#eventModal').modal('show');
+				updateAllDay();
 			}
 
 		});
 	}
+});
+
+$("#repeat0").click(function() {
+	$("#occurrences-container").addClass("hidden");
+	$("#after-container").addClass("hidden");
+});
+
+$("#repeat1").click(function() {
+	$("#occurrences-container").removeClass("hidden");
+	$("#after-container").addClass("hidden");
+});
+
+$("#repeat2").click(function() {
+	$("#after-container").removeClass("hidden");
+	$("#occurrences-container").addClass("hidden");
 });
 
 $("#reoccurring").click(function() {
@@ -222,16 +290,14 @@ function updateReoccurring() {
 function updateReoccurringOptions() {
 	switch($("#repeats").val()) {
 		case "4":
-		case "0":
-			switch($("#repeats").val()) {
-				case "0":
-					$("#countType").text(_("Days"));
-				break;
-				case "4":
-					$("#countType").text(_("Weeks"));
-				break;
-			}
 			$("#repeat-on-container").removeClass("hidden");
+			$("#repeats-every-container").removeClass("hidden");
+			$("#repeat-by-container").addClass("hidden");
+			$("#countType").text(_("Weeks"));
+		break;
+		case "0":
+			$("#countType").text(_("Days"));
+			$("#repeat-on-container").addClass("hidden");
 			$("#repeats-every-container").removeClass("hidden");
 			$("#repeat-by-container").addClass("hidden");
 		break;
@@ -255,10 +321,24 @@ function updateReoccurringOptions() {
 			$("#repeat-by-container").addClass("hidden");
 		break;
 	}
+	if($("#repeat1").is(":checked")) {
+		$("#occurrences-container").removeClass("hidden");
+	} else {
+		$("#occurrences-container").addClass("hidden");
+	}
+	if($("#repeat2").is(":checked")) {
+		$("#after-container").removeClass("hidden");
+	} else {
+		$("#after-container").addClass("hidden");
+	}
 }
 
 function updateAllDay() {
 	if($("#starttime").val() == $("#endtime").val()) {
 		$("#allday").prop("checked",true);
+		$(".time").addClass("hidden");
+	} else {
+		$("#allday").prop("checked",false);
+		$(".time").removeClass("hidden");
 	}
 }

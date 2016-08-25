@@ -256,12 +256,12 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 												<div class="row">
 													<div class="form-group">
 														<div class="col-md-3">
-															<label class="control-label" for="repeats"><?php echo _("Repeat Every") ?></label>
-															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeats"></i>
+															<label class="control-label" for="repeat-count"><?php echo _("Repeat Every") ?></label>
+															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeat-count"></i>
 														</div>
 														<div class="col-md-9">
 															<div class="input-group">
-																<select class="form-control">
+																<select class="form-control" name="repeat-count" id="repeat-count">
 																	<option value="1" selected="selected">1</option>
 																	<option value="2">2</option>
 																	<option value="3">3</option>
@@ -302,7 +302,7 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<span id="repeats-help" class="help-block fpbx-help-block"><?php echo _("Repeats")?></span>
+												<span id="repeat-count-help" class="help-block fpbx-help-block"><?php echo _("Repeats")?></span>
 											</div>
 										</div>
 									</div>
@@ -317,7 +317,7 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 														</div>
 														<div class="col-md-9 radioset">
 															<?php foreach($locale['weekdaysShort'] as $id => $day) { ?>
-																<input id="weekday<?php echo $id?>" name="weekday" type="checkbox" title="<?php echo $locale['weekdays'][$id]?>" value="<?php echo $id?>">
+																<input id="weekday<?php echo $id?>" name="weekday[]" type="checkbox" title="<?php echo $locale['weekdays'][$id]?>" value="<?php echo $id?>">
 																<label for="weekday<?php echo $id?>" title="Sunday"><?php echo $day?></label>
 															<?php } ?>
 														</div>
@@ -362,15 +362,15 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 												<div class="row">
 													<div class="form-group">
 														<div class="col-md-3">
-															<label class="control-label" for="repeats"><?php echo _("Ends") ?></label>
-															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeats"></i>
+															<label class="control-label" for="ends"><?php echo _("Ends") ?></label>
+															<i class="fa fa-question-circle fpbx-help-icon" data-for="ends"></i>
 														</div>
 														<div class="col-md-9 radioset">
-															<input id="repeat0" name="repeats" type="radio" value="never">
+															<input id="repeat0" name="ends" type="radio" value="never">
 															<label for="repeat0"><?php echo _("Never")?></label>
-															<input id="repeat1" name="repeats" type="radio" value="after">
+															<input id="repeat1" name="ends" type="radio" value="after">
 															<label for="repeat1"><?php echo _("After")?></label>
-															<input id="repeat2" name="repeats" type="radio" value="on">
+															<input id="repeat2" name="ends" type="radio" value="on">
 															<label for="repeat2"><?php echo _('On')?></label>
 														</div>
 													</div>
@@ -379,7 +379,57 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<span id="repeats-help" class="help-block fpbx-help-block"><?php echo _("Repeats")?></span>
+												<span id="ends-help" class="help-block fpbx-help-block"><?php echo _("Ends")?></span>
+											</div>
+										</div>
+									</div>
+									<div id="occurrences-container" class="element-container reoccurring">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="row">
+													<div class="form-group">
+														<div class="col-md-3">
+															<label class="control-label" for="occurrences"><?php echo _("Occurrences") ?></label>
+															<i class="fa fa-question-circle fpbx-help-icon" data-for="occurrences"></i>
+														</div>
+														<div class="col-md-9">
+															<div class="input-group">
+																<input id="occurrences" name="occurrences" type="text" class="form-control">
+																<span class="input-group-addon"><?php echo _("occurrences")?></span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span id="occurrences-help" class="help-block fpbx-help-block"><?php echo _("occurrences")?></span>
+											</div>
+										</div>
+									</div>
+									<div id="after-container" class="element-container reoccurring">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="row">
+													<div class="form-group">
+														<div class="col-md-3">
+															<label class="control-label" for="afterdate"><?php echo _("After") ?></label>
+															<i class="fa fa-question-circle fpbx-help-icon" data-for="afterdate"></i>
+														</div>
+														<div class="col-md-9">
+															<div class="input-group">
+																<input type="text" class="form-control" id="afterdate" name="afterdate" value="">
+																<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span id="afterdate-help" class="help-block fpbx-help-block"><?php echo _("Repeats")?></span>
 											</div>
 										</div>
 									</div>
