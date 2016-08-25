@@ -29,8 +29,12 @@ $("#modalDelete").on('click',function(e){
 function resetModalForm(){
 	$(".time").show();
 	$('input[type=checkbox]').prop("checked",false);
-	$('select').val('');
+	$('select')[0].selectedIndex = 0;
 	$('input[type=text]').val('');
+	updateReoccurring();
+	$("#repeat0").prop("checked",true);
+	$("modalDelete").hide();
+	updateAllDay();
 }
 
 function actionformatter(v,r) {
@@ -49,6 +53,8 @@ if($('#calendar').length && !readonly) {
 						$('.dest').addClass('hidden');
 						$('#startdate').val(moment(Date.now()).format("YYYY-MM-DD"));
 						$('#enddate').val(moment(Date.now()).format("YYYY-MM-DD"));
+						$('#starttime').val(moment(Date.now()).format("kk:mm"));
+						$('#endtime').val(moment(Date.now()).format("kk:mm"));
 						$('#startdate').datepicker('update');
 						$('#enddate').datepicker('update');
 						$('#eventid').val('new');
@@ -61,6 +67,8 @@ if($('#calendar').length && !readonly) {
 							$("#modalSubmit").hide();
 							$("modalDelete").hide();
 						}
+						updateReoccurring();
+						updateAllDay();
 					}
 			}
 	};
@@ -78,10 +86,12 @@ $(document).ready(function() {
 			daysOfWeekShort = moment.weekdaysShort();
 
 	$('#starttime').clockpicker({
-		donetext: _('Done')
+		donetext: _('Done'),
+		twelvehour: true
 	});
 	$('#endtime').clockpicker({
-		donetext: _('Done')
+		donetext: _('Done'),
+		twelvehour: true
 	});
 
 	$("#startdate").datepicker({
@@ -153,8 +163,8 @@ $(document).ready(function() {
 				$("#eventtype option[value='"+src.eventtype+"']").prop('selected', true);
 				$('#startdate').val(ms.format("YYYY-MM-DD"));
 				$('#enddate').val(me.format("YYYY-MM-DD"));
-				$('#starttime').val(ms.format("hh:mm A"));
-				$('#endtime').val(me.format("hh:mm A"));
+				$('#starttime').val(ms.format("kk:mm"));
+				$('#endtime').val(me.format("kk:mm"));
 				$('#startdate').datepicker('update');
 				$('#enddate').datepicker('update');
 				$('#modalDelete').data('id', src.uid);
@@ -180,8 +190,10 @@ $(document).ready(function() {
 				resetModalForm();
 				$('#startdate').val(event.format("YYYY-MM-DD"));
 				$('#enddate').val(event.format("YYYY-MM-DD"));
-				$('#starttime').val(event.format("hh:mm A"));
-				$('#endtime').val(event.format("hh:mm A"));
+				$('#startdate').datepicker('update');
+				$('#enddate').datepicker('update');
+				$('#starttime').val(moment(Date.now()).format("kk:mm"));
+				$('#endtime').val(moment(Date.now()).add(1, 'h').format("kk:mm"));
 				$('#eventid').val('new');
 				$('#eventModal').modal('show');
 			}
@@ -190,6 +202,63 @@ $(document).ready(function() {
 	}
 });
 
-function displayEvent() {
+$("#reoccurring").click(function() {
+	updateReoccurring();
+});
 
+$("#repeats").change(function() {
+	updateReoccurring();
+});
+
+function updateReoccurring() {
+	if($("#reoccurring").is(":checked")) {
+		$(".reoccurring").removeClass("hidden");
+		updateReoccurringOptions();
+	} else {
+		$(".reoccurring").addClass("hidden");
+	}
+}
+
+function updateReoccurringOptions() {
+	switch($("#repeats").val()) {
+		case "4":
+		case "0":
+			switch($("#repeats").val()) {
+				case "0":
+					$("#countType").text(_("Days"));
+				break;
+				case "4":
+					$("#countType").text(_("Weeks"));
+				break;
+			}
+			$("#repeat-on-container").removeClass("hidden");
+			$("#repeats-every-container").removeClass("hidden");
+			$("#repeat-by-container").addClass("hidden");
+		break;
+		case "1":
+		case "2":
+		case "3":
+			$("#repeat-on-container").addClass("hidden");
+			$("#repeats-every-container").addClass("hidden");
+			$("#repeat-by-container").addClass("hidden");
+		break;
+		case "5":
+			$("#countType").text(_("Months"));
+			$("#repeat-on-container").addClass("hidden");
+			$("#repeats-every-container").removeClass("hidden");
+			$("#repeat-by-container").removeClass("hidden");
+		break;
+		case "6":
+			$("#countType").text(_("Years"));
+			$("#repeat-on-container").addClass("hidden");
+			$("#repeats-every-container").addClass("hidden");
+			$("#repeat-by-container").addClass("hidden");
+		break;
+	}
+}
+
+function updateAllDay() {
+	if($("#starttime").val() == $("#endtime").val()) {
+		$("#allday").prop("checked",true);
+	}
 }

@@ -340,7 +340,9 @@ class Calendar extends \DB_Helper implements \BMO {
 			break;
 			case "view":
 				$data = $this->getCalendarByID($_GET['id']);
-				return load_view(__DIR__."/views/calendar.php",array('action' => 'view', 'type' => $data['type'], 'data' => $data));
+				\Moment\Moment::setLocale('en_US');
+				$locale = \Moment\MomentLocale::getLocaleContent();
+				return load_view(__DIR__."/views/calendar.php",array('action' => 'view', 'type' => $data['type'], 'data' => $data, 'locale' => $locale));
 			break;
 			default:
 				return load_view(__DIR__."/views/grid.php",array());
@@ -572,6 +574,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param string $starttime   The event start timezone
 	 * @param string $endtime     The event end time
 	 * @param boolean $recurring  Is this a recurring event
+	 * @param array $rrules       Recurring rules
 	 * @param array $categories   The categories assigned to this event
 	 */
 	public function addEvent($calendarID,$eventID=null,$name,$description,$starttime,$endtime,$timezone=null,$recurring=false,$rrules=array(),$categories=array()){
@@ -588,6 +591,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param string $starttime   The event start timezone
 	 * @param string $endtime     The event end time
 	 * @param boolean $recurring  Is this a recurring event
+	 * @param array $rrules       Recurring rules
 	 * @param array $categories   The categories assigned to this event
 	 */
 	public function updateEvent($calendarID,$eventID,$name,$description,$starttime,$endtime,$timezone=null,$recurring=false,$rrules=array(),$categories=array()) {

@@ -220,7 +220,7 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 										</div>
 									</div>
 									<!--END End Event-->
-									<div class="element-container">
+									<div id="repeats-container" class="element-container reoccurring">
 										<div class="row">
 											<div class="col-md-12">
 												<div class="row">
@@ -230,7 +230,7 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeats"></i>
 														</div>
 														<div class="col-md-9">
-															<select class="form-control">
+															<select class="form-control" id="repeats" name="repeats">
 																<option value="0" title="Daily">Daily</option>
 																<option value="1" title="Every weekday (Monday to Friday)">Every weekday (Monday to Friday)</option>
 																<option value="2" title="Every Monday, Wednesday, and Friday">Every Monday, Wednesday, and Friday</option>
@@ -250,7 +250,7 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 											</div>
 										</div>
 									</div>
-									<div class="element-container">
+									<div id="repeats-every-container" class="element-container reoccurring">
 										<div class="row">
 											<div class="col-md-12">
 												<div class="row">
@@ -260,38 +260,41 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeats"></i>
 														</div>
 														<div class="col-md-9">
-															<select class="form-control">
-																<option value="1" selected="selected">1</option>
-																<option value="2">2</option>
-																<option value="3">3</option>
-																<option value="4">4</option>
-																<option value="5">5</option>
-																<option value="6">6</option>
-																<option value="7">7</option>
-																<option value="8">8</option>
-																<option value="9">9</option>
-																<option value="10">10</option>
-																<option value="11">11</option>
-																<option value="12">12</option>
-																<option value="13">13</option>
-																<option value="14">14</option>
-																<option value="15">15</option>
-																<option value="16">16</option>
-																<option value="17">17</option>
-																<option value="18">18</option>
-																<option value="19">19</option>
-																<option value="20">20</option>
-																<option value="21">21</option>
-																<option value="22">22</option>
-																<option value="23">23</option>
-																<option value="24">24</option>
-																<option value="25">25</option>
-																<option value="26">26</option>
-																<option value="27">27</option>
-																<option value="28">28</option>
-																<option value="29">29</option>
-																<option value="30">30</option>
-															</select>
+															<div class="input-group">
+																<select class="form-control">
+																	<option value="1" selected="selected">1</option>
+																	<option value="2">2</option>
+																	<option value="3">3</option>
+																	<option value="4">4</option>
+																	<option value="5">5</option>
+																	<option value="6">6</option>
+																	<option value="7">7</option>
+																	<option value="8">8</option>
+																	<option value="9">9</option>
+																	<option value="10">10</option>
+																	<option value="11">11</option>
+																	<option value="12">12</option>
+																	<option value="13">13</option>
+																	<option value="14">14</option>
+																	<option value="15">15</option>
+																	<option value="16">16</option>
+																	<option value="17">17</option>
+																	<option value="18">18</option>
+																	<option value="19">19</option>
+																	<option value="20">20</option>
+																	<option value="21">21</option>
+																	<option value="22">22</option>
+																	<option value="23">23</option>
+																	<option value="24">24</option>
+																	<option value="25">25</option>
+																	<option value="26">26</option>
+																	<option value="27">27</option>
+																	<option value="28">28</option>
+																	<option value="29">29</option>
+																	<option value="30">30</option>
+																</select>
+																<span class="input-group-addon" id="countType">Days</span>
+															</div>
 														</div>
 													</div>
 												</div>
@@ -303,7 +306,7 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 											</div>
 										</div>
 									</div>
-									<div class="element-container">
+									<div id="repeat-on-container" class="element-container reoccurring">
 										<div class="row">
 											<div class="col-md-12">
 												<div class="row">
@@ -313,20 +316,10 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeats"></i>
 														</div>
 														<div class="col-md-9 radioset">
-															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
-															<label for=":sj.dow0" title="Sunday">S</label>
-															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
-															<label for=":sj.dow0" title="Sunday">M</label>
-															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
-															<label for=":sj.dow0" title="Sunday">T</label>
-															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
-															<label for=":sj.dow0" title="Sunday">W</label>
-															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
-															<label for=":sj.dow0" title="Sunday">T</label>
-															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
-															<label for=":sj.dow0" title="Sunday">F</label>
-															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
-															<label for=":sj.dow0" title="Sunday">S</label>
+															<?php foreach($locale['weekdaysShort'] as $id => $day) { ?>
+																<input id="weekday<?php echo $id?>" name="weekday" type="checkbox" title="<?php echo $locale['weekdays'][$id]?>" value="<?php echo $id?>">
+																<label for="weekday<?php echo $id?>" title="Sunday"><?php echo $day?></label>
+															<?php } ?>
 														</div>
 													</div>
 												</div>
@@ -338,7 +331,32 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 											</div>
 										</div>
 									</div>
-									<div class="element-container">
+									<div id="repeat-by-container" class="element-container reoccurring">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="row">
+													<div class="form-group">
+														<div class="col-md-3">
+															<label class="control-label" for="repeat-by"><?php echo _("Repeat by") ?></label>
+															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeat-by"></i>
+														</div>
+														<div class="col-md-9 radioset">
+															<input id="repeat-by0" name="repeat-by" type="radio" value="0">
+															<label for="repeat-by0"><?php echo _("Day of the month")?></label>
+															<input id="repeat-by1" name="repeat-by" type="radio" value="1">
+															<label for="repeat-by1"><?php echo _("Day of the week")?></label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span id="repeat-by-help" class="help-block fpbx-help-block"><?php echo _("Repeats")?></span>
+											</div>
+										</div>
+									</div>
+									<div class="element-container reoccurring">
 										<div class="row">
 											<div class="col-md-12">
 												<div class="row">
@@ -348,12 +366,12 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeats"></i>
 														</div>
 														<div class="col-md-9 radioset">
-															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
-															<label for=":sj.dow0" title="Sunday">Never</label>
-															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
-															<label for=":sj.dow0" title="Sunday">After</label>
-															<input id=":sj.dow0" name="SU" type="checkbox" aria-label="Repeat on Sunday" title="Sunday">
-															<label for=":sj.dow0" title="Sunday">On</label>
+															<input id="repeat0" name="repeats" type="radio" value="never">
+															<label for="repeat0"><?php echo _("Never")?></label>
+															<input id="repeat1" name="repeats" type="radio" value="after">
+															<label for="repeat1"><?php echo _("After")?></label>
+															<input id="repeat2" name="repeats" type="radio" value="on">
+															<label for="repeat2"><?php echo _('On')?></label>
 														</div>
 													</div>
 												</div>
