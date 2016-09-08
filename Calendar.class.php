@@ -245,6 +245,7 @@ class Calendar extends \DB_Helper implements \BMO {
 				return array_values($events);
 			break;
 			case 'eventform':
+				dbug($_POST);
 				$calendarID = $_POST['calendarid'];
 				$vCalendar = new iCalendar($calendarID);
 				$vEvent = new Event();
@@ -254,9 +255,14 @@ class Calendar extends \DB_Helper implements \BMO {
 				$vEvent->setDtStart(new Carbon($_POST['startdate']." ".$_POST['starttime'], $this->systemtz));
 				$vEvent->setDtEnd(new Carbon($_POST['enddate']." ".$_POST['endtime'], $this->systemtz));
 				if(!empty($_REQUEST['allday']) && $_REQUEST['allday'] == "yes") {
-					$vEvent->setNoTime(true);
+					$vEvent->setDtStart(new Carbon($_POST['startdate'], $this->systemtz));
+					$vEvent->setDtEnd(new Carbon($_POST['enddate'], $this->systemtz));
 				}
 				if(!empty($_REQUEST['reoccurring']) && $_REQUEST['reoccurring'] == "yes") {
+					if(!empty($_POST['rstartdate'])) {
+						$vEvent->setDtStart(Carbon::createFromTimestamp($_POST['rstartdate'], $this->systemtz));
+						$vEvent->setDtStart(Carbon::createFromTimestamp($_POST['renddate'], $this->systemtz));
+					}
 					$recurrenceRule = new RecurrenceRule();
 					switch($_REQUEST['repeats']) {
 						case "0":
@@ -276,7 +282,35 @@ class Calendar extends \DB_Helper implements \BMO {
 						break;
 						case "4":
 							if(!empty($_REQUEST['weekday']) && is_array($_REQUEST['weekday'])) {
-								$recurrenceRule->setByDay(implode(",",$_REQUEST['weekday']));
+								$days = array();
+								foreach($_REQUEST['weekday'] as $day) {
+									switch($day) {
+										case "0":
+											$days[] = 'MO';
+										break;
+										case "1":
+											$days[] = 'TU';
+										break;
+										case "2":
+											$days[] = 'WE';
+										break;
+										case "3":
+											$days[] = 'TH';
+										break;
+										case "4":
+											$days[] = 'FR';
+										break;
+										case "5":
+											$days[] = 'SA';
+										break;
+										case "6":
+											$days[] = 'SU';
+										break;
+										default:
+										break;
+									}
+								}
+								$recurrenceRule->setByDay(implode(",",$days));
 							}
 							$recurrenceRule->setFreq(RecurrenceRule::FREQ_WEEKLY);
 						break;
@@ -307,7 +341,10 @@ class Calendar extends \DB_Helper implements \BMO {
 				$vCalendar->addComponent($vEvent);
 
 				$cal = new IcalParser();
-				$cal->parseString($vCalendar->render());
+				$render = $vCalendar->render();
+				$render = str_replace('"','',$render); //TODO: bad
+				$cal->parseString($render);
+				$this->deleteEvent($calendarID,$uuid); //TODO this is strange
 				foreach($cal->getSortedEvents() as $event) {
 					$this->processiCalEvent($calendarID, $event);
 				}
@@ -476,6 +513,7 @@ class Calendar extends \DB_Helper implements \BMO {
 		$final = array();
 		$i = 0;
 		$startdate = null;
+		$enddate = null;
 		foreach($event['events'] as $evt) {
 			$tmp = $event;
 			unset($tmp['events']);
@@ -486,8 +524,10 @@ class Calendar extends \DB_Helper implements \BMO {
 			$tmp['uid'] = $id."_".$i;
 			if($i == 0){
 				$startdate = $tmp['starttime'];
+				$enddate = $tmp['endtime'];
 			}
 			$tmp['rstartdate'] = $startdate;
+			$tmp['renddate'] = $enddate;
 			$final[$tmp['uid']] = $tmp;
 			$i++;
 		}

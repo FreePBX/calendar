@@ -18,8 +18,10 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 							</div>
 							<div id="modalBody" class="modal-body">
 								<form name="eventForm" id="eventForm" action="ajax.php?command=eventform&amp;module=calendar" method="POST">
-									<input type="hidden" name="calendarid" id="calendarid" class="form-control" value="<?php echo $data['id']?>">
-									<input type="hidden" name="eventid" id="eventid" class="form-control" value="">
+									<input type="hidden" name="calendarid" id="calendarid" value="<?php echo $data['id']?>">
+									<input type="hidden" name="eventid" id="eventid" value="">
+									<input type="hidden" name="rstartdate" id="rstartdate" value="">
+									<input type="hidden" name="renddate" id="renddate" value="">
 									<!--Event Description-->
 									<div class="element-container">
 										<div class="row">
