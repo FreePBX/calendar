@@ -49,6 +49,11 @@ class Calendar extends \DB_Helper implements \BMO {
 			);
 	}
 
+	public function setTimezone($timezone) {
+		$this->systemtz = $timezone;
+		$this->now = Carbon::now($this->systemtz);
+	}
+
 	public function backup() {}
 	public function restore($backup) {}
   public function install(){}
@@ -439,19 +444,6 @@ class Calendar extends \DB_Helper implements \BMO {
 			default:
 				return load_view(__DIR__."/views/grid.php",array());
 			break;
-		}
-	}
-
-	Public function myDialplanHooks(){
-		return '490';
-	}
-
-	public function doDialplanHook(&$ext, $engine, $priority){
-		//Dialplan
-		$dpapp = 'calendar-groups';
-		$ext->addInclude('from-internal-additional',$dpapp);
-		foreach ($this->listGroups() as $key => $value) {
-			$ext->add($dpapp,900,'', $this->ext_calendar_group_goto("41f0392b-bfc1-43a0-b5e7-0fb00935343b","ext-local,1,1","ext-local,1,2"));
 		}
 	}
 
@@ -1080,35 +1072,38 @@ class Calendar extends \DB_Helper implements \BMO {
 	/**
 	 * Dial Plan Function
 	 */
-	public function ext_calendar_group_variable($groupid,$integer=false) {
+	public function ext_calendar_group_variable($groupid,$timezone=null,$integer=false) {
+		$timezone = empty($timezone) ? $this->systemtz : $timezone;
 		$group = $this->getGroup($groupid);
 		if(empty($group)) {
 			throw new \Exception("Group $groupid does not exist!");
 		}
 		$type = $integer ? 'integer' : 'boolean';
-		return new \ext_agi('calendar.agi,group,'.$type.','.$groupid);
+		return new \ext_agi('calendar.agi,group,'.$type.','.$groupid.','.$timezone);
 	}
 
 	/**
 	 * Dial Plan Function
 	 */
-	public function ext_calendar_group_goto($groupid,$true_dest,$false_dest) {
+	public function ext_calendar_group_goto($groupid,$timezone=null,$true_dest,$false_dest) {
+		$timezone = empty($timezone) ? $this->systemtz : $timezone;
 		$group = $this->getGroup($groupid);
 		if(empty($group)) {
 			throw new \Exception("Group $groupid does not exist!");
 		}
-		return new \ext_agi('calendar.agi,group,goto,'.$groupid.','.base64_encode($true_dest).','.base64_encode($false_dest));
+		return new \ext_agi('calendar.agi,group,goto,'.$groupid.','.$timezone.','.base64_encode($true_dest).','.base64_encode($false_dest));
 	}
 
 	/**
 	 * Dial Plan Function
 	 */
-	public function ext_calendar_group_execif($groupid,$true,$false) {
+	public function ext_calendar_group_execif($groupid,$timezone=null,$true,$false) {
+		$timezone = empty($timezone) ? $this->systemtz : $timezone;
 		$group = $this->getGroup($groupid);
 		if(empty($group)) {
 			throw new \Exception("Group $groupid does not exist!");
 		}
-		return new \ext_agi('calendar.agi,group,execif,'.$groupid.','.base64_encode($true).','.base64_encode($true));
+		return new \ext_agi('calendar.agi,group,execif,'.$groupid.','.$timezone.','.base64_encode($true).','.base64_encode($false));
 	}
 
 	public function matchCategory($calendarID,$category) {

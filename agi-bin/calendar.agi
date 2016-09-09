@@ -15,8 +15,14 @@ $calendar = FreePBX::Calendar();
 $type = $argv[1];
 $action = $argv[2];
 $id = $argv[3];
-$true = isset($argv[4]) ? $argv[4] : '';
-$false = isset($argv[5]) ? $argv[5] : '';
+$timezone = $argv[4];
+$true = isset($argv[5]) ? $argv[5] : '';
+$false = isset($argv[6]) ? $argv[6] : '';
+
+if($timezone != 'default') {
+	$calendar->setTimezone($timezone);
+	$agi->verbose("Setting Timezone To: ".$timezone);
+}
 
 $flag = null;
 switch($type) {
