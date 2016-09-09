@@ -115,7 +115,8 @@ class Calendar extends \DB_Helper implements \BMO {
 								case "outlook":
 								break;
 								case "local":
-									$this->updateLocalCalendar($id,$name,$description);
+									$timezone = $_POST['timezone'];
+									$this->updateLocalCalendar($id,$name,$description,$timezone);
 								break;
 							}
 						}
@@ -250,23 +251,25 @@ class Calendar extends \DB_Helper implements \BMO {
 				return array_values($events);
 			break;
 			case 'eventform':
-				dbug($_POST);
 				$calendarID = $_POST['calendarid'];
+				$calendar = $this->getCalendarByID($calendarID);
+
+				$timezone = !empty($_POST['timezone']) ? $_POST['timezone'] : $calendar['timezone'];
 				$vCalendar = new iCalendar($calendarID);
 				$vEvent = new Event();
 				$vEvent->setUseTimezone(true);
 				$vEvent->setSummary($_POST['title']);
 				$vEvent->setDescription($_POST['description']);
-				$vEvent->setDtStart(new Carbon($_POST['startdate']." ".$_POST['starttime'], $this->systemtz));
-				$vEvent->setDtEnd(new Carbon($_POST['enddate']." ".$_POST['endtime'], $this->systemtz));
+				$vEvent->setDtStart(new Carbon($_POST['startdate']." ".$_POST['starttime'], $timezone));
+				$vEvent->setDtEnd(new Carbon($_POST['enddate']." ".$_POST['endtime'], $timezone));
 				if(!empty($_REQUEST['allday']) && $_REQUEST['allday'] == "yes") {
-					$vEvent->setDtStart(new Carbon($_POST['startdate'], $this->systemtz));
-					$vEvent->setDtEnd(new Carbon($_POST['enddate'], $this->systemtz));
+					$vEvent->setDtStart(new Carbon($_POST['startdate'], $timezone));
+					$vEvent->setDtEnd(new Carbon($_POST['enddate'], $timezone));
 				}
 				if(!empty($_REQUEST['reoccurring']) && $_REQUEST['reoccurring'] == "yes") {
 					if(!empty($_POST['rstartdate'])) {
-						$vEvent->setDtStart(Carbon::createFromTimestamp($_POST['rstartdate'], $this->systemtz));
-						$vEvent->setDtStart(Carbon::createFromTimestamp($_POST['renddate'], $this->systemtz));
+						$vEvent->setDtStart(Carbon::createFromTimestamp($_POST['rstartdate'], $timezone));
+						$vEvent->setDtStart(Carbon::createFromTimestamp($_POST['renddate'], $timezone));
 					}
 					$recurrenceRule = new RecurrenceRule();
 					switch($_REQUEST['repeats']) {
@@ -335,7 +338,7 @@ class Calendar extends \DB_Helper implements \BMO {
 						$recurrenceRule->setCount($_REQUEST['occurrences']);
 					}
 					if(!empty($_REQUEST['afterdate'])) {
-						$recurrenceRule->setUntil(new Carbon($_POST['afterdate'], $this->systemtz));
+						$recurrenceRule->setUntil(new Carbon($_POST['afterdate'], $timezone));
 					}
 
 					$vEvent->setRecurrenceRule($recurrenceRule);
@@ -402,7 +405,7 @@ class Calendar extends \DB_Helper implements \BMO {
 					case "google":
 					break;
 					case "local":
-						return load_view(__DIR__."/views/local_settings.php",array('action' => 'add', 'type' => $type));
+						return load_view(__DIR__."/views/local_settings.php",array('action' => 'add', 'type' => $type, 'timezone' => $this->systemtz));
 					break;
 				}
 			break;
@@ -431,7 +434,7 @@ class Calendar extends \DB_Helper implements \BMO {
 					case "google":
 					break;
 					case "local":
-						return load_view(__DIR__."/views/local_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data));
+						return load_view(__DIR__."/views/local_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data, 'timezone' => $data['timezone']));
 					break;
 				}
 			break;
@@ -537,6 +540,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 */
 	public function listEvents($calendarID, $start = null, $stop = null, $subevents = false) {
 		$return = array();
+		$calendar = $this->getCalendarByID($calendarID);
 		$data = $this->getAll($calendarID.'-events');
 		$events = array();
 		foreach($data as $id => $event) {
@@ -545,7 +549,7 @@ class Calendar extends \DB_Helper implements \BMO {
 		}
 
 		if(!empty($start) && !empty($stop)){
-			$events = $this->eventFilterDates($events, $start, $stop);
+			$events = $this->eventFilterDates($events, $start, $stop, $calendar['timezone']);
 		}
 
 		foreach($events as $uid => $event){
@@ -556,8 +560,8 @@ class Calendar extends \DB_Helper implements \BMO {
 			$event['title'] = $event['name'];
 			$event['uid'] = $uid;
 			if(($event['starttime'] != $event['endtime']) && $subevents) {
-				$startrange = Carbon::createFromTimeStamp($event['starttime'],$this->systemtz);
-				$endrange = Carbon::createFromTimeStamp($event['endtime'],$this->systemtz);
+				$startrange = Carbon::createFromTimeStamp($event['starttime'],$calendar['timezone']);
+				$endrange = Carbon::createFromTimeStamp($event['endtime'],$calendar['timezone']);
 				$daterange = new \DatePeriod($startrange, CarbonInterval::day(), $endrange);
 				$i = 0;
 				foreach($daterange as $d) {
@@ -581,13 +585,13 @@ class Calendar extends \DB_Helper implements \BMO {
 				$event['ustarttime'] = $event['starttime'];
 				$event['uendtime'] = $event['endtime'];
 
-				$start = Carbon::createFromTimeStamp($event['ustarttime'],$this->systemtz);
+				$start = Carbon::createFromTimeStamp($event['ustarttime'],$calendar['timezone']);
 				if($event['starttime'] == $event['endtime']) {
 					$event['allDay'] = true;
 					$end = $start->copy()->addDay();
 				} else {
 					$event['allDay'] = ($event['endtime'] - $event['starttime']) === 86400;
-					$end = Carbon::createFromTimeStamp($event['uendtime'],$this->systemtz);
+					$end = Carbon::createFromTimeStamp($event['uendtime'],$calendar['timezone']);
 				}
 
 				$event['uid'] = $uid;
@@ -618,16 +622,16 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param  object $stop   Carbon Object
 	 * @return array  an array of events
 	 */
-	public function eventFilterDates($data, $start, $end){
+	public function eventFilterDates($data, $start, $end, $timezone){
 		$final = $data;
 		foreach ($data as $key => $value) {
 			if(!isset($value['starttime']) || !isset($value['endtime'])){
 				unset($data[$key]);
 				continue;
 			}
-			$timezone = isset($value['timezone'])?$value['timezone']:$this->systemtz;
-			$startdate = Carbon::createFromTimeStamp($value['starttime'],$timezone);
-			$enddate = Carbon::createFromTimeStamp($value['endtime'],$timezone);
+			$tz = isset($value['timezone'])?$value['timezone']:$timezone;
+			$startdate = Carbon::createFromTimeStamp($value['starttime'],$tz);
+			$enddate = Carbon::createFromTimeStamp($value['endtime'],$tz);
 
 			if($start->between($startdate,$enddate) || $end->between($startdate,$enddate)) {
 				continue;
@@ -684,14 +688,14 @@ class Calendar extends \DB_Helper implements \BMO {
 		if(!isset($eventID) || is_null($eventID) || trim($eventID) == "") {
 			throw new \Exception("Event ID can not be blank");
 		}
-		//TODO: Store timezone? We get it....
 		$event = array(
 			"name" => $name,
 			"description" => $description,
 			"recurring" => $recurring,
 			"rrules" => $rrules,
 			"events" => array(),
-			"categories" => $categories
+			"categories" => $categories,
+			"timezone" => $timezone
 		);
 		if($recurring) {
 			$oldEvent = $this->getConfig($eventID,$calendarID."-events");
@@ -771,12 +775,16 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * Add Local Calendar
 	 * @param string $name        The Calendar name
 	 * @param string $description The Calendar description
+	 * @param string $timezone    The Calendar timezone
 	 */
-	public function addLocalCalendar($name,$description) {
+	public function addLocalCalendar($name,$description,$timezone) {
 		$uuid = Uuid::uuid4();
-		$this->updateLocalCalendar($uuid,$name,$description);
+		$this->updateLocalCalendar($uuid,$name,$description,$timezone);
 	}
 
+	/**
+	 * Sync Calendars
+	 */
 	public function sync() {
 		$calendars = $this->listCalendars();
 		foreach($calendars as $id => $calendar) {
@@ -815,15 +823,17 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param string $id          The Calendar ID
 	 * @param string $name        The Calendar name
 	 * @param string $description The Calendar description
+	 * @param string $timezone    The Calendar
 	 */
-	public function updateLocalCalendar($id,$name,$description) {
+	public function updateLocalCalendar($id,$name,$description,$timezone) {
 		if(empty($id)) {
 			throw new \Exception("Calendar ID is empty");
 		}
 		$calendar = array(
 			"name" => $name,
 			"description" => $description,
-			"type" => 'local'
+			"type" => 'local',
+			"timezone" => $timezone
 		);
 		$this->setConfig($id,$calendar,'calendars');
 		$calendar['id'] = $id;

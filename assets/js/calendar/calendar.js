@@ -31,6 +31,8 @@ function resetModalForm(){
 	$('input[type=checkbox]').prop("checked",false);
 	$('select')[0].selectedIndex = 0;
 	$('input[type=text]').val('');
+	$("#timezone").val('');
+	$("#timezone").multiselect('select', '');
 	updateReoccurring();
 	$("#repeat0").prop("checked",true);
 	$("modalDelete").hide();
@@ -164,8 +166,9 @@ $(document).ready(function() {
 			}],
 			eventClick: function( event, jsEvent, view ) {
 				var src = (typeof event.parent !== "undefined") ? event.parent : event,
-						ms = moment.unix(src.ustarttime),
-						me = moment.unix(src.uendtime),
+						tz = (typeof src.timezone !== "undefined") ? src.timezone : timezone,
+						ms = moment.unix(src.ustarttime).tz(tz),
+						me = moment.unix(src.uendtime).tz(tz),
 						allday = src.allDay;
 				resetModalForm();
 				$("#rstartdate").val(src.rstartdate);
@@ -180,6 +183,10 @@ $(document).ready(function() {
 				$('#endtime').val(me.format("kk:mm"));
 				$('#startdate').datepicker('update');
 				$('#enddate').datepicker('update');
+				if(typeof src.timezone !== "undefined") {
+					$("#timezone").val(src.timezone);
+					$("#timezone").multiselect('select', src.timezone);
+				}
 				$('#modalDelete').data('id', src.uid);
 				$('#eventModal').modal('show');
 				if(src.recurring) {

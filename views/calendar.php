@@ -2,7 +2,7 @@
 <script>
 var readonly = <?php echo $data['type'] !== 'local' ? 'true' : 'false'?>;
 var calendarid = "<?php echo $data['id']?>";
-var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
+var timezone = "<?php echo $data['timezone'];?>";
 </script>
 <div id="calendar"></div>
 <div class="row">
@@ -197,6 +197,30 @@ var timezone = "<?php echo FreePBX::View()->getTimezone();?>";
 										</div>
 									</div>
 									<!--END End Time-->
+									<!--Timezone-->
+									<div class="element-container">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="row">
+													<div class="form-group">
+														<div class="col-md-3">
+															<label class="control-label" for="timezone"><?php echo _("Timezone") ?></label>
+															<i class="fa fa-question-circle fpbx-help-icon" data-for="timezone"></i>
+														</div>
+														<div class="col-md-9">
+															<?php echo FreePBX::View()->timezoneDrawSelect('timezone',null,_('Use Calendar Timezone')); ?>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span id="timezone-help" class="help-block fpbx-help-block"><?php echo _("Timezone for this event")?></span>
+											</div>
+										</div>
+									</div>
+									<!--END Timezone-->
 									<!--End Event Date and Time-->
 									<div class="element-container">
 										<div class="row">

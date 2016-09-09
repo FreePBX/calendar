@@ -57,6 +57,30 @@
 								</div>
 							</div>
 						</div>
+						<!--Timezone-->
+						<div class="element-container">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="form-group">
+											<div class="col-md-3">
+												<label class="control-label" for="timezone"><?php echo _("Timezone") ?></label>
+												<i class="fa fa-question-circle fpbx-help-icon" data-for="timezone"></i>
+											</div>
+											<div class="col-md-9">
+												<?php echo FreePBX::View()->timezoneDrawSelect('timezone',$timezone); ?>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<span id="timezone-help" class="help-block fpbx-help-block"><?php echo _("Timezone for this Calendar")?></span>
+								</div>
+							</div>
+						</div>
+						<!--END Timezone-->
 					</form>
 				</div>
 			</div>
