@@ -626,7 +626,7 @@ class Calendar extends \DB_Helper implements \BMO {
 		$final = $data;
 		foreach ($data as $key => $value) {
 			if(!isset($value['starttime']) || !isset($value['endtime'])){
-				unset($data[$key]);
+				unset($final[$key]);
 				continue;
 			}
 			$tz = isset($value['timezone'])?$value['timezone']:$timezone;
@@ -1332,5 +1332,45 @@ class Calendar extends \DB_Helper implements \BMO {
 	}
 	public function ucpDelGroup($id,$display,$data) {
 
+	}
+	/**
+	 * Gets the next event in a Calendar.
+	 * @param  str $calendar calendar id
+	 * @return array  the Found event or empty
+	 */
+	public function getNextEvent($calendar){
+		$now  = Carbon::now();
+		$dates = array(
+			$now->copy()->endOfWeek(),
+			$now->copy()->endOfMonth(),
+			$now->copy()->addMonth(),
+			$now->copy()->addMonths(2),
+			$now->copy()->addMonths(4),
+			$now->copy()->addMonths(6),
+			$now->copy()->addYear(),
+			$now->copy()->addYears(2),
+			$now->copy()->addYears(4),
+			$now->copy()->addYears(6),
+			$now->copy()->addYears(10)
+		);
+		foreach($dates as $date){
+			$events = $this->listEvents($calendar, $now, $date);
+			if(!empty($events)){
+				return reset($events);
+			}
+		}
+		return array();
+	}
+	public function getNextEventByGroup($groupid){
+		$group = $this->getGroup($groupid);
+		$events = array();
+		foreach ($group['calendars'] as $cal) {
+			$ev = $this->getNextEvent($cal);
+			if(!empty($ev)){
+				$events[$ev['startdate']] = $ev;
+			}
+		}
+		ksort($events);
+		return reset($events);
 	}
 }
