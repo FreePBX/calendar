@@ -1373,4 +1373,14 @@ class Calendar extends \DB_Helper implements \BMO {
 		ksort($events);
 		return reset($events);
 	}
+
+	/**
+	 * Takes in a carbon object and command and returns a cron line.
+	 * @param  object $obj     Carbon object
+	 * @param  string $command command to run
+	 * @return string         formatted cronline
+	 */
+	public function objToCron($obj, $command){
+		return sprintf("%s %s %s %s %s %s", $obj->minute, $obj->hour, $obj->day, $obj->month,$obj->dayOfWeek,$command);
+	}
 }

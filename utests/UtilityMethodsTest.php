@@ -24,76 +24,9 @@ class UtilityMethods extends PHPUnit_Framework_TestCase{
 	public function testCreate() {;
 		$this->assertTrue(is_object(self::$o), sprintf("Did not get a %s object",self::$module));
 	}
-	public function testBuildRangeDays(){
-		$expect = array(
-			array(
-				'start' => '2015-01-01T01:00',
-				'end' => '2015-01-01T23:59'
-			),
-			array(
-				'start' => '2015-01-02T01:00',
-				'end' => '2015-01-02T23:59'
-			)
-		);
-		$output = self::$o->buildRangeDays('01/01/2015', '01/02/2015', '01:00-23:59', 'mon-sat', '1-31', 'jan-feb');
-		$this->assertEquals($expect, $output, _("Time range not as expected"));
-	}
-	public function testCheckEventfail(){
 
-		$event = array(
-			'uid' => 'fpcal_574df432d74da_3',
-			'user' => '',
-			'description' => 'nintynint',
-			'hookdata' => '',
-			'active' => '1',
-			'generatehint' => '',
-			'generatefc' => '',
-			'eventtype' => 'callflow',
-			'weekdays' => '',
-			'monthdays' => '',
-			'months' => '',
-			'timezone' => 'America/Phoenix',
-			'startdate' => '2016-06-03',
-			'enddate' => '2016-06-03',
-			'starttime' => '',
-			'endtime' => '',
-			'repeatinterval' => '',
-			'frequency' => '',
-			'truedest' => 'app-announcement-1,s,1',
-			'falsedest' => 'from-did-direct,1000,1',
-			'title' => 'nintynint',
-			'start' => '2016-06-03T00:00:00',
-			'end' => '2016-06-03T23:59:59'
-		);
-		$this->assertFalse(self::$o->checkEvent($event), "checkEvent Should be FALSE here...");
-	}
-	public function testCheckEventpass(){
-		$date = date('Y-m-d');
-		$event = array(
-			'uid' => 'fpcal_574df432d74da_3',
-			'user' => '',
-			'description' => 'nintynint',
-			'hookdata' => '',
-			'active' => '1',
-			'generatehint' => '',
-			'generatefc' => '',
-			'eventtype' => 'callflow',
-			'weekdays' => '',
-			'monthdays' => '',
-			'months' => '',
-			'timezone' => 'America/Phoenix',
-			'startdate' => $date,
-			'enddate' => $date,
-			'starttime' => '',
-			'endtime' => '',
-			'repeatinterval' => '',
-			'frequency' => '',
-			'truedest' => 'app-announcement-1,s,1',
-			'falsedest' => 'from-did-direct,1000,1',
-			'title' => 'nintynint',
-			'start' => $date.'T00:00:00',
-			'end' => $date.'T23:59:59'
-		);
-		$this->assertTrue(self::$o->checkEvent($event), "checkEvent Should be True  here...");
+	public function testObjToCron(){
+		$foo = \Carbon\Carbon::createFromTimestamp(1346901971,'America/Phoenix');
+		$this->assertEquals("26 20 5 9 3 /foo/bar.baz", self::$o->objToCron($foo,'/foo/bar.baz'), "objToCron returned an unexpected string");
 	}
 }
