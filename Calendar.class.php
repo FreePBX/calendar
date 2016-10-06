@@ -1381,6 +1381,43 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @return string         formatted cronline
 	 */
 	public function objToCron($obj, $command){
-		return sprintf("%s %s %s %s %s %s", $obj->minute, $obj->hour, $obj->day, $obj->month,$obj->dayOfWeek,$command);
+		try {
+			$reflect = new \ReflectionClass($obj);
+			$name = $reflect->getShortName();
+		} catch (\ReflectionException $e) {
+			if(is_string($obj)){
+				$name = "text";
+			}else{
+				$name = "unknown";
+			}
+		}
+		switch ($name) {
+			case 'Carbon':
+			case 'Moment':
+			case 'DateTime':
+				$cronstring = $obj->format("i G j n w");
+			break;
+			case 'text':
+				if(is_numeric($obj)){
+					$date = new \DateTime();
+					try {
+						$date->setTimestamp($obj);
+					} catch (\Exception $e) {
+						return false;
+					}
+				}else{
+					try {
+						$date = new \DateTime($obj);
+					} catch (\Exception $e) {
+						return false;
+					}
+				}
+				$cronstring = $date->format("i G j n w");
+			break;
+			default:
+				return false;
+			break;
+		}
+		return sprintf("%s %s", $cronstring,$command);
 	}
 }
