@@ -408,7 +408,7 @@ class Calendar extends \DB_Helper implements \BMO {
 						return load_view(__DIR__."/views/remote_ical_settings.php",array('action' => 'add', 'type' => $type));
 					break;
 					case "caldav":
-						return load_view(__DIR__."/views/remote_caldav_settings.php",array('action' => 'add', 'type' => $type));
+						return load_view(__DIR__."/views/remote_caldav_settings.php",array('action' => 'add', 'calendars' => array(), 'type' => $type));
 					break;
 					case "local":
 						return load_view(__DIR__."/views/local_settings.php",array('action' => 'add', 'type' => $type, 'timezone' => $this->systemtz));
