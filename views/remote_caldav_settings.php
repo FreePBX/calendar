@@ -67,7 +67,7 @@
 												<i class="fa fa-question-circle fpbx-help-icon" data-for="purl"></i>
 											</div>
 											<div class="col-md-9">
-												<input type="text" class="form-control" id="purl" name="purl" value="<?php echo !empty($data['purl']) ? $data['purl'] : ''?>">
+												<input type="text" class="form-control diswhenloading" id="purl" name="purl" value="<?php echo !empty($data['purl']) ? $data['purl'] : ''?>">
 											</div>
 										</div>
 									</div>
@@ -89,7 +89,7 @@
 												<i class="fa fa-question-circle fpbx-help-icon" data-for="username"></i>
 											</div>
 											<div class="col-md-9">
-												<input type="text" class="form-control" id="username" name="username" value="<?php echo !empty($data['username']) ? $data['username'] : ''?>">
+												<input type="text" class="form-control diswhenloading" id="username" name="username" value="<?php echo !empty($data['username']) ? $data['username'] : ''?>">
 											</div>
 										</div>
 									</div>
@@ -111,7 +111,7 @@
 												<i class="fa fa-question-circle fpbx-help-icon" data-for="password"></i>
 											</div>
 											<div class="col-md-9">
-												<input type="password" class="form-control" id="password" name="password" value="<?php echo !empty($data['password']) ? $data['password'] : ''?>">
+												<input type="password" class="form-control diswhenloading" id="password" name="password" value="<?php echo !empty($data['password']) ? $data['password'] : ''?>">
 											</div>
 										</div>
 									</div>
@@ -134,11 +134,23 @@
 												<i class="fa fa-question-circle fpbx-help-icon" data-for="calendars"></i>
 											</div>
 											<div class="col-md-9">
-												<select id="calendars" name="calendars[]" class="form-control" multiple="multiple">
-													<?php foreach($calendars as $calendar) { ?>
-														<option value="<?php echo $calendar['id']?>" <?php echo $calendar['selected'] ? 'selected' : ''?>><?php echo $calendar['name']?></option>
-													<?php } ?>
-												</select>
+<?php 
+if (strtolower($action) == "add") {
+	$selclass = "style='display: none'";
+	$unsetclass = "";
+} else {
+	$selclass = "";
+	$unsetclass = "style='display: none'";
+}
+?>
+												<span id='setspan' <?php echo $selclass; ?>>
+													<select id="calendars" name="calendars[]" class="form-control" multiple="multiple">
+														<?php foreach($calendars as $calendar) { ?>
+															<option value="<?php echo $calendar['id']?>" <?php echo $calendar['selected'] ? 'selected' : ''?>><?php echo $calendar['name']?></option>
+														<?php } ?>
+													</select>
+												</span>
+												<span id='unsetspan' <?php echo $unsetclass; ?>><?php echo _("Please enter valid credentials above"); ?></span>
 											</div>
 										</div>
 									</div>
@@ -170,9 +182,15 @@
 	});
 	function updateCalendars() {
 		if($("#purl").val() !== "" && $("#username").val() !== "" && $("#password").val() !== "") {
+			$("#unsetspan").text('<?php echo _("Attempting to load..."); ?>').show();
+			$("#setspan").hide();
+			$(".diswhenloading").addClass("disabled").attr("disabled", true);
 			$.post( "ajax.php?module=calendar&command=getcaldavcals", {purl: $("#purl").val(), username: $("#username").val(), password: $("#password").val()}, function( data ) {
 				$("#calendars").html(data.calshtml);
 				$('#calendars').multiselect('rebuild');
+				$("#setspan").show();
+				$("#unsetspan").hide();
+				$(".diswhenloading").removeClass("disabled").attr("disabled", false);
 			});
 		}
 	}
