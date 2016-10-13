@@ -31,10 +31,10 @@ class Calendar extends \DB_Helper implements \BMO {
 		if ($freepbx == null) {
 			throw new Exception("Not given a FreePBX Object");
 		}
-		$this->now = Carbon::now();
 		$this->FreePBX = $freepbx;
 		$this->db = $freepbx->Database;
 		$this->systemtz = $this->FreePBX->View()->getTimezone();
+		$this->now = Carbon::now($this->systemtz);
 		$this->eventDefaults = array(
 				'uid' => '',
 				'user' => '',
@@ -60,6 +60,9 @@ class Calendar extends \DB_Helper implements \BMO {
 	}
 
 	public function setTimezone($timezone) {
+		if(empty($timezone)) {
+			return false;
+		}
 		$this->systemtz = $timezone;
 		$this->now = Carbon::now($this->systemtz);
 	}
@@ -1388,34 +1391,34 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param  str $calendar calendar id
 	 * @return array  the Found event or empty
 	 */
-	public function getNextEvent($calendar){
-		$now  = Carbon::now();
+	public function getNextEvent($calendar,$timezone=null){
+		$this->setTimezone($timezone);
 		$dates = array(
-			$now->copy()->endOfWeek(),
-			$now->copy()->endOfMonth(),
-			$now->copy()->addMonth(),
-			$now->copy()->addMonths(2),
-			$now->copy()->addMonths(4),
-			$now->copy()->addMonths(6),
-			$now->copy()->addYear(),
-			$now->copy()->addYears(2),
-			$now->copy()->addYears(4),
-			$now->copy()->addYears(6),
-			$now->copy()->addYears(10)
+			$this->now->copy()->endOfWeek(),
+			$this->now->copy()->endOfMonth(),
+			$this->now->copy()->addMonth(),
+			$this->now->copy()->addMonths(2),
+			$this->now->copy()->addMonths(4),
+			$this->now->copy()->addMonths(6),
+			$this->now->copy()->addYear(),
+			$this->now->copy()->addYears(2),
+			$this->now->copy()->addYears(4),
+			$this->now->copy()->addYears(6),
+			$this->now->copy()->addYears(10)
 		);
 		foreach($dates as $date){
-			$events = $this->listEvents($calendar, $now, $date);
+			$events = $this->listEvents($calendar, $this->now, $date);
 			if(!empty($events)){
 				return reset($events);
 			}
 		}
 		return array();
 	}
-	public function getNextEventByGroup($groupid){
+	public function getNextEventByGroup($groupid,$timezone=null){
 		$group = $this->getGroup($groupid);
 		$events = array();
 		foreach ($group['calendars'] as $cal) {
-			$ev = $this->getNextEvent($cal);
+			$ev = $this->getNextEvent($cal,$timezone);
 			if(!empty($ev)){
 				$events[$ev['startdate']] = $ev;
 			}
