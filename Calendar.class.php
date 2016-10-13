@@ -1301,7 +1301,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			$allowedgroups = (!empty($allowedgroups))?$allowedgroups:array();
 		}
 		$calopts = '';
-		if($mode == 'group'){
+		if($mode != 'group'){
 			$calopts = '<option value="inherit">'._("Inherit").'</option>';
 		}
 		foreach ($this->listCalendars() as $key => $value) {
@@ -1309,7 +1309,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			$calopts .= '<option value="'.$key.'" '.$selected.'>'.$value['name'].'</option>';
 		}
 		$grpopts = '';
-		if($mode == 'group'){
+		if($mode != 'group'){
 			$grpopts = '<option value="inherit">'._("Inherit").'</option>';
 		}
 		foreach ($this->listGroups() as $key => $value) {
@@ -1363,6 +1363,14 @@ class Calendar extends \DB_Helper implements \BMO {
 				$this->FreePBX->Ucp->setSettingByGID($id,'Calendar','enabled',true);
 			} else {
 				$this->FreePBX->Ucp->setSettingByGID($id,'Calendar','enabled',false);
+			}
+			if(isset($_POST['calendar_allowedcalendars'])){
+				$data = (is_array($_POST['calendar_allowedcalendars']))?$_POST['calendar_allowedcalendars']:array($_POST['calendar_allowedcalendars']);
+				$this->FreePBX->Ucp->setSettingByGID($id,'Calendar','allowedcals',$data);
+			}
+			if(isset($_POST['calendar_allowedgroups'])){
+				$data = (is_array($_POST['calendar_allowedgroups']))?$_POST['calendar_allowedgroups']:array($_POST['calendar_allowedgroups']);
+				$this->FreePBX->Ucp->setSettingByGID($id,'Calendar','allowedgroups',$data);
 			}
 		}
 	}
