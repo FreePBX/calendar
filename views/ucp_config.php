@@ -29,3 +29,64 @@
 		</div>
 	</div>
 </div>
+<!--Allowed Calendars-->
+<div class="element-container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="form-group">
+					<div class="col-md-3">
+						<label class="control-label" for="calendar_allowedcalendars"><?php echo _("Allowed Calendars") ?></label>
+						<i class="fa fa-question-circle fpbx-help-icon" data-for="calendar_allowedcalendars"></i>
+					</div>
+					<div class="col-md-9">
+						<select class="form-control" id="calendar_allowedcalendars" name="calendar_allowedcalendars[]" multiple="multiple">
+							<?php echo $calopts ?>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<span id="calendar_allowedcalendars-help" class="help-block fpbx-help-block"><?php echo _("Calendars the user may utilize")?></span>
+		</div>
+	</div>
+</div>
+<!--END Allowed Calendars-->
+<!--Allowed Calendar Groups-->
+<div class="element-container">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="row">
+				<div class="form-group">
+					<div class="col-md-3">
+						<label class="control-label" for="calendar_allowedgroups"><?php echo _("Allowed Calendar Groups") ?></label>
+						<i class="fa fa-question-circle fpbx-help-icon" data-for="calendar_allowedgroups"></i>
+					</div>
+					<div class="col-md-9">
+						<select class="form-control" id="calendar_allowedgroups" name="calendar_allowedgroups[]" multiple='multiple'>
+							<?php echo $grpopts ?>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<span id="calendar_allowedgroups-help" class="help-block fpbx-help-block"><?php echo _("Calendar groups the user may utilize.")?></span>
+		</div>
+	</div>
+</div>
+<!--END Allowed Calendar Groups-->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#calendar_allowedgroups,#calendar_allowedcalendars').multiselect({
+            enableFiltering: true,
+            filterBehavior: 'value',
+						 buttonWidth: '80%'
+        });
+    });
+</script>
