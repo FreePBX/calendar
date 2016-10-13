@@ -451,7 +451,8 @@ class Calendar extends \DB_Helper implements \BMO {
 				$data = $this->getCalendarByID($_GET['id']);
 				\Moment\Moment::setLocale('en_US');
 				$locale = \Moment\MomentLocale::getLocaleContent();
-				return load_view(__DIR__."/views/calendar.php",array('action' => 'view', 'type' => $data['type'], 'data' => $data, 'locale' => $locale));
+				$timezone = !empty($data['timezone']) ? $data['timezone'] : $this->systemtz;
+				return load_view(__DIR__."/views/calendar.php",array('action' => 'view', 'timezone' => $timezone, 'type' => $data['type'], 'data' => $data, 'locale' => $locale));
 			break;
 			default:
 				return load_view(__DIR__."/views/grid.php",array());
