@@ -180,7 +180,8 @@
 		$('#calendars').multiselect({
 				enableFiltering: true,
 				enableFullValueFiltering: true,
-				enableCaseInsensitiveFiltering: true
+				enableCaseInsensitiveFiltering: true,
+				buttonWidth: '50%'
 		});
 	});
 </script>
