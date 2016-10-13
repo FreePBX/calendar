@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "aaf96de81b51ce5a3e75b1e3bd33f3e0",
-    "content-hash": "3d317f3035f8c81ab6b91a1c90cf5249",
+    "hash": "be2c589cd2f9cf1c2dfc97806799f9c3",
+    "content-hash": "614cb6b35efd4d6b3643fe8b884fc52d",
     "packages": [
         {
             "name": "eluceo/ical",
@@ -539,6 +539,44 @@
             "time": "2016-07-04 13:13:09"
         },
         {
+            "name": "php-ews/php-ews",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jamesiarmes/php-ews.git",
+                "reference": "7787a294d84d0fbb89998135dbcd6c12fa521a66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jamesiarmes/php-ews/zipball/7787a294d84d0fbb89998135dbcd6c12fa521a66",
+                "reference": "7787a294d84d0fbb89998135dbcd6c12fa521a66",
+                "shasum": ""
+            },
+            "require": {
+                "ext-soap": "*",
+                "php": ">=5.3.9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "James Armes",
+                    "email": "jamesiarmes@gmail.com"
+                }
+            ],
+            "description": "Library for communicating with Exchange Web Services.",
+            "homepage": "http://jamesarmes.com/php-ews/",
+            "time": "2016-08-20 17:36:00"
+        },
+        {
             "name": "phpseclib/phpseclib",
             "version": "2.0.2",
             "source": {
@@ -809,9 +847,11 @@
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
-    "prefer-stable": false,
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "php-ews/php-ews": 20
+    },
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": []

@@ -827,5 +827,45 @@
             "ics",
             "php calendar"
         ]
+    },
+    {
+        "name": "php-ews/php-ews",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/jamesiarmes/php-ews.git",
+            "reference": "7787a294d84d0fbb89998135dbcd6c12fa521a66"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/jamesiarmes/php-ews/zipball/7787a294d84d0fbb89998135dbcd6c12fa521a66",
+            "reference": "7787a294d84d0fbb89998135dbcd6c12fa521a66",
+            "shasum": ""
+        },
+        "require": {
+            "ext-soap": "*",
+            "php": ">=5.3.9"
+        },
+        "time": "2016-08-20 17:36:00",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "James Armes",
+                "email": "jamesiarmes@gmail.com"
+            }
+        ],
+        "description": "Library for communicating with Exchange Web Services.",
+        "homepage": "http://jamesarmes.com/php-ews/"
     }
 ]

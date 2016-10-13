@@ -87,6 +87,10 @@ class ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b
         ),
     );
 
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/..' . '/php-ews/php-ews/src',
+    );
+
     public static $prefixesPsr0 = array (
         'P' => 
         array (
@@ -148,6 +152,7 @@ class ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b::$fallbackDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b::$classMap;
 

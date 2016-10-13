@@ -11,8 +11,18 @@ use om\IcalParser;
 use Eluceo\iCal\Component\Calendar as iCalendar;
 use Eluceo\iCal\Component\Event;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
+use \FreePBX\modules\Calendar\PhpEws\Autodiscover;
+use \jamesiarmes\PhpEws\Request\FindItemType;
+use \jamesiarmes\PhpEws\Enumeration\ItemQueryTraversalType;
+use \jamesiarmes\PhpEws\Type\ItemResponseShapeType;
+use \jamesiarmes\PhpEws\Enumeration\DefaultShapeNamesType;
+use \jamesiarmes\PhpEws\Type\CalendarViewType;
+use \jamesiarmes\PhpEws\ArrayType\NonEmptyArrayOfBaseFolderIdsType;
+use \jamesiarmes\PhpEws\Type\DistinguishedFolderIdType;
+use \jamesiarmes\PhpEws\Enumeration\DistinguishedFolderIdNameType;
 
 include __DIR__."/vendor/autoload.php";
+include __DIR__."/PhpEws/Autodiscover.php";
 
 class Calendar extends \DB_Helper implements \BMO {
 	private $now; //right now, private so it doesnt keep updating
@@ -69,11 +79,11 @@ class Calendar extends \DB_Helper implements \BMO {
 							$description = $_POST['description'];
 							$type = $_POST['type'];
 							switch($type) {
+								case "ews":
+								break;
 								case "ical":
 									$url = $_POST['url'];
 									$this->addRemoteiCalCalendar($name,$description,$url);
-								break;
-								case "google":
 								break;
 								case "caldav":
 									$purl = $_POST['purl'];
@@ -82,8 +92,6 @@ class Calendar extends \DB_Helper implements \BMO {
 									$password = $_POST['password'];
 									$calendars = $_POST['calendars'];
 									$this->addRemoteCalDavCalendar($name,$description,$purl,$surl,$username,$password,$calendars);
-								break;
-								case "outlook":
 								break;
 								case "local":
 									$this->addLocalCalendar($name,$description);
@@ -98,11 +106,11 @@ class Calendar extends \DB_Helper implements \BMO {
 							$type = $_POST['type'];
 							$id = $_POST['id'];
 							switch($type) {
+								case "ews":
+								break;
 								case "ical":
 									$url = $_POST['url'];
 									$this->updateRemoteiCalCalendar($id,$name,$description,$url);
-								break;
-								case "google":
 								break;
 								case "caldav":
 									$purl = $_POST['purl'];
@@ -111,8 +119,6 @@ class Calendar extends \DB_Helper implements \BMO {
 									$password = $_POST['password'];
 									$calendars = $_POST['calendars'];
 									$this->updateRemoteCalDavCalendar($id,$name,$description,$purl,$surl,$username,$password,$calendars);
-								break;
-								case "outlook":
 								break;
 								case "local":
 									$timezone = $_POST['timezone'];
@@ -395,14 +401,14 @@ class Calendar extends \DB_Helper implements \BMO {
 			case "add":
 				$type = !empty($_GET['type']) ? $_GET['type'] : '';
 				switch($type) {
+					case "ews":
+						return load_view(__DIR__."/views/remote_ews_settings.php",array('action' => 'add', 'type' => $type));
+					break;
 					case "ical":
 						return load_view(__DIR__."/views/remote_ical_settings.php",array('action' => 'add', 'type' => $type));
 					break;
 					case "caldav":
 						return load_view(__DIR__."/views/remote_caldav_settings.php",array('action' => 'add', 'type' => $type));
-					break;
-					case "outlook":
-					case "google":
 					break;
 					case "local":
 						return load_view(__DIR__."/views/local_settings.php",array('action' => 'add', 'type' => $type, 'timezone' => $this->systemtz));
@@ -412,6 +418,9 @@ class Calendar extends \DB_Helper implements \BMO {
 			case "edit":
 				$data = $this->getCalendarByID($_GET['id']);
 				switch($data['type']) {
+					case "ews":
+						return load_view(__DIR__."/views/remote_ews_settings.php",array('action' => 'edit', 'type' => $type, 'data' => $data));
+					break;
 					case "ical":
 						return load_view(__DIR__."/views/remote_ical_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data));
 					break;
@@ -429,9 +438,6 @@ class Calendar extends \DB_Helper implements \BMO {
 							);
 						}
 						return load_view(__DIR__."/views/remote_caldav_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data, 'calendars' => $calendars));
-					break;
-					case "outlook":
-					case "google":
 					break;
 					case "local":
 						return load_view(__DIR__."/views/local_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data, 'timezone' => $data['timezone']));
