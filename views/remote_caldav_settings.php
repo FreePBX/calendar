@@ -1,7 +1,7 @@
 <div class = "display full-border">
 	<div class="container-fluid">
 		<h1>
-			<span><?php echo sprintf(_('%s %s Calendar'),$action,$type)?></span>
+			<span><?php echo sprintf(_('%s CalDAV Calendar'),ucfirst($action)) ?></span>
 		</h1>
 	</div>
 	<div class="row">
