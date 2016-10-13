@@ -1451,6 +1451,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			case 'Carbon':
 			case 'Moment':
 			case 'DateTime':
+				$obj->setTimezone($this->getSystemTimezone());
 				$cronstring = $obj->format("i G j n w");
 			break;
 			case 'text':
@@ -1468,6 +1469,7 @@ class Calendar extends \DB_Helper implements \BMO {
 						return false;
 					}
 				}
+				$date->setTimezone($this->getSystemTimezone());
 				$cronstring = $date->format("i G j n w");
 			break;
 			default:
@@ -1475,5 +1477,34 @@ class Calendar extends \DB_Helper implements \BMO {
 			break;
 		}
 		return sprintf("%s %s", $cronstring,$command);
+	}
+
+	private function getSystemTimezone() {
+		$timezone = '';
+		if (is_link('/etc/localtime')) {
+			// Mac OS X (and older Linuxes)
+			// /etc/localtime is a symlink to the
+			// timezone in /usr/share/zoneinfo.
+			$filename = readlink('/etc/localtime');
+			if (strpos($filename, '/usr/share/zoneinfo/') === 0) {
+				$timezone = trim(substr($filename, 20));
+			}
+		} elseif (file_exists('/etc/timezone')) {
+			// Ubuntu / Debian.
+			$data = file_get_contents('/etc/timezone');
+			if (!empty($data)) {
+				$timezone = trim($data);
+			}
+		} elseif (file_exists('/etc/sysconfig/clock')) {
+			// RHEL / CentOS
+			$data = @parse_ini_file('/etc/sysconfig/clock');
+			if (!empty($data['ZONE'])) {
+				$timezone = trim($data['ZONE']);
+			}
+		}
+		if(empty($timezone)) {
+			throw new \Exception("Unable to determine system timezone");
+		}
+		return $timezone;
 	}
 }
