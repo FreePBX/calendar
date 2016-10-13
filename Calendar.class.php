@@ -451,8 +451,7 @@ class Calendar extends \DB_Helper implements \BMO {
 				$data = $this->getCalendarByID($_GET['id']);
 				\Moment\Moment::setLocale('en_US');
 				$locale = \Moment\MomentLocale::getLocaleContent();
-				$timezone = !empty($data['timezone']) ? $data['timezone'] : $this->systemtz;
-				return load_view(__DIR__."/views/calendar.php",array('action' => 'view', 'timezone' => $timezone, 'type' => $data['type'], 'data' => $data, 'locale' => $locale));
+				return load_view(__DIR__."/views/calendar.php",array('action' => 'view', 'type' => $data['type'], 'data' => $data, 'locale' => $locale));
 			break;
 			default:
 				return load_view(__DIR__."/views/grid.php",array());
@@ -498,10 +497,14 @@ class Calendar extends \DB_Helper implements \BMO {
 	 */
 	public function getCalendarByID($id) {
 		$final = $this->getConfig($id,'calendars');
+		if(empty($final)) {
+			return false;
+		}
 		$final['id'] = $id;
 		if (!isset($final['calendars']) || !is_array($final['calendars'])) {
 			$final['calendars'] = array();
 		}
+		$final['timezone'] = !empty($final['timezone']) ? $final['timezone'] : $this->systemtz;
 		return $final;
 	}
 
@@ -987,6 +990,7 @@ class Calendar extends \DB_Helper implements \BMO {
 
 			$this->processiCalEvent($calendarID, $event);
 		}
+
 
 		$this->db->commit(); //now update just incase this takes a long time
 	}

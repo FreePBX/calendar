@@ -2,7 +2,7 @@
 <script>
 var readonly = <?php echo $data['type'] !== 'local' ? 'true' : 'false'?>;
 var calendarid = "<?php echo $data['id']?>";
-var timezone = "<?php echo $timezone;?>";
+var timezone = "<?php echo $data['timezone']?>";
 </script>
 <div id="calendar"></div>
 <div class="row">
