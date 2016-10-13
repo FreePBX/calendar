@@ -498,6 +498,9 @@ class Calendar extends \DB_Helper implements \BMO {
 	public function getCalendarByID($id) {
 		$final = $this->getConfig($id,'calendars');
 		$final['id'] = $id;
+		if (!isset($final['calendars']) || !is_array($final['calendars'])) {
+			$final['calendars'] = array();
+		}
 		return $final;
 	}
 
