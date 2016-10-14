@@ -1005,7 +1005,6 @@ class Calendar extends \DB_Helper implements \BMO {
 
 		$this->db->commit(); //now update just incase this takes a long time
 
-		$things = $this->getAll($calendarID.'-events');
 	}
 
 	/**
