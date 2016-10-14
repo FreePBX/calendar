@@ -97,7 +97,7 @@ class Calendar extends \DB_Helper implements \BMO {
 									$this->addRemoteCalDavCalendar($name,$description,$purl,$surl,$username,$password,$calendars);
 								break;
 								case "local":
-									$this->addLocalCalendar($name,$description);
+									$this->addLocalCalendar($name,$description, $_REQUEST['timezone']);
 								break;
 							}
 						}
