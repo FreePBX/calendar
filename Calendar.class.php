@@ -267,8 +267,16 @@ class Calendar extends \DB_Helper implements \BMO {
 				$vCalendar = new iCalendar($calendarID);
 				$vEvent = new Event();
 				$vEvent->setUseTimezone(true);
-				$vEvent->setSummary($_POST['title']);
-				$vEvent->setDescription($_POST['description']);
+				// Make sure there is a title
+				if (!isset($_POST['title']) || !trim($_POST['title'])) {
+					throw new \Exception("No title provided");
+				}
+				$vEvent->setSummary(trim($_POST['title']));
+				if (!isset($_POST['description'])) {
+					$vEvent->setDescription("");
+				} else {
+					$vEvent->setDescription(trim($_POST['description']));
+				}
 				$vEvent->setDtStart(new Carbon($_POST['startdate']." ".$_POST['starttime'], $timezone));
 				$vEvent->setDtEnd(new Carbon($_POST['enddate']." ".$_POST['endtime'], $timezone));
 				if(!empty($_REQUEST['allday']) && $_REQUEST['allday'] == "yes") {

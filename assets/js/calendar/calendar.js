@@ -3,6 +3,11 @@ $("#eventForm").submit(function(e) {
 	var frm = $(this);
 	var frmurl = frm.attr('action');
 	var frmdata = frm.serializeArray();
+
+	if (!validateCalSubmit(frmdata)) {
+		return;
+	}
+
 	$.ajax({
 		url : frmurl,
 		type: "POST",
@@ -13,7 +18,12 @@ $("#eventForm").submit(function(e) {
 			$("#calendar").fullCalendar( 'refetchEvents' );
 		},
 		error: function(jqXHR, status, error){
-			fpbxToast('Something Failed Unable to submit');
+			console.log(jqXHR);
+			if (typeof jqXHR.responseJSON !== undefined) {
+				fpbxToast('Error: ' + jqXHR.responseJSON.error.message);
+			} else {
+				fpbxToast('Unknown Error');
+			}
 		}
 	});
 });
@@ -26,6 +36,11 @@ $("#modalDelete").on('click',function(e){
 	});
 });
 
+function validateCalSubmit(data) {
+	// TODO: Make sure we have an event title, etc
+	return true;
+}
+
 function resetModalForm(){
 	$(".time").show();
 	$('input[type=checkbox]').prop("checked",false);
@@ -35,7 +50,7 @@ function resetModalForm(){
 	$("#timezone").multiselect('select', '');
 	updateReoccurring();
 	$("#repeat0").prop("checked",true);
-	$("modalDelete").hide();
+	$("#modalSubmit,#modalDelete").addClass('hidden');
 	updateAllDay();
 }
 
@@ -62,13 +77,6 @@ if($('#calendar').length && !readonly) {
 						$('#eventid').val('new');
 						$('#eventModal').modal('show');
 						$('#modalDelete').data('id', null);
-						if(event.canedit !== false){
-							$("#modalSubmit").show();
-							$("modalDelete").hide();
-						}else{
-							$("#modalSubmit").hide();
-							$("modalDelete").hide();
-						}
 						updateReoccurring();
 						updateAllDay();
 					}
@@ -230,16 +238,13 @@ $(document).ready(function() {
 						$("#weekday"+days[v]).prop("checked",true);
 					});
 				}
-				if(!readonly){
-					$("#eventForm input").prop("disabled",false);
-					$("#eventForm select").prop("disabled",false);
-					$("#modalSubmit").show();
-					$("#modalDelete").show();
-				}else{
+				if (readonly) {
 					$("#eventForm input").prop("disabled",true);
 					$("#eventForm select").prop("disabled",true);
-					$("#modalSubmit").hide();
-					$("#modalDelete").hide();
+				} else {
+					$("#eventForm input").prop("disabled",false);
+					$("#eventForm select").prop("disabled",false);
+					$("#modalSubmit,#modalDelete").removeClass('hidden');
 				}
 				updateReoccurring();
 				updateAllDay();
@@ -256,6 +261,7 @@ $(document).ready(function() {
 				$('#starttime').val(moment(Date.now()).format("kk:mm"));
 				$('#endtime').val(moment(Date.now()).add(1, 'h').format("kk:mm"));
 				$('#eventid').val('new');
+				$('#modalSubmit').removeClass('hidden');
 				$('#eventModal').modal('show');
 				updateAllDay();
 			}

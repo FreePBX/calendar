@@ -462,7 +462,7 @@ var timezone = "<?php echo $data['timezone']?>";
 								</form>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-danger pull-left" data-id='' data-dismiss="modal" id="modalDelete"><?php echo _("Delete Event")?></button>
+								<button type="button" class="btn btn-danger pull-left hidden" data-id='deletebutton' data-dismiss="modal" id="modalDelete"><?php echo _("Delete Event")?></button>
 								<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo _("Close")?></button>
 								<button type="submit" class="btn btn-default" form='eventForm' id="modalSubmit"><?php echo _("Submit")?></button>
 							</div>
