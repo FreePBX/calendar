@@ -873,6 +873,9 @@ class Calendar extends \DB_Helper implements \BMO {
 					if(isset($cals[$c])) {
 						$caldavClient->setCalendar($cals[$c]);
 						$events = $caldavClient->getEvents();
+						if(empty($events)) {
+							return;
+						}
 						$i = 0;
 						$ical = '';
 						$begin = '';
