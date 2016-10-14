@@ -1,10 +1,11 @@
 <h1><?php echo sprintf(_("Viewing %s"),$data['name'])?></h1>
 <script>
-var readonly = <?php echo $data['type'] !== 'local' ? 'true' : 'false'?>;
-var calendarid = "<?php echo $data['id']?>";
-var timezone = "<?php echo $data['timezone']?>";
+<?php $readonly = $data['type'] !== 'local' ? 'true' : 'false'; ?>
+var readonly = <?php echo $readonly; ?>;
+var calendarid = "<?php echo $data['id']; ?>";
+var timezone = "<?php echo $data['timezone']; ?>";
 </script>
-<div id="calendar"></div>
+<div id="calendar" class="calendar-readonly-<?php echo $readonly; ?>"></div>
 <div class="row">
 	<div class="col-sm-12">
 		<div class="fpbx-container">
