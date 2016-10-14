@@ -269,6 +269,28 @@ $(document).ready(function() {
 
 		});
 	}
+
+	$("#updatecal").on('click', function(e) {
+		var calendarid=$(e.target).data('calendarid');
+		e.preventDefault();
+		$("#updatecal").text(_("Updating...")).attr("disabled", true).addClass("disabled");
+		$("body").css("cursor", "progress");
+		$.ajax({
+			url : "ajax.php?module=calendar",
+			data : {
+				command: "updatesource",
+				calendarid: calendarid
+			},
+			success: function(data) {
+				console.log(data);
+				$("#calendar").fullCalendar( 'refetchEvents' );
+			},
+			complete: function(data) {
+				$("#updatecal").text(_("Update from Source")).attr("disabled", false).removeClass("disabled");
+				$("body").css("cursor", "default");
+			},
+		});
+	});
 });
 
 $("#repeat0").click(function() {

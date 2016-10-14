@@ -176,12 +176,10 @@ class Calendar extends \DB_Helper implements \BMO {
 			case 'groupsgrid':
 			case 'groupeventshtml':
 			case 'getcaldavcals':
+			case 'updatesource':
 				return true;
-			break;
-			default:
-				return false;
-			break;
 		}
+		return false;
 	}
 	public function ajaxHandler() {
 		switch ($_REQUEST['command']) {
@@ -382,9 +380,11 @@ class Calendar extends \DB_Helper implements \BMO {
 					$final[] = $data;
 				}
 				return $final;
-			break;
-    }
-  }
+			case 'updatesource':
+				return $this->refreshCalendarById($_REQUEST['calendarid']);
+				break;
+		}
+	}
 
 	public function showCalendarGroupsPage() {
 		$action = !empty($_GET['action']) ? $_GET['action'] : '';
@@ -1539,5 +1539,24 @@ class Calendar extends \DB_Helper implements \BMO {
 			throw new \Exception("Unable to determine system timezone");
 		}
 		return $timezone;
+	}
+
+	/**
+	 * Update Calendar By ID
+	 *
+	 * For remote calendars, updates the local calendar to match
+	 * the remote.
+	 *
+	 * @param string $calendarid
+	 * 
+	 * @return void
+	 */
+	public function refreshCalendarById($calendarid) {
+		$calendar = $this->getConfig($calendarid, 'calendars');
+		if (is_array($calendar) && $calendar['type'] !== "local") {
+			$calendar['id'] = $calendarid;
+			return $this->processCalendar($calendar);
+		}
+		return "Unable to update calendar";
 	}
 }

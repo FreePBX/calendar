@@ -5,7 +5,12 @@ $readonly = $data['type'] !== 'local' ? 'true' : 'false';
 
 <h1>
   <?php echo sprintf(_("Viewing Calendar '%s'"),$data['name'])?>
-  <span class='pull-right'><a href="<?php echo $url; ?>" class='btn btn-default' style='margin-top: -5px'><?php echo _("Edit Settings"); ?></a></span>
+  <span class='pull-right'>
+<?php if ($readonly == "true") { ?>
+    <button id="updatecal" data-calendarid="<?php echo $data['id']; ?>" class='btn btn-default' style='margin-top: -5px'><?php echo _("Update from Source"); ?></button>
+<?php } ?>
+    <a href="<?php echo $url; ?>" class='btn btn-default' style='margin-top: -5px'><?php echo _("Edit Settings"); ?></a>
+  </span>
 </h1>
 <script>
 var readonly = <?php echo $readonly; ?>;
