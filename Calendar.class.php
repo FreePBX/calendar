@@ -897,8 +897,9 @@ class Calendar extends \DB_Helper implements \BMO {
 				}
 			break;
 			case "ical":
+				$req = \FreePBX::Curl()->requests($calendar['url']);
 				$cal = new IcalParser();
-				$cal->parseFile($calendar['url']);
+				$cal->parseString($req->get($calendar['url'])->body);
 				$this->processiCalEvents($calendar['id'], $cal);
 			break;
 			case "google":
