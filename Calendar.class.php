@@ -873,12 +873,23 @@ class Calendar extends \DB_Helper implements \BMO {
 					if(isset($cals[$c])) {
 						$caldavClient->setCalendar($cals[$c]);
 						$events = $caldavClient->getEvents();
+						$i = 0;
+						$ical = '';
+						$begin = '';
+						$middle = '';
 						foreach($events as $event) {
 							$ical = $event->getData();
-							$cal = new IcalParser();
-							$cal->parseString($ical);
-							$this->processiCalEvents($calendar['id'], $cal); //will ids clash? they shouldnt????
+							if($i == 0){
+								preg_match_all("/^(.*)BEGIN:VEVENT/s",$ical,$matches);
+								$begin = $matches[1][0];
+							}
+							preg_match_all("/BEGIN:VEVENT(.*)END:VEVENT/s",$ical,$matches);
+							$middle .= $matches[0][0]."\n";
 						}
+						$finalical = $begin.$middle."END:VCALENDAR";
+						$cal = new IcalParser();
+						$cal->parseString($finalical);
+						$this->processiCalEvents($calendar['id'], $cal); //will ids clash? they shouldnt????
 					}
 				}
 			break;
@@ -993,6 +1004,8 @@ class Calendar extends \DB_Helper implements \BMO {
 
 
 		$this->db->commit(); //now update just incase this takes a long time
+
+		$things = $this->getAll($calendarID.'-events');
 	}
 
 	/**
