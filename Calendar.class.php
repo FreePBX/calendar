@@ -1038,8 +1038,12 @@ class Calendar extends \DB_Helper implements \BMO {
 
 		$event['DESCRIPTION'] = !empty($event['DESCRIPTION']) ? $event['DESCRIPTION'] : "";
 
+		// If there is no end event, set it to the start time
+		if (!is_object($event['DTEND'])) { 
+			$event['DTEND'] = clone $event['DTSTART'];
+		}
 		if($event['DTSTART']->getTimezone() != $event['DTEND']->getTimezone()) {
-			throw new \Exception("Start timezone and end timezone are different! Not sure what to do here");
+			throw new \Exception("Start timezone and end timezone are different! Not sure what to do here".json_encode($event));
 		}
 		$tz = $event['DTSTART']->getTimezone();
 		$timezone = $tz->getName();
