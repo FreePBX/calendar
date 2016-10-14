@@ -1520,8 +1520,9 @@ class Calendar extends \DB_Helper implements \BMO {
 			// /etc/localtime is a symlink to the
 			// timezone in /usr/share/zoneinfo.
 			$filename = readlink('/etc/localtime');
-			if (strpos($filename, '/usr/share/zoneinfo/') === 0) {
-				$timezone = trim(substr($filename, 20));
+			$pathpos = strpos($filename, '/usr/share/zoneinfo/');
+			if ($pathpos !== false) {
+				$timezone = trim(substr($filename,($pathpos + 20)));
 			}
 		} elseif (file_exists('/etc/timezone')) {
 			// Ubuntu / Debian.
