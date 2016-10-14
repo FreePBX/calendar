@@ -36,6 +36,6 @@
 </table>
 <script type="text/javascript">
 	$("#table-rnav").on('click-row.bs.table',function(e,row,elem){
-		window.location = '?display=calendar&action=edit&type=calendar&id='+row['id'];
+		window.location = '?display=calendar&action=view&type=calendar&id='+row['id'];
 	})
 </script>

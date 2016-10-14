@@ -1,6 +1,13 @@
-<h1><?php echo sprintf(_("Viewing %s"),$data['name'])?></h1>
+<?php
+$url = "config.php?display=calendar&action=edit&type=calendar&id=".$data['id'];
+$readonly = $data['type'] !== 'local' ? 'true' : 'false';
+?>
+
+<h1>
+  <?php echo sprintf(_("Viewing Calendar '%s'"),$data['name'])?>
+  <span class='pull-right'><a href="<?php echo $url; ?>" class='btn btn-default' style='margin-top: -5px'><?php echo _("Edit Settings"); ?></a></span>
+</h1>
 <script>
-<?php $readonly = $data['type'] !== 'local' ? 'true' : 'false'; ?>
 var readonly = <?php echo $readonly; ?>;
 var calendarid = "<?php echo $data['id']; ?>";
 var timezone = "<?php echo $data['timezone']; ?>";
