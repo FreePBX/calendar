@@ -1,26 +1,10 @@
-/* =========================================================
- * bootstrap-datepicker.js
- * Repo: https://github.com/eternicode/bootstrap-datepicker/
- * Demo: https://eternicode.github.io/bootstrap-datepicker/
- * Docs: https://bootstrap-datepicker.readthedocs.org/
- * Forked from http://www.eyecon.ro/bootstrap-datepicker
- * =========================================================
- * Started by Stefan Petre; improvements by Andrew Rowls + contributors
+/*!
+ * Datepicker for Bootstrap v1.6.4 (https://github.com/eternicode/bootstrap-datepicker)
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * ========================================================= */
-
-(function(factory){
+ * Copyright 2012 Stefan Petre
+ * Improvements by Andrew Rowls
+ * Licensed under the Apache License v2.0 (http://www.apache.org/licenses/LICENSE-2.0)
+ */(function(factory){
     if (typeof define === "function" && define.amd) {
         define(["jquery"], factory);
     } else if (typeof exports === 'object') {
@@ -63,8 +47,7 @@
 				// $.inArray doesn't work with Dates
 				var val = d && d.valueOf();
 				for (var i=0, l=this.length; i < l; i++)
-          // Use date arithmetic to allow dates with different times to match
-          if (0 <= this[i].valueOf() - val && this[i].valueOf() - val < 1000*60*60*24)
+					if (this[i].valueOf() === val)
 						return i;
 				return -1;
 			},
@@ -101,6 +84,7 @@
 	// Picker object
 
 	var Datepicker = function(element, options){
+		console.log("thing");
 		$(element).data('datepicker', this);
 		this._process_options(options);
 
@@ -668,7 +652,6 @@
 			this._process_options({datesDisabled: datesDisabled});
 			this.update();
 			this.updateNavArrows();
-			return this;
 		},
 
 		place: function(){
@@ -1048,9 +1031,15 @@
 						tooltip = before.tooltip;
 				}
 
-				clsName = $.unique(clsName);
-				
-				html.push('<td class="'+clsName.join(' ')+'"' + (tooltip ? ' title="'+tooltip+'"' : '') + (this.o.dateCells ? ' data-date="'+(prevMonth.getTime().toString())+'"' : '') + '>'+prevMonth.getUTCDate() + '</td>');
+				//Check if uniqueSort exists (supported by jquery >=1.12 and >=2.2)
+				//Fallback to unique function for older jquery versions
+				if ($.isFunction($.uniqueSort)) {
+					clsName = $.uniqueSort(clsName);
+				} else {
+					clsName = $.unique(clsName);
+				}
+
+				html.push('<td class="'+clsName.join(' ')+'"' + (tooltip ? ' title="'+tooltip+'"' : '') + '>'+prevMonth.getUTCDate() + '</td>');
 				tooltip = null;
 				if (prevMonth.getUTCDay() === this.o.weekEnd){
 					html.push('</tr>');
@@ -1064,7 +1053,7 @@
 						.find('.datepicker-switch')
 							.text(this.o.maxViewMode < 2 ? monthsTitle : year)
 							.end()
-						.find('tbody span').removeClass('active');
+						.find('span').removeClass('active');
 
 			$.each(this.dates, function(i, d){
 				if (d.getUTCFullYear() === year)
@@ -1148,16 +1137,16 @@
 			switch (this.viewMode){
 				case 0:
 					if (this.o.startDate !== -Infinity && year <= this.o.startDate.getUTCFullYear() && month <= this.o.startDate.getUTCMonth()){
-						this.picker.find('.prev').addClass('disabled');
+						this.picker.find('.prev').css({visibility: 'hidden'});
 					}
 					else {
-						this.picker.find('.prev').removeClass('disabled');
+						this.picker.find('.prev').css({visibility: 'visible'});
 					}
 					if (this.o.endDate !== Infinity && year >= this.o.endDate.getUTCFullYear() && month >= this.o.endDate.getUTCMonth()){
-						this.picker.find('.next').addClass('disabled');
+						this.picker.find('.next').css({visibility: 'hidden'});
 					}
 					else {
-						this.picker.find('.next').removeClass('disabled');
+						this.picker.find('.next').css({visibility: 'visible'});
 					}
 					break;
 				case 1:
@@ -1165,16 +1154,16 @@
 				case 3:
 				case 4:
 					if (this.o.startDate !== -Infinity && year <= this.o.startDate.getUTCFullYear() || this.o.maxViewMode < 2){
-						this.picker.find('.prev').addClass('disabled');
+						this.picker.find('.prev').css({visibility: 'hidden'});
 					}
 					else {
-						this.picker.find('.prev').removeClass('disabled');
+						this.picker.find('.prev').css({visibility: 'visible'});
 					}
 					if (this.o.endDate !== Infinity && year >= this.o.endDate.getUTCFullYear() || this.o.maxViewMode < 2){
-						this.picker.find('.next').addClass('disabled');
+						this.picker.find('.next').css({visibility: 'hidden'});
 					}
 					else {
-						this.picker.find('.next').removeClass('disabled');
+						this.picker.find('.next').css({visibility: 'visible'});
 					}
 					break;
 			}
@@ -1581,9 +1570,6 @@
 		});
 		delete options.inputs;
 
-		this.keepEmptyValues = options.keepEmptyValues || false;
-		delete options.keepEmptyValues;
-
 		datepickerPlugin.call($(this.inputs), options)
 			.on('changeDate', $.proxy(this.dateUpdated, this));
 
@@ -1622,7 +1608,6 @@
 			}
 
 			var new_date = dp.getUTCDate(),
-				keep_empty_values = this.keepEmptyValues,
 				i = $.inArray(e.target, this.inputs),
 				j = i - 1,
 				k = i + 1,
@@ -1631,7 +1616,7 @@
 				return;
 
 			$.each(this.pickers, function(i, p){
-				if (!p.getUTCDate() && (p === dp || !keep_empty_values))
+				if (!p.getUTCDate())
 					p.setUTCDate(new_date);
 			});
 
@@ -1774,7 +1759,6 @@
 		zIndexOffset: 10,
 		container: 'body',
 		immediateUpdates: false,
-		dateCells:false,
 		title: '',
 		templates: {
 			leftArrow: '&laquo;',
@@ -2089,7 +2073,7 @@
 
 	/* DATEPICKER VERSION
 	 * =================== */
-	$.fn.datepicker.version = '1.7.0-dev';
+	$.fn.datepicker.version = '1.6.4';
 
 	/* DATEPICKER DATA-API
 	* ================== */

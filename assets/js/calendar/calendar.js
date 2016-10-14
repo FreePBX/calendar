@@ -85,6 +85,7 @@ if($('#calendar').length && !readonly) {
 }
 
 $(document).ready(function() {
+
 	$("#allday").click(function() {
 		if($(this).is(":checked")) {
 			$(".time").addClass("hidden");
