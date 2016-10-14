@@ -13,34 +13,8 @@ class addDelEvent extends PHPUnit_Framework_TestCase{
 		self::$o = self::$f->Calendar;
 	}
 	public function setup() {
-		$date = date('Y-m-d');
-		$this->eventfull = array(
-					'uid' => '1234',
-					'user' => '',
-					'description' => 'nintynint',
-					'hookdata' => '',
-					'active' => '1',
-					'generatehint' => '',
-					'generatefc' => '',
-					'eventtype' => 'callflow',
-					'weekdays' => '',
-					'monthdays' => '',
-					'months' => '',
-					'timezone' => 'America/Phoenix',
-					'startdate' => $date,
-					'enddate' => $date,
-					'starttime' => '',
-					'endtime' => '',
-					'repeatinterval' => '',
-					'frequency' => '',
-					'truedest' => 'app-announcement-1,s,1',
-					'falsedest' => 'from-did-direct,1000,1',
-					'title' => 'nintynint',
-					'start' => $date.'T00:00:00',
-					'end' => $date.'T23:59:59'
-				);
-		$this->eventEmpty = array();
-		$this->eventString = 'Foo';
+		$this->calid = 'ABB4AB7F-644D-48D4-A882-B5B599F7CD18';
+		$this->evid = '89EB15CA-3469-4003-A4B2-919EE1D10460';
 	}
 	public function testPHPUnit() {
 		$this->assertEquals("test", "test", "PHPUnit is broken.");
@@ -49,26 +23,24 @@ class addDelEvent extends PHPUnit_Framework_TestCase{
 	public function testCreate() {
 		$this->assertTrue(is_object(self::$o), sprintf("Did not get a %s object",self::$module));
 	}
-
-	public function testaddEventPass(){
-		$return = self::$o->addEvent($this->eventfull);
-		$this->assertArrayHasKey('status', $return, "Adding Event did not return an array with a status");
-		$this->assertTrue($return['status']);
+	/**
+ 	* @covers Calendar::addEvent
+ 	* @covers Calendar::updateEvent
+ 	*/
+	public function testEventAdd(){
+		//addEvent($calendarID,$eventID=null,$name,$description,$starttime,$endtime,$timezone=null,$recurring=false,$rrules=array(),$categories=array())
+		self::$o->addEvent($this->calid,$this->evid,"Utest","Unit Test",1476468713,1476468773,"America/Phoenix",false,array(),array());
+		$event = self::$o->getEvent($this->calid,$this->evid);
+		$this->assertEquals('Utest', $event['name'], "Name doesn't match");
+		$this->assertEquals('Unit Test', $event['description'], "Description doesn't match");
 	}
 
-	public function testAddEventEmpty(){
-		$return = self::$o->addEvent($this->eventEmpty);
-		$this->assertArrayHasKey('status', $return, "Adding Event did not return an array with a status");
-		$this->assertFalse($return['status']);
-	}
-	public function testAddEventString(){
-		$return = self::$o->addEvent($this->eventString);
-		$this->assertArrayHasKey('status', $return, "Adding Event did not return an array with a status");
-		$this->assertFalse($return['status']);
-	}
-	public function testDeletebyID(){
-		$return = self::$o->deleteEventById('1234');
-		$this->assertArrayHasKey('status', $return, "Deleting Event did not return an array with a status");
-		$this->assertTrue($return['status']);
+	/**
+ 	* @covers Calendar::deleteEvent
+ 	* @depends testEventAdd
+ 	*/
+	public function testEventDelete(){
+		self::$o->deleteEvent($this->calid,$this->evid);
+		$this->assertFalse($event = self::$o->getEvent($this->calid,$this->evid), "Event still present");
 	}
 }

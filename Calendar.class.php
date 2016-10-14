@@ -692,7 +692,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param array $categories   The categories assigned to this event
 	 */
 	public function addEvent($calendarID,$eventID=null,$name,$description,$starttime,$endtime,$timezone=null,$recurring=false,$rrules=array(),$categories=array()){
-		$eventID = !is_null($eventID) ? $eventID : Uuid::uuid4();
+		$eventID = !is_null($eventID) ? $eventID : Uuid::uuid4()->toString();
 		$this->updateEvent($calendarID,$eventID,$name,$description,$starttime,$endtime,$timezone,$recurring,$rrules,$categories);
 	}
 
@@ -756,11 +756,12 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param  string $eventID    The event ID
 	 */
 	public function deleteEvent($calendarID,$eventID) {
+		dbug(array($calendarID,$eventID));
 		$this->setConfig($eventID,false,$calendarID."-events");
 	}
 
 	public function addRemoteCalDavCalendar($name,$description,$purl,$surl,$username,$password,$calendars) {
-		$uuid = Uuid::uuid4();
+		$uuid = Uuid::uuid4()->toString();
 		$this->updateRemoteCalDavCalendar($uuid,$name,$description,$purl,$surl,$username,$password,$calendars);
 	}
 
@@ -791,7 +792,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param string $url         The Calendar URL
 	 */
 	public function addRemoteiCalCalendar($name,$description,$url) {
-		$uuid = Uuid::uuid4();
+		$uuid = Uuid::uuid4()->toString();
 		$this->updateRemoteiCalCalendar($uuid,$name,$description,$url);
 	}
 
@@ -802,7 +803,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param string $timezone    The Calendar timezone
 	 */
 	public function addLocalCalendar($name,$description,$timezone) {
-		$uuid = Uuid::uuid4();
+		$uuid = Uuid::uuid4()->toString();
 		$this->updateLocalCalendar($uuid,$name,$description,$timezone);
 	}
 
@@ -1047,7 +1048,7 @@ class Calendar extends \DB_Helper implements \BMO {
 		$event['DESCRIPTION'] = !empty($event['DESCRIPTION']) ? $event['DESCRIPTION'] : "";
 
 		// If there is no end event, set it to the start time
-		if (!isset($event['DTEND']) || !is_object($event['DTEND'])) { 
+		if (!isset($event['DTEND']) || !is_object($event['DTEND'])) {
 			$event['DTEND'] = clone $event['DTSTART'];
 		}
 		if($event['DTSTART']->getTimezone() != $event['DTEND']->getTimezone()) {
@@ -1074,7 +1075,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param array $events The event group events
 	 */
 	public function addGroup($name,$calendars,$categories,$events) {
-		$uuid = Uuid::uuid4();
+		$uuid = Uuid::uuid4()->toString();
 		$this->updateGroup($uuid,$name,$calendars,$categories,$events);
 	}
 
@@ -1548,7 +1549,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * the remote.
 	 *
 	 * @param string $calendarid
-	 * 
+	 *
 	 * @return void
 	 */
 	public function refreshCalendarById($calendarid) {
