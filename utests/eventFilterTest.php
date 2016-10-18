@@ -12,6 +12,8 @@ class eventFilterMethods extends PHPUnit_Framework_TestCase{
 		include 'setuptests.php';
 		self::$f = FreePBX::create();
 		self::$o = self::$f->Calendar;
+		include dirname(dirname(__DIR__)).'/framework/amp_conf/htdocs/admin/libraries/Composer/vendor/autoload.php';
+
 	}
 
 	public function setup() {}
@@ -26,50 +28,25 @@ class eventFilterMethods extends PHPUnit_Framework_TestCase{
 	}
   public function testFilterDates(){
     $data = array();
-    $data[] = array('startdate' => '2016-01-01', 'enddate'=> '2016-01-31');
-    $data[] = array('startdate' => '2016-01-02', 'enddate'=> '2016-01-31');
-    $data[] = array('startdate' => '2016-01-03', 'enddate'=> '2016-01-31');
-    $data[] = array('startdate' => '2016-02-01', 'enddate'=> '2016-02-28');
-    $data[] = array('startdate' => '2016-02-02', 'enddate'=> '2016-02-28');
-    $data[] = array('startdate' => '2016-02-03', 'enddate'=> '2016-02-28');
-    $data[] = array('startdate' => '2016-03-01', 'enddate'=> '2016-03-31');
-    $data[] = array('startdate' => '2016-03-02', 'enddate'=> '2016-03-31');
-    $data[] = array('startdate' => '2016-03-03', 'enddate'=> '2016-03-31');
+    $data[] = array('starttime' => date_timestamp_get(new DateTime('2016-01-01')), 'endtime'=> date_timestamp_get(new DateTime('2016-01-31')),'timezone' => 'America/Phoenix');
+    $data[] = array('starttime' => date_timestamp_get(new DateTime('2016-01-02')), 'endtime'=> date_timestamp_get(new DateTime('2016-01-31')),'timezone' => 'America/Phoenix');
+    $data[] = array('starttime' => date_timestamp_get(new DateTime('2016-01-03')), 'endtime'=> date_timestamp_get(new DateTime('2016-01-31')),'timezone' => 'America/Phoenix');
+    $data[] = array('starttime' => date_timestamp_get(new DateTime('2016-02-01')), 'endtime'=> date_timestamp_get(new DateTime('2016-02-28')),'timezone' => 'America/Phoenix');
+    $data[] = array('starttime' => date_timestamp_get(new DateTime('2016-02-02')), 'endtime'=> date_timestamp_get(new DateTime('2016-02-28')),'timezone' => 'America/Phoenix');
+    $data[] = array('starttime' => date_timestamp_get(new DateTime('2016-02-03')), 'endtime'=> date_timestamp_get(new DateTime('2016-02-28')),'timezone' => 'America/Phoenix');
+    $data[] = array('starttime' => date_timestamp_get(new DateTime('2016-03-01')), 'endtime'=> date_timestamp_get(new DateTime('2016-03-31')),'timezone' => 'America/Phoenix');
+    $data[] = array('starttime' => date_timestamp_get(new DateTime('2016-03-02')), 'endtime'=> date_timestamp_get(new DateTime('2016-03-31')),'timezone' => 'America/Phoenix');
+    $data[] = array('starttime' => date_timestamp_get(new DateTime('2016-03-03')), 'endtime'=> date_timestamp_get(new DateTime('2016-03-31')),'timezone' => 'America/Phoenix');
     $expect = array();
-    $expect[] = array('startdate' => '2016-01-01', 'enddate'=> '2016-01-31');
-    $expect[] = array('startdate' => '2016-01-02', 'enddate'=> '2016-01-31');
-    $expect[] = array('startdate' => '2016-01-03', 'enddate'=> '2016-01-31');
-    $expect[] = array('startdate' => '2016-02-01', 'enddate'=> '2016-02-28');
-    $expect[] = array('startdate' => '2016-02-02', 'enddate'=> '2016-02-28');
-    $expect[] = array('startdate' => '2016-02-03', 'enddate'=> '2016-02-28');
-    $output = self::$o->eventFilterDates($data, '2016-01-01', '2016-02-28');
+    $expect[] = array('starttime' => date_timestamp_get(new DateTime('2016-01-01')), 'endtime'=> date_timestamp_get(new DateTime('2016-01-31')),'timezone' => 'America/Phoenix');
+    $expect[] = array('starttime' => date_timestamp_get(new DateTime('2016-01-02')), 'endtime'=> date_timestamp_get(new DateTime('2016-01-31')),'timezone' => 'America/Phoenix');
+    $expect[] = array('starttime' => date_timestamp_get(new DateTime('2016-01-03')), 'endtime'=> date_timestamp_get(new DateTime('2016-01-31')),'timezone' => 'America/Phoenix');
+    $expect[] = array('starttime' => date_timestamp_get(new DateTime('2016-02-01')), 'endtime'=> date_timestamp_get(new DateTime('2016-02-28')),'timezone' => 'America/Phoenix');
+    $expect[] = array('starttime' => date_timestamp_get(new DateTime('2016-02-02')), 'endtime'=> date_timestamp_get(new DateTime('2016-02-28')),'timezone' => 'America/Phoenix');
+    $expect[] = array('starttime' => date_timestamp_get(new DateTime('2016-02-03')), 'endtime'=> date_timestamp_get(new DateTime('2016-02-28')),'timezone' => 'America/Phoenix');
+		$start = Carbon\Carbon::createFromDate(2016,01,01,'America/Phoenix');
+		$end = Carbon\Carbon::createFromDate(2016,02,28,'America/Phoenix');
+    $output = self::$o->eventFilterDates($data, $start, $end, 'America/Phoenix');
     $this->assertTrue((count(array_diff(array_merge($expect, $output), array_intersect($expect, $output))) === 0), _("Returned date range was not as expected"));
-  }
-
-  public function testFilterUser(){
-    $data = array();
-    $data[] = array('user' => 'foo');
-    $data[] = array('user' => 'foo');
-    $data[] = array('user' => 'bar');
-    $data[] = array('user' => 'bar');
-    $data[] = array('user' => 'baz');
-    $data[] = array('user' => 'baz');
-    $expect = array();
-    $expect[] = array('user' => 'bar');
-    $expect[] = array('user' => 'bar');
-    $output = self::$o->eventFilterUser($data, 'bar');
-    $this->assertTrue((count(array_diff(array_merge($expect, $output), array_intersect($expect, $output))) === 0), _("Returned user data is incorrect"));
-  }
-
-  public function testFilterEventType(){
-    $data = array();
-    $data[] = array('eventtype' => 'dialplan');
-    $data[] = array('eventtype' => 'calendaronly');
-    $data[] = array('eventtype' => 'presence');
-
-    $expect = array();
-    $expect[] = array('user' => 'dialplan');
-    $output = self::$o->eventFilterType($data, 'dialplan');
-    $this->assertTrue((count(array_diff(array_merge($expect, $output), array_intersect($expect, $output))) === 0), _("Returned event type data is incorrect"));
   }
 }
