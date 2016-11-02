@@ -1343,9 +1343,9 @@ class Calendar extends \DB_Helper implements \BMO {
 				$allowedgroups = $this->FreePBX->Ucp->getSettingByID($user['id'],'Calendar','allowedgroups');
 				$enabled = $this->FreePBX->Ucp->getSettingByID($user['id'],'Calendar','enabled');
 			}
-			$allowedcals = (!empty($allowedcals))?$allowedcals:array();
-			$allowedgroups = (!empty($allowedgroups))?$allowedgroups:array();
 		}
+		$allowedcals = (!empty($allowedcals))?$allowedcals:array();
+		$allowedgroups = (!empty($allowedgroups))?$allowedgroups:array();
 		$calopts = '';
 		if($mode != 'group'){
 			$calopts = '<option value="inherit">'._("Inherit").'</option>';

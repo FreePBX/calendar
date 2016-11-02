@@ -26,6 +26,9 @@ class eventFilterMethods extends PHPUnit_Framework_TestCase{
 	public function testCreate() {;
 		$this->assertTrue(is_object(self::$o), sprintf("Did not get a %s object",self::$module));
 	}
+	/**
+	 * @covers Calendar::eventFilterDates
+	 */
   public function testFilterDates(){
     $data = array();
     $data[] = array('starttime' => date_timestamp_get(new DateTime('2016-01-01')), 'endtime'=> date_timestamp_get(new DateTime('2016-01-31')),'timezone' => 'America/Phoenix');
