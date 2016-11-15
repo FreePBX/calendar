@@ -23,6 +23,8 @@
  */
 namespace UCP\Modules;
 use \UCP\Modules as Modules;
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
 
 class Calendar extends Modules{
 	protected $module = 'Calendar';
@@ -30,64 +32,81 @@ class Calendar extends Modules{
 	function __construct($Modules) {
 		$this->Modules = $Modules;
 		$this->user = $this->UCP->User->getUser();
-		$allowed = array();
-		$allowed = $this->UCP->getCombinedSettingByID($this->user['id'],$this->module,'calendars');
+		$this->allowed = array();
+		$allowed = $this->UCP->getCombinedSettingByID($this->user['id'],$this->module,'allowedcals');
 		if(!empty($allowed)) {
 			$this->allowed = is_array($allowed)?$allowed:array($allowed);
 		}
 	}
-	function getDisplay() {
-		return $this->load_view(__DIR__.'/views/calendar.php' , array('user' => $this->user, 'allowed' => $allowed));
-	}
+
 	public function getSettingsDisplay($ext) {
 		$out = array(
 			array(
 				"title" => _('Calendar'),
 				"content" => $this->load_view(__DIR__.'/views/settings.php',array('enabled' => true)),
-				"size" => 6
 			)
 		);
 		return $out;
 	}
-	//Left Menu
-	public function getMenuItems() {
-		$menu = array();
-		$menu = array(
+	public function allowedCalendars(){
+		$cals = $this->UCP->FreePBX->Calendar->listCalendars();
+		foreach ($cals as $key => $value) {
+			if(!in_array($key, $this->allowed))
+			unset($cals[$key]);
+		}
+		return $cals;
+	}
+	//page widget
+	public function getWidgetList(){
+		$cals = $this->allowedCalendars();
+		if(empty($cals)){
+			return [];
+		}
+		$widgets = [];
+		foreach ($cals as $key => $value) {
+			$widgets['calendar-'.$key] = [
+				'display' => $value['description'],
+				'defaultsize' => ["width" => 12, "height" => 6],
+			];
+		}
+		$menu = [
 			"rawname" => "calendar",
-			"name" => _("Calendar"),
-			"badge" => false
-		);
+			"display" => _("Calendar"),
+			"icon" => "fa fa-calendar",
+			"list" => $widgets,
+			];
 		return $menu;
 	}
-	//top bar
-	public function getNavItems() {
-		$out[] = array(
+
+	//side widget
+	public function getSimpleWidgetList() {
+		$menu = [
 			"rawname" => "calendar",
-			"badge" => true,
-			"icon" => "fa-hand-spock-o",
-			"menu" => array(
-				"html" => '<li><a class="hello">'._("HELLO").'</a></li><li><hr></li><li><a class="world">'._("WORLD").'</a></li><li><hr></li>'
-			)
-		);
-		return $out;
+			"display" => _("Calendar"),
+			"icon" => "fa fa-calendar",
+			"list" => [
+					"agenda-8675309" => [
+						"display" => "Work Calendar",
+						"defaultsize" => ["width" => 12, "height" => 6],
+					]
+				]
+			];
+		return $menu;
 	}
-	public function poll(){
-		$count = mt_rand(1,42);
-		return array("status" => true, "total" => $count);
+	public function getWidgetDisplay($id){
+		$listmode = (strpos($id, 'agenda') !== false);
+
+		$id = ($listmode)?substr($id, 7):substr($id, 9);
+		$ret = ['title' => 'Work Calendar',
+						'html'  => $this->load_view(__DIR__.'/views/calendar.php' , ['id' => $id, 'listmode' => $listmode]),
+		];
+		return $ret;
 	}
-	public function getHomeWidgets() {
-		$out[] = array(
-			"id" => 'hello',
-			"title" => 'Hello World',
-			"content" => '<h3>Hello World</h3>',
-			"size" => '33.33%'
-		);
-		return $out;
-	}
+
+
 	public function ajaxRequest($command,$settings){
 		switch($command) {
-			case 'hello':
-			case 'homeRefresh':
+			case 'events':
 				return true;
 			default:
 				return false;
@@ -96,12 +115,18 @@ class Calendar extends Modules{
 	}
 	public function ajaxHandler(){
 		switch($_REQUEST['command']){
-			case 'hello':
-				return array("status" => true, "alert" => "success", "message" => _('HELLO UCP'));
-			break;
-			case 'homeRefresh':
-			//when you hit refresh on the home page widget
-				return array("status" => true, "content" => '<h3>This is refreshing</h3>');
+			case 'events':
+				if(!isset($_REQUEST['calendarid'])){
+					return ['status' => false, 'message' => 'Calendar ID not specified'];
+				}
+				if(!in_array($_REQUEST['calendarid'], $this->allowed)){
+					return ['status' => false, 'message' => 'Unauthorized'];
+				}
+				$start = new Carbon($_GET['start'],$_GET['timezone']);
+				$end = new Carbon($_GET['end'],$_GET['timezone']);
+				$events = $this->UCP->FreePBX->Calendar->listEvents($_REQUEST['calendarid'],$start, $end);
+				$events = is_array($events) ? $events : array();
+				return array_values($events);
 			break;
 			default:
 				return array("status" => false, "message" => "");
