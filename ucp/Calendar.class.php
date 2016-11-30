@@ -107,6 +107,7 @@ class Calendar extends Modules{
 	public function ajaxRequest($command,$settings){
 		switch($command) {
 			case 'events':
+			case 'eventform':
 				return true;
 			default:
 				return false;
@@ -127,6 +128,11 @@ class Calendar extends Modules{
 				$events = $this->UCP->FreePBX->Calendar->listEvents($_REQUEST['calendarid'],$start, $end);
 				$events = is_array($events) ? $events : array();
 				return array_values($events);
+			break;
+			case 'eventform':
+				$vars = [];
+				$vars['submitted_id'] = $_REQUEST['calendarid'];
+				return load_view(__DIR__.'/views/eventModal.php',$vars);
 			break;
 			default:
 				return array("status" => false, "message" => "");

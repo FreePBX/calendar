@@ -13,7 +13,27 @@ var CalendarC = UCPMC.extend({
 			addEvent: {
 					text: _('Add Event'),
 					click: function() {
-						$("#eventModal").modal('show');
+						$.getJSON('index.php?quietmode=1&module=calendar&command=eventform&calendar_id='+widget_id, function(data){
+							if(data.status === true){
+								$('#globalModalBody').html(data.message);
+								$(':checkbox').bootstrapToggle();
+							}else{
+								$('#globalModalBody').html('<h2>'+_("Error getting form")+'</h2>');
+							}
+						});
+						$('#globalModalLabel').html('<h3>'+_("Add Event")+'</h3>');
+						$('#globalModalFooter').html('<button type="button" class="btn btn-secondary" data-dismiss="modal">'+_("Close")+'</button><button id="save" type="button" class="btn btn-primary">'+ _("Save changes")+'</button>');
+						$("#globalModal").modal('show');
+						$('#save').on('click',function(){
+							$.ajax({
+								type: 'POST',
+								url: 'index.php?quietmode=1&module=calendar&command=saveform',
+								data: $('#calform'+widget_id).serialize(),
+								success: function (data) {
+									console.log(data);
+								}
+							});
+						});
 					}
 			}
 		};
@@ -45,7 +65,10 @@ var CalendarC = UCPMC.extend({
 				left:	 'prev,addEvent,next',
 				center: 'title',
 				right:	'month,basicWeek,agendaDay'
-			}
+			},
+			eventClick: function(event, jsEvent, view){
+			 console.log(event, jsEvent, view); 
+		 	}
 		});
 	},
 	displayWidgetSettings: function(widget_id,dashboard_id) {
