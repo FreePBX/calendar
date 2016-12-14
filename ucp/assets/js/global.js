@@ -9,11 +9,12 @@ var CalendarC = UCPMC.extend({
 	poll: function(data){
 	},
 	displayWidget: function(widget_id,dashboard_id) {
+		var widget_type_id = $(".grid-stack-item[data-id='"+widget_id+"']").data("widget_type_id");
 		var buttons = {
 			addEvent: {
 					text: _('Add Event'),
 					click: function() {
-						$.getJSON('index.php?quietmode=1&module=calendar&command=eventform&calendar_id='+widget_id, function(data){
+						$.getJSON('index.php?quietmode=1&module=calendar&command=eventform&calendar_id='+widget_type_id, function(data){
 							if(data.status === true){
 								$('#globalModalBody').html(data.message);
 								$(':checkbox').bootstrapToggle();
@@ -28,7 +29,7 @@ var CalendarC = UCPMC.extend({
 							$.ajax({
 								type: 'POST',
 								url: 'index.php?quietmode=1&module=calendar&command=saveform',
-								data: $('#calform'+widget_id).serialize(),
+								data: $('#calform'+widget_type_id).serialize(),
 								success: function (data) {
 									console.log(data);
 								}
@@ -38,8 +39,8 @@ var CalendarC = UCPMC.extend({
 			}
 		};
 
-		calid = widget_id.replace(/calendar-/,'');
-		$('#'+widget_id).fullCalendar({
+		calid = widget_type_id.replace(/calendar-/,'');
+		$('#'+widget_type_id).fullCalendar({
 			displayEventEnd: true,
 			nextDayThreshold: '00:00:01',
 			fixedWeekCount: false,
@@ -67,7 +68,7 @@ var CalendarC = UCPMC.extend({
 				right:	'month,basicWeek,agendaDay'
 			},
 			eventClick: function(event, jsEvent, view){
-			 console.log(event, jsEvent, view); 
+			 console.log(event, jsEvent, view);
 		 	}
 		});
 	},
