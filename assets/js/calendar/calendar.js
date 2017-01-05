@@ -128,7 +128,7 @@ $(document).ready(function() {
 				right:	'month,basicWeek,agendaDay'
 			},
 			height: 650,
-			timezone: timezone,
+			timezone: caltimezone,
 			eventSources: [{
 				url: 'ajax.php',
 				type: 'GET',

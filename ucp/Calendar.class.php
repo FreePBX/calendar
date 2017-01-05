@@ -66,7 +66,8 @@ class Calendar extends Modules{
 		foreach ($cals as $key => $value) {
 			$widgets['calendar-'.$key] = [
 				'display' => $value['description'],
-				'defaultsize' => ["width" => 12, "height" => 6],
+				'defaultsize' => ["width" => 4, "height" => 10],
+				'minsize' => ["width" => 4, "height" => 10],
 			];
 		}
 		$menu = [
