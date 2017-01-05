@@ -68,12 +68,10 @@ if($('#calendar').length && !readonly) {
 						$('#description').val('');
 						$("#eventtype").val('');
 						$('.dest').addClass('hidden');
-						$('#startdate').val(moment(Date.now()).format("YYYY-MM-DD"));
-						$('#enddate').val(moment(Date.now()).format("YYYY-MM-DD"));
-						$('#starttime').val(moment(Date.now()).format("kk:mm"));
-						$('#endtime').val(moment(Date.now()).format("kk:mm"));
-						$('#startdate').datepicker('update');
-						$('#enddate').datepicker('update');
+						$("#startdate")[0]._flatpickr.setDate(moment(Date.now()).format("YYYY-MM-DD kk:mm:ss"));
+						$("#starttime")[0]._flatpickr.setDate(moment(Date.now()).format("YYYY-MM-DD kk:mm:ss"));
+						$("#enddate")[0]._flatpickr.setDate(moment(Date.now()).format("YYYY-MM-DD kk:mm:ss"));
+						$("#endtime")[0]._flatpickr.setDate(moment(Date.now()).add(1, 'h').format("YYYY-MM-DD kk:mm:ss"));
 						$('#eventid').val('new');
 						$('#eventModal').modal('show');
 						$('#modalDelete').data('id', null);
@@ -95,48 +93,18 @@ $(document).ready(function() {
 	});
 	var daysOfWeek = moment.weekdays(),
 			daysOfWeekShort = moment.weekdaysShort();
+	$("#starttime").flatpickr({
+		enableTime: true,
+		noCalendar: true
+	});
+	$("#endtime").flatpickr({
+		enableTime: true,
+		noCalendar: true
+	});
+	$('#startdate').flatpickr();
+	$("#enddate").flatpickr();
+	$("#afterdate").flatpickr();
 
-	$('#starttime').clockpicker({
-		donetext: _('Done'),
-		twelvehour: true
-	});
-	$('#endtime').clockpicker({
-		donetext: _('Done'),
-		twelvehour: true
-	});
-
-	$("#afterdate").datepicker({
-		format: {
-			toDisplay: function (date, format, language) {
-				return moment(date).tz('UTC').format("YYYY-MM-DD");
-			},
-			toValue: function (date, format, language) {
-				return moment(date).toDate();
-			}
-		}
-	});
-
-	$("#startdate").datepicker({
-		format: {
-			toDisplay: function (date, format, language) {
-				return moment(date).tz('UTC').format("YYYY-MM-DD");
-			},
-			toValue: function (date, format, language) {
-				return moment(date).toDate();
-			}
-		}
-	});
-
-	$("#enddate").datepicker({
-		format: {
-			toDisplay: function (date, format, language) {
-				return moment(date).tz('UTC').format("YYYY-MM-DD");
-			},
-			toValue: function (date, format, language) {
-				return moment(date).toDate();
-			}
-		}
-	});
 	//Add bootstrap classes to full calendar
 	$('.fc-button').addClass('btn btn-default');
 
@@ -186,12 +154,11 @@ $(document).ready(function() {
 				$('#description').val(src.description);
 				$('#eventid').val(src.linkedid);
 				$("#eventtype option[value='"+src.eventtype+"']").prop('selected', true);
-				$('#startdate').val(ms.format("YYYY-MM-DD"));
-				$('#enddate').val(me.format("YYYY-MM-DD"));
-				$('#starttime').val(ms.format("kk:mm"));
-				$('#endtime').val(me.format("kk:mm"));
-				$('#startdate').datepicker('update');
-				$('#enddate').datepicker('update');
+				//$('#startdate').val(ms.format("YYYY-MM-DD"));
+				$("#startdate")[0]._flatpickr.setDate(ms.format("YYYY-MM-DD kk:mm:ss"));
+				$("#starttime")[0]._flatpickr.setDate(ms.format("YYYY-MM-DD kk:mm:ss"));
+				$("#enddate")[0]._flatpickr.setDate(me.format("YYYY-MM-DD kk:mm:ss"));
+				$("#endtime")[0]._flatpickr.setDate(me.format("YYYY-MM-DD kk:mm:ss"));
 				if(typeof src.timezone !== "undefined") {
 					$("#timezone").val(src.timezone);
 					$("#timezone").multiselect('select', src.timezone);
@@ -210,7 +177,6 @@ $(document).ready(function() {
 					if(src.rrules.until !== "") {
 						$("#repeat2").prop("checked",true);
 						$('#afterdate').val(moment.unix(src.rrules.until).format("YYYY-MM-DD"));
-						$('#afterdate').datepicker('update');
 					}
 					switch(src.rrules.frequency) {
 						case "DAILY":
@@ -255,12 +221,10 @@ $(document).ready(function() {
 					return;
 				}
 				resetModalForm();
-				$('#startdate').val(event.format("YYYY-MM-DD"));
-				$('#enddate').val(event.format("YYYY-MM-DD"));
-				$('#startdate').datepicker('update');
-				$('#enddate').datepicker('update');
-				$('#starttime').val(moment(Date.now()).format("kk:mm"));
-				$('#endtime').val(moment(Date.now()).add(1, 'h').format("kk:mm"));
+				$("#startdate")[0]._flatpickr.setDate(event.format("YYYY-MM-DD kk:mm:ss"));
+				$("#starttime")[0]._flatpickr.setDate(moment(Date.now()).format("YYYY-MM-DD kk:mm:ss"));
+				$("#enddate")[0]._flatpickr.setDate(event.format("YYYY-MM-DD kk:mm:ss"));
+				$("#endtime")[0]._flatpickr.setDate(moment(Date.now()).add(1, 'h').format("YYYY-MM-DD kk:mm:ss"));
 				$('#eventid').val('new');
 				$('#modalSubmit').removeClass('hidden');
 				$('#eventModal').modal('show');
