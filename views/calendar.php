@@ -15,7 +15,7 @@ $readonly = $data['type'] !== 'local' ? 'true' : 'false';
 <script>
 var readonly = <?php echo $readonly; ?>;
 var calendarid = "<?php echo $data['id']; ?>";
-var timezone = "<?php echo $data['timezone']; ?>";
+var caltimezone = "<?php echo $data['timezone']; ?>";
 </script>
 <div id="calendar" class="calendar-readonly-<?php echo $readonly; ?>"></div>
 <div class="row">

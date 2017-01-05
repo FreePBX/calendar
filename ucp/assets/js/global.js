@@ -9,6 +9,7 @@ var CalendarC = UCPMC.extend({
 	poll: function(data){
 	},
 	displayWidget: function(widget_id,dashboard_id) {
+		console.log(widget_id);
 		var widget_type_id = $(".grid-stack-item[data-id='"+widget_id+"']").data("widget_type_id");
 		var buttons = {
 			addEvent: {
