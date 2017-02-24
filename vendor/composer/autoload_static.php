@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b
+class ComposerStaticInit0add5e43809a9bddbcdc89867cb2a3b5
 {
     public static $files = array (
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
@@ -18,12 +18,18 @@ class ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b
         array (
             'phpseclib\\' => 10,
         ),
+        'j' => 
+        array (
+            'jamesiarmes\\PhpNtlm\\' => 20,
+            'jamesiarmes\\PhpEws\\' => 19,
+        ),
         'i' => 
         array (
             'it\\thecsea\\simple_caldav_client\\' => 32,
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Cache\\' => 10,
         ),
@@ -49,9 +55,21 @@ class ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
+        'jamesiarmes\\PhpNtlm\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jamesiarmes/php-ntlm/src',
+        ),
+        'jamesiarmes\\PhpEws\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-ews/php-ews/src',
+        ),
         'it\\thecsea\\simple_caldav_client\\' => 
         array (
             0 => __DIR__ . '/..' . '/thecsea/simple-caldav-client/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
         ),
         'Psr\\Http\\Message\\' => 
         array (
@@ -87,23 +105,12 @@ class ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b
         ),
     );
 
-    public static $fallbackDirsPsr4 = array (
-        0 => __DIR__ . '/..' . '/php-ews/php-ews/src',
-    );
-
     public static $prefixesPsr0 = array (
-        'P' => 
-        array (
-            'Psr\\Log\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/psr/log',
-            ),
-        ),
         'G' => 
         array (
             'Google_Service_' => 
             array (
-                0 => __DIR__ . '/..' . '/google/apiclient-services',
+                0 => __DIR__ . '/..' . '/google/apiclient-services/src',
             ),
             'Google_' => 
             array (
@@ -122,6 +129,9 @@ class ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b
     public static $classMap = array (
         'Google\\Auth\\ApplicationDefaultCredentials' => __DIR__ . '/..' . '/google/auth/src/ApplicationDefaultCredentials.php',
         'Google\\Auth\\CacheTrait' => __DIR__ . '/..' . '/google/auth/src/CacheTrait.php',
+        'Google\\Auth\\Cache\\InvalidArgumentException' => __DIR__ . '/..' . '/google/auth/src/Cache/InvalidArgumentException.php',
+        'Google\\Auth\\Cache\\Item' => __DIR__ . '/..' . '/google/auth/src/Cache/Item.php',
+        'Google\\Auth\\Cache\\MemoryCacheItemPool' => __DIR__ . '/..' . '/google/auth/src/Cache/MemoryCacheItemPool.php',
         'Google\\Auth\\CredentialsLoader' => __DIR__ . '/..' . '/google/auth/src/CredentialsLoader.php',
         'Google\\Auth\\Credentials\\AppIdentityCredentials' => __DIR__ . '/..' . '/google/auth/src/Credentials/AppIdentityCredentials.php',
         'Google\\Auth\\Credentials\\GCECredentials' => __DIR__ . '/..' . '/google/auth/src/Credentials/GCECredentials.php',
@@ -129,6 +139,7 @@ class ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b
         'Google\\Auth\\Credentials\\ServiceAccountCredentials' => __DIR__ . '/..' . '/google/auth/src/Credentials/ServiceAccountCredentials.php',
         'Google\\Auth\\Credentials\\ServiceAccountJwtAccessCredentials' => __DIR__ . '/..' . '/google/auth/src/Credentials/ServiceAccountJwtAccessCredentials.php',
         'Google\\Auth\\Credentials\\UserRefreshCredentials' => __DIR__ . '/..' . '/google/auth/src/Credentials/UserRefreshCredentials.php',
+        'Google\\Auth\\FetchAuthTokenCache' => __DIR__ . '/..' . '/google/auth/src/FetchAuthTokenCache.php',
         'Google\\Auth\\FetchAuthTokenInterface' => __DIR__ . '/..' . '/google/auth/src/FetchAuthTokenInterface.php',
         'Google\\Auth\\HttpHandler\\Guzzle5HttpHandler' => __DIR__ . '/..' . '/google/auth/src/HttpHandler/Guzzle5HttpHandler.php',
         'Google\\Auth\\HttpHandler\\Guzzle6HttpHandler' => __DIR__ . '/..' . '/google/auth/src/HttpHandler/Guzzle6HttpHandler.php',
@@ -150,11 +161,10 @@ class ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit3c612eabfa6d00263c8b3d1c51c2f59b::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit0add5e43809a9bddbcdc89867cb2a3b5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit0add5e43809a9bddbcdc89867cb2a3b5::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit0add5e43809a9bddbcdc89867cb2a3b5::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit0add5e43809a9bddbcdc89867cb2a3b5::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -13,14 +13,23 @@
   "prefer-stable": true,
   "require": {
     "php": ">=5.3.9",
-    "ext-soap": "*"
+    "ext-soap": "*",
+    "jamesiarmes/php-ntlm": "~1.0.0"
+  },
+  "require-dev": {
+    "mustache/mustache": "~2.0"
   },
   "config": {
     "bin-dir": "bin"
   },
   "autoload": {
     "psr-4": {
-      "": "src/"
+      "jamesiarmes\\PhpEws\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
     }
   }
 }

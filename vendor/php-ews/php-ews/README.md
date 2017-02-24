@@ -8,14 +8,15 @@ services and provides an object-oriented interface to the complex types
 required to form a request.
 
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jamesiarmes/php-ews/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jamesiarmes/php-ews/?branch=master)
+[![Scrutinizer](https://img.shields.io/scrutinizer/g/jamesiarmes/php-ews.svg?style=flat-square)](https://scrutinizer-ci.com/g/jamesiarmes/php-ews)
+[![Total Downloads](https://img.shields.io/packagist/dt/php-ews/php-ews.svg?style=flat-square)](https://packagist.org/packages/php-ews/php-ews)
 
 Dependencies
 ------------
 
  * Composer
  * PHP 5.4 or greater
- * cURL with NTLM support (7.23.0+ recommended)
+ * cURL with NTLM support (7.30.0+ recommended)
  * Exchange 2007 or later
 
 **Note: Not all operations or request elements are supported on all versions of
@@ -69,6 +70,13 @@ determine the correct classes to use using the provided docblocks.
 
 The request objects are build similar to the XML body of the request. See the
 resources section below for more information on building the requests.
+
+## Examples
+There are a number of examples included in the examples directory. These
+examples are meant to be run from the command line. In each, you will need to
+set the connection information variables to match those of your Exchange server.
+For some of them, you will also need to set ids or additional data that will be
+used in the request.
 
 ## Resources
 * [php-ews Website](http://jamesarmes.com/php-ews/)
