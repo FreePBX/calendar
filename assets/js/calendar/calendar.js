@@ -1,3 +1,37 @@
+$("#ews-autodetect").click(function() {
+	var text = $(this).text(),
+			$this = $(this);
+
+	if($("#email").val() === "") {
+		alert(_("Email can not be blank!"));
+		return;
+	}
+
+	if($("#password").val() === "") {
+		alert(_("Password can not be blank!"));
+		return;
+	}
+
+	$(this).text(_("Detecting..."));
+	$(this).prop("disabled",true);
+	$("body").css("cursor","progress");
+	$.post("ajax.php?module=calendar&command=ewsautodetect",{email: $("#email").val(), password: $("#password").val(), username: $("#username").val()}, function(data) {
+		if(data.status) {
+			$("#version option[data-name='"+data.version+"']").prop("selected",true);
+			$("#username").val(data.username);
+			$("#url").val(data.server);
+			updateCalendars();
+		} else {
+			alert(data.message);
+		}
+	}).fail(function() {
+		alert(_("There was an error"));
+	}).always(function() {
+		$this.text(text);
+		$this.prop("disabled",false);
+		$("body").css("cursor","");
+	});
+});
 $("#eventForm").submit(function(e) {
 	e.preventDefault();
 	var frm = $(this);

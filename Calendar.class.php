@@ -1,9 +1,9 @@
 <?php
 namespace FreePBX\modules;
-use \Moment\Moment;
-use \Moment\CustomFormats\MomentJs;
-use \Ramsey\Uuid\Uuid;
-use \Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
+use Moment\Moment;
+use Moment\CustomFormats\MomentJs;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use it\thecsea\simple_caldav_client\SimpleCalDAVClient;
@@ -11,18 +11,11 @@ use om\IcalParser;
 use Eluceo\iCal\Component\Calendar as iCalendar;
 use Eluceo\iCal\Component\Event;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
-use \FreePBX\modules\Calendar\PhpEws\Autodiscover;
-use \jamesiarmes\PhpEws\Request\FindItemType;
-use \jamesiarmes\PhpEws\Enumeration\ItemQueryTraversalType;
-use \jamesiarmes\PhpEws\Type\ItemResponseShapeType;
-use \jamesiarmes\PhpEws\Enumeration\DefaultShapeNamesType;
-use \jamesiarmes\PhpEws\Type\CalendarViewType;
-use \jamesiarmes\PhpEws\ArrayType\NonEmptyArrayOfBaseFolderIdsType;
-use \jamesiarmes\PhpEws\Type\DistinguishedFolderIdType;
-use \jamesiarmes\PhpEws\Enumeration\DistinguishedFolderIdNameType;
+use \jamesiarmes\PhpEws\Client;
+use \FreePBX\modules\Calendar\PhpEws\Calendar as EWSCalendar;
 
 include __DIR__."/vendor/autoload.php";
-include __DIR__."/PhpEws/Autodiscover.php";
+include __DIR__."/PhpEws/Calendar.php";
 
 class Calendar extends \DB_Helper implements \BMO {
 	private $now; //right now, private so it doesnt keep updating
@@ -83,6 +76,13 @@ class Calendar extends \DB_Helper implements \BMO {
 							$type = $_POST['type'];
 							switch($type) {
 								case "ews":
+									$url = $_POST['url'];
+									$email = $_POST['email'];
+									$username = $_POST['username'];
+									$password = $_POST['password'];
+									$calendars = $_POST['calendars'];
+									$version = $_POST['version'];
+									$this->addRemoteEWSCalendar($name,$description,$url,$version,$email,$username,$password,$calendars);
 								break;
 								case "ical":
 									$url = $_POST['url'];
@@ -110,6 +110,13 @@ class Calendar extends \DB_Helper implements \BMO {
 							$id = $_POST['id'];
 							switch($type) {
 								case "ews":
+									$url = $_POST['url'];
+									$email = $_POST['email'];
+									$username = $_POST['username'];
+									$password = $_POST['password'];
+									$calendars = $_POST['calendars'];
+									$version = $_POST['version'];
+									$this->updateRemoteEWSCalendar($id,$name,$description,$url,$version,$email,$username,$password,$calendars);
 								break;
 								case "ical":
 									$url = $_POST['url'];
@@ -176,13 +183,37 @@ class Calendar extends \DB_Helper implements \BMO {
 			case 'groupsgrid':
 			case 'groupeventshtml':
 			case 'getcaldavcals':
+			case 'getewscals':
 			case 'updatesource':
+			case 'ewsautodetect':
 				return true;
 		}
 		return false;
 	}
 	public function ajaxHandler() {
 		switch ($_REQUEST['command']) {
+			case 'ewsautodetect':
+
+				try {
+					$settings = EWSCalendar::autoDiscoverSettings($_POST['email'], $_POST['password']);
+				} catch(\Exception $e) {
+					return array("status" => false, "message" => $e->getMessage());
+				}
+				$settings['status'] = true;
+				return $settings;
+			break;
+			case 'getewscals':
+				$server = $_POST['purl'];
+				$username = $_POST['username'];
+				$password = $_POST['password'];
+				$version = constant('\jamesiarmes\PhpEws\Client::'.$_POST['version']);
+				$ews = new EWSCalendar($server, $username, $password, $version);
+				$chtml = '';
+				foreach($ews->getAllCalendars() as $c) {
+					$chtml .= '<option value="'.$c['id'].'">'.$c['name'].'</option>';
+				}
+				return array("calshtml" => $chtml);
+			break;
 			case 'getcaldavcals':
 				$caldavClient = new SimpleCalDAVClient();
 				$caldavClient->connect($_POST['purl'], $_POST['username'], $_POST['password']);
@@ -413,7 +444,7 @@ class Calendar extends \DB_Helper implements \BMO {
 				$type = !empty($_GET['type']) ? $_GET['type'] : '';
 				switch($type) {
 					case "ews":
-						return load_view(__DIR__."/views/remote_ews_settings.php",array('action' => 'add', 'type' => $type));
+						return load_view(__DIR__."/views/remote_ews_settings.php",array('action' => 'add', 'calendars' => array(), 'type' => $type));
 					break;
 					case "ical":
 						return load_view(__DIR__."/views/remote_ical_settings.php",array('action' => 'add', 'type' => $type));
@@ -430,7 +461,21 @@ class Calendar extends \DB_Helper implements \BMO {
 				$data = $this->getCalendarByID($_GET['id']);
 				switch($data['type']) {
 					case "ews":
-						return load_view(__DIR__."/views/remote_ews_settings.php",array('action' => 'edit', 'type' => $type, 'data' => $data));
+						$server = $data['url'];
+						$username = $data['username'];
+						$password = $data['password'];
+						$version = constant('\jamesiarmes\PhpEws\Client::'.$data['version']);
+						$ews = new EWSCalendar($server, $username, $password, $version);
+						$calendars = array();
+						foreach($ews->getAllCalendars() as $calendar) {
+							$id = $calendar['id'];
+							$calendars[$id] = array(
+								"id" => $id,
+								"name" => $calendar['name'],
+								"selected" => in_array($id,$data['calendars'])
+							);
+						}
+						return load_view(__DIR__."/views/remote_ews_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data, 'calendars' => $calendars));
 					break;
 					case "ical":
 						return load_view(__DIR__."/views/remote_ical_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data));
@@ -756,8 +801,32 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param  string $eventID    The event ID
 	 */
 	public function deleteEvent($calendarID,$eventID) {
-		dbug(array($calendarID,$eventID));
 		$this->setConfig($eventID,false,$calendarID."-events");
+	}
+
+	public function addRemoteEWSCalendar($name,$description,$url,$version,$email,$username,$password,$calendars) {
+		$uuid = Uuid::uuid4()->toString();
+		$this->updateRemoteEWSCalendar($uuid,$name,$description,$url,$version,$email,$username,$password,$calendars);
+	}
+
+	public function updateRemoteEWSCalendar($id,$name,$description,$url,$version,$email,$username,$password,$calendars) {
+		if(empty($id)) {
+			throw new \Exception("Calendar ID is empty");
+		}
+		$calendar = array(
+			"name" => $name,
+			"description" => $description,
+			"type" => "ews",
+			"email" => $email,
+			"version" => $version,
+			"url" => $url,
+			"username" => $username,
+			"password" => $password,
+			"calendars" => !empty($calendars) ? $calendars : array()
+		);
+		$this->setConfig($id,$calendar,'calendars');
+		$calendar['id'] = $id;
+		$this->processCalendar($calendar);
 	}
 
 	public function addRemoteCalDavCalendar($name,$description,$purl,$surl,$username,$password,$calendars) {
@@ -777,7 +846,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			"surl" => $surl,
 			"username" => $username,
 			"password" => $password,
-			"calendars" => $calendars
+			"calendars" => !empty($calendars) ? $calendars : array()
 		);
 		$this->setConfig($id,$calendar,'calendars');
 		$calendar['id'] = $id;
@@ -874,6 +943,22 @@ class Calendar extends \DB_Helper implements \BMO {
 		}
 
 		switch($calendar['type']) {
+			case "ews":
+				$server = $calendar['url'];
+				$username = $calendar['username'];
+				$password = $calendar['password'];
+				$version = constant('\jamesiarmes\PhpEws\Client::'.$calendar['version']);
+				$ews = new EWSCalendar($server, $username, $password, $version);
+				$cals = $ews->getAllCalendars();
+				foreach($calendar['calendars'] as $c) {
+					if(isset($cals[$c])) {
+						$events = $ews->getAllEventsByCalendarID($c);
+						$cal = new IcalParser();
+						$cal->parseString($ews->formatiCal($events));
+						$this->processiCalEvents($calendar['id'], $cal); //will ids clash? they shouldnt????
+					}
+				}
+			break;
 			case "caldav":
 				$caldavClient = new SimpleCalDAVClient();
 				$caldavClient->connect($calendar['purl'], $calendar['username'], $calendar['password']);
@@ -1056,6 +1141,7 @@ class Calendar extends \DB_Helper implements \BMO {
 		}
 		$tz = $event['DTSTART']->getTimezone();
 		$timezone = $tz->getName();
+		$timezone = ($timezone == 'Z') ? 'UTC' : $timezone;
 		$this->updateEvent($calendarID,$event['UID'],htmlspecialchars_decode($event['SUMMARY'], ENT_QUOTES),htmlspecialchars_decode($event['DESCRIPTION'], ENT_QUOTES),$event['DTSTART']->format('U'),$event['DTEND']->format('U'),$timezone,$recurring,$rrules,$categories);
 	}
 

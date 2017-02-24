@@ -13,8 +13,8 @@
 				<li><a href="?display=calendar&amp;action=add&amp;type=local"><i class="fa fa-plus"></i> <strong><?php echo _('Add New Local Calendar')?></strong></a></li>
 				<li><a href="?display=calendar&amp;action=add&amp;type=ical"><i class="fa fa-plus"></i> <strong><?php echo _('Add Remote iCal Calendar')?></strong></a></li>
 				<li><a href="?display=calendar&amp;action=add&amp;type=caldav"><i class="fa fa-plus"></i> <strong><?php echo _('Add Remote CalDAV Calendar')?></strong></a></li>
-<!-- Disabling outlook and google until they're working 
-				<li><a href="?display=calendar&amp;action=add&amp;type=outlook"><i class="fa fa-plus"></i> <strong><?php echo _('Add Remote Outlook Calendar')?></strong></a></li>
+				<li><a href="?display=calendar&amp;action=add&amp;type=ews"><i class="fa fa-plus"></i> <strong><?php echo _('Add Remote Outlook Calendar')?></strong></a></li>
+<!-- Disabling outlook and google until they're working
 				<li><a href="?display=calendar&amp;action=add&amp;type=google"><i class="fa fa-plus"></i> <strong><?php echo _('Add Remote Google Calendar')?></strong></a></li>
 -->
 		</ul>

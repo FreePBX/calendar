@@ -80,6 +80,7 @@ class Calendar extends Modules{
 	}
 
 	//side widget
+	/**
 	public function getSimpleWidgetList() {
 		$menu = [
 			"rawname" => "calendar",
@@ -94,6 +95,7 @@ class Calendar extends Modules{
 			];
 		return $menu;
 	}
+	*/
 	public function getWidgetDisplay($id){
 		$listmode = (strpos($id, 'agenda') !== false);
 
