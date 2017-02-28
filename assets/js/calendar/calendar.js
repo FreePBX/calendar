@@ -102,10 +102,10 @@ if($('#calendar').length && !readonly) {
 						$('#description').val('');
 						$("#eventtype").val('');
 						$('.dest').addClass('hidden');
-						$("#startdate")[0]._flatpickr.setDate(moment(Date.now()).format("YYYY-MM-DD kk:mm:ss"));
-						$("#starttime")[0]._flatpickr.setDate(moment(Date.now()).format("YYYY-MM-DD kk:mm:ss"));
-						$("#enddate")[0]._flatpickr.setDate(moment(Date.now()).format("YYYY-MM-DD kk:mm:ss"));
-						$("#endtime")[0]._flatpickr.setDate(moment(Date.now()).add(1, 'h').format("YYYY-MM-DD kk:mm:ss"));
+						$("#startdate")[0]._flatpickr.setDate(moment(Date.now()).format("YYYY-MM-DD"));
+						$("#starttime")[0]._flatpickr.setDate(moment(Date.now()).format("YYYY-MM-DD"));
+						$("#enddate")[0]._flatpickr.setDate(moment(Date.now()).format("kk:mm:ss"));
+						$("#endtime")[0]._flatpickr.setDate(moment(Date.now()).add(1, 'h').format("kk:mm:ss"));
 						$('#eventid').val('new');
 						$('#eventModal').modal('show');
 						$('#modalDelete').data('id', null);
@@ -189,10 +189,10 @@ $(document).ready(function() {
 				$('#eventid').val(src.linkedid);
 				$("#eventtype option[value='"+src.eventtype+"']").prop('selected', true);
 				//$('#startdate').val(ms.format("YYYY-MM-DD"));
-				$("#startdate")[0]._flatpickr.setDate(ms.format("YYYY-MM-DD kk:mm:ss"));
-				$("#starttime")[0]._flatpickr.setDate(ms.format("YYYY-MM-DD kk:mm:ss"));
-				$("#enddate")[0]._flatpickr.setDate(me.format("YYYY-MM-DD kk:mm:ss"));
-				$("#endtime")[0]._flatpickr.setDate(me.format("YYYY-MM-DD kk:mm:ss"));
+				$("#startdate")[0]._flatpickr.setDate(ms.format("YYYY-MM-DD"));
+				$("#starttime")[0]._flatpickr.setDate(ms.format("YYYY-MM-DD"));
+				$("#enddate")[0]._flatpickr.setDate(me.format("kk:mm:ss"));
+				$("#endtime")[0]._flatpickr.setDate(me.format("kk:mm:ss"));
 				if(typeof src.timezone !== "undefined") {
 					$("#timezone").val(src.timezone);
 					$("#timezone").multiselect('select', src.timezone);
@@ -255,10 +255,10 @@ $(document).ready(function() {
 					return;
 				}
 				resetModalForm();
-				$("#startdate")[0]._flatpickr.setDate(event.format("YYYY-MM-DD kk:mm:ss"));
-				$("#starttime")[0]._flatpickr.setDate(moment(Date.now()).format("YYYY-MM-DD kk:mm:ss"));
-				$("#enddate")[0]._flatpickr.setDate(event.format("YYYY-MM-DD kk:mm:ss"));
-				$("#endtime")[0]._flatpickr.setDate(moment(Date.now()).add(1, 'h').format("YYYY-MM-DD kk:mm:ss"));
+				$("#startdate")[0]._flatpickr.setDate(event.format("YYYY-MM-DD"));
+				$("#starttime")[0]._flatpickr.setDate(moment(Date.now()).format("kk:mm:ss"));
+				$("#enddate")[0]._flatpickr.setDate(event.format("YYYY-MM-DD"));
+				$("#endtime")[0]._flatpickr.setDate(moment(Date.now()).add(1, 'h').format("kk:mm:ss"));
 				$('#eventid').val('new');
 				$('#modalSubmit').removeClass('hidden');
 				$('#eventModal').modal('show');

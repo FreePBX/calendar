@@ -13,12 +13,14 @@ use Eluceo\iCal\Component\Event;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
 use \jamesiarmes\PhpEws\Client;
 use \FreePBX\modules\Calendar\PhpEws\Calendar as EWSCalendar;
+use malkusch\lock\mutex\FlockMutex;
 
 include __DIR__."/vendor/autoload.php";
 include __DIR__."/PhpEws/Calendar.php";
 
 class Calendar extends \DB_Helper implements \BMO {
 	private $now; //right now, private so it doesnt keep updating
+	private $drivers;
 
 	public function __construct($freepbx = null) {
 		if ($freepbx == null) {
@@ -62,8 +64,28 @@ class Calendar extends \DB_Helper implements \BMO {
 
 	public function backup() {}
 	public function restore($backup) {}
-  public function install(){}
-  public function uninstall(){}
+	public function install(){
+		$crons = $this->FreePBX->Cron->getAll();
+		foreach($crons as $c) {
+			if(preg_match('/fwconsole calendar sync/',$c,$matches)) {
+				$this->FreePBX->Cron->remove($c);
+			}
+		}
+
+		$ampbin = $this->FreePBX->Config->get('AMPSBIN');
+		$this->FreePBX->Cron->add(array(
+			'minute' => '*/1',
+			"command" => $ampbin.'/fwconsole calendar sync 2>&1 > /dev/null')
+		);
+	}
+	public function uninstall(){
+		$crons = $this->FreePBX->Cron->getAll();
+		foreach($crons as $c) {
+			if(preg_match('/fwconsole calendar sync/',$c,$matches)) {
+				FreePBX::Cron()->remove($c);
+			}
+		}
+	}
 	public function doConfigPageInit($page) {
 		switch ($page) {
 			case 'calendar':
@@ -71,70 +93,17 @@ class Calendar extends \DB_Helper implements \BMO {
 				switch($action) {
 					case "add":
 						if(isset($_POST['name'])) {
-							$name = $_POST['name'];
-							$description = $_POST['description'];
 							$type = $_POST['type'];
-							switch($type) {
-								case "ews":
-									$url = $_POST['url'];
-									$email = $_POST['email'];
-									$username = $_POST['username'];
-									$password = $_POST['password'];
-									$calendars = $_POST['calendars'];
-									$version = $_POST['version'];
-									$this->addRemoteEWSCalendar($name,$description,$url,$version,$email,$username,$password,$calendars);
-								break;
-								case "ical":
-									$url = $_POST['url'];
-									$this->addRemoteiCalCalendar($name,$description,$url);
-								break;
-								case "caldav":
-									$purl = $_POST['purl'];
-									$surl = $_POST['surl'];
-									$username = $_POST['username'];
-									$password = $_POST['password'];
-									$calendars = $_POST['calendars'];
-									$this->addRemoteCalDavCalendar($name,$description,$purl,$surl,$username,$password,$calendars);
-								break;
-								case "local":
-									$this->addLocalCalendar($name,$description, $_REQUEST['timezone']);
-								break;
-							}
+							$driver = $this->getDriver($type);
+							return $driver->addCalendar($_POST);
 						}
 					break;
 					case "edit":
 						if(isset($_POST['name'])) {
-							$name = $_POST['name'];
-							$description = $_POST['description'];
-							$type = $_POST['type'];
 							$id = $_POST['id'];
-							switch($type) {
-								case "ews":
-									$url = $_POST['url'];
-									$email = $_POST['email'];
-									$username = $_POST['username'];
-									$password = $_POST['password'];
-									$calendars = $_POST['calendars'];
-									$version = $_POST['version'];
-									$this->updateRemoteEWSCalendar($id,$name,$description,$url,$version,$email,$username,$password,$calendars);
-								break;
-								case "ical":
-									$url = $_POST['url'];
-									$this->updateRemoteiCalCalendar($id,$name,$description,$url);
-								break;
-								case "caldav":
-									$purl = $_POST['purl'];
-									$surl = $_POST['surl'];
-									$username = $_POST['username'];
-									$password = $_POST['password'];
-									$calendars = $_POST['calendars'];
-									$this->updateRemoteCalDavCalendar($id,$name,$description,$purl,$surl,$username,$password,$calendars);
-								break;
-								case "local":
-									$timezone = $_POST['timezone'];
-									$this->updateLocalCalendar($id,$name,$description,$timezone);
-								break;
-							}
+							$type = $_POST['type'];
+							$driver = $this->getDriver($type);
+							return $driver->updateCalendar($id,$_POST);
 						}
 					break;
 					case "delete":
@@ -174,6 +143,44 @@ class Calendar extends \DB_Helper implements \BMO {
 			break;
 		}
 	}
+
+	public function getAllDrivers() {
+		if(!empty($this->drivers)) {
+			return $this->drivers;
+		}
+		foreach(glob(__DIR__."/drivers/*.class.php") as $driver) {
+			$name = basename($driver);
+			$name = explode(".",$name);
+			$name = $name[0];
+			$name = ucfirst(strtolower($name));
+			$class = "\FreePBX\modules\Calendar\driver\\".$name;
+			include($driver);
+			$this->drivers[$name] = new $class($this);
+		}
+		return $this->drivers;
+	}
+
+	/**
+	 * Get Calendar Driver
+	 * @method getDriver
+	 * @param  string    $driver The driver name
+	 * @return object            The object
+	 */
+	public function getDriver($driver) {
+		$driver = basename($driver);
+		$driver = ucfirst(strtolower($driver));
+		if(!empty($this->drivers[$driver])) {
+			return $this->drivers[$driver];
+		}
+		if(!file_exists(__DIR__."/drivers/".$driver.".class.php")) {
+			throw new \Exception("Driver [$driver] does not exist!");
+		}
+		include(__DIR__."/drivers/".$driver.".class.php");
+		$class = "\FreePBX\modules\Calendar\driver\\".$driver;
+		$this->drivers[$driver] = new $class($this);
+		return $this->drivers[$driver];
+	}
+
 	public function ajaxRequest($req, &$setting) {
 		switch($req){
 			case 'grid':
@@ -193,7 +200,6 @@ class Calendar extends \DB_Helper implements \BMO {
 	public function ajaxHandler() {
 		switch ($_REQUEST['command']) {
 			case 'ewsautodetect':
-
 				try {
 					$settings = EWSCalendar::autoDiscoverSettings($_POST['email'], $_POST['password']);
 				} catch(\Exception $e) {
@@ -442,72 +448,27 @@ class Calendar extends \DB_Helper implements \BMO {
 		switch($action) {
 			case "add":
 				$type = !empty($_GET['type']) ? $_GET['type'] : '';
-				switch($type) {
-					case "ews":
-						return load_view(__DIR__."/views/remote_ews_settings.php",array('action' => 'add', 'calendars' => array(), 'type' => $type));
-					break;
-					case "ical":
-						return load_view(__DIR__."/views/remote_ical_settings.php",array('action' => 'add', 'type' => $type));
-					break;
-					case "caldav":
-						return load_view(__DIR__."/views/remote_caldav_settings.php",array('action' => 'add', 'calendars' => array(), 'type' => $type));
-					break;
-					case "local":
-						return load_view(__DIR__."/views/local_settings.php",array('action' => 'add', 'type' => $type, 'timezone' => $this->systemtz));
-					break;
-				}
+				$driver = $this->getDriver($type);
+				return $driver->getAddDisplay();
 			break;
 			case "edit":
 				$data = $this->getCalendarByID($_GET['id']);
-				switch($data['type']) {
-					case "ews":
-						$server = $data['url'];
-						$username = $data['username'];
-						$password = $data['password'];
-						$version = constant('\jamesiarmes\PhpEws\Client::'.$data['version']);
-						$ews = new EWSCalendar($server, $username, $password, $version);
-						$calendars = array();
-						foreach($ews->getAllCalendars() as $calendar) {
-							$id = $calendar['id'];
-							$calendars[$id] = array(
-								"id" => $id,
-								"name" => $calendar['name'],
-								"selected" => in_array($id,$data['calendars'])
-							);
-						}
-						return load_view(__DIR__."/views/remote_ews_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data, 'calendars' => $calendars));
-					break;
-					case "ical":
-						return load_view(__DIR__."/views/remote_ical_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data));
-					break;
-					case "caldav":
-						$caldavClient = new SimpleCalDAVClient();
-						$caldavClient->connect($data['purl'], $data['username'], $data['password']);
-						$cals = $caldavClient->findCalendars();
-						$calendars = array();
-						foreach($cals as $calendar) {
-							$id = $calendar->getCalendarID();
-							$calendars[$id] = array(
-								"id" => $id,
-								"name" => $calendar->getDisplayName(),
-								"selected" => in_array($id,$data['calendars'])
-							);
-						}
-						return load_view(__DIR__."/views/remote_caldav_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data, 'calendars' => $calendars));
-					break;
-					case "local":
-						return load_view(__DIR__."/views/local_settings.php",array('action' => 'edit', 'type' => $data['type'], 'data' => $data, 'timezone' => $data['timezone']));
-					break;
-				}
+				$driver = $this->getDriver($data['type']);
+				return $driver->getEditDisplay($data);
 			break;
 			case "view":
 				$data = $this->getCalendarByID($_GET['id']);
-				\Moment\Moment::setLocale('en_US');
+				\Moment\Moment::setLocale('en_US'); //get this from freepbx...
 				$locale = \Moment\MomentLocale::getLocaleContent();
 				return load_view(__DIR__."/views/calendar.php",array('action' => 'view', 'type' => $data['type'], 'data' => $data, 'locale' => $locale));
 			break;
 			default:
-				return load_view(__DIR__."/views/grid.php",array());
+				$dropdown = array();
+				$drivers = $this->getAllDrivers();
+				foreach($drivers as $driver => $object) {
+					$dropdown[$driver] = $object->getInfo()['name'];
+				}
+				return load_view(__DIR__."/views/grid.php",array('dropdown' => $dropdown));
 			break;
 		}
 	}
@@ -804,133 +765,32 @@ class Calendar extends \DB_Helper implements \BMO {
 		$this->setConfig($eventID,false,$calendarID."-events");
 	}
 
-	public function addRemoteEWSCalendar($name,$description,$url,$version,$email,$username,$password,$calendars) {
-		$uuid = Uuid::uuid4()->toString();
-		$this->updateRemoteEWSCalendar($uuid,$name,$description,$url,$version,$email,$username,$password,$calendars);
-	}
-
-	public function updateRemoteEWSCalendar($id,$name,$description,$url,$version,$email,$username,$password,$calendars) {
-		if(empty($id)) {
-			throw new \Exception("Calendar ID is empty");
-		}
-		$calendar = array(
-			"name" => $name,
-			"description" => $description,
-			"type" => "ews",
-			"email" => $email,
-			"version" => $version,
-			"url" => $url,
-			"username" => $username,
-			"password" => $password,
-			"calendars" => !empty($calendars) ? $calendars : array()
-		);
-		$this->setConfig($id,$calendar,'calendars');
-		$calendar['id'] = $id;
-		$this->processCalendar($calendar);
-	}
-
-	public function addRemoteCalDavCalendar($name,$description,$purl,$surl,$username,$password,$calendars) {
-		$uuid = Uuid::uuid4()->toString();
-		$this->updateRemoteCalDavCalendar($uuid,$name,$description,$purl,$surl,$username,$password,$calendars);
-	}
-
-	public function updateRemoteCalDavCalendar($id,$name,$description,$purl,$surl,$username,$password,$calendars) {
-		if(empty($id)) {
-			throw new \Exception("Calendar ID is empty");
-		}
-		$calendar = array(
-			"name" => $name,
-			"description" => $description,
-			"type" => "caldav",
-			"purl" => $purl,
-			"surl" => $surl,
-			"username" => $username,
-			"password" => $password,
-			"calendars" => !empty($calendars) ? $calendars : array()
-		);
-		$this->setConfig($id,$calendar,'calendars');
-		$calendar['id'] = $id;
-		$this->processCalendar($calendar);
-	}
-
-	/**
-	 * Add a Remote Calendar
-	 * @param string $name        The Calendar name
-	 * @param string $description The Calendar description
-	 * @param string $type        The Calendar type
-	 * @param string $url         The Calendar URL
-	 */
-	public function addRemoteiCalCalendar($name,$description,$url) {
-		$uuid = Uuid::uuid4()->toString();
-		$this->updateRemoteiCalCalendar($uuid,$name,$description,$url);
-	}
-
-	/**
-	 * Add Local Calendar
-	 * @param string $name        The Calendar name
-	 * @param string $description The Calendar description
-	 * @param string $timezone    The Calendar timezone
-	 */
-	public function addLocalCalendar($name,$description,$timezone) {
-		$uuid = Uuid::uuid4()->toString();
-		$this->updateLocalCalendar($uuid,$name,$description,$timezone);
-	}
-
 	/**
 	 * Sync Calendars
 	 */
-	public function sync() {
-		$calendars = $this->listCalendars();
-		foreach($calendars as $id => $calendar) {
-			if($calendar['type'] !== "local") {
-				$calendar['id'] = $id;
-				$this->processCalendar($calendar);
+	public function sync($output) {
+		$cal = $this;
+		$mutex = new FlockMutex(fopen(__FILE__, "r"));
+		$mutex->synchronized(function () use ($cal,$output) {
+			$calendars = $cal->listCalendars();
+			foreach($calendars as $id => $calendar) {
+				$output->write("\tSyncing ".$calendar['name']."...");
+				$last = $cal->getConfig($id,'calendar-sync');
+				$last = !empty($last) ? $last : 0;
+				$next = !empty($calendar['next']) ? $calendar['next'] : 300;
+				if($calendar['type'] !== "local" && ($last + $next) < time()) {
+					$calendar['id'] = $id;
+					$cal->processCalendar($calendar);
+
+					$cal->setConfig($id,time(),'calendar-sync');
+					$output->writeln("Done");
+				} else {
+					$output->writeln("Skipping");
+				}
+
 			}
-		}
-	}
+		});
 
-	/**
-	 * Update a Remote Calendar's settings
-	 * @param string $id          The Calendar ID
-	 * @param string $name        The Calendar name
-	 * @param string $description The Calendar description
-	 * @param string $type        The Calendar type
-	 * @param string $url         The Calendar URL
-	 */
-	public function updateRemoteiCalCalendar($id,$name,$description,$url) {
-		if(empty($id)) {
-			throw new \Exception("Calendar ID is empty");
-		}
-		$calendar = array(
-			"name" => $name,
-			"description" => $description,
-			"type" => "ical",
-			"url" => $url
-		);
-		$this->setConfig($id,$calendar,'calendars');
-		$calendar['id'] = $id;
-		$this->processCalendar($calendar);
-	}
-
-	/**
-	 * Update a Remote Calendar's settings
-	 * @param string $id          The Calendar ID
-	 * @param string $name        The Calendar name
-	 * @param string $description The Calendar description
-	 * @param string $timezone    The Calendar
-	 */
-	public function updateLocalCalendar($id,$name,$description,$timezone) {
-		if(empty($id)) {
-			throw new \Exception("Calendar ID is empty");
-		}
-		$calendar = array(
-			"name" => $name,
-			"description" => $description,
-			"type" => 'local',
-			"timezone" => $timezone
-		);
-		$this->setConfig($id,$calendar,'calendars');
-		$calendar['id'] = $id;
 	}
 
 	/**
@@ -942,134 +802,8 @@ class Calendar extends \DB_Helper implements \BMO {
 			throw new \Exception("Calendar ID can not be empty!");
 		}
 
-		switch($calendar['type']) {
-			case "ews":
-				$server = $calendar['url'];
-				$username = $calendar['username'];
-				$password = $calendar['password'];
-				$version = constant('\jamesiarmes\PhpEws\Client::'.$calendar['version']);
-				$ews = new EWSCalendar($server, $username, $password, $version);
-				$cals = $ews->getAllCalendars();
-				foreach($calendar['calendars'] as $c) {
-					if(isset($cals[$c])) {
-						$events = $ews->getAllEventsByCalendarID($c);
-						$cal = new IcalParser();
-						$cal->parseString($ews->formatiCal($events));
-						$this->processiCalEvents($calendar['id'], $cal); //will ids clash? they shouldnt????
-					}
-				}
-			break;
-			case "caldav":
-				$caldavClient = new SimpleCalDAVClient();
-				$caldavClient->connect($calendar['purl'], $calendar['username'], $calendar['password']);
-				$cals = $caldavClient->findCalendars();
-				foreach($calendar['calendars'] as $c) {
-					if(isset($cals[$c])) {
-						$caldavClient->setCalendar($cals[$c]);
-						$events = $caldavClient->getEvents();
-						if(empty($events)) {
-							continue;
-						}
-						$i = 0;
-						$ical = '';
-						$begin = '';
-						$middle = '';
-						foreach($events as $event) {
-							$ical = $event->getData();
-							if($i == 0){
-								preg_match_all("/^(.*)BEGIN:VEVENT/s",$ical,$matches);
-								$begin = $matches[1][0];
-							}
-							preg_match_all("/BEGIN:VEVENT(.*)END:VEVENT/s",$ical,$matches);
-							$middle .= $matches[0][0]."\n";
-						}
-						$finalical = $begin.$middle."END:VCALENDAR";
-						$cal = new IcalParser();
-						$cal->parseString($finalical);
-						$this->processiCalEvents($calendar['id'], $cal); //will ids clash? they shouldnt????
-					}
-				}
-			break;
-			case "ical":
-				$req = \FreePBX::Curl()->requests($calendar['url']);
-				$cal = new IcalParser();
-				$cal->parseString($req->get($calendar['url'])->body);
-				$this->processiCalEvents($calendar['id'], $cal);
-			break;
-			case "google":
-				//https://developers.google.com/api-client-library/php/auth/web-app
-				$client = getGoogleClient();
-				$service = new \Google_Service_Calendar($client);
-				// Print the next 10 events on the user's calendar.
-				$calendarId = 'primary';
-				$optParams = array(
-				  'maxResults' => 10,
-				  'orderBy' => 'startTime',
-				  'singleEvents' => TRUE,
-				  'timeMin' => date('c'),
-				);
-				$results = $service->events->listEvents($calendarId, $optParams);
-
-				if (count($results->getItems()) == 0) {
-				  print "No upcoming events found.\n";
-				} else {
-				  print "Upcoming events:\n";
-				  foreach ($results->getItems() as $event) {
-				    $start = $event->start->dateTime;
-				    if (empty($start)) {
-				      $start = $event->start->date;
-				    }
-				    printf("%s (%s)\n", $event->getSummary(), $start);
-				  }
-				}
-			break;
-		}
-	}
-
-
-	private function getGoogleClient() {
-	  $client = new \Google_Client();
-	  $client->setApplicationName('Google Calendar API PHP Quickstart');
-	  $client->setScopes(implode(' ', array(
-			Google_Service_Calendar::CALENDAR_READONLY)
-		));
-		$client->setRedirectUri('http://' . $_SERVER['HTTP_HOST'] . '/oauth2callback.php');
-	  $client->setAuthConfigFile(__DIR__ . '/client_secret.json');
-	  $client->setAccessType('offline');
-
-		$auth_url = $client->createAuthUrl();
-
-		//header('Location: ' . filter_var($auth_url, FILTER_SANITIZE_URL));
-
-	  // Load previously authorized credentials from a file.
-	  $credentialsPath = expandHomeDirectory('~/.credentials/calendar-php-quickstart.json');
-	  if (file_exists($credentialsPath)) {
-	    $accessToken = file_get_contents($credentialsPath);
-	  } else {
-	    // Request authorization from the user.
-	    $authUrl = $client->createAuthUrl();
-	    printf("Open the following link in your browser:\n%s\n", $authUrl);
-	    print 'Enter verification code: ';
-	    $authCode = trim(fgets(STDIN));
-
-	    // Exchange authorization code for an access token.
-	    $accessToken = $client->authenticate($authCode);
-
-	    // Store the credentials to disk.
-	    if(!file_exists(dirname($credentialsPath))) {
-	      mkdir(dirname($credentialsPath), 0700, true);
-	    }
-	    file_put_contents($credentialsPath, $accessToken);
-	    printf("Credentials saved to %s\n", $credentialsPath);
-	  }
-	  $client->setAccessToken($accessToken);
-
-	  // Refresh the token if it's expired.
-	  if ($client->isAccessTokenExpired()) {
-	    $client->refreshToken($client->getRefreshToken());
-	    file_put_contents($credentialsPath, $client->getAccessToken());
-	  }
-	  return $client;
+		$driver = $this->getDriver($calendar['type']);
+		return $driver->processCalendar($calendar);
 	}
 
 	/**
@@ -1077,7 +811,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param  string     $calendarID The Calendar ID
 	 * @param  IcalParser $cal        IcalParser Object reference of events
 	 */
-	private function processiCalEvents($calendarID, IcalParser $cal) {
+	public function processiCalEvents($calendarID, IcalParser $cal) {
 		//dont let sql update until the end of this
 		//This might be bad.. ok it probably is bad. We should just get a Range of events
 		//works for now though.
@@ -1102,7 +836,6 @@ class Calendar extends \DB_Helper implements \BMO {
 
 
 		$this->db->commit(); //now update just incase this takes a long time
-
 	}
 
 	/**
@@ -1537,6 +1270,8 @@ class Calendar extends \DB_Helper implements \BMO {
 		}
 		return array();
 	}
+
+
 	public function getNextEventByGroup($groupid,$timezone=null){
 		$group = $this->getGroup($groupid);
 		$events = array();
@@ -1572,7 +1307,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			case 'Moment':
 			case 'DateTime':
 				$obj->setTimezone($this->getSystemTimezone());
-				$cronstring = $obj->format("i G j n w");
+				$cronstring = $obj->format("i G j n *");
 			break;
 			case 'text':
 				if(is_numeric($obj)){
@@ -1590,7 +1325,7 @@ class Calendar extends \DB_Helper implements \BMO {
 					}
 				}
 				$date->setTimezone($this->getSystemTimezone());
-				$cronstring = $date->format("i G j n w");
+				$cronstring = $date->format("i G j n *");
 			break;
 			default:
 				return false;

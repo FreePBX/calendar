@@ -25,7 +25,7 @@ class Calendar extends Command {
 			$calendar = \FreePBX::create()->Calendar;
 			switch ($command) {
 				case "sync":
-					$output->write("Starting Sync...");
+					$output->writeln("Starting Sync...");
 					$calendar->sync($output);
 					$output->writeln("Finished");
 				break;
