@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>14.0.1alpha2</version>
+	<version>14.0.1alpha4</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -26,6 +26,9 @@
 			<method namespace="FreePBX\Modules" class="Calendar" callingMethod="delGroup">ucpDelGroup</method>
 		</ucp>
 	</hooks>
+	<depends>
+		<version>14.0.1beta19</version>
+	</depends>	
 	<supported>
 		<version>14.0</version>
 	</supported>

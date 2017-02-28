@@ -1303,10 +1303,13 @@ class Calendar extends \DB_Helper implements \BMO {
 			}
 		}
 		switch ($name) {
-			case 'Carbon':
 			case 'Moment':
-			case 'DateTime':
 				$obj->setTimezone($this->getSystemTimezone());
+				$cronstring = $obj->format("i G j n *");
+			break;
+			case 'Carbon':
+			case 'DateTime':
+				$obj->setTimezone(new \DateTimeZone($this->getSystemTimezone()));
 				$cronstring = $obj->format("i G j n *");
 			break;
 			case 'text':
@@ -1324,7 +1327,7 @@ class Calendar extends \DB_Helper implements \BMO {
 						return false;
 					}
 				}
-				$date->setTimezone($this->getSystemTimezone());
+				$date->setTimezone(new \DateTimeZone($this->getSystemTimezone()));
 				$cronstring = $date->format("i G j n *");
 			break;
 			default:
