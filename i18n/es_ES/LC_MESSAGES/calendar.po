@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-28 10:00-0800\n"
+"POT-Creation-Date: 2017-03-01 16:43-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -179,7 +179,7 @@ msgstr ""
 msgid "Autodetect"
 msgstr ""
 
-#: Calendar.class.php:1193 Console/Calendar.class.php:18 calendar.i18n.php:4
+#: Calendar.class.php:1230 Console/Calendar.class.php:18 calendar.i18n.php:4
 #: calendar.i18n.php:10 ucp/Calendar.class.php:45 ucp/Calendar.class.php:75
 msgid "Calendar"
 msgstr ""
@@ -233,7 +233,7 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: Calendar.class.php:1081 Calendar.class.php:1119
+#: Calendar.class.php:1118 Calendar.class.php:1156
 msgid "Delete"
 msgstr ""
 
@@ -328,7 +328,7 @@ msgstr ""
 msgid "How often this calendar will synchronize with the remote server"
 msgstr ""
 
-#: Calendar.class.php:1170 Calendar.class.php:1178 views/ucp_config.php:18
+#: Calendar.class.php:1207 Calendar.class.php:1215 views/ucp_config.php:18
 msgid "Inherit"
 msgstr ""
 
@@ -440,8 +440,8 @@ msgstr ""
 msgid "Repeats"
 msgstr ""
 
-#: Calendar.class.php:1067 Calendar.class.php:1086 Calendar.class.php:1105
-#: Calendar.class.php:1124
+#: Calendar.class.php:1104 Calendar.class.php:1123 Calendar.class.php:1142
+#: Calendar.class.php:1161
 msgid "Reset"
 msgstr ""
 
@@ -486,8 +486,8 @@ msgstr ""
 msgid "Start Time"
 msgstr ""
 
-#: Calendar.class.php:1072 Calendar.class.php:1091 Calendar.class.php:1110
-#: Calendar.class.php:1129 views/calendar.php:480
+#: Calendar.class.php:1109 Calendar.class.php:1128 Calendar.class.php:1147
+#: Calendar.class.php:1166 views/calendar.php:480
 msgid "Submit"
 msgstr ""
 
