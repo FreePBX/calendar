@@ -947,6 +947,19 @@ class Calendar extends \DB_Helper implements \BMO {
 	/**
 	 * Dial Plan Function
 	 */
+	public function ext_calendar_variable($calendarid,$timezone=null,$integer=false) {
+		$timezone = empty($timezone) ? $this->systemtz : $timezone;
+		$cal = $this->getCalendarByID($calendarid);
+		if(empty($cal)) {
+			throw new \Exception("Calendar $calendarid does not exist!");
+		}
+		$type = $integer ? 'integer' : 'boolean';
+		return new \ext_agi('calendar.agi,calendar,'.$type.','.$calendarid.','.$timezone);
+	}
+
+	/**
+	 * Dial Plan Function
+	 */
 	public function ext_calendar_group_variable($groupid,$timezone=null,$integer=false) {
 		$timezone = empty($timezone) ? $this->systemtz : $timezone;
 		$group = $this->getGroup($groupid);
@@ -960,6 +973,18 @@ class Calendar extends \DB_Helper implements \BMO {
 	/**
 	 * Dial Plan Function
 	 */
+	public function ext_calendar_goto($calendarid,$timezone=null,$true_dest,$false_dest) {
+		$timezone = empty($timezone) ? $this->systemtz : $timezone;
+		$cal = $this->getCalendarByID($calendarid);
+		if(empty($cal)) {
+			throw new \Exception("Calendar $calendarid does not exist!");
+		}
+		return new \ext_agi('calendar.agi,calendar,goto,'.$calendarid.','.$timezone.','.base64_encode($true_dest).','.base64_encode($false_dest));
+	}
+
+	/**
+	 * Dial Plan Function
+	 */
 	public function ext_calendar_group_goto($groupid,$timezone=null,$true_dest,$false_dest) {
 		$timezone = empty($timezone) ? $this->systemtz : $timezone;
 		$group = $this->getGroup($groupid);
@@ -967,6 +992,18 @@ class Calendar extends \DB_Helper implements \BMO {
 			throw new \Exception("Group $groupid does not exist!");
 		}
 		return new \ext_agi('calendar.agi,group,goto,'.$groupid.','.$timezone.','.base64_encode($true_dest).','.base64_encode($false_dest));
+	}
+
+	/**
+	 * Dial Plan Function
+	 */
+	public function ext_calendar_execif($calendarid,$timezone=null,$true,$false) {
+		$timezone = empty($timezone) ? $this->systemtz : $timezone;
+		$cal = $this->getCalendarByID($calendarid);
+		if(empty($cal)) {
+			throw new \Exception("Calendar $calendarid does not exist!");
+		}
+		return new \ext_agi('calendar.agi,calendar,execif,'.$calendarid.','.$timezone.','.base64_encode($true).','.base64_encode($false));
 	}
 
 	/**
@@ -1271,9 +1308,16 @@ class Calendar extends \DB_Helper implements \BMO {
 		return array();
 	}
 
-
+	/**
+	 * Gets the next event in a Calendar.
+	 * @param  str $groupid groupid id
+	 * @return array  the Found event or empty
+	 */
 	public function getNextEventByGroup($groupid,$timezone=null){
 		$group = $this->getGroup($groupid);
+		if(empty($group)) {
+			return array();
+		}
 		$events = array();
 		foreach ($group['calendars'] as $cal) {
 			$ev = $this->getNextEvent($cal,$timezone);
