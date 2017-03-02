@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-01 16:43-0800\n"
+"POT-Creation-Date: 2017-03-01 17:47-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,8 +110,7 @@ msgstr ""
 msgid "Add Calendar"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:99 ucp/assets/js/global.js:16
-#: ucp/assets/js/global.js:26
+#: assets/js/calendar/calendar.js:99
 msgid "Add Event"
 msgstr ""
 
@@ -143,11 +142,7 @@ msgstr ""
 msgid "After"
 msgstr ""
 
-#: ucp/views/eventModal.php:150
-msgid "After Date"
-msgstr ""
-
-#: ucp/views/eventModal.php:43 views/calendar.php:147 views/calendar.php:152
+#: views/calendar.php:147 views/calendar.php:152
 msgid "All Day"
 msgstr ""
 
@@ -180,7 +175,7 @@ msgid "Autodetect"
 msgstr ""
 
 #: Calendar.class.php:1230 Console/Calendar.class.php:18 calendar.i18n.php:4
-#: calendar.i18n.php:10 ucp/Calendar.class.php:45 ucp/Calendar.class.php:75
+#: calendar.i18n.php:10
 msgid "Calendar"
 msgstr ""
 
@@ -217,7 +212,7 @@ msgstr ""
 msgid "Calendars the user may utilize"
 msgstr ""
 
-#: views/calendar.php:479 ucp/assets/js/global.js:27
+#: views/calendar.php:479
 msgid "Close"
 msgstr ""
 
@@ -283,20 +278,16 @@ msgstr ""
 msgid "Enable Calendar"
 msgstr ""
 
-#: ucp/views/eventModal.php:31 views/calendar.php:120
+#: views/calendar.php:120
 msgid "End Date"
 msgstr ""
 
-#: ucp/views/eventModal.php:67 views/calendar.php:196
+#: views/calendar.php:196
 msgid "End Time"
 msgstr ""
 
-#: ucp/views/eventModal.php:126 views/calendar.php:404 views/calendar.php:421
+#: views/calendar.php:404 views/calendar.php:421
 msgid "Ends"
-msgstr ""
-
-#: ucp/assets/js/global.js:23
-msgid "Error getting form"
 msgstr ""
 
 #: views/calendar.php:30
@@ -307,7 +298,7 @@ msgstr ""
 msgid "Event Description"
 msgstr ""
 
-#: ucp/views/eventModal.php:7 views/calendar.php:45
+#: views/calendar.php:45
 msgid "Event Title"
 msgstr ""
 
@@ -366,10 +357,6 @@ msgstr ""
 msgid "No settings were discovered"
 msgstr ""
 
-#: ucp/views/eventModal.php:138
-msgid "Occurances"
-msgstr ""
-
 #: views/calendar.php:431
 msgid "Occurrences"
 msgstr ""
@@ -410,10 +397,6 @@ msgstr ""
 msgid "Remote iCal Calendar"
 msgstr ""
 
-#: ucp/views/eventModal.php:91
-msgid "Reoccuring"
-msgstr ""
-
 #: views/calendar.php:244 views/calendar.php:249
 msgid "Reoccurring"
 msgstr ""
@@ -422,7 +405,7 @@ msgstr ""
 msgid "Reoccurring Event"
 msgstr ""
 
-#: ucp/views/eventModal.php:115 views/calendar.php:298
+#: views/calendar.php:298
 msgid "Repeat Every"
 msgstr ""
 
@@ -434,9 +417,8 @@ msgstr ""
 msgid "Repeat by"
 msgstr ""
 
-#: ucp/views/eventModal.php:103 views/calendar.php:268 views/calendar.php:288
-#: views/calendar.php:344 views/calendar.php:369 views/calendar.php:394
-#: views/calendar.php:471
+#: views/calendar.php:268 views/calendar.php:288 views/calendar.php:344
+#: views/calendar.php:369 views/calendar.php:394 views/calendar.php:471
 msgid "Repeats"
 msgstr ""
 
@@ -447,10 +429,6 @@ msgstr ""
 
 #: utests/eventFilterTest.php:53
 msgid "Returned date range was not as expected"
-msgstr ""
-
-#: ucp/assets/js/global.js:27
-msgid "Save changes"
 msgstr ""
 
 #: views/remote_caldav_settings.php:161 views/remote_ews_settings.php:219
@@ -478,11 +456,11 @@ msgstr ""
 msgid "Specific Events"
 msgstr ""
 
-#: ucp/views/eventModal.php:19 views/calendar.php:93
+#: views/calendar.php:93
 msgid "Start Date"
 msgstr ""
 
-#: ucp/views/eventModal.php:55 views/calendar.php:172
+#: views/calendar.php:172
 msgid "Start Time"
 msgstr ""
 
@@ -561,8 +539,7 @@ msgstr ""
 msgid "Time this event ends"
 msgstr ""
 
-#: ucp/views/eventModal.php:79 views/calendar.php:220
-#: views/local_settings.php:67
+#: views/calendar.php:220 views/local_settings.php:67
 msgid "Timezone"
 msgstr ""
 
