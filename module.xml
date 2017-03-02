@@ -13,22 +13,11 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
-	    *14.0.1alpha1* Development
+		*14.0.1alpha1* Development
 	</changelog>
-	<hooks>
-		<ucp class="Ucp">
-			<method namespace="FreePBX\Modules" class="Calendar" callingMethod="constructModuleConfigPages">ucpConfigPage</method>
-			<method namespace="FreePBX\Modules" class="Calendar" callingMethod="addUser">ucpAddUser</method>
-			<method namespace="FreePBX\Modules" class="Calendar" callingMethod="updateUser">ucpUpdateUser</method>
-			<method namespace="FreePBX\Modules" class="Calendar" callingMethod="delUser">ucpDelUser</method>
-			<method namespace="FreePBX\Modules" class="Calendar" callingMethod="addGroup">ucpAddGroup</method>
-			<method namespace="FreePBX\Modules" class="Calendar" callingMethod="updateGroup">ucpUpdateGroup</method>
-			<method namespace="FreePBX\Modules" class="Calendar" callingMethod="delGroup">ucpDelGroup</method>
-		</ucp>
-	</hooks>
 	<depends>
 		<version>14.0.1beta19</version>
-	</depends>	
+	</depends>
 	<supported>
 		<version>14.0</version>
 	</supported>
