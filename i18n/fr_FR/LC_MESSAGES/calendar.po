@@ -10,24 +10,26 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-01 17:47-0800\n"
-"PO-Revision-Date: 2017-03-01 17:47-0800\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: \n"
+"PO-Revision-Date: 2017-03-12 17:23+0200\n"
+"Last-Translator: Nicolas <freepbx@riendeau.org>\n"
+"Language-Team: French "
+"<http://weblate.freepbx.org/projects/freepbx/calendar/fr_FR/>\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2.4\n"
 
 #: views/remote_caldav_settings.php:4
 #, php-format
 msgid "%s CalDAV Calendar"
-msgstr ""
+msgstr "Agenda CalDAV de %s"
 
 #: views/calendargroups.php:3
 #, php-format
 msgid "%s Group"
-msgstr ""
+msgstr "Groupe %s"
 
 #: views/local_settings.php:4
 #, php-format
@@ -47,138 +49,138 @@ msgstr ""
 #: views/remote_caldav_settings.php:184 views/remote_ews_settings.php:242
 #: views/remote_ical_settings.php:101
 msgid "1 Day"
-msgstr ""
+msgstr "1 jour"
 
 #: views/remote_caldav_settings.php:180 views/remote_ews_settings.php:238
 #: views/remote_ical_settings.php:97
 msgid "1 Hour"
-msgstr ""
+msgstr "1 heure"
 
 #: views/remote_caldav_settings.php:176 views/remote_ews_settings.php:234
 #: views/remote_ical_settings.php:93
 msgid "1 Minute"
-msgstr ""
+msgstr "1 minute"
 
 #: views/remote_caldav_settings.php:185 views/remote_ews_settings.php:243
 #: views/remote_ical_settings.php:102
 msgid "1 Week"
-msgstr ""
+msgstr "1 semaine"
 
 #: views/remote_caldav_settings.php:178 views/remote_ews_settings.php:236
 #: views/remote_ical_settings.php:95
 msgid "10 Minutes"
-msgstr ""
+msgstr "10 minutes"
 
 #: views/remote_caldav_settings.php:183 views/remote_ews_settings.php:241
 #: views/remote_ical_settings.php:100
 msgid "12 Hours"
-msgstr ""
+msgstr "12 heures"
 
 #: views/remote_caldav_settings.php:181 views/remote_ews_settings.php:239
 #: views/remote_ical_settings.php:98
 msgid "2 Hours"
-msgstr ""
+msgstr "2 heures"
 
 #: views/remote_caldav_settings.php:179 views/remote_ews_settings.php:237
 #: views/remote_ical_settings.php:96
 msgid "30 Minutes"
-msgstr ""
+msgstr "30 minutes"
 
 #: views/remote_caldav_settings.php:177 views/remote_ews_settings.php:235
 #: views/remote_ical_settings.php:94
 msgid "5 Minutes"
-msgstr ""
+msgstr "5 minutes"
 
 #: views/remote_caldav_settings.php:182 views/remote_ews_settings.php:240
 #: views/remote_ical_settings.php:99
 msgid "6 Hours"
-msgstr ""
+msgstr "6 heures"
 
 #: views/calendargroupgrid.php:34 views/grid.php:25
 msgid "Actions"
-msgstr ""
+msgstr "Actions"
 
 #: Calendar.class.php:431
 msgid "Add"
-msgstr ""
+msgstr "Ajouter"
 
 #: views/grid.php:14
 #, php-format
 msgid "Add %s"
-msgstr ""
+msgstr "Ajouter un %s"
 
 #: views/grid.php:10 views/rnav.php:5
 msgid "Add Calendar"
-msgstr ""
+msgstr "Ajouter un agenda"
 
 #: assets/js/calendar/calendar.js:99
 msgid "Add Event"
-msgstr ""
+msgstr "Ajouter un évènement"
 
 #: views/calendargroupgrid.php:16
 msgid "Add Group"
-msgstr ""
+msgstr "Ajouter un groupe"
 
 #: views/rnav.php:8
 msgid "Add New Local Calendar"
-msgstr ""
+msgstr "Ajouter un nouvel agenda local"
 
 #: views/rnav.php:10
 msgid "Add Remote CalDAV Calendar"
-msgstr ""
+msgstr "Ajouter un nouvel agenda CalDAV distant"
 
 #: views/rnav.php:13
 msgid "Add Remote Google Calendar"
-msgstr ""
+msgstr "Ajouter un nouvel agenda Google distant"
 
 #: views/rnav.php:12
 msgid "Add Remote Outlook Calendar"
-msgstr ""
+msgstr "Ajouter un nouvel agenda Outlook distant"
 
 #: views/rnav.php:9
 msgid "Add Remote iCal Calendar"
-msgstr ""
+msgstr "Ajouter un nouvel agenda iCal distant"
 
 #: views/calendar.php:411 views/calendar.php:456
 msgid "After"
-msgstr ""
+msgstr "Après"
 
 #: views/calendar.php:147 views/calendar.php:152
 msgid "All Day"
-msgstr ""
+msgstr "Toute la journée"
 
 #: views/calendar.php:160
 msgid "All Day Event"
-msgstr ""
+msgstr "Journée entière"
 
 #: views/ucp_config.php:65
 msgid "Allowed Calendar Groups"
-msgstr ""
+msgstr "Groupes d'agenda permis"
 
 #: views/ucp_config.php:39
 msgid "Allowed Calendars"
-msgstr ""
+msgstr "Agendas permis"
 
 #: calendar.i18n.php:6
 msgid "Applications"
-msgstr ""
+msgstr "Applications"
 
 #: views/remote_ews_settings.php:277
 msgid "Attempting to load"
-msgstr ""
+msgstr "Tentative de chargement"
 
 #: views/remote_caldav_settings.php:220
 msgid "Attempting to load..."
-msgstr ""
+msgstr "Tentative de chargement..."
 
 #: views/remote_ews_settings.php:139
 msgid "Autodetect"
-msgstr ""
+msgstr "Détection automatique"
 
 #: Calendar.class.php:1230 Console/Calendar.class.php:18 calendar.i18n.php:4
 #: calendar.i18n.php:10
 msgid "Calendar"
-msgstr ""
+msgstr "Agenda"
 
 #: calendar.i18n.php:12
 msgid "Calendar Event Groups"
@@ -207,130 +209,130 @@ msgstr ""
 #: views/calendargroups.php:43 views/remote_caldav_settings.php:133
 #: views/remote_ews_settings.php:191
 msgid "Calendars"
-msgstr ""
+msgstr "Agendas"
 
 #: views/ucp_config.php:53
 msgid "Calendars the user may utilize"
-msgstr ""
+msgstr "Les agenda que l'utilisateur peut utiliser"
 
 #: views/calendar.php:479
 msgid "Close"
-msgstr ""
+msgstr "Fermer"
 
 #: views/calendar.php:384
 msgid "Day of the month"
-msgstr ""
+msgstr "Jour du mois"
 
 #: views/calendar.php:386
 msgid "Day of the week"
-msgstr ""
+msgstr "Jour de la semaine"
 
 #: assets/js/calendar/calendar.js:335
 msgid "Days"
-msgstr ""
+msgstr "Jours"
 
 #: Calendar.class.php:1118 Calendar.class.php:1156
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 #: views/calendar.php:478
 msgid "Delete Event"
-msgstr ""
+msgstr "Supprimer un évènement"
 
 #: views/grid.php:23 views/local_settings.php:44
 #: views/remote_caldav_settings.php:44 views/remote_ews_settings.php:44
 #: views/remote_ical_settings.php:44
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: views/calendar.php:81
 msgid "Description for the event"
-msgstr ""
+msgstr "Description de l'évènement"
 
 #: assets/js/calendar/calendar.js:15
 msgid "Detecting..."
-msgstr ""
+msgstr "Détection..."
 
 #: views/remote_ews_settings.php:132
 msgid "EWS Server URL"
-msgstr ""
+msgstr "URL du serveur EWS"
 
 #: views/remote_ews_settings.php:159
 msgid "EWS Version"
-msgstr ""
+msgstr "Version EWS"
 
 #: Calendar.class.php:436
 msgid "Edit"
-msgstr ""
+msgstr "Editer"
 
 #: views/calendar.php:12
 msgid "Edit Settings"
-msgstr ""
+msgstr "Éditer les paramètres"
 
 #: views/remote_ews_settings.php:66
 msgid "Email"
-msgstr ""
+msgstr "Courriel"
 
 #: assets/js/calendar/calendar.js:6
 msgid "Email can not be blank!"
-msgstr ""
+msgstr "Le courriel ne peut pas être vide !"
 
 #: views/ucp_config.php:7
 msgid "Enable Calendar"
-msgstr ""
+msgstr "Active l'agenda"
 
 #: views/calendar.php:120
 msgid "End Date"
-msgstr ""
+msgstr "Date de fin"
 
 #: views/calendar.php:196
 msgid "End Time"
-msgstr ""
+msgstr "Heure de fin"
 
 #: views/calendar.php:404 views/calendar.php:421
 msgid "Ends"
-msgstr ""
+msgstr "Termine"
 
 #: views/calendar.php:30
 msgid "Event"
-msgstr ""
+msgstr "Évènement"
 
 #: views/calendar.php:69
 msgid "Event Description"
-msgstr ""
+msgstr "Description de l'évènement"
 
 #: views/calendar.php:45
 msgid "Event Title"
-msgstr ""
+msgstr "Titre de l'évènement"
 
 #: views/calendargroups.php:59
 msgid "Events to include in to this group"
-msgstr ""
+msgstr "Évènements à inclure dans ce groupe"
 
 #: views/calendar.php:57
 msgid "Friendly name for the event"
-msgstr ""
+msgstr "Nom convivial pour cet évènement"
 
 #: views/calendargroupgrid.php:33
 msgid "Group"
-msgstr ""
+msgstr "Groupe"
 
 #: views/remote_caldav_settings.php:194 views/remote_ews_settings.php:252
 #: views/remote_ical_settings.php:111
 msgid "How often this calendar will synchronize with the remote server"
-msgstr ""
+msgstr "À quel fréquence cet agenda se ssynchronisera avec le serveur distant"
 
 #: Calendar.class.php:1207 Calendar.class.php:1215 views/ucp_config.php:18
 msgid "Inherit"
-msgstr ""
+msgstr "Hérite"
 
 #: views/rnav.php:2
 msgid "List Calendars"
-msgstr ""
+msgstr "Afficher les agendas"
 
 #: drivers/Local.class.php:14
 msgid "Local Calendar"
-msgstr ""
+msgstr "Agenda local"
 
 #: assets/js/calendar/calendar.js:348
 msgid "Months"
