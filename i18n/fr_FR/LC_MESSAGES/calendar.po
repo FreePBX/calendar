@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-01 17:47-0800\n"
-"PO-Revision-Date: 2017-03-12 17:23+0200\n"
+"PO-Revision-Date: 2017-03-12 18:35+0200\n"
 "Last-Translator: Nicolas <freepbx@riendeau.org>\n"
 "Language-Team: French "
 "<http://weblate.freepbx.org/projects/freepbx/calendar/fr_FR/>\n"
@@ -189,11 +189,11 @@ msgstr ""
 #: functions.inc.php:18 functions.inc.php:32
 #, php-format
 msgid "Calendar Group: %s"
-msgstr ""
+msgstr "Groupe d'agenda : %s"
 
 #: functions.inc.php:19
 msgid "Calendar Groups"
-msgstr ""
+msgstr "Groupes d'agenda"
 
 #: views/calendargroupgrid.php:11
 msgid ""
@@ -204,7 +204,7 @@ msgstr ""
 
 #: views/ucp_config.php:79
 msgid "Calendar groups the user may utilize."
-msgstr ""
+msgstr "Les groupes d'agenda que l'utilisateur peut utiliser."
 
 #: views/calendargroups.php:43 views/remote_caldav_settings.php:133
 #: views/remote_ews_settings.php:191
@@ -336,45 +336,45 @@ msgstr "Agenda local"
 
 #: assets/js/calendar/calendar.js:348
 msgid "Months"
-msgstr ""
+msgstr "Mois"
 
 #: views/calendargroups.php:19 views/grid.php:22 views/local_settings.php:22
 #: views/remote_caldav_settings.php:22 views/remote_ews_settings.php:22
 #: views/remote_ical_settings.php:22 views/rnav.php:30
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: views/calendargroups.php:31
 msgid "Name of this group"
-msgstr ""
+msgstr "Nom de ce groupe"
 
 #: views/calendar.php:409
 msgid "Never"
-msgstr ""
+msgstr "Jamais"
 
 #: views/ucp_config.php:15
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: PhpEws/Calendar.php:50
 msgid "No settings were discovered"
-msgstr ""
+msgstr "Aucun paramètre n'a été découvert"
 
 #: views/calendar.php:431
 msgid "Occurrences"
-msgstr ""
+msgstr "Occurrences"
 
 #: views/calendar.php:413
 msgid "On"
-msgstr ""
+msgstr "Activé"
 
 #: views/remote_caldav_settings.php:110 views/remote_ews_settings.php:110
 msgid "Password"
-msgstr ""
+msgstr "Mot de passe"
 
 #: assets/js/calendar/calendar.js:11
 msgid "Password can not be blank!"
-msgstr ""
+msgstr "Le mot de passe ne peut être vide !"
 
 #: views/remote_caldav_settings.php:153 views/remote_ews_settings.php:211
 msgid "Please enter valid credentials above"
@@ -386,19 +386,19 @@ msgstr ""
 
 #: drivers/Caldav.class.php:20
 msgid "Remote CalDAV Calendar"
-msgstr ""
+msgstr "Agenda CalDAV distant"
 
 #: drivers/Ews.class.php:21
 msgid "Remote Outlook Calendar"
-msgstr ""
+msgstr "Agenda Outlook distant"
 
 #: views/remote_ical_settings.php:66
 msgid "Remote URL"
-msgstr ""
+msgstr "URL distant"
 
 #: drivers/Ical.class.php:20
 msgid "Remote iCal Calendar"
-msgstr ""
+msgstr "Agenda iCal distant"
 
 #: views/calendar.php:244 views/calendar.php:249
 msgid "Reoccurring"
@@ -410,29 +410,29 @@ msgstr ""
 
 #: views/calendar.php:298
 msgid "Repeat Every"
-msgstr ""
+msgstr "Répéter chaque"
 
 #: views/calendar.php:354
 msgid "Repeat On"
-msgstr ""
+msgstr "Répéter le"
 
 #: views/calendar.php:379
 msgid "Repeat by"
-msgstr ""
+msgstr "Répéter par"
 
 #: views/calendar.php:268 views/calendar.php:288 views/calendar.php:344
 #: views/calendar.php:369 views/calendar.php:394 views/calendar.php:471
 msgid "Repeats"
-msgstr ""
+msgstr "Répétitions"
 
 #: Calendar.class.php:1104 Calendar.class.php:1123 Calendar.class.php:1142
 #: Calendar.class.php:1161
 msgid "Reset"
-msgstr ""
+msgstr "Réinitialiser"
 
 #: utests/eventFilterTest.php:53
 msgid "Returned date range was not as expected"
-msgstr ""
+msgstr "La période de dates retournée n'était pas celle prévue"
 
 #: views/remote_caldav_settings.php:161 views/remote_ews_settings.php:219
 msgid "Select specific calendars"
@@ -461,21 +461,21 @@ msgstr ""
 
 #: views/calendar.php:93
 msgid "Start Date"
-msgstr ""
+msgstr "Date de début"
 
 #: views/calendar.php:172
 msgid "Start Time"
-msgstr ""
+msgstr "Heure de début"
 
 #: Calendar.class.php:1109 Calendar.class.php:1128 Calendar.class.php:1147
 #: Calendar.class.php:1166 views/calendar.php:480
 msgid "Submit"
-msgstr ""
+msgstr "Soumettre"
 
 #: views/remote_caldav_settings.php:171 views/remote_ews_settings.php:229
 #: views/remote_ical_settings.php:88
 msgid "Synchronization Time"
-msgstr ""
+msgstr "Heure de synchronisation"
 
 #: views/remote_caldav_settings.php:100
 msgid "The Userman for this calendar"
@@ -483,22 +483,22 @@ msgstr ""
 
 #: views/remote_ews_settings.php:56
 msgid "The description of this calendar"
-msgstr ""
+msgstr "La description de cet agenda"
 
 #: views/remote_ews_settings.php:78
 msgid "The email address of this calendar's user [Optional]"
-msgstr ""
+msgstr "L'adresse de courriel de l'utilisateur de cet agenda [Optionnel]"
 
 #: views/local_settings.php:34 views/local_settings.php:56
 #: views/remote_caldav_settings.php:34 views/remote_caldav_settings.php:56
 #: views/remote_ews_settings.php:34 views/remote_ical_settings.php:34
 #: views/remote_ical_settings.php:56
 msgid "The name of this calendar"
-msgstr ""
+msgstr "Le nom de cet agenda"
 
 #: views/remote_caldav_settings.php:122
 msgid "The password for this calendar"
-msgstr ""
+msgstr "Le mot de passe de cet agenda"
 
 #: views/remote_caldav_settings.php:78
 msgid "The principal url for this calendar"
@@ -507,23 +507,23 @@ msgstr ""
 #: views/remote_ews_settings.php:122 views/remote_ews_settings.php:149
 #: views/remote_ews_settings.php:181 views/remote_ical_settings.php:78
 msgid "The remote url for this calendar"
-msgstr ""
+msgstr "L'URL distant pour cet agenda"
 
 #: views/calendar.php:108
 msgid "The time to start the event"
-msgstr ""
+msgstr "L'heure a laquelle débuter l'évènement"
 
 #: views/remote_ews_settings.php:100
 msgid "The username of this calendar's user"
-msgstr ""
+msgstr "Le nom d'utilisateur de l'utilisateur de cet agenda"
 
 #: assets/js/calendar/calendar.js:28
 msgid "There was an error"
-msgstr ""
+msgstr "Il y a eu une erreur"
 
 #: assets/js/calendar/calendar.js:175
 msgid "There was an error fetching the events"
-msgstr ""
+msgstr "Il y a eu une erreur lors de l'obtention des évènements"
 
 #: calendar.i18n.php:8
 msgid ""
@@ -544,73 +544,73 @@ msgstr ""
 
 #: views/calendar.php:220 views/local_settings.php:67
 msgid "Timezone"
-msgstr ""
+msgstr "Fuseau horaire"
 
 #: views/local_settings.php:79
 msgid "Timezone for this Calendar"
-msgstr ""
+msgstr "Fuseau horaire pour cet agenda"
 
 #: views/calendar.php:232
 msgid "Timezone for this event"
-msgstr ""
+msgstr "Fuseau horaire pour cet évènement"
 
 #: views/grid.php:24 views/rnav.php:31
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: PhpEws/Calendar.php:75
 msgid "Unable to determine server URL"
-msgstr ""
+msgstr "Incapable de déterminer l'URL du serveur"
 
 #: views/calendar.php:10 assets/js/calendar/calendar.js:287
 msgid "Update from Source"
-msgstr ""
+msgstr "Mise à jour de la source"
 
 #: assets/js/calendar/calendar.js:274
 msgid "Updating..."
-msgstr ""
+msgstr "En cours de mise à jour..."
 
 #: views/calendar.php:224
 msgid "Use Calendar Timezone"
-msgstr ""
+msgstr "Utiliser le fuseau horaire de l'agenda"
 
 #: views/remote_caldav_settings.php:88 views/remote_ews_settings.php:88
 msgid "Username"
-msgstr ""
+msgstr "Nom d'utilisateur"
 
 #: views/calendargroupgrid.php:15
 msgid "View Calendars"
-msgstr ""
+msgstr "Visualiser les agendas"
 
 #: views/calendar.php:7
 #, php-format
 msgid "Viewing Calendar '%s'"
-msgstr ""
+msgstr "Visualisation de l'agenda '%s'"
 
 #: assets/js/calendar/calendar.js:332
 msgid "Weeks"
-msgstr ""
+msgstr "Semaines"
 
 #: views/calendargroupgrid.php:7
 msgid "What are Calendar Event Groups?"
-msgstr ""
+msgstr "Que sont les groupes d'évènements d'agenda ?"
 
 #: views/ucp_config.php:28
 msgid "Whether to allow this user to be able to access the calendar in UCP"
-msgstr ""
+msgstr "Cet utilisateur devrait-il avoir accès à l'agenda dans UCP"
 
 #: assets/js/calendar/calendar.js:354
 msgid "Years"
-msgstr ""
+msgstr "Années"
 
 #: views/ucp_config.php:13
 msgid "Yes"
-msgstr ""
+msgstr "Oui"
 
 #: views/calendar.php:437 views/calendar.php:446
 msgid "occurrences"
-msgstr ""
+msgstr "occurrences"
 
 #: Calendar.class.php:269
 msgid "to"
-msgstr ""
+msgstr "à"
