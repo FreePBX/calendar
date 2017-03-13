@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-01 17:47-0800\n"
-"PO-Revision-Date: 2017-03-12 19:46+0200\n"
+"PO-Revision-Date: 2017-03-13 02:18+0200\n"
 "Last-Translator: Nicolas <freepbx@riendeau.org>\n"
 "Language-Team: French "
 "<http://weblate.freepbx.org/projects/freepbx/calendar/fr_FR/>\n"
@@ -378,7 +378,7 @@ msgstr "Le mot de passe ne peut être vide !"
 
 #: views/remote_caldav_settings.php:153 views/remote_ews_settings.php:211
 msgid "Please enter valid credentials above"
-msgstr "Veuillez entrer des informations d'identifications valide ci-dessus"
+msgstr "Veuillez entrer des informations d'identification valides ci-dessus"
 
 #: views/remote_caldav_settings.php:66
 msgid "Principal URL"
