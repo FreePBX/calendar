@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-01 17:47-0800\n"
-"PO-Revision-Date: 2017-03-13 13:49+0200\n"
-"Last-Translator: Francis <fbinet@solist.ca>\n"
+"PO-Revision-Date: 2017-03-13 14:20+0200\n"
+"Last-Translator: Nicolas <freepbx@riendeau.org>\n"
 "Language-Team: French "
 "<http://weblate.freepbx.org/projects/freepbx/calendar/fr_FR/>\n"
 "Language: fr_FR\n"
@@ -163,7 +163,7 @@ msgstr "Agendas permis"
 
 #: calendar.i18n.php:6
 msgid "Applications"
-msgstr ""
+msgstr "Applications"
 
 #: views/remote_ews_settings.php:277
 msgid "Attempting to load"
@@ -362,7 +362,7 @@ msgstr "Aucun paramètre n'a été découvert"
 
 #: views/calendar.php:431
 msgid "Occurrences"
-msgstr ""
+msgstr "Occurrences"
 
 #: views/calendar.php:413
 msgid "On"
@@ -609,7 +609,7 @@ msgstr "Oui"
 
 #: views/calendar.php:437 views/calendar.php:446
 msgid "occurrences"
-msgstr ""
+msgstr "occurrences"
 
 #: Calendar.class.php:269
 msgid "to"
