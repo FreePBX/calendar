@@ -8,7 +8,7 @@ $dataurl = "ajax.php?module=calendar&command=groupsgrid";
 	</div>
 	<!--At some point we can probably kill this... Maybe make is a 1 time panel that may be dismissed-->
 	<div class="panel-body collapse" id="moreinfo">
-		<p><?php echo _("Calendar event groups are a collection of calendars, events or categories. Calendars, events and/or categories can be placed into separate groups. These groups can then be linked to various applications or utilities")?></p>
+		<p><?php echo _("Calendar event groups are a collection of calendars, events or categories from the Calendar Module.") ."<br>". _("Multiple calendars, events and/or categories can be placed into separate groups. Even multiple events from different calendars can be placed into a single group!") ."<br>". _("These groups can then be linked to various applications or utilities")?></p>
 	</div>
 </div>
 <div id="toolbar-all">

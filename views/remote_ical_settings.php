@@ -10,7 +10,7 @@
 				<div class="display full-border">
 					<form class="fpbx-submit" method="post" action="?display=calendar" data-fpbx-delete="config.php?display=calendar&amp;id=<?php echo $id ?>&amp;action=delete">
 						<input type="hidden" name="action" value="<?php echo $action?>">
-						<input type="hidden" name="type" value="<?php echo $type?>">
+						<input type="hidden" name="type" value="ical">
 						<input type="hidden" name="id" value="<?php echo !empty($data['id']) ? $data['id'] : ''?>">
 						<!--Name-->
 						<div class="element-container">

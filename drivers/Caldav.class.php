@@ -2,6 +2,7 @@
 namespace FreePBX\modules\Calendar\driver;
 use om\IcalParser;
 use Ramsey\Uuid\Uuid;
+use it\thecsea\simple_caldav_client\SimpleCalDAVClient;
 class Caldav {
 	public $driver = 'Caldav';
 	private $calendar;
@@ -86,7 +87,7 @@ class Caldav {
 				"selected" => in_array($id,$data['calendars'])
 			);
 		}
-		return load_view(__DIR__."/views/remote_caldav_settings.php",array('action' => 'edit', 'data' => $data, 'calendars' => $calendars));
+		return load_view(dirname(__DIR__)."/views/remote_caldav_settings.php",array('action' => 'edit', 'data' => $data, 'calendars' => $calendars));
 	}
 
 	/**
@@ -120,6 +121,7 @@ class Caldav {
 					$middle .= $matches[0][0]."\n";
 				}
 				$finalical = $begin.$middle."END:VCALENDAR";
+				dbug($finalical);
 				$cal = new IcalParser();
 				$cal->parseString($finalical);
 				$this->calendar->processiCalEvents($calendar['id'], $cal); //will ids clash? they shouldnt????

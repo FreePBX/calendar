@@ -874,7 +874,7 @@ class Calendar extends \DB_Helper implements \BMO {
 		}
 		$tz = $event['DTSTART']->getTimezone();
 		$timezone = $tz->getName();
-		$timezone = ($timezone == 'Z') ? 'UTC' : $timezone;
+		$timezone = ($timezone == 'Z') ? null : $timezone;
 		$this->updateEvent($calendarID,$event['UID'],htmlspecialchars_decode($event['SUMMARY'], ENT_QUOTES),htmlspecialchars_decode($event['DESCRIPTION'], ENT_QUOTES),$event['DTSTART']->format('U'),$event['DTEND']->format('U'),$timezone,$recurring,$rrules,$categories);
 	}
 
@@ -1349,12 +1349,14 @@ class Calendar extends \DB_Helper implements \BMO {
 		switch ($name) {
 			case 'Moment':
 				$obj->setTimezone($this->getSystemTimezone());
-				$cronstring = $obj->format("i G j n *");
+				$min = (int)$obj->format("i"); //remove leading zeros
+				$cronstring = $min." ".$obj->format("G j n *");
 			break;
 			case 'Carbon':
 			case 'DateTime':
 				$obj->setTimezone(new \DateTimeZone($this->getSystemTimezone()));
-				$cronstring = $obj->format("i G j n *");
+				$min = (int)$obj->format("i"); //remove leading zeros
+				$cronstring = $min." ".$obj->format("G j n *");
 			break;
 			case 'text':
 				if(is_numeric($obj)){
@@ -1372,7 +1374,8 @@ class Calendar extends \DB_Helper implements \BMO {
 					}
 				}
 				$date->setTimezone(new \DateTimeZone($this->getSystemTimezone()));
-				$cronstring = $date->format("i G j n *");
+				$min = (int)$obj->format("i"); //remove leading zeros
+				$cronstring = $min." ".$obj->format("G j n *");
 			break;
 			default:
 				return false;

@@ -43,6 +43,9 @@ class Ews {
 		if(empty($id)) {
 			throw new \Exception("Calendar ID is empty");
 		}
+		if(!class_exists('SoapClient')) {
+			return false;
+		}
 		$calendar = array(
 			"name" => $data['name'],
 			"description" => $data['description'],
@@ -66,6 +69,9 @@ class Ews {
 	 * @return string              HTML to display
 	 */
 	public function getAddDisplay() {
+		if(!class_exists('SoapClient')) {
+			return _("You are missing the PHP SoapClient library. Please install to continue");
+		}
 		return load_view(dirname(__DIR__)."/views/remote_ews_settings.php",array('action' => 'add', 'calendars' => array(), 'data' => array('next' => 86400)));
 	}
 
@@ -76,6 +82,9 @@ class Ews {
 	 * @return string               HTML to display
 	 */
 	public function getEditDisplay($data) {
+		if(!class_exists('SoapClient')) {
+			return _("You are missing the PHP SoapClient library. Please install to continue");
+		}
 		$server = $data['url'];
 		$username = $data['username'];
 		$password = $data['password'];
@@ -100,6 +109,9 @@ class Ews {
 	 * @return boolean                    true or false
 	 */
 	public function processCalendar($calendar) {
+		if(!class_exists('SoapClient')) {
+			return false;
+		}
 		$server = $calendar['url'];
 		$username = $calendar['username'];
 		$password = $calendar['password'];

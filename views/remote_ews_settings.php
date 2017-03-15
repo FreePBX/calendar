@@ -119,7 +119,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12">
-									<span id="password-help" class="help-block fpbx-help-block"><?php echo _("The remote url for this calendar")?></span>
+									<span id="password-help" class="help-block fpbx-help-block"><?php echo _("The password of this calendar's user")?></span>
 								</div>
 							</div>
 						</div>

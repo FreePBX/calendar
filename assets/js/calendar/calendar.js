@@ -89,7 +89,7 @@ function resetModalForm(){
 }
 
 function actionformatter(v,r) {
-	return '<div class="actions"><a href="?display=calendar&amp;action=view&amp;type=calendar&amp;id='+r.id+'"><i class="fa fa-eye" aria-hidden="true"></i></a><a href="?display=calendar&amp;action=edit&amp;type=calendar&amp;id='+r.id+'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a href="?display=calendar&amp;action=delete&amp;type=calendar&amp;id='+r.id+'"><i class="fa fa-trash" aria-hidden="true"></i></a></div>';
+	return '<div class="actions"><a href="?display=calendar&amp;action=view&amp;type=calendar&amp;id='+r.id+'"><i class="fa fa-eye" aria-hidden="true"></i></a><a href="?display=calendar&amp;action=edit&amp;type=calendar&amp;id='+r.id+'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a class="delAction" href="?display=calendar&amp;action=delete&amp;type=calendar&amp;id='+r.id+'"><i class="fa fa-trash" aria-hidden="true"></i></a></div>';
 }
 var test = '';
 var buttons = {};
@@ -103,14 +103,15 @@ if($('#calendar').length && !readonly) {
 						$("#eventtype").val('');
 						$('.dest').addClass('hidden');
 						$("#startdate")[0]._flatpickr.setDate(moment(Date.now()).format("YYYY-MM-DD"));
-						$("#starttime")[0]._flatpickr.setDate(moment(Date.now()).format("YYYY-MM-DD"));
-						$("#enddate")[0]._flatpickr.setDate(moment(Date.now()).format("kk:mm:ss"));
+						$("#starttime")[0]._flatpickr.setDate(moment(Date.now()).format("kk:mm:ss"));
+						$("#enddate")[0]._flatpickr.setDate(moment(Date.now()).format("YYYY-MM-DD"));
 						$("#endtime")[0]._flatpickr.setDate(moment(Date.now()).add(1, 'h').format("kk:mm:ss"));
 						$('#eventid').val('new');
 						$('#eventModal').modal('show');
 						$('#modalDelete').data('id', null);
 						updateReoccurring();
 						updateAllDay();
+						$("#modalSubmit").removeClass('hidden');
 					}
 			}
 	};
@@ -177,9 +178,9 @@ $(document).ready(function() {
 			}],
 			eventClick: function( event, jsEvent, view ) {
 				var src = (typeof event.parent !== "undefined") ? event.parent : event,
-						tz = (typeof src.timezone !== "undefined") ? src.timezone : timezone,
-						ms = moment.unix(src.ustarttime).tz(tz),
-						me = moment.unix(src.uendtime).tz(tz),
+						tz = (typeof src.timezone !== "undefined" && src.timezone !== null) ? src.timezone : timezone,
+						ms = moment.unix(src.ustarttime).tz(timezone),
+						me = moment.unix(src.uendtime).tz(timezone),
 						allday = src.allDay;
 				resetModalForm();
 				$("#rstartdate").val(src.rstartdate);
@@ -188,10 +189,9 @@ $(document).ready(function() {
 				$('#description').val(src.description);
 				$('#eventid').val(src.linkedid);
 				$("#eventtype option[value='"+src.eventtype+"']").prop('selected', true);
-				//$('#startdate').val(ms.format("YYYY-MM-DD"));
 				$("#startdate")[0]._flatpickr.setDate(ms.format("YYYY-MM-DD"));
-				$("#starttime")[0]._flatpickr.setDate(ms.format("YYYY-MM-DD"));
-				$("#enddate")[0]._flatpickr.setDate(me.format("kk:mm:ss"));
+				$("#starttime")[0]._flatpickr.setDate(ms.format("kk:mm:ss"));
+				$("#enddate")[0]._flatpickr.setDate(me.format("YYYY-MM-DD"));
 				$("#endtime")[0]._flatpickr.setDate(me.format("kk:mm:ss"));
 				if(typeof src.timezone !== "undefined") {
 					$("#timezone").val(src.timezone);
@@ -242,9 +242,11 @@ $(document).ready(function() {
 				if (readonly) {
 					$("#eventForm input").prop("disabled",true);
 					$("#eventForm select").prop("disabled",true);
+					$("#timezone").multiselect('disable');
 				} else {
 					$("#eventForm input").prop("disabled",false);
 					$("#eventForm select").prop("disabled",false);
+					$("#timezone").multiselect('enable');
 					$("#modalSubmit,#modalDelete").removeClass('hidden');
 				}
 				updateReoccurring();
