@@ -59,7 +59,7 @@ class Ical {
 	 * @method getAddDisplay
 	 * @return string              HTML to display
 	 */
-	public function getAddDisplay($mode) {
+	public function getAddDisplay() {
 		return load_view(dirname(__DIR__)."/views/remote_ical_settings.php",array('action' => 'add', 'data' => array('next' => 86400)));
 	}
 
