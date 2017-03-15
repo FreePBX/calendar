@@ -1374,8 +1374,8 @@ class Calendar extends \DB_Helper implements \BMO {
 					}
 				}
 				$date->setTimezone(new \DateTimeZone($this->getSystemTimezone()));
-				$min = (int)$obj->format("i"); //remove leading zeros
-				$cronstring = $min." ".$obj->format("G j n *");
+				$min = (int)$date->format("i"); //remove leading zeros
+				$cronstring = $min." ".$date->format("G j n *");
 			break;
 			default:
 				return false;
