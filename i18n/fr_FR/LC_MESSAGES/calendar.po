@@ -9,11 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-01 17:47-0800\n"
+"POT-Creation-Date: 2017-03-15 16:31-0700\n"
 "PO-Revision-Date: 2017-03-13 14:20+0200\n"
 "Last-Translator: Nicolas <freepbx@riendeau.org>\n"
-"Language-Team: French "
-"<http://weblate.freepbx.org/projects/freepbx/calendar/fr_FR/>\n"
+"Language-Team: French <http://weblate.freepbx.org/projects/freepbx/calendar/"
+"fr_FR/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -197,9 +197,8 @@ msgstr "Groupes d'agenda"
 
 #: views/calendargroupgrid.php:11
 msgid ""
-"Calendar event groups are a collection of calendars, events or categories. "
-"Calendars, events and/or categories can be placed into separate groups. "
-"These groups can then be linked to various applications or utilities"
+"Calendar event groups are a collection of calendars, events or categories "
+"from the Calendar Module."
 msgstr ""
 
 #: views/ucp_config.php:79
@@ -227,7 +226,7 @@ msgstr "Jour du mois"
 msgid "Day of the week"
 msgstr "Jour de la semaine"
 
-#: assets/js/calendar/calendar.js:335
+#: assets/js/calendar/calendar.js:337
 msgid "Days"
 msgstr "Jours"
 
@@ -334,9 +333,16 @@ msgstr "Afficher les agendas"
 msgid "Local Calendar"
 msgstr "Agenda local"
 
-#: assets/js/calendar/calendar.js:348
+#: assets/js/calendar/calendar.js:350
 msgid "Months"
 msgstr "Mois"
+
+#: views/calendargroupgrid.php:11
+msgid ""
+"Multiple calendars, events and/or categories can be placed into separate "
+"groups. Even multiple events from different calendars can be placed into a "
+"single group!"
+msgstr ""
 
 #: views/calendargroups.php:19 views/grid.php:22 views/local_settings.php:22
 #: views/remote_caldav_settings.php:22 views/remote_ews_settings.php:22
@@ -384,7 +390,7 @@ msgstr "Veuillez entrer des informations d'identification valides ci-dessus"
 msgid "Principal URL"
 msgstr ""
 
-#: drivers/Caldav.class.php:20
+#: drivers/Caldav.class.php:21
 msgid "Remote CalDAV Calendar"
 msgstr "Agenda CalDAV distant"
 
@@ -500,12 +506,16 @@ msgstr "Le nom de cet agenda"
 msgid "The password for this calendar"
 msgstr "Le mot de passe de cet agenda"
 
+#: views/remote_ews_settings.php:122
+msgid "The password of this calendar's user"
+msgstr ""
+
 #: views/remote_caldav_settings.php:78
 msgid "The principal url for this calendar"
 msgstr ""
 
-#: views/remote_ews_settings.php:122 views/remote_ews_settings.php:149
-#: views/remote_ews_settings.php:181 views/remote_ical_settings.php:78
+#: views/remote_ews_settings.php:149 views/remote_ews_settings.php:181
+#: views/remote_ical_settings.php:78
 msgid "The remote url for this calendar"
 msgstr "L'URL distant pour cet agenda"
 
@@ -521,9 +531,13 @@ msgstr "Le nom d'utilisateur de l'utilisateur de cet agenda"
 msgid "There was an error"
 msgstr "Il y a eu une erreur"
 
-#: assets/js/calendar/calendar.js:175
+#: assets/js/calendar/calendar.js:176
 msgid "There was an error fetching the events"
 msgstr "Il y a eu une erreur lors de l'obtention des évènements"
+
+#: views/calendargroupgrid.php:11
+msgid "These groups can then be linked to various applications or utilities"
+msgstr ""
 
 #: calendar.i18n.php:8
 msgid ""
@@ -562,11 +576,11 @@ msgstr "Type"
 msgid "Unable to determine server URL"
 msgstr "Incapable de déterminer l'URL du serveur"
 
-#: views/calendar.php:10 assets/js/calendar/calendar.js:287
+#: views/calendar.php:10 assets/js/calendar/calendar.js:289
 msgid "Update from Source"
 msgstr "Mise à jour de la source"
 
-#: assets/js/calendar/calendar.js:274
+#: assets/js/calendar/calendar.js:276
 msgid "Updating..."
 msgstr "En cours de mise à jour..."
 
@@ -587,7 +601,7 @@ msgstr "Visualiser les agendas"
 msgid "Viewing Calendar '%s'"
 msgstr "Visualisation de l'agenda '%s'"
 
-#: assets/js/calendar/calendar.js:332
+#: assets/js/calendar/calendar.js:334
 msgid "Weeks"
 msgstr "Semaines"
 
@@ -599,13 +613,17 @@ msgstr "Que sont les groupes d'évènements d'agenda ?"
 msgid "Whether to allow this user to be able to access the calendar in UCP"
 msgstr "Cet utilisateur devrait-il avoir accès à l'agenda dans UCP"
 
-#: assets/js/calendar/calendar.js:354
+#: assets/js/calendar/calendar.js:356
 msgid "Years"
 msgstr "Années"
 
 #: views/ucp_config.php:13
 msgid "Yes"
 msgstr "Oui"
+
+#: drivers/Ews.class.php:73 drivers/Ews.class.php:86
+msgid "You are missing the PHP SoapClient library. Please install to continue"
+msgstr ""
 
 #: views/calendar.php:437 views/calendar.php:446
 msgid "occurrences"

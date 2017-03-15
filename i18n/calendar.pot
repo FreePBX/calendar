@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-01 17:47-0800\n"
+"POT-Creation-Date: 2017-03-15 16:31-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -211,9 +211,8 @@ msgstr ""
 
 #: views/calendargroupgrid.php:11
 msgid ""
-"Calendar event groups are a collection of calendars, events or categories. "
-"Calendars, events and/or categories can be placed into separate groups. "
-"These groups can then be linked to various applications or utilities"
+"Calendar event groups are a collection of calendars, events or categories "
+"from the Calendar Module."
 msgstr ""
 
 #: views/ucp_config.php:79
@@ -242,7 +241,7 @@ msgstr ""
 msgid "Day of the week"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:335
+#: assets/js/calendar/calendar.js:337
 msgid "Days"
 msgstr ""
 
@@ -356,8 +355,15 @@ msgstr ""
 msgid "Local Calendar"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:348
+#: assets/js/calendar/calendar.js:350
 msgid "Months"
+msgstr ""
+
+#: views/calendargroupgrid.php:11
+msgid ""
+"Multiple calendars, events and/or categories can be placed into separate "
+"groups. Even multiple events from different calendars can be placed into a "
+"single group!"
 msgstr ""
 
 #: views/calendargroups.php:19
@@ -412,7 +418,7 @@ msgstr ""
 msgid "Principal URL"
 msgstr ""
 
-#: drivers/Caldav.class.php:20
+#: drivers/Caldav.class.php:21
 msgid "Remote CalDAV Calendar"
 msgstr ""
 
@@ -543,11 +549,14 @@ msgstr ""
 msgid "The password for this calendar"
 msgstr ""
 
+#: views/remote_ews_settings.php:122
+msgid "The password of this calendar's user"
+msgstr ""
+
 #: views/remote_caldav_settings.php:78
 msgid "The principal url for this calendar"
 msgstr ""
 
-#: views/remote_ews_settings.php:122
 #: views/remote_ews_settings.php:149
 #: views/remote_ews_settings.php:181
 #: views/remote_ical_settings.php:78
@@ -566,8 +575,12 @@ msgstr ""
 msgid "There was an error"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:175
+#: assets/js/calendar/calendar.js:176
 msgid "There was an error fetching the events"
+msgstr ""
+
+#: views/calendargroupgrid.php:11
+msgid "These groups can then be linked to various applications or utilities"
 msgstr ""
 
 #: calendar.i18n.php:8
@@ -610,11 +623,11 @@ msgid "Unable to determine server URL"
 msgstr ""
 
 #: views/calendar.php:10
-#: assets/js/calendar/calendar.js:287
+#: assets/js/calendar/calendar.js:289
 msgid "Update from Source"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:274
+#: assets/js/calendar/calendar.js:276
 msgid "Updating..."
 msgstr ""
 
@@ -636,7 +649,7 @@ msgstr ""
 msgid "Viewing Calendar '%s'"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:332
+#: assets/js/calendar/calendar.js:334
 msgid "Weeks"
 msgstr ""
 
@@ -648,12 +661,17 @@ msgstr ""
 msgid "Whether to allow this user to be able to access the calendar in UCP"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:354
+#: assets/js/calendar/calendar.js:356
 msgid "Years"
 msgstr ""
 
 #: views/ucp_config.php:13
 msgid "Yes"
+msgstr ""
+
+#: drivers/Ews.class.php:73
+#: drivers/Ews.class.php:86
+msgid "You are missing the PHP SoapClient library. Please install to continue"
 msgstr ""
 
 #: views/calendar.php:437
