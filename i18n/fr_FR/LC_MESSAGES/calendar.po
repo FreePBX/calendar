@@ -10,10 +10,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-15 16:31-0700\n"
-"PO-Revision-Date: 2017-03-13 14:20+0200\n"
+"PO-Revision-Date: 2017-03-17 01:43+0200\n"
 "Last-Translator: Nicolas <freepbx@riendeau.org>\n"
-"Language-Team: French <http://weblate.freepbx.org/projects/freepbx/calendar/"
-"fr_FR/>\n"
+"Language-Team: French "
+"<http://weblate.freepbx.org/projects/freepbx/calendar/fr_FR/>\n"
 "Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -184,7 +184,7 @@ msgstr "Agenda"
 
 #: calendar.i18n.php:12
 msgid "Calendar Event Groups"
-msgstr "Groupes d'évènements du calendrier"
+msgstr "Groupes d'évènements d'agenda"
 
 #: functions.inc.php:18 functions.inc.php:32
 #, php-format
@@ -200,6 +200,8 @@ msgid ""
 "Calendar event groups are a collection of calendars, events or categories "
 "from the Calendar Module."
 msgstr ""
+"Les groupes d'évènements d'agenda sont une collection d'agenda, évènements "
+"ou catégories du module d'agenda."
 
 #: views/ucp_config.php:79
 msgid "Calendar groups the user may utilize."
@@ -343,6 +345,9 @@ msgid ""
 "groups. Even multiple events from different calendars can be placed into a "
 "single group!"
 msgstr ""
+"De multiples agendas, évènements et/ou catégories peuvent être mis dans des "
+"groupes séparés.  On peut même placer des évènement de divers agenda dans un "
+"même groupe !"
 
 #: views/calendargroups.php:19 views/grid.php:22 views/local_settings.php:22
 #: views/remote_caldav_settings.php:22 views/remote_ews_settings.php:22
@@ -388,7 +393,7 @@ msgstr "Veuillez entrer des informations d'identification valides ci-dessus"
 
 #: views/remote_caldav_settings.php:66
 msgid "Principal URL"
-msgstr ""
+msgstr "URL principal"
 
 #: drivers/Caldav.class.php:21
 msgid "Remote CalDAV Calendar"
@@ -408,11 +413,11 @@ msgstr "Agenda iCal distant"
 
 #: views/calendar.php:244 views/calendar.php:249
 msgid "Reoccurring"
-msgstr ""
+msgstr "Répétitif"
 
 #: views/calendar.php:257
 msgid "Reoccurring Event"
-msgstr ""
+msgstr "Évènement répétitif"
 
 #: views/calendar.php:298
 msgid "Repeat Every"
@@ -442,7 +447,7 @@ msgstr "La période de dates retournée n'était pas celle prévue"
 
 #: views/remote_caldav_settings.php:161 views/remote_ews_settings.php:219
 msgid "Select specific calendars"
-msgstr ""
+msgstr "Choisissez des agendas spécifiques"
 
 #: views/calendargroups.php:84
 msgid ""
@@ -456,14 +461,17 @@ msgid ""
 "Select specific events for this group. If no events are selected but "
 "categories are selected then all events in said categories will match"
 msgstr ""
+"Choisissez des évènements spécifiques pour ce groupe. Si aucun évènement est "
+"sélectionné mais les catégories sont sélectionnées alors tous les évènement "
+"de cette catégorie seront choisi"
 
 #: views/calendargroups.php:71
 msgid "Specific Categories"
-msgstr ""
+msgstr "Catégories spécifiques"
 
 #: views/calendargroups.php:96
 msgid "Specific Events"
-msgstr ""
+msgstr "Évènements spécifiques"
 
 #: views/calendar.php:93
 msgid "Start Date"
@@ -508,11 +516,11 @@ msgstr "Le mot de passe de cet agenda"
 
 #: views/remote_ews_settings.php:122
 msgid "The password of this calendar's user"
-msgstr ""
+msgstr "Le mot de passe pour l'utilisateur de cet agenda"
 
 #: views/remote_caldav_settings.php:78
 msgid "The principal url for this calendar"
-msgstr ""
+msgstr "L'URL principal pour cet agenda"
 
 #: views/remote_ews_settings.php:149 views/remote_ews_settings.php:181
 #: views/remote_ical_settings.php:78
@@ -538,6 +546,7 @@ msgstr "Il y a eu une erreur lors de l'obtention des évènements"
 #: views/calendargroupgrid.php:11
 msgid "These groups can then be linked to various applications or utilities"
 msgstr ""
+"Ces groupes peuvent être joint à des applications diverses ou des utilitaires"
 
 #: calendar.i18n.php:8
 msgid ""
@@ -546,15 +555,15 @@ msgstr ""
 
 #: views/calendar.php:184
 msgid "Time event starts"
-msgstr ""
+msgstr "Heure de début de l'évènement"
 
 #: views/calendar.php:208
 msgid "Time the event ends"
-msgstr ""
+msgstr "Heure de fin de l'évènement"
 
 #: views/calendar.php:135
 msgid "Time this event ends"
-msgstr ""
+msgstr "Heure de fin de cet évènement"
 
 #: views/calendar.php:220 views/local_settings.php:67
 msgid "Timezone"
@@ -624,6 +633,8 @@ msgstr "Oui"
 #: drivers/Ews.class.php:73 drivers/Ews.class.php:86
 msgid "You are missing the PHP SoapClient library. Please install to continue"
 msgstr ""
+"La bibliothèque PHP SoapClient est absente. Veuillez l'installer pour "
+"continuer"
 
 #: views/calendar.php:437 views/calendar.php:446
 msgid "occurrences"
