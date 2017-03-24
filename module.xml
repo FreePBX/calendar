@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>14.0.1alpha7</version>
+	<version>14.0.1alpha8</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -13,6 +13,7 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
+		*14.0.1alpha8* FREEPBX-14395 Calendar Month not displaying correctly in safari
 		*14.0.1alpha7* FREEPBX-14327, FREEPBX-14329, FREEPBX-14338, FREEPBX-14335, FREEPBX-14336
 		*14.0.1alpha1* Development
 	</changelog>
