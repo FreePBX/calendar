@@ -11,6 +11,9 @@
 
  function calendar_destinations(){
   global $cal;
+  if(!$cal) {
+    $cal = FreePBX::Calendar();
+  }
  	$extens = array();
   foreach($cal->listGroups() as $id => $group){
    	$extens[] = array(
@@ -25,6 +28,9 @@
 
  function calendar_getdestinfo($dest) {
   global $cal;
+  if(!$cal) {
+    $cal = FreePBX::Calendar();
+  }
  	if (substr(trim($dest),0,14) == 'calendargroups') {
     $parts = explode(',', $dest);
     $group = $cal->getGroup($parts[1]);
