@@ -1082,8 +1082,21 @@ class Calendar extends \DB_Helper implements \BMO {
 					}
 				}
 			}
-			if(!empty($data['categories'])) {
-			}
+			if(!empty($group['categories'])) {
+                                foreach($group['categories'] as $catid) {
+                                        $parts = explode("_",$catid,2);
+                                        $cat = $parts[1];
+                                        foreach($events as $event) {
+                                                if(isset($event["categories"]) && $event["now"]) {
+                                                        foreach($event["categories"] as $category) {
+                                                                if($category == $cat) {
+                                                                        return true;
+                                                                }
+                                                        }
+                                                }
+                                        }
+                                }
+                        }
 			if(!empty($data['calendars'])) {
 			}
 		}
