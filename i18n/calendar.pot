@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-15 16:31-0700\n"
+"POT-Creation-Date: 2017-06-02 18:44-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,25 +104,25 @@ msgid "6 Hours"
 msgstr ""
 
 #: views/calendargroupgrid.php:34
-#: views/grid.php:25
+#: views/grid.php:29
 msgid "Actions"
 msgstr ""
 
-#: Calendar.class.php:431
+#: Calendar.class.php:447
 msgid "Add"
 msgstr ""
 
-#: views/grid.php:14
+#: views/grid.php:18
 #, php-format
 msgid "Add %s"
 msgstr ""
 
-#: views/grid.php:10
+#: views/grid.php:14
 #: views/rnav.php:5
 msgid "Add Calendar"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:99
+#: assets/js/calendar/calendar.js:65
 msgid "Add Event"
 msgstr ""
 
@@ -142,7 +142,7 @@ msgstr ""
 msgid "Add Remote Google Calendar"
 msgstr ""
 
-#: views/rnav.php:12
+#: views/rnav.php:11
 msgid "Add Remote Outlook Calendar"
 msgstr ""
 
@@ -188,7 +188,7 @@ msgstr ""
 msgid "Autodetect"
 msgstr ""
 
-#: Calendar.class.php:1230
+#: Calendar.class.php:1246
 #: Console/Calendar.class.php:18
 #: calendar.i18n.php:4
 #: calendar.i18n.php:10
@@ -241,12 +241,12 @@ msgstr ""
 msgid "Day of the week"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:337
+#: assets/js/calendar/calendar.js:303
 msgid "Days"
 msgstr ""
 
-#: Calendar.class.php:1118
-#: Calendar.class.php:1156
+#: Calendar.class.php:1134
+#: Calendar.class.php:1172
 msgid "Delete"
 msgstr ""
 
@@ -254,7 +254,7 @@ msgstr ""
 msgid "Delete Event"
 msgstr ""
 
-#: views/grid.php:23
+#: views/grid.php:27
 #: views/local_settings.php:44
 #: views/remote_caldav_settings.php:44
 #: views/remote_ews_settings.php:44
@@ -266,10 +266,6 @@ msgstr ""
 msgid "Description for the event"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:15
-msgid "Detecting..."
-msgstr ""
-
 #: views/remote_ews_settings.php:132
 msgid "EWS Server URL"
 msgstr ""
@@ -278,7 +274,7 @@ msgstr ""
 msgid "EWS Version"
 msgstr ""
 
-#: Calendar.class.php:436
+#: Calendar.class.php:452
 msgid "Edit"
 msgstr ""
 
@@ -288,10 +284,6 @@ msgstr ""
 
 #: views/remote_ews_settings.php:66
 msgid "Email"
-msgstr ""
-
-#: assets/js/calendar/calendar.js:6
-msgid "Email can not be blank!"
 msgstr ""
 
 #: views/ucp_config.php:7
@@ -341,8 +333,8 @@ msgstr ""
 msgid "How often this calendar will synchronize with the remote server"
 msgstr ""
 
-#: Calendar.class.php:1207
-#: Calendar.class.php:1215
+#: Calendar.class.php:1223
+#: Calendar.class.php:1231
 #: views/ucp_config.php:18
 msgid "Inherit"
 msgstr ""
@@ -355,7 +347,7 @@ msgstr ""
 msgid "Local Calendar"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:350
+#: assets/js/calendar/calendar.js:316
 msgid "Months"
 msgstr ""
 
@@ -367,7 +359,7 @@ msgid ""
 msgstr ""
 
 #: views/calendargroups.php:19
-#: views/grid.php:22
+#: views/grid.php:26
 #: views/local_settings.php:22
 #: views/remote_caldav_settings.php:22
 #: views/remote_ews_settings.php:22
@@ -403,10 +395,6 @@ msgstr ""
 #: views/remote_caldav_settings.php:110
 #: views/remote_ews_settings.php:110
 msgid "Password"
-msgstr ""
-
-#: assets/js/calendar/calendar.js:11
-msgid "Password can not be blank!"
 msgstr ""
 
 #: views/remote_caldav_settings.php:153
@@ -464,10 +452,10 @@ msgstr ""
 msgid "Repeats"
 msgstr ""
 
-#: Calendar.class.php:1104
-#: Calendar.class.php:1123
-#: Calendar.class.php:1142
-#: Calendar.class.php:1161
+#: Calendar.class.php:1120
+#: Calendar.class.php:1139
+#: Calendar.class.php:1158
+#: Calendar.class.php:1177
 msgid "Reset"
 msgstr ""
 
@@ -509,10 +497,10 @@ msgstr ""
 msgid "Start Time"
 msgstr ""
 
-#: Calendar.class.php:1109
-#: Calendar.class.php:1128
-#: Calendar.class.php:1147
-#: Calendar.class.php:1166
+#: Calendar.class.php:1125
+#: Calendar.class.php:1144
+#: Calendar.class.php:1163
+#: Calendar.class.php:1182
 #: views/calendar.php:480
 msgid "Submit"
 msgstr ""
@@ -571,11 +559,7 @@ msgstr ""
 msgid "The username of this calendar's user"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:28
-msgid "There was an error"
-msgstr ""
-
-#: assets/js/calendar/calendar.js:176
+#: assets/js/calendar/calendar.js:142
 msgid "There was an error fetching the events"
 msgstr ""
 
@@ -613,7 +597,7 @@ msgstr ""
 msgid "Timezone for this event"
 msgstr ""
 
-#: views/grid.php:24
+#: views/grid.php:28
 #: views/rnav.php:31
 msgid "Type"
 msgstr ""
@@ -623,11 +607,11 @@ msgid "Unable to determine server URL"
 msgstr ""
 
 #: views/calendar.php:10
-#: assets/js/calendar/calendar.js:289
+#: assets/js/calendar/calendar.js:255
 msgid "Update from Source"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:276
+#: assets/js/calendar/calendar.js:242
 msgid "Updating..."
 msgstr ""
 
@@ -649,7 +633,7 @@ msgstr ""
 msgid "Viewing Calendar '%s'"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:334
+#: assets/js/calendar/calendar.js:300
 msgid "Weeks"
 msgstr ""
 
@@ -661,7 +645,7 @@ msgstr ""
 msgid "Whether to allow this user to be able to access the calendar in UCP"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:356
+#: assets/js/calendar/calendar.js:322
 msgid "Years"
 msgstr ""
 
@@ -669,8 +653,8 @@ msgstr ""
 msgid "Yes"
 msgstr ""
 
-#: drivers/Ews.class.php:73
-#: drivers/Ews.class.php:86
+#: drivers/Ews.class.php:78
+#: drivers/Ews.class.php:91
 msgid "You are missing the PHP SoapClient library. Please install to continue"
 msgstr ""
 
@@ -679,6 +663,6 @@ msgstr ""
 msgid "occurrences"
 msgstr ""
 
-#: Calendar.class.php:269
+#: Calendar.class.php:285
 msgid "to"
 msgstr ""
