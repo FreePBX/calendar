@@ -8,7 +8,7 @@
 		<div class="col-sm-12">
 			<div class="fpbx-container">
 				<div class="display full-border">
-					<form class="fpbx-submit" method="post" action="?display=calendar" data-fpbx-delete="config.php?display=calendar&amp;id=<?php echo $id ?>&amp;action=delete">
+					<form class="fpbx-submit" method="post" action="?display=calendar" data-fpbx-delete="config.php?display=calendar&amp;id=<?php echo !empty($data['id']) ? $data['id'] : ''?>&amp;action=delete">
 						<input type="hidden" name="action" value="<?php echo $action?>">
 						<input type="hidden" name="type" value="caldav">
 						<input type="hidden" name="id" value="<?php echo !empty($data['id']) ? $data['id'] : ''?>">
@@ -238,5 +238,16 @@ if (strtolower($action) == "add") {
 				enableCaseInsensitiveFiltering: true,
 				buttonWidth: '50%'
 		});
+	});
+	$(".fpbx-submit").submit(function() {
+		if($("#username").val() == "") {
+			return warnInvalid($("#username"),_("Please define a valid username"));
+		}
+		if($("#password").val() == "") {
+			return warnInvalid($("#password"),_("Please define a valid password"));
+		}
+		if($("#purl").val() == "") {
+			return warnInvalid($("#url"),_("Please define a valid url"));
+		}
 	});
 </script>

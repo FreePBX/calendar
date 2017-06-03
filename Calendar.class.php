@@ -21,6 +21,7 @@ include __DIR__."/PhpEws/Calendar.php";
 class Calendar extends \DB_Helper implements \BMO {
 	private $now; //right now, private so it doesnt keep updating
 	private $drivers;
+	private $guimessage;
 
 	public function __construct($freepbx = null) {
 		if ($freepbx == null) {
@@ -95,7 +96,15 @@ class Calendar extends \DB_Helper implements \BMO {
 						if(isset($_POST['name'])) {
 							$type = $_POST['type'];
 							$driver = $this->getDriver($type);
-							return $driver->addCalendar($_POST);
+							$allCalendars = $this->listCalendars();
+							try {
+								return $driver->addCalendar($_POST);
+							} catch(\Exception $e) {
+								$this->guimessage = array(
+									"type" => "danger",
+									"message" => $e->getMessage()
+								);
+							}
 						}
 					break;
 					case "edit":
@@ -103,7 +112,14 @@ class Calendar extends \DB_Helper implements \BMO {
 							$id = $_POST['id'];
 							$type = $_POST['type'];
 							$driver = $this->getDriver($type);
-							return $driver->updateCalendar($id,$_POST);
+							try {
+								return $driver->updateCalendar($id,$_POST);
+							} catch(\Exception $e) {
+								$this->guimessage = array(
+									"type" => "danger",
+									"message" => $e->getMessage()
+								);
+							}
 						}
 					break;
 					case "delete":
@@ -468,7 +484,7 @@ class Calendar extends \DB_Helper implements \BMO {
 				foreach($drivers as $driver => $object) {
 					$dropdown[$driver] = $object->getInfo()['name'];
 				}
-				return load_view(__DIR__."/views/grid.php",array('dropdown' => $dropdown));
+				return load_view(__DIR__."/views/grid.php",array('message' => $this->guimessage, 'dropdown' => $dropdown));
 			break;
 		}
 	}

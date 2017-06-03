@@ -8,7 +8,7 @@
 		<div class="col-sm-12">
 			<div class="fpbx-container">
 				<div class="display full-border">
-					<form class="fpbx-submit" method="post" action="?display=calendar" data-fpbx-delete="config.php?display=calendar&amp;id=<?php echo $id ?>&amp;action=delete">
+					<form class="fpbx-submit" method="post" action="?display=calendar" data-fpbx-delete="config.php?display=calendar&amp;id=<?php echo !empty($data['id']) ? $data['id'] : ''?>&amp;action=delete">
 						<input type="hidden" name="action" value="<?php echo $action?>">
 						<input type="hidden" name="type" value="ews">
 						<input type="hidden" name="id" value="<?php echo !empty($data['id']) ? $data['id'] : ''?>">
@@ -161,15 +161,15 @@
 											</div>
 											<div class="col-md-9">
 												<select id="version" class="form-control" name="version">
-													<option value="VERSION_2007" data-name="Exchange2007">Exchange 2007</option>
-													<option value="VERSION_2007_SP1" data-name="Exchange2007_SP1">Exchange2007 SP1</option>
-													<option value="VERSION_2009" data-name="Exchange2009">Exchange 2009</option>
-													<option value="VERSION_2010" data-name="Exchange2010">Exchange 2010</option>
-													<option value="VERSION_2010_SP1" data-name="Exchange2010_SP1">Exchange 2010 SP1</option>
-													<option value="VERSION_2010_SP2" data-name="Exchange2010_SP2">Exchange 2010 SP2</option>
-													<option value="VERSION_2013" data-name="Exchange2013">Exchange 2013</option>
-													<option value="VERSION_2013_SP1" data-name="Exchange2013_SP1">Exchange 2013 SP1</option>
-													<option value="VERSION_2016" data-name="Exchange2016">Exchange 2016</option>
+													<option value="VERSION_2007" data-name="Exchange2007" <?php echo $data['version'] == 'VERSION_2007' ? 'selected' : '' ?>>Exchange 2007</option>
+													<option value="VERSION_2007_SP1" data-name="Exchange2007_SP1" <?php echo $data['version'] == 'VERSION_2007_SP1' ? 'selected' : '' ?>>Exchange2007 SP1</option>
+													<option value="VERSION_2009" data-name="Exchange2009" <?php echo $data['version'] == 'VERSION_2009' ? 'selected' : '' ?>>Exchange 2009</option>
+													<option value="VERSION_2010" data-name="Exchange2010" <?php echo $data['version'] == 'VERSION_2010' ? 'selected' : '' ?>>Exchange 2010</option>
+													<option value="VERSION_2010_SP1" data-name="Exchange2010_SP1" <?php echo $data['version'] == 'VERSION_2010_SP1' ? 'selected' : '' ?>>Exchange 2010 SP1</option>
+													<option value="VERSION_2010_SP2" data-name="Exchange2010_SP2" <?php echo $data['version'] == 'VERSION_2010_SP2' ? 'selected' : '' ?>>Exchange 2010 SP2</option>
+													<option value="VERSION_2013" data-name="Exchange2013" <?php echo $data['version'] == 'VERSION_2013' ? 'selected' : '' ?>>Exchange 2013</option>
+													<option value="VERSION_2013_SP1" data-name="Exchange2013_SP1" <?php echo $data['version'] == 'VERSION_2013_SP1' ? 'selected' : '' ?>>Exchange 2013 SP1</option>
+													<option value="VERSION_2016" data-name="Exchange2016" <?php echo $data['version'] == 'VERSION_2016' ? 'selected' : '' ?>>Exchange 2016</option>
 												</select>
 											</div>
 										</div>
@@ -261,7 +261,7 @@ if (strtolower($action) == "add") {
 </div>
 <script>
 	var calendars = <?php echo !empty($data['calendars']) ? json_encode($data['calendars']) : '[]'?>;
-	$("#purl").blur(function() {
+	$("#url").blur(function() {
 		updateCalendars();
 	});
 	$("#username").blur(function() {
@@ -272,7 +272,7 @@ if (strtolower($action) == "add") {
 	});
 	var updating = false;
 	function updateCalendars() {
-		if($("#purl").val() !== "" && $("#username").val() !== "" && $("#password").val() !== "" && !updating) {
+		if($("#username").val() !== "" && $("#password").val() !== "" && $("#url").val() !== "" && !updating) {
 			updating = true;
 			$("#unsetspan").text('<?php echo _("Attempting to load"); ?>...').show();
 			$("#setspan").addClass("hidden");
@@ -294,6 +294,58 @@ if (strtolower($action) == "add") {
 				enableFullValueFiltering: true,
 				enableCaseInsensitiveFiltering: true,
 				buttonWidth: '50%'
+		});
+	});
+	$(".fpbx-submit").submit(function() {
+		if($("#username").val() == "") {
+			return warnInvalid($("#username"),_("Please define a valid username"));
+		}
+		if($("#password").val() == "") {
+			return warnInvalid($("#password"),_("Please define a valid password"));
+		}
+		if($("#url").val() == "") {
+			return warnInvalid($("#url"),_("Please define a valid url"));
+		}
+	});
+	$("#ews-autodetect").click(function() {
+		var text = $(this).text(),
+				$this = $(this);
+
+		if($("#email").val() === "") {
+			return warnInvalid($("#email"),_("Email can not be blank!"));
+		}
+
+		if($("#password").val() === "") {
+			return warnInvalid($("#password"), _("Password can not be blank!"));
+		}
+
+		$("#password").prop("disabled",true);
+		$("#email").prop("disabled",true);
+		$("#username").prop("disabled",true);
+		$("#url").prop("disabled",true);
+
+		$(this).text(_("Detecting..."));
+		$(this).prop("disabled",true);
+		$("body").css("cursor","progress");
+		$.post("ajax.php?module=calendar&command=ewsautodetect",{email: $("#email").val(), password: $("#password").val(), username: $("#username").val()}, function(data) {
+			if(data.status) {
+				$("#version option[data-name='"+data.version+"']").prop("selected",true);
+				$("#username").val(data.username);
+				$("#url").val(data.server);
+				updateCalendars();
+			} else {
+				alert(data.message);
+			}
+		}).fail(function() {
+			alert(_("There was an error"));
+		}).always(function() {
+			$this.text(text);
+			$this.prop("disabled",false);
+			$("body").css("cursor","");
+			$("#password").prop("disabled",false);
+			$("#email").prop("disabled",false);
+			$("#username").prop("disabled",false);
+			$("#url").prop("disabled",false);
 		});
 	});
 </script>

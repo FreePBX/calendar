@@ -3,7 +3,11 @@
 //	Copyright 2015 Sangoma Technologies.
 //
 //
-?>
+if(!empty($message)) { ?>
+<div class="alert alert-<?php echo $message['type']?>">
+	<?php echo $message['message']?>
+</div>
+<?php } ?>
 <div id="toolbar-all">
 	<div class="dropdown">
 		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">

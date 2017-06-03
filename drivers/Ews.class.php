@@ -29,7 +29,12 @@ class Ews {
 	 */
 	public function addCalendar($data) {
 		$uuid = Uuid::uuid4()->toString();
-		return $this->updateCalendar($uuid,$data);
+		try {
+			$this->updateCalendar($uuid,$data);
+		} catch(\Exception $e) {
+			$this->calendar->delCalendarByID($uuid);
+			throw $e;
+		}
 	}
 
 	/**

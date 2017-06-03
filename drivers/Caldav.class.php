@@ -29,7 +29,12 @@ class Caldav {
 	 */
 	public function addCalendar($data) {
 		$uuid = Uuid::uuid4()->toString();
-		$this->updateCalendar($uuid,$data);
+		try {
+			$this->updateCalendar($uuid,$data);
+		} catch(\Exception $e) {
+			$this->calendar->delCalendarByID($uuid);
+			throw $e;
+		}
 	}
 
 	/**
