@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-02 18:44-0700\n"
-"PO-Revision-Date: 2017-06-07 21:57+0200\n"
+"PO-Revision-Date: 2017-06-07 22:47+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese "
 "<http://weblate.freepbx.org/projects/freepbx/calendar/vi/>\n"
@@ -84,250 +84,253 @@ msgstr "2 giờ"
 #: views/remote_caldav_settings.php:179 views/remote_ews_settings.php:237
 #: views/remote_ical_settings.php:96
 msgid "30 Minutes"
-msgstr ""
+msgstr "30 phút"
 
 #: views/remote_caldav_settings.php:177 views/remote_ews_settings.php:235
 #: views/remote_ical_settings.php:94
 msgid "5 Minutes"
-msgstr ""
+msgstr "5 phút"
 
 #: views/remote_caldav_settings.php:182 views/remote_ews_settings.php:240
 #: views/remote_ical_settings.php:99
 msgid "6 Hours"
-msgstr ""
+msgstr "6 giờ"
 
 #: views/calendargroupgrid.php:34 views/grid.php:29
 msgid "Actions"
-msgstr ""
+msgstr "Các thao tác"
 
 #: Calendar.class.php:447
 msgid "Add"
-msgstr ""
+msgstr "Thêm"
 
 #: views/grid.php:18
 #, php-format
 msgid "Add %s"
-msgstr ""
+msgstr "Thêm %s"
 
 #: views/grid.php:14 views/rnav.php:5
 msgid "Add Calendar"
-msgstr ""
+msgstr "Thêm Lịch"
 
 #: assets/js/calendar/calendar.js:65
 msgid "Add Event"
-msgstr ""
+msgstr "Thêm Sự kiện"
 
 #: views/calendargroupgrid.php:16
 msgid "Add Group"
-msgstr ""
+msgstr "Thêm Nhóm"
 
 #: views/rnav.php:8
 msgid "Add New Local Calendar"
-msgstr ""
+msgstr "Thêm Lịch địa phương mới"
 
 #: views/rnav.php:10
 msgid "Add Remote CalDAV Calendar"
-msgstr ""
+msgstr "Thêm Lịch CalDAV  từ xa"
 
 #: views/rnav.php:13
 msgid "Add Remote Google Calendar"
-msgstr ""
+msgstr "Thêm lịch Google Từ xa"
 
 #: views/rnav.php:11
 msgid "Add Remote Outlook Calendar"
-msgstr ""
+msgstr "Thêm Lịch Outlook từ xa"
 
 #: views/rnav.php:9
 msgid "Add Remote iCal Calendar"
-msgstr ""
+msgstr "Thêm Lịch iCal từ xa"
 
 #: views/calendar.php:411 views/calendar.php:456
 msgid "After"
-msgstr ""
+msgstr "Sau khi"
 
 #: views/calendar.php:147 views/calendar.php:152
 msgid "All Day"
-msgstr ""
+msgstr "Cả ngày"
 
 #: views/calendar.php:160
 msgid "All Day Event"
-msgstr ""
+msgstr "Sự kiện cả ngày"
 
 #: views/ucp_config.php:65
 msgid "Allowed Calendar Groups"
-msgstr ""
+msgstr "Các nhóm lịch được cho phép"
 
 #: views/ucp_config.php:39
 msgid "Allowed Calendars"
-msgstr ""
+msgstr "Các lịch cho phép"
 
 #: calendar.i18n.php:6
 msgid "Applications"
-msgstr ""
+msgstr "Các ứng dụng"
 
 #: views/remote_ews_settings.php:277
 msgid "Attempting to load"
-msgstr ""
+msgstr "Đang cố tải"
 
 #: views/remote_caldav_settings.php:220
 msgid "Attempting to load..."
-msgstr ""
+msgstr "Đang cố tải..."
 
 #: views/remote_ews_settings.php:139
 msgid "Autodetect"
-msgstr ""
+msgstr "Tự động phát hiện"
 
 #: Calendar.class.php:1246 Console/Calendar.class.php:18 calendar.i18n.php:4
 #: calendar.i18n.php:10
 msgid "Calendar"
-msgstr ""
+msgstr "Lịch"
 
 #: calendar.i18n.php:12
 msgid "Calendar Event Groups"
-msgstr ""
+msgstr "Các nhóm Lịch sự kiện"
 
 #: functions.inc.php:18 functions.inc.php:32
 #, php-format
 msgid "Calendar Group: %s"
-msgstr ""
+msgstr "Nhóm lịch: %s"
 
 #: functions.inc.php:19
 msgid "Calendar Groups"
-msgstr ""
+msgstr "Các nhóm lịch"
 
 #: views/calendargroupgrid.php:11
 msgid ""
 "Calendar event groups are a collection of calendars, events or categories "
 "from the Calendar Module."
 msgstr ""
+"Các nhóm lịch sự kiện là một tập hợp các lịch, sự kiện hoặc danh mục từ Mô "
+"đun Lịch."
 
 #: views/ucp_config.php:79
 msgid "Calendar groups the user may utilize."
-msgstr ""
+msgstr "Các nhóm lịch người dùng có thể sử dụng."
 
 #: views/calendargroups.php:43 views/remote_caldav_settings.php:133
 #: views/remote_ews_settings.php:191
 msgid "Calendars"
-msgstr ""
+msgstr "Các lịch"
 
 #: views/ucp_config.php:53
 msgid "Calendars the user may utilize"
-msgstr ""
+msgstr "Các lịch người dùng có thể sử dụng"
 
 #: views/calendar.php:479
 msgid "Close"
-msgstr ""
+msgstr "Đóng"
 
 #: views/calendar.php:384
 msgid "Day of the month"
-msgstr ""
+msgstr "Ngày trong tháng"
 
 #: views/calendar.php:386
 msgid "Day of the week"
-msgstr ""
+msgstr "Ngày trong tuần"
 
 #: assets/js/calendar/calendar.js:303
 msgid "Days"
-msgstr ""
+msgstr "Các ngày"
 
 #: Calendar.class.php:1134 Calendar.class.php:1172
 msgid "Delete"
-msgstr ""
+msgstr "Xóa"
 
 #: views/calendar.php:478
 msgid "Delete Event"
-msgstr ""
+msgstr "Xóa sự kiện"
 
 #: views/grid.php:27 views/local_settings.php:44
 #: views/remote_caldav_settings.php:44 views/remote_ews_settings.php:44
 #: views/remote_ical_settings.php:44
 msgid "Description"
-msgstr ""
+msgstr "Mô tả"
 
 #: views/calendar.php:81
 msgid "Description for the event"
-msgstr ""
+msgstr "Mô tả cho sự kiện"
 
 #: views/remote_ews_settings.php:132
 msgid "EWS Server URL"
-msgstr ""
+msgstr "URL máy chủ EWS"
 
 #: views/remote_ews_settings.php:159
 msgid "EWS Version"
-msgstr ""
+msgstr "Phiên bản EWS"
 
 #: Calendar.class.php:452
 msgid "Edit"
-msgstr ""
+msgstr "Hiệu chỉnh"
 
 #: views/calendar.php:12
 msgid "Edit Settings"
-msgstr ""
+msgstr "Cài đặt hiệu chỉnh"
 
 #: views/remote_ews_settings.php:66
 msgid "Email"
-msgstr ""
+msgstr "Thư điện tử"
 
 #: views/ucp_config.php:7
 msgid "Enable Calendar"
-msgstr ""
+msgstr "Bật Lịch"
 
 #: views/calendar.php:120
 msgid "End Date"
-msgstr ""
+msgstr "Ngày kết thúc"
 
 #: views/calendar.php:196
 msgid "End Time"
-msgstr ""
+msgstr "Thời gian kết thúc"
 
 #: views/calendar.php:404 views/calendar.php:421
 msgid "Ends"
-msgstr ""
+msgstr "Kết thúc"
 
 #: views/calendar.php:30
 msgid "Event"
-msgstr ""
+msgstr "Sự kiện"
 
 #: views/calendar.php:69
 msgid "Event Description"
-msgstr ""
+msgstr "Mô tả sự kiện"
 
 #: views/calendar.php:45
 msgid "Event Title"
-msgstr ""
+msgstr "Tiêu đề sự kiện"
 
 #: views/calendargroups.php:59
 msgid "Events to include in to this group"
-msgstr ""
+msgstr "Các sự kiện bao gồm trong nhóm này"
 
 #: views/calendar.php:57
 msgid "Friendly name for the event"
-msgstr ""
+msgstr "Tên thân thiện cho sự kiện"
 
 #: views/calendargroupgrid.php:33
 msgid "Group"
-msgstr ""
+msgstr "Nhóm"
 
 #: views/remote_caldav_settings.php:194 views/remote_ews_settings.php:252
 #: views/remote_ical_settings.php:111
 msgid "How often this calendar will synchronize with the remote server"
 msgstr ""
+"Mức độ thường xuyên mà Lịch này sẽ đồng bộ hóa với máy chủ từ xa như thế nào"
 
 #: Calendar.class.php:1223 Calendar.class.php:1231 views/ucp_config.php:18
 msgid "Inherit"
-msgstr ""
+msgstr "Thừa kế"
 
 #: views/rnav.php:2
 msgid "List Calendars"
-msgstr ""
+msgstr "Danh sách Lịch"
 
 #: drivers/Local.class.php:14
 msgid "Local Calendar"
-msgstr ""
+msgstr "Lịch tại chỗ"
 
 #: assets/js/calendar/calendar.js:316
 msgid "Months"
-msgstr ""
+msgstr "Tháng"
 
 #: views/calendargroupgrid.php:11
 msgid ""
