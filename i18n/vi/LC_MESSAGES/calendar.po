@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-02 18:44-0700\n"
-"PO-Revision-Date: 2017-06-07 22:47+0200\n"
+"PO-Revision-Date: 2017-06-08 09:20+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese "
 "<http://weblate.freepbx.org/projects/freepbx/calendar/vi/>\n"
@@ -343,23 +343,23 @@ msgstr ""
 #: views/remote_caldav_settings.php:22 views/remote_ews_settings.php:22
 #: views/remote_ical_settings.php:22 views/rnav.php:30
 msgid "Name"
-msgstr ""
+msgstr "Tên"
 
 #: views/calendargroups.php:31
 msgid "Name of this group"
-msgstr ""
+msgstr "Tên của Nhóm này"
 
 #: views/calendar.php:409
 msgid "Never"
-msgstr ""
+msgstr "Không bao giờ"
 
 #: views/ucp_config.php:15
 msgid "No"
-msgstr ""
+msgstr "Không"
 
 #: PhpEws/Calendar.php:50
 msgid "No settings were discovered"
-msgstr ""
+msgstr "Không có cài đặt nào được phát hiện"
 
 #: views/calendar.php:431
 msgid "Occurrences"
