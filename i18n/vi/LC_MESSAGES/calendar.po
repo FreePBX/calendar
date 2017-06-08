@@ -10,74 +10,76 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-02 18:44-0700\n"
-"PO-Revision-Date: 2017-06-02 18:44-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: \n"
+"PO-Revision-Date: 2017-06-07 21:57+0200\n"
+"Last-Translator: Peter Trinh <ftek@ymail.com>\n"
+"Language-Team: Vietnamese "
+"<http://weblate.freepbx.org/projects/freepbx/calendar/vi/>\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2.4\n"
 
 #: views/remote_caldav_settings.php:4
 #, php-format
 msgid "%s CalDAV Calendar"
-msgstr ""
+msgstr "%s Lịch CalDAV"
 
 #: views/calendargroups.php:3
 #, php-format
 msgid "%s Group"
-msgstr ""
+msgstr "%s nhóm"
 
 #: views/local_settings.php:4
 #, php-format
 msgid "%s Local Calendar"
-msgstr ""
+msgstr "%s Lịch địa phương"
 
 #: views/remote_ews_settings.php:4
 #, php-format
 msgid "%s Outlook Calendar"
-msgstr ""
+msgstr "%s Lịch Outlook"
 
 #: views/remote_ical_settings.php:4
 #, php-format
 msgid "%s iCal Calendar"
-msgstr ""
+msgstr "%s Lịch iCal"
 
 #: views/remote_caldav_settings.php:184 views/remote_ews_settings.php:242
 #: views/remote_ical_settings.php:101
 msgid "1 Day"
-msgstr ""
+msgstr "1 ngày"
 
 #: views/remote_caldav_settings.php:180 views/remote_ews_settings.php:238
 #: views/remote_ical_settings.php:97
 msgid "1 Hour"
-msgstr ""
+msgstr "1 giờ"
 
 #: views/remote_caldav_settings.php:176 views/remote_ews_settings.php:234
 #: views/remote_ical_settings.php:93
 msgid "1 Minute"
-msgstr ""
+msgstr "1 phút"
 
 #: views/remote_caldav_settings.php:185 views/remote_ews_settings.php:243
 #: views/remote_ical_settings.php:102
 msgid "1 Week"
-msgstr ""
+msgstr "1 tuần"
 
 #: views/remote_caldav_settings.php:178 views/remote_ews_settings.php:236
 #: views/remote_ical_settings.php:95
 msgid "10 Minutes"
-msgstr ""
+msgstr "10 phút"
 
 #: views/remote_caldav_settings.php:183 views/remote_ews_settings.php:241
 #: views/remote_ical_settings.php:100
 msgid "12 Hours"
-msgstr ""
+msgstr "12 giờ"
 
 #: views/remote_caldav_settings.php:181 views/remote_ews_settings.php:239
 #: views/remote_ical_settings.php:98
 msgid "2 Hours"
-msgstr ""
+msgstr "2 giờ"
 
 #: views/remote_caldav_settings.php:179 views/remote_ews_settings.php:237
 #: views/remote_ical_settings.php:96
