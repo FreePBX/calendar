@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-02 18:44-0700\n"
-"PO-Revision-Date: 2017-06-08 09:20+0200\n"
+"PO-Revision-Date: 2017-06-10 21:54+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese "
 "<http://weblate.freepbx.org/projects/freepbx/calendar/vi/>\n"
@@ -338,6 +338,9 @@ msgid ""
 "groups. Even multiple events from different calendars can be placed into a "
 "single group!"
 msgstr ""
+"Nhiều lịch, sự kiện và / hoặc danh mục có thể được đặt vào trong các nhóm "
+"riêng biệt. Thậm chí nhiều sự kiện từ các lịch khác nhau có thể được đặt vào "
+"một nhóm đơn!"
 
 #: views/calendargroups.php:19 views/grid.php:26 views/local_settings.php:22
 #: views/remote_caldav_settings.php:22 views/remote_ews_settings.php:22
@@ -363,77 +366,77 @@ msgstr "Không có cài đặt nào được phát hiện"
 
 #: views/calendar.php:431
 msgid "Occurrences"
-msgstr ""
+msgstr "Lần xuất hiện"
 
 #: views/calendar.php:413
 msgid "On"
-msgstr ""
+msgstr "Trên"
 
 #: views/remote_caldav_settings.php:110 views/remote_ews_settings.php:110
 msgid "Password"
-msgstr ""
+msgstr "Mật khẩu"
 
 #: views/remote_caldav_settings.php:153 views/remote_ews_settings.php:211
 msgid "Please enter valid credentials above"
-msgstr ""
+msgstr "Vui lòng nhập các chứng chỉ hợp lệ trên"
 
 #: views/remote_caldav_settings.php:66
 msgid "Principal URL"
-msgstr ""
+msgstr "URL chính"
 
 #: drivers/Caldav.class.php:21
 msgid "Remote CalDAV Calendar"
-msgstr ""
+msgstr "Lịch CalDAV từ xa"
 
 #: drivers/Ews.class.php:21
 msgid "Remote Outlook Calendar"
-msgstr ""
+msgstr "Lịch Outlook từ xa"
 
 #: views/remote_ical_settings.php:66
 msgid "Remote URL"
-msgstr ""
+msgstr "URL từ xa"
 
 #: drivers/Ical.class.php:20
 msgid "Remote iCal Calendar"
-msgstr ""
+msgstr "Lịch iCal từ xa"
 
 #: views/calendar.php:244 views/calendar.php:249
 msgid "Reoccurring"
-msgstr ""
+msgstr "Tuần hoàn"
 
 #: views/calendar.php:257
 msgid "Reoccurring Event"
-msgstr ""
+msgstr "Các sự kiện tuần hoàn"
 
 #: views/calendar.php:298
 msgid "Repeat Every"
-msgstr ""
+msgstr "Lặp lại vào mỗi"
 
 #: views/calendar.php:354
 msgid "Repeat On"
-msgstr ""
+msgstr "Lặp lại trên"
 
 #: views/calendar.php:379
 msgid "Repeat by"
-msgstr ""
+msgstr "Lặp lại bởi"
 
 #: views/calendar.php:268 views/calendar.php:288 views/calendar.php:344
 #: views/calendar.php:369 views/calendar.php:394 views/calendar.php:471
 msgid "Repeats"
-msgstr ""
+msgstr "Lặp lại"
 
 #: Calendar.class.php:1120 Calendar.class.php:1139 Calendar.class.php:1158
 #: Calendar.class.php:1177
 msgid "Reset"
-msgstr ""
+msgstr "Cài đặt lại"
 
 #: utests/eventFilterTest.php:53
 msgid "Returned date range was not as expected"
-msgstr ""
+msgstr "Vùng ngày trả lại không như ý muốn"
 
 #: views/remote_caldav_settings.php:161 views/remote_ews_settings.php:219
 msgid "Select specific calendars"
-msgstr ""
+msgstr "Chọn lịch cụ thể"
 
 #: views/calendargroups.php:84
 msgid ""
@@ -441,6 +444,9 @@ msgid ""
 "categories are selected then all events in said categories will match. "
 "Changing categories will change events below"
 msgstr ""
+"Chọn các danh mục cụ thể cho nhóm này. Nếu không có sự kiện nào được chọn "
+"nhưng danh mục được chọn thì tất cả các sự kiện trong các danh mục đó sẽ "
+"khớp. Thay đổi danh mục sẽ thay đổi các sự kiện dưới đây"
 
 #: views/calendargroups.php:109
 msgid ""
