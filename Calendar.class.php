@@ -449,7 +449,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			case "edit":
 				$calendars = $this->listCalendars();
 				$group = $this->getGroup($_REQUEST['id']);
-				return load_view(__DIR__."/views/calendargroups.php",array("calendars" => $calendars, "group" => $group, "action" => _("Edit")));
+				return load_view(__DIR__."/views/calendargroups.php",array("calendars" => $calendars, "group" => $group,'id' => $_GET['id'],"action" => _("Edit")));
 			break;
 			case "view":
 			break;
