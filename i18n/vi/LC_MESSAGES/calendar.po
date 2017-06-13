@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-02 18:44-0700\n"
-"PO-Revision-Date: 2017-06-10 21:54+0200\n"
+"PO-Revision-Date: 2017-06-13 15:59+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese "
 "<http://weblate.freepbx.org/projects/freepbx/calendar/vi/>\n"
@@ -453,154 +453,160 @@ msgid ""
 "Select specific events for this group. If no events are selected but "
 "categories are selected then all events in said categories will match"
 msgstr ""
+"Chọn các sự kiện cụ thể cho nhóm này. Nếu không có sự kiện nào được chọn "
+"nhưng danh mục được chọn thì tất cả các sự kiện trong các danh mục đó sẽ khớp"
 
 #: views/calendargroups.php:71
 msgid "Specific Categories"
-msgstr ""
+msgstr "Các danh mục cụ thể"
 
 #: views/calendargroups.php:96
 msgid "Specific Events"
-msgstr ""
+msgstr "Các sự kiện cụ thể"
 
 #: views/calendar.php:93
 msgid "Start Date"
-msgstr ""
+msgstr "Ngày bắt đầu"
 
 #: views/calendar.php:172
 msgid "Start Time"
-msgstr ""
+msgstr "Thời gian bắt đầu"
 
 #: Calendar.class.php:1125 Calendar.class.php:1144 Calendar.class.php:1163
 #: Calendar.class.php:1182 views/calendar.php:480
 msgid "Submit"
-msgstr ""
+msgstr "Gửi đi"
 
 #: views/remote_caldav_settings.php:171 views/remote_ews_settings.php:229
 #: views/remote_ical_settings.php:88
 msgid "Synchronization Time"
-msgstr ""
+msgstr "Thời gian đồng bộ hóa"
 
 #: views/remote_caldav_settings.php:100
 msgid "The Userman for this calendar"
-msgstr ""
+msgstr "Tên người dùng cho lịch này"
 
 #: views/remote_ews_settings.php:56
 msgid "The description of this calendar"
-msgstr ""
+msgstr "Mô tả của lịch này"
 
 #: views/remote_ews_settings.php:78
 msgid "The email address of this calendar's user [Optional]"
-msgstr ""
+msgstr "Địa chỉ thư điện tử của người dùng lịch này [Lựa chọn]"
 
 #: views/local_settings.php:34 views/local_settings.php:56
 #: views/remote_caldav_settings.php:34 views/remote_caldav_settings.php:56
 #: views/remote_ews_settings.php:34 views/remote_ical_settings.php:34
 #: views/remote_ical_settings.php:56
 msgid "The name of this calendar"
-msgstr ""
+msgstr "Tên của lịch này"
 
 #: views/remote_caldav_settings.php:122
 msgid "The password for this calendar"
-msgstr ""
+msgstr "Mật khẩu cho lịch này"
 
 #: views/remote_ews_settings.php:122
 msgid "The password of this calendar's user"
-msgstr ""
+msgstr "Mật khẩu của người dùng lịch này"
 
 #: views/remote_caldav_settings.php:78
 msgid "The principal url for this calendar"
-msgstr ""
+msgstr "Url chính cho lịch này"
 
 #: views/remote_ews_settings.php:149 views/remote_ews_settings.php:181
 #: views/remote_ical_settings.php:78
 msgid "The remote url for this calendar"
-msgstr ""
+msgstr "Url từ xa cho lịch này"
 
 #: views/calendar.php:108
 msgid "The time to start the event"
-msgstr ""
+msgstr "Thời gian để khởi động sự kiện"
 
 #: views/remote_ews_settings.php:100
 msgid "The username of this calendar's user"
-msgstr ""
+msgstr "Tên người dùng của người dùng lịch này"
 
 #: assets/js/calendar/calendar.js:142
 msgid "There was an error fetching the events"
-msgstr ""
+msgstr "Đã xảy ra lỗi khi tìm nạp các sự kiện"
 
 #: views/calendargroupgrid.php:11
 msgid "These groups can then be linked to various applications or utilities"
 msgstr ""
+"Những nhóm này sau đó có thể được kết nối tới các ứng dụng hoặc các tiện ích "
+"khác nhau"
 
 #: calendar.i18n.php:8
 msgid ""
 "This module is used to manage calendar and time based events for FreePBX"
 msgstr ""
+"Mô đun này được sử dụng để quản lý các sự kiện dựa trên lịch và thời gian "
+"đối với FreePBX"
 
 #: views/calendar.php:184
 msgid "Time event starts"
-msgstr ""
+msgstr "Thời gian sự kiện bắt đầu"
 
 #: views/calendar.php:208
 msgid "Time the event ends"
-msgstr ""
+msgstr "Thời gian sự kiện kết thúc"
 
 #: views/calendar.php:135
 msgid "Time this event ends"
-msgstr ""
+msgstr "Thời gian sự kiện này kết thúc"
 
 #: views/calendar.php:220 views/local_settings.php:67
 msgid "Timezone"
-msgstr ""
+msgstr "Khung thời gian"
 
 #: views/local_settings.php:79
 msgid "Timezone for this Calendar"
-msgstr ""
+msgstr "Múi giờ cho lịch này"
 
 #: views/calendar.php:232
 msgid "Timezone for this event"
-msgstr ""
+msgstr "Múi giờ cho sự kiện này"
 
 #: views/grid.php:28 views/rnav.php:31
 msgid "Type"
-msgstr ""
+msgstr "Kiểu"
 
 #: PhpEws/Calendar.php:75
 msgid "Unable to determine server URL"
-msgstr ""
+msgstr "Không thể xác định URL máy chủ"
 
 #: views/calendar.php:10 assets/js/calendar/calendar.js:255
 msgid "Update from Source"
-msgstr ""
+msgstr "Cập nhật từ nguồn"
 
 #: assets/js/calendar/calendar.js:242
 msgid "Updating..."
-msgstr ""
+msgstr "Đang cập nhật..."
 
 #: views/calendar.php:224
 msgid "Use Calendar Timezone"
-msgstr ""
+msgstr "Sử dụng múi giờ lịch"
 
 #: views/remote_caldav_settings.php:88 views/remote_ews_settings.php:88
 msgid "Username"
-msgstr ""
+msgstr "Tên người dùng"
 
 #: views/calendargroupgrid.php:15
 msgid "View Calendars"
-msgstr ""
+msgstr "Xem lịch"
 
 #: views/calendar.php:7
 #, php-format
 msgid "Viewing Calendar '%s'"
-msgstr ""
+msgstr "Đang xem Lịch '%s'"
 
 #: assets/js/calendar/calendar.js:300
 msgid "Weeks"
-msgstr ""
+msgstr "Các tuần"
 
 #: views/calendargroupgrid.php:7
 msgid "What are Calendar Event Groups?"
-msgstr ""
+msgstr "Nhóm sự kiện lịch là gì?"
 
 #: views/ucp_config.php:28
 msgid "Whether to allow this user to be able to access the calendar in UCP"
