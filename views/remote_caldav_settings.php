@@ -222,10 +222,16 @@ if (strtolower($action) == "add") {
 			$(".diswhenloading").addClass("disabled").attr("disabled", true);
 			$.post( "ajax.php?module=calendar&command=getcaldavcals", {purl: $("#purl").val(), username: $("#username").val(), password: $("#password").val()}, function( data ) {
 				$("#calendars").html(data.calshtml);
-				$('#calendars').multiselect('rebuild');
-				$("#setspan").removeClass("hidden");
-				$("#unsetspan").addClass("hidden");
-				$(".diswhenloading").removeClass("disabled").attr("disabled", false);
+				if(data.status == true){
+					$('#calendars').multiselect('rebuild');
+					$("#setspan").removeClass("hidden");
+					$("#unsetspan").addClass("hidden");
+					$(".diswhenloading").removeClass("disabled").attr("disabled", false);
+				}else{
+					$("#unsetspan").html(data.calshtml);
+					$(".diswhenloading").addClass("disabled").attr("disabled", false);
+				}
+
 			}).always(function() {
 				updating = false;
 			});
@@ -248,6 +254,9 @@ if (strtolower($action) == "add") {
 		}
 		if($("#purl").val() == "") {
 			return warnInvalid($("#url"),_("Please define a valid url"));
+		}
+		if($("#urlerror").length == 1) {
+			return warnInvalid($("#url"),_("Please check your URL and credentials."));
 		}
 	});
 </script>
