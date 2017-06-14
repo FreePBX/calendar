@@ -209,6 +209,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			case 'getewscals':
 			case 'updatesource':
 			case 'ewsautodetect':
+			case 'duplicate':
 				return true;
 		}
 		return false;
@@ -293,6 +294,27 @@ class Calendar extends \DB_Helper implements \BMO {
 				$calendarID = $_POST['calendarid'];
 				$eventID = $_POST['eventid'];
 				$this->deleteEvent($calendarID,$eventID);
+			break;
+			case 'duplicate':
+				$name = $_REQUEST['value'];
+				$id = $_REQUEST['id'];
+				$calendars = $this ->listCalendars();
+				//check whether its edit or add
+				if (array_key_exists($id,$calendars)){
+					// its an edit check name changed or duplicated
+					// so unset the array key and before doing the duplicate check
+					unset($calendars[$id]);
+				}
+				$calnames = array();
+				foreach($calendars as $cal) {
+					$calnames[] = $cal['name'];
+				}
+				if (in_array($name, $calnames)){
+					return array('value' => 1);
+				}
+				else{
+					return array('value' => 0);
+				}
 			break;
 			case 'grid':
 				$calendars = $this->listCalendars();

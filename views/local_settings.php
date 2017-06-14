@@ -23,7 +23,7 @@
 												<i class="fa fa-question-circle fpbx-help-icon" data-for="name"></i>
 											</div>
 											<div class="col-md-9">
-												<input type="text" class="form-control" id="name" name="name" value="<?php echo !empty($data['name']) ? $data['name'] : ''?>">
+												<input type="text" onblur=checkduplicate(this.value,"<?php echo $data['id'];?>") class="form-control" id="name" name="name" value="<?php echo !empty($data['name']) ? $data['name'] : ''?> ">
 											</div>
 										</div>
 									</div>
