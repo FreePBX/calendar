@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-02 18:44-0700\n"
-"PO-Revision-Date: 2017-06-14 09:48+0200\n"
+"PO-Revision-Date: 2017-06-14 09:55+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese "
 "<http://weblate.freepbx.org/projects/freepbx/calendar/vi/>\n"
@@ -34,7 +34,7 @@ msgstr "%s nhóm"
 #: views/local_settings.php:4
 #, php-format
 msgid "%s Local Calendar"
-msgstr "%s Lịch địa phương"
+msgstr "%s Lịch tại chỗ"
 
 #: views/remote_ews_settings.php:4
 #, php-format
@@ -123,7 +123,7 @@ msgstr "Thêm Nhóm"
 
 #: views/rnav.php:8
 msgid "Add New Local Calendar"
-msgstr "Thêm Lịch địa phương mới"
+msgstr "Thêm Lịch từ xa mới"
 
 #: views/rnav.php:10
 msgid "Add Remote CalDAV Calendar"
