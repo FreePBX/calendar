@@ -105,6 +105,7 @@ class Caldav {
 		$caldavClient = new SimpleCalDAVClient();
 		$caldavClient->connect($calendar['purl'], $calendar['username'], $calendar['password']);
 		$cals = $caldavClient->findCalendars();
+		$finalical =  'BEGIN:VCALENDAR';
 		foreach($calendar['calendars'] as $c) {
 			if(isset($cals[$c])) {
 				$caldavClient->setCalendar($cals[$c]);
@@ -125,8 +126,7 @@ class Caldav {
 					preg_match_all("/BEGIN:VEVENT(.*)END:VEVENT/s",$ical,$matches);
 					$middle .= $matches[0][0]."\n";
 				}
-				$finalical = $begin.$middle."END:VCALENDAR";
-				dbug($finalical);
+				$finalical .= $begin.$middle."END:VCALENDAR";
 				$cal = new IcalParser();
 				$cal->parseString($finalical);
 				$this->calendar->processiCalEvents($calendar['id'], $cal); //will ids clash? they shouldnt????
