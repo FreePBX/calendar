@@ -797,13 +797,12 @@ class Calendar extends \DB_Helper implements \BMO {
 				if($calendar['type'] !== "local" && ($last + $next) < time()) {
 					$calendar['id'] = $id;
 					$cal->processCalendar($calendar);
-
 					$cal->setConfig($id,time(),'calendar-sync');
 					$output->writeln("Done");
+					$this->FreePBX->Hooks->processHooks($calendar['id']); 
 				} else {
 					$output->writeln("Skipping");
 				}
-
 			}
 		});
 
