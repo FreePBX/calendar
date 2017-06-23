@@ -258,6 +258,10 @@ class Calendar extends \DB_Helper implements \BMO {
 				$chtml = '';
 				foreach($calendars as $calendarID) {
 					$cats = $this->getCategoriesByCalendarID($calendarID);
+					if(empty($cats)){
+						$chtml .= '<optgroup label="'.sprintf(_("No Categories for %s"),$allCalendars[$calendarID]['name']).'">';
+						continue;
+					}
 					$chtml .= '<optgroup label="'.$allCalendars[$calendarID]['name'].'">';
 					foreach($cats as $name => $events) {
 						$chtml .= '<option value="'.$calendarID.'_'.$name.'">'.$name.'</option>';
@@ -267,6 +271,10 @@ class Calendar extends \DB_Helper implements \BMO {
 				$ehtml = '';
 				foreach($calendars as $calendarID) {
 					$events = $this->listEvents($calendarID);
+					if(empty($events)){
+						$ehtml .= '<optgroup label="'.sprintf(_("No Events for %s"),$allCalendars[$calendarID]['name']).'">';
+						continue;
+					}
 					if(!empty($categories[$calendarID])) {
 						$valid = array();
 						$cats = $this->getCategoriesByCalendarID($calendarID);

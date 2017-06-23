@@ -5,12 +5,14 @@ $(document).ready(function() {
 			enableClickableOptGroups: true,
 			enableCollapsibleOptGroups: true,
 			includeSelectAllOption: true,
-			enableCaseInsensitiveFiltering: true
+			enableCaseInsensitiveFiltering: true,
+			buttonWidth: '50%'
 	});
 	$('#calendars').multiselect({
 			enableFiltering: true,
 			enableFullValueFiltering: true,
-			enableCaseInsensitiveFiltering: true
+			enableCaseInsensitiveFiltering: true,
+			buttonWidth: '50%'
 	});
 	$('#categories').multiselect({
 			enableFiltering: true,
@@ -18,7 +20,8 @@ $(document).ready(function() {
 			enableClickableOptGroups: true,
 			enableCollapsibleOptGroups: true,
 			includeSelectAllOption: true,
-			enableCaseInsensitiveFiltering: true
+			enableCaseInsensitiveFiltering: true,
+			buttonWidth: '50%'
 	});
 	$('#calendars').change(function() {
 		$.post( "ajax.php?module=calendar&command=groupeventshtml", {calendars: $(this).val(), categories: $("#categories").val()}, function( data ) {
