@@ -238,13 +238,18 @@ class Calendar extends \DB_Helper implements \BMO {
 			break;
 			case 'getcaldavcals':
 				$caldavClient = new SimpleCalDAVClient();
-				$caldavClient->connect($_POST['purl'], $_POST['username'], $_POST['password']);
+				try {
+					$caldavClient->connect($_POST['purl'], $_POST['username'], $_POST['password']);
+				} catch (\Exception $e) {
+					$chtml = $e->getMessage().'<input type="hidden" id="urlerror" value="error">';
+					return array("calshtml" => $chtml, 'status' => false);
+				}
 				$calendars = $caldavClient->findCalendars();
 				$chtml = '';
 				foreach($calendars as $calendar) {
 					$chtml .= '<option value="'.$calendar->getCalendarID().'">'.$calendar->getDisplayName().'</option>';
 				}
-				return array("calshtml" => $chtml);
+				return array("calshtml" => $chtml, 'status' => true);
 			break;
 			case 'groupeventshtml':
 				$allCalendars = $this->listCalendars();
