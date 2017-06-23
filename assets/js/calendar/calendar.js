@@ -1,5 +1,4 @@
 $("#eventForm").submit(function(e) {
-	e.preventDefault();
 	var frm = $(this);
 	var frmurl = frm.attr('action');
 	var frmdata = frm.serializeArray();
@@ -345,4 +344,16 @@ function updateAllDay() {
 		$("#allday").prop("checked",false);
 		$(".time").removeClass("hidden");
 	}
+}
+
+function checkduplicate(name,id){
+	$.ajax({url: "ajax.php?command=duplicate&module=calendar&value="+name+"&id="+id,
+	success: function(result){
+		if(result.value == 1){
+			alert("Duplicate calendar name ");
+
+		}
+	}
+	});
+
 }
