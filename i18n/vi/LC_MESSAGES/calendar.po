@@ -1,0 +1,633 @@
+# This file is part of FreePBX.
+#
+# For licensing information, please see the file named LICENSE located in the module directory
+#
+# FreePBX language template for calendar
+# Copyright (C) 2008-2017 Sangoma Technologies, Inc.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-02 18:44-0700\n"
+"PO-Revision-Date: 2017-06-14 09:55+0200\n"
+"Last-Translator: Peter Trinh <ftek@ymail.com>\n"
+"Language-Team: Vietnamese "
+"<http://weblate.freepbx.org/projects/freepbx/calendar/vi/>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2.4\n"
+
+#: views/remote_caldav_settings.php:4
+#, php-format
+msgid "%s CalDAV Calendar"
+msgstr "%s Lịch CalDAV"
+
+#: views/calendargroups.php:3
+#, php-format
+msgid "%s Group"
+msgstr "%s nhóm"
+
+#: views/local_settings.php:4
+#, php-format
+msgid "%s Local Calendar"
+msgstr "%s Lịch tại chỗ"
+
+#: views/remote_ews_settings.php:4
+#, php-format
+msgid "%s Outlook Calendar"
+msgstr "%s Lịch Outlook"
+
+#: views/remote_ical_settings.php:4
+#, php-format
+msgid "%s iCal Calendar"
+msgstr "%s Lịch iCal"
+
+#: views/remote_caldav_settings.php:184 views/remote_ews_settings.php:242
+#: views/remote_ical_settings.php:101
+msgid "1 Day"
+msgstr "1 ngày"
+
+#: views/remote_caldav_settings.php:180 views/remote_ews_settings.php:238
+#: views/remote_ical_settings.php:97
+msgid "1 Hour"
+msgstr "1 giờ"
+
+#: views/remote_caldav_settings.php:176 views/remote_ews_settings.php:234
+#: views/remote_ical_settings.php:93
+msgid "1 Minute"
+msgstr "1 phút"
+
+#: views/remote_caldav_settings.php:185 views/remote_ews_settings.php:243
+#: views/remote_ical_settings.php:102
+msgid "1 Week"
+msgstr "1 tuần"
+
+#: views/remote_caldav_settings.php:178 views/remote_ews_settings.php:236
+#: views/remote_ical_settings.php:95
+msgid "10 Minutes"
+msgstr "10 phút"
+
+#: views/remote_caldav_settings.php:183 views/remote_ews_settings.php:241
+#: views/remote_ical_settings.php:100
+msgid "12 Hours"
+msgstr "12 giờ"
+
+#: views/remote_caldav_settings.php:181 views/remote_ews_settings.php:239
+#: views/remote_ical_settings.php:98
+msgid "2 Hours"
+msgstr "2 giờ"
+
+#: views/remote_caldav_settings.php:179 views/remote_ews_settings.php:237
+#: views/remote_ical_settings.php:96
+msgid "30 Minutes"
+msgstr "30 phút"
+
+#: views/remote_caldav_settings.php:177 views/remote_ews_settings.php:235
+#: views/remote_ical_settings.php:94
+msgid "5 Minutes"
+msgstr "5 phút"
+
+#: views/remote_caldav_settings.php:182 views/remote_ews_settings.php:240
+#: views/remote_ical_settings.php:99
+msgid "6 Hours"
+msgstr "6 giờ"
+
+#: views/calendargroupgrid.php:34 views/grid.php:29
+msgid "Actions"
+msgstr "Các thao tác"
+
+#: Calendar.class.php:447
+msgid "Add"
+msgstr "Thêm"
+
+#: views/grid.php:18
+#, php-format
+msgid "Add %s"
+msgstr "Thêm %s"
+
+#: views/grid.php:14 views/rnav.php:5
+msgid "Add Calendar"
+msgstr "Thêm Lịch"
+
+#: assets/js/calendar/calendar.js:65
+msgid "Add Event"
+msgstr "Thêm Sự kiện"
+
+#: views/calendargroupgrid.php:16
+msgid "Add Group"
+msgstr "Thêm Nhóm"
+
+#: views/rnav.php:8
+msgid "Add New Local Calendar"
+msgstr "Thêm Lịch từ xa mới"
+
+#: views/rnav.php:10
+msgid "Add Remote CalDAV Calendar"
+msgstr "Thêm Lịch CalDAV  từ xa"
+
+#: views/rnav.php:13
+msgid "Add Remote Google Calendar"
+msgstr "Thêm lịch Google Từ xa"
+
+#: views/rnav.php:11
+msgid "Add Remote Outlook Calendar"
+msgstr "Thêm Lịch Outlook từ xa"
+
+#: views/rnav.php:9
+msgid "Add Remote iCal Calendar"
+msgstr "Thêm Lịch iCal từ xa"
+
+#: views/calendar.php:411 views/calendar.php:456
+msgid "After"
+msgstr "Sau khi"
+
+#: views/calendar.php:147 views/calendar.php:152
+msgid "All Day"
+msgstr "Cả ngày"
+
+#: views/calendar.php:160
+msgid "All Day Event"
+msgstr "Sự kiện cả ngày"
+
+#: views/ucp_config.php:65
+msgid "Allowed Calendar Groups"
+msgstr "Các nhóm lịch được cho phép"
+
+#: views/ucp_config.php:39
+msgid "Allowed Calendars"
+msgstr "Các lịch cho phép"
+
+#: calendar.i18n.php:6
+msgid "Applications"
+msgstr "Các ứng dụng"
+
+#: views/remote_ews_settings.php:277
+msgid "Attempting to load"
+msgstr "Đang cố tải"
+
+#: views/remote_caldav_settings.php:220
+msgid "Attempting to load..."
+msgstr "Đang cố tải..."
+
+#: views/remote_ews_settings.php:139
+msgid "Autodetect"
+msgstr "Tự động phát hiện"
+
+#: Calendar.class.php:1246 Console/Calendar.class.php:18 calendar.i18n.php:4
+#: calendar.i18n.php:10
+msgid "Calendar"
+msgstr "Lịch"
+
+#: calendar.i18n.php:12
+msgid "Calendar Event Groups"
+msgstr "Các nhóm Lịch sự kiện"
+
+#: functions.inc.php:18 functions.inc.php:32
+#, php-format
+msgid "Calendar Group: %s"
+msgstr "Nhóm lịch: %s"
+
+#: functions.inc.php:19
+msgid "Calendar Groups"
+msgstr "Các nhóm lịch"
+
+#: views/calendargroupgrid.php:11
+msgid ""
+"Calendar event groups are a collection of calendars, events or categories "
+"from the Calendar Module."
+msgstr ""
+"Các nhóm lịch sự kiện là một tập hợp các lịch, sự kiện hoặc danh mục từ Mô "
+"đun Lịch."
+
+#: views/ucp_config.php:79
+msgid "Calendar groups the user may utilize."
+msgstr "Các nhóm lịch người dùng có thể sử dụng."
+
+#: views/calendargroups.php:43 views/remote_caldav_settings.php:133
+#: views/remote_ews_settings.php:191
+msgid "Calendars"
+msgstr "Các lịch"
+
+#: views/ucp_config.php:53
+msgid "Calendars the user may utilize"
+msgstr "Các lịch người dùng có thể sử dụng"
+
+#: views/calendar.php:479
+msgid "Close"
+msgstr "Đóng"
+
+#: views/calendar.php:384
+msgid "Day of the month"
+msgstr "Ngày trong tháng"
+
+#: views/calendar.php:386
+msgid "Day of the week"
+msgstr "Ngày trong tuần"
+
+#: assets/js/calendar/calendar.js:303
+msgid "Days"
+msgstr "Các ngày"
+
+#: Calendar.class.php:1134 Calendar.class.php:1172
+msgid "Delete"
+msgstr "Xóa"
+
+#: views/calendar.php:478
+msgid "Delete Event"
+msgstr "Xóa sự kiện"
+
+#: views/grid.php:27 views/local_settings.php:44
+#: views/remote_caldav_settings.php:44 views/remote_ews_settings.php:44
+#: views/remote_ical_settings.php:44
+msgid "Description"
+msgstr "Mô tả"
+
+#: views/calendar.php:81
+msgid "Description for the event"
+msgstr "Mô tả cho sự kiện"
+
+#: views/remote_ews_settings.php:132
+msgid "EWS Server URL"
+msgstr "URL máy chủ EWS"
+
+#: views/remote_ews_settings.php:159
+msgid "EWS Version"
+msgstr "Phiên bản EWS"
+
+#: Calendar.class.php:452
+msgid "Edit"
+msgstr "Hiệu chỉnh"
+
+#: views/calendar.php:12
+msgid "Edit Settings"
+msgstr "Cài đặt hiệu chỉnh"
+
+#: views/remote_ews_settings.php:66
+msgid "Email"
+msgstr "Thư điện tử"
+
+#: views/ucp_config.php:7
+msgid "Enable Calendar"
+msgstr "Bật Lịch"
+
+#: views/calendar.php:120
+msgid "End Date"
+msgstr "Ngày kết thúc"
+
+#: views/calendar.php:196
+msgid "End Time"
+msgstr "Thời gian kết thúc"
+
+#: views/calendar.php:404 views/calendar.php:421
+msgid "Ends"
+msgstr "Kết thúc"
+
+#: views/calendar.php:30
+msgid "Event"
+msgstr "Sự kiện"
+
+#: views/calendar.php:69
+msgid "Event Description"
+msgstr "Mô tả sự kiện"
+
+#: views/calendar.php:45
+msgid "Event Title"
+msgstr "Tiêu đề sự kiện"
+
+#: views/calendargroups.php:59
+msgid "Events to include in to this group"
+msgstr "Các sự kiện bao gồm trong nhóm này"
+
+#: views/calendar.php:57
+msgid "Friendly name for the event"
+msgstr "Tên thân thiện cho sự kiện"
+
+#: views/calendargroupgrid.php:33
+msgid "Group"
+msgstr "Nhóm"
+
+#: views/remote_caldav_settings.php:194 views/remote_ews_settings.php:252
+#: views/remote_ical_settings.php:111
+msgid "How often this calendar will synchronize with the remote server"
+msgstr ""
+"Mức độ thường xuyên mà Lịch này sẽ đồng bộ hóa với máy chủ từ xa như thế nào"
+
+#: Calendar.class.php:1223 Calendar.class.php:1231 views/ucp_config.php:18
+msgid "Inherit"
+msgstr "Thừa kế"
+
+#: views/rnav.php:2
+msgid "List Calendars"
+msgstr "Danh sách Lịch"
+
+#: drivers/Local.class.php:14
+msgid "Local Calendar"
+msgstr "Lịch tại chỗ"
+
+#: assets/js/calendar/calendar.js:316
+msgid "Months"
+msgstr "Tháng"
+
+#: views/calendargroupgrid.php:11
+msgid ""
+"Multiple calendars, events and/or categories can be placed into separate "
+"groups. Even multiple events from different calendars can be placed into a "
+"single group!"
+msgstr ""
+"Nhiều lịch, sự kiện và / hoặc danh mục có thể được đặt vào trong các nhóm "
+"riêng biệt. Thậm chí nhiều sự kiện từ các lịch khác nhau có thể được đặt vào "
+"một nhóm đơn!"
+
+#: views/calendargroups.php:19 views/grid.php:26 views/local_settings.php:22
+#: views/remote_caldav_settings.php:22 views/remote_ews_settings.php:22
+#: views/remote_ical_settings.php:22 views/rnav.php:30
+msgid "Name"
+msgstr "Tên"
+
+#: views/calendargroups.php:31
+msgid "Name of this group"
+msgstr "Tên của Nhóm này"
+
+#: views/calendar.php:409
+msgid "Never"
+msgstr "Không bao giờ"
+
+#: views/ucp_config.php:15
+msgid "No"
+msgstr "Không"
+
+#: PhpEws/Calendar.php:50
+msgid "No settings were discovered"
+msgstr "Không có cài đặt nào được phát hiện"
+
+#: views/calendar.php:431
+msgid "Occurrences"
+msgstr "Lần xuất hiện"
+
+#: views/calendar.php:413
+msgid "On"
+msgstr "Trên"
+
+#: views/remote_caldav_settings.php:110 views/remote_ews_settings.php:110
+msgid "Password"
+msgstr "Mật khẩu"
+
+#: views/remote_caldav_settings.php:153 views/remote_ews_settings.php:211
+msgid "Please enter valid credentials above"
+msgstr "Vui lòng nhập các chứng chỉ hợp lệ trên"
+
+#: views/remote_caldav_settings.php:66
+msgid "Principal URL"
+msgstr "URL chính"
+
+#: drivers/Caldav.class.php:21
+msgid "Remote CalDAV Calendar"
+msgstr "Lịch CalDAV từ xa"
+
+#: drivers/Ews.class.php:21
+msgid "Remote Outlook Calendar"
+msgstr "Lịch Outlook từ xa"
+
+#: views/remote_ical_settings.php:66
+msgid "Remote URL"
+msgstr "URL từ xa"
+
+#: drivers/Ical.class.php:20
+msgid "Remote iCal Calendar"
+msgstr "Lịch iCal từ xa"
+
+#: views/calendar.php:244 views/calendar.php:249
+msgid "Reoccurring"
+msgstr "Tuần hoàn"
+
+#: views/calendar.php:257
+msgid "Reoccurring Event"
+msgstr "Các sự kiện tuần hoàn"
+
+#: views/calendar.php:298
+msgid "Repeat Every"
+msgstr "Lặp lại vào mỗi"
+
+#: views/calendar.php:354
+msgid "Repeat On"
+msgstr "Lặp lại trên"
+
+#: views/calendar.php:379
+msgid "Repeat by"
+msgstr "Lặp lại bởi"
+
+#: views/calendar.php:268 views/calendar.php:288 views/calendar.php:344
+#: views/calendar.php:369 views/calendar.php:394 views/calendar.php:471
+msgid "Repeats"
+msgstr "Lặp lại"
+
+#: Calendar.class.php:1120 Calendar.class.php:1139 Calendar.class.php:1158
+#: Calendar.class.php:1177
+msgid "Reset"
+msgstr "Cài đặt lại"
+
+#: utests/eventFilterTest.php:53
+msgid "Returned date range was not as expected"
+msgstr "Vùng ngày trả lại không như ý muốn"
+
+#: views/remote_caldav_settings.php:161 views/remote_ews_settings.php:219
+msgid "Select specific calendars"
+msgstr "Chọn lịch cụ thể"
+
+#: views/calendargroups.php:84
+msgid ""
+"Select specific cateogories for this group. If no events are selected but "
+"categories are selected then all events in said categories will match. "
+"Changing categories will change events below"
+msgstr ""
+"Chọn các danh mục cụ thể cho nhóm này. Nếu không có sự kiện nào được chọn "
+"nhưng danh mục được chọn thì tất cả các sự kiện trong các danh mục đó sẽ "
+"khớp. Thay đổi danh mục sẽ thay đổi các sự kiện dưới đây"
+
+#: views/calendargroups.php:109
+msgid ""
+"Select specific events for this group. If no events are selected but "
+"categories are selected then all events in said categories will match"
+msgstr ""
+"Chọn các sự kiện cụ thể cho nhóm này. Nếu không có sự kiện nào được chọn "
+"nhưng danh mục được chọn thì tất cả các sự kiện trong các danh mục đó sẽ khớp"
+
+#: views/calendargroups.php:71
+msgid "Specific Categories"
+msgstr "Các danh mục cụ thể"
+
+#: views/calendargroups.php:96
+msgid "Specific Events"
+msgstr "Các sự kiện cụ thể"
+
+#: views/calendar.php:93
+msgid "Start Date"
+msgstr "Ngày bắt đầu"
+
+#: views/calendar.php:172
+msgid "Start Time"
+msgstr "Thời gian bắt đầu"
+
+#: Calendar.class.php:1125 Calendar.class.php:1144 Calendar.class.php:1163
+#: Calendar.class.php:1182 views/calendar.php:480
+msgid "Submit"
+msgstr "Gửi đi"
+
+#: views/remote_caldav_settings.php:171 views/remote_ews_settings.php:229
+#: views/remote_ical_settings.php:88
+msgid "Synchronization Time"
+msgstr "Thời gian đồng bộ hóa"
+
+#: views/remote_caldav_settings.php:100
+msgid "The Userman for this calendar"
+msgstr "Tên người dùng cho lịch này"
+
+#: views/remote_ews_settings.php:56
+msgid "The description of this calendar"
+msgstr "Mô tả của lịch này"
+
+#: views/remote_ews_settings.php:78
+msgid "The email address of this calendar's user [Optional]"
+msgstr "Địa chỉ thư điện tử của người dùng lịch này [Lựa chọn]"
+
+#: views/local_settings.php:34 views/local_settings.php:56
+#: views/remote_caldav_settings.php:34 views/remote_caldav_settings.php:56
+#: views/remote_ews_settings.php:34 views/remote_ical_settings.php:34
+#: views/remote_ical_settings.php:56
+msgid "The name of this calendar"
+msgstr "Tên của lịch này"
+
+#: views/remote_caldav_settings.php:122
+msgid "The password for this calendar"
+msgstr "Mật khẩu cho lịch này"
+
+#: views/remote_ews_settings.php:122
+msgid "The password of this calendar's user"
+msgstr "Mật khẩu của người dùng lịch này"
+
+#: views/remote_caldav_settings.php:78
+msgid "The principal url for this calendar"
+msgstr "Url chính cho lịch này"
+
+#: views/remote_ews_settings.php:149 views/remote_ews_settings.php:181
+#: views/remote_ical_settings.php:78
+msgid "The remote url for this calendar"
+msgstr "Url từ xa cho lịch này"
+
+#: views/calendar.php:108
+msgid "The time to start the event"
+msgstr "Thời gian để khởi động sự kiện"
+
+#: views/remote_ews_settings.php:100
+msgid "The username of this calendar's user"
+msgstr "Tên người dùng của người dùng lịch này"
+
+#: assets/js/calendar/calendar.js:142
+msgid "There was an error fetching the events"
+msgstr "Đã xảy ra lỗi khi tìm nạp các sự kiện"
+
+#: views/calendargroupgrid.php:11
+msgid "These groups can then be linked to various applications or utilities"
+msgstr ""
+"Những nhóm này sau đó có thể được kết nối tới các ứng dụng hoặc các tiện ích "
+"khác nhau"
+
+#: calendar.i18n.php:8
+msgid ""
+"This module is used to manage calendar and time based events for FreePBX"
+msgstr ""
+"Mô đun này được sử dụng để quản lý các sự kiện dựa trên lịch và thời gian "
+"đối với FreePBX"
+
+#: views/calendar.php:184
+msgid "Time event starts"
+msgstr "Thời gian sự kiện bắt đầu"
+
+#: views/calendar.php:208
+msgid "Time the event ends"
+msgstr "Thời gian sự kiện kết thúc"
+
+#: views/calendar.php:135
+msgid "Time this event ends"
+msgstr "Thời gian sự kiện này kết thúc"
+
+#: views/calendar.php:220 views/local_settings.php:67
+msgid "Timezone"
+msgstr "Khung thời gian"
+
+#: views/local_settings.php:79
+msgid "Timezone for this Calendar"
+msgstr "Múi giờ cho lịch này"
+
+#: views/calendar.php:232
+msgid "Timezone for this event"
+msgstr "Múi giờ cho sự kiện này"
+
+#: views/grid.php:28 views/rnav.php:31
+msgid "Type"
+msgstr "Kiểu"
+
+#: PhpEws/Calendar.php:75
+msgid "Unable to determine server URL"
+msgstr "Không thể xác định URL máy chủ"
+
+#: views/calendar.php:10 assets/js/calendar/calendar.js:255
+msgid "Update from Source"
+msgstr "Cập nhật từ nguồn"
+
+#: assets/js/calendar/calendar.js:242
+msgid "Updating..."
+msgstr "Đang cập nhật..."
+
+#: views/calendar.php:224
+msgid "Use Calendar Timezone"
+msgstr "Sử dụng múi giờ lịch"
+
+#: views/remote_caldav_settings.php:88 views/remote_ews_settings.php:88
+msgid "Username"
+msgstr "Tên người dùng"
+
+#: views/calendargroupgrid.php:15
+msgid "View Calendars"
+msgstr "Xem lịch"
+
+#: views/calendar.php:7
+#, php-format
+msgid "Viewing Calendar '%s'"
+msgstr "Đang xem Lịch '%s'"
+
+#: assets/js/calendar/calendar.js:300
+msgid "Weeks"
+msgstr "Các tuần"
+
+#: views/calendargroupgrid.php:7
+msgid "What are Calendar Event Groups?"
+msgstr "Nhóm sự kiện lịch là gì?"
+
+#: views/ucp_config.php:28
+msgid "Whether to allow this user to be able to access the calendar in UCP"
+msgstr "Có cho phép người dùng có thể truy cập vào lịch trong UCP không"
+
+#: assets/js/calendar/calendar.js:322
+msgid "Years"
+msgstr "Năm"
+
+#: views/ucp_config.php:13
+msgid "Yes"
+msgstr "Có"
+
+#: drivers/Ews.class.php:78 drivers/Ews.class.php:91
+msgid "You are missing the PHP SoapClient library. Please install to continue"
+msgstr "Bạn đang thiếu thư viện PHP SoapClient. Vui lòng cài đặt để tiếp tục"
+
+#: views/calendar.php:437 views/calendar.php:446
+msgid "occurrences"
+msgstr "Lần xuất hiện"
+
+#: Calendar.class.php:285
+msgid "to"
+msgstr "Tới"
