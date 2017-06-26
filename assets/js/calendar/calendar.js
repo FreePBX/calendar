@@ -84,6 +84,13 @@ if($('#calendar').length && !readonly) {
 
 $(document).ready(function() {
 
+	$(".calform").on('submit',function(e){
+		if($('[name="action"]').val() !== "edit" && calnames.indexOf($("#name").val()) > -1){
+			warnInvalid($("#name"),_("Calendar names should be unique."));
+			return false;
+		}
+	});
+
 	$("#allday").click(function() {
 		if($(this).is(":checked")) {
 			$(".time").addClass("hidden");
