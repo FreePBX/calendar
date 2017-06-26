@@ -8,6 +8,7 @@
 		<div class="col-sm-12">
 			<div class="fpbx-container">
 				<div class="display full-border">
+					<form class="fpbx-submit calform" method="post" action="?display=calendar" id="icalform" name="icalform" data-fpbx-delete="config.php?display=calendar&amp;id=<?php echo !empty($data['id']) ? $data['id'] : ''?>&amp;action=delete">
 					<form class="fpbx-submit calform" method="post" action="?display=calendar" data-fpbx-delete="config.php?display=calendar&amp;id=<?php echo !empty($data['id']) ? $data['id'] : ''?>&amp;action=delete">
 						<input type="hidden" name="action" value="<?php echo $action?>">
 						<input type="hidden" name="type" value="ical">
