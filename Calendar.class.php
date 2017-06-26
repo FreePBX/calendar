@@ -544,6 +544,17 @@ class Calendar extends \DB_Helper implements \BMO {
 		return $calendars;
 	}
 
+	public function namesJSON(){
+		$cals = $this->listCalendars();
+		$ret = array();
+		$cals = is_array($cals)?$cals:array();
+		foreach ($cals as $cal) {
+			if(isset($cal['name'])){
+				$ret[] = $cal['name'];
+			}
+		}
+		return '<script> var calnames='.json_encode($ret).'</script>';
+	}
 	/**
 	 * Delete Calendar by ID
 	 * @param  string $id The calendar ID
@@ -834,7 +845,7 @@ class Calendar extends \DB_Helper implements \BMO {
 					$cal->processCalendar($calendar);
 					$cal->setConfig($id,time(),'calendar-sync');
 					$output->writeln("Done");
-					$this->FreePBX->Hooks->processHooks($calendar['id']); 
+					$this->FreePBX->Hooks->processHooks($calendar['id']);
 				} else {
 					$output->writeln("Skipping");
 				}
