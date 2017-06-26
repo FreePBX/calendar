@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-23 14:35-0700\n"
+"POT-Creation-Date: 2017-06-26 13:46-0700\n"
 "PO-Revision-Date: 2017-06-14 09:55+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese <http://weblate.freepbx.org/projects/freepbx/"
@@ -47,52 +47,52 @@ msgid "%s iCal Calendar"
 msgstr "%s Lịch iCal"
 
 #: views/remote_caldav_settings.php:184 views/remote_ews_settings.php:242
-#: views/remote_ical_settings.php:101
+#: views/remote_ical_settings.php:102
 msgid "1 Day"
 msgstr "1 ngày"
 
 #: views/remote_caldav_settings.php:180 views/remote_ews_settings.php:238
-#: views/remote_ical_settings.php:97
+#: views/remote_ical_settings.php:98
 msgid "1 Hour"
 msgstr "1 giờ"
 
 #: views/remote_caldav_settings.php:176 views/remote_ews_settings.php:234
-#: views/remote_ical_settings.php:93
+#: views/remote_ical_settings.php:94
 msgid "1 Minute"
 msgstr "1 phút"
 
 #: views/remote_caldav_settings.php:185 views/remote_ews_settings.php:243
-#: views/remote_ical_settings.php:102
+#: views/remote_ical_settings.php:103
 msgid "1 Week"
 msgstr "1 tuần"
 
 #: views/remote_caldav_settings.php:178 views/remote_ews_settings.php:236
-#: views/remote_ical_settings.php:95
+#: views/remote_ical_settings.php:96
 msgid "10 Minutes"
 msgstr "10 phút"
 
 #: views/remote_caldav_settings.php:183 views/remote_ews_settings.php:241
-#: views/remote_ical_settings.php:100
+#: views/remote_ical_settings.php:101
 msgid "12 Hours"
 msgstr "12 giờ"
 
 #: views/remote_caldav_settings.php:181 views/remote_ews_settings.php:239
-#: views/remote_ical_settings.php:98
+#: views/remote_ical_settings.php:99
 msgid "2 Hours"
 msgstr "2 giờ"
 
 #: views/remote_caldav_settings.php:179 views/remote_ews_settings.php:237
-#: views/remote_ical_settings.php:96
+#: views/remote_ical_settings.php:97
 msgid "30 Minutes"
 msgstr "30 phút"
 
 #: views/remote_caldav_settings.php:177 views/remote_ews_settings.php:235
-#: views/remote_ical_settings.php:94
+#: views/remote_ical_settings.php:95
 msgid "5 Minutes"
 msgstr "5 phút"
 
 #: views/remote_caldav_settings.php:182 views/remote_ews_settings.php:240
-#: views/remote_ical_settings.php:99
+#: views/remote_ical_settings.php:100
 msgid "6 Hours"
 msgstr "6 giờ"
 
@@ -177,7 +177,7 @@ msgstr "Đang cố tải..."
 msgid "Autodetect"
 msgstr "Tự động phát hiện"
 
-#: Calendar.class.php:1280 Console/Calendar.class.php:18 calendar.i18n.php:4
+#: Calendar.class.php:1291 Console/Calendar.class.php:18 calendar.i18n.php:4
 #: calendar.i18n.php:10
 msgid "Calendar"
 msgstr "Lịch"
@@ -207,6 +207,10 @@ msgstr ""
 msgid "Calendar groups the user may utilize."
 msgstr "Các nhóm lịch người dùng có thể sử dụng."
 
+#: assets/js/calendar/calendar.js:89
+msgid "Calendar names should be unique."
+msgstr ""
+
 #: views/calendargroups.php:43 views/remote_caldav_settings.php:133
 #: views/remote_ews_settings.php:191
 msgid "Calendars"
@@ -228,11 +232,11 @@ msgstr "Ngày trong tháng"
 msgid "Day of the week"
 msgstr "Ngày trong tuần"
 
-#: assets/js/calendar/calendar.js:302
+#: assets/js/calendar/calendar.js:309
 msgid "Days"
 msgstr "Các ngày"
 
-#: Calendar.class.php:1168 Calendar.class.php:1206
+#: Calendar.class.php:1179 Calendar.class.php:1217
 msgid "Delete"
 msgstr "Xóa"
 
@@ -242,7 +246,7 @@ msgstr "Xóa sự kiện"
 
 #: views/grid.php:27 views/local_settings.php:44
 #: views/remote_caldav_settings.php:44 views/remote_ews_settings.php:44
-#: views/remote_ical_settings.php:44
+#: views/remote_ical_settings.php:45
 msgid "Description"
 msgstr "Mô tả"
 
@@ -311,12 +315,12 @@ msgid "Group"
 msgstr "Nhóm"
 
 #: views/remote_caldav_settings.php:194 views/remote_ews_settings.php:252
-#: views/remote_ical_settings.php:111
+#: views/remote_ical_settings.php:112
 msgid "How often this calendar will synchronize with the remote server"
 msgstr ""
 "Mức độ thường xuyên mà Lịch này sẽ đồng bộ hóa với máy chủ từ xa như thế nào"
 
-#: Calendar.class.php:1257 Calendar.class.php:1265 views/ucp_config.php:18
+#: Calendar.class.php:1268 Calendar.class.php:1276 views/ucp_config.php:18
 msgid "Inherit"
 msgstr "Thừa kế"
 
@@ -328,7 +332,7 @@ msgstr "Danh sách Lịch"
 msgid "Local Calendar"
 msgstr "Lịch tại chỗ"
 
-#: assets/js/calendar/calendar.js:315
+#: assets/js/calendar/calendar.js:322
 msgid "Months"
 msgstr "Tháng"
 
@@ -344,7 +348,7 @@ msgstr ""
 
 #: views/calendargroups.php:19 views/grid.php:26 views/local_settings.php:22
 #: views/remote_caldav_settings.php:22 views/remote_ews_settings.php:22
-#: views/remote_ical_settings.php:22 views/rnav.php:30
+#: views/remote_ical_settings.php:23 views/rnav.php:30
 msgid "Name"
 msgstr "Tên"
 
@@ -402,7 +406,7 @@ msgstr "Lịch CalDAV từ xa"
 msgid "Remote Outlook Calendar"
 msgstr "Lịch Outlook từ xa"
 
-#: views/remote_ical_settings.php:66
+#: views/remote_ical_settings.php:67
 msgid "Remote URL"
 msgstr "URL từ xa"
 
@@ -435,8 +439,8 @@ msgstr "Lặp lại bởi"
 msgid "Repeats"
 msgstr "Lặp lại"
 
-#: Calendar.class.php:1154 Calendar.class.php:1173 Calendar.class.php:1192
-#: Calendar.class.php:1211
+#: Calendar.class.php:1165 Calendar.class.php:1184 Calendar.class.php:1203
+#: Calendar.class.php:1222
 msgid "Reset"
 msgstr "Cài đặt lại"
 
@@ -482,13 +486,13 @@ msgstr "Ngày bắt đầu"
 msgid "Start Time"
 msgstr "Thời gian bắt đầu"
 
-#: Calendar.class.php:1159 Calendar.class.php:1178 Calendar.class.php:1197
-#: Calendar.class.php:1216 views/calendar.php:480
+#: Calendar.class.php:1170 Calendar.class.php:1189 Calendar.class.php:1208
+#: Calendar.class.php:1227 views/calendar.php:480
 msgid "Submit"
 msgstr "Gửi đi"
 
 #: views/remote_caldav_settings.php:171 views/remote_ews_settings.php:229
-#: views/remote_ical_settings.php:88
+#: views/remote_ical_settings.php:89
 msgid "Synchronization Time"
 msgstr "Thời gian đồng bộ hóa"
 
@@ -506,8 +510,8 @@ msgstr "Địa chỉ thư điện tử của người dùng lịch này [Lựa c
 
 #: views/local_settings.php:34 views/local_settings.php:56
 #: views/remote_caldav_settings.php:34 views/remote_caldav_settings.php:56
-#: views/remote_ews_settings.php:34 views/remote_ical_settings.php:34
-#: views/remote_ical_settings.php:56
+#: views/remote_ews_settings.php:34 views/remote_ical_settings.php:35
+#: views/remote_ical_settings.php:57
 msgid "The name of this calendar"
 msgstr "Tên của lịch này"
 
@@ -524,7 +528,7 @@ msgid "The principal url for this calendar"
 msgstr "Url chính cho lịch này"
 
 #: views/remote_ews_settings.php:149 views/remote_ews_settings.php:181
-#: views/remote_ical_settings.php:78
+#: views/remote_ical_settings.php:79
 msgid "The remote url for this calendar"
 msgstr "Url từ xa cho lịch này"
 
@@ -536,7 +540,7 @@ msgstr "Thời gian để khởi động sự kiện"
 msgid "The username of this calendar's user"
 msgstr "Tên người dùng của người dùng lịch này"
 
-#: assets/js/calendar/calendar.js:141
+#: assets/js/calendar/calendar.js:148
 msgid "There was an error fetching the events"
 msgstr "Đã xảy ra lỗi khi tìm nạp các sự kiện"
 
@@ -585,11 +589,11 @@ msgstr "Kiểu"
 msgid "Unable to determine server URL"
 msgstr "Không thể xác định URL máy chủ"
 
-#: views/calendar.php:10 assets/js/calendar/calendar.js:254
+#: views/calendar.php:10 assets/js/calendar/calendar.js:261
 msgid "Update from Source"
 msgstr "Cập nhật từ nguồn"
 
-#: assets/js/calendar/calendar.js:241
+#: assets/js/calendar/calendar.js:248
 msgid "Updating..."
 msgstr "Đang cập nhật..."
 
@@ -610,7 +614,7 @@ msgstr "Xem lịch"
 msgid "Viewing Calendar '%s'"
 msgstr "Đang xem Lịch '%s'"
 
-#: assets/js/calendar/calendar.js:299
+#: assets/js/calendar/calendar.js:306
 msgid "Weeks"
 msgstr "Các tuần"
 
@@ -622,7 +626,7 @@ msgstr "Nhóm sự kiện lịch là gì?"
 msgid "Whether to allow this user to be able to access the calendar in UCP"
 msgstr "Có cho phép người dùng có thể truy cập vào lịch trong UCP không"
 
-#: assets/js/calendar/calendar.js:321
+#: assets/js/calendar/calendar.js:328
 msgid "Years"
 msgstr "Năm"
 
