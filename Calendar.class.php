@@ -320,7 +320,7 @@ class Calendar extends \DB_Helper implements \BMO {
 				}
 				$calnames = array();
 				foreach($calendars as $cal) {
-					$calnames[] = $cal['name'];
+					$calnames[] = trim($cal['name']);
 				}
 				if (in_array($name, $calnames)){
 					return array('value' => 1);
