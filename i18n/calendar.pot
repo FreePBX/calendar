@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-26 13:46-0700\n"
+"POT-Creation-Date: 2017-06-28 14:36-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,7 +122,7 @@ msgstr ""
 msgid "Add Calendar"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:64
+#: assets/js/calendar/calendar.js:65
 msgid "Add Event"
 msgstr ""
 
@@ -219,7 +219,7 @@ msgstr ""
 msgid "Calendar groups the user may utilize."
 msgstr ""
 
-#: assets/js/calendar/calendar.js:89
+#: assets/js/calendar/calendar.js:90
 msgid "Calendar names should be unique."
 msgstr ""
 
@@ -245,7 +245,7 @@ msgstr ""
 msgid "Day of the week"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:309
+#: assets/js/calendar/calendar.js:310
 msgid "Days"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgstr ""
 msgid "Local Calendar"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:322
+#: assets/js/calendar/calendar.js:323
 msgid "Months"
 msgstr ""
 
@@ -573,7 +573,7 @@ msgstr ""
 msgid "The username of this calendar's user"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:148
+#: assets/js/calendar/calendar.js:149
 msgid "There was an error fetching the events"
 msgstr ""
 
@@ -621,11 +621,11 @@ msgid "Unable to determine server URL"
 msgstr ""
 
 #: views/calendar.php:10
-#: assets/js/calendar/calendar.js:261
+#: assets/js/calendar/calendar.js:262
 msgid "Update from Source"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:248
+#: assets/js/calendar/calendar.js:249
 msgid "Updating..."
 msgstr ""
 
@@ -647,7 +647,7 @@ msgstr ""
 msgid "Viewing Calendar '%s'"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:306
+#: assets/js/calendar/calendar.js:307
 msgid "Weeks"
 msgstr ""
 
@@ -659,7 +659,7 @@ msgstr ""
 msgid "Whether to allow this user to be able to access the calendar in UCP"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:328
+#: assets/js/calendar/calendar.js:329
 msgid "Years"
 msgstr ""
 
