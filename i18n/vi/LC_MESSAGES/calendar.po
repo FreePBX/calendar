@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-28 14:36-0700\n"
+"POT-Creation-Date: 2017-07-17 09:20-0700\n"
 "PO-Revision-Date: 2017-06-14 09:55+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese <http://weblate.freepbx.org/projects/freepbx/"
@@ -207,7 +207,7 @@ msgstr ""
 msgid "Calendar groups the user may utilize."
 msgstr "Các nhóm lịch người dùng có thể sử dụng."
 
-#: assets/js/calendar/calendar.js:90
+#: assets/js/calendar/calendar.js:89
 msgid "Calendar names should be unique."
 msgstr ""
 
@@ -232,7 +232,7 @@ msgstr "Ngày trong tháng"
 msgid "Day of the week"
 msgstr "Ngày trong tuần"
 
-#: assets/js/calendar/calendar.js:310
+#: assets/js/calendar/calendar.js:309
 msgid "Days"
 msgstr "Các ngày"
 
@@ -332,7 +332,7 @@ msgstr "Danh sách Lịch"
 msgid "Local Calendar"
 msgstr "Lịch tại chỗ"
 
-#: assets/js/calendar/calendar.js:323
+#: assets/js/calendar/calendar.js:322
 msgid "Months"
 msgstr "Tháng"
 
@@ -540,7 +540,7 @@ msgstr "Thời gian để khởi động sự kiện"
 msgid "The username of this calendar's user"
 msgstr "Tên người dùng của người dùng lịch này"
 
-#: assets/js/calendar/calendar.js:149
+#: assets/js/calendar/calendar.js:148
 msgid "There was an error fetching the events"
 msgstr "Đã xảy ra lỗi khi tìm nạp các sự kiện"
 
@@ -589,11 +589,11 @@ msgstr "Kiểu"
 msgid "Unable to determine server URL"
 msgstr "Không thể xác định URL máy chủ"
 
-#: views/calendar.php:10 assets/js/calendar/calendar.js:262
+#: views/calendar.php:10 assets/js/calendar/calendar.js:261
 msgid "Update from Source"
 msgstr "Cập nhật từ nguồn"
 
-#: assets/js/calendar/calendar.js:249
+#: assets/js/calendar/calendar.js:248
 msgid "Updating..."
 msgstr "Đang cập nhật..."
 
@@ -614,7 +614,7 @@ msgstr "Xem lịch"
 msgid "Viewing Calendar '%s'"
 msgstr "Đang xem Lịch '%s'"
 
-#: assets/js/calendar/calendar.js:307
+#: assets/js/calendar/calendar.js:306
 msgid "Weeks"
 msgstr "Các tuần"
 
@@ -626,7 +626,7 @@ msgstr "Nhóm sự kiện lịch là gì?"
 msgid "Whether to allow this user to be able to access the calendar in UCP"
 msgstr "Có cho phép người dùng có thể truy cập vào lịch trong UCP không"
 
-#: assets/js/calendar/calendar.js:329
+#: assets/js/calendar/calendar.js:328
 msgid "Years"
 msgstr "Năm"
 

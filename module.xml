@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>14.0.1.1</version>
+	<version>14.0.1.2</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -13,6 +13,7 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
+		*14.0.1.2* FREEPBX-14951 Fix whitespace in name, trim validation
 		*14.0.1.1* FREEPBX-15188 Fix Event form to submit properly through AJAX
 		*14.0.1* Stable release
 		*14.0.1beta2* FREEPBX-15175 FREEPBX-14951
