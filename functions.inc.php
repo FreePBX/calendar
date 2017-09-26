@@ -3,16 +3,13 @@
  *These functions should generally make a BMO Call if possible.
  */
 
- $cal = FreePBX::Calendar();
-
  function calendar_getdest($exten) {
  	return array("calendargroups,$exten,1");
  }
 
  function calendar_destinations(){
-  global $cal;
  	$extens = array();
-  foreach($cal->listGroups() as $id => $group){
+  foreach(FreePBX::Calendar()->listGroups() as $id => $group){
    	$extens[] = array(
    		'destination' => 'calendargroups,'.$id.',1',
    		'description' => sprintf(_("Calendar Group: %s"),$group['description']),
@@ -24,10 +21,9 @@
 
 
  function calendar_getdestinfo($dest) {
-  global $cal;
  	if (substr(trim($dest),0,14) == 'calendargroups') {
     $parts = explode(',', $dest);
-    $group = $cal->getGroup($parts[1]);
+    $group = FreePBX::Calendar()->getGroup($parts[1]);
  		return array(
  			'description' => sprintf(_("Calendar Group: %s"),$group['description']),
  			'edit_url' => '?display=calendargroups&view=form&id='.$parts[1]
