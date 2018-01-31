@@ -14,7 +14,6 @@ $("#generate-ical-link").click(function(e) {
 	$(this).text(_('Generating...'));
 	$.get( "ajax.php?module=calendar&command=generateical&id="+calendarid)
 	.done(function(data) {
-		console.log(data);
 		if(data.status) {
 			$("#ical-link").removeClass("hidden");
 			$("#ical-link").attr('href',data.href);
