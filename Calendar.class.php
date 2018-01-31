@@ -12,11 +12,10 @@ use Eluceo\iCal\Component\Calendar as iCalendar;
 use Eluceo\iCal\Component\Event;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
 use \jamesiarmes\PhpEws\Client;
-use \FreePBX\modules\Calendar\PhpEws\Calendar as EWSCalendar;
+use \FreePBX\modules\Calendar\drivers\Ews\Calendar as EWSCalendar;
 use malkusch\lock\mutex\FlockMutex;
 
 include __DIR__."/vendor/autoload.php";
-include __DIR__."/PhpEws/Calendar.php";
 
 class Calendar extends \DB_Helper implements \BMO {
 	private $now; //right now, private so it doesnt keep updating
@@ -76,7 +75,7 @@ class Calendar extends \DB_Helper implements \BMO {
 		$ampbin = $this->FreePBX->Config->get('AMPSBIN');
 		$this->FreePBX->Cron->add(array(
 			'minute' => '*/1',
-			"command" => $ampbin.'/fwconsole calendar sync 2>&1 > /dev/null')
+			"command" => $ampbin.'/fwconsole calendar --sync 2>&1 > /dev/null')
 		);
 	}
 	public function uninstall(){
@@ -164,13 +163,15 @@ class Calendar extends \DB_Helper implements \BMO {
 		if(!empty($this->drivers)) {
 			return $this->drivers;
 		}
-		foreach(glob(__DIR__."/drivers/*.class.php") as $driver) {
+		foreach(glob(__DIR__."/drivers/*.php") as $driver) {
 			$name = basename($driver);
 			$name = explode(".",$name);
 			$name = $name[0];
 			$name = ucfirst(strtolower($name));
-			$class = "\FreePBX\modules\Calendar\driver\\".$name;
-			include($driver);
+			if($name === 'Base') {
+				continue;
+			}
+			$class = "\FreePBX\modules\Calendar\drivers\\".$name;
 			$this->drivers[$name] = new $class($this);
 		}
 		return $this->drivers;
@@ -188,11 +189,10 @@ class Calendar extends \DB_Helper implements \BMO {
 		if(!empty($this->drivers[$driver])) {
 			return $this->drivers[$driver];
 		}
-		if(!file_exists(__DIR__."/drivers/".$driver.".class.php")) {
+		if(!file_exists(__DIR__."/drivers/".$driver.".php") || $driver === 'Base') {
 			throw new \Exception("Driver [$driver] does not exist!");
 		}
-		include(__DIR__."/drivers/".$driver.".class.php");
-		$class = "\FreePBX\modules\Calendar\driver\\".$driver;
+		$class = "\FreePBX\modules\Calendar\drivers\\".$driver;
 		$this->drivers[$driver] = new $class($this);
 		return $this->drivers[$driver];
 	}
@@ -210,12 +210,65 @@ class Calendar extends \DB_Helper implements \BMO {
 			case 'updatesource':
 			case 'ewsautodetect':
 			case 'duplicate':
+			case 'generateical':
 				return true;
+			case 'ical':
+				//be aware
+				$setting['authenticate'] = false;
+				$setting['allowremote'] = true;
+				return true;
+			break;
 		}
 		return false;
 	}
+
+	public function ajaxCustomHandler() {
+		switch($_REQUEST['command']) {
+			case "ical":
+				$calendar = $this->getCalendarByMappingToken($_REQUEST['token']);
+				if(empty($calendar)) {
+					return false;
+				}
+				header('Content-Type: text/calendar; charset=utf-8');
+				header('Content-Disposition: attachment; filename='.$calendar['name'].'.ics');
+				print $this->exportiCalCalendar($calendar['id']);
+				return true;
+			break;
+		}
+		return false;
+	}
+
+	public function getMappingTokenByCalendarID($calendarid) {
+		$mapping = $this->getConfig('ical-mapping');
+		$mapping = !empty($mapping) ? $mapping : array();
+		return isset($mapping[$calendarid]) ? $mapping[$calendarid] : false;
+	}
+
+	public function getCalendarByMappingToken($token) {
+		$mapping = $this->getConfig('ical-mapping');
+		$mapping = !empty($mapping) ? $mapping : array();
+		$k = array_search($token,$mapping);
+		if($k === false) {
+			return false;
+		}
+		$calendar = $this->getCalendarByID($k);
+		return $calendar;
+	}
+
+	public function updateiCalMapping($calendarID, $token) {
+		$mapping = $this->getConfig('ical-mapping');
+		$mapping = !empty($mapping) ? $mapping : array();
+		$mapping[$calendarID] = $token;
+		$this->setConfig('ical-mapping',$mapping);
+	}
+
 	public function ajaxHandler() {
 		switch ($_REQUEST['command']) {
+			case 'generateical':
+				$uuid = Uuid::uuid4()->toString();
+				$this->updateiCalMapping($_REQUEST['id'], $uuid);
+				return array("status" => true, "href" => "ajax.php?module=calendar&command=ical&token=".$uuid);
+			break;
 			case 'ewsautodetect':
 				try {
 					$settings = EWSCalendar::autoDiscoverSettings($_POST['email'], $_POST['password']);
@@ -346,119 +399,8 @@ class Calendar extends \DB_Helper implements \BMO {
 				return array_values($events);
 			break;
 			case 'eventform':
-				$calendarID = $_POST['calendarid'];
-				$calendar = $this->getCalendarByID($calendarID);
-
-				$timezone = !empty($_POST['timezone']) ? $_POST['timezone'] : $calendar['timezone'];
-				$vCalendar = new iCalendar($calendarID);
-				$vEvent = new Event();
-				$vEvent->setUseTimezone(true);
-				// Make sure there is a title
-				if (!isset($_POST['title']) || !trim($_POST['title'])) {
-					throw new \Exception("No title provided");
-				}
-				$vEvent->setSummary(trim($_POST['title']));
-				if (!isset($_POST['description'])) {
-					$vEvent->setDescription("");
-				} else {
-					$vEvent->setDescription(trim($_POST['description']));
-				}
-				$vEvent->setDtStart(new Carbon($_POST['startdate']." ".$_POST['starttime'], $timezone));
-				$vEvent->setDtEnd(new Carbon($_POST['enddate']." ".$_POST['endtime'], $timezone));
-				if(!empty($_REQUEST['allday']) && $_REQUEST['allday'] == "yes") {
-					$vEvent->setDtStart(new Carbon($_POST['startdate'], $timezone));
-					$vEvent->setDtEnd(new Carbon($_POST['enddate'], $timezone));
-				}
-				if(!empty($_REQUEST['reoccurring']) && $_REQUEST['reoccurring'] == "yes") {
-					if(!empty($_POST['rstartdate'])) {
-						$vEvent->setDtStart(Carbon::createFromTimestamp($_POST['rstartdate'], $timezone));
-						$vEvent->setDtStart(Carbon::createFromTimestamp($_POST['renddate'], $timezone));
-					}
-					$recurrenceRule = new RecurrenceRule();
-					switch($_REQUEST['repeats']) {
-						case "0":
-							$recurrenceRule->setFreq(RecurrenceRule::FREQ_DAILY);
-						break;
-						case "1":
-							$recurrenceRule->setByDay("MO,TU,WE,TH,FR");
-							$recurrenceRule->setFreq(RecurrenceRule::FREQ_WEEKLY);
-						break;
-						case "2":
-							$recurrenceRule->setByDay("MO,WE,FR");
-							$recurrenceRule->setFreq(RecurrenceRule::FREQ_WEEKLY);
-						break;
-						case "3":
-							$recurrenceRule->setByDay("TU,TH");
-							$recurrenceRule->setFreq(RecurrenceRule::FREQ_WEEKLY);
-						break;
-						case "4":
-							if(!empty($_REQUEST['weekday']) && is_array($_REQUEST['weekday'])) {
-								$days = array();
-								foreach($_REQUEST['weekday'] as $day) {
-									switch($day) {
-										case "0":
-											$days[] = 'MO';
-										break;
-										case "1":
-											$days[] = 'TU';
-										break;
-										case "2":
-											$days[] = 'WE';
-										break;
-										case "3":
-											$days[] = 'TH';
-										break;
-										case "4":
-											$days[] = 'FR';
-										break;
-										case "5":
-											$days[] = 'SA';
-										break;
-										case "6":
-											$days[] = 'SU';
-										break;
-										default:
-										break;
-									}
-								}
-								$recurrenceRule->setByDay(implode(",",$days));
-							}
-							$recurrenceRule->setFreq(RecurrenceRule::FREQ_WEEKLY);
-						break;
-						case "5":
-							$recurrenceRule->setFreq(RecurrenceRule::FREQ_MONTHLY);
-						break;
-						case "6":
-							$recurrenceRule->setFreq(RecurrenceRule::FREQ_YEARLY);
-						break;
-						default:
-						break;
-					}
-					if(!empty($_REQUEST['repeat-count'])) {
-						$recurrenceRule->setInterval($_REQUEST['repeat-count']);
-					}
-					if(!empty($_REQUEST['occurrences'])) {
-						$recurrenceRule->setCount($_REQUEST['occurrences']);
-					}
-					if(!empty($_REQUEST['afterdate'])) {
-						$recurrenceRule->setUntil(new Carbon($_POST['afterdate'], $timezone));
-					}
-
-					$vEvent->setRecurrenceRule($recurrenceRule);
-				}
-				$uuid = ($_REQUEST['eventid'] == 'new') ? (string)Uuid::uuid4() : $_REQUEST['eventid'];
-				$vEvent->setUniqueId($uuid);
-
-				$vCalendar->addComponent($vEvent);
-
-				$cal = new IcalParser();
-				$render = $vCalendar->render();
-				$render = str_replace('"','',$render); //TODO: bad
-				$cal->parseString($render);
-				$this->deleteEvent($calendarID,$uuid); //TODO this is strange
-				foreach($cal->getSortedEvents() as $event) {
-					$this->processiCalEvent($calendarID, $event);
-				}
+				$this->getDriver('local')->updateEvent($_POST['calendarid'], $_POST);
+				return array("status" => true, "message" => _("Successfully updated event"));
 			break;
 			case 'groupsgrid':
 				$groups =  $this->listGroups();
@@ -468,9 +410,12 @@ class Calendar extends \DB_Helper implements \BMO {
 					$final[] = $data;
 				}
 				return $final;
+			break;
 			case 'updatesource':
-				return $this->refreshCalendarById($_REQUEST['calendarid']);
-				break;
+				$data = $this->getCalendarByID($_REQUEST['calendarid']);
+				$this->refreshCalendarById($_REQUEST['calendarid']);
+				return $data;
+			break;
 		}
 	}
 
@@ -511,7 +456,8 @@ class Calendar extends \DB_Helper implements \BMO {
 				$data = $this->getCalendarByID($_GET['id']);
 				\Moment\Moment::setLocale('en_US'); //get this from freepbx...
 				$locale = \Moment\MomentLocale::getLocaleContent();
-				return load_view(__DIR__."/views/calendar.php",array('action' => 'view', 'type' => $data['type'], 'data' => $data, 'locale' => $locale));
+				$icallink = $this->getMappingTokenByCalendarID($_GET['id']);
+				return load_view(__DIR__."/views/calendar.php",array('action' => 'view', 'type' => $data['type'], 'data' => $data, 'locale' => $locale, 'icallink' => (!empty($icallink) ? 'ajax.php?module=calendar&command=ical&token='.$icallink : '')));
 			break;
 			default:
 				$dropdown = array();
@@ -524,6 +470,126 @@ class Calendar extends \DB_Helper implements \BMO {
 		}
 	}
 
+	public function exportiCalEvent($calendarID,$eventID) {
+		$calendar = $this->getCalendarByID($calendarID);
+		if(empty($calendar)) {
+			return false;
+		}
+		$event = $this->getEvent($calendarID,$eventID);
+		if(empty($event)) {
+			return false;
+		}
+
+		$vEvent = new Event();
+		$vEvent->setUniqueId($eventID);
+		$vEvent->setUseTimezone(true);
+		$vEvent->setSummary($event['name']);
+		$vEvent->setDescription($event['description']);
+		$vEvent->setCategories($event['categories']);
+		if($event['recurring']) {
+			$vEvent->setDtStart(Carbon::createFromTimestamp($event['events'][0]['starttime'], $event['timezone']));
+			$vEvent->setDtEnd(Carbon::createFromTimestamp($event['events'][0]['endtime'], $event['timezone']));
+			$recurrenceRule = new RecurrenceRule();
+			switch($event['rrules']['frequency']) {
+				case 'DAILY':
+					$recurrenceRule->setFreq(RecurrenceRule::FREQ_DAILY);
+				break;
+				case 'WEEKLY':
+					$recurrenceRule->setFreq(RecurrenceRule::FREQ_WEEKLY);
+				break;
+				case 'MONTHLY':
+					$recurrenceRule->setFreq(RecurrenceRule::FREQ_MONTHLY);
+				break;
+				case 'YEARLY':
+					$recurrenceRule->setFreq(RecurrenceRule::FREQ_YEARLY);
+				break;
+			}
+			$recurrenceRule->setByDay(implode(",",$event['rrules']['days']));
+			if(!empty($event['rrules']['interval'])) {
+				$recurrenceRule->setInterval($event['rrules']['interval']);
+			}
+			if(!empty($event['rrules']['count'])) {
+				$recurrenceRule->setCount($event['rrules']['count']);
+			}
+			if(!empty($event['rrules']['until'])) {
+				$recurrenceRule->setUntil(Carbon::createFromTimestamp($event['rrules']['until'], $event['timezone']));
+			}
+			$vEvent->setRecurrenceRule($recurrenceRule);
+		} else {
+			$vEvent->setDtStart(Carbon::createFromTimestamp($event['starttime'], $event['timezone']));
+			$vEvent->setDtEnd(Carbon::createFromTimestamp($event['endtime'], $event['timezone']));
+		}
+		return $vEvent->render();
+	}
+
+	public function exportiCalCalendar($calendarID) {
+		$calendar = $this->getCalendarByID($calendarID);
+		if(empty($calendar)) {
+			return false;
+		}
+		$events = $this->getAllEvents($calendarID);
+		if(empty($events)) {
+			$events = array();
+		}
+
+		$vCalendar = new iCalendar($calendarID);
+		foreach($events as $uuid => $event) {
+			$vEvent = new Event();
+			$vEvent->setUniqueId($uuid);
+			$vEvent->setUseTimezone(true);
+			$vEvent->setSummary($event['name']);
+			$vEvent->setDescription($event['description']);
+			$vEvent->setCategories($event['categories']);
+			if($event['recurring']) {
+				$vEvent->setDtStart(Carbon::createFromTimestamp($event['events'][0]['starttime'], $event['timezone']));
+				$vEvent->setDtEnd(Carbon::createFromTimestamp($event['events'][0]['endtime'], $event['timezone']));
+				$recurrenceRule = new RecurrenceRule();
+				switch($event['rrules']['frequency']) {
+					case 'DAILY':
+						$recurrenceRule->setFreq(RecurrenceRule::FREQ_DAILY);
+					break;
+					case 'WEEKLY':
+						$recurrenceRule->setFreq(RecurrenceRule::FREQ_WEEKLY);
+					break;
+					case 'MONTHLY':
+						$recurrenceRule->setFreq(RecurrenceRule::FREQ_MONTHLY);
+					break;
+					case 'YEARLY':
+						$recurrenceRule->setFreq(RecurrenceRule::FREQ_YEARLY);
+					break;
+				}
+				$recurrenceRule->setByDay(implode(",",$event['rrules']['days']));
+				if(!empty($event['rrules']['interval'])) {
+					$recurrenceRule->setInterval($event['rrules']['interval']);
+				}
+				if(!empty($event['rrules']['count'])) {
+					$recurrenceRule->setCount($event['rrules']['count']);
+				}
+				if(!empty($event['rrules']['until'])) {
+					$recurrenceRule->setUntil(Carbon::createFromTimestamp($event['rrules']['until'], $event['timezone']));
+				}
+				$vEvent->setRecurrenceRule($recurrenceRule);
+			} else {
+				$vEvent->setDtStart(Carbon::createFromTimestamp($event['starttime'], $event['timezone']));
+				$vEvent->setDtEnd(Carbon::createFromTimestamp($event['endtime'], $event['timezone']));
+			}
+			$vCalendar->addComponent($vEvent);
+		}
+		return $vCalendar->render();
+	}
+
+	public function getRawCalendar($calendarID) {
+		return $this->getConfig($calendarID,'calendar-ical');
+	}
+
+	public function getRawEvents($calendarID) {
+		return $this->getAll($calendarID.'-raw-events');
+	}
+
+	public function getAllEvents($calendarID) {
+		return $this->getAll($calendarID.'-events');
+	}
+
 	/**
 	 * Get Event by Event ID
 	 * @param  string $calendarID The calendar ID
@@ -531,7 +597,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @return array     The returned event array
 	 */
 	public function getEvent($calendarID,$eventID) {
-		$events = $this->getAll($calendarID.'-events');
+		$events = $this->getAllEvents($calendarID);
 		return isset($events[$eventID]) ? $events[$eventID] : false;
 	}
 
@@ -590,7 +656,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param  array $event Array of event information
 	 * @return array        Array of Event information
 	 */
-	public function expandRecurring($id, $event) {
+	public function expandRecurring($id, $event, $start = null, $stop = null) {
 		if(!$event['recurring']) {
 			$event['linkedid'] = $id;
 			$event['uid'] = $id;
@@ -601,6 +667,10 @@ class Calendar extends \DB_Helper implements \BMO {
 		$i = 0;
 		$startdate = null;
 		$enddate = null;
+		if(!empty($event['events'])) {
+			//$tmp['rstartdate'] = $event['events'][0]['starttime'];
+			//$tmp['renddate'] = $event['events'][0]['endtime'];
+		}
 		foreach($event['events'] as $evt) {
 			$tmp = $event;
 			unset($tmp['events']);
@@ -633,10 +703,10 @@ class Calendar extends \DB_Helper implements \BMO {
 	public function listEvents($calendarID, $start = null, $stop = null, $subevents = false) {
 		$return = array();
 		$calendar = $this->getCalendarByID($calendarID);
-		$data = $this->getAll($calendarID.'-events');
+		$data = $this->getAllEvents($calendarID);
 		$events = array();
 		foreach($data as $id => $event) {
-			$d = $this->expandRecurring($id, $event);
+			$d = $this->expandRecurring($id, $event, $start, $stop);
 			$events = array_merge($events,$d);
 		}
 
@@ -805,6 +875,8 @@ class Calendar extends \DB_Helper implements \BMO {
 
 		$this->setConfig($eventID,$event,$calendarID."-events");
 
+		$out = $this->getConfig($eventID,$calendarID."-events");
+
 		foreach($categories as $category) {
 			$events = $this->getConfig($category,$calendarID."-categories-events");
 			if(empty($events)) {
@@ -830,17 +902,20 @@ class Calendar extends \DB_Helper implements \BMO {
 	/**
 	 * Sync Calendars
 	 */
-	public function sync($output) {
+	public function sync($output, $force = false) {
 		$cal = $this;
 		$mutex = new FlockMutex(fopen(__FILE__, "r"));
-		$mutex->synchronized(function () use ($cal,$output) {
+		$mutex->synchronized(function () use ($cal,$output, $force) {
 			$calendars = $cal->listCalendars();
 			foreach($calendars as $id => $calendar) {
+				if($calendar['type'] === "local") {
+					continue;
+				}
 				$output->write("\tSyncing ".$calendar['name']."...");
 				$last = $cal->getConfig($id,'calendar-sync');
 				$last = !empty($last) ? $last : 0;
 				$next = !empty($calendar['next']) ? $calendar['next'] : 300;
-				if($calendar['type'] !== "local" && ($last + $next) < time()) {
+				if($force || ($last + $next) < time()) {
 					$calendar['id'] = $id;
 					$cal->processCalendar($calendar);
 					$cal->setConfig($id,time(),'calendar-sync');
@@ -872,7 +947,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param  string     $calendarID The Calendar ID
 	 * @param  IcalParser $cal        IcalParser Object reference of events
 	 */
-	public function processiCalEvents($calendarID, IcalParser $cal) {
+	public function processiCalEvents($calendarID, IcalParser $cal, $rawiCal) {
 		//dont let sql update until the end of this
 		//This might be bad.. ok it probably is bad. We should just get a Range of events
 		//works for now though.
@@ -892,7 +967,7 @@ class Calendar extends \DB_Helper implements \BMO {
 
 			$event['UID'] = isset($event['UID']) ? $event['UID'] : 0;
 
-			$this->processiCalEvent($calendarID, $event);
+			$this->processiCalEvent($calendarID, $event, $rawiCal);
 		}
 
 
@@ -904,7 +979,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param  string $calendarID The Calendar ID
 	 * @param  array $event      The iCal Event
 	 */
-	public function processiCalEvent($calendarID, $event) {
+	public function processiCalEvent($calendarID, $event, $rawiCalEvent) {
 		$event['UID'] = isset($event['UID']) ? $event['UID'] : 0;
 
 		if(!empty($event['RECURRING'])) {
@@ -933,6 +1008,7 @@ class Calendar extends \DB_Helper implements \BMO {
 		if($event['DTSTART']->getTimezone() != $event['DTEND']->getTimezone()) {
 			throw new \Exception("Start timezone and end timezone are different! Not sure what to do here".json_encode($event));
 		}
+
 		$tz = $event['DTSTART']->getTimezone();
 		$timezone = $tz->getName();
 		$timezone = ($timezone == 'Z') ? null : $timezone;
@@ -1157,6 +1233,23 @@ class Calendar extends \DB_Helper implements \BMO {
 			case 'calendar':
 				$action = !empty($_GET['action']) ? $_GET['action'] : '';
 				switch($action) {
+					case "view":
+						$calendar = $this->getCalendarByID($_REQUEST['id']);
+						$buttons = array(
+							'link' => array(
+								'name' => 'link',
+								'id' => 'link',
+								'value' => _('Edit Settings')
+							)
+						);
+						if($calendar['type'] !== 'local') {
+							$buttons['updatecal'] = array(
+								'name' => 'updatecal',
+								'id' => 'updatecal',
+								'value' => _("Update from Source")
+							);
+						}
+					break;
 					case "add":
 						$buttons = array(
 							'reset' => array(
@@ -1491,6 +1584,6 @@ class Calendar extends \DB_Helper implements \BMO {
 			$calendar['id'] = $calendarid;
 			return $this->processCalendar($calendar);
 		}
-		return "Unable to update calendar";
+		return false;
 	}
 }

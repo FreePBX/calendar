@@ -5,13 +5,22 @@ $readonly = $data['type'] !== 'local' ? 'true' : 'false';
 
 <h1>
   <?php echo sprintf(_("Viewing Calendar '%s'"),$data['name'])?>
-  <span class='pull-right'>
-<?php if ($readonly == "true") { ?>
-    <button id="updatecal" data-calendarid="<?php echo $data['id']; ?>" class='btn btn-default' style='margin-top: -5px'><?php echo _("Update from Source"); ?></button>
-<?php } ?>
-    <a href="<?php echo $url; ?>" class='btn btn-default' style='margin-top: -5px'><?php echo _("Edit Settings"); ?></a>
-  </span>
 </h1>
+<h5>
+  <?php echo sprintf(_("Viewing from timezone '%s'"),'<span id="timezone-display">'.$data['timezone'].'</span>')?>
+</h5>
+<h6>
+  <?php if($data['type'] === 'local') {
+    echo _('Utilizing the calendar timezone (You can change this in Edit Settings)');
+  } else {
+    echo _('Utilizing your timezone (You can change this in Advanced Settings or User Manager)');
+  }?>
+</h6>
+<h6>
+  <?php echo _('Private address in iCal format')?> (<a id="generate-ical-link" class="clickable"><?php echo _('(Re)Generate Link')?></a>)
+  <br>
+	<a href="<?php echo !empty($icallink) ? $icallink : ''?>" id="ical-link" class="<?php echo !empty($icallink) ? '' : 'hidden'?>"><?php echo _('Private iCal Link') ?></a>
+</h6>
 <script>
 var readonly = <?php echo $readonly; ?>;
 var calendarid = "<?php echo $data['id']; ?>";

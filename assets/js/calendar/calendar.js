@@ -1,3 +1,34 @@
+$("#link").click(function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+	$(this).prop("disabled",true);
+	window.location = '?display=calendar&action=edit&type=calendar&id='+calendarid;
+});
+$("#generate-ical-link").click(function(e) {
+	if($(this).data("generating")) {
+		return;
+	}
+	var text = $(this).text();
+	var $this = this;
+	$(this).data("generating",true);
+	$(this).text(_('Generating...'));
+	$.get( "ajax.php?module=calendar&command=generateical&id="+calendarid)
+	.done(function(data) {
+		console.log(data);
+		if(data.status) {
+			$("#ical-link").removeClass("hidden");
+			$("#ical-link").attr('href',data.href);
+		}
+	})
+	.fail(function(err){
+
+	})
+	.always(function(){
+		$($this).text(text);
+		$($this).data("generating",false);
+	})
+
+});
 $("#eventForm").submit(function(e) {
 	e.preventDefault();
 	var frm = $(this);
@@ -7,25 +38,28 @@ $("#eventForm").submit(function(e) {
 	if (!validateCalSubmit(frmdata)) {
 		return;
 	}
+	$("#modalSubmit").prop("disabled",true);
+	$("#modalDelete").prop("disabled",true);
 
-	$.ajax({
-		url : frmurl,
-		type: "POST",
-		data : frmdata,
-		success:function(data, status){
+	$.post(frmurl, frmdata)
+	.done(function(data){
+		if(data.status) {
 			$('#eventModal').modal('hide');
 			fpbxToast(data.message);
 			$("#calendar").fullCalendar( 'refetchEvents' );
-		},
-		error: function(jqXHR, status, error){
-			console.log(jqXHR);
-			if (typeof jqXHR.responseJSON !== undefined) {
-				fpbxToast('Error: ' + jqXHR.responseJSON.error.message);
-			} else {
-				fpbxToast('Unknown Error');
-			}
 		}
-	});
+	})
+	.fail(function(jqXHR, status, error) {
+		if (typeof jqXHR.responseJSON !== undefined) {
+			fpbxToast('Error: ' + jqXHR.responseJSON.error.message);
+		} else {
+			fpbxToast('Unknown Error');
+		}
+	})
+	.always(function() {
+		$("#modalSubmit").prop("disabled",false);
+		$("#modalDelete").prop("disabled",false);
+	})
 });
 $("#modalDelete").on('click',function(e){
 	if(readonly) {
@@ -37,7 +71,9 @@ $("#modalDelete").on('click',function(e){
 });
 
 function validateCalSubmit(data) {
-	// TODO: Make sure we have an event title, etc
+	if($("#title").val().trim().length === 0) {
+		return warnInvalid($("#title"),_('Event must have a title'));
+	}
 	return true;
 }
 
@@ -126,8 +162,7 @@ $(document).ready(function() {
 				prev: 'left-single-arrow',
 				next: 'right-single-arrow',
 				prevYear: 'left-double-arrow',
-				nextYear: 'right-double-arrow',
-				addEvent: 'fa fa-calendar-plus-o'
+				nextYear: 'right-double-arrow'
 			},
 			header: {
 				left:	 'prev,addEvent,next',
@@ -150,9 +185,9 @@ $(document).ready(function() {
 			}],
 			eventClick: function( event, jsEvent, view ) {
 				var src = (typeof event.parent !== "undefined") ? event.parent : event,
-						tz = (typeof src.timezone !== "undefined" && src.timezone !== null) ? src.timezone : timezone,
-						ms = moment.unix(src.ustarttime).tz(timezone),
-						me = moment.unix(src.uendtime).tz(timezone),
+						tz = (typeof src.timezone !== "undefined" && src.timezone !== null) ? src.timezone : caltimezone,
+						ms = moment.unix(src.ustarttime).tz(tz),
+						me = moment.unix(src.uendtime).tz(tz),
 						allday = src.allDay;
 				resetModalForm();
 				$("#rstartdate").val(src.rstartdate);
@@ -162,9 +197,11 @@ $(document).ready(function() {
 				$('#eventid').val(src.linkedid);
 				$("#eventtype option[value='"+src.eventtype+"']").prop('selected', true);
 				$("#startdate")[0]._flatpickr.setDate(ms.format("YYYY-MM-DD"));
-				$("#starttime")[0]._flatpickr.setDate(ms.format("kk:mm:ss"));
 				$("#enddate")[0]._flatpickr.setDate(me.format("YYYY-MM-DD"));
-				$("#endtime")[0]._flatpickr.setDate(me.format("kk:mm:ss"));
+				if(!allday) {
+					$("#starttime")[0]._flatpickr.setDate(ms.format("kk:mm:ss"));
+					$("#endtime")[0]._flatpickr.setDate(me.format("kk:mm:ss"));
+				}
 				if(typeof src.timezone !== "undefined") {
 					$("#timezone").val(src.timezone);
 					$("#timezone").multiselect('select', src.timezone);
@@ -243,8 +280,8 @@ $(document).ready(function() {
 	}
 
 	$("#updatecal").on('click', function(e) {
-		var calendarid=$(e.target).data('calendarid');
 		e.preventDefault();
+		e.stopPropagation();
 		$("#updatecal").text(_("Updating...")).attr("disabled", true).addClass("disabled");
 		$("body").css("cursor", "progress");
 		$.ajax({
@@ -254,7 +291,7 @@ $(document).ready(function() {
 				calendarid: calendarid
 			},
 			success: function(data) {
-				console.log(data);
+				$("#timezone-display").text(data.timezone);
 				$("#calendar").fullCalendar( 'refetchEvents' );
 			},
 			complete: function(data) {

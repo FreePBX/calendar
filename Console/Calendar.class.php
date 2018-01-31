@@ -17,24 +17,33 @@ class Calendar extends Command {
 		$this->setName('calendar')
 		->setDescription(_('Calendar'))
 		->setDefinition(array(
-			new InputArgument('args', InputArgument::IS_ARRAY, null, null),));
+			new InputOption('sync', null, InputOption::VALUE_NONE, _('Syncronize all Calendars')),
+			new InputOption('force', null, InputOption::VALUE_NONE, _('Force command')),
+			new InputOption('export', null, InputOption::VALUE_REQUIRED, _('Export Calendar by ID')),
+		));
 		}
 		protected function execute(InputInterface $input, OutputInterface $output){
-			$args = $input->getArgument('args');
-			$command = isset($args[0])?$args[0]:'';
 			$calendar = \FreePBX::create()->Calendar;
-			switch ($command) {
-				case "sync":
-					$output->writeln("Starting Sync...");
-					$calendar->sync($output);
-					$output->writeln("Finished");
-				break;
-				default:
-					$output->writeln("<error>The command provided is not valid.</error>");
-					$output->writeln("Avalible commands are:");
-					$output->writeln("<info>sync</info> - Syncronize Calendar Information");
-				exit(4);
-				break;
+			if($input->getOption('sync')) {
+				return $this->sync($calendar, $input, $output);
 			}
+
+			if($input->getOption('export')) {
+				return $this->export($calendar, $input, $output);
+			}
+
+			$output->writeln("<error>The command provided is not valid.</error>");
+			$output->writeln("Avalible commands are:");
+			$output->writeln("<info>sync</info> - Syncronize Calendar Information");
+		}
+
+		private function sync($calendar, InputInterface $input, OutputInterface $output) {
+			$output->writeln("Starting Sync...");
+			$calendar->sync($output,true);
+			$output->writeln("Finished");
+		}
+
+		private function export($calendar, InputInterface $input, OutputInterface $output) {
+			$output->writeln($calendar->getRawCalendar($input->getOption('export')));
 		}
 	}
