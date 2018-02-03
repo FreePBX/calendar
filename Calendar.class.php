@@ -65,18 +65,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	public function backup() {}
 	public function restore($backup) {}
 	public function install(){
-		$crons = $this->FreePBX->Cron->getAll();
-		foreach($crons as $c) {
-			if(preg_match('/fwconsole calendar sync/',$c,$matches)) {
-				$this->FreePBX->Cron->remove($c);
-			}
-		}
 
-		$ampbin = $this->FreePBX->Config->get('AMPSBIN');
-		$this->FreePBX->Cron->add(array(
-			'minute' => '*/1',
-			"command" => $ampbin.'/fwconsole calendar --sync 2>&1 > /dev/null')
-		);
 	}
 	public function uninstall(){
 		$crons = $this->FreePBX->Cron->getAll();
