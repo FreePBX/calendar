@@ -70,7 +70,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	public function uninstall(){
 		$crons = $this->FreePBX->Cron->getAll();
 		foreach($crons as $c) {
-			if(preg_match('/fwconsole calendar sync/',$c,$matches)) {
+			if(preg_match('/fwconsole calendar --sync/',$c,$matches)) {
 				FreePBX::Cron()->remove($c);
 			}
 		}
