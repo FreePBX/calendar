@@ -10,14 +10,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-02 17:37-0800\n"
-"PO-Revision-Date: 2017-07-17 09:20-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: \n"
+"PO-Revision-Date: 2018-02-16 18:06+0200\n"
+"Last-Translator: Nils <Nils@heckenkamp.info>\n"
+"Language-Team: German "
+"<http://weblate.freepbx.org/projects/freepbx/calendar/de_DE/>\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.4\n"
 
 #: views/remote_caldav_settings.php:4
 #, php-format
@@ -176,7 +178,7 @@ msgstr ""
 
 #: calendar.i18n.php:6
 msgid "Applications"
-msgstr ""
+msgstr "Anwendungen"
 
 #: views/remote_ews_settings.php:277
 msgid "Attempting to load"
@@ -249,7 +251,7 @@ msgstr ""
 
 #: Calendar.class.php:1261 Calendar.class.php:1299
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 #: views/calendar.php:487
 msgid "Delete Event"
@@ -259,7 +261,7 @@ msgstr ""
 #: views/remote_caldav_settings.php:44 views/remote_ews_settings.php:44
 #: views/remote_ical_settings.php:45
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: views/calendar.php:90
 msgid "Description for the event"
@@ -473,7 +475,7 @@ msgstr ""
 #: Calendar.class.php:1247 Calendar.class.php:1266 Calendar.class.php:1285
 #: Calendar.class.php:1304
 msgid "Reset"
-msgstr ""
+msgstr "Zurücksetzen"
 
 #: utests/eventFilterTest.php:53
 msgid "Returned date range was not as expected"
@@ -681,7 +683,7 @@ msgstr ""
 
 #: views/ucp_config.php:13
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: drivers/Ews.php:58 drivers/Ews.php:71
 msgid "You are missing the PHP SoapClient library. Please install to continue"
