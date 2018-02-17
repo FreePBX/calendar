@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-02 17:37-0800\n"
-"PO-Revision-Date: 2018-02-16 18:06+0200\n"
+"PO-Revision-Date: 2018-02-16 20:14+0200\n"
 "Last-Translator: Nils <Nils@heckenkamp.info>\n"
 "Language-Team: German "
 "<http://weblate.freepbx.org/projects/freepbx/calendar/de_DE/>\n"
@@ -24,27 +24,27 @@ msgstr ""
 #: views/remote_caldav_settings.php:4
 #, php-format
 msgid "%s CalDAV Calendar"
-msgstr ""
+msgstr "%s CalDAV-Kalender"
 
 #: views/calendargroups.php:3
 #, php-format
 msgid "%s Group"
-msgstr ""
+msgstr "%s Gruppe"
 
 #: views/local_settings.php:4
 #, php-format
 msgid "%s Local Calendar"
-msgstr ""
+msgstr "%s Lokaler Kalendar"
 
 #: views/remote_ews_settings.php:4
 #, php-format
 msgid "%s Outlook Calendar"
-msgstr ""
+msgstr "%s Outlook Kalendar"
 
 #: views/remote_ical_settings.php:4
 #, php-format
 msgid "%s iCal Calendar"
-msgstr ""
+msgstr "%s iCal Kalendar"
 
 #: views/calendar.php:20
 msgid "(Re)Generate Link"
@@ -52,7 +52,7 @@ msgstr ""
 
 #: assets/js/calendar/fullcalendar-3.8.2.min.js:8
 msgid "+t]&&this["
-msgstr ""
+msgstr "+t]&&this["
 
 #: assets/js/calendar/fullcalendar-3.8.2.min.js:8
 msgid ""
@@ -375,24 +375,24 @@ msgstr ""
 #: views/remote_caldav_settings.php:22 views/remote_ews_settings.php:22
 #: views/remote_ical_settings.php:23 views/rnav.php:30
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: views/calendargroups.php:31
 msgid "Name of this group"
-msgstr ""
+msgstr "Name dieser Gruppe"
 
 #: views/calendar.php:418
 msgid "Never"
-msgstr ""
+msgstr "Niemals"
 
 #: views/ucp_config.php:15
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 #: Calendar.class.php:310
 #, php-format
 msgid "No Categories for %s"
-msgstr ""
+msgstr "Keine Kategorien für %s"
 
 #: Calendar.class.php:323
 #, php-format
