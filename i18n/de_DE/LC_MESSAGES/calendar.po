@@ -10,39 +10,41 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-02 17:37-0800\n"
-"PO-Revision-Date: 2017-07-17 09:20-0700\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
-"Language: \n"
+"PO-Revision-Date: 2018-02-16 20:14+0200\n"
+"Last-Translator: Nils <Nils@heckenkamp.info>\n"
+"Language-Team: German "
+"<http://weblate.freepbx.org/projects/freepbx/calendar/de_DE/>\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2.4\n"
 
 #: views/remote_caldav_settings.php:4
 #, php-format
 msgid "%s CalDAV Calendar"
-msgstr ""
+msgstr "%s CalDAV-Kalender"
 
 #: views/calendargroups.php:3
 #, php-format
 msgid "%s Group"
-msgstr ""
+msgstr "%s Gruppe"
 
 #: views/local_settings.php:4
 #, php-format
 msgid "%s Local Calendar"
-msgstr ""
+msgstr "%s Lokaler Kalendar"
 
 #: views/remote_ews_settings.php:4
 #, php-format
 msgid "%s Outlook Calendar"
-msgstr ""
+msgstr "%s Outlook Kalendar"
 
 #: views/remote_ical_settings.php:4
 #, php-format
 msgid "%s iCal Calendar"
-msgstr ""
+msgstr "%s iCal Kalendar"
 
 #: views/calendar.php:20
 msgid "(Re)Generate Link"
@@ -50,7 +52,7 @@ msgstr ""
 
 #: assets/js/calendar/fullcalendar-3.8.2.min.js:8
 msgid "+t]&&this["
-msgstr ""
+msgstr "+t]&&this["
 
 #: assets/js/calendar/fullcalendar-3.8.2.min.js:8
 msgid ""
@@ -176,7 +178,7 @@ msgstr ""
 
 #: calendar.i18n.php:6
 msgid "Applications"
-msgstr ""
+msgstr "Anwendungen"
 
 #: views/remote_ews_settings.php:277
 msgid "Attempting to load"
@@ -249,7 +251,7 @@ msgstr ""
 
 #: Calendar.class.php:1261 Calendar.class.php:1299
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 #: views/calendar.php:487
 msgid "Delete Event"
@@ -259,7 +261,7 @@ msgstr ""
 #: views/remote_caldav_settings.php:44 views/remote_ews_settings.php:44
 #: views/remote_ical_settings.php:45
 msgid "Description"
-msgstr ""
+msgstr "Beschreibung"
 
 #: views/calendar.php:90
 msgid "Description for the event"
@@ -373,24 +375,24 @@ msgstr ""
 #: views/remote_caldav_settings.php:22 views/remote_ews_settings.php:22
 #: views/remote_ical_settings.php:23 views/rnav.php:30
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: views/calendargroups.php:31
 msgid "Name of this group"
-msgstr ""
+msgstr "Name dieser Gruppe"
 
 #: views/calendar.php:418
 msgid "Never"
-msgstr ""
+msgstr "Niemals"
 
 #: views/ucp_config.php:15
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 #: Calendar.class.php:310
 #, php-format
 msgid "No Categories for %s"
-msgstr ""
+msgstr "Keine Kategorien für %s"
 
 #: Calendar.class.php:323
 #, php-format
@@ -473,7 +475,7 @@ msgstr ""
 #: Calendar.class.php:1247 Calendar.class.php:1266 Calendar.class.php:1285
 #: Calendar.class.php:1304
 msgid "Reset"
-msgstr ""
+msgstr "Zurücksetzen"
 
 #: utests/eventFilterTest.php:53
 msgid "Returned date range was not as expected"
@@ -681,7 +683,7 @@ msgstr ""
 
 #: views/ucp_config.php:13
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: drivers/Ews.php:58 drivers/Ews.php:71
 msgid "You are missing the PHP SoapClient library. Please install to continue"
