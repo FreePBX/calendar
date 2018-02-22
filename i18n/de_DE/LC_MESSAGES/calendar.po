@@ -9,11 +9,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-02 17:37-0800\n"
+"POT-Creation-Date: 2018-02-22 14:38-0800\n"
 "PO-Revision-Date: 2018-02-16 20:14+0200\n"
 "Last-Translator: Nils <Nils@heckenkamp.info>\n"
-"Language-Team: German "
-"<http://weblate.freepbx.org/projects/freepbx/calendar/de_DE/>\n"
+"Language-Team: German <http://weblate.freepbx.org/projects/freepbx/calendar/"
+"de_DE/>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -192,7 +192,7 @@ msgstr ""
 msgid "Autodetect"
 msgstr ""
 
-#: Calendar.class.php:1373 Console/Calendar.class.php:18 calendar.i18n.php:4
+#: Calendar.class.php:1400 Console/Calendar.class.php:18 calendar.i18n.php:4
 #: calendar.i18n.php:10
 msgid "Calendar"
 msgstr ""
@@ -249,7 +249,7 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: Calendar.class.php:1261 Calendar.class.php:1299
+#: Calendar.class.php:1288 Calendar.class.php:1326
 msgid "Delete"
 msgstr "Löschen"
 
@@ -279,7 +279,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: Calendar.class.php:1231
+#: Calendar.class.php:1258
 msgid "Edit Settings"
 msgstr ""
 
@@ -348,7 +348,7 @@ msgstr ""
 msgid "How often this calendar will synchronize with the remote server"
 msgstr ""
 
-#: Calendar.class.php:1350 Calendar.class.php:1358 views/ucp_config.php:18
+#: Calendar.class.php:1377 Calendar.class.php:1385 views/ucp_config.php:18
 msgid "Inherit"
 msgstr ""
 
@@ -472,8 +472,8 @@ msgstr ""
 msgid "Repeats"
 msgstr ""
 
-#: Calendar.class.php:1247 Calendar.class.php:1266 Calendar.class.php:1285
-#: Calendar.class.php:1304
+#: Calendar.class.php:1274 Calendar.class.php:1293 Calendar.class.php:1312
+#: Calendar.class.php:1331
 msgid "Reset"
 msgstr "Zurücksetzen"
 
@@ -514,8 +514,8 @@ msgstr ""
 msgid "Start Time"
 msgstr ""
 
-#: Calendar.class.php:1252 Calendar.class.php:1271 Calendar.class.php:1290
-#: Calendar.class.php:1309 views/calendar.php:489
+#: Calendar.class.php:1279 Calendar.class.php:1298 Calendar.class.php:1317
+#: Calendar.class.php:1336 views/calendar.php:489
 msgid "Submit"
 msgstr ""
 
@@ -625,7 +625,7 @@ msgstr ""
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:1238 assets/js/calendar/calendar.js:297
+#: Calendar.class.php:1265 assets/js/calendar/calendar.js:297
 msgid "Update from Source"
 msgstr ""
 
