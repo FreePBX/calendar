@@ -1197,9 +1197,39 @@ class Calendar extends \DB_Helper implements \BMO {
 			return false;
 		}
 		$events = array();
-		foreach($calendars as $cid => $calendar) {
-			$events = $this->listEvents($cid, $start, $stop);
-			if(!empty($group['events'])) {
+
+		if(empty($group['calendars'])) {
+			return false;
+		}
+
+		if(empty($group['events']) && empty($group['categories'])) {
+			//calendars only
+			foreach($group['calendars'] as $cid) {
+				$events = $this->listEvents($cid, $start, $stop);
+				foreach($events as $event) {
+					if($event['now']) {
+						return true;
+					}
+				}
+			}
+		} else if(empty($group['events']) && !empty($group['categories'])) {
+			//categories only
+			foreach($calendars as $cid => $calendar) {
+				$events = $this->listEvents($cid, $start, $stop);
+				foreach($group['categories'] as $categoryid) {
+					foreach($events as $event) {
+						$parts = explode("_",$categoryid,2);
+						$categoryName = $parts[1];
+						if(isset($event["categories"]) && in_array($categoryName,$event["categories"]) && $event["now"]) {
+							return true;
+						}
+					}
+				}
+			}
+		} else if(!empty($group['events'])) {
+			//events only
+			foreach($calendars as $cid => $calendar) {
+				$events = $this->listEvents($cid, $start, $stop);
 				foreach($group['events'] as $eventid) {
 					$parts = explode("_",$eventid,2);
 					$eid = $parts[1]; //eventid is second part, calendarid is first
@@ -1208,11 +1238,8 @@ class Calendar extends \DB_Helper implements \BMO {
 					}
 				}
 			}
-			if(!empty($data['categories'])) {
-			}
-			if(!empty($data['calendars'])) {
-			}
 		}
+
 		return false;
 	}
 
