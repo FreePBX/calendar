@@ -10,10 +10,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-22 14:38-0800\n"
-"PO-Revision-Date: 2018-02-16 20:14+0200\n"
+"PO-Revision-Date: 2018-03-01 17:18+0200\n"
 "Last-Translator: Nils <Nils@heckenkamp.info>\n"
-"Language-Team: German <http://weblate.freepbx.org/projects/freepbx/calendar/"
-"de_DE/>\n"
+"Language-Team: German "
+"<http://weblate.freepbx.org/projects/freepbx/calendar/de_DE/>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: views/remote_caldav_settings.php:4
 #, php-format
 msgid "%s CalDAV Calendar"
-msgstr "%s CalDAV-Kalender"
+msgstr "%s CalDAV Kalender"
 
 #: views/calendargroups.php:3
 #, php-format
@@ -48,7 +48,7 @@ msgstr "%s iCal Kalendar"
 
 #: views/calendar.php:20
 msgid "(Re)Generate Link"
-msgstr ""
+msgstr "Link neu erstellen"
 
 #: assets/js/calendar/fullcalendar-3.8.2.min.js:8
 msgid "+t]&&this["
@@ -64,117 +64,117 @@ msgstr ""
 #: views/remote_caldav_settings.php:184 views/remote_ews_settings.php:242
 #: views/remote_ical_settings.php:102
 msgid "1 Day"
-msgstr ""
+msgstr "1 Tag"
 
 #: views/remote_caldav_settings.php:180 views/remote_ews_settings.php:238
 #: views/remote_ical_settings.php:98
 msgid "1 Hour"
-msgstr ""
+msgstr "1 Stunde"
 
 #: views/remote_caldav_settings.php:176 views/remote_ews_settings.php:234
 #: views/remote_ical_settings.php:94
 msgid "1 Minute"
-msgstr ""
+msgstr "1 Minute"
 
 #: views/remote_caldav_settings.php:185 views/remote_ews_settings.php:243
 #: views/remote_ical_settings.php:103
 msgid "1 Week"
-msgstr ""
+msgstr "1 Woche"
 
 #: views/remote_caldav_settings.php:178 views/remote_ews_settings.php:236
 #: views/remote_ical_settings.php:96
 msgid "10 Minutes"
-msgstr ""
+msgstr "10 Minuten"
 
 #: views/remote_caldav_settings.php:183 views/remote_ews_settings.php:241
 #: views/remote_ical_settings.php:101
 msgid "12 Hours"
-msgstr ""
+msgstr "12 Stunden"
 
 #: views/remote_caldav_settings.php:181 views/remote_ews_settings.php:239
 #: views/remote_ical_settings.php:99
 msgid "2 Hours"
-msgstr ""
+msgstr "2 Stunden"
 
 #: views/remote_caldav_settings.php:179 views/remote_ews_settings.php:237
 #: views/remote_ical_settings.php:97
 msgid "30 Minutes"
-msgstr ""
+msgstr "30 Minuten"
 
 #: views/remote_caldav_settings.php:177 views/remote_ews_settings.php:235
 #: views/remote_ical_settings.php:95
 msgid "5 Minutes"
-msgstr ""
+msgstr "5 Minuten"
 
 #: views/remote_caldav_settings.php:182 views/remote_ews_settings.php:240
 #: views/remote_ical_settings.php:100
 msgid "6 Hours"
-msgstr ""
+msgstr "6 Stunden"
 
 #: views/calendargroupgrid.php:34 views/grid.php:29
 msgid "Actions"
-msgstr ""
+msgstr "Aktionen"
 
 #: Calendar.class.php:416
 msgid "Add"
-msgstr ""
+msgstr "Hinzufügen"
 
 #: views/grid.php:18
 #, php-format
 msgid "Add %s"
-msgstr ""
+msgstr "Hinzufügen %s"
 
 #: views/grid.php:14 views/rnav.php:5
 msgid "Add Calendar"
-msgstr ""
+msgstr "Kalender hinzufügen"
 
 #: assets/js/calendar/calendar.js:100
 msgid "Add Event"
-msgstr ""
+msgstr "Ereignis hinzufügen"
 
 #: views/calendargroupgrid.php:16
 msgid "Add Group"
-msgstr ""
+msgstr "Gruppe hinzufügen"
 
 #: views/rnav.php:8
 msgid "Add New Local Calendar"
-msgstr ""
+msgstr "Neuen lokalen Kalender hinzufügen"
 
 #: views/rnav.php:10
 msgid "Add Remote CalDAV Calendar"
-msgstr ""
+msgstr "Remote CalDAV Kalender hinzufügen"
 
 #: views/rnav.php:13
 msgid "Add Remote Google Calendar"
-msgstr ""
+msgstr "Remote Google Kalender hinzufügen"
 
 #: views/rnav.php:11
 msgid "Add Remote Outlook Calendar"
-msgstr ""
+msgstr "Remote Outlook-Kalender hinzufügen"
 
 #: views/rnav.php:9
 msgid "Add Remote iCal Calendar"
-msgstr ""
+msgstr "Remote iCal-Kalender hinzufügen"
 
 #: views/calendar.php:420 views/calendar.php:465
 msgid "After"
-msgstr ""
+msgstr "Später"
 
 #: views/calendar.php:156 views/calendar.php:161
 msgid "All Day"
-msgstr ""
+msgstr "Ganztägig"
 
 #: views/calendar.php:169
 msgid "All Day Event"
-msgstr ""
+msgstr "Ganztägiges Ereignis"
 
 #: views/ucp_config.php:65
 msgid "Allowed Calendar Groups"
-msgstr ""
+msgstr "zugelassene Kalender Gruppen"
 
 #: views/ucp_config.php:39
 msgid "Allowed Calendars"
-msgstr ""
+msgstr "zugelassene Kalender"
 
 #: calendar.i18n.php:6
 msgid "Applications"
