@@ -783,6 +783,9 @@ class Calendar extends \DB_Helper implements \BMO {
 			$tz = isset($value['timezone'])?$value['timezone']:$timezone;
 			$startdate = Carbon::createFromTimeStamp($value['starttime'],$tz);
 			$enddate = Carbon::createFromTimeStamp($value['endtime'],$tz);
+			if($startdate == $enddate) {
+				continue;
+			}
 
 			if($start->between($startdate,$enddate) || $end->between($startdate,$enddate)) {
 				continue;

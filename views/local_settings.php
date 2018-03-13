@@ -53,7 +53,7 @@
 							</div>
 							<div class="row">
 								<div class="col-md-12">
-									<span id="description-help" class="help-block fpbx-help-block"><?php echo _("The name of this calendar")?></span>
+									<span id="description-help" class="help-block fpbx-help-block"><?php echo _("The description of this calendar")?></span>
 								</div>
 							</div>
 						</div>
