@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-22 14:38-0800\n"
+"POT-Creation-Date: 2018-03-14 13:38-0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Autodetect"
 msgstr ""
 
-#: Calendar.class.php:1400
+#: Calendar.class.php:1403
 #: Console/Calendar.class.php:18
 #: calendar.i18n.php:4
 #: calendar.i18n.php:10
@@ -264,8 +264,8 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: Calendar.class.php:1288
-#: Calendar.class.php:1326
+#: Calendar.class.php:1291
+#: Calendar.class.php:1329
 msgid "Delete"
 msgstr ""
 
@@ -297,7 +297,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: Calendar.class.php:1258
+#: Calendar.class.php:1261
 msgid "Edit Settings"
 msgstr ""
 
@@ -368,8 +368,8 @@ msgstr ""
 msgid "How often this calendar will synchronize with the remote server"
 msgstr ""
 
-#: Calendar.class.php:1377
-#: Calendar.class.php:1385
+#: Calendar.class.php:1380
+#: Calendar.class.php:1388
 #: views/ucp_config.php:18
 msgid "Inherit"
 msgstr ""
@@ -505,10 +505,10 @@ msgstr ""
 msgid "Repeats"
 msgstr ""
 
-#: Calendar.class.php:1274
-#: Calendar.class.php:1293
-#: Calendar.class.php:1312
-#: Calendar.class.php:1331
+#: Calendar.class.php:1277
+#: Calendar.class.php:1296
+#: Calendar.class.php:1315
+#: Calendar.class.php:1334
 msgid "Reset"
 msgstr ""
 
@@ -550,10 +550,10 @@ msgstr ""
 msgid "Start Time"
 msgstr ""
 
-#: Calendar.class.php:1279
-#: Calendar.class.php:1298
-#: Calendar.class.php:1317
-#: Calendar.class.php:1336
+#: Calendar.class.php:1282
+#: Calendar.class.php:1301
+#: Calendar.class.php:1320
+#: Calendar.class.php:1339
 #: views/calendar.php:489
 msgid "Submit"
 msgstr ""
@@ -576,7 +576,10 @@ msgstr ""
 msgid "The Userman for this calendar"
 msgstr ""
 
+#: views/local_settings.php:56
+#: views/remote_caldav_settings.php:56
 #: views/remote_ews_settings.php:56
+#: views/remote_ical_settings.php:57
 msgid "The description of this calendar"
 msgstr ""
 
@@ -585,12 +588,9 @@ msgid "The email address of this calendar's user [Optional]"
 msgstr ""
 
 #: views/local_settings.php:34
-#: views/local_settings.php:56
 #: views/remote_caldav_settings.php:34
-#: views/remote_caldav_settings.php:56
 #: views/remote_ews_settings.php:34
 #: views/remote_ical_settings.php:35
-#: views/remote_ical_settings.php:57
 msgid "The name of this calendar"
 msgstr ""
 
@@ -671,7 +671,7 @@ msgstr ""
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:1265
+#: Calendar.class.php:1268
 #: assets/js/calendar/calendar.js:297
 msgid "Update from Source"
 msgstr ""
