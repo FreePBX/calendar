@@ -189,8 +189,8 @@ $(document).ready(function() {
 						me = moment.unix(src.uendtime).tz(tz),
 						allday = src.allDay;
 				resetModalForm();
-				$("#rstartdate").val(src.rstartdate);
-				$("#renddate").val(src.renddate);
+				//$("#rstartdate").val(src.rstartdate);
+				//$("#renddate").val(src.renddate);
 				$('#title').val(src.title);
 				$('#description').val(src.description);
 				$('#eventid').val(src.linkedid);

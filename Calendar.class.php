@@ -690,6 +690,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @return array  an array of events
 	 */
 	public function listEvents($calendarID, $start = null, $stop = null, $subevents = false) {
+		$aday = 0;
 		$return = array();
 		$calendar = $this->getCalendarByID($calendarID);
 		$data = $this->getAllEvents($calendarID);
@@ -710,6 +711,16 @@ class Calendar extends \DB_Helper implements \BMO {
 			$event['uendtime'] = $event['endtime'];
 			$event['title'] = $event['name'];
 			$event['uid'] = $uid;
+			$chkstartt = Carbon::createFromTimeStamp($event['starttime'],$calendar['timezone']);
+			$chkendt = Carbon::createFromTimeStamp($event['endtime'],$calendar['timezone']);
+			$orgsttime = $chkstartt->format('H:i:s');
+			$orgetime = $chkendt->format('H:i:s');
+			$orgstdate = $chkstartt->format('Y-m-d');
+			$orgedate = $chkendt->format('Y-m-d');
+			if(($orgsttime === $orgetime) && ($orgstdate !== $orgedate)) {
+				$aday = 1;
+			}
+
 			if(($event['starttime'] != $event['endtime']) && $subevents) {
 				$startrange = Carbon::createFromTimeStamp($event['starttime'],$calendar['timezone']);
 				$endrange = Carbon::createFromTimeStamp($event['endtime'],$calendar['timezone']);
@@ -735,7 +746,6 @@ class Calendar extends \DB_Helper implements \BMO {
 			}else{
 				$event['ustarttime'] = $event['starttime'];
 				$event['uendtime'] = $event['endtime'];
-
 				$start = Carbon::createFromTimeStamp($event['ustarttime'],$calendar['timezone']);
 				if($event['starttime'] == $event['endtime']) {
 					$event['allDay'] = true;
@@ -753,6 +763,10 @@ class Calendar extends \DB_Helper implements \BMO {
 				$event['start'] = sprintf('%sT%s',$event['startdate'],$event['starttime']);
 				$event['end'] = sprintf('%sT%s',$event['enddate'],$event['endtime']);
 				$event['now'] = $this->now->between($start, $end);
+				if($aday == 1) {
+					$event['enddate'] = date('Y-m-d', strtotime($event['enddate'] . ' +1 day'));
+					$event['end'] = sprintf('%sT%s',$event['enddate'],$event['endtime']);
+				}
 
 				$return[$uid] = $event;
 			}
