@@ -690,7 +690,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @return array  an array of events
 	 */
 	public function listEvents($calendarID, $start = null, $stop = null, $subevents = false) {
-		$aday = 0;
+		$aday = false;
 		$return = array();
 		$calendar = $this->getCalendarByID($calendarID);
 		$data = $this->getAllEvents($calendarID);
@@ -718,7 +718,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			$orgstdate = $chkstartt->format('Y-m-d');
 			$orgedate = $chkendt->format('Y-m-d');
 			if(($orgsttime === $orgetime) && ($orgstdate !== $orgedate)) {
-				$aday = 1;
+				$aday = true;
 			}
 
 			if(($event['starttime'] != $event['endtime']) && $subevents) {
@@ -763,7 +763,7 @@ class Calendar extends \DB_Helper implements \BMO {
 				$event['start'] = sprintf('%sT%s',$event['startdate'],$event['starttime']);
 				$event['end'] = sprintf('%sT%s',$event['enddate'],$event['endtime']);
 				$event['now'] = $this->now->between($start, $end);
-				if($aday == 1) {
+				if($aday) {
 					$event['enddate'] = date('Y-m-d', strtotime($event['enddate'] . ' +1 day'));
 					$event['end'] = sprintf('%sT%s',$event['enddate'],$event['endtime']);
 				}
