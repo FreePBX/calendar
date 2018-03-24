@@ -704,12 +704,23 @@ class Calendar extends \DB_Helper implements \BMO {
 		}
 
 		foreach($events as $uid => $event){
+			$aday = false;
 			$starttime = !empty($event['starttime'])?$event['starttime']:'00:00:00';
-			$endtime = !empty($event['endtime'])?$event['endtime']:'23:59:59';
+			$endtime = !empty($event['endtime'])?$event['endtime']:'00:00:00';
 			$event['ustarttime'] = $event['starttime'];
 			$event['uendtime'] = $event['endtime'];
 			$event['title'] = $event['name'];
 			$event['uid'] = $uid;
+			$chkstartt = Carbon::createFromTimeStamp($event['starttime'],$calendar['timezone']);
+			$chkendt = Carbon::createFromTimeStamp($event['endtime'],$calendar['timezone']);
+			$orgsttime = $chkstartt->format('H:i:s');
+			$orgetime = $chkendt->format('H:i:s');
+			$orgstdate = $chkstartt->format('Y-m-d');
+			$orgedate = $chkendt->format('Y-m-d');
+			if((($orgsttime === $orgetime) && ($orgstdate !== $orgedate)) || ($event['starttime'] == $event['endtime'])) {
+				$aday = true;
+			}
+
 			if(($event['starttime'] != $event['endtime']) && $subevents) {
 				$startrange = Carbon::createFromTimeStamp($event['starttime'],$calendar['timezone']);
 				$endrange = Carbon::createFromTimeStamp($event['endtime'],$calendar['timezone']);
@@ -726,8 +737,7 @@ class Calendar extends \DB_Helper implements \BMO {
 					$tempevent['endtime'] = $d->format('H:i:s');
 					$tempevent['start'] = sprintf('%sT%s',$tempevent['startdate'],$tempevent['starttime']);
 					$tempevent['end'] = sprintf('%sT%s',$tempevent['enddate'],$tempevent['endtime']);
-					$tempevent['allDay'] = ($event['endtime'] - $event['starttime']) === 86400;
-					//$tempevent['now'] = $this->now->between($start, $end);
+					$tempevent['allDay'] = $aday;
 					$tempevent['parent'] = $event;
 					$return[$tempevent['uid']] = $tempevent;
 					$i++;
@@ -735,13 +745,10 @@ class Calendar extends \DB_Helper implements \BMO {
 			}else{
 				$event['ustarttime'] = $event['starttime'];
 				$event['uendtime'] = $event['endtime'];
-
 				$start = Carbon::createFromTimeStamp($event['ustarttime'],$calendar['timezone']);
 				if($event['starttime'] == $event['endtime']) {
-					$event['allDay'] = true;
-					$end = $start->copy()->addDay();
+					$end = $start->copy();
 				} else {
-					$event['allDay'] = ($event['endtime'] - $event['starttime']) === 86400;
 					$end = Carbon::createFromTimeStamp($event['uendtime'],$calendar['timezone']);
 				}
 
@@ -753,6 +760,11 @@ class Calendar extends \DB_Helper implements \BMO {
 				$event['start'] = sprintf('%sT%s',$event['startdate'],$event['starttime']);
 				$event['end'] = sprintf('%sT%s',$event['enddate'],$event['endtime']);
 				$event['now'] = $this->now->between($start, $end);
+				$event['allDay'] = $aday;
+				if($aday) {
+					$event['enddate'] = $end->copy()->addDay()->format('Y-m-d');
+					$event['end'] = sprintf('%sT%s',$event['enddate'],$event['endtime']);
+				}
 
 				$return[$uid] = $event;
 			}
