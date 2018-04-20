@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-14 11:18-0700\n"
+"POT-Creation-Date: 2018-04-20 01:20-0400\n"
 "PO-Revision-Date: 2018-02-14 21:15+0200\n"
 "Last-Translator: jeremie <freepbx@famillecattan.com>\n"
 "Language-Team: French <http://weblate.freepbx.org/projects/freepbx/calendar/"
@@ -192,7 +192,7 @@ msgstr "Tentative de chargement..."
 msgid "Autodetect"
 msgstr "Détection automatique"
 
-#: Calendar.class.php:1403 Console/Calendar.class.php:18 calendar.i18n.php:4
+#: Calendar.class.php:1415 Console/Calendar.class.php:18 calendar.i18n.php:4
 #: calendar.i18n.php:10
 msgid "Calendar"
 msgstr "Agenda"
@@ -251,7 +251,7 @@ msgstr "Jour de la semaine"
 msgid "Days"
 msgstr "Jours"
 
-#: Calendar.class.php:1291 Calendar.class.php:1329
+#: Calendar.class.php:1303 Calendar.class.php:1341
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -281,7 +281,7 @@ msgstr "Version EWS"
 msgid "Edit"
 msgstr "Editer"
 
-#: Calendar.class.php:1261
+#: Calendar.class.php:1273
 msgid "Edit Settings"
 msgstr "Éditer les paramètres"
 
@@ -350,7 +350,7 @@ msgstr "Groupe"
 msgid "How often this calendar will synchronize with the remote server"
 msgstr "À quel fréquence cet agenda se ssynchronisera avec le serveur distant"
 
-#: Calendar.class.php:1380 Calendar.class.php:1388 views/ucp_config.php:18
+#: Calendar.class.php:1392 Calendar.class.php:1400 views/ucp_config.php:18
 msgid "Inherit"
 msgstr "Hérite"
 
@@ -477,8 +477,8 @@ msgstr "Répéter par"
 msgid "Repeats"
 msgstr "Répétitions"
 
-#: Calendar.class.php:1277 Calendar.class.php:1296 Calendar.class.php:1315
-#: Calendar.class.php:1334
+#: Calendar.class.php:1289 Calendar.class.php:1308 Calendar.class.php:1327
+#: Calendar.class.php:1346
 msgid "Reset"
 msgstr "Réinitialiser"
 
@@ -526,8 +526,8 @@ msgstr "Date de début"
 msgid "Start Time"
 msgstr "Heure de début"
 
-#: Calendar.class.php:1282 Calendar.class.php:1301 Calendar.class.php:1320
-#: Calendar.class.php:1339 views/calendar.php:489
+#: Calendar.class.php:1294 Calendar.class.php:1313 Calendar.class.php:1332
+#: Calendar.class.php:1351 views/calendar.php:489
 msgid "Submit"
 msgstr "Soumettre"
 
@@ -639,7 +639,7 @@ msgstr "Incapable de déterminer l'URL du serveur"
 msgid "Unknown Calendar"
 msgstr "Calendrier inconnu"
 
-#: Calendar.class.php:1268 assets/js/calendar/calendar.js:297
+#: Calendar.class.php:1280 assets/js/calendar/calendar.js:297
 msgid "Update from Source"
 msgstr "Mise à jour de la source"
 
