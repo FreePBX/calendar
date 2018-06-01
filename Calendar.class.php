@@ -14,44 +14,23 @@ use Eluceo\iCal\Property\Event\RecurrenceRule;
 use \jamesiarmes\PhpEws\Client;
 use \FreePBX\modules\Calendar\drivers\Ews\Calendar as EWSCalendar;
 use malkusch\lock\mutex\FlockMutex;
-
+use BMO;
+use DB_Helper;
 include __DIR__."/vendor/autoload.php";
 
-class Calendar extends \DB_Helper implements \BMO {
+class Calendar extends DB_Helper implements BMO {
 	private $now; //right now, private so it doesnt keep updating
 	private $drivers;
 	private $guimessage;
-
+	
 	public function __construct($freepbx = null) {
 		if ($freepbx == null) {
 			throw new Exception("Not given a FreePBX Object");
 		}
 		$this->FreePBX = $freepbx;
 		$this->db = $freepbx->Database;
-		$this->systemtz = $this->FreePBX->View()->getTimezone();
+		$this->systemtz = $this->FreePBX->View->getTimezone();
 		$this->now = Carbon::now($this->systemtz);
-		$this->eventDefaults = array(
-				'uid' => '',
-				'user' => '',
-				'description' => '',
-				'hookdata' => '',
-				'active' => true,
-				'generatehint' => false,
-				'generatefc' => false,
-				'eventtype' => 'calendaronly',
-				'weekdays' => '',
-				'monthdays' => '',
-				'months' => '',
-				'timezone' => $this->systemtz,
-				'startdate' => '',
-				'enddate' => '',
-				'starttime' => '',
-				'endtime' => '',
-				'repeatinterval' => '',
-				'frequency' => '',
-				'truedest' => '',
-				'falsedest' => ''
-			);
 	}
 
 	public function setTimezone($timezone) {
@@ -62,8 +41,6 @@ class Calendar extends \DB_Helper implements \BMO {
 		$this->now = Carbon::now($this->systemtz);
 	}
 
-	public function backup() {}
-	public function restore($backup) {}
 	public function install(){
 
 	}
@@ -206,9 +183,9 @@ class Calendar extends \DB_Helper implements \BMO {
 				$setting['authenticate'] = false;
 				$setting['allowremote'] = true;
 				return true;
-			break;
+			default:
+				return false;
 		}
-		return false;
 	}
 
 	public function ajaxCustomHandler() {
