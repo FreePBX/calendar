@@ -10,16 +10,15 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-14 11:18-0700\n"
-"PO-Revision-Date: 2018-03-01 17:18+0200\n"
-"Last-Translator: Nils <Nils@heckenkamp.info>\n"
-"Language-Team: German <http://weblate.freepbx.org/projects/freepbx/calendar/"
-"de_DE/>\n"
+"PO-Revision-Date: 2018-06-14 09:09+0000\n"
+"Last-Translator: Nils Heckenkamp <nheckenkamp@sangoma.com>\n"
+"Language-Team: German <http://*/projects/freepbx/calendar/de/>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.4\n"
+"X-Generator: Weblate 2.19.1\n"
 
 #: views/remote_caldav_settings.php:4
 #, php-format
@@ -190,56 +189,58 @@ msgstr ""
 
 #: views/remote_ews_settings.php:139
 msgid "Autodetect"
-msgstr ""
+msgstr "Automatische Erkennung"
 
 #: Calendar.class.php:1403 Console/Calendar.class.php:18 calendar.i18n.php:4
 #: calendar.i18n.php:10
 msgid "Calendar"
-msgstr ""
+msgstr "Kalender"
 
 #: calendar.i18n.php:12
 msgid "Calendar Event Groups"
-msgstr ""
+msgstr "Kalender Ereignisgruppen"
 
 #: functions.inc.php:15 functions.inc.php:28
 #, php-format
 msgid "Calendar Group: %s"
-msgstr ""
+msgstr "Kalendar Gruppe: %s1"
 
 #: functions.inc.php:16
 msgid "Calendar Groups"
-msgstr ""
+msgstr "Kalender Gruppen"
 
 #: views/calendargroupgrid.php:11
 msgid ""
 "Calendar event groups are a collection of calendars, events or categories "
 "from the Calendar Module."
 msgstr ""
+"Kalenderereignisgruppen sind eine Sammlung von Kalendern, Ereignissen oder "
+"Kategorien aus dem Kalendermodul."
 
 #: views/ucp_config.php:79
 msgid "Calendar groups the user may utilize."
-msgstr ""
+msgstr "Kalendergruppen, die der Benutzer verwenden kann."
 
 #: assets/js/calendar/calendar.js:124
 msgid "Calendar names should be unique."
-msgstr ""
+msgstr "Kalendernamen sollten eindeutig sein."
 
 #: views/calendargroups.php:43 views/remote_caldav_settings.php:133
 #: views/remote_ews_settings.php:191
 msgid "Calendars"
-msgstr ""
+msgstr "Kalender"
 
 #: views/ucp_config.php:53
 msgid "Calendars the user may utilize"
-msgstr ""
+msgstr "Kalender, die der Benutzer verwenden kann"
 
 #: views/calendar.php:488
 msgid "Close"
-msgstr ""
+msgstr "Schließen"
 
 #: views/calendar.php:393
 msgid "Day of the month"
-msgstr ""
+msgstr "Tag des Monats"
 
 #: views/calendar.php:395
 msgid "Day of the week"
