@@ -15,9 +15,11 @@ use Eluceo\iCal\Component;
 use Eluceo\iCal\Property;
 use Eluceo\iCal\Property\DateTimeProperty;
 use Eluceo\iCal\Property\Event\Attendees;
+use Eluceo\iCal\Property\Event\Geo;
 use Eluceo\iCal\Property\Event\Organizer;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
 use Eluceo\iCal\Property\Event\Description;
+use Eluceo\iCal\Property\RawStringValue;
 use Eluceo\iCal\PropertyBag;
 use Eluceo\iCal\Property\Event\RecurrenceId;
 use Eluceo\iCal\Property\DateTimesProperty;
@@ -87,7 +89,7 @@ class Event extends Component
     protected $locationTitle;
 
     /**
-     * @var string
+     * @var Geo
      */
     protected $locationGeo;
 
@@ -144,6 +146,11 @@ class Event extends Component
      * @var RecurrenceRule
      */
     protected $recurrenceRule;
+
+    /**
+     * @var array
+     */
+    protected $recurrenceRules = array();
 
     /**
      * This property specifies the date and time that the calendar
@@ -244,6 +251,9 @@ class Event extends Component
 
         // An event can have a 'dtend' or 'duration', but not both.
         if (null != $this->dtEnd) {
+            if($this->noTime === true) {
+                $this->dtEnd->add(new \DateInterval('P1D'));
+            }
             $propertyBag->add(new DateTimeProperty('DTEND', $this->dtEnd, $this->noTime, $this->useTimezone, $this->useUtc));
         } elseif (null != $this->duration) {
             $propertyBag->set('DURATION', $this->duration->format('P%dDT%hH%iM%sS'));
@@ -261,7 +271,7 @@ class Event extends Component
                 $propertyBag->add(
                     new Property(
                         'X-APPLE-STRUCTURED-LOCATION',
-                        'geo:' . $this->locationGeo,
+                        new RawStringValue('geo:' . $this->locationGeo->getGeoLocationAsString(',')),
                         array(
                             'VALUE'          => 'URI',
                             'X-ADDRESS'      => $this->location,
@@ -270,8 +280,11 @@ class Event extends Component
                         )
                     )
                 );
-                $propertyBag->set('GEO', str_replace(',', ';', $this->locationGeo));
             }
+        }
+
+        if (null != $this->locationGeo) {
+            $propertyBag->add($this->locationGeo);
         }
 
         if (null != $this->summary) {
@@ -302,6 +315,10 @@ class Event extends Component
 
         if (null != $this->recurrenceRule) {
             $propertyBag->set('RRULE', $this->recurrenceRule);
+        }
+
+        foreach ($this->recurrenceRules as $recurrenceRule) {
+            $propertyBag->set('RRULE', $recurrenceRule);
         }
 
         if (null != $this->recurrenceId) {
@@ -368,6 +385,11 @@ class Event extends Component
         return $this;
     }
 
+    public function getDtStart()
+    {
+        return $this->dtStart;
+    }
+
     /**
      * @param $dtStamp
      *
@@ -393,17 +415,38 @@ class Event extends Component
     }
 
     /**
-     * @param        $location
+     * @param string       $location
      * @param string $title
-     * @param null   $geo
+     * @param Geo|string $geo
      *
      * @return $this
      */
     public function setLocation($location, $title = '', $geo = null)
     {
+        if (is_scalar($geo)) {
+            $geo = Geo::fromString($geo);
+        } else if (!is_null($geo) && !$geo instanceof Geo) {
+            $className = get_class($geo);
+            throw new \InvalidArgumentException(
+                "The parameter 'geo' must be a string or an instance of \\Eluceo\\iCal\\Property\\Event\\Geo"
+                . " but an instance of {$className} was given."
+            );
+        }
+
         $this->location      = $location;
         $this->locationTitle = $title;
         $this->locationGeo   = $geo;
+
+        return $this;
+    }
+
+    /**
+     * @param Geo $geoProperty
+     * @return $this
+     */
+    public function setGeoLocation(Geo $geoProperty)
+    {
+        $this->locationGeo = $geoProperty;
 
         return $this;
     }
@@ -530,7 +573,7 @@ class Event extends Component
 
     /**
      * @param string $attendee
-     * @param array  $params
+     * @param array $params
      *
      * @return $this
      */
@@ -611,7 +654,7 @@ class Event extends Component
      */
     public function setCancelled($status)
     {
-        $this->cancelled = (bool) $status;
+        $this->cancelled = (bool)$status;
 
         return $this;
     }
@@ -660,23 +703,51 @@ class Event extends Component
     }
 
     /**
+     * @deprecated Deprecated since version 0.11.0, to be removed in 1.0. Use addRecurrenceRule instead.
+     *
      * @param RecurrenceRule $recurrenceRule
      *
      * @return $this
      */
     public function setRecurrenceRule(RecurrenceRule $recurrenceRule)
     {
+        @trigger_error('setRecurrenceRule() is deprecated since version 0.11.0 and will be removed in 1.0. Use addRecurrenceRule instead.', E_USER_DEPRECATED);
+
         $this->recurrenceRule = $recurrenceRule;
 
         return $this;
     }
 
     /**
+     * @deprecated Deprecated since version 0.11.0, to be removed in 1.0. Use getRecurrenceRules instead.
+     *
      * @return RecurrenceRule
      */
     public function getRecurrenceRule()
     {
+        @trigger_error('getRecurrenceRule() is deprecated since version 0.11.0 and will be removed in 1.0. Use getRecurrenceRules instead.', E_USER_DEPRECATED);
+
         return $this->recurrenceRule;
+    }
+
+    /**
+     * @param RecurrenceRule $recurrenceRule
+     *
+     * @return $this
+     */
+    public function addRecurrenceRule(RecurrenceRule $recurrenceRule)
+    {
+        $this->recurrenceRules[] = $recurrenceRule;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRecurrenceRules()
+    {
+        return $this->recurrenceRules;
     }
 
     /**
@@ -724,7 +795,7 @@ class Event extends Component
      */
     public function setIsPrivate($flag)
     {
-        $this->isPrivate = (bool) $flag;
+        $this->isPrivate = (bool)$flag;
 
         return $this;
     }

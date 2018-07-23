@@ -1,7 +1,7 @@
 <?php
 namespace FreePBX\modules\Calendar\drivers;
 use FreePBX\modules\Calendar\drivers\Ews\Calendar as EWSCalendar;
-use om\IcalParser;
+use FreePBX\modules\Calendar\IcalParser\IcalRangedParser;
 use Ramsey\Uuid\Uuid;
 class Ews extends Base {
 	public $driver = 'Ews';
@@ -106,7 +106,11 @@ class Ews extends Base {
 		foreach($calendar['calendars'] as $c) {
 			if(isset($cals[$c])) {
 				$events = $ews->getAllEventsByCalendarID($c);
-				$cal = new IcalParser();
+				$cal = new IcalRangedParser();
+				$cal->setStartRange(new \DateTime());
+				$end = new \DateTime();
+				$end->add(new \DateInterval('P2M'));
+				$cal->setEndRange($end);
 				$finalical = $ews->formatiCal($events);
 				$cal->parseString($finalical);
 				$this->calendar->processiCalEvents($calendar['id'], $cal, $finalical); //will ids clash? they shouldnt????

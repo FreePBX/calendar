@@ -1,6 +1,6 @@
 <?php
 namespace FreePBX\modules\Calendar\drivers;
-use om\IcalParser;
+use FreePBX\modules\Calendar\IcalParser\IcalRangedParser;
 use Ramsey\Uuid\Uuid;
 class Ical extends Base {
 	public $driver = 'Ical';
@@ -66,7 +66,11 @@ class Ical extends Base {
 	 */
 	public function processCalendar($calendar) {
 		$req = \FreePBX::Curl()->requests($calendar['url']);
-		$cal = new IcalParser();
+		$cal = new IcalRangedParser();
+		$cal->setStartRange(new \DateTime());
+		$end = new \DateTime();
+		$end->add(new \DateInterval('P2M'));
+		$cal->setEndRange($end);
 		$finalical = $req->get($calendar['url'])->body;
 		$cal->parseString($finalical);
 		$this->calendar->processiCalEvents($calendar['id'], $cal, $finalical);

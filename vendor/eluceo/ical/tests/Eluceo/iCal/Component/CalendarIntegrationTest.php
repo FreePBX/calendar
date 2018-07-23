@@ -26,7 +26,7 @@ class CalendarIntegrationTest extends \PHPUnit_Framework_TestCase
         $recurrenceRule = new \Eluceo\iCal\Property\Event\RecurrenceRule();
         $recurrenceRule->setFreq(\Eluceo\iCal\Property\Event\RecurrenceRule::FREQ_YEARLY);
         $recurrenceRule->setInterval(1);
-        $vEvent->setRecurrenceRule($recurrenceRule);
+        $vEvent->addRecurrenceRule($recurrenceRule);
 
         // Adding Timezone (optional)
         $vEvent->setUseTimezone(true);
@@ -41,10 +41,10 @@ class CalendarIntegrationTest extends \PHPUnit_Framework_TestCase
             '/X-PUBLISHED-TTL:P1W/',
             '/BEGIN:VEVENT/',
             '/UID:123456/',
-            '/DTSTART;TZID=Europe\/Berlin;VALUE=DATE:20121231/',
+            '/DTSTART;VALUE=DATE:20121231/',
             '/SEQUENCE:0/',
             '/TRANSP:OPAQUE/',
-            '/DTEND;TZID=Europe\/Berlin;VALUE=DATE:20121231/',
+            '/DTEND;VALUE=DATE:20130101/',
             '/SUMMARY:New Year’s Eve/',
             '/CLASS:PRIVATE/',
             '/RRULE:FREQ=YEARLY;INTERVAL=1/',

@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "edb70bea5808f68d77ca53fce1d2744d",
+    "content-hash": "401fe96b865c3cdbf06a22987eaf2d90",
     "packages": [
         {
             "name": "eluceo/ical",
-            "version": "0.10.1",
+            "version": "0.11.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/markuspoerschke/iCal.git",
-                "reference": "2dd99c12c0aa961c541380ab0c113135e14af33e"
+                "reference": "e22ef0fad1a19ad1bbffd819f21fa6a83f96531c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/markuspoerschke/iCal/zipball/2dd99c12c0aa961c541380ab0c113135e14af33e",
-                "reference": "2dd99c12c0aa961c541380ab0c113135e14af33e",
+                "url": "https://api.github.com/repos/markuspoerschke/iCal/zipball/e22ef0fad1a19ad1bbffd819f21fa6a83f96531c",
+                "reference": "e22ef0fad1a19ad1bbffd819f21fa6a83f96531c",
                 "shasum": ""
             },
             "require": {
@@ -25,6 +25,9 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.3"
+            },
+            "suggest": {
+                "ext-mbstring": "Massive performance enhancement of line folding"
             },
             "type": "library",
             "autoload": {
@@ -57,20 +60,20 @@
                 "ics",
                 "php calendar"
             ],
-            "time": "2016-06-09T09:08:55+00:00"
+            "time": "2018-04-30T07:46:32+00:00"
         },
         {
             "name": "jamesiarmes/php-ntlm",
-            "version": "1.0.0-beta.1",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jamesiarmes/php-ntlm.git",
-                "reference": "deda583bd93371a7940b5dd8a97b14576315a7c5"
+                "reference": "08fa988af7506b8dc366737b06c86633ba8cecbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jamesiarmes/php-ntlm/zipball/deda583bd93371a7940b5dd8a97b14576315a7c5",
-                "reference": "deda583bd93371a7940b5dd8a97b14576315a7c5",
+                "url": "https://api.github.com/repos/jamesiarmes/php-ntlm/zipball/08fa988af7506b8dc366737b06c86633ba8cecbc",
+                "reference": "08fa988af7506b8dc366737b06c86633ba8cecbc",
                 "shasum": ""
             },
             "require": {
@@ -99,27 +102,27 @@
                 }
             ],
             "description": "Library for communicating with Microsoft services using NTLM authentication.",
-            "time": "2016-12-30T21:43:02+00:00"
+            "time": "2017-10-04T01:14:17+00:00"
         },
         {
             "name": "om/icalparser",
-            "version": "v0.2.0",
+            "version": "dev-hotfix/31",
             "source": {
                 "type": "git",
-                "url": "https://github.com/OzzyCzech/icalparser.git",
-                "reference": "e46be90a5ed3d6f32b6a3a76fb9e68aea1972f14"
+                "url": "https://github.com/tm1000/icalparser.git",
+                "reference": "70a839dd207bb5292c73d473024b4a33b4a22b48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OzzyCzech/icalparser/zipball/e46be90a5ed3d6f32b6a3a76fb9e68aea1972f14",
-                "reference": "e46be90a5ed3d6f32b6a3a76fb9e68aea1972f14",
+                "url": "https://api.github.com/repos/tm1000/icalparser/zipball/70a839dd207bb5292c73d473024b4a33b4a22b48",
+                "reference": "70a839dd207bb5292c73d473024b4a33b4a22b48",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.6.0"
             },
             "require-dev": {
-                "nette/tester": "v1.7.1"
+                "nette/tester": "v2.0.1"
             },
             "type": "library",
             "autoload": {
@@ -127,7 +130,11 @@
                     "src/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "tests": [
+                    "./vendor/bin/tester tests -s -p php"
+                ]
+            },
             "license": [
                 "BSD-3-Clause"
             ],
@@ -143,25 +150,28 @@
                 "ical",
                 "parser"
             ],
-            "time": "2016-07-04T13:13:09+00:00"
+            "support": {
+                "source": "https://github.com/tm1000/icalparser/tree/hotfix/31"
+            },
+            "time": "2018-07-23T15:44:19+00:00"
         },
         {
             "name": "php-ews/php-ews",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jamesiarmes/php-ews.git",
-                "reference": "8046d5eba1d09ca722b29d17169b80d9f7f42aae"
+                "reference": "405f03cb679eff59c84f223962c9cadf14b38450"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jamesiarmes/php-ews/zipball/8046d5eba1d09ca722b29d17169b80d9f7f42aae",
-                "reference": "8046d5eba1d09ca722b29d17169b80d9f7f42aae",
+                "url": "https://api.github.com/repos/jamesiarmes/php-ews/zipball/405f03cb679eff59c84f223962c9cadf14b38450",
+                "reference": "405f03cb679eff59c84f223962c9cadf14b38450",
                 "shasum": ""
             },
             "require": {
                 "ext-soap": "*",
-                "jamesiarmes/php-ntlm": "~1.0.0",
+                "jamesiarmes/php-ntlm": "~1.0",
                 "php": ">=5.3.9"
             },
             "require-dev": {
@@ -190,20 +200,20 @@
             ],
             "description": "Library for communicating with Exchange Web Services.",
             "homepage": "http://jamesarmes.com/php-ews/",
-            "time": "2017-02-12 21:59:28"
+            "time": "2017-10-04T01:18:36+00:00"
         },
         {
             "name": "thecsea/simple-caldav-client",
-            "version": "v0.1.5",
+            "version": "v0.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thecsea/simpleCalDAV.git",
-                "reference": "b8f62de8f639da87fc72057b241d7edb0c6988bf"
+                "reference": "e672f89944e0e9ab10975d9abb44afff0fdaafc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thecsea/simpleCalDAV/zipball/b8f62de8f639da87fc72057b241d7edb0c6988bf",
-                "reference": "b8f62de8f639da87fc72057b241d7edb0c6988bf",
+                "url": "https://api.github.com/repos/thecsea/simpleCalDAV/zipball/e672f89944e0e9ab10975d9abb44afff0fdaafc5",
+                "reference": "e672f89944e0e9ab10975d9abb44afff0fdaafc5",
                 "shasum": ""
             },
             "require": {
@@ -233,16 +243,16 @@
                 "Simple",
                 "client"
             ],
-            "time": "2015-12-02T19:10:12+00:00"
+            "time": "2018-04-16T15:35:30+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
-        "php-ews/php-ews": 20
+        "om/icalparser": 20
     },
-    "prefer-stable": true,
+    "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": []

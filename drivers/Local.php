@@ -2,7 +2,7 @@
 namespace FreePBX\modules\Calendar\drivers;
 use Ramsey\Uuid\Uuid;
 use Carbon\Carbon;
-use om\IcalParser;
+use FreePBX\modules\IcalParser\IcalRangedParser;
 use Eluceo\iCal\Component\Calendar as iCalendar;
 use Eluceo\iCal\Component\Event;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
@@ -138,7 +138,11 @@ class Local extends Base {
 
 		$vCalendar->addComponent($vEvent);
 
-		$cal = new IcalParser();
+		$cal = new IcalRangedParser();
+		$cal->setStartRange(new \DateTime());
+		$end = new \DateTime();
+		$end->add(new \DateInterval('P2M'));
+		$cal->setEndRange($end);
 		$render = $vCalendar->render();
 		$render = str_replace('"','',$render); //TODO: bad
 		$cal->parseString($render);

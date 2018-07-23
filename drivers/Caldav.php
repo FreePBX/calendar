@@ -1,6 +1,6 @@
 <?php
 namespace FreePBX\modules\Calendar\drivers;
-use om\IcalParser;
+use FreePBX\modules\Calendar\IcalParser\IcalRangedParser;
 use Ramsey\Uuid\Uuid;
 use it\thecsea\simple_caldav_client\SimpleCalDAVClient;
 class Caldav extends Base {
@@ -107,7 +107,11 @@ class Caldav extends Base {
 					$middle .= $matches[0][0]."\n";
 				}
 				$finalical .= $begin.$middle."END:VCALENDAR";
-				$cal = new IcalParser();
+				$cal = new IcalRangedParser();
+				$cal->setStartRange(new \DateTime());
+				$end = new \DateTime();
+				$end->add(new \DateInterval('P2M'));
+				$cal->setEndRange($end);
 				$cal->parseString($finalical);
 				$this->calendar->processiCalEvents($calendar['id'], $cal, $finalical); //will ids clash? they shouldnt????
 				$this->saveiCal($calendar['id'],$finalical);

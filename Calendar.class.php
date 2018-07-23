@@ -1,5 +1,8 @@
 <?php
 namespace FreePBX\modules;
+
+include __DIR__."/vendor/autoload.php";
+
 use Moment\Moment;
 use Moment\CustomFormats\MomentJs;
 use Ramsey\Uuid\Uuid;
@@ -7,6 +10,7 @@ use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use it\thecsea\simple_caldav_client\SimpleCalDAVClient;
+use FreePBX\modules\Calendar\IcalParser\IcalRangedParser;
 use om\IcalParser;
 use Eluceo\iCal\Component\Calendar as iCalendar;
 use Eluceo\iCal\Component\Event;
@@ -14,8 +18,8 @@ use Eluceo\iCal\Property\Event\RecurrenceRule;
 use \jamesiarmes\PhpEws\Client;
 use \FreePBX\modules\Calendar\drivers\Ews\Calendar as EWSCalendar;
 use malkusch\lock\mutex\FlockMutex;
-
-include __DIR__."/vendor/autoload.php";
+use BMO;
+use DB_Helper;
 
 class Calendar extends \DB_Helper implements \BMO {
 	private $now; //right now, private so it doesnt keep updating
@@ -383,8 +387,9 @@ class Calendar extends \DB_Helper implements \BMO {
 			case 'events':
 				$start = new Carbon($_GET['start'],$_GET['timezone']);
 				$end = new Carbon($_GET['end'],$_GET['timezone']);
-				$events = $this->listEvents($_REQUEST['calendarid'],$start, $end);
-				$events = is_array($events) ? $events : array();
+
+				$events = $this->getParsedEvents($_REQUEST['calendarid'], $start, $end);
+
 				return array_values($events);
 			break;
 			case 'eventform':
@@ -406,6 +411,95 @@ class Calendar extends \DB_Helper implements \BMO {
 				return $data;
 			break;
 		}
+	}
+
+	public function getParsedEvents($calendar, \DateTime $start, \DateTime $end) {
+		$calendar = $this->getCalendarByID($_REQUEST['calendarid']);
+		$raw = $this->getIcalCalendarByID($_REQUEST['calendarid']);
+		$cal = new IcalRangedParser();
+		$cal->setStartRange($start);
+		$cal->setEndRange($end);
+		$cal->parseString($raw);
+		$events = $cal->getSortedEvents();
+		$parsedEvents = [];
+		$i = 0;
+		$calendarTimezone = new \DateTimeZone($calendar['timezone']);
+		foreach($events as $event) {
+			$event['UID'] = isset($event['UID']) ? $event['UID'] : $i;
+
+			// If there is no end event, set it to the start time
+			if (!isset($event['DTEND']) || !is_object($event['DTEND'])) {
+				$event['DTEND'] = clone $event['DTSTART'];
+			}
+
+			if($event['DTSTART']->getTimezone() != $event['DTEND']->getTimezone()) {
+				throw new \Exception("Start timezone and end timezone are different! Not sure what to do here".json_encode($event));
+			}
+
+			$event['DTSTART']->setTimezone($calendarTimezone);
+			$event['DTEND']->setTimezone($calendarTimezone);
+
+			$event['DTSTART'] = Carbon::instance($event['DTSTART']);
+			$event['DTEND'] = Carbon::instance($event['DTEND']);
+			if(isset($event['ORIGINAL_VEVENT'])) {
+				$event['ORIGINAL_VEVENT']['DTSTART'] = Carbon::instance($event['ORIGINAL_VEVENT']['DTSTART']);
+				$event['ORIGINAL_VEVENT']['DTEND'] = Carbon::instance($event['ORIGINAL_VEVENT']['DTEND']);
+				$event['ORIGINAL_VEVENT']['DTSTART']->setTimezone($calendarTimezone);
+				$event['ORIGINAL_VEVENT']['DTEND']->setTimezone($calendarTimezone);
+			}
+
+			$event['RECURRENCE_INSTANCE'] = isset($event['RECURRENCE_INSTANCE']) ? $event['RECURRENCE_INSTANCE'] : 0;
+
+			$e = [
+				'name' => $event['SUMMARY'],
+				'description' => isset($event['DESCRIPTION']) ? $event['DESCRIPTION'] : '',
+				'recurring' => isset($event['RECURRING']) ? $event['RECURRING'] : false,
+				'rrules' => [],
+				'categories' => (!empty($event['CATEGORIES']) && is_array($event['CATEGORIES'])) ? $event['CATEGORIES'] : [],
+				'timezone' => null,
+				'starttime' => $event['DTSTART']->format('H:i:s'),
+				'endtime' => $event['DTEND']->format('H:i:s'),
+				'linkedid' => $event['UID'],
+				'uid' => $event['UID'].'_'.$event['RECURRENCE_INSTANCE'],
+				'rstartdate' => isset($event['ORIGINAL_VEVENT']) ? $event['ORIGINAL_VEVENT']['DTSTART']->getTimestamp() : null,
+				'renddate' => isset($event['ORIGINAL_VEVENT']) ? $event['ORIGINAL_VEVENT']['DTEND']->getTimestamp() : null,
+				'ustarttime' => $event['DTSTART']->getTimestamp(),
+				'uendtime' => $event['DTEND']->getTimestamp(),
+				'title' => $event['SUMMARY'],
+				'startdate' => $start->format('Y-m-d'),
+				'enddate' => $end->format('Y-m-d'),
+				'start' => sprintf('%sT%s',$event['DTSTART']->format('Y-m-d'),$event['DTSTART']->format('H:i:s')),
+				'end' => sprintf('%sT%s',$event['DTEND']->format('Y-m-d'),$event['DTEND']->format('H:i:s')),
+				'now' => $this->now->between($event['DTSTART'], $event['DTEND']),
+				'allDay' => false
+			];
+
+			$tz = $event['DTSTART']->getTimezone();
+			$timezone = $tz->getName();
+			$e['timezone'] = ($timezone === 'Z') ? null : $timezone;
+
+			if(!empty($event['RECURRING'])) {
+				$e['rrules'] = [
+					"frequency" => $event['RRULE']['FREQ'],
+					"days" => !empty($event['RRULE']['BYDAY']) ? explode(",",$event['RRULE']['BYDAY']) : [],
+					"byday" => !empty($event['RRULE']['BYDAY']) ? $event['RRULE']['BYDAY'] : [],
+					"interval" => !empty($event['RRULE']['INTERVAL']) ? $event['RRULE']['INTERVAL'] : "",
+					"count" => !empty($event['RRULE']['COUNT']) ? $event['RRULE']['COUNT'] : "",
+					"until" => !empty($event['RRULE']['UNTIL']) ? $event['RRULE']['UNTIL']->format('U') : ""
+				];
+			}
+
+			//Check for all day
+			if($e['ustarttime'] === $e['enddate'] || ($e['starttime'] === $e['endtime']) && ($e['startdate'] !== $e['enddate'])) {
+				$e['allDay'] = true;
+				//$e['enddate'] = $end->copy()->addDay()->format('Y-m-d');
+				//$e['end'] = sprintf('%sT%s',$event['enddate'],$event['endtime']);
+			}
+
+			$parsedEvents[$e['uid']] = $e;
+			$i++;
+		}
+		return $parsedEvents;
 	}
 
 	public function showCalendarGroupsPage() {
@@ -637,6 +731,13 @@ class Calendar extends \DB_Helper implements \BMO {
 		}
 		$final['timezone'] = !empty($final['timezone']) ? $final['timezone'] : $this->systemtz;
 		return $final;
+	}
+
+	public function getIcalCalendarByID($id) {
+		if(empty($this->getCalendarByID($id))) {
+			return false;
+		}
+		return $this->getConfig($id."-raw");
 	}
 
 	/**
@@ -949,9 +1050,9 @@ class Calendar extends \DB_Helper implements \BMO {
 	/**
 	 * Process iCal Type events
 	 * @param  string     $calendarID The Calendar ID
-	 * @param  IcalParser $cal        IcalParser Object reference of events
+	 * @param  IcalRangedParser $cal        IcalRangedParser Object reference of events
 	 */
-	public function processiCalEvents($calendarID, IcalParser $cal, $rawiCal) {
+	public function processiCalEvents($calendarID, IcalRangedParser $cal, $rawiCal) {
 		//dont let sql update until the end of this
 		//This might be bad.. ok it probably is bad. We should just get a Range of events
 		//works for now though.
@@ -963,6 +1064,9 @@ class Calendar extends \DB_Helper implements \BMO {
 		$this->delById($calendarID."-events");
 		$this->delById($calendarID."-linked-events");
 		$this->delById($calendarID."-categories-events");
+		//store raw icals
+		$this->delConfig($calendarID."-raw");
+		$this->setConfig($calendarID."-raw",$rawiCal);
 
 		foreach ($cal->getSortedEvents() as $event) {
 			if($event['DTSTART']->format('U') == 0) {
@@ -983,7 +1087,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param  string $calendarID The Calendar ID
 	 * @param  array $event      The iCal Event
 	 */
-	public function processiCalEvent($calendarID, $event, $rawiCalEvent) {
+	public function processiCalEvent($calendarID, $event) {
 		$event['UID'] = isset($event['UID']) ? $event['UID'] : 0;
 
 		if(!empty($event['RECURRING'])) {
