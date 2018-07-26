@@ -795,7 +795,9 @@ class Calendar extends \DB_Helper implements \BMO {
 			$tz = isset($value['timezone'])?$value['timezone']:$timezone;
 			$startdate = Carbon::createFromTimeStamp($value['starttime'],$tz);
 			$enddate = Carbon::createFromTimeStamp($value['endtime'],$tz);
-			if($startdate == $enddate) {
+			$currentdate = $this->now->format('Y-m-d');
+			$onlydate = $startdate->format('Y-m-d');
+			if($startdate == $enddate && $onlydate == $currentdate) {
 				continue;
 			}
 
@@ -1175,7 +1177,7 @@ class Calendar extends \DB_Helper implements \BMO {
 		$stop = $this->now->copy()->addMinute();
 		$events = $this->listEvents($calendarID, $start, $stop);
 		foreach($events as $event) {
-			if($event['now']) {
+			if($event['now'] || $event['allDay']) {
 				return true;
 			}
 		}
