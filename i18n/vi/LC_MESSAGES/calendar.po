@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-20 01:20-0400\n"
+"POT-Creation-Date: 2018-07-27 19:18-0400\n"
 "PO-Revision-Date: 2017-06-14 09:55+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese <http://weblate.freepbx.org/projects/freepbx/"
@@ -192,7 +192,7 @@ msgstr "Đang cố tải..."
 msgid "Autodetect"
 msgstr "Tự động phát hiện"
 
-#: Calendar.class.php:1415 Console/Calendar.class.php:18 calendar.i18n.php:4
+#: Calendar.class.php:1417 Console/Calendar.class.php:18 calendar.i18n.php:4
 #: calendar.i18n.php:10
 msgid "Calendar"
 msgstr "Lịch"
@@ -251,7 +251,7 @@ msgstr "Ngày trong tuần"
 msgid "Days"
 msgstr "Các ngày"
 
-#: Calendar.class.php:1303 Calendar.class.php:1341
+#: Calendar.class.php:1305 Calendar.class.php:1343
 msgid "Delete"
 msgstr "Xóa"
 
@@ -281,7 +281,7 @@ msgstr "Phiên bản EWS"
 msgid "Edit"
 msgstr "Hiệu chỉnh"
 
-#: Calendar.class.php:1273
+#: Calendar.class.php:1275
 msgid "Edit Settings"
 msgstr "Cài đặt hiệu chỉnh"
 
@@ -351,7 +351,7 @@ msgid "How often this calendar will synchronize with the remote server"
 msgstr ""
 "Mức độ thường xuyên mà Lịch này sẽ đồng bộ hóa với máy chủ từ xa như thế nào"
 
-#: Calendar.class.php:1392 Calendar.class.php:1400 views/ucp_config.php:18
+#: Calendar.class.php:1394 Calendar.class.php:1402 views/ucp_config.php:18
 msgid "Inherit"
 msgstr "Thừa kế"
 
@@ -478,8 +478,8 @@ msgstr "Lặp lại bởi"
 msgid "Repeats"
 msgstr "Lặp lại"
 
-#: Calendar.class.php:1289 Calendar.class.php:1308 Calendar.class.php:1327
-#: Calendar.class.php:1346
+#: Calendar.class.php:1291 Calendar.class.php:1310 Calendar.class.php:1329
+#: Calendar.class.php:1348
 msgid "Reset"
 msgstr "Cài đặt lại"
 
@@ -525,8 +525,8 @@ msgstr "Ngày bắt đầu"
 msgid "Start Time"
 msgstr "Thời gian bắt đầu"
 
-#: Calendar.class.php:1294 Calendar.class.php:1313 Calendar.class.php:1332
-#: Calendar.class.php:1351 views/calendar.php:489
+#: Calendar.class.php:1296 Calendar.class.php:1315 Calendar.class.php:1334
+#: Calendar.class.php:1353 views/calendar.php:489
 msgid "Submit"
 msgstr "Gửi đi"
 
@@ -639,7 +639,7 @@ msgstr "Không thể xác định URL máy chủ"
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:1280 assets/js/calendar/calendar.js:297
+#: Calendar.class.php:1282 assets/js/calendar/calendar.js:297
 msgid "Update from Source"
 msgstr "Cập nhật từ nguồn"
 
