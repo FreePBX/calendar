@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-27 19:18-0400\n"
+"POT-Creation-Date: 2018-07-27 19:19-0400\n"
 "PO-Revision-Date: 2018-02-14 21:15+0200\n"
 "Last-Translator: jeremie <freepbx@famillecattan.com>\n"
 "Language-Team: French <http://weblate.freepbx.org/projects/freepbx/calendar/"
@@ -115,7 +115,7 @@ msgstr "6 heures"
 msgid "Actions"
 msgstr "Actions"
 
-#: Calendar.class.php:416
+#: Calendar.class.php:393
 msgid "Add"
 msgstr "Ajouter"
 
@@ -192,7 +192,7 @@ msgstr "Tentative de chargement..."
 msgid "Autodetect"
 msgstr "Détection automatique"
 
-#: Calendar.class.php:1417 Console/Calendar.class.php:18 calendar.i18n.php:4
+#: Calendar.class.php:1394 Console/Calendar.class.php:18 calendar.i18n.php:4
 #: calendar.i18n.php:10
 msgid "Calendar"
 msgstr "Agenda"
@@ -251,7 +251,7 @@ msgstr "Jour de la semaine"
 msgid "Days"
 msgstr "Jours"
 
-#: Calendar.class.php:1305 Calendar.class.php:1343
+#: Calendar.class.php:1282 Calendar.class.php:1320
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -277,11 +277,11 @@ msgstr "URL du serveur EWS"
 msgid "EWS Version"
 msgstr "Version EWS"
 
-#: Calendar.class.php:421
+#: Calendar.class.php:398
 msgid "Edit"
 msgstr "Editer"
 
-#: Calendar.class.php:1275
+#: Calendar.class.php:1252
 msgid "Edit Settings"
 msgstr "Éditer les paramètres"
 
@@ -350,7 +350,7 @@ msgstr "Groupe"
 msgid "How often this calendar will synchronize with the remote server"
 msgstr "À quel fréquence cet agenda se ssynchronisera avec le serveur distant"
 
-#: Calendar.class.php:1394 Calendar.class.php:1402 views/ucp_config.php:18
+#: Calendar.class.php:1371 Calendar.class.php:1379 views/ucp_config.php:18
 msgid "Inherit"
 msgstr "Hérite"
 
@@ -394,12 +394,12 @@ msgstr "Jamais"
 msgid "No"
 msgstr "Non"
 
-#: Calendar.class.php:310
+#: Calendar.class.php:287
 #, php-format
 msgid "No Categories for %s"
 msgstr "Pas de categorie pour %s"
 
-#: Calendar.class.php:323
+#: Calendar.class.php:300
 #, php-format
 msgid "No Events for %s"
 msgstr "Pas d' évènements pour %s"
@@ -477,8 +477,8 @@ msgstr "Répéter par"
 msgid "Repeats"
 msgstr "Répétitions"
 
-#: Calendar.class.php:1291 Calendar.class.php:1310 Calendar.class.php:1329
-#: Calendar.class.php:1348
+#: Calendar.class.php:1268 Calendar.class.php:1287 Calendar.class.php:1306
+#: Calendar.class.php:1325
 msgid "Reset"
 msgstr "Réinitialiser"
 
@@ -526,12 +526,12 @@ msgstr "Date de début"
 msgid "Start Time"
 msgstr "Heure de début"
 
-#: Calendar.class.php:1296 Calendar.class.php:1315 Calendar.class.php:1334
-#: Calendar.class.php:1353 views/calendar.php:489
+#: Calendar.class.php:1273 Calendar.class.php:1292 Calendar.class.php:1311
+#: Calendar.class.php:1330 views/calendar.php:489
 msgid "Submit"
 msgstr "Soumettre"
 
-#: Calendar.class.php:392
+#: Calendar.class.php:369
 msgid "Successfully updated event"
 msgstr "Éventement modifié avec succès"
 
@@ -639,7 +639,7 @@ msgstr "Incapable de déterminer l'URL du serveur"
 msgid "Unknown Calendar"
 msgstr "Calendrier inconnu"
 
-#: Calendar.class.php:1282 assets/js/calendar/calendar.js:297
+#: Calendar.class.php:1259 assets/js/calendar/calendar.js:297
 msgid "Update from Source"
 msgstr "Mise à jour de la source"
 
@@ -713,7 +713,7 @@ msgstr ""
 msgid "occurrences"
 msgstr "occurrences"
 
-#: Calendar.class.php:341
+#: Calendar.class.php:318
 msgid "to"
 msgstr "à"
 

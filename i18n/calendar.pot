@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-27 19:18-0400\n"
+"POT-Creation-Date: 2018-07-27 19:19-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,7 +123,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: Calendar.class.php:416
+#: Calendar.class.php:393
 msgid "Add"
 msgstr ""
 
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Autodetect"
 msgstr ""
 
-#: Calendar.class.php:1417
+#: Calendar.class.php:1394
 #: Console/Calendar.class.php:18
 #: calendar.i18n.php:4
 #: calendar.i18n.php:10
@@ -264,8 +264,8 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: Calendar.class.php:1305
-#: Calendar.class.php:1343
+#: Calendar.class.php:1282
+#: Calendar.class.php:1320
 msgid "Delete"
 msgstr ""
 
@@ -293,11 +293,11 @@ msgstr ""
 msgid "EWS Version"
 msgstr ""
 
-#: Calendar.class.php:421
+#: Calendar.class.php:398
 msgid "Edit"
 msgstr ""
 
-#: Calendar.class.php:1275
+#: Calendar.class.php:1252
 msgid "Edit Settings"
 msgstr ""
 
@@ -368,8 +368,8 @@ msgstr ""
 msgid "How often this calendar will synchronize with the remote server"
 msgstr ""
 
-#: Calendar.class.php:1394
-#: Calendar.class.php:1402
+#: Calendar.class.php:1371
+#: Calendar.class.php:1379
 #: views/ucp_config.php:18
 msgid "Inherit"
 msgstr ""
@@ -415,12 +415,12 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: Calendar.class.php:310
+#: Calendar.class.php:287
 #, php-format
 msgid "No Categories for %s"
 msgstr ""
 
-#: Calendar.class.php:323
+#: Calendar.class.php:300
 #, php-format
 msgid "No Events for %s"
 msgstr ""
@@ -505,10 +505,10 @@ msgstr ""
 msgid "Repeats"
 msgstr ""
 
-#: Calendar.class.php:1291
-#: Calendar.class.php:1310
-#: Calendar.class.php:1329
-#: Calendar.class.php:1348
+#: Calendar.class.php:1268
+#: Calendar.class.php:1287
+#: Calendar.class.php:1306
+#: Calendar.class.php:1325
 msgid "Reset"
 msgstr ""
 
@@ -550,15 +550,15 @@ msgstr ""
 msgid "Start Time"
 msgstr ""
 
-#: Calendar.class.php:1296
-#: Calendar.class.php:1315
-#: Calendar.class.php:1334
-#: Calendar.class.php:1353
+#: Calendar.class.php:1273
+#: Calendar.class.php:1292
+#: Calendar.class.php:1311
+#: Calendar.class.php:1330
 #: views/calendar.php:489
 msgid "Submit"
 msgstr ""
 
-#: Calendar.class.php:392
+#: Calendar.class.php:369
 msgid "Successfully updated event"
 msgstr ""
 
@@ -671,7 +671,7 @@ msgstr ""
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:1282
+#: Calendar.class.php:1259
 #: assets/js/calendar/calendar.js:297
 msgid "Update from Source"
 msgstr ""
@@ -743,6 +743,6 @@ msgstr ""
 msgid "occurrences"
 msgstr ""
 
-#: Calendar.class.php:341
+#: Calendar.class.php:318
 msgid "to"
 msgstr ""
