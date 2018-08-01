@@ -85,14 +85,14 @@ class Caldav extends Base {
 		$caldavClient = new SimpleCalDAVClient();
 		$caldavClient->connect($calendar['purl'], $calendar['username'], $calendar['password']);
 		$cals = $caldavClient->findCalendars();
-		$finalical =  'BEGIN:VCALENDAR';
+		$finalical =  "BEGIN:VCALENDAR\n";
+		$start = new \DateTime('now', new \DateTimeZone('UTC'));
+		$end = clone($start);
+		$end->add(new \DateInterval('P2M'));
 		foreach($calendar['calendars'] as $c) {
 			if(isset($cals[$c])) {
 				$caldavClient->setCalendar($cals[$c]);
-				$events = $caldavClient->getEvents();
-				if(empty($events)) {
-					continue;
-				}
+				$events = $caldavClient->getEvents($start->format('Ymd\THis\Z'),$end->format('Ymd\THis\Z'));
 				$i = 0;
 				$ical = '';
 				$begin = '';
@@ -107,10 +107,9 @@ class Caldav extends Base {
 					$middle .= $matches[0][0]."\n";
 				}
 				$finalical .= $begin.$middle."END:VCALENDAR";
+				print_r($finalical);
 				$cal = new IcalRangedParser();
-				$cal->setStartRange(new \DateTime());
-				$end = new \DateTime();
-				$end->add(new \DateInterval('P2M'));
+				$cal->setStartRange($start);
 				$cal->setEndRange($end);
 				$cal->parseString($finalical);
 				$this->calendar->processiCalEvents($calendar['id'], $cal, $finalical); //will ids clash? they shouldnt????

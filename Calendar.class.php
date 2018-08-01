@@ -292,6 +292,7 @@ class Calendar extends \DB_Helper implements \BMO {
 					return array("calshtml" => $chtml, 'status' => false);
 				}
 				$calendars = $caldavClient->findCalendars();
+				dbug($calendars);
 				$chtml = '';
 				foreach($calendars as $calendar) {
 					$chtml .= '<option value="'.$calendar->getCalendarID().'">'.$calendar->getDisplayName().'</option>';
