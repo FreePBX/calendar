@@ -9,4 +9,10 @@ class Restore extends Base\RestoreBase{
       $this->FreePBX->Calendar->setMultiConfig($value, $key);
     }
   }
+
+  public function processLegacy($pdo, $data, $tables, $unknownTables, $tmpfiledir){
+    return $this->transformLegacyKV($pdo,'calendar', $this->FreePBX)
+                ->transformNamespacedKV($pdo,'calendar', $this->FreePBX);
+  }
+
 }
