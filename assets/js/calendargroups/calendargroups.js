@@ -6,7 +6,8 @@ $(document).ready(function() {
 			enableCollapsibleOptGroups: true,
 			includeSelectAllOption: true,
 			enableCaseInsensitiveFiltering: true,
-			buttonWidth: '50%'
+			buttonWidth: '50%',
+			nonSelectedText: _('All Events')
 	});
 	$('#calendars').multiselect({
 			enableFiltering: true,
@@ -21,7 +22,8 @@ $(document).ready(function() {
 			enableCollapsibleOptGroups: true,
 			includeSelectAllOption: true,
 			enableCaseInsensitiveFiltering: true,
-			buttonWidth: '50%'
+			buttonWidth: '50%',
+			nonSelectedText: _('All Categories')
 	});
 	$('#calendars').change(function() {
 		$.post( "ajax.php?module=calendar&command=groupeventshtml", {calendars: $(this).val(), categories: $("#categories").val()}, function( data ) {

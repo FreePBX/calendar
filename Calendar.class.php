@@ -32,8 +32,7 @@ class Calendar extends \DB_Helper implements \BMO {
 		}
 		$this->FreePBX = $freepbx;
 		$this->db = $freepbx->Database;
-		$this->systemtz = $this->FreePBX->View()->getTimezone();
-		$this->now = Carbon::now($this->systemtz);
+		$this->setTimezone($this->FreePBX->View()->getTimezone());
 		$this->eventDefaults = array(
 				'uid' => '',
 				'user' => '',
@@ -58,12 +57,38 @@ class Calendar extends \DB_Helper implements \BMO {
 			);
 	}
 
+	/**
+	 * Change $this->now
+	 *
+	 * This should only be called during debugging
+	 *
+	 * @method setNow
+	 * @param  [type] $timestamp [description]
+	 */
+	public function setNow($timestamp) {
+		$this->now = Carbon::createFromTimestamp($timestamp, $this->systemtz);
+	}
+
+	public function getNow() {
+		return $this->now;
+	}
+
+	/**
+	 * Set Timezone
+	 * This will also set or update now
+	 * @method setTimezone
+	 * @param  [type]      $timezone [description]
+	 */
 	public function setTimezone($timezone) {
 		if(empty($timezone)) {
 			return false;
 		}
 		$this->systemtz = $timezone;
-		$this->now = Carbon::now($this->systemtz);
+		if(isset($this->now)) {
+			$this->now =  Carbon::createFromTimestamp($this->now->getTimestamp(), $this->systemtz);
+		} else {
+			$this->setNow(time());
+		}
 	}
 
 	public function backup() {}
@@ -292,7 +317,6 @@ class Calendar extends \DB_Helper implements \BMO {
 					return array("calshtml" => $chtml, 'status' => false);
 				}
 				$calendars = $caldavClient->findCalendars();
-				dbug($calendars);
 				$chtml = '';
 				foreach($calendars as $calendar) {
 					$chtml .= '<option value="'.$calendar->getCalendarID().'">'.$calendar->getDisplayName().'</option>';
@@ -1068,7 +1092,6 @@ class Calendar extends \DB_Helper implements \BMO {
 		//store raw icals
 		$this->delConfig($calendarID."-raw");
 		$this->setConfig($calendarID."-raw",$rawiCal);
-
 		foreach ($cal->getSortedEvents() as $event) {
 			if($event['DTSTART']->format('U') == 0) {
 				continue;
@@ -1078,7 +1101,6 @@ class Calendar extends \DB_Helper implements \BMO {
 
 			$this->processiCalEvent($calendarID, $event, $rawiCal);
 		}
-
 
 		$this->db->commit(); //now update just incase this takes a long time
 	}
