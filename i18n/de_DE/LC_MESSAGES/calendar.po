@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-27 19:18-0400\n"
-"PO-Revision-Date: 2018-08-25 12:00+0000\n"
+"PO-Revision-Date: 2018-09-15 02:47+0000\n"
 "Last-Translator: Bastian Mertgen <b.mertgen@bastian-mertgen.de>\n"
 "Language-Team: German <http://*/projects/freepbx/calendar/de/>\n"
 "Language: de_DE\n"
@@ -47,7 +47,7 @@ msgstr "%s iCal-Kalender"
 
 #: views/calendar.php:20
 msgid "(Re)Generate Link"
-msgstr "Link neu erstellen"
+msgstr "Verknüpfung neu erstellen"
 
 #: assets/js/calendar/fullcalendar-3.8.2.min.js:8
 msgid "+t]&&this["
@@ -330,7 +330,7 @@ msgstr "Kalender nach ID exportieren"
 
 #: Console/Calendar.class.php:21
 msgid "Force command"
-msgstr ""
+msgstr "Ausführung erzwingen"
 
 #: views/calendar.php:66
 msgid "Friendly name for the event"
@@ -572,12 +572,12 @@ msgstr "Das Passwort für den Benutzer dieses Kalenders"
 
 #: views/remote_caldav_settings.php:78
 msgid "The principal url for this calendar"
-msgstr ""
+msgstr "Der Haupt-URL für diesen Kalender"
 
 #: views/remote_ews_settings.php:149 views/remote_ews_settings.php:181
 #: views/remote_ical_settings.php:79
 msgid "The remote url for this calendar"
-msgstr ""
+msgstr "Der entfernte URL für diesen Kalender"
 
 #: views/calendar.php:117
 msgid "The time to start the event"
@@ -606,7 +606,7 @@ msgstr ""
 
 #: views/calendar.php:193
 msgid "Time event starts"
-msgstr ""
+msgstr "Zeit, zu der das Ereignis beginnt"
 
 #: views/calendar.php:217
 msgid "Time the event ends"
@@ -716,4 +716,4 @@ msgstr "Vorkommen"
 
 #: Calendar.class.php:341
 msgid "to"
-msgstr ""
+msgstr "bis"
