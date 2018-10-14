@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-27 19:18-0400\n"
-"PO-Revision-Date: 2018-09-15 02:47+0000\n"
+"PO-Revision-Date: 2018-10-15 02:00+0000\n"
 "Last-Translator: Bastian Mertgen <b.mertgen@bastian-mertgen.de>\n"
 "Language-Team: German <http://*/projects/freepbx/calendar/de/>\n"
 "Language: de_DE\n"
@@ -430,11 +430,11 @@ msgstr "Prinzipal-URL"
 
 #: views/calendar.php:20
 msgid "Private address in iCal format"
-msgstr ""
+msgstr "Nichtöffentliche Adresse im iCal-Format"
 
 #: views/calendar.php:22
 msgid "Private iCal Link"
-msgstr ""
+msgstr "Nichtöffentliche iCal-Verknüpfung"
 
 #: drivers/Caldav.php:16
 msgid "Remote CalDAV Calendar"
