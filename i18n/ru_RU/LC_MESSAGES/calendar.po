@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-20 01:20-0400\n"
+"POT-Creation-Date: 2018-07-27 19:18-0400\n"
 "PO-Revision-Date: 2017-03-15 16:31-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -191,7 +191,7 @@ msgstr ""
 msgid "Autodetect"
 msgstr ""
 
-#: Calendar.class.php:1415 Console/Calendar.class.php:18 calendar.i18n.php:4
+#: Calendar.class.php:1417 Console/Calendar.class.php:18 calendar.i18n.php:4
 #: calendar.i18n.php:10
 msgid "Calendar"
 msgstr ""
@@ -248,7 +248,7 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: Calendar.class.php:1303 Calendar.class.php:1341
+#: Calendar.class.php:1305 Calendar.class.php:1343
 msgid "Delete"
 msgstr ""
 
@@ -278,7 +278,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: Calendar.class.php:1273
+#: Calendar.class.php:1275
 msgid "Edit Settings"
 msgstr ""
 
@@ -347,7 +347,7 @@ msgstr ""
 msgid "How often this calendar will synchronize with the remote server"
 msgstr ""
 
-#: Calendar.class.php:1392 Calendar.class.php:1400 views/ucp_config.php:18
+#: Calendar.class.php:1394 Calendar.class.php:1402 views/ucp_config.php:18
 msgid "Inherit"
 msgstr ""
 
@@ -471,8 +471,8 @@ msgstr ""
 msgid "Repeats"
 msgstr ""
 
-#: Calendar.class.php:1289 Calendar.class.php:1308 Calendar.class.php:1327
-#: Calendar.class.php:1346
+#: Calendar.class.php:1291 Calendar.class.php:1310 Calendar.class.php:1329
+#: Calendar.class.php:1348
 msgid "Reset"
 msgstr ""
 
@@ -513,8 +513,8 @@ msgstr ""
 msgid "Start Time"
 msgstr ""
 
-#: Calendar.class.php:1294 Calendar.class.php:1313 Calendar.class.php:1332
-#: Calendar.class.php:1351 views/calendar.php:489
+#: Calendar.class.php:1296 Calendar.class.php:1315 Calendar.class.php:1334
+#: Calendar.class.php:1353 views/calendar.php:489
 msgid "Submit"
 msgstr ""
 
@@ -623,7 +623,7 @@ msgstr ""
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:1280 assets/js/calendar/calendar.js:297
+#: Calendar.class.php:1282 assets/js/calendar/calendar.js:297
 msgid "Update from Source"
 msgstr ""
 

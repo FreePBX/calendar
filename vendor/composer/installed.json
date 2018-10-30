@@ -205,23 +205,23 @@
     },
     {
         "name": "thecsea/simple-caldav-client",
-        "version": "v0.1.5",
-        "version_normalized": "0.1.5.0",
+        "version": "v0.1.8",
+        "version_normalized": "0.1.8.0",
         "source": {
             "type": "git",
             "url": "https://github.com/thecsea/simpleCalDAV.git",
-            "reference": "b8f62de8f639da87fc72057b241d7edb0c6988bf"
+            "reference": "e672f89944e0e9ab10975d9abb44afff0fdaafc5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/thecsea/simpleCalDAV/zipball/b8f62de8f639da87fc72057b241d7edb0c6988bf",
-            "reference": "b8f62de8f639da87fc72057b241d7edb0c6988bf",
+            "url": "https://api.github.com/repos/thecsea/simpleCalDAV/zipball/e672f89944e0e9ab10975d9abb44afff0fdaafc5",
+            "reference": "e672f89944e0e9ab10975d9abb44afff0fdaafc5",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2015-12-02T19:10:12+00:00",
+        "time": "2018-04-16T15:35:30+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
