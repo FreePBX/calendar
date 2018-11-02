@@ -10,10 +10,29 @@ class Ical extends Base {
 	 * @method getInfo
 	 * @return array  array of information
 	 */
-	public function getInfo() {
+	public static function getInfo() {
 		return array(
 			"name" => _("Remote iCal Calendar")
 		);
+	}
+
+	/**
+	 * Get the "update" display
+	 * @method getEditDisplay
+	 * @param  array         $data Array of calendar information
+	 * @return string               HTML to display
+	 */
+	public static function getEditDisplay($data) {
+		return load_view(dirname(__DIR__)."/views/remote_ical_settings.php",array('action' => 'edit', 'data' => $data));
+	}
+
+	/**
+	 * Get the "Add" display
+	 * @method getAddDisplay
+	 * @return string              HTML to display
+	 */
+	public static function getAddDisplay() {
+		return load_view(dirname(__DIR__)."/views/remote_ical_settings.php",array('action' => 'add', 'data' => array('next' => 86400)));
 	}
 
 	/**
@@ -23,10 +42,7 @@ class Ical extends Base {
 	 * @param  array         $data Array of data about this calendar
 	 * @return boolean               true or false
 	 */
-	public function updateCalendar($id,$data) {
-		if(empty($id)) {
-			throw new \Exception("Calendar ID is empty");
-		}
+	public function updateCalendar($data) {
 		$calendar = array(
 			"name" => $data['name'],
 			"description" => $data['description'],
@@ -34,47 +50,14 @@ class Ical extends Base {
 			"url" => $data['url'],
 			"next" => !empty($data['next']) ? $data['next'] : 300
 		);
-		$this->calendar->setConfig($id,$calendar,'calendars');
-		$calendar['id'] = $id;
-		return $this->processCalendar($calendar);
+		$ret = parent::updateCalendar($calendar);
+		$this->processCalendar();
+		return $ret;
 	}
 
-	/**
-	 * Get the "Add" display
-	 * @method getAddDisplay
-	 * @return string              HTML to display
-	 */
-	public function getAddDisplay() {
-		return load_view(dirname(__DIR__)."/views/remote_ical_settings.php",array('action' => 'add', 'data' => array('next' => 86400)));
-	}
-
-	/**
-	 * Get the "update" display
-	 * @method getEditDisplay
-	 * @param  array         $data Array of calendar information
-	 * @return string               HTML to display
-	 */
-	public function getEditDisplay($data) {
-		return load_view(dirname(__DIR__)."/views/remote_ical_settings.php",array('action' => 'edit', 'data' => $data));
-	}
-
-	/**
-	 * Process Calendar (Updating)
-	 * @method processCalendar
-	 * @param  array          $calendar Array of calendar information
-	 * @return boolean                    true or false
-	 */
-	public function processCalendar($calendar) {
-		$req = \FreePBX::Curl()->requests($calendar['url']);
-		$cal = new IcalRangedParser();
-		$cal->setStartRange(new \DateTime());
-		$end = new \DateTime();
-		$end->add(new \DateInterval('P2M'));
-		$cal->setEndRange($end);
-		$finalical = $req->get($calendar['url'])->body;
-		$cal->parseString($finalical);
-		$this->calendar->processiCalEvents($calendar['id'], $cal, $finalical);
-		$this->saveiCal($calendar['id'],$finalical);
-		return true;
+	public function processCalendar() {
+		$req = \FreePBX::Curl()->requests($this->calendar['url']);
+		$finalical = $req->get($this->calendar['url'])->body;
+		$this->saveiCal($finalical);
 	}
 }

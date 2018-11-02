@@ -39,12 +39,12 @@ class IcalRangedParser extends IcalParser {
 			foreach ($event['EXDATES'] as $exDate) {
 				if (is_array($exDate)) {
 					foreach ($exDate as $singleExDate) {
-						if($this->timestampInRange($singleExDate->getTimestamp())) {
+						if($this->dateInRange($singleExDate)) {
 							$exclusions[] = $singleExDate->getTimestamp();
 						}
 					}
 				} else {
-					if($this->timestampInRange($exDate->getTimestamp())) {
+					if($this->dateInRange($exDate)) {
 						$exclusions[] = $exDate->getTimestamp();
 					}
 				}

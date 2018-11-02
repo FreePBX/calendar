@@ -2,11 +2,11 @@
 /**
  * Copyright 2014 Michael Palm <palm.michael@gmx.de>
  *
- * This file is heavily based on AgenDAV caldav-client-v2.php by 
+ * This file is heavily based on AgenDAV caldav-client-v2.php by
  * Jorge López Pérez <jorge@adobo.org> which is again heavily based
  * on DAViCal caldav-client-v2.php by Andrew McMillan
  * <andrew@mcmillan.net.nz>
- * 
+ *
  * @package simpleCalDAV
  */
 
@@ -52,7 +52,7 @@ class CalDAVClient {
   * @var string
   */
   public $user_agent = 'simpleCalDAVclient';
-  
+
   protected $headers = array();
   protected $body = "";
   protected $requestMethod = "GET";
@@ -74,7 +74,7 @@ class CalDAVClient {
 
   // Full URL
   private $full_url;
-  
+
   // First part of the full url
   public $first_url_part;
 
@@ -115,7 +115,7 @@ class CalDAVClient {
           trigger_error("Invalid URL: '".$base_url."'", E_USER_ERROR);
       }
 
-      $this->timeout = isset($options['timeout']) ? 
+      $this->timeout = isset($options['timeout']) ?
           $options['timeout'] : 10;
       $this->ch = curl_init();
       curl_setopt_array($this->ch, array(
@@ -140,7 +140,7 @@ class CalDAVClient {
 
   /**
    * Check with OPTIONS if calendar-access is enabled
-   * 
+   *
    * Can be used to check authentication against server
    *
    */
@@ -261,8 +261,8 @@ class CalDAVClient {
               //        echo "\nNodes array............................................................\n"; print_r( $this->xmlnodes );
               //        echo "\nTags array............................................................\n";  print_r( $this->xmltags );
               //printf( "\nXML Reponse:\n%s\n", $this->xmlResponse );
-              log_message('ERROR', 'XML parsing error: ' 
-                      . xml_get_error_code($parser) . ', ' 
+              log_message('ERROR', 'XML parsing error: '
+                      . xml_get_error_code($parser) . ', '
                       . xml_error_string(xml_get_error_code($parser)));
           }
 
@@ -271,7 +271,7 @@ class CalDAVClient {
   }
 
   /**
-   * Parse response headers 
+   * Parse response headers
    */
   function ParseResponseHeaders($headers) {
       $lines = preg_split('/[\r\n]+/', $headers);
@@ -361,13 +361,13 @@ class CalDAVClient {
       $this->headers['disable_expect'] = 'Expect:';
       curl_setopt($this->ch, CURLOPT_HTTPHEADER,
               array_values($this->headers));
-			  
+
       curl_setopt($this->ch, CURLOPT_USERPWD, $this->user . ':' .
               $this->pass);
 
       // Request body
       curl_setopt($this->ch, CURLOPT_POSTFIELDS, $this->body);
-	  
+
 	  // Save Request
 	  curl_setopt($this->ch, CURLINFO_HEADER_OUT, TRUE);
 
@@ -375,13 +375,13 @@ class CalDAVClient {
 
       if (FALSE === $response) {
           // TODO better error handling
-          log_message('ERROR', 'Error requesting ' . $url . ': ' 
+          log_message('ERROR', 'Error requesting ' . $url . ': '
                   . curl_error($this->ch));
           return false;
       }
 
       $info = curl_getinfo($this->ch);
-	  
+
 	  // Save request
 	  $this->httpRequest = $info['request_header'];
 
@@ -602,10 +602,6 @@ class CalDAVClient {
    * @param string $tagname The tag name to find the href inside of
    */
   function HrefValueInside( $tagname ) {
-      if (!isset($this->xmltags[$tagname])) {
-      	  return null;
-      }
-	  
       foreach( $this->xmltags[$tagname] AS $k => $v ) {
           $j = $v + 1;
           if ( $this->xmlnodes[$j]['tag'] == 'DAV::href' ) {
@@ -733,14 +729,12 @@ class CalDAVClient {
       }
 
       $calendar_home = array();
-      if (isset($this->xamltags['urn:ietf:params:xml:ns:caldav:calendar-home-set'])) {
-          foreach( $this->xmltags['urn:ietf:params:xml:ns:caldav:calendar-home-set'] AS $k => $v ) {
-              if ( $this->xmlnodes[$v]['type'] != 'open' ) continue;
-              while( $this->xmlnodes[++$v]['type'] != 'close' && $this->xmlnodes[$v]['tag'] != 'urn:ietf:params:xml:ns:caldav:calendar-home-set' ) {
-                  //        printf( "Tag: '%s' = '%s'\n", $this->xmlnodes[$v]['tag'], $this->xmlnodes[$v]['value']);
-                  if ( $this->xmlnodes[$v]['tag'] == 'DAV::href' && isset($this->xmlnodes[$v]['value']) )
-                      $calendar_home[] = rawurldecode($this->xmlnodes[$v]['value']);
-              }
+      foreach( $this->xmltags['urn:ietf:params:xml:ns:caldav:calendar-home-set'] AS $k => $v ) {
+          if ( $this->xmlnodes[$v]['type'] != 'open' ) continue;
+          while( $this->xmlnodes[++$v]['type'] != 'close' && $this->xmlnodes[$v]['tag'] != 'urn:ietf:params:xml:ns:caldav:calendar-home-set' ) {
+              //        printf( "Tag: '%s' = '%s'\n", $this->xmlnodes[$v]['tag'], $this->xmlnodes[$v]['value']);
+              if ( $this->xmlnodes[$v]['tag'] == 'DAV::href' && isset($this->xmlnodes[$v]['value']) )
+                  $calendar_home[] = rawurldecode($this->xmlnodes[$v]['value']);
           }
       }
 
@@ -758,15 +752,16 @@ class CalDAVClient {
       if ( !isset($this->calendar_home_set[0]) ) {
           $this->FindCalendarHome($recursed);
       }
-      $properties = array(
-                      'resourcetype',
-                      'displayname',
-                      'http://calendarserver.org/ns/:getctag',
-                      'http://apple.com/ns/ical/:calendar-color',
-                      'http://apple.com/ns/ical/:calendar-order',
-                   );
-      @$this->DoPROPFINDRequest( $this->first_url_part.$this->calendar_home_set[0], $properties, 1);
-      
+      $properties =
+          array(
+                  'resourcetype',
+                  'displayname',
+                  'http://calendarserver.org/ns/:getctag',
+                  'http://apple.com/ns/ical/:calendar-color',
+                  'http://apple.com/ns/ical/:calendar-order',
+               );
+      $this->DoPROPFINDRequest( $this->first_url_part.$this->calendar_home_set[0], $properties, 1);
+
       return $this->parse_calendar_info();
   }
 
@@ -774,7 +769,7 @@ class CalDAVClient {
    * Do a PROPFIND on a calendar and retrieve its information
    */
   function GetCalendarDetailsByURL($url) {
-      $properties = 
+      $properties =
           array(
                   'resourcetype',
                   'displayname',
@@ -858,7 +853,7 @@ EOXML;
       $this->requestMethod = "REPORT";
       $this->SetContentType("text/xml");
       $response = $this->DoRequest( $this->calendar_url );
-      
+
 	  $report = array();
       foreach( $this->xmlnodes as $k => $v ) {
           switch( $v['tag'] ) {
@@ -881,7 +876,7 @@ EOXML;
                         break;
           }
       }
-	  
+
       return $report;
   }
 
@@ -999,7 +994,7 @@ EOFILTER;
    */
   function GetTodos( $start = null, $finish = null, $completed = null, $cancelled = null, $relative_url = "" ) {
   	$this->SetDepth('1');
-  	
+
   	if ( isset($start) && isset($finish) )
   		$range = "<C:comp-filter name=\"VALARM\"><C:time-range start=\"$start\" end=\"$finish\"/></C:comp-filter>";
   	elseif ( isset($start) && ! isset($finish) )
@@ -1009,7 +1004,7 @@ EOFILTER;
   	else
   		$range = '';
 
-  	
+
   	// Warning!  May contain traces of double negatives...
   	if(isset($completed) && $completed == true)
   		$completed_filter = '<C:prop-filter name="STATUS"><C:text-match negate-condition="no">COMPLETED</C:text-match></C:prop-filter>';
@@ -1017,14 +1012,14 @@ EOFILTER;
   		$completed_filter = '<C:prop-filter name="STATUS"><C:text-match negate-condition="yes">COMPLETED</C:text-match></C:prop-filter>';
   	else
   		$completed_filter = '';
-  	
+
   	if(isset($cancelled) && $cancelled == true)
   		$cancelled_filter = '<C:prop-filter name="STATUS"><C:text-match negate-condition="no">CANCELLED</C:text-match></C:prop-filter>';
   	else if(isset($cancelled) && $cancelled == false)
   		$cancelled_filter = '<C:prop-filter name="STATUS"><C:text-match negate-condition="yes">CANCELLED</C:text-match></C:prop-filter>';
   	else
   		$cancelled_filter = '';
-  	
+
       $filter = <<<EOFILTER
 <C:filter>
 <C:comp-filter name="VCALENDAR">
@@ -1080,11 +1075,11 @@ EOFILTER;
   function GetEntryByHref( $href ) {
       //$href = str_replace( rawurlencode('/'),'/',rawurlencode($href));
       $response = $this->DoGETRequest( $href );
-	  
+
 	  $report = array();
-	  
+
 	  if ( $this->GetHttpResultCode() == '404' ) { return $report; }
-	  
+
       $etag = null;
       if ( preg_match( '{^ETag:\s+"([^"]*)"\s*$}im', $this->httpResponseHeaders, $matches ) ) $etag = $matches[1];
 	  else if ( preg_match( '{^ETag:\s+([^\s]*)\s*$}im', $this->httpResponseHeaders, $matches ) ) $etag = $matches[1];
@@ -1096,7 +1091,7 @@ EOFILTER;
           $this->DoHEADRequest( $href );
           if ( preg_match( '{^Etag:\s+"([^"]*)"\s*$}im', $this->httpResponseHeaders, $matches ) ) $etag = $matches[1];
 		  else if ( preg_match( '{^ETag:\s+([^\s]*)\s*$}im', $this->httpResponseHeaders, $matches ) ) $etag = $matches[1];
-		  
+
           /*
              if ( !isset($etag) || $etag == '' ) {
              printf( "Still No etag in:\n%s\n", $this->httpResponseHeaders );
@@ -1106,7 +1101,7 @@ EOFILTER;
           $this->httpResponseHeaders = $save_response_headers;
           $this->httpResultCode = $save_http_result;
       }
-	  
+
 	  $report = array(array('etag'=>$etag));
 
       return $report;
@@ -1155,7 +1150,7 @@ EOFILTER;
                               $v['value'] : '-'));
                           break;
                       case 'http://apple.com/ns/ical/:calendar-color':
-                          $calendar->setRBGcolor((isset($v['value']) ? 
+                          $calendar->setRBGcolor((isset($v['value']) ?
                           		$this->_rgba2rgb($v['value']) : '-'));
                           break;
                       case 'http://apple.com/ns/ical/:calendar-order':
@@ -1247,7 +1242,7 @@ EOFILTER;
                                   isset($v['value']) ? $v['value'] : '';
                               break;
                           case 'DAV::email':
-                              $result[$i]['email'] = 
+                              $result[$i]['email'] =
                                   isset($v['value']) ? $v['value'] : '';
                               break;
                       }
@@ -1273,34 +1268,34 @@ EOFILTER;
           return $s;
       }
   }
-  
+
 	public function printLastMessages() {
 		$string = '';
 		$dom = new DOMDocument();
 		$dom->preserveWhiteSpace = FALSE;
 		$dom->formatOutput = TRUE;
-		
+
 		$string .= '<pre>';
 		$string .= 'last request:<br><br>';
-		
+
 		$string .= $this->httpRequest;
-		 
+
 		if(!empty($this->body)) {
 			$dom->loadXML($this->body);
 			$string .= htmlentities($dom->saveXml());
 		}
-		
+
 		$string .= '<br>last response:<br><br>';
-		
+
 		$string .= $this->httpResponse;
-		 
+
 		if(!empty($this->xmlResponse)) {
 			$dom->loadXML($this->xmlResponse);
 			$string .= htmlentities($dom->saveXml());
 		}
-		
+
 		$string .= '</pre>';
-		 
+
 		echo $string;
 	}
 }
@@ -1310,7 +1305,7 @@ EOFILTER;
    */
 
 $debug = TRUE;
-   
+
 function log_message ($type, $message) {
 	global $debug;
 	if ($debug) {

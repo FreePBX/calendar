@@ -89,6 +89,10 @@ function resetModalForm(){
 	updateAllDay();
 }
 
+function typeformatter(v,r) {
+	return drivers[v];
+}
+
 function actionformatter(v,r) {
 	return '<div class="actions"><a href="?display=calendar&amp;action=view&amp;type=calendar&amp;id='+r.id+'"><i class="fa fa-eye" aria-hidden="true"></i></a><a href="?display=calendar&amp;action=edit&amp;type=calendar&amp;id='+r.id+'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a class="delAction" href="?display=calendar&amp;action=delete&amp;type=calendar&amp;id='+r.id+'"><i class="fa fa-trash" aria-hidden="true"></i></a></div>';
 }
@@ -189,10 +193,15 @@ $(document).ready(function() {
 						me = moment.unix(src.uendtime).tz(tz),
 						allday = src.allDay;
 				resetModalForm();
-				//$("#rstartdate").val(src.rstartdate);
-				//$("#renddate").val(src.renddate);
+				if(allday) {
+					me = me.subtract(1, "days"); //force day to display correctly
+					console.log(me);
+				}
 				$('#title').val(src.title);
 				$('#description').val(src.description);
+				if(src.categories.length) {
+					$('#categories').val(src.categories.join(','));
+				}
 				$('#eventid').val(src.linkedid);
 				$("#eventtype option[value='"+src.eventtype+"']").prop('selected', true);
 				$("#startdate")[0]._flatpickr.setDate(ms.format("YYYY-MM-DD"));
