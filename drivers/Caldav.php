@@ -1,8 +1,9 @@
 <?php
 namespace FreePBX\modules\Calendar\drivers;
-use om\IcalParser;
+use FreePBX\modules\Calendar\IcalParser\IcalRangedParser;
 use Ramsey\Uuid\Uuid;
 use it\thecsea\simple_caldav_client\SimpleCalDAVClient;
+use Carbon\Carbon;
 class Caldav extends Base {
 	public $driver = 'Caldav';
 
@@ -11,37 +12,10 @@ class Caldav extends Base {
 	 * @method getInfo
 	 * @return array  array of information
 	 */
-	public function getInfo() {
+	public static function getInfo() {
 		return array(
 			"name" => _("Remote CalDAV Calendar")
 		);
-	}
-
-	/**
-	 * Update calendar by uuid
-	 * @method updateCalendar
-	 * @param  string         $id   The uuid to update
-	 * @param  array         $data Array of data about this calendar
-	 * @return boolean               true or false
-	 */
-	public function updateCalendar($id,$data) {
-		if(empty($id)) {
-			throw new \Exception("Calendar ID is empty");
-		}
-		$calendar = array(
-			"name" => $data['name'],
-			"description" => $data['description'],
-			"type" => "caldav",
-			"purl" => $data['purl'],
-			"surl" => $data['surl'],
-			"username" => $data['username'],
-			"password" => $data['password'],
-			"calendars" => !empty($data['calendars']) ? $data['calendars'] : array(),
-			"next" => !empty($data['next']) ? $data['next'] : 300
-		);
-		$this->calendar->setConfig($id,$calendar,'calendars');
-		$calendar['id'] = $id;
-		return $this->processCalendar($calendar);
 	}
 
 	/**
@@ -49,7 +23,7 @@ class Caldav extends Base {
 	 * @method getAddDisplay
 	 * @return string              HTML to display
 	 */
-	public function getAddDisplay() {
+	public static function getAddDisplay() {
 		return load_view(dirname(__DIR__)."/views/remote_caldav_settings.php",array('action' => 'add', 'calendars' => array(), 'data' => array('next' => 86400)));
 	}
 
@@ -59,7 +33,7 @@ class Caldav extends Base {
 	 * @param  array         $data Array of calendar information
 	 * @return string               HTML to display
 	 */
-	public function getEditDisplay($data) {
+	public static function getEditDisplay($data) {
 		$caldavClient = new SimpleCalDAVClient();
 		$caldavClient->connect($data['purl'], $data['username'], $data['password']);
 		$cals = $caldavClient->findCalendars();
@@ -76,43 +50,64 @@ class Caldav extends Base {
 	}
 
 	/**
+	 * Update calendar by uuid
+	 * @method updateCalendar
+	 * @param  string         $id   The uuid to update
+	 * @param  array         $data Array of data about this calendar
+	 * @return boolean               true or false
+	 */
+	public function updateCalendar($data) {
+		$calendar = array(
+			"name" => $data['name'],
+			"description" => $data['description'],
+			"type" => "caldav",
+			"purl" => $data['purl'],
+			"surl" => $data['surl'],
+			"username" => $data['username'],
+			"password" => $data['password'],
+			"calendars" => !empty($data['calendars']) ? $data['calendars'] : array(),
+			"next" => !empty($data['next']) ? $data['next'] : 300
+		);
+		$ret = $this->processCalendar();
+		parent::updateCalendar($calendar);
+		return $ret;
+	}
+
+
+	/**
 	 * Process Calendar (Updating)
 	 * @method processCalendar
 	 * @param  array          $calendar Array of calendar information
 	 * @return boolean                    true or false
 	 */
-	public function processCalendar($calendar) {
+	public function processCalendar() {
 		$caldavClient = new SimpleCalDAVClient();
-		$caldavClient->connect($calendar['purl'], $calendar['username'], $calendar['password']);
+		$caldavClient->connect($this->calendar['purl'], $this->calendar['username'], $this->calendar['password']);
 		$cals = $caldavClient->findCalendars();
-		$finalical =  'BEGIN:VCALENDAR';
-		foreach($calendar['calendars'] as $c) {
+		$start = Carbon::Now()->subYear();
+		$end = $start->copy()->addYear();
+		foreach($this->calendar['calendars'] as $c) {
 			if(isset($cals[$c])) {
 				$caldavClient->setCalendar($cals[$c]);
-				$events = $caldavClient->getEvents();
-				if(empty($events)) {
-					continue;
-				}
+				$events = $caldavClient->getEvents($start->format('Ymd\THis\Z'),$end->format('Ymd\THis\Z'));
 				$i = 0;
 				$ical = '';
-				$begin = '';
-				$middle = '';
+				$headerSection = '';
+				$eventsSection = '';
 				foreach($events as $event) {
 					$ical = $event->getData();
 					if($i == 0){
 						preg_match_all("/^(.*)BEGIN:VEVENT/s",$ical,$matches);
-						$begin = $matches[1][0];
+						$headerSection = $matches[1][0];
 					}
 					preg_match_all("/BEGIN:VEVENT(.*)END:VEVENT/s",$ical,$matches);
-					$middle .= $matches[0][0]."\n";
+					$eventsSection .= $matches[0][0]."\n";
+					$i++;
 				}
-				$finalical .= $begin.$middle."END:VCALENDAR";
-				$cal = new IcalParser();
-				$cal->parseString($finalical);
-				$this->calendar->processiCalEvents($calendar['id'], $cal, $finalical); //will ids clash? they shouldnt????
-				$this->saveiCal($calendar['id'],$finalical);
 			}
 		}
+		$finalical = $headerSection.$eventsSection."END:VCALENDAR";
+		$this->saveiCal($finalical);
 		return true;
 	}
 }

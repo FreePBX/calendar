@@ -89,12 +89,6 @@ class Calendar {
 		$parent = new DistinguishedFolderIdType();
 		$parent->Id = DistinguishedFolderIdNameType::ROOT;
 		$request->ParentFolderIds->DistinguishedFolderId[] = $parent;
-		$contains = new ContainsExpressionType();
-		$contains->FieldURI = new PathToUnindexedFieldType();
-		$contains->FieldURI->FieldURI = UnindexedFieldURIType::FOLDER_DISPLAY_NAME;
-		$contains->ContainmentComparison = ContainmentComparisonType::EXACT;
-		$contains->ContainmentMode = ContainmentModeType::SUBSTRING;
-		$request->Restriction->Contains = $contains;
 		$response = $client->FindFolder($request);
 		$calendars = array();
 		foreach($response->ResponseMessages->FindFolderResponseMessage as $item) {
@@ -143,13 +137,21 @@ class Calendar {
 					$id = $event->ItemId->Id;
 					$uid = $event->UID;
 
+					if($event->IsAllDayEvent) {
+						$end = new \DateTime($event->End);
+						$end->sub(new \DateInterval('P1D'));
+					} else {
+						$end = new \DateTime($event->End);
+					}
+
 					$es[$id] = array(
 						"subject" => $event->Subject,
 						"start" => new \DateTime($event->Start),
-						"end" => new \DateTime($event->End),
+						"end" => $end,
 						"type" => $event->CalendarItemType,
 						"location" => $event->Location,
-						"categories" => (isset($event->Categories->String)) ? $event->Categories->String : array()
+						"categories" => (isset($event->Categories->String)) ? $event->Categories->String : array(),
+						"allday" => $event->IsAllDayEvent
 					);
 				}
 			} else {
@@ -169,10 +171,13 @@ class Calendar {
 			$vEvent = new Event($id);
 			$vEvent->setSummary($event['subject']);
 			$vEvent->setLocation($event['location']);
-			//$vEvent->setDescription($event['description']);
 			$vEvent->setCategories($event['categories']);
 			$vEvent->setDtStart($event['start']);
 			$vEvent->setDtEnd($event['end']);
+			if($event['allday']) {
+				$vEvent->setUseUtc(true);
+				$vEvent->setNoTime(true);
+			}
 			$vCalendar->addComponent($vEvent);
 		}
 		return $vCalendar->render();
