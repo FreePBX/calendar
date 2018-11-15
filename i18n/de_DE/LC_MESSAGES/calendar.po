@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-27 19:18-0400\n"
-"PO-Revision-Date: 2018-07-18 19:12+0000\n"
+"PO-Revision-Date: 2018-10-18 20:22+0000\n"
 "Last-Translator: Bastian Mertgen <b.mertgen@bastian-mertgen.de>\n"
 "Language-Team: German <http://*/projects/freepbx/calendar/de/>\n"
 "Language: de_DE\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2.19.1\n"
+"X-Generator: Weblate 3.0.1\n"
 
 #: views/remote_caldav_settings.php:4
 #, php-format
@@ -47,7 +47,7 @@ msgstr "%s iCal-Kalender"
 
 #: views/calendar.php:20
 msgid "(Re)Generate Link"
-msgstr "Link neu erstellen"
+msgstr "Verknüpfung neu erstellen"
 
 #: assets/js/calendar/fullcalendar-3.8.2.min.js:8
 msgid "+t]&&this["
@@ -59,6 +59,9 @@ msgid ""
 "this.isAutoScroll=this.options.scroll&&t&&!t.is(window)&&!t.is(document),"
 "this.isAutoScroll&&this.listenTo(t,"
 msgstr ""
+"+t].apply(this,e)},t.prototype.initAutoScroll=function(){var t=this.scrollEl;"
+"this.isAutoScroll=this.options.scroll&&t&&!t.is(window)&&!t.is(document),this"
+".isAutoScroll&&this.listenTo(t,"
 
 #: views/remote_caldav_settings.php:184 views/remote_ews_settings.php:242
 #: views/remote_ical_settings.php:102
@@ -298,11 +301,11 @@ msgstr "Enddatum"
 
 #: views/calendar.php:205
 msgid "End Time"
-msgstr ""
+msgstr "Endzeit"
 
 #: views/calendar.php:413 views/calendar.php:430
 msgid "Ends"
-msgstr ""
+msgstr "Endet"
 
 #: views/calendar.php:39
 msgid "Event"
@@ -330,11 +333,11 @@ msgstr "Kalender nach ID exportieren"
 
 #: Console/Calendar.class.php:21
 msgid "Force command"
-msgstr ""
+msgstr "Ausführung erzwingen"
 
 #: views/calendar.php:66
 msgid "Friendly name for the event"
-msgstr ""
+msgstr "Lesefreundlicher Name für das Ereignis"
 
 #: assets/js/calendar/calendar.js:14
 msgid "Generating..."
@@ -372,6 +375,9 @@ msgid ""
 "groups. Even multiple events from different calendars can be placed into a "
 "single group!"
 msgstr ""
+"Mehrere Kalender, Ereignisse und/oder Kategorien können in verschiedene "
+"Gruppen aufgenommen werden. Es können sogar mehrere Ereignisse aus "
+"unterschiedlichen Kalendern in eine gemeinsame Gruppe aufgenommen werden!"
 
 #: views/calendargroups.php:19 views/grid.php:26 views/local_settings.php:22
 #: views/remote_caldav_settings.php:22 views/remote_ews_settings.php:22
@@ -411,7 +417,7 @@ msgstr "Vorkommem"
 
 #: views/calendar.php:422
 msgid "On"
-msgstr ""
+msgstr "Am"
 
 #: views/remote_caldav_settings.php:110 views/remote_ews_settings.php:110
 msgid "Password"
@@ -423,35 +429,35 @@ msgstr "Bitte geben Sie oben gültige Zugangsdaten ein"
 
 #: views/remote_caldav_settings.php:66
 msgid "Principal URL"
-msgstr ""
+msgstr "Prinzipal-URL"
 
 #: views/calendar.php:20
 msgid "Private address in iCal format"
-msgstr ""
+msgstr "Nichtöffentliche Adresse im iCal-Format"
 
 #: views/calendar.php:22
 msgid "Private iCal Link"
-msgstr ""
+msgstr "Nichtöffentliche iCal-Verknüpfung"
 
 #: drivers/Caldav.php:16
 msgid "Remote CalDAV Calendar"
-msgstr ""
+msgstr "Entfernter CalDAV-Kalender"
 
 #: drivers/Ews.php:16
 msgid "Remote Outlook Calendar"
-msgstr ""
+msgstr "Entfernter Outlook-Kalender"
 
 #: views/remote_ical_settings.php:67
 msgid "Remote URL"
-msgstr ""
+msgstr "Entfernter URL"
 
 #: drivers/Ical.php:15
 msgid "Remote iCal Calendar"
-msgstr ""
+msgstr "Entfernter iCal-Kalender"
 
 #: views/calendar.php:253 views/calendar.php:258
 msgid "Reoccurring"
-msgstr ""
+msgstr "Wiederkehrend"
 
 #: views/calendar.php:266
 msgid "Reoccurring Event"
@@ -459,20 +465,20 @@ msgstr "Wiederkehrendes Ereignis"
 
 #: views/calendar.php:307
 msgid "Repeat Every"
-msgstr ""
+msgstr "Wiederhole jeden"
 
 #: views/calendar.php:363
 msgid "Repeat On"
-msgstr ""
+msgstr "Wiederhole am"
 
 #: views/calendar.php:388
 msgid "Repeat by"
-msgstr ""
+msgstr "Wiederhole nach"
 
 #: views/calendar.php:277 views/calendar.php:297 views/calendar.php:353
 #: views/calendar.php:378 views/calendar.php:403 views/calendar.php:480
 msgid "Repeats"
-msgstr ""
+msgstr "Wiederholt sich"
 
 #: Calendar.class.php:1291 Calendar.class.php:1310 Calendar.class.php:1329
 #: Calendar.class.php:1348
@@ -481,11 +487,11 @@ msgstr "Zurücksetzen"
 
 #: utests/eventFilterTest.php:53
 msgid "Returned date range was not as expected"
-msgstr ""
+msgstr "Der zurückgegebene Zeitraum war nicht wie erwartet"
 
 #: views/remote_caldav_settings.php:161 views/remote_ews_settings.php:219
 msgid "Select specific calendars"
-msgstr ""
+msgstr "Wählen Sie bestimmte Kalender aus"
 
 #: views/calendargroups.php:84
 msgid ""
@@ -493,12 +499,19 @@ msgid ""
 "categories are selected then all events in said categories will match. "
 "Changing categories will change events below"
 msgstr ""
+"Wählen Sie spezifische Kategorien für diese Gruppe aus. Wenn keine "
+"Ereignisse, sondern nur Kategorien ausgewählt werden, werden alle Ereignisse "
+"in diesen Kategorien ausgewählt. Eine Änderung der Kategorien ändert die "
+"untenstehenden Ereignisse"
 
 #: views/calendargroups.php:109
 msgid ""
 "Select specific events for this group. If no events are selected but "
 "categories are selected then all events in said categories will match"
 msgstr ""
+"Wählen Sie spezifische Kategorien für diese Gruppe aus. Wenn keine "
+"Ereignisse, sondern nur Kategorien ausgewählt werden, werden alle Ereignisse "
+"in diesen Kategorien ausgewählt"
 
 #: views/calendargroups.php:71
 msgid "Specific Categories"
@@ -519,7 +532,7 @@ msgstr "Anfangszeit"
 #: Calendar.class.php:1296 Calendar.class.php:1315 Calendar.class.php:1334
 #: Calendar.class.php:1353 views/calendar.php:489
 msgid "Submit"
-msgstr ""
+msgstr "Absenden"
 
 #: Calendar.class.php:392
 msgid "Successfully updated event"
@@ -545,7 +558,7 @@ msgstr "Die Beschreibung für diesen Kalender"
 
 #: views/remote_ews_settings.php:78
 msgid "The email address of this calendar's user [Optional]"
-msgstr ""
+msgstr "Die E-Mail-Adresse des Benutzers dieses Kalenders [optional]"
 
 #: views/local_settings.php:34 views/remote_caldav_settings.php:34
 #: views/remote_ews_settings.php:34 views/remote_ical_settings.php:35
@@ -558,49 +571,53 @@ msgstr "Das Passwort für diesen Kalender"
 
 #: views/remote_ews_settings.php:122
 msgid "The password of this calendar's user"
-msgstr ""
+msgstr "Das Passwort für den Benutzer dieses Kalenders"
 
 #: views/remote_caldav_settings.php:78
 msgid "The principal url for this calendar"
-msgstr ""
+msgstr "Der Haupt-URL für diesen Kalender"
 
 #: views/remote_ews_settings.php:149 views/remote_ews_settings.php:181
 #: views/remote_ical_settings.php:79
 msgid "The remote url for this calendar"
-msgstr ""
+msgstr "Der entfernte URL für diesen Kalender"
 
 #: views/calendar.php:117
 msgid "The time to start the event"
-msgstr ""
+msgstr "Die Zeit, zu der dieses Ereignis zu beginnt"
 
 #: views/remote_ews_settings.php:100
 msgid "The username of this calendar's user"
-msgstr ""
+msgstr "Der Benutzername des Benutzers dieses Kalenders"
 
 #: assets/js/calendar/calendar.js:182
 msgid "There was an error fetching the events"
-msgstr ""
+msgstr "Beim Abholen der Ereignisse ist ein Fehler aufgetreten"
 
 #: views/calendargroupgrid.php:11
 msgid "These groups can then be linked to various applications or utilities"
 msgstr ""
+"Diese Gruppen können mit verschiedenen Anwendungen und Werkzeugen verknüpft "
+"werden"
 
 #: calendar.i18n.php:8
 msgid ""
 "This module is used to manage calendar and time based events for FreePBX"
 msgstr ""
+"Dieses Modul wird verwendet, um kalender- und zeitgesteuerte Ereignisse für "
+"FreePBX zu verwalten"
 
 #: views/calendar.php:193
 msgid "Time event starts"
-msgstr ""
+msgstr "Zeit, zu der das Ereignis beginnt"
 
 #: views/calendar.php:217
 msgid "Time the event ends"
-msgstr ""
+msgstr "Zeit, zu der das Ereignis endet"
 
 #: views/calendar.php:144
 msgid "Time this event ends"
-msgstr ""
+msgstr "Zeit, zu der dieses Ereignis endet"
 
 #: views/calendar.php:229 views/local_settings.php:67
 msgid "Timezone"
@@ -620,7 +637,7 @@ msgstr "Typ"
 
 #: drivers/Ews/Calendar.php:76
 msgid "Unable to determine server URL"
-msgstr ""
+msgstr "Kann den Server-URL nicht bestimmen"
 
 #: drivers/Base.php:17
 msgid "Unknown Calendar"
@@ -628,7 +645,7 @@ msgstr "Unbekannter Kalender"
 
 #: Calendar.class.php:1282 assets/js/calendar/calendar.js:297
 msgid "Update from Source"
-msgstr ""
+msgstr "Aktualisierung aus der Quelle"
 
 #: assets/js/calendar/calendar.js:284
 msgid "Updating..."
@@ -645,26 +662,30 @@ msgstr "Benutzername"
 #: views/calendar.php:14
 msgid "Utilizing the calendar timezone (You can change this in Edit Settings)"
 msgstr ""
+"Verwende die Zeitzone des Kalenders (Sie können dies über \"Einstellungen "
+"bearbeiten\" ändern)"
 
 #: views/calendar.php:16
 msgid ""
 "Utilizing your timezone (You can change this in Advanced Settings or User "
 "Manager)"
 msgstr ""
+"Verwende Ihre Zeitzone (Sie können dies in den erweiterten Einstellungen "
+"oder in der Benutzerverwaltung ändern)"
 
 #: views/calendargroupgrid.php:15
 msgid "View Calendars"
-msgstr ""
+msgstr "Kalender ansehen"
 
 #: views/calendar.php:7
 #, php-format
 msgid "Viewing Calendar '%s'"
-msgstr ""
+msgstr "Sie sehen Kalender '%s'"
 
 #: views/calendar.php:10
 #, php-format
 msgid "Viewing from timezone '%s'"
-msgstr ""
+msgstr "Ansicht aus Zeitzone '%s'"
 
 #: assets/js/calendar/calendar.js:342
 msgid "Weeks"
@@ -672,11 +693,11 @@ msgstr "Wochen"
 
 #: views/calendargroupgrid.php:7
 msgid "What are Calendar Event Groups?"
-msgstr ""
+msgstr "Was sind Kalender-Ereignis-Gruppen?"
 
 #: views/ucp_config.php:28
 msgid "Whether to allow this user to be able to access the calendar in UCP"
-msgstr ""
+msgstr "Soll dieser Benutzer im UCP Zugriff auf den Kalender erhalten"
 
 #: assets/js/calendar/calendar.js:364
 msgid "Years"
@@ -689,6 +710,8 @@ msgstr "Ja"
 #: drivers/Ews.php:58 drivers/Ews.php:71
 msgid "You are missing the PHP SoapClient library. Please install to continue"
 msgstr ""
+"Die PHP-SoapClient-Bibliothek fehlt. Bitte installieren Sie diese, um "
+"fortzufahren"
 
 #: views/calendar.php:446 views/calendar.php:455
 msgid "occurrences"
@@ -696,4 +719,4 @@ msgstr "Vorkommen"
 
 #: Calendar.class.php:341
 msgid "to"
-msgstr ""
+msgstr "bis"
