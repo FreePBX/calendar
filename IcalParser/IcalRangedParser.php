@@ -4,6 +4,7 @@ namespace FreePBX\modules\Calendar\IcalParser;
 use om\Freq;
 use om\Recurrence;
 use om\IcalParser;
+use Carbon\CarbonPeriod;
 class IcalRangedParser extends IcalParser {
 	private $ranges = [
 		'start' => null,
@@ -39,12 +40,12 @@ class IcalRangedParser extends IcalParser {
 			foreach ($event['EXDATES'] as $exDate) {
 				if (is_array($exDate)) {
 					foreach ($exDate as $singleExDate) {
-						if($this->dateInRange($singleExDate)) {
+						if($this->eventDateInCalendarRange($singleExDate)) {
 							$exclusions[] = $singleExDate->getTimestamp();
 						}
 					}
 				} else {
-					if($this->dateInRange($exDate)) {
+					if($this->eventDateInCalendarRange($exDate)) {
 						$exclusions[] = $exDate->getTimestamp();
 					}
 				}
@@ -55,12 +56,12 @@ class IcalRangedParser extends IcalParser {
 			foreach ($event['RDATES'] as $rDate) {
 				if (is_array($rDate)) {
 					foreach ($rDate as $singleRDate) {
-						if($this->dateInRange($singleRDate)) {
+						if($this->eventDateInCalendarRange($singleRDate)) {
 							$additions[] = $singleRDate->getTimestamp();
 						}
 					}
 				} else {
-					if($this->dateInRange($rDate)) {
+					if($this->eventDateInCalendarRange($rDate)) {
 						$additions[] = $rDate->getTimestamp();
 					}
 				}
@@ -71,33 +72,36 @@ class IcalRangedParser extends IcalParser {
 
 		$until = $recurring->getUntil();
 		if ($until === false) {
-			//forever... limit to 3 years
+			//forever... limit to 15 years
 			$end = clone($event['DTSTART']);
-			$end->add(new \DateInterval('P3Y')); // + 3 years
+			$end->add(new \DateInterval('P15Y')); // + 15 years
 			$recurring->setUntil($end);
 		}
 
 		$frequency = new Freq($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
 
-		$nextTimestamp = ($event['DTSTART']->getTimestamp() > $this->ranges['start']->getTimestamp()) ? $event['DTSTART']->getTimestamp() : $this->ranges['start']->getTimestamp();
+		if(!isset($recurring->rrule['COUNT'])) {
+			$nextTimestamp = ($event['DTSTART']->getTimestamp() > $this->ranges['start']->getTimestamp()) ? $event['DTSTART']->getTimestamp() : $this->ranges['start']->getTimestamp();
 
-		$out = $frequency->previousOccurrence($nextTimestamp);
-		$start = clone($event['DTSTART']);
-		$start->setTimestamp($out);
+			$out = $frequency->previousOccurrence($nextTimestamp);
+			$start = clone($event['DTSTART']);
+			$start->setTimestamp($out);
 
-		$d1 = $this->ranges['start'];
+			$d1 = $this->ranges['start'];
 
-		$end = $until !== false && $until->getTimestamp() < $this->ranges['end']->getTimestamp() ? $until : $this->ranges['end'];
+			$end = $until !== false && $until->getTimestamp() < $this->ranges['end']->getTimestamp() ? $until : $this->ranges['end'];
 
-		$diff = $this->ranges['start']->diff($end);
+			$diff = $start->diff($end);
+			if ($until === false) {
+				$end = clone($start);
+				$end->add($diff);
+				$recurring->setUntil($end);
+			}
 
-		if ($until === false) {
-			$end = clone($start);
-			$end->add($diff);
-			$recurring->setUntil($end);
+			$frequency = new Freq($recurring->rrule, $start->getTimestamp(), $exclusions, $additions);
+		} elseif(class_exists('FreePBX')) {
+			\FreePBX::Notifications()->add_warning('calendar', 'RRULECOUNT', _('Calendar using COUNT'), _('A calendar you have added has an event that has a reoccuring rule of COUNT. When COUNT is used this slows down Calendar drastically. Please change your rule to another format'), "", true, true);
 		}
-
-		$frequency = new Freq($recurring->rrule, $start->getTimestamp(), $exclusions, $additions);
 
 		$recurrenceTimestamps = $frequency->getAllOccurrences();
 		$recurrences = [];
@@ -171,7 +175,7 @@ class IcalRangedParser extends IcalParser {
 						}
 					} else {
 						//neither start nor end is within range so skip it
-						if(!$this->dateInRange($event['DTSTART']) && !$this->dateInRange($event['DTEND'])) {
+						if(!$this->eventRangeInCalendarRange($event['DTSTART'],$event['DTEND'])) {
 							$event = null;
 						}
 					}
@@ -199,7 +203,7 @@ class IcalRangedParser extends IcalParser {
 							$newEvent['DTEND']->add($eventInterval);
 						}
 
-						if($this->dateInRange($newEvent['DTSTART']) || $this->dateInRange($newEvent['DTEND'])) {
+						if($this->eventRangeInCalendarRange($newEvent['DTSTART'],$newEvent['DTEND'])) {
 							$newEvent['RECURRENCE_INSTANCE'] = $j;
 							$events[] = $newEvent;
 						}
@@ -212,7 +216,17 @@ class IcalRangedParser extends IcalParser {
 		return $events;
 	}
 
-	public function dateInRange(\DateTime $timestamp) {
+	public function eventDateInCalendarRange(\DateTime $timestamp) {
 		return ($timestamp->getTimestamp() > $this->ranges['start']->getTimestamp() && $timestamp->getTimestamp() < $this->ranges['end']->getTimestamp());
+	}
+
+	public function eventRangeInCalendarRange(\DateTime $eventStart, \DateTime $eventEnd) {
+		$event = CarbonPeriod::between($eventStart, $eventEnd);
+		foreach ($event as $date) {
+			if($date->between($this->ranges['start'], $this->ranges['end'])) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
