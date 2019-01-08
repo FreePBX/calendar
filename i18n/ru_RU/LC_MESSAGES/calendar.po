@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-07 19:57-0500\n"
+"POT-Creation-Date: 2019-01-08 16:57-0500\n"
 "PO-Revision-Date: 2017-03-15 16:31-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -110,7 +110,7 @@ msgstr ""
 msgid "6 Hours"
 msgstr ""
 
-#: IcalParser/IcalRangedParser.php:103
+#: IcalParser/IcalRangedParser.php:118
 msgid ""
 "A calendar you have added has an event that has a reoccuring rule of COUNT. "
 "When COUNT is used this slows down Calendar drastically. Please change your "
@@ -166,7 +166,7 @@ msgstr ""
 msgid "After"
 msgstr ""
 
-#: Console/Calendar.class.php:68 views/calendar.php:180 views/calendar.php:185
+#: Console/Calendar.class.php:79 views/calendar.php:180 views/calendar.php:185
 msgid "All Day"
 msgstr ""
 
@@ -236,7 +236,7 @@ msgstr ""
 msgid "Calendar names should be unique."
 msgstr ""
 
-#: IcalParser/IcalRangedParser.php:103
+#: IcalParser/IcalRangedParser.php:118
 msgid "Calendar using COUNT"
 msgstr ""
 
@@ -252,7 +252,7 @@ msgstr ""
 msgid "Categories this event belongs to, separated by comma"
 msgstr ""
 
-#: Console/Calendar.class.php:28
+#: Console/Calendar.class.php:31
 msgid "Check if match, value can be any timestamp"
 msgstr ""
 
@@ -268,7 +268,7 @@ msgstr ""
 msgid "Day of the week"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:354
+#: assets/js/calendar/calendar.js:358
 msgid "Days"
 msgstr ""
 
@@ -280,7 +280,7 @@ msgstr ""
 msgid "Delete Event"
 msgstr ""
 
-#: Console/Calendar.class.php:68 views/grid.php:27 views/local_settings.php:44
+#: Console/Calendar.class.php:79 views/grid.php:27 views/local_settings.php:44
 #: views/remote_caldav_settings.php:44 views/remote_ews_settings.php:47
 #: views/remote_ical_settings.php:45
 msgid "Description"
@@ -314,7 +314,7 @@ msgstr ""
 msgid "Enable Calendar"
 msgstr ""
 
-#: Console/Calendar.class.php:68
+#: Console/Calendar.class.php:79
 msgid "End"
 msgstr ""
 
@@ -362,6 +362,10 @@ msgstr ""
 msgid "Export Calendar by ID"
 msgstr ""
 
+#: Console/Calendar.class.php:30
+msgid "File location of the ics to import"
+msgstr ""
+
 #: Console/Calendar.class.php:25
 msgid "Force command"
 msgstr ""
@@ -383,6 +387,10 @@ msgstr ""
 msgid "How often this calendar will synchronize with the remote server"
 msgstr ""
 
+#: Console/Calendar.class.php:28
+msgid "Import Calendar by ID"
+msgstr ""
+
 #: Calendar.class.php:903 Calendar.class.php:911 views/ucp_config.php:18
 msgid "Inherit"
 msgstr ""
@@ -399,7 +407,7 @@ msgstr ""
 msgid "Local Calendar"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:367
+#: assets/js/calendar/calendar.js:371
 msgid "Months"
 msgstr ""
 
@@ -410,7 +418,7 @@ msgid ""
 "single group!"
 msgstr ""
 
-#: Console/Calendar.class.php:68 views/calendargroups.php:19 views/grid.php:26
+#: Console/Calendar.class.php:79 views/calendargroups.php:19 views/grid.php:26
 #: views/local_settings.php:22 views/remote_caldav_settings.php:22
 #: views/remote_ews_settings.php:25 views/remote_ical_settings.php:23
 #: views/rnav.php:30
@@ -425,8 +433,8 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-#: Console/Calendar.class.php:78 Console/Calendar.class.php:79
-#: Console/Calendar.class.php:80 views/ucp_config.php:15
+#: Console/Calendar.class.php:89 Console/Calendar.class.php:90
+#: Console/Calendar.class.php:91 views/ucp_config.php:15
 msgid "No"
 msgstr ""
 
@@ -444,7 +452,7 @@ msgstr ""
 msgid "No settings were discovered"
 msgstr ""
 
-#: Console/Calendar.class.php:68
+#: Console/Calendar.class.php:79
 msgid "Now Match"
 msgstr ""
 
@@ -456,11 +464,11 @@ msgstr ""
 msgid "On"
 msgstr ""
 
-#: Console/Calendar.class.php:30
+#: Console/Calendar.class.php:33
 msgid "One of: calendar id | event id | group id"
 msgstr ""
 
-#: Console/Calendar.class.php:29
+#: Console/Calendar.class.php:32
 msgid "One of: calendar | event | group"
 msgstr ""
 
@@ -484,7 +492,7 @@ msgstr ""
 msgid "Private iCal Link"
 msgstr ""
 
-#: Console/Calendar.class.php:68
+#: Console/Calendar.class.php:79
 msgid "Recurring"
 msgstr ""
 
@@ -534,6 +542,10 @@ msgstr ""
 msgid "Reset"
 msgstr ""
 
+#: Console/Calendar.class.php:29
+msgid "Reset Calendar by ID"
+msgstr ""
+
 #: views/remote_caldav_settings.php:161 views/remote_ews_settings.php:222
 msgid "Select specific calendar"
 msgstr ""
@@ -559,7 +571,7 @@ msgstr ""
 msgid "Specific Events"
 msgstr ""
 
-#: Console/Calendar.class.php:68
+#: Console/Calendar.class.php:79
 msgid "Start"
 msgstr ""
 
@@ -652,7 +664,7 @@ msgstr ""
 msgid "Time this event ends"
 msgstr ""
 
-#: Console/Calendar.class.php:68 views/calendar.php:253
+#: Console/Calendar.class.php:79 views/calendar.php:253
 #: views/local_settings.php:67
 msgid "Timezone"
 msgstr ""
@@ -669,7 +681,7 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: Console/Calendar.class.php:68
+#: Console/Calendar.class.php:79
 msgid "UID"
 msgstr ""
 
@@ -681,11 +693,11 @@ msgstr ""
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:791 assets/js/calendar/calendar.js:306
+#: Calendar.class.php:791 assets/js/calendar/calendar.js:310
 msgid "Update from Source"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:293
+#: assets/js/calendar/calendar.js:297
 msgid "Updating..."
 msgstr ""
 
@@ -729,7 +741,7 @@ msgstr ""
 msgid "Viewing from timezone '%s'"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:351
+#: assets/js/calendar/calendar.js:355
 msgid "Weeks"
 msgstr ""
 
@@ -741,12 +753,12 @@ msgstr ""
 msgid "Whether to allow this user to be able to access the calendar in UCP"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:373
+#: assets/js/calendar/calendar.js:377
 msgid "Years"
 msgstr ""
 
-#: Console/Calendar.class.php:78 Console/Calendar.class.php:79
-#: Console/Calendar.class.php:80 views/ucp_config.php:13
+#: Console/Calendar.class.php:89 Console/Calendar.class.php:90
+#: Console/Calendar.class.php:91 views/ucp_config.php:13
 msgid "Yes"
 msgstr ""
 
