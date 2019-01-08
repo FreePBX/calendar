@@ -25,6 +25,9 @@ class Calendar extends Command {
 			new InputOption('force', null, InputOption::VALUE_NONE, _('Force command')),
 			new InputOption('list', null, InputOption::VALUE_NONE, _('List Events')),
 			new InputOption('export', null, InputOption::VALUE_REQUIRED, _('Export Calendar by ID')),
+			new InputOption('import', null, InputOption::VALUE_REQUIRED, _('Import Calendar by ID')),
+			new InputOption('reset', null, InputOption::VALUE_REQUIRED, _('Reset Calendar by ID')),
+			new InputOption('file', null, InputOption::VALUE_REQUIRED, _('File location of the ics to import')),
 			new InputOption('match', null, InputOption::VALUE_REQUIRED, _('Check if match, value can be any timestamp')),
 			new InputOption('type', null, InputOption::VALUE_REQUIRED, _('One of: calendar | event | group')),
 			new InputOption('id', null, InputOption::VALUE_REQUIRED, _('One of: calendar id | event id | group id'))
@@ -38,6 +41,14 @@ class Calendar extends Command {
 
 		if($input->getOption('export')) {
 			return $this->export($calendar, $input, $output);
+		}
+
+		if($input->getOption('import')) {
+			return $this->import($calendar, $input, $output);
+		}
+
+		if($input->getOption('reset')) {
+			return $this->reset($calendar, $input, $output);
 		}
 
 		if($input->getOption('match') && $input->getOption('type')) {
@@ -195,6 +206,31 @@ class Calendar extends Command {
 	private function export($calendar, InputInterface $input, OutputInterface $output) {
 		$driver = $calendar->getDriverById($input->getOption('export'));
 		$output->writeln($driver->getIcal());
+	}
+
+	private function reset($calendar, InputInterface $input, OutputInterface $output) {
+		$info = $calendar->getCalendarById($input->getOption('reset'));
+		if($info['type'] !== 'local') {
+			$output->writeln("<error>Reset is only supported on local calendars!</error>");
+			exit(-1);
+		}
+		$output->writeln($info['calendar']->deleteiCal());
+		$output->writeln("Successfully reset the calendar");
+	}
+
+	private function import($calendar, InputInterface $input, OutputInterface $output) {
+		$info = $calendar->getCalendarById($input->getOption('import'));
+		if($info['type'] !== 'local') {
+			$output->writeln("<error>Import is only supported on local calendars!</error>");
+			exit(-1);
+		}
+		$file = $input->getOption('file');
+		if(!file_exists($file)) {
+			$output->writeln("<error>File does not exist</error>");
+			exit(-1);
+		}
+		$info['calendar']->saveiCal(file_get_contents($file));
+		$output->writeln("Successfully imported calendar");
 	}
 
 	/**
