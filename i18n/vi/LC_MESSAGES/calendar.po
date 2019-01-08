@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-14 22:25-0500\n"
+"POT-Creation-Date: 2019-01-07 19:57-0500\n"
 "PO-Revision-Date: 2017-06-14 09:55+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese <http://weblate.freepbx.org/projects/freepbx/"
@@ -110,6 +110,13 @@ msgstr "5 phút"
 #: views/remote_ical_settings.php:100
 msgid "6 Hours"
 msgstr "6 giờ"
+
+#: IcalParser/IcalRangedParser.php:103
+msgid ""
+"A calendar you have added has an event that has a reoccuring rule of COUNT. "
+"When COUNT is used this slows down Calendar drastically. Please change your "
+"rule to another format"
+msgstr ""
 
 #: views/calendargroupgrid.php:34 views/grid.php:29
 msgid "Actions"
@@ -230,6 +237,10 @@ msgstr "Các nhóm lịch người dùng có thể sử dụng."
 
 #: assets/js/calendar/calendar.js:128
 msgid "Calendar names should be unique."
+msgstr ""
+
+#: IcalParser/IcalRangedParser.php:103
+msgid "Calendar using COUNT"
 msgstr ""
 
 #: views/calendargroups.php:43
@@ -530,10 +541,6 @@ msgstr "Lặp lại"
 msgid "Reset"
 msgstr "Cài đặt lại"
 
-#: utests/eventFilterTest.php:53
-msgid "Returned date range was not as expected"
-msgstr "Vùng ngày trả lại không như ý muốn"
-
 #: views/remote_caldav_settings.php:161 views/remote_ews_settings.php:222
 msgid "Select specific calendar"
 msgstr ""
@@ -774,6 +781,9 @@ msgstr "Lần xuất hiện"
 #: Calendar.class.php:344
 msgid "to"
 msgstr "Tới"
+
+#~ msgid "Returned date range was not as expected"
+#~ msgstr "Vùng ngày trả lại không như ý muốn"
 
 #~ msgid "Select specific calendars"
 #~ msgstr "Chọn lịch cụ thể"

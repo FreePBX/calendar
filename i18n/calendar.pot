@@ -3,13 +3,13 @@
 # For licensing information, please see the file named LICENSE located in the module directory
 #
 # FreePBX language template for calendar
-# Copyright (C) 2008-2018 Sangoma Technologies, Inc.
+# Copyright (C) 2008-2019 Sangoma Technologies, Inc.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-14 22:25-0500\n"
+"POT-Creation-Date: 2019-01-07 19:57-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -116,6 +116,13 @@ msgstr ""
 #: views/remote_ews_settings.php:243
 #: views/remote_ical_settings.php:100
 msgid "6 Hours"
+msgstr ""
+
+#: IcalParser/IcalRangedParser.php:103
+msgid ""
+"A calendar you have added has an event that has a reoccuring rule of COUNT. "
+"When COUNT is used this slows down Calendar drastically. Please change your "
+"rule to another format"
 msgstr ""
 
 #: views/calendargroupgrid.php:34
@@ -245,6 +252,10 @@ msgstr ""
 
 #: assets/js/calendar/calendar.js:128
 msgid "Calendar names should be unique."
+msgstr ""
+
+#: IcalParser/IcalRangedParser.php:103
+msgid "Calendar using COUNT"
 msgstr ""
 
 #: views/calendargroups.php:43
@@ -562,10 +573,6 @@ msgstr ""
 #: Calendar.class.php:838
 #: Calendar.class.php:857
 msgid "Reset"
-msgstr ""
-
-#: utests/eventFilterTest.php:53
-msgid "Returned date range was not as expected"
 msgstr ""
 
 #: views/remote_caldav_settings.php:161

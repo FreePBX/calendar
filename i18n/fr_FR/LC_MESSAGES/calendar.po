@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-14 22:25-0500\n"
+"POT-Creation-Date: 2019-01-07 19:57-0500\n"
 "PO-Revision-Date: 2018-02-14 21:15+0200\n"
 "Last-Translator: jeremie <freepbx@famillecattan.com>\n"
 "Language-Team: French <http://weblate.freepbx.org/projects/freepbx/calendar/"
@@ -110,6 +110,13 @@ msgstr "5 minutes"
 #: views/remote_ical_settings.php:100
 msgid "6 Hours"
 msgstr "6 heures"
+
+#: IcalParser/IcalRangedParser.php:103
+msgid ""
+"A calendar you have added has an event that has a reoccuring rule of COUNT. "
+"When COUNT is used this slows down Calendar drastically. Please change your "
+"rule to another format"
+msgstr ""
 
 #: views/calendargroupgrid.php:34 views/grid.php:29
 msgid "Actions"
@@ -231,6 +238,10 @@ msgstr "Les groupes d'agenda que l'utilisateur peut utiliser."
 #: assets/js/calendar/calendar.js:128
 msgid "Calendar names should be unique."
 msgstr "Le nom du calendrier doit être unique."
+
+#: IcalParser/IcalRangedParser.php:103
+msgid "Calendar using COUNT"
+msgstr ""
 
 #: views/calendargroups.php:43
 msgid "Calendars"
@@ -529,10 +540,6 @@ msgstr "Répétitions"
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: utests/eventFilterTest.php:53
-msgid "Returned date range was not as expected"
-msgstr "La période de dates retournée n'était pas celle prévue"
-
 #: views/remote_caldav_settings.php:161 views/remote_ews_settings.php:222
 msgid "Select specific calendar"
 msgstr ""
@@ -780,6 +787,9 @@ msgstr "occurrences"
 #: Calendar.class.php:344
 msgid "to"
 msgstr "à"
+
+#~ msgid "Returned date range was not as expected"
+#~ msgstr "La période de dates retournée n'était pas celle prévue"
 
 #~ msgid "Select specific calendars"
 #~ msgstr "Choisissez des agendas spécifiques"
