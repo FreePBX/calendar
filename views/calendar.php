@@ -4,21 +4,21 @@ $readonly = $data['type'] !== 'local' ? 'true' : 'false';
 ?>
 
 <h1>
-  <?php echo sprintf(_("Viewing Calendar '%s'"),$data['name'])?>
+	<?php echo sprintf(_("Viewing Calendar '%s'"),$data['name'])?>
 </h1>
 <h5>
-  <?php echo sprintf(_("Viewing from timezone '%s'"),'<span id="timezone-display">'.$data['timezone'].'</span>')?>
+	<?php echo sprintf(_("Viewing from timezone '%s'"),'<span id="timezone-display">'.$data['timezone'].'</span>')?>
 </h5>
 <h6>
-  <?php if($data['type'] === 'local') {
-    echo _('Utilizing the calendar timezone (You can change this in Edit Settings)');
-  } else {
-    echo _('Utilizing your timezone (You can change this in Advanced Settings or User Manager)');
-  }?>
+	<?php if($data['type'] === 'local') {
+		echo _('Utilizing the calendar timezone (You can change this in Edit Settings)');
+	} else {
+		echo _('Utilizing your timezone (You can change this in Advanced Settings or User Manager)');
+	}?>
 </h6>
 <h6>
-  <?php echo _('Private address in iCal format')?> (<a id="generate-ical-link" class="clickable"><?php echo _('(Re)Generate Link')?></a>)
-  <br>
+	<?php echo _('Private address in iCal format')?> (<a id="generate-ical-link" class="clickable"><?php echo _('(Re)Generate Link')?></a>)
+	<br>
 	<a href="<?php echo !empty($icallink) ? $icallink : ''?>" id="ical-link" class="<?php echo !empty($icallink) ? '' : 'hidden'?>"><?php echo _('Private iCal Link') ?></a>
 </h6>
 <script>
@@ -92,6 +92,30 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 										</div>
 									</div>
 									<!--END Event Description-->
+									<!--Event Categories-->
+									<div class="element-container">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="row">
+													<div class="form-group">
+														<div class="col-md-3">
+															<label class="control-label" for="categories"><?php echo _("Event Categories") ?></label>
+															<i class="fa fa-question-circle fpbx-help-icon" data-for="categories"></i>
+														</div>
+														<div class="col-md-9">
+															<input type="text" class="form-control" id="categories" name="categories" value="">
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span id="categories-help" class="help-block fpbx-help-block"><?php echo _("Categories this event belongs to, separated by comma")?></span>
+											</div>
+										</div>
+									</div>
+									<!--END Event Categories-->
 									<!--Start Date and Time-->
 									<div class="element-container">
 										<div class="row">

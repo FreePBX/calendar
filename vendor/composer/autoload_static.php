@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit0add5e43809a9bddbcdc89867cb2a3b5
+class ComposerStaticInit678a1299a219628bd23671dbba7bffe5
 {
     public static $prefixLengthsPsr4 = array (
         'j' => 
@@ -58,9 +58,11 @@ class ComposerStaticInit0add5e43809a9bddbcdc89867cb2a3b5
         'Eluceo\\iCal\\Property\\DateTimesProperty' => __DIR__ . '/..' . '/eluceo/ical/src/Eluceo/iCal/Property/DateTimesProperty.php',
         'Eluceo\\iCal\\Property\\Event\\Attendees' => __DIR__ . '/..' . '/eluceo/ical/src/Eluceo/iCal/Property/Event/Attendees.php',
         'Eluceo\\iCal\\Property\\Event\\Description' => __DIR__ . '/..' . '/eluceo/ical/src/Eluceo/iCal/Property/Event/Description.php',
+        'Eluceo\\iCal\\Property\\Event\\Geo' => __DIR__ . '/..' . '/eluceo/ical/src/Eluceo/iCal/Property/Event/Geo.php',
         'Eluceo\\iCal\\Property\\Event\\Organizer' => __DIR__ . '/..' . '/eluceo/ical/src/Eluceo/iCal/Property/Event/Organizer.php',
         'Eluceo\\iCal\\Property\\Event\\RecurrenceId' => __DIR__ . '/..' . '/eluceo/ical/src/Eluceo/iCal/Property/Event/RecurrenceId.php',
         'Eluceo\\iCal\\Property\\Event\\RecurrenceRule' => __DIR__ . '/..' . '/eluceo/ical/src/Eluceo/iCal/Property/Event/RecurrenceRule.php',
+        'Eluceo\\iCal\\Property\\RawStringValue' => __DIR__ . '/..' . '/eluceo/ical/src/Eluceo/iCal/Property/RawStringValue.php',
         'Eluceo\\iCal\\Property\\StringValue' => __DIR__ . '/..' . '/eluceo/ical/src/Eluceo/iCal/Property/StringValue.php',
         'Eluceo\\iCal\\Property\\ValueInterface' => __DIR__ . '/..' . '/eluceo/ical/src/Eluceo/iCal/Property/ValueInterface.php',
         'Eluceo\\iCal\\Util\\ComponentUtil' => __DIR__ . '/..' . '/eluceo/ical/src/Eluceo/iCal/Util/ComponentUtil.php',
@@ -735,6 +737,7 @@ class ComposerStaticInit0add5e43809a9bddbcdc89867cb2a3b5
         'jamesiarmes\\PhpEws\\Type\\PreviewItemMailboxType' => __DIR__ . '/..' . '/php-ews/php-ews/src/Type/PreviewItemMailboxType.php',
         'jamesiarmes\\PhpEws\\Type\\PreviewItemResponseShapeType' => __DIR__ . '/..' . '/php-ews/php-ews/src/Type/PreviewItemResponseShapeType.php',
         'jamesiarmes\\PhpEws\\Type\\PrivateCatalogAddInsType' => __DIR__ . '/..' . '/php-ews/php-ews/src/Type/PrivateCatalogAddInsType.php',
+        'jamesiarmes\\PhpEws\\Type\\ProposeNewTimeType' => __DIR__ . '/..' . '/php-ews/php-ews/src/Type/ProposeNewTimeType.php',
         'jamesiarmes\\PhpEws\\Type\\ProtectionRuleActionType' => __DIR__ . '/..' . '/php-ews/php-ews/src/Type/ProtectionRuleActionType.php',
         'jamesiarmes\\PhpEws\\Type\\ProtectionRuleAndType' => __DIR__ . '/..' . '/php-ews/php-ews/src/Type/ProtectionRuleAndType.php',
         'jamesiarmes\\PhpEws\\Type\\ProtectionRuleArgumentType' => __DIR__ . '/..' . '/php-ews/php-ews/src/Type/ProtectionRuleArgumentType.php',
@@ -860,10 +863,10 @@ class ComposerStaticInit0add5e43809a9bddbcdc89867cb2a3b5
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit0add5e43809a9bddbcdc89867cb2a3b5::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit0add5e43809a9bddbcdc89867cb2a3b5::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit0add5e43809a9bddbcdc89867cb2a3b5::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit0add5e43809a9bddbcdc89867cb2a3b5::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit678a1299a219628bd23671dbba7bffe5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit678a1299a219628bd23671dbba7bffe5::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit678a1299a219628bd23671dbba7bffe5::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit678a1299a219628bd23671dbba7bffe5::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -2,10 +2,12 @@
 /**
  * @author Marc Vachette <marc.vachette@gmail.com>
  */
+
 use Tester\Assert;
+use Tester\Environment;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-\Tester\Environment::setup();
+Environment::setup();
 date_default_timezone_set('Europe/Paris');
 
 //some clean timezone
@@ -20,3 +22,7 @@ Assert::same('Etc/GMT', $cal->timezone->getName());
 $cal = new \om\IcalParser();
 $results = $cal->parseFile(__DIR__ . '/cal/FrenchHolidays.ics');
 Assert::same('Europe/Paris', $cal->timezone->getName());
+
+$cal = new \om\IcalParser();
+$results = $cal->parseFile(__DIR__ . '/cal/weird_windows_timezones.ics');
+$events = $cal->getSortedEvents();

@@ -1,4 +1,5 @@
 <?php
+
 namespace om;
 /**
  * Copyright (c) 2004-2015 Roman Ožana (http://www.omdesign.cz)
@@ -11,110 +12,13 @@ class IcalParser {
 	public $timezone;
 
 	/** @var array */
-	public $data;
+	public $data = [];
 
 	/** @var array */
-	public $windows_timezones = [
-		'Dateline Standard Time' => 'Etc/GMT+12',
-		'UTC-11' => 'Etc/GMT+11',
-		'Hawaiian Standard Time' => 'Pacific/Honolulu',
-		'Alaskan Standard Time' => 'America/Anchorage',
-		'Pacific Standard Time (Mexico)' => 'America/Santa_Isabel',
-		'Pacific Standard Time' => 'America/Los_Angeles',
-		'US Mountain Standard Time' => 'America/Phoenix',
-		'Mountain Standard Time (Mexico)' => 'America/Chihuahua',
-		'Mountain Standard Time' => 'America/Denver',
-		'Central America Standard Time' => 'America/Guatemala',
-		'Central Standard Time' => 'America/Chicago',
-		'Central Standard Time (Mexico)' => 'America/Mexico_City',
-		'Canada Central Standard Time' => 'America/Regina',
-		'SA Pacific Standard Time' => 'America/Bogota',
-		'Eastern Standard Time' => 'America/New_York',
-		'US Eastern Standard Time' => 'America/Indianapolis',
-		'Venezuela Standard Time' => 'America/Caracas',
-		'Paraguay Standard Time' => 'America/Asuncion',
-		'Atlantic Standard Time' => 'America/Halifax',
-		'Central Brazilian Standard Time' => 'America/Cuiaba',
-		'SA Western Standard Time' => 'America/La_Paz',
-		'Pacific SA Standard Time' => 'America/Santiago',
-		'Newfoundland Standard Time' => 'America/St_Johns',
-		'E. South America Standard Time' => 'America/Sao_Paulo',
-		'Argentina Standard Time' => 'America/Buenos_Aires',
-		'SA Eastern Standard Time' => 'America/Cayenne',
-		'Greenland Standard Time' => 'America/Godthab',
-		'Montevideo Standard Time' => 'America/Montevideo',
-		'Bahia Standard Time' => 'America/Bahia',
-		'UTC-02' => 'Etc/GMT+2',
-		'Azores Standard Time' => 'Atlantic/Azores',
-		'Cape Verde Standard Time' => 'Atlantic/Cape_Verde',
-		'Morocco Standard Time' => 'Africa/Casablanca',
-		'UTC' => 'Etc/GMT',
-		'GMT Standard Time' => 'Europe/London',
-		'Greenwich Standard Time' => 'Atlantic/Reykjavik',
-		'W. Europe Standard Time' => 'Europe/Berlin',
-		'Central Europe Standard Time' => 'Europe/Budapest',
-		'Romance Standard Time' => 'Europe/Paris',
-		'Central European Standard Time' => 'Europe/Warsaw',
-		'W. Central Africa Standard Time' => 'Africa/Lagos',
-		'Namibia Standard Time' => 'Africa/Windhoek',
-		'GTB Standard Time' => 'Europe/Bucharest',
-		'Middle East Standard Time' => 'Asia/Beirut',
-		'Egypt Standard Time' => 'Africa/Cairo',
-		'Syria Standard Time' => 'Asia/Damascus',
-		'South Africa Standard Time' => 'Africa/Johannesburg',
-		'FLE Standard Time' => 'Europe/Kiev',
-		'Turkey Standard Time' => 'Europe/Istanbul',
-		'Israel Standard Time' => 'Asia/Jerusalem',
-		'Libya Standard Time' => 'Africa/Tripoli',
-		'Jordan Standard Time' => 'Asia/Amman',
-		'Arabic Standard Time' => 'Asia/Baghdad',
-		'Kaliningrad Standard Time' => 'Europe/Kaliningrad',
-		'Arab Standard Time' => 'Asia/Riyadh',
-		'E. Africa Standard Time' => 'Africa/Nairobi',
-		'Iran Standard Time' => 'Asia/Tehran',
-		'Arabian Standard Time' => 'Asia/Dubai',
-		'Azerbaijan Standard Time' => 'Asia/Baku',
-		'Russian Standard Time' => 'Europe/Moscow',
-		'Mauritius Standard Time' => 'Indian/Mauritius',
-		'Georgian Standard Time' => 'Asia/Tbilisi',
-		'Caucasus Standard Time' => 'Asia/Yerevan',
-		'Afghanistan Standard Time' => 'Asia/Kabul',
-		'West Asia Standard Time' => 'Asia/Tashkent',
-		'Pakistan Standard Time' => 'Asia/Karachi',
-		'India Standard Time' => 'Asia/Calcutta',
-		'Sri Lanka Standard Time' => 'Asia/Colombo',
-		'Nepal Standard Time' => 'Asia/Katmandu',
-		'Central Asia Standard Time' => 'Asia/Almaty',
-		'Bangladesh Standard Time' => 'Asia/Dhaka',
-		'Ekaterinburg Standard Time' => 'Asia/Yekaterinburg',
-		'Myanmar Standard Time' => 'Asia/Rangoon',
-		'SE Asia Standard Time' => 'Asia/Bangkok',
-		'N. Central Asia Standard Time' => 'Asia/Novosibirsk',
-		'China Standard Time' => 'Asia/Shanghai',
-		'North Asia Standard Time' => 'Asia/Krasnoyarsk',
-		'Singapore Standard Time' => 'Asia/Singapore',
-		'W. Australia Standard Time' => 'Australia/Perth',
-		'Taipei Standard Time' => 'Asia/Taipei',
-		'Ulaanbaatar Standard Time' => 'Asia/Ulaanbaatar',
-		'North Asia East Standard Time' => 'Asia/Irkutsk',
-		'Tokyo Standard Time' => 'Asia/Tokyo',
-		'Korea Standard Time' => 'Asia/Seoul',
-		'Cen. Australia Standard Time' => 'Australia/Adelaide',
-		'AUS Central Standard Time' => 'Australia/Darwin',
-		'E. Australia Standard Time' => 'Australia/Brisbane',
-		'AUS Eastern Standard Time' => 'Australia/Sydney',
-		'West Pacific Standard Time' => 'Pacific/Port_Moresby',
-		'Tasmania Standard Time' => 'Australia/Hobart',
-		'Yakutsk Standard Time' => 'Asia/Yakutsk',
-		'Central Pacific Standard Time' => 'Pacific/Guadalcanal',
-		'Vladivostok Standard Time' => 'Asia/Vladivostok',
-		'New Zealand Standard Time' => 'Pacific/Auckland',
-		'UTC+12' => 'Etc/GMT-12',
-		'Fiji Standard Time' => 'Pacific/Fiji',
-		'Magadan Standard Time' => 'Asia/Magadan',
-		'Tonga Standard Time' => 'Pacific/Tongatapu',
-		'Samoa Standard Time' => 'Pacific/Apia',
-	];
+	protected $counters = [];
+
+	/** @var array */
+	private $windowsTimezones;
 
 	protected $arrayKeyMappings = [
 		'ATTACH' => 'ATTACHMENTS',
@@ -122,12 +26,17 @@ class IcalParser {
 		'RDATE' => 'RDATES',
 	];
 
+	public function __construct() {
+		$this->windowsTimezones = require __DIR__ . '/WindowsTimezones.php'; // load Windows timezones from separate file
+	}
+
 	/**
 	 * @param string $file
 	 * @param null $callback
 	 * @return array|null
 	 * @throws \RuntimeException
 	 * @throws \InvalidArgumentException
+	 * @throws \Exception
 	 */
 	public function parseFile($file, $callback = null) {
 		if (!$handle = fopen($file, 'r')) {
@@ -141,23 +50,29 @@ class IcalParser {
 	/**
 	 * @param string $string
 	 * @param null $callback
+	 * @param boolean $add if true the parsed string is added to existing data
 	 * @return array|null
+	 * @throws \InvalidArgumentException
+	 * @throws \Exception
 	 */
-	public function parseString($string, $callback = null) {
-		$this->data = [];
+	public function parseString($string, $callback = null, $add = false) {
+		if ($add === false) {
+			// delete old data
+			$this->data = [];
+			$this->counters = [];
+		}
 
 		if (!preg_match('/BEGIN:VCALENDAR/', $string)) {
 			throw new \InvalidArgumentException('Invalid ICAL data format');
 		}
 
-		$counters = [];
 		$section = 'VCALENDAR';
 
 		// Replace \r\n with \n
 		$string = str_replace("\r\n", "\n", $string);
 
 		// Unfold multi-line strings
-		$string = str_replace("\n ", "", $string);
+		$string = str_replace("\n ", '', $string);
 
 		foreach (explode("\n", $string) as $row) {
 
@@ -171,19 +86,17 @@ class IcalParser {
 				case 'BEGIN:VTODO':
 				case 'BEGIN:VEVENT':
 					$section = substr($row, 6);
-					$counters[$section] = isset($counters[$section]) ? $counters[$section] + 1 : 0;
+					$this->counters[$section] = isset($this->counters[$section]) ? $this->counters[$section] + 1 : 0;
 					continue 2; // while
 					break;
 				case 'END:VEVENT':
 					$section = substr($row, 4);
-					$currCounter = $counters[$section];
+					$currCounter = $this->counters[$section];
 					$event = $this->data[$section][$currCounter];
-					if (!empty($event['RRULE']) || !empty($event['RDATE'])) {
-						$recurrences = $this->parseRecurrences($event);
-						if (!empty($recurrences)) {
-							$this->data[$section][$currCounter]['RECURRENCES'] = $recurrences;
-						}
+					if (!empty($event['RECURRENCE-ID'])) {
+						$this->data['_RECURRENCE_IDS'][$event['RECURRENCE-ID']] = $event;
 					}
+
 					continue 2; // while
 					break;
 				case 'END:DAYLIGHT':
@@ -193,7 +106,25 @@ class IcalParser {
 				case 'END:VJOURNAL':
 				case 'END:STANDARD':
 				case 'END:VTODO':
+					continue 2; // while
+					break;
+
 				case 'END:VCALENDAR':
+					$veventSection = 'VEVENT';
+					if (!empty($this->data[$veventSection])) {
+						foreach ($this->data[$veventSection] as $currCounter => $event) {
+							if (!empty($event['RRULE']) || !empty($event['RDATE'])) {
+								$recurrences = $this->parseRecurrences($event);
+								if (!empty($recurrences)) {
+									$this->data[$veventSection][$currCounter]['RECURRENCES'] = $recurrences;
+								}
+
+								if (!empty($event['UID'])) {
+									$this->data["_RECURRENCE_COUNTERS_BY_UID"][$event['UID']] = $currCounter;
+								}
+							}
+						}
+					}
 					continue 2; // while
 					break;
 			}
@@ -203,7 +134,7 @@ class IcalParser {
 
 			if ($callback) {
 				// call user function for processing line
-				call_user_func($callback, $row, $key, $middle, $value, $section, $counters[$section]);
+				call_user_func($callback, $row, $key, $middle, $value, $section, $this->counters[$section]);
 			} else {
 				if ($section === 'VCALENDAR') {
 					$this->data[$key] = $value;
@@ -213,10 +144,10 @@ class IcalParser {
 						// break the current implementation--it leaves the original key alone and adds
 						// a new one specifically for the array of values.
 						$arrayKey = $this->arrayKeyMappings[$key];
-						$this->data[$section][$counters[$section]][$arrayKey][] = $value;
+						$this->data[$section][$this->counters[$section]][$arrayKey][] = $value;
 					}
 
-					$this->data[$section][$counters[$section]][$key] = $value;
+					$this->data[$section][$this->counters[$section]][$key] = $value;
 				}
 
 			}
@@ -230,7 +161,7 @@ class IcalParser {
 	 * @return array
 	 */
 	private function parseRow($row) {
-		preg_match('#^([\w-]+);?(.*?):(.*)$#i', $row, $matches);
+		preg_match('#^([\w-]+);?([\w-]+="[^"]*"|.*?):(.*)$#i', $row, $matches);
 
 		$key = false;
 		$middle = null;
@@ -246,9 +177,7 @@ class IcalParser {
 				if (preg_match('#(\w+/\w+)$#i', $value, $matches)) {
 					$value = $matches[1];
 				}
-				if (isset($this->windows_timezones[$value])) {
-					$value = $this->windows_timezones[$value];
-				}
+				$value = $this->toTimezone($value);
 				$this->timezone = new \DateTimeZone($value);
 			}
 
@@ -257,13 +186,16 @@ class IcalParser {
 				$middle = [];
 				foreach ($matches as $match) {
 					if ($match['key'] === 'TZID') {
-						if (isset($this->windows_timezones[$match['value']])) {
-							$match['value'] = $this->windows_timezones[$match['value']];
-						}
+						$match['value'] = trim($match['value'], "'\"");
+						$match['value'] = $this->toTimezone($match['value']);
 						try {
 							$middle[$match['key']] = $timezone = new \DateTimeZone($match['value']);
 						} catch (\Exception $e) {
 							$middle[$match['key']] = $match['value'];
+						}
+					} else if ($match['key'] === 'ENCODING') {
+						if ($match['value'] === 'QUOTED-PRINTABLE') {
+							$value = quoted_printable_decode($value);
 						}
 					}
 				}
@@ -271,7 +203,7 @@ class IcalParser {
 		}
 
 		// process simple dates with timezone
-		if (in_array($key, ['DTSTAMP', 'LAST-MODIFIED', 'CREATED', 'DTSTART', 'DTEND'])) {
+		if (in_array($key, ['DTSTAMP', 'LAST-MODIFIED', 'CREATED', 'DTSTART', 'DTEND'], true)) {
 			try {
 				$value = new \DateTime($value, ($timezone ?: $this->timezone));
 			} catch (\Exception $e) {
@@ -286,7 +218,7 @@ class IcalParser {
 					// pass
 				}
 			}
-			if (count($values) == 1) {
+			if (count($values) === 1) {
 				$value = $values[0];
 			} else {
 				$value = $values;
@@ -333,7 +265,11 @@ class IcalParser {
 		return [$key, $middle, $value];
 	}
 
-
+	/**
+	 * @param $event
+	 * @return array
+	 * @throws \Exception
+	 */
 	public function parseRecurrences($event) {
 		$recurring = new Recurrence($event['RRULE']);
 		$exclusions = [];
@@ -367,7 +303,7 @@ class IcalParser {
 		if ($until === false) {
 			//forever... limit to 3 years
 			$end = clone($event['DTSTART']);
-			$end->add(new \DateInterval('P3Y')); // + 10 years
+			$end->add(new \DateInterval('P3Y')); // + 3 years
 			$recurring->setUntil($end);
 			$until = $recurring->getUntil();
 		}
@@ -377,9 +313,20 @@ class IcalParser {
 		$recurrenceTimestamps = $frequency->getAllOccurrences();
 		$recurrences = [];
 		foreach ($recurrenceTimestamps as $recurrenceTimestamp) {
-			$tmp = new \DateTime("now", $event['DTSTART']->getTimezone());
+			$tmp = new \DateTime('now', $event['DTSTART']->getTimezone());
 			$tmp->setTimestamp($recurrenceTimestamp);
-			$recurrences[] = $tmp;
+
+			$recurrenceIDDate = $tmp->format('Ymd');
+			$recurrenceIDDateTime = $tmp->format('Ymd\THis');
+			if (empty($this->data['_RECURRENCE_IDS'][$recurrenceIDDate]) &&
+				empty($this->data['_RECURRENCE_IDS'][$recurrenceIDDateTime])) {
+				$gmtCheck = new \DateTime("now", new \DateTimeZone('UTC'));
+				$gmtCheck->setTimestamp($recurrenceTimestamp);
+				$recurrenceIDDateTimeZ = $gmtCheck->format('Ymd\THis\Z');
+				if (empty($this->data['_RECURRENCE_IDS'][$recurrenceIDDateTimeZ])) {
+					$recurrences[] = $tmp;
+				}
+			}
 		}
 
 		return $recurrences;
@@ -391,9 +338,53 @@ class IcalParser {
 	public function getEvents() {
 		$events = [];
 		if (isset($this->data['VEVENT'])) {
-			foreach ($this->data['VEVENT'] as $event) {
+			for ($i = 0; $i < count($this->data['VEVENT']); $i++) {
+				$event = $this->data['VEVENT'][$i];
+
 				if (empty($event['RECURRENCES'])) {
-					$events[] = $event;
+					if (!empty($event['RECURRENCE-ID']) && !empty($event['UID']) && isset($event['SEQUENCE'])) {
+						$modifiedEventUID = $event['UID'];
+						$modifiedEventRecurID = $event['RECURRENCE-ID'];
+						$modifiedEventSeq = intval($event['SEQUENCE'], 10);
+
+						if (isset($this->data["_RECURRENCE_COUNTERS_BY_UID"][$modifiedEventUID])) {
+							$counter = $this->data["_RECURRENCE_COUNTERS_BY_UID"][$modifiedEventUID];
+
+							$originalEvent = $this->data["VEVENT"][$counter];
+							if (isset($originalEvent['SEQUENCE'])) {
+								$originalEventSeq = intval($originalEvent['SEQUENCE'], 10);
+								$originalEventFormattedStartDate = $originalEvent['DTSTART']->format('Ymd\THis');
+								if ($modifiedEventRecurID === $originalEventFormattedStartDate && $modifiedEventSeq > $originalEventSeq) {
+									// this modifies the original event
+									$modifiedEvent = array_replace_recursive($originalEvent, $event);
+									$this->data["VEVENT"][$counter] = $modifiedEvent;
+									foreach ($events as $z => $event) {
+										if ($events[$z]['UID'] === $originalEvent['UID'] &&
+											$events[$z]['SEQUENCE'] === $originalEvent['SEQUENCE']) {
+											// replace the original event with the modified event
+											$events[$z] = $modifiedEvent;
+											break;
+										}
+									}
+									$event = null; // don't add this to the $events[] array again
+								} else if (!empty($originalEvent['RECURRENCES'])) {
+									for ($j = 0; $j < count($originalEvent['RECURRENCES']); $j++) {
+										$recurDate = $originalEvent['RECURRENCES'][$j];
+										$formattedStartDate = $recurDate->format('Ymd\THis');
+										if ($formattedStartDate === $modifiedEventRecurID) {
+											unset($this->data["VEVENT"][$counter]['RECURRENCES'][$j]);
+											$this->data["VEVENT"][$counter]['RECURRENCES'] = array_values($this->data["VEVENT"][$counter]['RECURRENCES']);
+											break;
+										}
+									}
+								}
+							}
+						}
+					}
+
+					if (!empty($event)) {
+						$events[] = $event;
+					}
 				} else {
 					$recurrences = $event['RECURRENCES'];
 					$event['RECURRING'] = true;
@@ -401,15 +392,16 @@ class IcalParser {
 					$eventInterval = $event['DTSTART']->diff($event['DTEND']);
 
 					$firstEvent = true;
-					foreach ($recurrences as $recurDate) {
+					foreach ($recurrences as $j => $recurDate) {
 						$newEvent = $event;
 						if (!$firstEvent) {
-							unset($event['RECURRENCES']);
+							unset($newEvent['RECURRENCES']);
 							$newEvent['DTSTART'] = $recurDate;
 							$newEvent['DTEND'] = clone($recurDate);
 							$newEvent['DTEND']->add($eventInterval);
 						}
 
+						$newEvent['RECURRENCE_INSTANCE'] = $j;
 						$events[] = $newEvent;
 						$firstEvent = false;
 					}
@@ -417,6 +409,17 @@ class IcalParser {
 			}
 		}
 		return $events;
+	}
+
+
+	/**
+	 * Process timezone and return correct one...
+	 *
+	 * @param string $zone
+	 * @return mixed|null
+	 */
+	private function toTimezone($zone) {
+		return isset($this->windowsTimezones[$zone]) ? $this->windowsTimezones[$zone] : $zone;
 	}
 
 	/**
@@ -434,9 +437,9 @@ class IcalParser {
 	}
 
 	/**
-	 * Return sorted eventlist as array or false if calenar is empty
+	 * Return sorted event list as array
 	 *
-	 * @return array|boolean
+	 * @return array
 	 */
 	public function getSortedEvents() {
 		if ($events = $this->getEvents()) {

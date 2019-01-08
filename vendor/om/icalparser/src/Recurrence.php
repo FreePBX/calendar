@@ -58,7 +58,7 @@ class Recurrence {
 	 * Parses an 'RRULE' array and sets the member variables of this object.
 	 * Expects a string that looks like this:  'FREQ=WEEKLY;INTERVAL=2;BYDAY=SU,TU,WE'
 	 *
-	 * @param string $line the line to be parsed
+	 * @param $rrule
 	 */
 	protected function parseRrule($rrule) {
 		$this->rrule = $rrule;
@@ -68,7 +68,7 @@ class Recurrence {
 			//need the lower-case name for setting the member variable
 			$propertyName = strtolower($propertyName);
 			//split up the list of values into an array (if it's a list)
-			if (in_array($propertyName, $this->listProperties)) {
+			if (in_array($propertyName, $this->listProperties, true)) {
 				$propertyValue = explode(',', $propertyValue);
 			}
 			$this->$propertyName = $propertyValue;

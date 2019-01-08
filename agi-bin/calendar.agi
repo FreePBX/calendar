@@ -18,7 +18,6 @@ $true = isset($argv[5]) ? $argv[5] : '';
 $false = isset($argv[6]) ? $argv[6] : '';
 
 if($timezone != 'default') {
-	$calendar->setTimezone($timezone);
 	$agi->verbose("Setting Timezone To: ".$timezone);
 }
 
@@ -26,12 +25,12 @@ $flag = null;
 switch($type) {
 	case "group":
 		$agi->verbose("Checking Group");
-		$flag = $calendar->matchGroup($id);
+		$flag = $calendar->matchGroup($id, null, $timezone);
 		$agi->verbose("Group: ".($flag ? 'True' : 'False'));
 	break;
 	case "calendar":
 		$agi->verbose("Checking Calendar");
-		$flag = $calendar->matchCalendar($id);
+		$flag = $calendar->matchCalendar($id, null, $timezone);
 		$agi->verbose("Calendar: ".($flag ? 'True' : 'False'));
 	break;
 }

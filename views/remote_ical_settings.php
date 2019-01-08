@@ -86,7 +86,7 @@
 									<div class="row">
 										<div class="form-group">
 											<div class="col-md-3">
-												<label class="control-label" for="next"><?php echo _("Synchronization Time") ?></label>
+												<label class="control-label" for="next"><?php echo _("Auto Refresh") ?></label>
 												<i class="fa fa-question-circle fpbx-help-icon" data-for="next"></i>
 											</div>
 											<div class="col-md-9">

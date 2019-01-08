@@ -120,4 +120,5 @@
 <script>
 	var categories = <?php echo !empty($group['categories']) ? json_encode($group['categories']) : '[]'?>;
 	var events = <?php echo !empty($group['events']) ? json_encode($group['events']) : '[]'?>;
+	var expand = <?php echo !isset($group['expand']) || $group['expand']  ? 'true' : 'false'?>;
 </script>

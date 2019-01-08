@@ -2,6 +2,26 @@
 
 ## [Unreleased]
 
+## 1.0.0 - 2017-10-03
+
+First stable release.
+
+### Changed
+- Updated minimum required version of php-ntlm.
+
+## 1.0.0-rc.2 - 2017-03-11
+
+### Changed
+- Fixed capitalization of URL property on PushSubscriptionRequestType.
+- Fixed capitalization of redirect element in autodiscovery.
+- Updated contact/update example to use a constant for the field URI.
+- Added output for downloaded attachments in message/get-attachments example.
+
+## 1.0.0-rc.1 - 2017-03-02
+
+### Added
+- ProposeNewTimeType implementation.
+
 ## 1.0.0-beta.4 - 2017-02-12
 
 ### Changed
@@ -15,7 +35,6 @@
 ### Changed
 - Fixed Exchange 2007 version parsing in autodiscovery.
 - Fixed event title in event/create example.
-- Fixed capitalization of URL property on PushSubscriptionRequestType.
 - Improved error messages in examples.
 
 ## 1.0.0-beta.2 - 2017-01-12

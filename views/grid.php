@@ -25,10 +25,11 @@ if(!empty($message)) { ?>
 		<tr>
 			<th data-sortable="true" data-field="name"><?php echo _("Name")?></th>
 			<th data-sortable="true" data-field="description"><?php echo _("Description")?></th>
-			<th data-sortable="true" data-field="type"><?php echo _("Type")?></th>
+			<th data-sortable="true" data-field="type" data-formatter="typeformatter"><?php echo _("Type")?></th>
 			<th data-formatter="actionformatter"><?php echo _("Actions")?></th>
 		</tr>
 	</thead>
 	<tbody>
 	</tbody>
 </table>
+<script>var drivers = <?php echo json_encode($dropdown)?></script>
