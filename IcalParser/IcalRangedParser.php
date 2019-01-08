@@ -78,9 +78,8 @@ class IcalRangedParser extends IcalParser {
 			$recurring->setUntil($end);
 		}
 
-		$frequency = new Freq($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
-
 		if(!isset($recurring->rrule['COUNT'])) {
+			$frequency = new Freq($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
 			$nextTimestamp = ($event['DTSTART']->getTimestamp() > $this->ranges['start']->getTimestamp()) ? $event['DTSTART']->getTimestamp() : $this->ranges['start']->getTimestamp();
 
 			$out = $frequency->previousOccurrence($nextTimestamp);
@@ -99,11 +98,52 @@ class IcalRangedParser extends IcalParser {
 			}
 
 			$frequency = new Freq($recurring->rrule, $start->getTimestamp(), $exclusions, $additions);
+			$recurrenceTimestamps = $frequency->getAllOccurrences();
 		} elseif(class_exists('FreePBX')) {
 			\FreePBX::Notifications()->add_warning('calendar', 'RRULECOUNT', _('Calendar using COUNT'), _('A calendar you have added has an event that has a reoccuring rule of COUNT. When COUNT is used this slows down Calendar drastically. Please change your rule to another format'), "", true, true);
+			/*
+			$period = CarbonPeriod::between($event['DTSTART'],$this->ranges['end']);
+			switch ($event['RRULE']['FREQ']) {
+				case 'DAILY':
+					$period->setDateInterval(new \DateInterval("P1D"));
+					break;
+				case 'WEEKLY':
+					$period->setDateInterval(new \DateInterval("P1W"));
+					break;
+				case 'MONTHLY':
+					$period->setDateInterval(new \DateInterval("P1M"));
+					break;
+				case 'YEARLY':
+					$period->setDateInterval(new \DateInterval("P1Y"));
+					break;
+				default:
+					// We don't know how to handle anything else.
+					throw new Exception("Cannot handle rrule frequency ".$event['RRULE']['FREQ']);
+			}
+			if(isset($event['RRULE']['COUNT'])) {
+				$period->setRecurrences($event['RRULE']['COUNT']);
+			}
+			$period->filter(function($date) use ($event, $exclusions) {
+				if(in_array($date->getTimestamp(),$exclusions)) {
+					return false;
+				}
+				if($date->between($this->ranges['start'],$this->ranges['end'])) {
+					return true;
+				}
+				return false;
+			},'RRULE');
+
+			$recurrenceTimestamps = [];
+			foreach ($period as $date) {
+				$recurrenceTimestamps[] = $date->format('U');
+			}
+
+			$recurrenceTimestamps = array_merge($recurrenceTimestamps,$additions);
+			*/
+			$frequency = new Freq($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
+			$recurrenceTimestamps = $frequency->getAllOccurrences();
 		}
 
-		$recurrenceTimestamps = $frequency->getAllOccurrences();
 		$recurrences = [];
 		foreach ($recurrenceTimestamps as $recurrenceTimestamp) {
 			$tmp = new \DateTime('now', $event['DTSTART']->getTimezone());
@@ -188,6 +228,10 @@ class IcalRangedParser extends IcalParser {
 					$event['RECURRING'] = true;
 					$event['DTEND'] = !empty($event['DTEND']) ? $event['DTEND'] : $event['DTSTART'];
 					$eventInterval = $event['DTSTART']->diff($event['DTEND']);
+
+					//TODO: at some point make the first event ALWAYS the earliest event as thats our starter
+					//$event['RECURRENCE_INSTANCE'] = 0;
+					//$events[] = $event;
 
 					$firstEvent = true;
 					foreach ($recurrences as $j => $recurDate) {
