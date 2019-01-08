@@ -195,7 +195,6 @@ $(document).ready(function() {
 				resetModalForm();
 				if(allday) {
 					me = me.subtract(1, "days"); //force day to display correctly
-					console.log(me);
 				}
 				$('#title').val(src.title);
 				$('#description').val(src.description);
@@ -282,8 +281,13 @@ $(document).ready(function() {
 				$('#modalSubmit').removeClass('hidden');
 				$('#eventModal').modal('show');
 				updateAllDay();
+			},
+			viewRender: function(view, element) {
+				$(".fc-left .fc-button-group").append('<span id="loading-bar">&nbsp;Loading...</span>');
+			},
+			eventAfterAllRender: function(view) {
+				$("#loading-bar").remove();
 			}
-
 		});
 	}
 
