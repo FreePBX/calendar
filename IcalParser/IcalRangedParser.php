@@ -78,6 +78,21 @@ class IcalRangedParser extends IcalParser {
 			$recurring->setUntil($end);
 		}
 
+		$byKeys = [
+			'BYWEEKNO',
+			'BYYEARDAY',
+			'BYMONTHDAY',
+			'BYDAY',
+			'BYHOUR',
+			'BYMINUTE',
+			'BYSECOND'
+		];
+		foreach($byKeys as $key) {
+			if(isset($recurring->rrule[$key])) {
+				$recurring->rrule[$key] = str_replace('"','',$recurring->rrule[$key]);
+			}
+		}
+
 		if(!isset($recurring->rrule['COUNT'])) {
 			$frequency = new Freq($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
 			$nextTimestamp = ($event['DTSTART']->getTimestamp() > $this->ranges['start']->getTimestamp()) ? $event['DTSTART']->getTimestamp() : $this->ranges['start']->getTimestamp();

@@ -285,6 +285,28 @@ class IcalRangedParserTest extends PHPUnit_Framework_TestCase {
 		$this->assertEvents($assertEvents, $events);
 	}
 
+	function testFREEPBX18919() {
+		$raw = file_get_contents(__DIR__.'/icals/FREEPBX18919.ics');
+		$cal = new IcalRangedParser();
+		$cal->setStartRange(Carbon::parse("2019-03-03"));
+		$cal->setEndRange(Carbon::parse("2019-03-05"));
+		$cal->parseString($raw);
+		$events = $cal->getSortedEvents();
+
+		$assertEvents = [
+			[
+				'2019',
+				'03',
+				'4',
+				'15',
+				'46',
+				'30'
+			],
+		];
+
+		$this->assertEvents($assertEvents, $events);
+	}
+
 	function assertEvents($assertEvents, $events) {
 		$this->assertEquals(count($events), count($assertEvents));
 		foreach($assertEvents as $k => $args) {
