@@ -334,10 +334,11 @@ abstract class Base {
 
 			//FREEPBX-17710 Google and others use the same UID when events are split.
 			//Since we dont allow editing of remote events just add $i to the list
-			if($this->driver === 'Local') {
-				$parsedEvents[$e['uid']] = $e;
+			//http://thomas.apestaart.org/log/?p=579
+			if(isset($event['RECURRENCE-ID'])) {
+				$parsedEvents[$e['uid'].'_'.$event['RECURRENCE-ID']] = $e;
 			} else {
-				$parsedEvents[$e['uid'].'_'.$i] = $e;
+				$parsedEvents[$e['uid']] = $e;
 			}
 			$i++;
 		}
