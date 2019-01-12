@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-08 16:57-0500\n"
+"POT-Creation-Date: 2019-01-12 14:27-0500\n"
 "PO-Revision-Date: 2018-10-18 20:22+0000\n"
 "Last-Translator: Bastian Mertgen <b.mertgen@bastian-mertgen.de>\n"
 "Language-Team: German <http://*/projects/freepbx/calendar/de/>\n"
@@ -273,7 +273,7 @@ msgstr "Tag des Monats"
 msgid "Day of the week"
 msgstr "Wochentag"
 
-#: assets/js/calendar/calendar.js:358
+#: assets/js/calendar/calendar.js:361
 msgid "Days"
 msgstr "Tage"
 
@@ -413,7 +413,7 @@ msgstr ""
 msgid "Local Calendar"
 msgstr "Lokaler Kalender"
 
-#: assets/js/calendar/calendar.js:371
+#: assets/js/calendar/calendar.js:374
 msgid "Months"
 msgstr "Monate"
 
@@ -713,11 +713,11 @@ msgstr "Kann den Server-URL nicht bestimmen"
 msgid "Unknown Calendar"
 msgstr "Unbekannter Kalender"
 
-#: Calendar.class.php:791 assets/js/calendar/calendar.js:310
+#: Calendar.class.php:791 assets/js/calendar/calendar.js:313
 msgid "Update from Source"
 msgstr "Aktualisierung aus der Quelle"
 
-#: assets/js/calendar/calendar.js:297
+#: assets/js/calendar/calendar.js:300
 msgid "Updating..."
 msgstr "Aktualisiere..."
 
@@ -765,7 +765,7 @@ msgstr "Sie sehen Kalender '%s'"
 msgid "Viewing from timezone '%s'"
 msgstr "Ansicht aus Zeitzone '%s'"
 
-#: assets/js/calendar/calendar.js:355
+#: assets/js/calendar/calendar.js:358
 msgid "Weeks"
 msgstr "Wochen"
 
@@ -777,7 +777,7 @@ msgstr "Was sind Kalender-Ereignis-Gruppen?"
 msgid "Whether to allow this user to be able to access the calendar in UCP"
 msgstr "Soll dieser Benutzer im UCP Zugriff auf den Kalender erhalten"
 
-#: assets/js/calendar/calendar.js:377
+#: assets/js/calendar/calendar.js:380
 msgid "Years"
 msgstr "Jahre"
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-08 16:57-0500\n"
+"POT-Creation-Date: 2019-01-12 14:27-0500\n"
 "PO-Revision-Date: 2017-03-15 16:31-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -268,7 +268,7 @@ msgstr ""
 msgid "Day of the week"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:358
+#: assets/js/calendar/calendar.js:361
 msgid "Days"
 msgstr ""
 
@@ -407,7 +407,7 @@ msgstr ""
 msgid "Local Calendar"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:371
+#: assets/js/calendar/calendar.js:374
 msgid "Months"
 msgstr ""
 
@@ -693,11 +693,11 @@ msgstr ""
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:791 assets/js/calendar/calendar.js:310
+#: Calendar.class.php:791 assets/js/calendar/calendar.js:313
 msgid "Update from Source"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:297
+#: assets/js/calendar/calendar.js:300
 msgid "Updating..."
 msgstr ""
 
@@ -741,7 +741,7 @@ msgstr ""
 msgid "Viewing from timezone '%s'"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:355
+#: assets/js/calendar/calendar.js:358
 msgid "Weeks"
 msgstr ""
 
@@ -753,7 +753,7 @@ msgstr ""
 msgid "Whether to allow this user to be able to access the calendar in UCP"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:377
+#: assets/js/calendar/calendar.js:380
 msgid "Years"
 msgstr ""
 
