@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-08 17:56-0500\n"
+"POT-Creation-Date: 2019-03-04 18:53-0500\n"
 "PO-Revision-Date: 2017-06-14 09:55+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese <http://weblate.freepbx.org/projects/freepbx/"
@@ -271,7 +271,7 @@ msgstr "Ngày trong tháng"
 msgid "Day of the week"
 msgstr "Ngày trong tuần"
 
-#: assets/js/calendar/calendar.js:358
+#: assets/js/calendar/calendar.js:361
 msgid "Days"
 msgstr "Các ngày"
 
@@ -411,7 +411,7 @@ msgstr ""
 msgid "Local Calendar"
 msgstr "Lịch tại chỗ"
 
-#: assets/js/calendar/calendar.js:371
+#: assets/js/calendar/calendar.js:374
 msgid "Months"
 msgstr "Tháng"
 
@@ -709,11 +709,11 @@ msgstr "Không thể xác định URL máy chủ"
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:789 assets/js/calendar/calendar.js:310
+#: Calendar.class.php:789 assets/js/calendar/calendar.js:313
 msgid "Update from Source"
 msgstr "Cập nhật từ nguồn"
 
-#: assets/js/calendar/calendar.js:297
+#: assets/js/calendar/calendar.js:300
 msgid "Updating..."
 msgstr "Đang cập nhật..."
 
@@ -757,7 +757,7 @@ msgstr "Đang xem Lịch '%s'"
 msgid "Viewing from timezone '%s'"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:355
+#: assets/js/calendar/calendar.js:358
 msgid "Weeks"
 msgstr "Các tuần"
 
@@ -769,7 +769,7 @@ msgstr "Nhóm sự kiện lịch là gì?"
 msgid "Whether to allow this user to be able to access the calendar in UCP"
 msgstr "Có cho phép người dùng có thể truy cập vào lịch trong UCP không"
 
-#: assets/js/calendar/calendar.js:377
+#: assets/js/calendar/calendar.js:380
 msgid "Years"
 msgstr "Năm"
 
