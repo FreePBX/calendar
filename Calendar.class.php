@@ -51,7 +51,7 @@ class Calendar extends \DB_Helper implements \BMO {
 		$crons = $this->FreePBX->Cron->getAll();
 		foreach($crons as $c) {
 			if(preg_match('/fwconsole calendar --sync/',$c,$matches)) {
-				FreePBX::Cron()->remove($c);
+				$this->FreePBX->Cron->remove($c);
 			}
 		}
 	}
