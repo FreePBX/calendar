@@ -332,14 +332,35 @@ abstract class Base {
 				$e['allDay'] = true;
 			}
 
-			$parsedEvents[$e['uid']] = $e;
+			//FREEPBX-17710 Google and others use the same UID when events are split.
+			//Since we dont allow editing of remote events just add $i to the list
+			//http://thomas.apestaart.org/log/?p=579
+			if(isset($event['RECURRENCE-ID'])) {
+				$parsedEvents[$e['uid'].'_'.$event['RECURRENCE-ID']] = $e;
+			} else {
+				$parsedEvents[$e['uid']] = $e;
+			}
 			$i++;
 		}
 		return $parsedEvents;
 	}
 
+	/**
+	 * Checks if any event in a category matches the current time
+	 *
+	 * @param string $category
+	 * @return boolean          True if match, False if no match
+	 */
 	public function matchCategory($category) {
-
+		$start = $this->now->copy()->subWeek();
+		$stop = $this->now->copy()->addWeek();
+		$events = $this->getEventsBetween($start, $stop);
+		foreach($events as $event) {
+			if($event['now'] && in_array($category, $event['categories'])) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -412,10 +433,7 @@ abstract class Base {
 	 * @return void
 	 */
 	public function refreshCalendar() {
-		if ($this->calendar['type'] !== "local") {
-			return $this->processCalendar();
-		}
-		return false;
+		return $this->processCalendar();
 	}
 
 	/**

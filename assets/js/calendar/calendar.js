@@ -244,6 +244,9 @@ $(document).ready(function() {
 									case "TU,TH":
 										$("#repeats").val(3);
 									break;
+									default:
+										$("#repeats").val(4);
+									break;
 								}
 							} else {
 								$("#repeats").val(4);

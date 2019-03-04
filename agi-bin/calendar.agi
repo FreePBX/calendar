@@ -19,18 +19,30 @@ $false = isset($argv[6]) ? $argv[6] : '';
 
 if($timezone != 'default') {
 	$agi->verbose("Setting Timezone To: ".$timezone);
+} else {
+	$timezone = \FreePBX::View()->getTimezone();
 }
 
 $flag = null;
 switch($type) {
 	case "group":
 		$agi->verbose("Checking Group");
-		$flag = $calendar->matchGroup($id, null, $timezone);
+		try {
+			$flag = $calendar->matchGroup($id, null, $timezone);
+		} catch (\Exception $e) {
+			$agi->verbose("There was an error matching the group: ".$e->getMessage());
+			exit(255);
+		}
 		$agi->verbose("Group: ".($flag ? 'True' : 'False'));
 	break;
 	case "calendar":
 		$agi->verbose("Checking Calendar");
-		$flag = $calendar->matchCalendar($id, null, $timezone);
+		try {
+			$flag = $calendar->matchCalendar($id, null, $timezone);
+		} catch (\Exception $e) {
+			$agi->verbose("There was an error matching the calendar: ".$e->getMessage());
+			exit(255);
+		}
 		$agi->verbose("Calendar: ".($flag ? 'True' : 'False'));
 	break;
 }
