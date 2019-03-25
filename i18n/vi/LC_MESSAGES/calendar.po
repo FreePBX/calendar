@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-12 14:27-0500\n"
+"POT-Creation-Date: 2019-03-25 15:55-0400\n"
 "PO-Revision-Date: 2017-06-14 09:55+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese <http://weblate.freepbx.org/projects/freepbx/"
@@ -122,7 +122,7 @@ msgstr ""
 msgid "Actions"
 msgstr "Các thao tác"
 
-#: Calendar.class.php:427
+#: Calendar.class.php:437
 msgid "Add"
 msgstr "Thêm"
 
@@ -204,7 +204,7 @@ msgstr ""
 msgid "Autodetect"
 msgstr "Tự động phát hiện"
 
-#: Calendar.class.php:926 Console/Calendar.class.php:22 calendar.i18n.php:4
+#: Calendar.class.php:936 Console/Calendar.class.php:22 calendar.i18n.php:4
 #: calendar.i18n.php:10 views/remote_caldav_settings.php:133
 #: views/remote_ews_settings.php:194
 msgid "Calendar"
@@ -275,7 +275,7 @@ msgstr "Ngày trong tuần"
 msgid "Days"
 msgstr "Các ngày"
 
-#: Calendar.class.php:814 Calendar.class.php:852
+#: Calendar.class.php:824 Calendar.class.php:862
 msgid "Delete"
 msgstr "Xóa"
 
@@ -301,11 +301,11 @@ msgstr "URL máy chủ EWS"
 msgid "EWS Version"
 msgstr "Phiên bản EWS"
 
-#: Calendar.class.php:432
+#: Calendar.class.php:442
 msgid "Edit"
 msgstr "Hiệu chỉnh"
 
-#: Calendar.class.php:784
+#: Calendar.class.php:794
 msgid "Edit Settings"
 msgstr "Cài đặt hiệu chỉnh"
 
@@ -395,7 +395,7 @@ msgstr ""
 msgid "Import Calendar by ID"
 msgstr ""
 
-#: Calendar.class.php:903 Calendar.class.php:911 views/ucp_config.php:18
+#: Calendar.class.php:913 Calendar.class.php:921 views/ucp_config.php:18
 msgid "Inherit"
 msgstr "Thừa kế"
 
@@ -445,12 +445,12 @@ msgstr "Không bao giờ"
 msgid "No"
 msgstr "Không"
 
-#: Calendar.class.php:308
+#: Calendar.class.php:318
 #, php-format
 msgid "No Categories for %s"
 msgstr ""
 
-#: Calendar.class.php:322
+#: Calendar.class.php:332
 #, php-format
 msgid "No Events for %s"
 msgstr ""
@@ -482,6 +482,10 @@ msgstr ""
 #: views/remote_caldav_settings.php:110 views/remote_ews_settings.php:113
 msgid "Password"
 msgstr "Mật khẩu"
+
+#: assets/js/calendar/calendar.js:421
+msgid "Please define a valid url"
+msgstr ""
 
 #: views/remote_caldav_settings.php:153 views/remote_ews_settings.php:214
 msgid "Please enter valid credentials above"
@@ -544,8 +548,8 @@ msgstr "Lặp lại bởi"
 msgid "Repeats"
 msgstr "Lặp lại"
 
-#: Calendar.class.php:800 Calendar.class.php:819 Calendar.class.php:838
-#: Calendar.class.php:857
+#: Calendar.class.php:810 Calendar.class.php:829 Calendar.class.php:848
+#: Calendar.class.php:867
 msgid "Reset"
 msgstr "Cài đặt lại"
 
@@ -595,12 +599,12 @@ msgstr "Ngày bắt đầu"
 msgid "Start Time"
 msgstr "Thời gian bắt đầu"
 
-#: Calendar.class.php:805 Calendar.class.php:824 Calendar.class.php:843
-#: Calendar.class.php:862 views/calendar.php:513
+#: Calendar.class.php:815 Calendar.class.php:834 Calendar.class.php:853
+#: Calendar.class.php:872 views/calendar.php:513
 msgid "Submit"
 msgstr "Gửi đi"
 
-#: Calendar.class.php:404
+#: Calendar.class.php:414
 msgid "Successfully updated event"
 msgstr ""
 
@@ -709,7 +713,7 @@ msgstr "Không thể xác định URL máy chủ"
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:791 assets/js/calendar/calendar.js:313
+#: Calendar.class.php:801 assets/js/calendar/calendar.js:313
 msgid "Update from Source"
 msgstr "Cập nhật từ nguồn"
 
@@ -782,7 +786,7 @@ msgstr "Có"
 msgid "You are missing the PHP SoapClient library. Please install to continue"
 msgstr "Bạn đang thiếu thư viện PHP SoapClient. Vui lòng cài đặt để tiếp tục"
 
-#: Calendar.class.php:356 Calendar.class.php:401
+#: Calendar.class.php:366 Calendar.class.php:411
 msgid "You can only edit local calendars"
 msgstr ""
 
@@ -790,7 +794,7 @@ msgstr ""
 msgid "occurrences"
 msgstr "Lần xuất hiện"
 
-#: Calendar.class.php:344
+#: Calendar.class.php:354
 msgid "to"
 msgstr "Tới"
 

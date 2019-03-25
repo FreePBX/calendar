@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-12 14:27-0500\n"
+"POT-Creation-Date: 2019-03-25 15:55-0400\n"
 "PO-Revision-Date: 2018-02-14 21:15+0200\n"
 "Last-Translator: jeremie <freepbx@famillecattan.com>\n"
 "Language-Team: French <http://weblate.freepbx.org/projects/freepbx/calendar/"
@@ -122,7 +122,7 @@ msgstr ""
 msgid "Actions"
 msgstr "Actions"
 
-#: Calendar.class.php:427
+#: Calendar.class.php:437
 msgid "Add"
 msgstr "Ajouter"
 
@@ -204,7 +204,7 @@ msgstr ""
 msgid "Autodetect"
 msgstr "Détection automatique"
 
-#: Calendar.class.php:926 Console/Calendar.class.php:22 calendar.i18n.php:4
+#: Calendar.class.php:936 Console/Calendar.class.php:22 calendar.i18n.php:4
 #: calendar.i18n.php:10 views/remote_caldav_settings.php:133
 #: views/remote_ews_settings.php:194
 msgid "Calendar"
@@ -275,7 +275,7 @@ msgstr "Jour de la semaine"
 msgid "Days"
 msgstr "Jours"
 
-#: Calendar.class.php:814 Calendar.class.php:852
+#: Calendar.class.php:824 Calendar.class.php:862
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -301,11 +301,11 @@ msgstr "URL du serveur EWS"
 msgid "EWS Version"
 msgstr "Version EWS"
 
-#: Calendar.class.php:432
+#: Calendar.class.php:442
 msgid "Edit"
 msgstr "Editer"
 
-#: Calendar.class.php:784
+#: Calendar.class.php:794
 msgid "Edit Settings"
 msgstr "Éditer les paramètres"
 
@@ -394,7 +394,7 @@ msgstr "À quel fréquence cet agenda se ssynchronisera avec le serveur distant"
 msgid "Import Calendar by ID"
 msgstr ""
 
-#: Calendar.class.php:903 Calendar.class.php:911 views/ucp_config.php:18
+#: Calendar.class.php:913 Calendar.class.php:921 views/ucp_config.php:18
 msgid "Inherit"
 msgstr "Hérite"
 
@@ -444,12 +444,12 @@ msgstr "Jamais"
 msgid "No"
 msgstr "Non"
 
-#: Calendar.class.php:308
+#: Calendar.class.php:318
 #, php-format
 msgid "No Categories for %s"
 msgstr "Pas de categorie pour %s"
 
-#: Calendar.class.php:322
+#: Calendar.class.php:332
 #, php-format
 msgid "No Events for %s"
 msgstr "Pas d' évènements pour %s"
@@ -481,6 +481,10 @@ msgstr ""
 #: views/remote_caldav_settings.php:110 views/remote_ews_settings.php:113
 msgid "Password"
 msgstr "Mot de passe"
+
+#: assets/js/calendar/calendar.js:421
+msgid "Please define a valid url"
+msgstr ""
 
 #: views/remote_caldav_settings.php:153 views/remote_ews_settings.php:214
 msgid "Please enter valid credentials above"
@@ -543,8 +547,8 @@ msgstr "Répéter par"
 msgid "Repeats"
 msgstr "Répétitions"
 
-#: Calendar.class.php:800 Calendar.class.php:819 Calendar.class.php:838
-#: Calendar.class.php:857
+#: Calendar.class.php:810 Calendar.class.php:829 Calendar.class.php:848
+#: Calendar.class.php:867
 msgid "Reset"
 msgstr "Réinitialiser"
 
@@ -596,12 +600,12 @@ msgstr "Date de début"
 msgid "Start Time"
 msgstr "Heure de début"
 
-#: Calendar.class.php:805 Calendar.class.php:824 Calendar.class.php:843
-#: Calendar.class.php:862 views/calendar.php:513
+#: Calendar.class.php:815 Calendar.class.php:834 Calendar.class.php:853
+#: Calendar.class.php:872 views/calendar.php:513
 msgid "Submit"
 msgstr "Soumettre"
 
-#: Calendar.class.php:404
+#: Calendar.class.php:414
 msgid "Successfully updated event"
 msgstr "Éventement modifié avec succès"
 
@@ -709,7 +713,7 @@ msgstr "Incapable de déterminer l'URL du serveur"
 msgid "Unknown Calendar"
 msgstr "Calendrier inconnu"
 
-#: Calendar.class.php:791 assets/js/calendar/calendar.js:313
+#: Calendar.class.php:801 assets/js/calendar/calendar.js:313
 msgid "Update from Source"
 msgstr "Mise à jour de la source"
 
@@ -788,7 +792,7 @@ msgstr ""
 "La bibliothèque PHP SoapClient est absente. Veuillez l'installer pour "
 "continuer"
 
-#: Calendar.class.php:356 Calendar.class.php:401
+#: Calendar.class.php:366 Calendar.class.php:411
 msgid "You can only edit local calendars"
 msgstr ""
 
@@ -796,7 +800,7 @@ msgstr ""
 msgid "occurrences"
 msgstr "occurrences"
 
-#: Calendar.class.php:344
+#: Calendar.class.php:354
 msgid "to"
 msgstr "à"
 
