@@ -268,7 +268,7 @@ abstract class Base {
 			$event['DTSTART'] = Carbon::instance($event['DTSTART']);
 			$event['DTEND'] = Carbon::instance($event['DTEND']);
 
-			if(!empty($calendarTimezone)) {
+			if(!empty($calendarTimezone) && $this->calendar['type'] != "local") {
 				$event['DTSTART']->setTimezone($calendarTimezone);
 				$event['DTEND']->setTimezone($calendarTimezone);
 			}
