@@ -200,6 +200,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			case 'ewsautodetect':
 			case 'duplicate':
 			case 'generateical':
+			case 'checkical':
 				return true;
 			case 'ical':
 				//be aware
@@ -284,6 +285,15 @@ class Calendar extends \DB_Helper implements \BMO {
 					$chtml .= '<option value="'.$calendar->getCalendarID().'">'.$calendar->getDisplayName().'</option>';
 				}
 				return array("calshtml" => $chtml, 'status' => true);
+			break;
+			case 'checkical':
+				$req = \FreePBX::Curl()->requests($_POST['url']);
+				try {
+					$finalical = $req->get($_POST['url'])->body;
+				} catch (\Exception $e) {dbug($e->getMessage());
+					return array("message" => $e->getMessage(), 'status' => false);
+				}
+				return array('status' => true);
 			break;
 			case 'groupeventshtml':
 				$allCalendars = $this->listCalendars();
