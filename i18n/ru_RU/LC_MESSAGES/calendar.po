@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-04 18:53-0500\n"
+"POT-Creation-Date: 2019-03-25 15:56-0400\n"
 "PO-Revision-Date: 2017-03-15 16:31-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -121,7 +121,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: Calendar.class.php:425
+#: Calendar.class.php:435
 msgid "Add"
 msgstr ""
 
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Autodetect"
 msgstr ""
 
-#: Calendar.class.php:924 Console/Calendar.class.php:22 calendar.i18n.php:4
+#: Calendar.class.php:934 Console/Calendar.class.php:22 calendar.i18n.php:4
 #: calendar.i18n.php:10 views/remote_caldav_settings.php:133
 #: views/remote_ews_settings.php:194
 msgid "Calendar"
@@ -272,7 +272,7 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: Calendar.class.php:812 Calendar.class.php:850
+#: Calendar.class.php:822 Calendar.class.php:860
 msgid "Delete"
 msgstr ""
 
@@ -298,11 +298,11 @@ msgstr ""
 msgid "EWS Version"
 msgstr ""
 
-#: Calendar.class.php:430
+#: Calendar.class.php:440
 msgid "Edit"
 msgstr ""
 
-#: Calendar.class.php:782
+#: Calendar.class.php:792
 msgid "Edit Settings"
 msgstr ""
 
@@ -391,7 +391,7 @@ msgstr ""
 msgid "Import Calendar by ID"
 msgstr ""
 
-#: Calendar.class.php:901 Calendar.class.php:909 views/ucp_config.php:18
+#: Calendar.class.php:911 Calendar.class.php:919 views/ucp_config.php:18
 msgid "Inherit"
 msgstr ""
 
@@ -438,12 +438,12 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: Calendar.class.php:306
+#: Calendar.class.php:316
 #, php-format
 msgid "No Categories for %s"
 msgstr ""
 
-#: Calendar.class.php:320
+#: Calendar.class.php:330
 #, php-format
 msgid "No Events for %s"
 msgstr ""
@@ -474,6 +474,10 @@ msgstr ""
 
 #: views/remote_caldav_settings.php:110 views/remote_ews_settings.php:113
 msgid "Password"
+msgstr ""
+
+#: assets/js/calendar/calendar.js:421
+msgid "Please define a valid url"
 msgstr ""
 
 #: views/remote_caldav_settings.php:153 views/remote_ews_settings.php:214
@@ -537,8 +541,8 @@ msgstr ""
 msgid "Repeats"
 msgstr ""
 
-#: Calendar.class.php:798 Calendar.class.php:817 Calendar.class.php:836
-#: Calendar.class.php:855
+#: Calendar.class.php:808 Calendar.class.php:827 Calendar.class.php:846
+#: Calendar.class.php:865
 msgid "Reset"
 msgstr ""
 
@@ -583,12 +587,12 @@ msgstr ""
 msgid "Start Time"
 msgstr ""
 
-#: Calendar.class.php:803 Calendar.class.php:822 Calendar.class.php:841
-#: Calendar.class.php:860 views/calendar.php:513
+#: Calendar.class.php:813 Calendar.class.php:832 Calendar.class.php:851
+#: Calendar.class.php:870 views/calendar.php:513
 msgid "Submit"
 msgstr ""
 
-#: Calendar.class.php:402
+#: Calendar.class.php:412
 msgid "Successfully updated event"
 msgstr ""
 
@@ -693,7 +697,7 @@ msgstr ""
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:789 assets/js/calendar/calendar.js:313
+#: Calendar.class.php:799 assets/js/calendar/calendar.js:313
 msgid "Update from Source"
 msgstr ""
 
@@ -766,7 +770,7 @@ msgstr ""
 msgid "You are missing the PHP SoapClient library. Please install to continue"
 msgstr ""
 
-#: Calendar.class.php:354 Calendar.class.php:399
+#: Calendar.class.php:364 Calendar.class.php:409
 msgid "You can only edit local calendars"
 msgstr ""
 
@@ -774,6 +778,6 @@ msgstr ""
 msgid "occurrences"
 msgstr ""
 
-#: Calendar.class.php:342
+#: Calendar.class.php:352
 msgid "to"
 msgstr ""
