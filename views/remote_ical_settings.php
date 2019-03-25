@@ -119,25 +119,3 @@
 		</div>
 	</div>
 </div>
-<script>
-$(".fpbx-submit").submit(function(event) {
-	if($("#url").val() == "") {
-		return warnInvalid($("#url"),_("Please define a valid url"));
-	}
-	var result = $.ajax({
-		url: "ajax.php?module=calendar&command=checkical",
-		type: 'POST',
-		async: false,
-		data: {url: $("#url").val()}
-		});
-	obj = JSON.parse(result.responseText);
-	if(obj.status) {
-		return true;
-	} else {
-		warnInvalid($("#url"), obj.message);
-		event.preventDefault();
-		return false;
-	}
-	return false;
-});
-</script>
