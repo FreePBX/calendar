@@ -26,7 +26,7 @@ function calendar_getdestinfo($dest) {
 		$group = FreePBX::Calendar()->getGroup($parts[1]);
 		return array(
 			'description' => sprintf(_("Calendar Group: %s"),$group['name']),
-			'edit_url' => '?display=calendargroups&view=form&id='.$parts[1]
+			'edit_url' => '?display=calendargroups&action=edit&id='.$parts[1]
 		);
 	} else {
 		return false;
