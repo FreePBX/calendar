@@ -258,5 +258,9 @@ if (strtolower($action) == "add") {
 		if($("#urlerror").length == 1) {
 			return warnInvalid($("#url"),_("Please check your URL and credentials."));
 		}
+		if($("#setspan").is(":hidden")) {
+			alert('Vaidation In Progress. Please Wait.');
+			return false;
+		}
 	});
 </script>
