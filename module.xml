@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>15.0.4.4</version>
+	<version>15.0.4.5</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -13,6 +13,7 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
+		*15.0.4.5* Fixing FREEPBX-17867 
 		*15.0.4.4* FREEPBX-19607 Exception Invalid URL While creating the ical Calendar with empty URL field 
 		*15.0.4.3* FREEPBX-19606 Java script Issue in Calendar Events. 
 		*15.0.4.2* Fixing legacy restore 
