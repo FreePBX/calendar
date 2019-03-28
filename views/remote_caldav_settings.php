@@ -259,7 +259,7 @@ if (strtolower($action) == "add") {
 			return warnInvalid($("#url"),_("Please check your URL and credentials."));
 		}
 		if($("#setspan").is(":hidden")) {
-			alert('Vaidation In Progress. Please Wait.');
+			fpbxToast(_('Validation in progress. Please wait.'),'','warning');
 			return false;
 		}
 	});
