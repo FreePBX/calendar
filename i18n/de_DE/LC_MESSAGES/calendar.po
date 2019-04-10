@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-03-25 15:55-0400\n"
-"PO-Revision-Date: 2019-04-05 16:00+0000\n"
+"PO-Revision-Date: 2019-04-10 07:25+0000\n"
 "Last-Translator: florian alberts <alberts@ar-systems.de>\n"
 "Language-Team: German <http://*/projects/freepbx/calendar/de/>\n"
 "Language: de_DE\n"
@@ -595,7 +595,6 @@ msgid "Specific Events"
 msgstr "Spezifische Ereignisse"
 
 #: Console/Calendar.class.php:79
-#, fuzzy
 msgid "Start"
 msgstr "Start"
 
@@ -710,7 +709,6 @@ msgid "Type"
 msgstr "Typ"
 
 #: Console/Calendar.class.php:79
-#, fuzzy
 msgid "UID"
 msgstr "UID"
 
