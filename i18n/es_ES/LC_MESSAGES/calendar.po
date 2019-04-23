@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-25 15:56-0400\n"
+"POT-Creation-Date: 2019-04-23 17:17+0530\n"
 "PO-Revision-Date: 2018-07-18 19:12+0000\n"
 "Last-Translator: Elvita Crespo <ecrespo@sangoma.com>\n"
 "Language-Team: Spanish <http://*/projects/freepbx/calendar/es/>\n"
@@ -232,6 +232,10 @@ msgstr ""
 msgid "Calendar groups the user may utilize."
 msgstr ""
 
+#: assets/js/calendar/calendar.js:133
+msgid "Calendar name cannot be empty."
+msgstr ""
+
 #: assets/js/calendar/calendar.js:128
 msgid "Calendar names should be unique."
 msgstr ""
@@ -268,7 +272,7 @@ msgstr ""
 msgid "Day of the week"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:361
+#: assets/js/calendar/calendar.js:366
 msgid "Days"
 msgstr ""
 
@@ -288,6 +292,10 @@ msgstr ""
 
 #: views/calendar.php:90
 msgid "Description for the event"
+msgstr ""
+
+#: assets/js/calendar/calendar.js:417
+msgid "Duplicate calendar name."
 msgstr ""
 
 #: views/remote_ews_settings.php:135
@@ -407,7 +415,7 @@ msgstr ""
 msgid "Local Calendar"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:374
+#: assets/js/calendar/calendar.js:379
 msgid "Months"
 msgstr ""
 
@@ -476,7 +484,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:421
+#: assets/js/calendar/calendar.js:425
 msgid "Please define a valid url"
 msgstr ""
 
@@ -643,7 +651,7 @@ msgstr ""
 msgid "The username of this calendar's user"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:186
+#: assets/js/calendar/calendar.js:191
 msgid "There was an error fetching the events"
 msgstr ""
 
@@ -697,11 +705,11 @@ msgstr ""
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:799 assets/js/calendar/calendar.js:313
+#: Calendar.class.php:799 assets/js/calendar/calendar.js:318
 msgid "Update from Source"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:300
+#: assets/js/calendar/calendar.js:305
 msgid "Updating..."
 msgstr ""
 
@@ -745,7 +753,11 @@ msgstr ""
 msgid "Viewing from timezone '%s'"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:358
+#: assets/js/calendar/calendar.js:133 assets/js/calendar/calendar.js:417
+msgid "Warning"
+msgstr ""
+
+#: assets/js/calendar/calendar.js:363
 msgid "Weeks"
 msgstr ""
 
@@ -757,7 +769,7 @@ msgstr ""
 msgid "Whether to allow this user to be able to access the calendar in UCP"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:380
+#: assets/js/calendar/calendar.js:385
 msgid "Years"
 msgstr ""
 
