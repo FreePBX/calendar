@@ -128,6 +128,11 @@ $(document).ready(function() {
 			warnInvalid($("#name"),_("Calendar names should be unique."));
 			return false;
 		}
+		if($("#name").val() == ""){
+			warnInvalid($("#name"));
+			fpbxToast(_("Calendar name cannot be empty."),_("Warning"),'warning');
+			return false;
+		}
 	});
 
 	$("#allday").click(function() {
@@ -409,8 +414,7 @@ function checkduplicate(name,id){
 	$.ajax({url: "ajax.php?command=duplicate&module=calendar&value="+name+"&id="+id,
 	success: function(result){
 		if(result.value == 1){
-			alert("Duplicate calendar name ");
-
+			fpbxToast(_("Duplicate calendar name."),_("Warning"),'warning');
 		}
 	}
 	});
