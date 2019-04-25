@@ -319,8 +319,8 @@ abstract class Base {
 			if(!empty($event['RECURRING'])) {
 				$e['rrules'] = [
 					"frequency" => $event['RRULE']['FREQ'],
-					"days" => !empty($event['RRULE']['BYDAY']) ? explode(",",$event['RRULE']['BYDAY']) : [],
-					"byday" => !empty($event['RRULE']['BYDAY']) ? $event['RRULE']['BYDAY'] : [],
+					"days" => !empty($event['RRULE']['BYDAY']) ? explode(",",str_replace('"','',$event['RRULE']['BYDAY'])) : [],
+					"byday" => !empty($event['RRULE']['BYDAY']) ? str_replace('"','',$event['RRULE']['BYDAY']) : [],
 					"interval" => !empty($event['RRULE']['INTERVAL']) ? $event['RRULE']['INTERVAL'] : "",
 					"count" => !empty($event['RRULE']['COUNT']) ? $event['RRULE']['COUNT'] : "",
 					"until" => !empty($event['RRULE']['UNTIL']) ? $event['RRULE']['UNTIL']->format('U') : ""

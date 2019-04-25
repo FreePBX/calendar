@@ -400,7 +400,6 @@ class Calendar extends \DB_Helper implements \BMO {
 				$end = new Carbon($_GET['end'],$_GET['timezone']);
 				$calendar = $this->getCalendarById($_REQUEST['calendarid']);
 				$events = $calendar['calendar']->getEventsBetween($start, $end);
-
 				return array_values($events);
 			break;
 			case 'eventform':

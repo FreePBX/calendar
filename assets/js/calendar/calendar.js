@@ -220,6 +220,7 @@ $(document).ready(function() {
 				}
 				$('#modalDelete').data('id', src.uid);
 				$('#eventModal').modal('show');
+				console.log(src);
 				if(src.recurring) {
 					$("#reoccurring").prop("checked",true);
 					if(src.rrules.interval !== "") {
@@ -237,24 +238,26 @@ $(document).ready(function() {
 						case "DAILY":
 							$("#repeats").val(0);
 						break;
+						case "YEARLY":
+							$("#repeats").val(6);
+						break;
+						case "MONTHLY":
+							$("#repeats").val(5);
+						break;
 						case "WEEKLY":
-							if(src.rrules.interval === "") {
-								switch(src.rrules.byday) {
-									case "MO,TU,WE,TH,FR":
-										$("#repeats").val(1);
-									break;
-									case "MO,WE,FR":
-										$("#repeats").val(2);
-									break;
-									case "TU,TH":
-										$("#repeats").val(3);
-									break;
-									default:
-										$("#repeats").val(4);
-									break;
-								}
-							} else {
-								$("#repeats").val(4);
+							switch(src.rrules.byday) {
+								case "MO,TU,WE,TH,FR":
+									$("#repeats").val(1);
+								break;
+								case "MO,WE,FR":
+									$("#repeats").val(2);
+								break;
+								case "TU,TH":
+									$("#repeats").val(3);
+								break;
+								default:
+									$("#repeats").val(4);
+								break;
 							}
 						break;
 					}
