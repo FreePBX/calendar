@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-23 17:13+0530\n"
+"POT-Creation-Date: 2019-04-25 15:09-0400\n"
 "PO-Revision-Date: 2018-02-14 21:15+0200\n"
 "Last-Translator: jeremie <freepbx@famillecattan.com>\n"
 "Language-Team: French <http://weblate.freepbx.org/projects/freepbx/calendar/"
@@ -122,7 +122,7 @@ msgstr ""
 msgid "Actions"
 msgstr "Actions"
 
-#: Calendar.class.php:437
+#: Calendar.class.php:436
 msgid "Add"
 msgstr "Ajouter"
 
@@ -204,7 +204,7 @@ msgstr ""
 msgid "Autodetect"
 msgstr "Détection automatique"
 
-#: Calendar.class.php:936 Console/Calendar.class.php:22 calendar.i18n.php:4
+#: Calendar.class.php:935 Console/Calendar.class.php:22 calendar.i18n.php:4
 #: calendar.i18n.php:10 views/remote_caldav_settings.php:133
 #: views/remote_ews_settings.php:194
 msgid "Calendar"
@@ -275,11 +275,11 @@ msgstr "Jour du mois"
 msgid "Day of the week"
 msgstr "Jour de la semaine"
 
-#: assets/js/calendar/calendar.js:366
+#: assets/js/calendar/calendar.js:369
 msgid "Days"
 msgstr "Jours"
 
-#: Calendar.class.php:824 Calendar.class.php:862
+#: Calendar.class.php:823 Calendar.class.php:861
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -297,7 +297,7 @@ msgstr "Description"
 msgid "Description for the event"
 msgstr "Description de l'évènement"
 
-#: assets/js/calendar/calendar.js:417
+#: assets/js/calendar/calendar.js:420
 msgid "Duplicate calendar name."
 msgstr ""
 
@@ -309,11 +309,11 @@ msgstr "URL du serveur EWS"
 msgid "EWS Version"
 msgstr "Version EWS"
 
-#: Calendar.class.php:442
+#: Calendar.class.php:441
 msgid "Edit"
 msgstr "Editer"
 
-#: Calendar.class.php:794
+#: Calendar.class.php:793
 msgid "Edit Settings"
 msgstr "Éditer les paramètres"
 
@@ -402,7 +402,7 @@ msgstr "À quel fréquence cet agenda se ssynchronisera avec le serveur distant"
 msgid "Import Calendar by ID"
 msgstr ""
 
-#: Calendar.class.php:913 Calendar.class.php:921 views/ucp_config.php:18
+#: Calendar.class.php:912 Calendar.class.php:920 views/ucp_config.php:18
 msgid "Inherit"
 msgstr "Hérite"
 
@@ -418,7 +418,7 @@ msgstr ""
 msgid "Local Calendar"
 msgstr "Agenda local"
 
-#: assets/js/calendar/calendar.js:379
+#: assets/js/calendar/calendar.js:382
 msgid "Months"
 msgstr "Mois"
 
@@ -490,7 +490,7 @@ msgstr ""
 msgid "Password"
 msgstr "Mot de passe"
 
-#: assets/js/calendar/calendar.js:425
+#: assets/js/calendar/calendar.js:428
 msgid "Please define a valid url"
 msgstr ""
 
@@ -555,8 +555,8 @@ msgstr "Répéter par"
 msgid "Repeats"
 msgstr "Répétitions"
 
-#: Calendar.class.php:810 Calendar.class.php:829 Calendar.class.php:848
-#: Calendar.class.php:867
+#: Calendar.class.php:809 Calendar.class.php:828 Calendar.class.php:847
+#: Calendar.class.php:866
 msgid "Reset"
 msgstr "Réinitialiser"
 
@@ -608,12 +608,12 @@ msgstr "Date de début"
 msgid "Start Time"
 msgstr "Heure de début"
 
-#: Calendar.class.php:815 Calendar.class.php:834 Calendar.class.php:853
-#: Calendar.class.php:872 views/calendar.php:513
+#: Calendar.class.php:814 Calendar.class.php:833 Calendar.class.php:852
+#: Calendar.class.php:871 views/calendar.php:513
 msgid "Submit"
 msgstr "Soumettre"
 
-#: Calendar.class.php:414
+#: Calendar.class.php:413
 msgid "Successfully updated event"
 msgstr "Éventement modifié avec succès"
 
@@ -721,11 +721,11 @@ msgstr "Incapable de déterminer l'URL du serveur"
 msgid "Unknown Calendar"
 msgstr "Calendrier inconnu"
 
-#: Calendar.class.php:801 assets/js/calendar/calendar.js:318
+#: Calendar.class.php:800 assets/js/calendar/calendar.js:321
 msgid "Update from Source"
 msgstr "Mise à jour de la source"
 
-#: assets/js/calendar/calendar.js:305
+#: assets/js/calendar/calendar.js:308
 msgid "Updating..."
 msgstr "En cours de mise à jour..."
 
@@ -773,11 +773,11 @@ msgstr "Visualisation de l'agenda '%s'"
 msgid "Viewing from timezone '%s'"
 msgstr "Affichage à partir du fuseau horaire '%s'"
 
-#: assets/js/calendar/calendar.js:133 assets/js/calendar/calendar.js:417
+#: assets/js/calendar/calendar.js:133 assets/js/calendar/calendar.js:420
 msgid "Warning"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:363
+#: assets/js/calendar/calendar.js:366
 msgid "Weeks"
 msgstr "Semaines"
 
@@ -789,7 +789,7 @@ msgstr "Que sont les groupes d'évènements d'agenda ?"
 msgid "Whether to allow this user to be able to access the calendar in UCP"
 msgstr "Cet utilisateur devrait-il avoir accès à l'agenda dans UCP"
 
-#: assets/js/calendar/calendar.js:385
+#: assets/js/calendar/calendar.js:388
 msgid "Years"
 msgstr "Années"
 
@@ -804,7 +804,7 @@ msgstr ""
 "La bibliothèque PHP SoapClient est absente. Veuillez l'installer pour "
 "continuer"
 
-#: Calendar.class.php:366 Calendar.class.php:411
+#: Calendar.class.php:366 Calendar.class.php:410
 msgid "You can only edit local calendars"
 msgstr ""
 

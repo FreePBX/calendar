@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-23 17:13+0530\n"
+"POT-Creation-Date: 2019-04-25 15:09-0400\n"
 "PO-Revision-Date: 2017-06-14 09:55+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese <http://weblate.freepbx.org/projects/freepbx/"
@@ -122,7 +122,7 @@ msgstr ""
 msgid "Actions"
 msgstr "Các thao tác"
 
-#: Calendar.class.php:437
+#: Calendar.class.php:436
 msgid "Add"
 msgstr "Thêm"
 
@@ -204,7 +204,7 @@ msgstr ""
 msgid "Autodetect"
 msgstr "Tự động phát hiện"
 
-#: Calendar.class.php:936 Console/Calendar.class.php:22 calendar.i18n.php:4
+#: Calendar.class.php:935 Console/Calendar.class.php:22 calendar.i18n.php:4
 #: calendar.i18n.php:10 views/remote_caldav_settings.php:133
 #: views/remote_ews_settings.php:194
 msgid "Calendar"
@@ -275,11 +275,11 @@ msgstr "Ngày trong tháng"
 msgid "Day of the week"
 msgstr "Ngày trong tuần"
 
-#: assets/js/calendar/calendar.js:366
+#: assets/js/calendar/calendar.js:369
 msgid "Days"
 msgstr "Các ngày"
 
-#: Calendar.class.php:824 Calendar.class.php:862
+#: Calendar.class.php:823 Calendar.class.php:861
 msgid "Delete"
 msgstr "Xóa"
 
@@ -297,7 +297,7 @@ msgstr "Mô tả"
 msgid "Description for the event"
 msgstr "Mô tả cho sự kiện"
 
-#: assets/js/calendar/calendar.js:417
+#: assets/js/calendar/calendar.js:420
 msgid "Duplicate calendar name."
 msgstr ""
 
@@ -309,11 +309,11 @@ msgstr "URL máy chủ EWS"
 msgid "EWS Version"
 msgstr "Phiên bản EWS"
 
-#: Calendar.class.php:442
+#: Calendar.class.php:441
 msgid "Edit"
 msgstr "Hiệu chỉnh"
 
-#: Calendar.class.php:794
+#: Calendar.class.php:793
 msgid "Edit Settings"
 msgstr "Cài đặt hiệu chỉnh"
 
@@ -403,7 +403,7 @@ msgstr ""
 msgid "Import Calendar by ID"
 msgstr ""
 
-#: Calendar.class.php:913 Calendar.class.php:921 views/ucp_config.php:18
+#: Calendar.class.php:912 Calendar.class.php:920 views/ucp_config.php:18
 msgid "Inherit"
 msgstr "Thừa kế"
 
@@ -419,7 +419,7 @@ msgstr ""
 msgid "Local Calendar"
 msgstr "Lịch tại chỗ"
 
-#: assets/js/calendar/calendar.js:379
+#: assets/js/calendar/calendar.js:382
 msgid "Months"
 msgstr "Tháng"
 
@@ -491,7 +491,7 @@ msgstr ""
 msgid "Password"
 msgstr "Mật khẩu"
 
-#: assets/js/calendar/calendar.js:425
+#: assets/js/calendar/calendar.js:428
 msgid "Please define a valid url"
 msgstr ""
 
@@ -556,8 +556,8 @@ msgstr "Lặp lại bởi"
 msgid "Repeats"
 msgstr "Lặp lại"
 
-#: Calendar.class.php:810 Calendar.class.php:829 Calendar.class.php:848
-#: Calendar.class.php:867
+#: Calendar.class.php:809 Calendar.class.php:828 Calendar.class.php:847
+#: Calendar.class.php:866
 msgid "Reset"
 msgstr "Cài đặt lại"
 
@@ -607,12 +607,12 @@ msgstr "Ngày bắt đầu"
 msgid "Start Time"
 msgstr "Thời gian bắt đầu"
 
-#: Calendar.class.php:815 Calendar.class.php:834 Calendar.class.php:853
-#: Calendar.class.php:872 views/calendar.php:513
+#: Calendar.class.php:814 Calendar.class.php:833 Calendar.class.php:852
+#: Calendar.class.php:871 views/calendar.php:513
 msgid "Submit"
 msgstr "Gửi đi"
 
-#: Calendar.class.php:414
+#: Calendar.class.php:413
 msgid "Successfully updated event"
 msgstr ""
 
@@ -721,11 +721,11 @@ msgstr "Không thể xác định URL máy chủ"
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:801 assets/js/calendar/calendar.js:318
+#: Calendar.class.php:800 assets/js/calendar/calendar.js:321
 msgid "Update from Source"
 msgstr "Cập nhật từ nguồn"
 
-#: assets/js/calendar/calendar.js:305
+#: assets/js/calendar/calendar.js:308
 msgid "Updating..."
 msgstr "Đang cập nhật..."
 
@@ -769,11 +769,11 @@ msgstr "Đang xem Lịch '%s'"
 msgid "Viewing from timezone '%s'"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:133 assets/js/calendar/calendar.js:417
+#: assets/js/calendar/calendar.js:133 assets/js/calendar/calendar.js:420
 msgid "Warning"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:363
+#: assets/js/calendar/calendar.js:366
 msgid "Weeks"
 msgstr "Các tuần"
 
@@ -785,7 +785,7 @@ msgstr "Nhóm sự kiện lịch là gì?"
 msgid "Whether to allow this user to be able to access the calendar in UCP"
 msgstr "Có cho phép người dùng có thể truy cập vào lịch trong UCP không"
 
-#: assets/js/calendar/calendar.js:385
+#: assets/js/calendar/calendar.js:388
 msgid "Years"
 msgstr "Năm"
 
@@ -798,7 +798,7 @@ msgstr "Có"
 msgid "You are missing the PHP SoapClient library. Please install to continue"
 msgstr "Bạn đang thiếu thư viện PHP SoapClient. Vui lòng cài đặt để tiếp tục"
 
-#: Calendar.class.php:366 Calendar.class.php:411
+#: Calendar.class.php:366 Calendar.class.php:410
 msgid "You can only edit local calendars"
 msgstr ""
 
