@@ -334,7 +334,7 @@ class Calendar extends \DB_Helper implements \BMO {
 					}
 					if(!empty($categories[$calendarID])) {
 						$valid = array();
-						$cats = $cal->getCategories($searchStart,$searchEnd);
+						$cats = $categories[$calendarID];
 						$events = array_filter($events, function($event) use($cats) {
 							if(empty($event['categories'])) {
 								return false;
