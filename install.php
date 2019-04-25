@@ -9,8 +9,4 @@ foreach($crons as $c) {
 	}
 }
 
-$ampbin = \FreePBX::Config()->get('AMPSBIN');
-\FreePBX::Cron()->add(array(
-	'minute' => '*/1',
-	"command" => $ampbin.'/fwconsole calendar --sync 2>&1 > /dev/null')
-);
+\FreePBX::Job()->addClass('calendar', 'sync', 'FreePBX\modules\Calendar\Job', '* * * * *');

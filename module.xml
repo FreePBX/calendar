@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>14.0.2.19</version>
+	<version>14.0.3</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -13,13 +13,14 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
+		*14.0.3* Centralize cron into job
 		*14.0.2.19* Fix visual issue on calendar event group category filtering
 		*14.0.2.18* Fix bug with viewing reoccuring dates
-		*14.0.2.17* FREEPBX-18329 
-		*14.0.2.16* FREEPBX-19608 
-		*14.0.2.15* Fixing FREEPBX-17867 
-		*14.0.2.14* FREEPBX-19607 Exception Invalid URL While creating the ical Calendar with empty URL field 
-		*14.0.2.13* FREEPBX-19606 Java script Issue in Calendar Events. 
+		*14.0.2.17* FREEPBX-18329
+		*14.0.2.16* FREEPBX-19608
+		*14.0.2.15* Fixing FREEPBX-17867
+		*14.0.2.14* FREEPBX-19607 Exception Invalid URL While creating the ical Calendar with empty URL field
+		*14.0.2.13* FREEPBX-19606 Java script Issue in Calendar Events.
 		*14.0.2.12* Fix uninstaller
 		*14.0.2.11* FREEPBX-17710 Fix issues with events with duplicated uids
 		*14.0.2.10* FREEPBX-15736 use system default timezone
@@ -45,7 +46,7 @@
 		*14.0.1alpha1* Development
 	</changelog>
 	<depends>
-		<version>14.0.1rc1.18</version>
+		<version>14.0.12</version>
 	</depends>
 	<supported>
 		<version>14.0</version>
