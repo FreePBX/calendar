@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-25 15:09-0400\n"
-"PO-Revision-Date: 2019-04-10 07:25+0000\n"
-"Last-Translator: florian alberts <alberts@ar-systems.de>\n"
+"PO-Revision-Date: 2019-05-02 12:09+0000\n"
+"Last-Translator: Bastian Mertgen <b.mertgen@bastian-mertgen.de>\n"
 "Language-Team: German <http://*/projects/freepbx/calendar/de/>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
@@ -242,7 +242,7 @@ msgstr "Kalendergruppen, die der Benutzer verwenden kann."
 
 #: assets/js/calendar/calendar.js:133
 msgid "Calendar name cannot be empty."
-msgstr ""
+msgstr "Der Kalendername darf nicht leer sein."
 
 #: assets/js/calendar/calendar.js:128
 msgid "Calendar names should be unique."
@@ -304,7 +304,7 @@ msgstr "Beschreibung für das Ereignis"
 
 #: assets/js/calendar/calendar.js:420
 msgid "Duplicate calendar name."
-msgstr ""
+msgstr "Doppelter Kalendername."
 
 #: views/remote_ews_settings.php:135
 msgid "EWS Server URL"
@@ -782,7 +782,7 @@ msgstr "Ansicht aus Zeitzone '%s'"
 
 #: assets/js/calendar/calendar.js:133 assets/js/calendar/calendar.js:420
 msgid "Warning"
-msgstr ""
+msgstr "Warnung"
 
 #: assets/js/calendar/calendar.js:366
 msgid "Weeks"
