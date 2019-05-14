@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>14.0.3</version>
+	<version>14.0.3.1</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -13,6 +13,7 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
+		*14.0.3.1* add console command
 		*14.0.3* Centralize cron into job
 		*14.0.2.19* Fix visual issue on calendar event group category filtering
 		*14.0.2.18* Fix bug with viewing reoccuring dates
@@ -51,4 +52,9 @@
 	<supported>
 		<version>14.0</version>
 	</supported>
+	<console>
+		<command>
+			<name>calendar</name>
+		</command>
+	</console>
 </module>
