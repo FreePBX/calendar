@@ -142,9 +142,43 @@ class Local extends Base {
 				break;
 				case "5":
 					$recurrenceRule->setFreq(RecurrenceRule::FREQ_MONTHLY);
+					if(isset($event['repeat-by'])) {
+						switch($event['repeat-by']) {
+							case 0:
+								//date of month
+								//FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=16
+								$recurrenceRule->setByMonthDay($vEvent->getDtStart()->format('j'));
+							break;
+							case 1:
+								//day of month
+								//FREQ=MONTHLY;INTERVAL=1;BYDAY=3TH
+								$c = ceil($vEvent->getDtStart()->format('j') / 7);
+								$d = strtoupper(substr($vEvent->getDtStart()->format('D'), 0, -1));
+								$recurrenceRule->setByDay($c.$d);
+							break;
+						}
+					}
 				break;
 				case "6":
 					$recurrenceRule->setFreq(RecurrenceRule::FREQ_YEARLY);
+					if(isset($event['repeat-by-year'])) {
+						switch($event['repeat-by-year']) {
+							case 0:
+								//date of year
+								//FREQ=YEARLY;INTERVAL=1;BYMONTH=05;BYMONTHDAY=16
+								$recurrenceRule->setByMonth((int)$vEvent->getDtStart()->format('n'));
+								$recurrenceRule->setByMonthDay($vEvent->getDtStart()->format('j'));
+							break;
+							case 1:
+								//day of month/year
+								//FREQ=YEARLY;INTERVAL=1;BYMONTH=05;BYDAY=3TH
+								$recurrenceRule->setByMonth((int)$vEvent->getDtStart()->format('n'));
+								$c = ceil($vEvent->getDtStart()->format('j') / 7);
+								$d = strtoupper(substr($vEvent->getDtStart()->format('D'), 0, -1));
+								$recurrenceRule->setByDay($c.$d);
+							break;
+						}
+					}
 				break;
 				default:
 				break;

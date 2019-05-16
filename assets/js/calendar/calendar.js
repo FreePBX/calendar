@@ -84,7 +84,9 @@ function resetModalForm(){
 	$("#timezone").val('');
 	$("#timezone").multiselect('select', '');
 	updateReoccurring();
+	$("#repeat-by0").prop("checked",true);
 	$("#repeat0").prop("checked",true);
+	$("#repeat-by-year0").prop("checked",true);
 	$("#modalSubmit,#modalDelete").addClass('hidden');
 	updateAllDay();
 }
@@ -240,9 +242,19 @@ $(document).ready(function() {
 						break;
 						case "YEARLY":
 							$("#repeats").val(6);
+							if(src.rrules.byday) {
+								$("#repeat-by-year1").prop("checked",true);
+							} else {
+								$("#repeat-by-year0").prop("checked",true);
+							}
 						break;
 						case "MONTHLY":
 							$("#repeats").val(5);
+							if(src.rrules.byday) {
+								$("#repeat-by1").prop("checked",true);
+							} else {
+								$("#repeat-by0").prop("checked",true);
+							}
 						break;
 						case "WEEKLY":
 							switch(src.rrules.byday) {
@@ -363,12 +375,14 @@ function updateReoccurringOptions() {
 			$("#repeat-on-container").removeClass("hidden");
 			$("#repeats-every-container").removeClass("hidden");
 			$("#repeat-by-container").addClass("hidden");
+			$("#repeat-by-year-container").addClass("hidden");
 			$("#countType").text(_("Weeks"));
 		break;
 		case "0":
 			$("#countType").text(_("Days"));
 			$("#repeat-on-container").addClass("hidden");
 			$("#repeats-every-container").removeClass("hidden");
+			$("#repeat-by-year-container").addClass("hidden");
 			$("#repeat-by-container").addClass("hidden");
 		break;
 		case "1":
@@ -377,18 +391,21 @@ function updateReoccurringOptions() {
 			$("#repeat-on-container").addClass("hidden");
 			$("#repeats-every-container").addClass("hidden");
 			$("#repeat-by-container").addClass("hidden");
+			$("#repeat-by-year-container").addClass("hidden");
 		break;
 		case "5":
 			$("#countType").text(_("Months"));
 			$("#repeat-on-container").addClass("hidden");
 			$("#repeats-every-container").removeClass("hidden");
 			$("#repeat-by-container").removeClass("hidden");
+			$("#repeat-by-year-container").addClass("hidden");
 		break;
 		case "6":
 			$("#countType").text(_("Years"));
 			$("#repeat-on-container").addClass("hidden");
-			$("#repeats-every-container").addClass("hidden");
+			$("#repeats-every-container").removeClass("hidden");
 			$("#repeat-by-container").addClass("hidden");
+			$("#repeat-by-year-container").removeClass("hidden");
 		break;
 	}
 	if($("#repeat1").is(":checked")) {
