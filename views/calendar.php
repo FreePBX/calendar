@@ -303,13 +303,13 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 														</div>
 														<div class="col-md-9">
 															<select class="form-control" id="repeats" name="repeats">
-																<option value="0" title="Daily">Daily</option>
-																<option value="1" title="Every weekday (Monday to Friday)">Every weekday (Monday to Friday)</option>
-																<option value="2" title="Every Monday, Wednesday, and Friday">Every Monday, Wednesday, and Friday</option>
-																<option value="3" title="Every Tuesday and Thursday">Every Tuesday and Thursday</option>
-																<option value="4" title="Weekly">Weekly</option>
-																<option value="5" title="Monthly">Monthly</option>
-																<option value="6" title="Yearly">Yearly</option>
+																<option value="0" title="Daily"><?php echo _('Daily')?></option>
+																<option value="1" title="Every weekday (Monday to Friday)"><?php echo _('Every weekday (Monday to Friday')?></option>
+																<option value="2" title="Every Monday, Wednesday, and Friday"><?php echo _('Every Monday, Wednesday, and Friday')?></option>
+																<option value="3" title="Every Tuesday and Thursday"><?php echo _('Every Tuesday and Thursday')?></option>
+																<option value="4" title="Weekly"><?php echo _('Weekly')?></option>
+																<option value="5" title="Monthly"><?php echo _('Monthly')?></option>
+																<option value="6" title="Yearly"><?php echo _('Yearly')?></option>
 															</select>
 														</div>
 													</div>
@@ -318,7 +318,7 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<span id="repeats-help" class="help-block fpbx-help-block"><?php echo _("Repeats")?></span>
+												<span id="repeats-help" class="help-block fpbx-help-block"><?php echo _("Select how often this event repeats")?></span>
 											</div>
 										</div>
 									</div>
@@ -374,7 +374,7 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<span id="repeat-count-help" class="help-block fpbx-help-block"><?php echo _("Repeats")?></span>
+												<span id="repeat-count-help" class="help-block fpbx-help-block"><?php echo _("Repeat every X interval")?></span>
 											</div>
 										</div>
 									</div>
@@ -399,7 +399,7 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<span id="repeats-help" class="help-block fpbx-help-block"><?php echo _("Repeats")?></span>
+												<span id="repeats-help" class="help-block fpbx-help-block"><?php echo _("Select day of week to repeat on")?></span>
 											</div>
 										</div>
 									</div>
@@ -414,9 +414,9 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 														</div>
 														<div class="col-md-9 radioset">
 															<input id="repeat-by0" name="repeat-by" type="radio" value="0">
-															<label for="repeat-by0"><?php echo _("Day of the month")?></label>
+															<label for="repeat-by0"><?php echo _("Date of the month (E.g. 16th)")?></label>
 															<input id="repeat-by1" name="repeat-by" type="radio" value="1">
-															<label for="repeat-by1"><?php echo _("Day of the week")?></label>
+															<label for="repeat-by1"><?php echo _("Day of the month (E.g. 2nd Monday)")?></label>
 														</div>
 													</div>
 												</div>
@@ -424,7 +424,32 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<span id="repeat-by-help" class="help-block fpbx-help-block"><?php echo _("Repeats")?></span>
+												<span id="repeat-by-help" class="help-block fpbx-help-block"><?php echo _("Select how to repeat")?></span>
+											</div>
+										</div>
+									</div>
+									<div id="repeat-by-year-container" class="element-container reoccurring">
+										<div class="row">
+											<div class="col-md-12">
+												<div class="row">
+													<div class="form-group">
+														<div class="col-md-3">
+															<label class="control-label" for="repeat-by-year"><?php echo _("Repeat by") ?></label>
+															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeat-by-year"></i>
+														</div>
+														<div class="col-md-9 radioset">
+															<input id="repeat-by-year0" name="repeat-by-year" type="radio" value="0">
+															<label for="repeat-by-year0"><?php echo _("Date of the year (E.g. May 16th)")?></label>
+															<input id="repeat-by-year1" name="repeat-by-year" type="radio" value="1">
+															<label for="repeat-by-year1"><?php echo _("Day of the year (E.g. 2nd Monday in May)")?></label>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<span id="repeat-by-year-help" class="help-block fpbx-help-block"><?php echo _("Select how to repeat")?></span>
 											</div>
 										</div>
 									</div>
@@ -451,7 +476,7 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<span id="ends-help" class="help-block fpbx-help-block"><?php echo _("Ends")?></span>
+												<span id="ends-help" class="help-block fpbx-help-block"><?php echo _("Define when to stop the reoccurrance")?></span>
 											</div>
 										</div>
 									</div>
@@ -501,7 +526,7 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 										</div>
 										<div class="row">
 											<div class="col-md-12">
-												<span id="afterdate-help" class="help-block fpbx-help-block"><?php echo _("Repeats")?></span>
+												<span id="afterdate-help" class="help-block fpbx-help-block"><?php echo _("X number of occurances")?></span>
 											</div>
 										</div>
 									</div>
