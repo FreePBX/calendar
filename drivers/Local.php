@@ -77,8 +77,8 @@ class Local extends Base {
 		$vEvent->setUseTimezone(true);
 		$vEvent->setUseUtc(false);
 
-		$vEvent->setDtStart(new Carbon($event['startdate']." ".$event['starttime'], $timezone));
-		$vEvent->setDtEnd(new Carbon($event['enddate']." ".$event['endtime'], $timezone));
+		$vEvent->setDtStart(new Carbon($event['startdate']." ".$event['starttime'], 'UTC'));
+		$vEvent->setDtEnd(new Carbon($event['enddate']." ".$event['endtime'], 'UTC'));
 		if(!empty($event['allday']) && $event['allday'] == "yes") {
 			$vEvent->setDtStart(new Carbon($event['startdate']." 00:00:00", $timezone));
 			$vEvent->setDtEnd(new Carbon($event['enddate']." 00:00:00", $timezone));
