@@ -217,8 +217,13 @@ $(document).ready(function() {
 					$("#endtime")[0]._flatpickr.setDate(me.format("kk:mm:ss"));
 				}
 				if(typeof src.timezone !== "undefined") {
-					$("#timezone").val(src.timezone);
-					$("#timezone").multiselect('select', src.timezone);
+					if(src.timezone != 'Etc/GMT'){
+						$("#timezone").val(src.timezone);
+						$("#timezone").multiselect('select', src.timezone);
+					} else {
+						$("#timezone").val(caltimezone);
+						$("#timezone").multiselect('select', caltimezone);
+					}
 				}
 				$('#modalDelete').data('id', src.uid);
 				$('#eventModal').modal('show');
