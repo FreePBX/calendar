@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-17 13:47-0400\n"
+"POT-Creation-Date: 2019-05-30 11:23+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -302,7 +302,7 @@ msgstr ""
 msgid "Day of the year (E.g. 2nd Monday in May)"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:382
+#: assets/js/calendar/calendar.js:387
 msgid "Days"
 msgstr ""
 
@@ -332,7 +332,7 @@ msgstr ""
 msgid "Description for the event"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:437
+#: assets/js/calendar/calendar.js:442
 msgid "Duplicate calendar name."
 msgstr ""
 
@@ -472,7 +472,7 @@ msgstr ""
 msgid "Monthly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:397
+#: assets/js/calendar/calendar.js:402
 msgid "Months"
 msgstr ""
 
@@ -548,7 +548,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:445
+#: assets/js/calendar/calendar.js:450
 msgid "Please define a valid url"
 msgstr ""
 
@@ -802,11 +802,11 @@ msgid "Unknown Calendar"
 msgstr ""
 
 #: Calendar.class.php:800
-#: assets/js/calendar/calendar.js:333
+#: assets/js/calendar/calendar.js:338
 msgid "Update from Source"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:320
+#: assets/js/calendar/calendar.js:325
 msgid "Updating..."
 msgstr ""
 
@@ -852,7 +852,7 @@ msgid "Viewing from timezone '%s'"
 msgstr ""
 
 #: assets/js/calendar/calendar.js:135
-#: assets/js/calendar/calendar.js:437
+#: assets/js/calendar/calendar.js:442
 msgid "Warning"
 msgstr ""
 
@@ -860,7 +860,7 @@ msgstr ""
 msgid "Weekly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:379
+#: assets/js/calendar/calendar.js:384
 msgid "Weeks"
 msgstr ""
 
@@ -880,7 +880,7 @@ msgstr ""
 msgid "Yearly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:404
+#: assets/js/calendar/calendar.js:409
 msgid "Years"
 msgstr ""
 
