@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-05-30 11:23+0530\n"
-"PO-Revision-Date: 2019-05-02 12:09+0000\n"
+"PO-Revision-Date: 2019-06-25 12:10+0000\n"
 "Last-Translator: Bastian Mertgen <b.mertgen@bastian-mertgen.de>\n"
 "Language-Team: German <http://*/projects/freepbx/calendar/de/>\n"
 "Language: de_DE\n"
@@ -274,23 +274,23 @@ msgstr "Schließen"
 
 #: views/calendar.php:306
 msgid "Daily"
-msgstr ""
+msgstr "täglich"
 
 #: views/calendar.php:417
 msgid "Date of the month (E.g. 16th)"
-msgstr ""
+msgstr "Tag des Monats (z.B. 16.)"
 
 #: views/calendar.php:442
 msgid "Date of the year (E.g. May 16th)"
-msgstr ""
+msgstr "Tag im Jahr (z.B. 16. Mai bzw. May 16th)"
 
 #: views/calendar.php:419
 msgid "Day of the month (E.g. 2nd Monday)"
-msgstr ""
+msgstr "Tag des Monats (z.B. zweiter Montag)"
 
 #: views/calendar.php:444
 msgid "Day of the year (E.g. 2nd Monday in May)"
-msgstr ""
+msgstr "Tag des Jahres (z.B. zweiter Montag im Mai)"
 
 #: assets/js/calendar/calendar.js:387
 msgid "Days"
@@ -298,7 +298,7 @@ msgstr "Tage"
 
 #: views/calendar.php:479
 msgid "Define when to stop the reoccurrance"
-msgstr ""
+msgstr "Definieren Sie ein Ende für zyklisch wiederkehrende Termine"
 
 #: Calendar.class.php:823 Calendar.class.php:861
 msgid "Delete"
@@ -388,15 +388,15 @@ msgstr "Ereignisse, die zu dieser Gruppe hinzugefügt werden sollen"
 
 #: views/calendar.php:308
 msgid "Every Monday, Wednesday, and Friday"
-msgstr ""
+msgstr "Jeder Montag, Mittwoch und Freitag"
 
 #: views/calendar.php:309
 msgid "Every Tuesday and Thursday"
-msgstr ""
+msgstr "Jeder Dienstag und Donnerstag"
 
 #: views/calendar.php:307
 msgid "Every weekday (Monday to Friday"
-msgstr ""
+msgstr "Jeder Wochentag (Montag bis Freitag"
 
 #: assets/js/calendargroups/calendargroups.js:11
 msgid "Expand Recurring Dates"
@@ -454,7 +454,7 @@ msgstr "Lokaler Kalender"
 
 #: views/calendar.php:311
 msgid "Monthly"
-msgstr ""
+msgstr "monatlich"
 
 #: assets/js/calendar/calendar.js:402
 msgid "Months"
@@ -590,7 +590,7 @@ msgstr "Wiederhole nach"
 
 #: views/calendar.php:377
 msgid "Repeat every X interval"
-msgstr ""
+msgstr "Wiederhole alle X Intervalle"
 
 #: views/calendar.php:301
 msgid "Repeats"
@@ -607,15 +607,15 @@ msgstr "Setze Kalender zurück über ID"
 
 #: views/calendar.php:402
 msgid "Select day of week to repeat on"
-msgstr ""
+msgstr "Wählen Sie den Tag der Woche für die Wiederholung"
 
 #: views/calendar.php:321
 msgid "Select how often this event repeats"
-msgstr ""
+msgstr "Wählen Sie die Anzahl der Wiederholungen"
 
 #: views/calendar.php:427 views/calendar.php:452
 msgid "Select how to repeat"
-msgstr ""
+msgstr "Wählen Sie die Art der Wiederholung"
 
 #: views/remote_caldav_settings.php:161 views/remote_ews_settings.php:222
 msgid "Select specific calendar"
@@ -833,7 +833,7 @@ msgstr "Warnung"
 
 #: views/calendar.php:310
 msgid "Weekly"
-msgstr ""
+msgstr "Wöchentlich"
 
 #: assets/js/calendar/calendar.js:384
 msgid "Weeks"
@@ -849,11 +849,11 @@ msgstr "Soll dieser Benutzer im UCP Zugriff auf den Kalender erhalten"
 
 #: views/calendar.php:529
 msgid "X number of occurances"
-msgstr ""
+msgstr "X Anzahl der Wiederholungen"
 
 #: views/calendar.php:312
 msgid "Yearly"
-msgstr ""
+msgstr "Jährlich"
 
 #: assets/js/calendar/calendar.js:409
 msgid "Years"
