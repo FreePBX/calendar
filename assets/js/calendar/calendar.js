@@ -242,7 +242,7 @@ $(document).ready(function() {
 						break;
 						case "YEARLY":
 							$("#repeats").val(6);
-							if(src.rrules.byday) {
+							if(src.rrules.byday.length != 0) {
 								$("#repeat-by-year1").prop("checked",true);
 							} else {
 								$("#repeat-by-year0").prop("checked",true);
@@ -250,7 +250,7 @@ $(document).ready(function() {
 						break;
 						case "MONTHLY":
 							$("#repeats").val(5);
-							if(src.rrules.byday) {
+							if(src.rrules.byday.length != 0) {
 								$("#repeat-by1").prop("checked",true);
 							} else {
 								$("#repeat-by0").prop("checked",true);
