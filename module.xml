@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>15.0.4.13</version>
+	<version>15.0.4.14</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -13,6 +13,7 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
+		*15.0.4.14* Fixes FREEPBX-20217: check for byday length instead of existence (v14.0) 
 		*15.0.4.13* FREEPBX-20373 Calendar Legacy restore issue 
 		*15.0.4.12* FREEPBX-19606 Java script Issue in Calendar Events. 
 		*15.0.4.11* FREEI-542 Calendar module not adding the event for Monday
