@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-11 18:11+0530\n"
+"POT-Creation-Date: 2019-09-02 21:38+0530\n"
 "PO-Revision-Date: 2018-07-18 19:12+0000\n"
 "Last-Translator: Elvita Crespo <ecrespo@sangoma.com>\n"
 "Language-Team: Spanish <http://*/projects/freepbx/calendar/es/>\n"
@@ -182,10 +182,6 @@ msgstr ""
 msgid "Allowed Calendars"
 msgstr ""
 
-#: calendar.i18n.php:6
-msgid "Applications"
-msgstr ""
-
 #: views/remote_ews_settings.php:280
 msgid "Attempting to load"
 msgstr ""
@@ -203,14 +199,9 @@ msgstr ""
 msgid "Autodetect"
 msgstr ""
 
-#: Calendar.class.php:935 Console/Calendar.class.php:22 calendar.i18n.php:4
-#: calendar.i18n.php:10 views/remote_caldav_settings.php:133
-#: views/remote_ews_settings.php:194
+#: Calendar.class.php:935 Console/Calendar.class.php:22
+#: views/remote_caldav_settings.php:133 views/remote_ews_settings.php:194
 msgid "Calendar"
-msgstr ""
-
-#: calendar.i18n.php:12
-msgid "Calendar Event Groups"
 msgstr ""
 
 #: functions.inc.php:15 functions.inc.php:28
@@ -704,11 +695,6 @@ msgstr ""
 
 #: views/calendargroupgrid.php:11
 msgid "These groups can then be linked to various applications or utilities"
-msgstr ""
-
-#: calendar.i18n.php:8
-msgid ""
-"This module is used to manage calendar and time based events for FreePBX"
 msgstr ""
 
 #: views/calendar.php:217

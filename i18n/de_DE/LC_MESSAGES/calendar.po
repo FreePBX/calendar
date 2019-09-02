@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-11 18:11+0530\n"
+"POT-Creation-Date: 2019-09-02 21:38+0530\n"
 "PO-Revision-Date: 2019-06-25 12:10+0000\n"
 "Last-Translator: Bastian Mertgen <b.mertgen@bastian-mertgen.de>\n"
 "Language-Team: German <http://*/projects/freepbx/calendar/de/>\n"
@@ -188,10 +188,6 @@ msgstr "zugelassene Kalendergruppen"
 msgid "Allowed Calendars"
 msgstr "zugelassene Kalender"
 
-#: calendar.i18n.php:6
-msgid "Applications"
-msgstr "Anwendungen"
-
 #: views/remote_ews_settings.php:280
 msgid "Attempting to load"
 msgstr "Versuche, zu laden"
@@ -209,15 +205,10 @@ msgstr "automatisch neu laden"
 msgid "Autodetect"
 msgstr "Automatische Erkennung"
 
-#: Calendar.class.php:935 Console/Calendar.class.php:22 calendar.i18n.php:4
-#: calendar.i18n.php:10 views/remote_caldav_settings.php:133
-#: views/remote_ews_settings.php:194
+#: Calendar.class.php:935 Console/Calendar.class.php:22
+#: views/remote_caldav_settings.php:133 views/remote_ews_settings.php:194
 msgid "Calendar"
 msgstr "Kalender"
-
-#: calendar.i18n.php:12
-msgid "Calendar Event Groups"
-msgstr "Kalender Ereignisgruppen"
 
 #: functions.inc.php:15 functions.inc.php:28
 #, php-format
@@ -727,13 +718,6 @@ msgstr ""
 "Diese Gruppen können mit verschiedenen Anwendungen und Werkzeugen verknüpft "
 "werden"
 
-#: calendar.i18n.php:8
-msgid ""
-"This module is used to manage calendar and time based events for FreePBX"
-msgstr ""
-"Dieses Modul wird verwendet, um kalender- und zeitgesteuerte Ereignisse für "
-"FreePBX zu verwalten"
-
 #: views/calendar.php:217
 msgid "Time event starts"
 msgstr "Zeit, zu der das Ereignis beginnt"
@@ -881,6 +865,18 @@ msgstr "Vorkommen"
 #: Calendar.class.php:354
 msgid "to"
 msgstr "bis"
+
+#~ msgid "Applications"
+#~ msgstr "Anwendungen"
+
+#~ msgid "Calendar Event Groups"
+#~ msgstr "Kalender Ereignisgruppen"
+
+#~ msgid ""
+#~ "This module is used to manage calendar and time based events for FreePBX"
+#~ msgstr ""
+#~ "Dieses Modul wird verwendet, um kalender- und zeitgesteuerte Ereignisse "
+#~ "für FreePBX zu verwalten"
 
 #~ msgid "Day of the month"
 #~ msgstr "Tag des Monats"
