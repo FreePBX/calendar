@@ -85,7 +85,7 @@ class Caldav extends Base {
 		$caldavClient->connect($this->calendar['purl'], $this->calendar['username'], $this->calendar['password']);
 		$cals = $caldavClient->findCalendars();
 		$start = Carbon::Now()->subYear();
-		$end = $start->copy()->addYear();
+		$end = Carbon::Now()->addYear();
 		foreach($this->calendar['calendars'] as $c) {
 			if(isset($cals[$c])) {
 				$caldavClient->setCalendar($cals[$c]);
