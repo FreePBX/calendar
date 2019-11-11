@@ -12,10 +12,7 @@ class IcalParser {
 	public $timezone;
 
 	/** @var array */
-	public $data = [];
-
-	/** @var array */
-	protected $counters = [];
+	public $data;
 
 	/** @var array */
 	private $windowsTimezones;
@@ -59,13 +56,13 @@ class IcalParser {
 		if ($add === false) {
 			// delete old data
 			$this->data = [];
-			$this->counters = [];
 		}
 
 		if (!preg_match('/BEGIN:VCALENDAR/', $string)) {
 			throw new \InvalidArgumentException('Invalid ICAL data format');
 		}
 
+		$counters = [];
 		$section = 'VCALENDAR';
 
 		// Replace \r\n with \n
@@ -86,12 +83,12 @@ class IcalParser {
 				case 'BEGIN:VTODO':
 				case 'BEGIN:VEVENT':
 					$section = substr($row, 6);
-					$this->counters[$section] = isset($this->counters[$section]) ? $this->counters[$section] + 1 : 0;
+					$counters[$section] = isset($counters[$section]) ? $counters[$section] + 1 : 0;
 					continue 2; // while
 					break;
 				case 'END:VEVENT':
 					$section = substr($row, 4);
-					$currCounter = $this->counters[$section];
+					$currCounter = $counters[$section];
 					$event = $this->data[$section][$currCounter];
 					if (!empty($event['RECURRENCE-ID'])) {
 						$this->data['_RECURRENCE_IDS'][$event['RECURRENCE-ID']] = $event;
@@ -134,7 +131,7 @@ class IcalParser {
 
 			if ($callback) {
 				// call user function for processing line
-				call_user_func($callback, $row, $key, $middle, $value, $section, $this->counters[$section]);
+				call_user_func($callback, $row, $key, $middle, $value, $section, $counters[$section]);
 			} else {
 				if ($section === 'VCALENDAR') {
 					$this->data[$key] = $value;
@@ -144,10 +141,10 @@ class IcalParser {
 						// break the current implementation--it leaves the original key alone and adds
 						// a new one specifically for the array of values.
 						$arrayKey = $this->arrayKeyMappings[$key];
-						$this->data[$section][$this->counters[$section]][$arrayKey][] = $value;
+						$this->data[$section][$counters[$section]][$arrayKey][] = $value;
 					}
 
-					$this->data[$section][$this->counters[$section]][$key] = $value;
+					$this->data[$section][$counters[$section]][$key] = $value;
 				}
 
 			}
