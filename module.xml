@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>15.0.4.16</version>
+	<version>15.0.4.17</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -13,6 +13,7 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
+		*15.0.4.17* FREEPBX-20256 Issues with calendar module due to 3rd party library 
 		*15.0.4.16* FREEI-669 Calendar module only displays events in past 
 		*15.0.4.15* Related to FREEPBX-20414: removed $jobid from runRestore() 
 		*15.0.4.14* Fixes FREEPBX-20217: check for byday length instead of existence (v14.0) 
