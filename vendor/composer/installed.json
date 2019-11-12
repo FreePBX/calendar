@@ -103,17 +103,17 @@
     },
     {
         "name": "om/icalparser",
-        "version": "dev-hotfix/31",
-        "version_normalized": "dev-hotfix/31",
+        "version": "v0.2.3",
+        "version_normalized": "0.2.3.0",
         "source": {
             "type": "git",
             "url": "https://github.com/tm1000/icalparser.git",
-            "reference": "70a839dd207bb5292c73d473024b4a33b4a22b48"
+            "reference": "eb5468eae5c5d39c766ab12a6919aa2b668b53e5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/tm1000/icalparser/zipball/70a839dd207bb5292c73d473024b4a33b4a22b48",
-            "reference": "70a839dd207bb5292c73d473024b4a33b4a22b48",
+            "url": "https://api.github.com/repos/tm1000/icalparser/zipball/eb5468eae5c5d39c766ab12a6919aa2b668b53e5",
+            "reference": "eb5468eae5c5d39c766ab12a6919aa2b668b53e5",
             "shasum": ""
         },
         "require": {
@@ -122,7 +122,7 @@
         "require-dev": {
             "nette/tester": "v2.0.1"
         },
-        "time": "2018-07-23T15:44:19+00:00",
+        "time": "2018-04-19T08:33:30+00:00",
         "type": "library",
         "installation-source": "source",
         "autoload": {
@@ -151,7 +151,7 @@
             "parser"
         ],
         "support": {
-            "source": "https://github.com/tm1000/icalparser/tree/hotfix/31"
+            "source": "https://github.com/tm1000/icalparser/tree/v0.2.3"
         }
     },
     {
