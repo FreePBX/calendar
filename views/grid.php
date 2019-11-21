@@ -20,7 +20,7 @@ if(!empty($message)) { ?>
 		</ul>
 	</div>
 </div>
-<table data-toolbar="#toolbar-all" data-toggle="table" data-url="ajax.php?module=calendar&amp;command=grid" data-maintain-selected="true" data-show-columns="true" data-show-toggle="true" data-toggle="table" data-pagination="true" data-search="true"  id="table-all">
+<table data-toolbar="#toolbar-all" data-escape="true" data-toggle="table" data-url="ajax.php?module=calendar&amp;command=grid" data-maintain-selected="true" data-show-columns="true" data-show-toggle="true" data-toggle="table" data-pagination="true" data-search="true" id="table-all">
 	<thead>
 		<tr>
 			<th data-sortable="true" data-field="name"><?php echo _("Name")?></th>
