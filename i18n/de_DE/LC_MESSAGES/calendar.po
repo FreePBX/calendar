@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-20 14:49+0530\n"
+"POT-Creation-Date: 2019-11-25 14:41+0530\n"
 "PO-Revision-Date: 2018-07-18 19:12+0000\n"
 "Last-Translator: Bastian Mertgen <b.mertgen@bastian-mertgen.de>\n"
 "Language-Team: German <http://*/projects/freepbx/calendar/de/>\n"
@@ -117,7 +117,7 @@ msgid ""
 "rule to another format"
 msgstr ""
 
-#: views/calendargroupgrid.php:34 views/grid.php:29
+#: views/calendargroupgrid.php:38 views/grid.php:29
 msgid "Actions"
 msgstr "Aktionen"
 
@@ -138,7 +138,7 @@ msgstr "Kalender hinzufügen"
 msgid "Add Event"
 msgstr "Ereignis hinzufügen"
 
-#: views/calendargroupgrid.php:16
+#: views/calendargroupgrid.php:20
 msgid "Add Group"
 msgstr "Gruppe hinzufügen"
 
@@ -182,6 +182,10 @@ msgstr "zugelassene Kalendergruppen"
 msgid "Allowed Calendars"
 msgstr "zugelassene Kalender"
 
+#: calendar.i18n.php:6
+msgid "Applications"
+msgstr "Anwendungen"
+
 #: views/remote_ews_settings.php:280
 msgid "Attempting to load"
 msgstr "Versuche, zu laden"
@@ -199,10 +203,15 @@ msgstr ""
 msgid "Autodetect"
 msgstr "Automatische Erkennung"
 
-#: Calendar.class.php:933 Console/Calendar.class.php:22
-#: views/remote_caldav_settings.php:133 views/remote_ews_settings.php:194
+#: Calendar.class.php:933 Console/Calendar.class.php:22 calendar.i18n.php:4
+#: calendar.i18n.php:10 views/remote_caldav_settings.php:133
+#: views/remote_ews_settings.php:194
 msgid "Calendar"
 msgstr "Kalender"
+
+#: calendar.i18n.php:12
+msgid "Calendar Event Groups"
+msgstr "Kalender Ereignisgruppen"
 
 #: functions.inc.php:15 functions.inc.php:28
 #, php-format
@@ -213,7 +222,7 @@ msgstr "Kalendergruppe: %s1"
 msgid "Calendar Groups"
 msgstr "Kalendergruppen"
 
-#: views/calendargroupgrid.php:11
+#: views/calendargroupgrid.php:12
 msgid ""
 "Calendar event groups are a collection of calendars, events or categories "
 "from the Calendar Module."
@@ -407,7 +416,7 @@ msgstr ""
 msgid "Generating..."
 msgstr "Erzeuge..."
 
-#: views/calendargroupgrid.php:33
+#: views/calendargroupgrid.php:37
 msgid "Group"
 msgstr "Gruppe"
 
@@ -445,7 +454,7 @@ msgstr ""
 msgid "Months"
 msgstr "Monate"
 
-#: views/calendargroupgrid.php:11
+#: views/calendargroupgrid.php:12
 msgid ""
 "Multiple calendars, events and/or categories can be placed into separate "
 "groups. Even multiple events from different calendars can be placed into a "
@@ -696,8 +705,13 @@ msgstr ""
 msgid "There was an error fetching the events"
 msgstr ""
 
-#: views/calendargroupgrid.php:11
+#: views/calendargroupgrid.php:12
 msgid "These groups can then be linked to various applications or utilities"
+msgstr ""
+
+#: calendar.i18n.php:8
+msgid ""
+"This module is used to manage calendar and time based events for FreePBX"
 msgstr ""
 
 #: views/calendar.php:217
@@ -775,7 +789,7 @@ msgid ""
 "Manager)"
 msgstr ""
 
-#: views/calendargroupgrid.php:15
+#: views/calendargroupgrid.php:18
 msgid "View Calendars"
 msgstr ""
 
@@ -801,7 +815,7 @@ msgstr ""
 msgid "Weeks"
 msgstr "Wochen"
 
-#: views/calendargroupgrid.php:7
+#: views/calendargroupgrid.php:8
 msgid "What are Calendar Event Groups?"
 msgstr ""
 
@@ -841,12 +855,6 @@ msgstr "Vorkommen"
 #: Calendar.class.php:352
 msgid "to"
 msgstr ""
-
-#~ msgid "Applications"
-#~ msgstr "Anwendungen"
-
-#~ msgid "Calendar Event Groups"
-#~ msgstr "Kalender Ereignisgruppen"
 
 #~ msgid "Day of the month"
 #~ msgstr "Tag des Monats"
