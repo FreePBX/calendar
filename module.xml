@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>14.0.3.7</version>
+	<version>14.0.3.8</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -13,6 +13,7 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
+		*14.0.3.8* FREEI-913 Fix XSS Bootstrap Datatable Issues 
 		*14.0.3.7* FREEPBX-20256 Issues with calendar module due to 3rd party library 
 		*14.0.3.6* FREEI-669 Calendar module only displays events in past 
 		*14.0.3.5* Fixes FREEPBX-20217: check for byday length instead of existence (v14.0) 

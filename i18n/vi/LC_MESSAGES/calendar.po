@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-02 21:38+0530\n"
+"POT-Creation-Date: 2019-11-25 14:39+0530\n"
 "PO-Revision-Date: 2017-06-14 09:55+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese <http://weblate.freepbx.org/projects/freepbx/"
@@ -118,7 +118,7 @@ msgid ""
 "rule to another format"
 msgstr ""
 
-#: views/calendargroupgrid.php:34 views/grid.php:29
+#: views/calendargroupgrid.php:38 views/grid.php:29
 msgid "Actions"
 msgstr "Các thao tác"
 
@@ -139,7 +139,7 @@ msgstr "Thêm Lịch"
 msgid "Add Event"
 msgstr "Thêm Sự kiện"
 
-#: views/calendargroupgrid.php:16
+#: views/calendargroupgrid.php:20
 msgid "Add Group"
 msgstr "Thêm Nhóm"
 
@@ -183,6 +183,10 @@ msgstr "Các nhóm lịch được cho phép"
 msgid "Allowed Calendars"
 msgstr "Các lịch cho phép"
 
+#: calendar.i18n.php:6
+msgid "Applications"
+msgstr "Các ứng dụng"
+
 #: views/remote_ews_settings.php:280
 msgid "Attempting to load"
 msgstr "Đang cố tải"
@@ -200,10 +204,15 @@ msgstr ""
 msgid "Autodetect"
 msgstr "Tự động phát hiện"
 
-#: Calendar.class.php:935 Console/Calendar.class.php:22
-#: views/remote_caldav_settings.php:133 views/remote_ews_settings.php:194
+#: Calendar.class.php:935 Console/Calendar.class.php:22 calendar.i18n.php:4
+#: calendar.i18n.php:10 views/remote_caldav_settings.php:133
+#: views/remote_ews_settings.php:194
 msgid "Calendar"
 msgstr "Lịch"
+
+#: calendar.i18n.php:12
+msgid "Calendar Event Groups"
+msgstr "Các nhóm Lịch sự kiện"
 
 #: functions.inc.php:15 functions.inc.php:28
 #, php-format
@@ -214,7 +223,7 @@ msgstr "Nhóm lịch: %s"
 msgid "Calendar Groups"
 msgstr "Các nhóm lịch"
 
-#: views/calendargroupgrid.php:11
+#: views/calendargroupgrid.php:12
 msgid ""
 "Calendar event groups are a collection of calendars, events or categories "
 "from the Calendar Module."
@@ -408,7 +417,7 @@ msgstr "Tên thân thiện cho sự kiện"
 msgid "Generating..."
 msgstr ""
 
-#: views/calendargroupgrid.php:33
+#: views/calendargroupgrid.php:37
 msgid "Group"
 msgstr "Nhóm"
 
@@ -446,7 +455,7 @@ msgstr ""
 msgid "Months"
 msgstr "Tháng"
 
-#: views/calendargroupgrid.php:11
+#: views/calendargroupgrid.php:12
 msgid ""
 "Multiple calendars, events and/or categories can be placed into separate "
 "groups. Even multiple events from different calendars can be placed into a "
@@ -705,11 +714,18 @@ msgstr "Tên người dùng của người dùng lịch này"
 msgid "There was an error fetching the events"
 msgstr "Đã xảy ra lỗi khi tìm nạp các sự kiện"
 
-#: views/calendargroupgrid.php:11
+#: views/calendargroupgrid.php:12
 msgid "These groups can then be linked to various applications or utilities"
 msgstr ""
 "Những nhóm này sau đó có thể được kết nối tới các ứng dụng hoặc các tiện ích "
 "khác nhau"
+
+#: calendar.i18n.php:8
+msgid ""
+"This module is used to manage calendar and time based events for FreePBX"
+msgstr ""
+"Mô đun này được sử dụng để quản lý các sự kiện dựa trên lịch và thời gian "
+"đối với FreePBX"
 
 #: views/calendar.php:217
 msgid "Time event starts"
@@ -786,7 +802,7 @@ msgid ""
 "Manager)"
 msgstr ""
 
-#: views/calendargroupgrid.php:15
+#: views/calendargroupgrid.php:18
 msgid "View Calendars"
 msgstr "Xem lịch"
 
@@ -812,7 +828,7 @@ msgstr ""
 msgid "Weeks"
 msgstr "Các tuần"
 
-#: views/calendargroupgrid.php:7
+#: views/calendargroupgrid.php:8
 msgid "What are Calendar Event Groups?"
 msgstr "Nhóm sự kiện lịch là gì?"
 
@@ -852,18 +868,6 @@ msgstr "Lần xuất hiện"
 #: Calendar.class.php:354
 msgid "to"
 msgstr "Tới"
-
-#~ msgid "Applications"
-#~ msgstr "Các ứng dụng"
-
-#~ msgid "Calendar Event Groups"
-#~ msgstr "Các nhóm Lịch sự kiện"
-
-#~ msgid ""
-#~ "This module is used to manage calendar and time based events for FreePBX"
-#~ msgstr ""
-#~ "Mô đun này được sử dụng để quản lý các sự kiện dựa trên lịch và thời gian "
-#~ "đối với FreePBX"
 
 #~ msgid "Day of the month"
 #~ msgstr "Ngày trong tháng"
