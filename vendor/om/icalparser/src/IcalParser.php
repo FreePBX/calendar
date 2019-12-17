@@ -1,6 +1,7 @@
 <?php
 
 namespace om;
+
 /**
  * Copyright (c) 2004-2015 Roman Ožana (http://www.omdesign.cz)
  *
@@ -12,7 +13,10 @@ class IcalParser {
 	public $timezone;
 
 	/** @var array */
-	public $data;
+	public $data = [];
+
+	/** @var array */
+	protected $counters = [];
 
 	/** @var array */
 	private $windowsTimezones;
@@ -56,13 +60,13 @@ class IcalParser {
 		if ($add === false) {
 			// delete old data
 			$this->data = [];
+			$this->counters = [];
 		}
 
 		if (!preg_match('/BEGIN:VCALENDAR/', $string)) {
 			throw new \InvalidArgumentException('Invalid ICAL data format');
 		}
 
-		$counters = [];
 		$section = 'VCALENDAR';
 
 		// Replace \r\n with \n
@@ -83,12 +87,12 @@ class IcalParser {
 				case 'BEGIN:VTODO':
 				case 'BEGIN:VEVENT':
 					$section = substr($row, 6);
-					$counters[$section] = isset($counters[$section]) ? $counters[$section] + 1 : 0;
+					$this->counters[$section] = isset($this->counters[$section]) ? $this->counters[$section] + 1 : 0;
 					continue 2; // while
 					break;
 				case 'END:VEVENT':
 					$section = substr($row, 4);
-					$currCounter = $counters[$section];
+					$currCounter = $this->counters[$section];
 					$event = $this->data[$section][$currCounter];
 					if (!empty($event['RECURRENCE-ID'])) {
 						$this->data['_RECURRENCE_IDS'][$event['RECURRENCE-ID']] = $event;
@@ -128,10 +132,9 @@ class IcalParser {
 
 			list($key, $middle, $value) = $this->parseRow($row);
 
-
 			if ($callback) {
 				// call user function for processing line
-				call_user_func($callback, $row, $key, $middle, $value, $section, $counters[$section]);
+				call_user_func($callback, $row, $key, $middle, $value, $section, $this->counters[$section]);
 			} else {
 				if ($section === 'VCALENDAR') {
 					$this->data[$key] = $value;
@@ -141,10 +144,10 @@ class IcalParser {
 						// break the current implementation--it leaves the original key alone and adds
 						// a new one specifically for the array of values.
 						$arrayKey = $this->arrayKeyMappings[$key];
-						$this->data[$section][$counters[$section]][$arrayKey][] = $value;
+						$this->data[$section][$this->counters[$section]][$arrayKey][] = $value;
 					}
 
-					$this->data[$section][$counters[$section]][$key] = $value;
+					$this->data[$section][$this->counters[$section]][$key] = $value;
 				}
 
 			}
@@ -190,7 +193,7 @@ class IcalParser {
 						} catch (\Exception $e) {
 							$middle[$match['key']] = $match['value'];
 						}
-					} else if ($match['key'] === 'ENCODING') {
+					} elseif ($match['key'] === 'ENCODING') {
 						if ($match['value'] === 'QUOTED-PRINTABLE') {
 							$value = quoted_printable_decode($value);
 						}
@@ -206,7 +209,7 @@ class IcalParser {
 			} catch (\Exception $e) {
 				$value = null;
 			}
-		} else if (in_array($key, ['EXDATE', 'RDATE'])) {
+		} elseif (in_array($key, ['EXDATE', 'RDATE'])) {
 			$values = [];
 			foreach (explode(',', $value) as $singleValue) {
 				try {
@@ -245,9 +248,9 @@ class IcalParser {
 
 		//implement 4.3.11 Text ESCAPED-CHAR
 		$text_properties = [
-			'CALSCALE', 'METHOD', 'PRODID', 'VERSION', 'CATEGORIES', 'CLASS', 'COMMENT', 'DESCRIPTION'
-			, 'LOCATION', 'RESOURCES', 'STATUS', 'SUMMARY', 'TRANSP', 'TZID', 'TZNAME', 'CONTACT', 'RELATED-TO', 'UID'
-			, 'ACTION', 'REQUEST-STATUS'
+			'CALSCALE', 'METHOD', 'PRODID', 'VERSION', 'CATEGORIES', 'CLASS', 'COMMENT', 'DESCRIPTION',
+			'LOCATION', 'RESOURCES', 'STATUS', 'SUMMARY', 'TRANSP', 'TZID', 'TZNAME', 'CONTACT',
+			'RELATED-TO', 'UID', 'ACTION', 'REQUEST-STATUS', 'URL',
 		];
 		if (in_array($key, $text_properties) || strpos($key, 'X-') === 0) {
 			if (is_array($value)) {
@@ -364,7 +367,7 @@ class IcalParser {
 										}
 									}
 									$event = null; // don't add this to the $events[] array again
-								} else if (!empty($originalEvent['RECURRENCES'])) {
+								} elseif (!empty($originalEvent['RECURRENCES'])) {
 									for ($j = 0; $j < count($originalEvent['RECURRENCES']); $j++) {
 										$recurDate = $originalEvent['RECURRENCES'][$j];
 										$formattedStartDate = $recurDate->format('Ymd\THis');
@@ -408,7 +411,6 @@ class IcalParser {
 		return $events;
 	}
 
-
 	/**
 	 * Process timezone and return correct one...
 	 *
@@ -431,6 +433,13 @@ class IcalParser {
 	 */
 	public function getTimezones() {
 		return isset($this->data['VTIMEZONE']) ? $this->data['VTIMEZONE'] : [];
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getTimezone() {
+		return $this->getTimezones();
 	}
 
 	/**
