@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>15.0.4.19</version>
+	<version>16.0.1</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -13,51 +13,13 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
-		*15.0.4.19* FREEI-1025 FREEPBX-20256 updated  lib with out composer update which requires php 7. 
-		*15.0.4.18* FREEI-913 Fix XSS Bootstrap Datatable Issues 
-		*15.0.4.17* FREEPBX-20256 Issues with calendar module due to 3rd party library 
-		*15.0.4.16* FREEI-669 Calendar module only displays events in past 
-		*15.0.4.15* Related to FREEPBX-20414: removed $jobid from runRestore() 
-		*15.0.4.14* Fixes FREEPBX-20217: check for byday length instead of existence (v14.0) 
-		*15.0.4.13* FREEPBX-20373 Calendar Legacy restore issue 
-		*15.0.4.12* FREEPBX-19606 Java script Issue in Calendar Events. 
-		*15.0.4.11* FREEI-542 Calendar module not adding the event for Monday
-		*15.0.4.10* FREEPBX-19902 fix monthly and yearly options to actually work correctly 
-		*15.0.4.9* Support console class
-		*15.0.4.8* Fix bug with viewing reoccuring dates
-		*15.0.4.7* FREEPBX-18329
-		*15.0.4.6* FREEPBX-19608
-		*15.0.4.5* Fixing FREEPBX-17867
-		*15.0.4.4* FREEPBX-19607 Exception Invalid URL While creating the ical Calendar with empty URL field
-		*15.0.4.3* FREEPBX-19606 Java script Issue in Calendar Events.
-		*15.0.4.2* Fixing legacy restore
-		*15.0.4.1* Fix uninstallation
-		*15.0.3* Packaging of ver 15.0.3
-		*15.0.3* Packaging of ver 15.0.3
-		*15.0.2* FREEPBX-17770 Calendar Module "Whole Day" goes to state unmachted
-		*15.0.1* Implement Backup/Restore
-		*14.0.2.5* FREEPBX-16507
-		*14.0.2.4* FREEPBX-15736 FREEPBX-17021
-		*14.0.2.3* FREEPBX-16890 support categories and calendars in group screen
-		*14.0.2.2* Make sure command is uninstalled
-		*14.0.2.1* Move code to install.php so we can be sure it was executed
-		*14.0.2* FREEPBX-16747 FREEPBX-16507 update libraries
-		*14.0.1.2* FREEPBX-14951 Fix whitespace in name, trim validation
-		*14.0.1.1* FREEPBX-15188 Fix Event form to submit properly through AJAX
-		*14.0.1* Stable release
-		*14.0.1beta2* FREEPBX-15175 FREEPBX-14951
-		*14.0.1beta1* FREEPBX-15023, FREEPBX-15022, FREEPBX-15021, FREEPBX-15016, FREEPBX-14951, FREEPBX-14860
-		*14.0.1alpha10* FREEPBX-14946 FREEPBX-14955 FREEPBX-14956 FREEPBX-14921
-		*14.0.1alpha9* FREEPBX-14956 FREEPBX-14921
-		*14.0.1alpha8* FREEPBX-14395 Calendar Month not displaying correctly in safari
-		*14.0.1alpha7* FREEPBX-14327, FREEPBX-14329, FREEPBX-14338, FREEPBX-14335, FREEPBX-14336
-		*14.0.1alpha1* Development
+		*16.0.1alpha1* 16.0.1 alpha release 
 	</changelog>
 	<depends>
 		<version>14.0.1rc1.18</version>
 	</depends>
 	<supported>
-		<version>15.0</version>
+		<version>16.0</version>
 	</supported>
 	<console>
 		<command>
