@@ -8,6 +8,7 @@
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
 	<category>Applications</category>
 	<description>This module is used to manage calendar and time based events for FreePBX</description>
+	<more-info>https://wiki.freepbx.org/display/FPG/Calendar+Module</more-info>
 	<menuitems>
 		<calendar needsenginedb="yes">Calendar</calendar>
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
