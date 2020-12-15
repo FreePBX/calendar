@@ -223,7 +223,7 @@ abstract class Base {
 	public function getEventsNow() {
 		$start = $this->getNow()->copy()->subWeek();
 		$stop = $this->getNow()->copy()->addWeek();
-		return $this->getEventsBetween($start, $end, true, true);
+		return $this->getEventsBetween($start, $stop, true, true);
 	}
 
 	/**
