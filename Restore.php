@@ -18,7 +18,7 @@ class Restore extends Base\RestoreBase{
 		$this->FreePBX->Database->query("DELETE from kvstore_FreePBX_modules_Calendar where id='calendar-raw'");
 		foreach($kvstorecalendar as $calendar) {
 			$calevents = explode('\n',$calendar['val']);
-			$calendar['val'] = implode($calevents,"\n");
+			$calendar['val'] = implode("\n", $calevents);
 			$query = "INSERT INTO kvstore_FreePBX_modules_Calendar VALUES('".$calendar['key']."','".$calendar['val']."','".$calendar['type']."','".$calendar['id']."')";
 			$this->FreePBX->Database->query($query);
 		}
