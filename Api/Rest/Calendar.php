@@ -13,12 +13,7 @@ class Calendar extends Base {
     }
 
     public function setupRoutes($app) {
-        /**
-         * @verb    GET
-         * @returns - the calendar list
-         * @uri     /calendar
-         */
-        $app->get('/', function($request, $response, $args) {
+        $getCalendars = function ($request, $response, $args){
             $list = [];
             $calendars = $this->freepbx->Calendar->listCalendars();
 
@@ -31,7 +26,23 @@ class Calendar extends Base {
             }
 
             return $response->withJson(!empty($list) ? $list : false);
-        })->add($this->checkAllReadScopeMiddleware());
+        };
+
+
+        /**
+         * @verb    GET
+         * @returns - the calendar list
+         * @uri     /calendar
+         */
+        $app->get('', $getCalendars)->add($this->checkAllReadScopeMiddleware());
+
+        /**
+         * Backward compatible for GET (path contains the / at the end)
+         * @verb    GET
+         * @returns - the calendar list
+         * @uri     /calendar/
+         */
+        $app->get('/', $getCalendars)->add($this->checkAllReadScopeMiddleware());
 
         /**
          * @verb    GET
@@ -144,6 +155,27 @@ class Calendar extends Base {
             }
 
             return $response->withJson($ret);
+        })->add($this->checkAllReadScopeMiddleware());
+
+        /**
+         * @verb    POST
+         * @returns - creates new calendar
+         * @uri     /calendar
+         */
+        $app->post('', function($request, $response, $args) {
+            $params = $request->getParsedBody();
+            $calendar = $this->freepbx->Calendar->getDriverByAdd($params['type'], $params);
+            if (!$calendar) {
+                return $response->withJson(false);
+            }
+
+            try {
+                needreload();
+            } catch (\Exception $e) {
+                return $response->withJson(false);
+            }
+
+            return $response->withJson($calendar->calendar);
         })->add($this->checkAllReadScopeMiddleware());
 
         /**
