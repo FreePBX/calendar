@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "82d5353d3a5bed23f89641a68a709d9c",
+    "content-hash": "48b95e1c512efd4a47b529d5fd556b83",
     "packages": [
         {
             "name": "eluceo/ical",
@@ -106,23 +106,26 @@
         },
         {
             "name": "om/icalparser",
-            "version": "v0.2.3",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/tm1000/icalparser.git",
-                "reference": "eb5468eae5c5d39c766ab12a6919aa2b668b53e5"
+                "url": "https://github.com/OzzyCzech/icalparser.git",
+                "reference": "1b7c1bb103e165fd637a76def39848696bbdbac5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tm1000/icalparser/zipball/eb5468eae5c5d39c766ab12a6919aa2b668b53e5",
-                "reference": "eb5468eae5c5d39c766ab12a6919aa2b668b53e5",
+                "url": "https://api.github.com/repos/OzzyCzech/icalparser/zipball/1b7c1bb103e165fd637a76def39848696bbdbac5",
+                "reference": "1b7c1bb103e165fd637a76def39848696bbdbac5",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6.0"
+                "php": ">=7.1.0"
             },
             "require-dev": {
-                "nette/tester": "v2.0.1"
+                "nette/tester": "*"
+            },
+            "suggest": {
+                "ext-dom": "for timezone tool"
             },
             "type": "library",
             "autoload": {
@@ -130,18 +133,14 @@
                     "src/"
                 ]
             },
-            "scripts": {
-                "tests": [
-                    "./vendor/bin/tester tests -s -p php"
-                ]
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
             "authors": [
                 {
                     "name": "Roman Ožana",
-                    "email": "ozana@omdesign.cz"
+                    "email": "roman@omdesign.cz"
                 }
             ],
             "description": "Simple ical parser",
@@ -151,9 +150,10 @@
                 "parser"
             ],
             "support": {
-                "source": "https://github.com/tm1000/icalparser/tree/v0.2.3"
+                "issues": "https://github.com/OzzyCzech/icalparser/issues",
+                "source": "https://github.com/OzzyCzech/icalparser/tree/v1.0.0"
             },
-            "time": "2018-04-19T08:33:30+00:00"
+            "time": "2020-09-11T11:28:28+00:00"
         },
         {
             "name": "php-ews/php-ews",
@@ -253,5 +253,6 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.1.0"
 }

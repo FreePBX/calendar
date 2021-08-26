@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Eluceo\\iCal\\Component' => $vendorDir . '/eluceo/ical/src/Eluceo/iCal/Component.php',
     'Eluceo\\iCal\\Component\\Alarm' => $vendorDir . '/eluceo/ical/src/Eluceo/iCal/Component/Alarm.php',
     'Eluceo\\iCal\\Component\\Calendar' => $vendorDir . '/eluceo/ical/src/Eluceo/iCal/Component/Calendar.php',

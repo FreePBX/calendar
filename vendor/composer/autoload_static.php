@@ -44,6 +44,7 @@ class ComposerStaticInit678a1299a219628bd23671dbba7bffe5
     );
 
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Eluceo\\iCal\\Component' => __DIR__ . '/..' . '/eluceo/ical/src/Eluceo/iCal/Component.php',
         'Eluceo\\iCal\\Component\\Alarm' => __DIR__ . '/..' . '/eluceo/ical/src/Eluceo/iCal/Component/Alarm.php',
         'Eluceo\\iCal\\Component\\Calendar' => __DIR__ . '/..' . '/eluceo/ical/src/Eluceo/iCal/Component/Calendar.php',
