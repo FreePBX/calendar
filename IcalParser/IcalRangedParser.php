@@ -31,7 +31,8 @@ class IcalRangedParser extends IcalParser {
 	 * @return array
 	 * @throws \Exception
 	 */
-	public function parseRecurrences($event) {
+	public function parseRecurrences($event): array
+	{
 		$recurring = new Recurrence($event['RRULE']);
 		$exclusions = [];
 		$additions = [];
@@ -183,7 +184,8 @@ class IcalRangedParser extends IcalParser {
 	/**
 	 * @return array
 	 */
-	public function getEvents() {
+	public function getEvents(): array
+	{
 		$events = [];
 		if (isset($this->data['VEVENT'])) {
 			for ($i = 0; $i < count($this->data['VEVENT']); $i++) {

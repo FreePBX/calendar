@@ -3,14 +3,14 @@
  * @author PC Drew <pc@schoolblocks.com>
  */
 
+use om\IcalParser;
 use Tester\Assert;
 use Tester\Environment;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 Environment::setup();
 
-$cal = new \om\IcalParser();
-
+$cal = new IcalParser();
 
 $results = $cal->parseFile(__DIR__ . '/cal/recur_instances_finite.ics');
 $events = $cal->getSortedEvents();
@@ -31,7 +31,7 @@ $results = $cal->parseFile(__DIR__ . '/cal/recur_instances.ics');
 $events = $cal->getSortedEvents();
 
 $recurrences = [];
-foreach($events as $i => $event) {
+foreach ($events as $i => $event) {
 	$recurrences[] = $event['DTSTART'];
 }
 
@@ -43,9 +43,11 @@ foreach($events as $i => $event) {
 // EXDATE;TZID=America/Los_Angeles:20130402T100000
 // EXDATE;TZID=America/Los_Angeles:20121204T100000
 // EXDATE;TZID=America/Los_Angeles:20130205T100000
-// total = 36 events - 3 exclusions + 3 additions
-//      because there is no "UNTIL", we only calculate the next 3 years of repeating events
-Assert::equal(35, sizeof($recurrences));
+//      because there is no "UNTIL", we calculate until 3 years from now of repeating events
+$now = new \DateTime('now');
+$diff = $now->diff(new \DateTime('20121002T100000'));
+$count = ($diff->y + 3) * 12 + $diff->m;
+Assert::equal($count, sizeof($recurrences));
 Assert::equal('02.10.2012 15:00:00', $recurrences[0]->format('d.m.Y H:i:s'));
 Assert::equal('06.11.2012 20:00:00', $recurrences[1]->format('d.m.Y H:i:s'));
 Assert::equal('10.11.2012 10:00:00', $recurrences[2]->format('d.m.Y H:i:s'));
@@ -86,9 +88,8 @@ foreach ($events[0]['EXDATES'] as $exDate) {
 	Assert::notContains($exDate, $recurrences);
 }
 
-
 $results = $cal->parseFile(__DIR__ . '/cal/recur_instances_with_modifications.ics');
-$events = $cal->getSortedEvents(true);
+$events = $cal->getSortedEvents();
 
 Assert::false(empty($events[0]['RECURRENCES']));
 // the 12th entry is the modified event, related to the remaining recurring events
@@ -106,23 +107,23 @@ Assert::notContains($modifiedEvent['DTSTART'], $recurrences);
 $results = $cal->parseFile(__DIR__ . '/cal/recur_instances_with_modifications_and_interval.ics');
 
 // Build the cache of RECURRENCE-IDs and EXDATES first, so that we can properly determine the interval
-$eventCache = array();
-foreach($results['VEVENT'] as $event) {
+$eventCache = [];
+foreach ($results['VEVENT'] as $event) {
 	$eventSequence = empty($event['SEQUENCE']) ? "0" : $event['SEQUENCE'];
 	$eventRecurrenceID = empty($event['RECURRENCE-ID']) ? "0" : $event['RECURRENCE-ID'];
 
 	$eventCache[$event['UID']][$eventRecurrenceID][$eventSequence] = $event;
 }
-$trueEvents = array();
-foreach($results['VEVENT'] as $event) {
-	if(empty($event['RECURRENCES'])) {
+$trueEvents = [];
+foreach ($results['VEVENT'] as $event) {
+	if (empty($event['RECURRENCES'])) {
 		$trueEvents[] = $event;
 	} else {
 		$eventUID = $event['UID'];
-		foreach($event['RECURRENCES'] as $recurrence) {
+		foreach ($event['RECURRENCES'] as $recurrence) {
 			$eventRecurrenceID = $recurrence->format("Ymd");
-			if(empty($eventCache[$eventUID][$eventRecurrenceID])) {
-				$trueEvents[$eventRecurrenceID] = array('DTSTART' => $recurrence);
+			if (empty($eventCache[$eventUID][$eventRecurrenceID])) {
+				$trueEvents[$eventRecurrenceID] = ['DTSTART' => $recurrence];
 			} else {
 				krsort($eventCache[$eventUID][$eventRecurrenceID]);
 				$keys = array_keys($eventCache[$eventUID][$eventRecurrenceID]);
@@ -132,17 +133,18 @@ foreach($results['VEVENT'] as $event) {
 	}
 }
 
-usort($trueEvents, function ($a, $b) {
+usort(
+	$trueEvents, function ($a, $b) {
 	return $a['DTSTART'] > $b['DTSTART'];
-});
+}
+);
 
-$events = $cal->getSortedEvents(true);
+$events = $cal->getSortedEvents();
 Assert::false(empty($events[0]['RECURRENCES']));
 Assert::equal(count($trueEvents), count($events));
-foreach($trueEvents as $index => $trueEvent) {
+foreach ($trueEvents as $index => $trueEvent) {
 	Assert::equal($trueEvent['DTSTART']->format("Ymd"), $events[$index]['DTSTART']->format("Ymd"));
 }
-
 
 // There is still an issue that needs to be resolved when modifications are made to the initial event that is the
 // base of the recurrences.  The below ICS file has a great edge case example: one event, no recurrences in the
@@ -156,7 +158,7 @@ Assert::equal(1, count($events));
 $results = $cal->parseFile(__DIR__ . '/cal/daily_recur.ics');
 $events = $cal->getSortedEvents();
 $period = new DatePeriod(new DateTime('20120801T050000'), new DateInterval('P1D'), 365 * 3);
-foreach($period as $i => $day) {
+foreach ($period as $i => $day) {
 	Assert::equal($day->format('j.n.Y H:i:s'), $events[$i]['DTSTART']->format('j.n.Y H:i:s'));
 }
 
@@ -168,3 +170,40 @@ Assert::equal('21.8.2017 00:00:00', $events[0]['DTSTART']->format('j.n.Y H:i:s')
 Assert::equal('28.8.2017 00:00:00', $events[1]['DTSTART']->format('j.n.Y H:i:s'));
 Assert::equal('4.9.2017 00:00:00', $events[2]['DTSTART']->format('j.n.Y H:i:s'));
 Assert::equal('11.9.2017 00:00:00', $events[3]['DTSTART']->format('j.n.Y H:i:s'));
+
+//https://github.com/OzzyCzech/icalparser/issues/38
+$results = $cal->parseFile(__DIR__ . '/cal/38_weekly_recurring_event_missing_day.ics');
+$events = $cal->getSortedEvents();
+
+//first monday
+Assert::equal('25.2.2019 09:00:00', $events[0]['DTSTART']->format('j.n.Y H:i:s'));
+//rest of week
+Assert::equal('26.2.2019 09:00:00', $events[1]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('27.2.2019 09:00:00', $events[2]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('28.2.2019 09:00:00', $events[3]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('1.3.2019 09:00:00', $events[4]['DTSTART']->format('j.n.Y H:i:s'));
+//now check the next 4 mondays to make sure they exist as well
+Assert::equal('4.3.2019 09:00:00', $events[5]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('11.3.2019 09:00:00', $events[10]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('18.3.2019 09:00:00', $events[15]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('25.3.2019 09:00:00', $events[20]['DTSTART']->format('j.n.Y H:i:s'));
+
+//Last week that works correctly
+Assert::equal('1.4.2019 09:00:00', $events[25]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('2.4.2019 09:00:00', $events[26]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('3.4.2019 09:00:00', $events[27]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('4.4.2019 09:00:00', $events[28]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('5.4.2019 09:00:00', $events[29]['DTSTART']->format('j.n.Y H:i:s'));
+
+//This week starts failing
+Assert::equal('8.4.2019 09:00:00', $events[30]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('9.4.2019 09:00:00', $events[31]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('10.4.2019 09:00:00', $events[32]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('11.4.2019 09:00:00', $events[33]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('12.4.2019 09:00:00', $events[34]['DTSTART']->format('j.n.Y H:i:s'));
+
+Assert::equal('15.4.2019 09:00:00', $events[35]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('16.4.2019 09:00:00', $events[36]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('17.4.2019 09:00:00', $events[37]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('18.4.2019 09:00:00', $events[38]['DTSTART']->format('j.n.Y H:i:s'));
+Assert::equal('19.4.2019 09:00:00', $events[39]['DTSTART']->format('j.n.Y H:i:s'));
