@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>16.0.4</version>
+	<version>16.0.5</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -14,6 +14,7 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
+		*16.0.5* FREEI-3690 Updated 3rd party library 'om/icalparser' to latest version 
 		*16.0.4* FREEI-3290 
 		*16.0.3* Packaging of ver 16.0.3
 		*16.0.2* FREEPBX-22109 Add API REST to control Calendars 

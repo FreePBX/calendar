@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-25 14:41+0530\n"
+"POT-Creation-Date: 2021-08-27 05:15+0000\n"
 "PO-Revision-Date: 2017-03-15 16:31-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -110,7 +110,7 @@ msgstr ""
 msgid "6 Hours"
 msgstr ""
 
-#: IcalParser/IcalRangedParser.php:118
+#: IcalParser/IcalRangedParser.php:119
 msgid ""
 "A calendar you have added has an event that has a reoccuring rule of COUNT. "
 "When COUNT is used this slows down Calendar drastically. Please change your "
@@ -240,7 +240,7 @@ msgstr ""
 msgid "Calendar names should be unique."
 msgstr ""
 
-#: IcalParser/IcalRangedParser.php:118
+#: IcalParser/IcalRangedParser.php:119
 msgid "Calendar using COUNT"
 msgstr ""
 
