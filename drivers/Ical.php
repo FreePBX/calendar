@@ -58,6 +58,10 @@ class Ical extends Base {
 	public function processCalendar() {
 		$req = \FreePBX::Curl()->requests($this->calendar['url']);
 		$finalical = $req->get($this->calendar['url'])->body;
+		if (!preg_match('/BEGIN:VCALENDAR/', $finalical)) {
+			return  array("status" => false, "message" => _("Invalid ical remote URL"));
+		}
 		$this->saveiCal($finalical);
+		return  array("status" => true, "message" => _("Calendar processed successfully"));
 	}
 }
