@@ -92,7 +92,7 @@ class Caldav extends Base {
 				$events = $caldavClient->getEvents($start->format('Ymd\THis\Z'),$end->format('Ymd\THis\Z'));
 				$i = 0;
 				$ical = '';
-				$headerSection = '';
+				$headerSection = 'BEGIN:VCALENDAR';
 				$eventsSection = '';
 				foreach($events as $event) {
 					$ical = $event->getData();
