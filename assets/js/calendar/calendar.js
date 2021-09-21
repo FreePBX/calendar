@@ -326,8 +326,12 @@ $(document).ready(function() {
 				calendarid: calendarid
 			},
 			success: function(data) {
-				$("#timezone-display").text(data.timezone);
-				$("#calendar").fullCalendar( 'refetchEvents' );
+				if (data.status == false) {
+					fpbxToast(_(data.message), '', 'warning');
+				} else {
+					$("#timezone-display").text(data.timezone);
+					$("#calendar").fullCalendar('refetchEvents');
+				}
 			},
 			complete: function(data) {
 				$("#updatecal").text(_("Update from Source")).attr("disabled", false).removeClass("disabled");

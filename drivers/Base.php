@@ -289,7 +289,7 @@ abstract class Base {
 			$event['RECURRENCE_INSTANCE'] = isset($event['RECURRENCE_INSTANCE']) ? $event['RECURRENCE_INSTANCE'] : 0;
 
 			$e = [
-				'name' => $event['SUMMARY'],
+				'name' => $event['SUMMARY'] ? $event['SUMMARY'] : "",
 				'description' => isset($event['DESCRIPTION']) ? $event['DESCRIPTION'] : '',
 				'recurring' => isset($event['RECURRING']) ? $event['RECURRING'] : false,
 				'rrules' => [],
@@ -303,7 +303,7 @@ abstract class Base {
 				'renddate' => isset($event['ORIGINAL_VEVENT']) ? $event['ORIGINAL_VEVENT']['DTEND']->getTimestamp() : null,
 				'ustarttime' => $event['DTSTART']->getTimestamp(),
 				'uendtime' => $event['DTEND']->getTimestamp(),
-				'title' => $event['SUMMARY'],
+				'title' => $event['SUMMARY'] ? $event['SUMMARY'] : "",
 				'startdate' => $event['DTSTART']->format('Y-m-d'),
 				'enddate' => $event['DTEND']->format('Y-m-d'),
 				'start' => sprintf('%sT%s',$event['DTSTART']->format('Y-m-d'),$event['DTSTART']->format('H:i:s')),
