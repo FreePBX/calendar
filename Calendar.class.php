@@ -725,28 +725,33 @@ class Calendar extends \DB_Helper implements \BMO {
 			//categories only
 			$groupCategories = [];
 			foreach($group['categories'] as $categoryid) {
-				$parts = explode("_",$categoryid,2);
-				$groupCategories[$parts[0]] = $parts[1]; //category is second part, calendarid is first
-			}
+              $parts = explode("_",$categoryid,2);
+              
+              if(!is_array($groupCategories[$parts[0]]))
+                $groupCategories[$parts[0]] = [];
+              
+              array_push($groupCategories[$parts[0]], $parts[1]); //category is second part, calendarid is first
+            }
 
 			foreach($calendars as $cid => $calendar) {
-				if(!in_array($cid, $group['calendars'])) {
+				if(!in_array($cid, $group['calendars']))
 					continue;
-				}
+				
 				$cal = $this->getDriverById($cid);
 				$cal->setTimezone($timezone);
 				$cal->setNow($now);
 				$events = $cal->getEventsBetween($start, $stop);
 				$filtered = array_filter($events, function($event) use($groupCategories, $cid) {
-					if(isset($groupCategories[$cid]) && !empty($event['categories']) && $event['now']) {
-						foreach($event['categories'] as $c) {
-							if($groupCategories[$cid] === $c) {
-								return true;
-							}
-						}
-					}
-					return false;
-				});
+                  if(isset($groupCategories[$cid]) && !empty($event['categories']) && $event['now']) {
+                    foreach($event['categories'] as $c) {
+                      foreach($groupCategories[$cid] as $cat) { //no need to check is_array($groupCategories[$cid]) beacuse it is always an array
+                        if($cat === $c)
+                          return true;
+                      }
+                    }
+                  }
+                  return false;
+                });
 				$matchingEvents = array_merge($matchingEvents, $filtered);
 			}
 		} else if(!empty($group['events'])) {
