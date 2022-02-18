@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-21 07:15+0000\n"
+"POT-Creation-Date: 2022-02-18 02:53+0000\n"
 "PO-Revision-Date: 2018-07-18 19:12+0000\n"
 "Last-Translator: Bastian Mertgen <b.mertgen@bastian-mertgen.de>\n"
 "Language-Team: German <http://*/projects/freepbx/calendar/de/>\n"
@@ -182,10 +182,6 @@ msgstr "zugelassene Kalendergruppen"
 msgid "Allowed Calendars"
 msgstr "zugelassene Kalender"
 
-#: calendar.i18n.php:6
-msgid "Applications"
-msgstr "Anwendungen"
-
 #: views/remote_ews_settings.php:280
 msgid "Attempting to load"
 msgstr "Versuche, zu laden"
@@ -203,15 +199,10 @@ msgstr ""
 msgid "Autodetect"
 msgstr "Automatische Erkennung"
 
-#: Calendar.class.php:933 Console/Calendar.class.php:22 calendar.i18n.php:4
-#: calendar.i18n.php:10 views/remote_caldav_settings.php:133
-#: views/remote_ews_settings.php:194
+#: Calendar.class.php:938 Console/Calendar.class.php:22
+#: views/remote_caldav_settings.php:133 views/remote_ews_settings.php:194
 msgid "Calendar"
 msgstr "Kalender"
-
-#: calendar.i18n.php:12
-msgid "Calendar Event Groups"
-msgstr "Kalender Ereignisgruppen"
 
 #: functions.inc.php:15 functions.inc.php:28
 #, php-format
@@ -298,7 +289,7 @@ msgstr "Tage"
 msgid "Define when to stop the reoccurrance"
 msgstr ""
 
-#: Calendar.class.php:821 Calendar.class.php:859
+#: Calendar.class.php:826 Calendar.class.php:864
 msgid "Delete"
 msgstr "Löschen"
 
@@ -332,7 +323,7 @@ msgstr "EWS-Version"
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: Calendar.class.php:791
+#: Calendar.class.php:796
 msgid "Edit Settings"
 msgstr "Einstellungen bearbeiten"
 
@@ -434,7 +425,7 @@ msgstr ""
 msgid "Import Calendar by ID"
 msgstr ""
 
-#: Calendar.class.php:910 Calendar.class.php:918 views/ucp_config.php:18
+#: Calendar.class.php:915 Calendar.class.php:923 views/ucp_config.php:18
 msgid "Inherit"
 msgstr "Erben"
 
@@ -595,8 +586,8 @@ msgstr ""
 msgid "Repeats"
 msgstr ""
 
-#: Calendar.class.php:807 Calendar.class.php:826 Calendar.class.php:845
-#: Calendar.class.php:864
+#: Calendar.class.php:812 Calendar.class.php:831 Calendar.class.php:850
+#: Calendar.class.php:869
 msgid "Reset"
 msgstr "Zurücksetzen"
 
@@ -653,8 +644,8 @@ msgstr "Anfangsdatum"
 msgid "Start Time"
 msgstr "Anfangszeit"
 
-#: Calendar.class.php:812 Calendar.class.php:831 Calendar.class.php:850
-#: Calendar.class.php:869 views/calendar.php:538
+#: Calendar.class.php:817 Calendar.class.php:836 Calendar.class.php:855
+#: Calendar.class.php:874 views/calendar.php:538
 msgid "Submit"
 msgstr ""
 
@@ -717,11 +708,6 @@ msgstr ""
 msgid "These groups can then be linked to various applications or utilities"
 msgstr ""
 
-#: calendar.i18n.php:8
-msgid ""
-"This module is used to manage calendar and time based events for FreePBX"
-msgstr ""
-
 #: views/calendar.php:217
 msgid "Time event starts"
 msgstr ""
@@ -763,7 +749,7 @@ msgstr ""
 msgid "Unknown Calendar"
 msgstr "Unbekannter Kalender"
 
-#: Calendar.class.php:798 assets/js/calendar/calendar.js:337
+#: Calendar.class.php:803 assets/js/calendar/calendar.js:337
 msgid "Update from Source"
 msgstr ""
 
@@ -863,6 +849,12 @@ msgstr "Vorkommen"
 #: Calendar.class.php:352
 msgid "to"
 msgstr ""
+
+#~ msgid "Applications"
+#~ msgstr "Anwendungen"
+
+#~ msgid "Calendar Event Groups"
+#~ msgstr "Kalender Ereignisgruppen"
 
 #~ msgid "Day of the month"
 #~ msgstr "Tag des Monats"

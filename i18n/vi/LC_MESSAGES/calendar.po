@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-21 07:15+0000\n"
+"POT-Creation-Date: 2022-02-18 02:53+0000\n"
 "PO-Revision-Date: 2017-06-14 09:55+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese <http://weblate.freepbx.org/projects/freepbx/"
@@ -183,10 +183,6 @@ msgstr "Các nhóm lịch được cho phép"
 msgid "Allowed Calendars"
 msgstr "Các lịch cho phép"
 
-#: calendar.i18n.php:6
-msgid "Applications"
-msgstr "Các ứng dụng"
-
 #: views/remote_ews_settings.php:280
 msgid "Attempting to load"
 msgstr "Đang cố tải"
@@ -204,15 +200,10 @@ msgstr ""
 msgid "Autodetect"
 msgstr "Tự động phát hiện"
 
-#: Calendar.class.php:933 Console/Calendar.class.php:22 calendar.i18n.php:4
-#: calendar.i18n.php:10 views/remote_caldav_settings.php:133
-#: views/remote_ews_settings.php:194
+#: Calendar.class.php:938 Console/Calendar.class.php:22
+#: views/remote_caldav_settings.php:133 views/remote_ews_settings.php:194
 msgid "Calendar"
 msgstr "Lịch"
-
-#: calendar.i18n.php:12
-msgid "Calendar Event Groups"
-msgstr "Các nhóm Lịch sự kiện"
 
 #: functions.inc.php:15 functions.inc.php:28
 #, php-format
@@ -299,7 +290,7 @@ msgstr "Các ngày"
 msgid "Define when to stop the reoccurrance"
 msgstr ""
 
-#: Calendar.class.php:821 Calendar.class.php:859
+#: Calendar.class.php:826 Calendar.class.php:864
 msgid "Delete"
 msgstr "Xóa"
 
@@ -333,7 +324,7 @@ msgstr "Phiên bản EWS"
 msgid "Edit"
 msgstr "Hiệu chỉnh"
 
-#: Calendar.class.php:791
+#: Calendar.class.php:796
 msgid "Edit Settings"
 msgstr "Cài đặt hiệu chỉnh"
 
@@ -435,7 +426,7 @@ msgstr ""
 msgid "Import Calendar by ID"
 msgstr ""
 
-#: Calendar.class.php:910 Calendar.class.php:918 views/ucp_config.php:18
+#: Calendar.class.php:915 Calendar.class.php:923 views/ucp_config.php:18
 msgid "Inherit"
 msgstr "Thừa kế"
 
@@ -599,8 +590,8 @@ msgstr ""
 msgid "Repeats"
 msgstr "Lặp lại"
 
-#: Calendar.class.php:807 Calendar.class.php:826 Calendar.class.php:845
-#: Calendar.class.php:864
+#: Calendar.class.php:812 Calendar.class.php:831 Calendar.class.php:850
+#: Calendar.class.php:869
 msgid "Reset"
 msgstr "Cài đặt lại"
 
@@ -662,8 +653,8 @@ msgstr "Ngày bắt đầu"
 msgid "Start Time"
 msgstr "Thời gian bắt đầu"
 
-#: Calendar.class.php:812 Calendar.class.php:831 Calendar.class.php:850
-#: Calendar.class.php:869 views/calendar.php:538
+#: Calendar.class.php:817 Calendar.class.php:836 Calendar.class.php:855
+#: Calendar.class.php:874 views/calendar.php:538
 msgid "Submit"
 msgstr "Gửi đi"
 
@@ -728,13 +719,6 @@ msgstr ""
 "Những nhóm này sau đó có thể được kết nối tới các ứng dụng hoặc các tiện ích "
 "khác nhau"
 
-#: calendar.i18n.php:8
-msgid ""
-"This module is used to manage calendar and time based events for FreePBX"
-msgstr ""
-"Mô đun này được sử dụng để quản lý các sự kiện dựa trên lịch và thời gian "
-"đối với FreePBX"
-
 #: views/calendar.php:217
 msgid "Time event starts"
 msgstr "Thời gian sự kiện bắt đầu"
@@ -776,7 +760,7 @@ msgstr "Không thể xác định URL máy chủ"
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:798 assets/js/calendar/calendar.js:337
+#: Calendar.class.php:803 assets/js/calendar/calendar.js:337
 msgid "Update from Source"
 msgstr "Cập nhật từ nguồn"
 
@@ -876,6 +860,18 @@ msgstr "Lần xuất hiện"
 #: Calendar.class.php:352
 msgid "to"
 msgstr "Tới"
+
+#~ msgid "Applications"
+#~ msgstr "Các ứng dụng"
+
+#~ msgid "Calendar Event Groups"
+#~ msgstr "Các nhóm Lịch sự kiện"
+
+#~ msgid ""
+#~ "This module is used to manage calendar and time based events for FreePBX"
+#~ msgstr ""
+#~ "Mô đun này được sử dụng để quản lý các sự kiện dựa trên lịch và thời gian "
+#~ "đối với FreePBX"
 
 #~ msgid "Day of the month"
 #~ msgstr "Ngày trong tháng"
