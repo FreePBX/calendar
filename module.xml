@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>15.0.4.21</version>
+	<version>15.0.4.22</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -14,6 +14,7 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
+		*15.0.4.22* [FREEPBX-23170] Fix calendar event group failing to recognize events with multiple categories. 
 		*15.0.4.21* FREEPBX-22109 Add API REST to control Calendars 
 		*15.0.4.20* Packaging of ver 15.0.4.20
 		*15.0.4.19* FREEI-1025 FREEPBX-20256 updated  lib with out composer update which requires php 7. 

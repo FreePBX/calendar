@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-25 14:41+0530\n"
+"POT-Creation-Date: 2022-02-18 02:49+0000\n"
 "PO-Revision-Date: 2017-03-15 16:31-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Autodetect"
 msgstr ""
 
-#: Calendar.class.php:933 Console/Calendar.class.php:22 calendar.i18n.php:4
+#: Calendar.class.php:938 Console/Calendar.class.php:22 calendar.i18n.php:4
 #: calendar.i18n.php:10 views/remote_caldav_settings.php:133
 #: views/remote_ews_settings.php:194
 msgid "Calendar"
@@ -292,7 +292,7 @@ msgstr ""
 msgid "Define when to stop the reoccurrance"
 msgstr ""
 
-#: Calendar.class.php:821 Calendar.class.php:859
+#: Calendar.class.php:826 Calendar.class.php:864
 msgid "Delete"
 msgstr ""
 
@@ -326,7 +326,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: Calendar.class.php:791
+#: Calendar.class.php:796
 msgid "Edit Settings"
 msgstr ""
 
@@ -427,7 +427,7 @@ msgstr ""
 msgid "Import Calendar by ID"
 msgstr ""
 
-#: Calendar.class.php:910 Calendar.class.php:918 views/ucp_config.php:18
+#: Calendar.class.php:915 Calendar.class.php:923 views/ucp_config.php:18
 msgid "Inherit"
 msgstr ""
 
@@ -584,8 +584,8 @@ msgstr ""
 msgid "Repeats"
 msgstr ""
 
-#: Calendar.class.php:807 Calendar.class.php:826 Calendar.class.php:845
-#: Calendar.class.php:864
+#: Calendar.class.php:812 Calendar.class.php:831 Calendar.class.php:850
+#: Calendar.class.php:869
 msgid "Reset"
 msgstr ""
 
@@ -642,8 +642,8 @@ msgstr ""
 msgid "Start Time"
 msgstr ""
 
-#: Calendar.class.php:812 Calendar.class.php:831 Calendar.class.php:850
-#: Calendar.class.php:869 views/calendar.php:538
+#: Calendar.class.php:817 Calendar.class.php:836 Calendar.class.php:855
+#: Calendar.class.php:874 views/calendar.php:538
 msgid "Submit"
 msgstr ""
 
@@ -752,7 +752,7 @@ msgstr ""
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:798 assets/js/calendar/calendar.js:333
+#: Calendar.class.php:803 assets/js/calendar/calendar.js:333
 msgid "Update from Source"
 msgstr ""
 
