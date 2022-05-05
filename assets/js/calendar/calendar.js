@@ -15,7 +15,7 @@ $("#generate-ical-link").click(function(e) {
 	$.get( "ajax.php?module=calendar&command=generateical&id="+calendarid)
 	.done(function(data) {
 		if(data.status) {
-			$("#ical-link").removeClass("hidden");
+			$("#ical-link").removeClass("d-none");
 			$("#ical-link").attr('href',data.href);
 		}
 	})
@@ -87,7 +87,7 @@ function resetModalForm(){
 	$("#repeat-by0").prop("checked",true);
 	$("#repeat0").prop("checked",true);
 	$("#repeat-by-year0").prop("checked",true);
-	$("#modalSubmit,#modalDelete").addClass('hidden');
+	$("#modalSubmit,#modalDelete").addClass('d-none');
 	updateAllDay();
 }
 
@@ -108,7 +108,7 @@ if($('#calendar').length && !readonly) {
 						resetModalForm();
 						$('#description').val('');
 						$("#eventtype").val('');
-						$('.dest').addClass('hidden');
+						$('.dest').addClass('d-none');
 						$("#startdate")[0]._flatpickr.setDate(moment(Date.now()).format("YYYY-MM-DD"));
 						$("#starttime")[0]._flatpickr.setDate(moment(Date.now()).format("kk:mm:ss"));
 						$("#enddate")[0]._flatpickr.setDate(moment(Date.now()).format("YYYY-MM-DD"));
@@ -118,7 +118,7 @@ if($('#calendar').length && !readonly) {
 						$('#modalDelete').data('id', null);
 						updateReoccurring();
 						updateAllDay();
-						$("#modalSubmit").removeClass('hidden');
+						$("#modalSubmit").removeClass('d-none');
 					}
 			}
 	};
@@ -139,9 +139,9 @@ $(document).ready(function() {
 
 	$("#allday").click(function() {
 		if($(this).is(":checked")) {
-			$(".time").addClass("hidden");
+			$(".time").addClass("d-none");
 		} else {
-			$(".time").removeClass("hidden");
+			$(".time").removeClass("d-none");
 		}
 	});
 	var daysOfWeek = moment.weekdays(),
@@ -286,7 +286,7 @@ $(document).ready(function() {
 					$("#eventForm input").prop("disabled",false);
 					$("#eventForm select").prop("disabled",false);
 					$("#timezone").multiselect('enable');
-					$("#modalSubmit,#modalDelete").removeClass('hidden');
+					$("#modalSubmit,#modalDelete").removeClass('d-none');
 				}
 				updateReoccurring();
 				updateAllDay();
@@ -301,7 +301,7 @@ $(document).ready(function() {
 				$("#enddate")[0]._flatpickr.setDate(event.format("YYYY-MM-DD"));
 				$("#endtime")[0]._flatpickr.setDate(moment(Date.now()).add(1, 'h').format("kk:mm:ss"));
 				$('#eventid').val('new');
-				$('#modalSubmit').removeClass('hidden');
+				$('#modalSubmit').removeClass('d-none');
 				$('#eventModal').modal('show');
 				updateAllDay();
 			},
@@ -342,18 +342,18 @@ $(document).ready(function() {
 });
 
 $("#repeat0").click(function() {
-	$("#occurrences-container").addClass("hidden");
-	$("#after-container").addClass("hidden");
+	$("#occurrences-container").addClass("d-none");
+	$("#after-container").addClass("d-none");
 });
 
 $("#repeat1").click(function() {
-	$("#occurrences-container").removeClass("hidden");
-	$("#after-container").addClass("hidden");
+	$("#occurrences-container").removeClass("d-none");
+	$("#after-container").addClass("d-none");
 });
 
 $("#repeat2").click(function() {
-	$("#after-container").removeClass("hidden");
-	$("#occurrences-container").addClass("hidden");
+	$("#after-container").removeClass("d-none");
+	$("#occurrences-container").addClass("d-none");
 });
 
 $("#reoccurring").click(function() {
@@ -366,71 +366,71 @@ $("#repeats").change(function() {
 
 function updateReoccurring() {
 	if($("#reoccurring").is(":checked")) {
-		$(".reoccurring").removeClass("hidden");
+		$(".reoccurring").removeClass("d-none");
 		updateReoccurringOptions();
 	} else {
-		$(".reoccurring").addClass("hidden");
+		$(".reoccurring").addClass("d-none");
 	}
 }
 
 function updateReoccurringOptions() {
 	switch($("#repeats").val()) {
 		case "4":
-			$("#repeat-on-container").removeClass("hidden");
-			$("#repeats-every-container").removeClass("hidden");
-			$("#repeat-by-container").addClass("hidden");
-			$("#repeat-by-year-container").addClass("hidden");
+			$("#repeat-on-container").removeClass("d-none");
+			$("#repeats-every-container").removeClass("d-none");
+			$("#repeat-by-container").addClass("d-none");
+			$("#repeat-by-year-container").addClass("d-none");
 			$("#countType").text(_("Weeks"));
 		break;
 		case "0":
 			$("#countType").text(_("Days"));
-			$("#repeat-on-container").addClass("hidden");
-			$("#repeats-every-container").removeClass("hidden");
-			$("#repeat-by-year-container").addClass("hidden");
-			$("#repeat-by-container").addClass("hidden");
+			$("#repeat-on-container").addClass("d-none");
+			$("#repeats-every-container").removeClass("d-none");
+			$("#repeat-by-year-container").addClass("d-none");
+			$("#repeat-by-container").addClass("d-none");
 		break;
 		case "1":
 		case "2":
 		case "3":
-			$("#repeat-on-container").addClass("hidden");
-			$("#repeats-every-container").addClass("hidden");
-			$("#repeat-by-container").addClass("hidden");
-			$("#repeat-by-year-container").addClass("hidden");
+			$("#repeat-on-container").addClass("d-none");
+			$("#repeats-every-container").addClass("d-none");
+			$("#repeat-by-container").addClass("d-none");
+			$("#repeat-by-year-container").addClass("d-none");
 		break;
 		case "5":
 			$("#countType").text(_("Months"));
-			$("#repeat-on-container").addClass("hidden");
-			$("#repeats-every-container").removeClass("hidden");
-			$("#repeat-by-container").removeClass("hidden");
-			$("#repeat-by-year-container").addClass("hidden");
+			$("#repeat-on-container").addClass("d-none");
+			$("#repeats-every-container").removeClass("d-none");
+			$("#repeat-by-container").removeClass("d-none");
+			$("#repeat-by-year-container").addClass("d-none");
 		break;
 		case "6":
 			$("#countType").text(_("Years"));
-			$("#repeat-on-container").addClass("hidden");
-			$("#repeats-every-container").removeClass("hidden");
-			$("#repeat-by-container").addClass("hidden");
-			$("#repeat-by-year-container").removeClass("hidden");
+			$("#repeat-on-container").addClass("d-none");
+			$("#repeats-every-container").removeClass("d-none");
+			$("#repeat-by-container").addClass("d-none");
+			$("#repeat-by-year-container").removeClass("d-none");
 		break;
 	}
 	if($("#repeat1").is(":checked")) {
-		$("#occurrences-container").removeClass("hidden");
+		$("#occurrences-container").removeClass("d-none");
 	} else {
-		$("#occurrences-container").addClass("hidden");
+		$("#occurrences-container").addClass("d-none");
 	}
 	if($("#repeat2").is(":checked")) {
-		$("#after-container").removeClass("hidden");
+		$("#after-container").removeClass("d-none");
 	} else {
-		$("#after-container").addClass("hidden");
+		$("#after-container").addClass("d-none");
 	}
 }
 
 function updateAllDay() {
 	if($("#starttime").val() == $("#endtime").val()) {
 		$("#allday").prop("checked",true);
-		$(".time").addClass("hidden");
+		$(".time").addClass("d-none");
 	} else {
 		$("#allday").prop("checked",false);
-		$(".time").removeClass("hidden");
+		$(".time").removeClass("d-none");
 	}
 }
 
