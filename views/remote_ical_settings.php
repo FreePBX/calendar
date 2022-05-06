@@ -17,8 +17,8 @@
 						<div class="element-container">
 							<div class="row">
 								<div class="col-md-12">
-									<div class="row">
-										<div class="form-group">
+									<div class="">
+										<div class="row form-group">
 											<div class="col-md-3">
 												<label class="control-label" for="name"><?php echo _("Name") ?></label>
 												<i class="fa fa-question-circle fpbx-help-icon" data-for="name"></i>
@@ -39,8 +39,8 @@
 						<div class="element-container">
 							<div class="row">
 								<div class="col-md-12">
-									<div class="row">
-										<div class="form-group">
+									<div class="">
+										<div class="row form-group">
 											<div class="col-md-3">
 												<label class="control-label" for="description"><?php echo _("Description") ?></label>
 												<i class="fa fa-question-circle fpbx-help-icon" data-for="description"></i>
@@ -61,8 +61,8 @@
 						<div class="element-container">
 							<div class="row">
 								<div class="col-md-12">
-									<div class="row">
-										<div class="form-group">
+									<div class="">
+										<div class="row form-group">
 											<div class="col-md-3">
 												<label class="control-label" for="url"><?php echo _("Remote URL") ?></label>
 												<i class="fa fa-question-circle fpbx-help-icon" data-for="url"></i>
@@ -83,8 +83,8 @@
 						<div class="element-container">
 							<div class="row">
 								<div class="col-md-12">
-									<div class="row">
-										<div class="form-group">
+									<div class="">
+										<div class="row form-group">
 											<div class="col-md-3">
 												<label class="control-label" for="next"><?php echo _("Auto Refresh") ?></label>
 												<i class="fa fa-question-circle fpbx-help-icon" data-for="next"></i>
