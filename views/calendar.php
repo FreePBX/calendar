@@ -48,8 +48,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div class="element-container">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="title"><?php echo _("Event Title") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="title"></i>
@@ -72,8 +72,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div class="element-container">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="description"><?php echo _("Event Description") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="description"></i>
@@ -96,8 +96,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div class="element-container">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="categories"><?php echo _("Event Categories") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="categories"></i>
@@ -120,8 +120,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div class="element-container">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="startdate"><?php echo _("Start Date") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="startdate"></i>
@@ -147,8 +147,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div class="element-container">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="enddate"><?php echo _("End Date") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="enddate"></i>
@@ -174,8 +174,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div class="element-container">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="allday"><?php echo _("All Day") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="allday"></i>
@@ -199,8 +199,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div class="element-container time">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="starttime"><?php echo _("Start Time") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="starttime"></i>
@@ -223,8 +223,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div class="element-container time">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="endtime"><?php echo _("End Time") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="endtime"></i>
@@ -247,8 +247,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div class="element-container">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="timezone"><?php echo _("Timezone") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="timezone"></i>
@@ -271,8 +271,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div class="element-container">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="reoccurring"><?php echo _("Reoccurring") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="reoccurring"></i>
@@ -295,8 +295,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div id="repeats-container" class="element-container reoccurring">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="repeats"><?php echo _("Repeats") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeats"></i>
@@ -325,8 +325,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div id="repeats-every-container" class="element-container reoccurring">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="repeat-count"><?php echo _("Repeat Every") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeat-count"></i>
@@ -381,8 +381,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div id="repeat-on-container" class="element-container reoccurring">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="repeats"><?php echo _("Repeat On") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeats"></i>
@@ -406,8 +406,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div id="repeat-by-container" class="element-container reoccurring">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="repeat-by"><?php echo _("Repeat by") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeat-by"></i>
@@ -431,8 +431,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div id="repeat-by-year-container" class="element-container reoccurring">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="repeat-by-year"><?php echo _("Repeat by") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="repeat-by-year"></i>
@@ -456,8 +456,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div class="element-container reoccurring">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="ends"><?php echo _("Ends") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="ends"></i>
@@ -483,8 +483,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div id="occurrences-container" class="element-container reoccurring">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="occurrences"><?php echo _("Occurrences") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="occurrences"></i>
@@ -508,8 +508,8 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 									<div id="after-container" class="element-container reoccurring">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="row">
-													<div class="form-group">
+												<div class="">
+													<div class="row form-group">
 														<div class="col-md-3">
 															<label class="control-label" for="afterdate"><?php echo _("After") ?></label>
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="afterdate"></i>
