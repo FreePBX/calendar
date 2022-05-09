@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="">
-				<div class="form-group row">
+				<div class="row form-group">
 					<div class="col-md-3">
 						<label class="control-label" for="calendar_enable"><?php echo _("Enable Calendar")?></label>
 						<i class="fa fa-question-circle fpbx-help-icon" data-for="calendar_enable"></i>
@@ -34,7 +34,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="">
-				<div class="form-group row">
+				<div class="row form-group">
 					<div class="col-md-3">
 						<label class="control-label" for="calendar_allowedcalendars"><?php echo _("Allowed Calendars") ?></label>
 						<i class="fa fa-question-circle fpbx-help-icon" data-for="calendar_allowedcalendars"></i>
@@ -60,7 +60,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="">
-				<div class="form-group row">
+				<div class="row form-group">
 					<div class="col-md-3">
 						<label class="control-label" for="calendar_allowedgroups"><?php echo _("Allowed Calendar Groups") ?></label>
 						<i class="fa fa-question-circle fpbx-help-icon" data-for="calendar_allowedgroups"></i>
