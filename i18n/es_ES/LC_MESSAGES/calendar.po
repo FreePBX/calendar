@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-18 02:53+0000\n"
+"POT-Creation-Date: 2022-05-12 07:46+0000\n"
 "PO-Revision-Date: 2018-07-18 19:12+0000\n"
 "Last-Translator: Elvita Crespo <ecrespo@sangoma.com>\n"
 "Language-Team: Spanish <http://*/projects/freepbx/calendar/es/>\n"
@@ -162,15 +162,15 @@ msgstr ""
 msgid "Add Remote iCal Calendar"
 msgstr ""
 
-#: views/calendar.php:469 views/calendar.php:514
+#: views/calendar.php:471 views/calendar.php:516
 msgid "After"
 msgstr ""
 
-#: Console/Calendar.class.php:79 views/calendar.php:180 views/calendar.php:185
+#: Console/Calendar.class.php:79 views/calendar.php:182 views/calendar.php:187
 msgid "All Day"
 msgstr ""
 
-#: views/calendar.php:193
+#: views/calendar.php:195
 msgid "All Day Event"
 msgstr ""
 
@@ -247,7 +247,7 @@ msgstr ""
 msgid "Calendars the user may utilize"
 msgstr ""
 
-#: views/calendar.php:114
+#: views/calendar.php:116
 msgid "Categories this event belongs to, separated by comma"
 msgstr ""
 
@@ -255,27 +255,27 @@ msgstr ""
 msgid "Check if match, value can be any timestamp"
 msgstr ""
 
-#: views/calendar.php:537
+#: views/calendar.php:539
 msgid "Close"
 msgstr ""
 
-#: views/calendar.php:306
+#: views/calendar.php:308
 msgid "Daily"
 msgstr ""
 
-#: views/calendar.php:417
+#: views/calendar.php:419
 msgid "Date of the month (E.g. 16th)"
 msgstr ""
 
-#: views/calendar.php:442
+#: views/calendar.php:444
 msgid "Date of the year (E.g. May 16th)"
 msgstr ""
 
-#: views/calendar.php:419
+#: views/calendar.php:421
 msgid "Day of the month (E.g. 2nd Monday)"
 msgstr ""
 
-#: views/calendar.php:444
+#: views/calendar.php:446
 msgid "Day of the year (E.g. 2nd Monday in May)"
 msgstr ""
 
@@ -283,7 +283,7 @@ msgstr ""
 msgid "Days"
 msgstr ""
 
-#: views/calendar.php:479
+#: views/calendar.php:481
 msgid "Define when to stop the reoccurrance"
 msgstr ""
 
@@ -291,7 +291,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: views/calendar.php:536
+#: views/calendar.php:538
 msgid "Delete Event"
 msgstr ""
 
@@ -301,7 +301,7 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: views/calendar.php:90
+#: views/calendar.php:92
 msgid "Description for the event"
 msgstr ""
 
@@ -337,31 +337,31 @@ msgstr ""
 msgid "End"
 msgstr ""
 
-#: views/calendar.php:153
+#: views/calendar.php:155
 msgid "End Date"
 msgstr ""
 
-#: views/calendar.php:229
+#: views/calendar.php:231
 msgid "End Time"
 msgstr ""
 
-#: views/calendar.php:462
+#: views/calendar.php:464
 msgid "Ends"
 msgstr ""
 
-#: views/calendar.php:39
+#: views/calendar.php:38
 msgid "Event"
 msgstr ""
 
-#: views/calendar.php:102
+#: views/calendar.php:104
 msgid "Event Categories"
 msgstr ""
 
-#: views/calendar.php:78
+#: views/calendar.php:80
 msgid "Event Description"
 msgstr ""
 
-#: views/calendar.php:54
+#: views/calendar.php:56
 msgid "Event Title"
 msgstr ""
 
@@ -373,15 +373,15 @@ msgstr ""
 msgid "Events to include in to this group"
 msgstr ""
 
-#: views/calendar.php:308
+#: views/calendar.php:310
 msgid "Every Monday, Wednesday, and Friday"
 msgstr ""
 
-#: views/calendar.php:309
+#: views/calendar.php:311
 msgid "Every Tuesday and Thursday"
 msgstr ""
 
-#: views/calendar.php:307
+#: views/calendar.php:309
 msgid "Every weekday (Monday to Friday"
 msgstr ""
 
@@ -401,7 +401,7 @@ msgstr ""
 msgid "Force command"
 msgstr ""
 
-#: views/calendar.php:66
+#: views/calendar.php:68
 msgid "Friendly name for the event"
 msgstr ""
 
@@ -442,7 +442,7 @@ msgstr ""
 msgid "Local Calendar"
 msgstr ""
 
-#: views/calendar.php:311
+#: views/calendar.php:313
 msgid "Monthly"
 msgstr ""
 
@@ -468,7 +468,7 @@ msgstr ""
 msgid "Name of this group"
 msgstr ""
 
-#: views/calendar.php:467
+#: views/calendar.php:469
 msgid "Never"
 msgstr ""
 
@@ -495,11 +495,11 @@ msgstr ""
 msgid "Now Match"
 msgstr ""
 
-#: views/calendar.php:489
+#: views/calendar.php:491
 msgid "Occurrences"
 msgstr ""
 
-#: views/calendar.php:471
+#: views/calendar.php:473
 msgid "On"
 msgstr ""
 
@@ -555,31 +555,31 @@ msgstr ""
 msgid "Remote iCal Calendar"
 msgstr ""
 
-#: views/calendar.php:277 views/calendar.php:282
+#: views/calendar.php:279 views/calendar.php:284
 msgid "Reoccurring"
 msgstr ""
 
-#: views/calendar.php:290
+#: views/calendar.php:292
 msgid "Reoccurring Event"
 msgstr ""
 
-#: views/calendar.php:331
+#: views/calendar.php:333
 msgid "Repeat Every"
 msgstr ""
 
-#: views/calendar.php:387
+#: views/calendar.php:389
 msgid "Repeat On"
 msgstr ""
 
-#: views/calendar.php:412 views/calendar.php:437
+#: views/calendar.php:414 views/calendar.php:439
 msgid "Repeat by"
 msgstr ""
 
-#: views/calendar.php:377
+#: views/calendar.php:379
 msgid "Repeat every X interval"
 msgstr ""
 
-#: views/calendar.php:301
+#: views/calendar.php:303
 msgid "Repeats"
 msgstr ""
 
@@ -592,15 +592,15 @@ msgstr ""
 msgid "Reset Calendar by ID"
 msgstr ""
 
-#: views/calendar.php:402
+#: views/calendar.php:404
 msgid "Select day of week to repeat on"
 msgstr ""
 
-#: views/calendar.php:321
+#: views/calendar.php:323
 msgid "Select how often this event repeats"
 msgstr ""
 
-#: views/calendar.php:427 views/calendar.php:452
+#: views/calendar.php:429 views/calendar.php:454
 msgid "Select how to repeat"
 msgstr ""
 
@@ -633,16 +633,16 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: views/calendar.php:126
+#: views/calendar.php:128
 msgid "Start Date"
 msgstr ""
 
-#: views/calendar.php:205
+#: views/calendar.php:207
 msgid "Start Time"
 msgstr ""
 
 #: Calendar.class.php:817 Calendar.class.php:836 Calendar.class.php:855
-#: Calendar.class.php:874 views/calendar.php:538
+#: Calendar.class.php:874 views/calendar.php:540
 msgid "Submit"
 msgstr "Enviar"
 
@@ -689,7 +689,7 @@ msgstr ""
 msgid "The remote url for this calendar"
 msgstr ""
 
-#: views/calendar.php:141
+#: views/calendar.php:143
 msgid "The time to start the event"
 msgstr ""
 
@@ -705,19 +705,19 @@ msgstr ""
 msgid "These groups can then be linked to various applications or utilities"
 msgstr ""
 
-#: views/calendar.php:217
+#: views/calendar.php:219
 msgid "Time event starts"
 msgstr ""
 
-#: views/calendar.php:241
+#: views/calendar.php:243
 msgid "Time the event ends"
 msgstr ""
 
-#: views/calendar.php:168
+#: views/calendar.php:170
 msgid "Time this event ends"
 msgstr ""
 
-#: Console/Calendar.class.php:79 views/calendar.php:253
+#: Console/Calendar.class.php:79 views/calendar.php:255
 #: views/local_settings.php:67
 msgid "Timezone"
 msgstr ""
@@ -726,7 +726,7 @@ msgstr ""
 msgid "Timezone for this Calendar"
 msgstr ""
 
-#: views/calendar.php:265
+#: views/calendar.php:267
 msgid "Timezone for this event"
 msgstr ""
 
@@ -762,7 +762,7 @@ msgstr ""
 msgid "Use All Events"
 msgstr ""
 
-#: views/calendar.php:257
+#: views/calendar.php:259
 msgid "Use Calendar Timezone"
 msgstr ""
 
@@ -798,7 +798,7 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: views/calendar.php:310
+#: views/calendar.php:312
 msgid "Weekly"
 msgstr ""
 
@@ -814,11 +814,11 @@ msgstr ""
 msgid "Whether to allow this user to be able to access the calendar in UCP"
 msgstr ""
 
-#: views/calendar.php:529
+#: views/calendar.php:531
 msgid "X number of occurances"
 msgstr ""
 
-#: views/calendar.php:312
+#: views/calendar.php:314
 msgid "Yearly"
 msgstr ""
 
@@ -839,7 +839,7 @@ msgstr ""
 msgid "You can only edit local calendars"
 msgstr ""
 
-#: views/calendar.php:495 views/calendar.php:504
+#: views/calendar.php:497 views/calendar.php:506
 msgid "occurrences"
 msgstr ""
 
