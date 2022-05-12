@@ -19,7 +19,7 @@ $readonly = $data['type'] !== 'local' ? 'true' : 'false';
 <h6>
 	<?php echo _('Private address in iCal format')?> (<a id="generate-ical-link" class="clickable"><?php echo _('(Re)Generate Link')?></a>)
 	<br>
-	<a href="<?php echo !empty($icallink) ? $icallink : ''?>" id="ical-link" class="<?php echo !empty($icallink) ? '' : 'hidden'?>"><?php echo _('Private iCal Link') ?></a>
+	<a href="<?php echo !empty($icallink) ? $icallink : ''?>" id="ical-link" class="<?php echo !empty($icallink) ? '' : 'd-none'?>"><?php echo _('Private iCal Link') ?></a>
 </h6>
 <script>
 var readonly = <?php echo $readonly; ?>;
@@ -35,8 +35,10 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span> <span class="sr-only">close</span></button>
 								<h4 id="modalTitle" class="modal-title"><?php echo _("Event")?></h4>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
 							</div>
 							<div id="modalBody" class="modal-body">
 								<form name="eventForm" id="eventForm" action="ajax.php?command=eventform&amp;module=calendar" method="POST">
@@ -533,7 +535,7 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 								</form>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-danger pull-left hidden" data-id='deletebutton' data-dismiss="modal" id="modalDelete"><?php echo _("Delete Event")?></button>
+								<button type="button" class="btn btn-danger pull-left d-none" data-id='deletebutton' data-dismiss="modal" id="modalDelete"><?php echo _("Delete Event")?></button>
 								<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo _("Close")?></button>
 								<button type="submit" class="btn btn-default" form='eventForm' id="modalSubmit"><?php echo _("Submit")?></button>
 							</div>

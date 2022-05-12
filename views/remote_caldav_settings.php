@@ -136,11 +136,11 @@
 											<div class="col-md-9">
 <?php
 if (strtolower($action) == "add") {
-	$selclass = "hidden";
+	$selclass = "d-none";
 	$unsetclass = "";
 } else {
 	$selclass = "";
-	$unsetclass = "hidden";
+	$unsetclass = "d-none";
 }
 ?>
 												<span id='setspan' class="<?php echo $selclass; ?>">
