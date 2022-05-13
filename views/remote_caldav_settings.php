@@ -218,14 +218,14 @@ if (strtolower($action) == "add") {
 		if($("#purl").val() !== "" && $("#username").val() !== "" && $("#password").val() !== "" && !updating) {
 			updating = true;
 			$("#unsetspan").text('<?php echo _("Attempting to load..."); ?>').show();
-			$("#setspan").addClass("hidden");
+			$("#setspan").addClass("d-none");
 			$(".diswhenloading").addClass("disabled").attr("disabled", true);
 			$.post( "ajax.php?module=calendar&command=getcaldavcals", {purl: $("#purl").val(), username: $("#username").val(), password: $("#password").val()}, function( data ) {
 				$("#calendars").html(data.calshtml);
 				if(data.status == true){
 					$('#calendars').multiselect('rebuild');
-					$("#setspan").removeClass("hidden");
-					$("#unsetspan").addClass("hidden");
+					$("#setspan").removeClass("d-none");
+					$("#unsetspan").addClass("d-none");
 					$(".diswhenloading").removeClass("disabled").attr("disabled", false);
 				}else{
 					$("#unsetspan").html(data.calshtml);
@@ -258,7 +258,7 @@ if (strtolower($action) == "add") {
 		if($("#urlerror").length == 1) {
 			return warnInvalid($("#url"),_("Please check your URL and credentials."));
 		}
-		if($("#setspan").is(":hidden")) {
+		if($("#setspan").is(":d-none")) {
 			fpbxToast(_('Validation in progress. Please wait.'),'','warning');
 			return false;
 		}
