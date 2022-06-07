@@ -55,9 +55,14 @@ class Calendar extends Command {
 			return $this->match($calendar, $input, $output);
 		}
 
-		if($input->getOption('list') && $input->getOption('id')) {
-			return $this->listCalendarEvents($calendar, $input, $output);
+		if($input->getOption('list')) {
+			if($input->getOption('id')){
+				return $this->listCalendarEvents($calendar, $input, $output);
+			}
+
+			return $this->listAllCalendar($calendar, $input, $output);
 		}
+
 		/*
 		if($input->getOption('list') && $input->getOption('id')) {
 			return $this->listGroupEvents($calendar, $input, $output);
@@ -65,6 +70,34 @@ class Calendar extends Command {
 		*/
 
 		$this->outputHelp($input,$output);
+	}
+
+	private function listAllCalendar($calendar, InputInterface $input, OutputInterface $output) {
+		$calendars = $calendar->listCalendars();
+		$table = new Table($output);
+		$table->setHeaders(array(_('ID'),_('Name'),_('Description'),_('Type'),_("Timezone")));
+		$rows = $ids = array();
+		foreach($calendars as $id => $content){
+			$ids[] = $id;
+			$rows[] = array(
+				$id,
+				$content["name"],
+				$content["description"],
+				$content["type"],
+				$content["timezone"],
+			);
+		}
+		$table->setRows($rows);
+		$table->render();
+		$output->writeln('');
+		$output->writeln("<info>"._("Get more details about calendars, please run the commands below:")."</info>");
+		$table->setHeaders(array(_('Commands')));
+		$rows = array();
+		foreach($ids as $id){
+			$rows[] = array(sprintf('fwconsole calendar --list --id=%s', $id));
+		}
+		$table->setRows($rows);
+		$table->render();
 	}
 
 	private function listCalendarEvents($calendar, InputInterface $input, OutputInterface $output) {
@@ -151,10 +184,10 @@ class Calendar extends Command {
 							$matched[] = $event;
 						}
 					}
-					$output->writeln('<info>Match Found</info>');
+					$output->writeln("<info>"._("Match Found")."</info>");
 					$output->writeln(print_r($matched,true));
 				} else {
-					$output->writeln('<error>No Match Found</error>');
+					$output->writeln("<error>"._("No Match Found")."</error>");
 				}
 			break;
 			case 'event':
@@ -176,31 +209,31 @@ class Calendar extends Command {
 					}
 				}
 				if(!empty($matched)) {
-					$output->writeln('<info>Matched</info>');
+					$output->writeln("<info>"._("Matched")."</info>");
 					$output->writeln(print_r($matched,true));
 				} else {
-					$output->writeln('<error>No Match Found</error>');
+					$output->writeln("<error>"._("No Match Found")."</error>");
 				}
 			break;
 			case 'group':
 				$matched = $calendar->matchGroupVerbose($input->getOption('id'), $match);
 				if(!empty($matched)) {
-					$output->writeln('<info>Matched</info>');
+					$output->writeln("<info>"._("Matched")."</info>");
 					$output->writeln(print_r($matched,true));
 				} else {
-					$output->writeln('<error>No Match Found</error>');
+					$output->writeln("<error>"._("No Match Found")."</error>");
 				}
 			break;
 			default:
-				throw new \Exception("Invalid type");
+				throw new \Exception(_("Invalid type"));
 			break;
 		}
 	}
 
 	private function sync($calendar, InputInterface $input, OutputInterface $output) {
-		$output->writeln("Starting Sync...");
+		$output->writeln(_("Starting Sync..."));
 		$calendar->sync($output,$input->getOption('force'));
-		$output->writeln("Finished");
+		$output->writeln(_("Finished"));
 	}
 
 	private function export($calendar, InputInterface $input, OutputInterface $output) {
@@ -211,26 +244,26 @@ class Calendar extends Command {
 	private function reset($calendar, InputInterface $input, OutputInterface $output) {
 		$info = $calendar->getCalendarById($input->getOption('reset'));
 		if($info['type'] !== 'local') {
-			$output->writeln("<error>Reset is only supported on local calendars!</error>");
+			$output->writeln("<error>"._("Reset is only supported on local calendars!")."</error>");
 			exit(-1);
 		}
 		$output->writeln($info['calendar']->deleteiCal());
-		$output->writeln("Successfully reset the calendar");
+		$output->writeln(_("Successfully reset the calendar"));
 	}
 
 	private function import($calendar, InputInterface $input, OutputInterface $output) {
 		$info = $calendar->getCalendarById($input->getOption('import'));
 		if($info['type'] !== 'local') {
-			$output->writeln("<error>Import is only supported on local calendars!</error>");
+			$output->writeln("<error>"._("Reset is only supported on local calendars!")."</error>");
 			exit(-1);
 		}
 		$file = $input->getOption('file');
 		if(!file_exists($file)) {
-			$output->writeln("<error>File does not exist</error>");
+			$output->writeln("<error>"._("File does not exist")."</error>");
 			exit(-1);
 		}
 		$info['calendar']->saveiCal(file_get_contents($file));
-		$output->writeln("Successfully imported calendar");
+		$output->writeln(_("Successfully imported calendar"));
 	}
 
 	/**
