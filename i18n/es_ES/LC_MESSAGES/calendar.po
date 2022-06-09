@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-02-18 02:49+0000\n"
+"POT-Creation-Date: 2022-06-09 04:59+0000\n"
 "PO-Revision-Date: 2018-07-18 19:12+0000\n"
 "Last-Translator: Elvita Crespo <ecrespo@sangoma.com>\n"
 "Language-Team: Spanish <http://*/projects/freepbx/calendar/es/>\n"
@@ -166,7 +166,7 @@ msgstr ""
 msgid "After"
 msgstr ""
 
-#: Console/Calendar.class.php:79 views/calendar.php:180 views/calendar.php:185
+#: Console/Calendar.class.php:112 views/calendar.php:180 views/calendar.php:185
 msgid "All Day"
 msgstr ""
 
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Autodetect"
 msgstr ""
 
-#: Calendar.class.php:938 Console/Calendar.class.php:22 calendar.i18n.php:4
+#: Calendar.class.php:945 Console/Calendar.class.php:22 calendar.i18n.php:4
 #: calendar.i18n.php:10 views/remote_caldav_settings.php:133
 #: views/remote_ews_settings.php:194
 msgid "Calendar"
@@ -264,6 +264,10 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
+#: Console/Calendar.class.php:94
+msgid "Commands"
+msgstr ""
+
 #: views/calendar.php:306
 msgid "Daily"
 msgstr ""
@@ -292,7 +296,7 @@ msgstr ""
 msgid "Define when to stop the reoccurrance"
 msgstr ""
 
-#: Calendar.class.php:826 Calendar.class.php:864
+#: Calendar.class.php:833 Calendar.class.php:871
 msgid "Delete"
 msgstr ""
 
@@ -300,7 +304,8 @@ msgstr ""
 msgid "Delete Event"
 msgstr ""
 
-#: Console/Calendar.class.php:79 views/grid.php:27 views/local_settings.php:44
+#: Console/Calendar.class.php:78 Console/Calendar.class.php:112
+#: views/grid.php:27 views/local_settings.php:44
 #: views/remote_caldav_settings.php:44 views/remote_ews_settings.php:47
 #: views/remote_ical_settings.php:45
 msgid "Description"
@@ -326,7 +331,7 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: Calendar.class.php:796
+#: Calendar.class.php:803
 msgid "Edit Settings"
 msgstr ""
 
@@ -338,7 +343,7 @@ msgstr ""
 msgid "Enable Calendar"
 msgstr ""
 
-#: Console/Calendar.class.php:79
+#: Console/Calendar.class.php:112
 msgid "End"
 msgstr ""
 
@@ -398,8 +403,16 @@ msgstr ""
 msgid "Export Calendar by ID"
 msgstr ""
 
+#: Console/Calendar.class.php:262
+msgid "File does not exist"
+msgstr ""
+
 #: Console/Calendar.class.php:30
 msgid "File location of the ics to import"
+msgstr ""
+
+#: Console/Calendar.class.php:236
+msgid "Finished"
 msgstr ""
 
 #: Console/Calendar.class.php:25
@@ -414,6 +427,10 @@ msgstr ""
 msgid "Generating..."
 msgstr ""
 
+#: Console/Calendar.class.php:93
+msgid "Get more details about calendars, please run the commands below:"
+msgstr ""
+
 #: views/calendargroupgrid.php:37
 msgid "Group"
 msgstr ""
@@ -423,12 +440,20 @@ msgstr ""
 msgid "How often this calendar will synchronize with the remote server"
 msgstr ""
 
+#: Console/Calendar.class.php:78
+msgid "ID"
+msgstr ""
+
 #: Console/Calendar.class.php:28
 msgid "Import Calendar by ID"
 msgstr ""
 
-#: Calendar.class.php:915 Calendar.class.php:923 views/ucp_config.php:18
+#: Calendar.class.php:922 Calendar.class.php:930 views/ucp_config.php:18
 msgid "Inherit"
+msgstr ""
+
+#: Console/Calendar.class.php:228
+msgid "Invalid type"
 msgstr ""
 
 #: views/rnav.php:2
@@ -441,6 +466,14 @@ msgstr ""
 
 #: drivers/Local.php:14
 msgid "Local Calendar"
+msgstr ""
+
+#: Console/Calendar.class.php:187
+msgid "Match Found"
+msgstr ""
+
+#: Console/Calendar.class.php:212 Console/Calendar.class.php:221
+msgid "Matched"
 msgstr ""
 
 #: views/calendar.php:311
@@ -458,10 +491,10 @@ msgid ""
 "single group!"
 msgstr ""
 
-#: Console/Calendar.class.php:79 views/calendargroups.php:19 views/grid.php:26
-#: views/local_settings.php:22 views/remote_caldav_settings.php:22
-#: views/remote_ews_settings.php:25 views/remote_ical_settings.php:23
-#: views/rnav.php:30
+#: Console/Calendar.class.php:78 Console/Calendar.class.php:112
+#: views/calendargroups.php:19 views/grid.php:26 views/local_settings.php:22
+#: views/remote_caldav_settings.php:22 views/remote_ews_settings.php:25
+#: views/remote_ical_settings.php:23 views/rnav.php:30
 msgid "Name"
 msgstr ""
 
@@ -473,8 +506,8 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-#: Console/Calendar.class.php:89 Console/Calendar.class.php:90
-#: Console/Calendar.class.php:91 views/ucp_config.php:15
+#: Console/Calendar.class.php:122 Console/Calendar.class.php:123
+#: Console/Calendar.class.php:124 views/ucp_config.php:15
 msgid "No"
 msgstr ""
 
@@ -488,11 +521,16 @@ msgstr ""
 msgid "No Events for %s"
 msgstr ""
 
+#: Console/Calendar.class.php:190 Console/Calendar.class.php:215
+#: Console/Calendar.class.php:224
+msgid "No Match Found"
+msgstr ""
+
 #: drivers/Ews/Calendar.php:51
 msgid "No settings were discovered"
 msgstr ""
 
-#: Console/Calendar.class.php:79
+#: Console/Calendar.class.php:112
 msgid "Now Match"
 msgstr ""
 
@@ -536,7 +574,7 @@ msgstr ""
 msgid "Private iCal Link"
 msgstr ""
 
-#: Console/Calendar.class.php:79
+#: Console/Calendar.class.php:112
 msgid "Recurring"
 msgstr ""
 
@@ -584,13 +622,17 @@ msgstr ""
 msgid "Repeats"
 msgstr ""
 
-#: Calendar.class.php:812 Calendar.class.php:831 Calendar.class.php:850
-#: Calendar.class.php:869
+#: Calendar.class.php:819 Calendar.class.php:838 Calendar.class.php:857
+#: Calendar.class.php:876
 msgid "Reset"
 msgstr ""
 
 #: Console/Calendar.class.php:29
 msgid "Reset Calendar by ID"
+msgstr ""
+
+#: Console/Calendar.class.php:247 Console/Calendar.class.php:257
+msgid "Reset is only supported on local calendars!"
 msgstr ""
 
 #: views/calendar.php:402
@@ -630,7 +672,7 @@ msgstr ""
 msgid "Specific Events"
 msgstr ""
 
-#: Console/Calendar.class.php:79
+#: Console/Calendar.class.php:112
 msgid "Start"
 msgstr ""
 
@@ -642,10 +684,22 @@ msgstr ""
 msgid "Start Time"
 msgstr ""
 
-#: Calendar.class.php:817 Calendar.class.php:836 Calendar.class.php:855
-#: Calendar.class.php:874 views/calendar.php:538
+#: Console/Calendar.class.php:234
+msgid "Starting Sync..."
+msgstr ""
+
+#: Calendar.class.php:824 Calendar.class.php:843 Calendar.class.php:862
+#: Calendar.class.php:881 views/calendar.php:538
 msgid "Submit"
 msgstr "Enviar"
+
+#: Console/Calendar.class.php:266
+msgid "Successfully imported calendar"
+msgstr ""
+
+#: Console/Calendar.class.php:251
+msgid "Successfully reset the calendar"
+msgstr ""
 
 #: Calendar.class.php:411
 msgid "Successfully updated event"
@@ -723,8 +777,8 @@ msgstr ""
 msgid "Time this event ends"
 msgstr ""
 
-#: Console/Calendar.class.php:79 views/calendar.php:253
-#: views/local_settings.php:67
+#: Console/Calendar.class.php:78 Console/Calendar.class.php:112
+#: views/calendar.php:253 views/local_settings.php:67
 msgid "Timezone"
 msgstr ""
 
@@ -736,11 +790,11 @@ msgstr ""
 msgid "Timezone for this event"
 msgstr ""
 
-#: views/grid.php:28 views/rnav.php:31
+#: Console/Calendar.class.php:78 views/grid.php:28 views/rnav.php:31
 msgid "Type"
 msgstr ""
 
-#: Console/Calendar.class.php:79
+#: Console/Calendar.class.php:112
 msgid "UID"
 msgstr ""
 
@@ -752,7 +806,7 @@ msgstr ""
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:803 assets/js/calendar/calendar.js:333
+#: Calendar.class.php:810 assets/js/calendar/calendar.js:333
 msgid "Update from Source"
 msgstr ""
 
@@ -832,8 +886,8 @@ msgstr ""
 msgid "Years"
 msgstr ""
 
-#: Console/Calendar.class.php:89 Console/Calendar.class.php:90
-#: Console/Calendar.class.php:91 views/ucp_config.php:13
+#: Console/Calendar.class.php:122 Console/Calendar.class.php:123
+#: Console/Calendar.class.php:124 views/ucp_config.php:13
 msgid "Yes"
 msgstr ""
 
