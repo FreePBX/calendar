@@ -771,7 +771,14 @@ class Calendar extends \DB_Helper implements \BMO {
 					if(isset($groupEvents[$event['uid']]) || isset($groupEvents[$event['linkedid']])
 						&& ($groupEvents[$event['uid']] === $cid || $groupEvents[$event['linkedid']] === $cid)
 						&& $event['now']) {
-							return true;
+							$unow 		= (int) strtotime("now");
+							$ustart 	= (int) $event["ustarttime"];
+							$uend 		= (int) $event["uendtime"];
+							$uresult 	= false;
+							if($ustart <= $unow && $uend >= $unow){
+								$uresult = true;
+							}
+							return $uresult;
 					}
 					return false;
 				});
