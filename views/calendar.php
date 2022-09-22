@@ -32,7 +32,7 @@ var caltimezone = "<?php echo $data['timezone']; ?>";
 		<div class="fpbx-container">
 			<div class = "display no-border">
 				<div id="eventModal" class="modal fade">
-					<div class="modal-dialog">
+					<div class="modal-dialog modal-lg">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 id="modalTitle" class="modal-title"><?php echo _("Event")?></h4>
