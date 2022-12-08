@@ -44,6 +44,8 @@ class Calendar {
 	}
 
 	public static function autoDiscoverSettings($email, $password) {
+		// changes as per new microsoft Oauth 2.0 
+
 		$ad = new Autodiscover($email, $password);
 		$ad->discover();
 		$data = $ad->discoveredSettings();
@@ -175,6 +177,26 @@ class Calendar {
 			$vEvent->setDtStart($event['start']);
 			$vEvent->setDtEnd($event['end']);
 			if($event['allday']) {
+				$vEvent->setUseUtc(true);
+				$vEvent->setNoTime(true);
+			}
+			$vCalendar->addComponent($vEvent);
+		}
+		return $vCalendar->render();
+	}
+
+	public function formatiCalNew($events) {
+		$vCalendar = new iCalendar('freepbx.org');
+		foreach($events as $id => $event) {
+			$vEvent = new Event($id);
+			$vEvent->setSummary($event['subject']);
+			$vEvent->setLocation($event['location']['displayName']);
+			$vEvent->setCategories($event['categories']);
+			$start = new \DateTime($event['start']['dateTime']);
+			$vEvent->setDtStart($start);
+			$end = new \DateTime($event['end']['dateTime']);
+			$vEvent->setDtEnd($end);
+			if(isset($event['isallday'])) {
 				$vEvent->setUseUtc(true);
 				$vEvent->setNoTime(true);
 			}

@@ -16,9 +16,15 @@ use \FreePBX\modules\Calendar\drivers\Ews\Calendar as EWSCalendar;
 use malkusch\lock\mutex\FlockMutex;
 use BMO;
 use DB_Helper;
-
+use \FreePBX\modules\Calendar\Oauth;
 class Calendar extends \DB_Helper implements \BMO {
 	private $guimessage;
+	private $oauth = null;
+	private $consumerkey = null;
+	private $consumersecret = null;
+	private $pbxurl = null;
+	private $outlookurl = null;
+	private $tenant = null;
 
 	public function __construct($freepbx = null) {
 		if ($freepbx == null) {
@@ -26,6 +32,18 @@ class Calendar extends \DB_Helper implements \BMO {
 		}
 		$this->FreePBX = $freepbx;
 		$this->db = $freepbx->Database;
+	}
+
+	public function loadAuthClass(){
+		$this->oauthdata = $this->getConfig("outlook-details","outlook-details");
+		$this->tenant = $this->oauthdata['tenantid'];
+		$this->consumerkey = $this->oauthdata['consumerkey'];
+		$this->consumersecret = $this->oauthdata['consumersecret'];
+		$this->pbxurl = $this->oauthdata['pbxurl'];
+		$this->outlookurl = $this->oauthdata['outlookurl'];
+		if(!is_object($this->oauth)) {
+			$this->oauth = new Oauth($this->tenant,$this->consumerkey, $this->consumersecret,null,null,$this->pbxurl,$this->outlookurl);
+		}
 	}
 
 	public function install(){
@@ -201,6 +219,9 @@ class Calendar extends \DB_Helper implements \BMO {
 			case 'duplicate':
 			case 'generateical':
 			case 'checkical':
+			case "saveoutlooksettings":
+			case 'saveOauth':
+			case 'getToken':
 				return true;
 			case 'ical':
 				//be aware
@@ -423,6 +444,21 @@ class Calendar extends \DB_Helper implements \BMO {
 				$cal = $this->getDriverByID($_REQUEST['calendarid']);
 				return $cal->refreshCalendar();
 			break;
+			case "saveoutlooksettings":
+				$this->setConfig('outlook-details',$_REQUEST,'outlook-details');
+				$this->loadAuthClass();
+				$authUrl =  $this->oauth->getAuthURL();
+				return array("status" => true, "message" => _("Data saved"), "authurl" => ($authUrl) ? $authUrl : '');
+			break;
+			case 'saveOauth':
+				$outlookdata = $this->getConfig('outlook-details','outlook-details');
+				$outlookdata['auth_code'] = $_REQUEST['auth_code'];
+				$this->setConfig('outlook-details',$outlookdata,'outlook-details');
+				return array("status" => true, "message" => _("saved auth code"));
+			break;
+			case 'getToken':
+				return $this->outlookToken();
+			break;
 		}
 	}
 
@@ -464,13 +500,21 @@ class Calendar extends \DB_Helper implements \BMO {
 				$icallink = $data['calendar']->getMappingToken();
 				return load_view(__DIR__."/views/calendar.php",array('action' => 'view', 'type' => $data['type'], 'data' => $data, 'locale' => $locale, 'icallink' => (!empty($icallink) ? 'ajax.php?module=calendar&command=ical&token='.$icallink : '')));
 			break;
+			case 'outlooksettings':
+				//load settings view
+				$outlookdata = $this->getConfig('outlook-details','outlook-details');
+				$this->loadAuthClass();
+				$outlookdata['authurl'] = $this->oauth->getAuthURL();
+				return load_view(__DIR__."/views/outlooksettings.php",array('outlookdata' => $outlookdata));
+			break;
 			default:
 				$dropdown = array();
 				$drivers = $this->getAllDriversInfo();
 				foreach($drivers as $driver => $data) {
 					$dropdown[$driver] = $data['name'];
 				}
-				return load_view(__DIR__."/views/grid.php",array('message' => $this->guimessage, 'dropdown' => $dropdown));
+				$authType = $this->FreePBX->Config->get_conf_setting('OUTLOOK_AUTH_METHOD');
+				return load_view(__DIR__."/views/grid.php",array('message' => $this->guimessage, 'dropdown' => $dropdown, 'auth_type' => $authType));
 			break;
 		}
 	}
@@ -894,6 +938,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			case "add":
 			case "edit":
 			case "view":
+			case "outlooksettings":
 				return load_view(__DIR__."/views/rnav.php",array());
 			break;
 		}
@@ -1143,5 +1188,52 @@ class Calendar extends \DB_Helper implements \BMO {
 		return $timezone;
 	}
 
+	public function getAuthorizeUrl($tenentId,$screteId,$type,$redirectUri) {
+        $requestData = array(
+            "client_id" => $screteId,
+            "redirect_uri" => $redirectUri,
+            "response_type" => $type,
+            "scope" => $this->scope,
+            "state" => "auth_code"
+        );
+        $token_request_body = http_build_query($requestData);
+		$url = $this->authority.$tenentId.$this->authorizeUrl."?".$token_request_body;
+		return $url;
+    }
+
+	public function outlookToken() {
+		$outlookdata = $this->getConfig('outlook-details','outlook-details');
+		$this->loadAuthClass();
+		$result = json_decode($this->oauth->getAuthToken($outlookdata['auth_code']),true);
+		$outlooknewdata = array();
+		if(isset($result['access_token'])) {
+			$outlooknewdata = $outlookdata;
+			$outlooknewdata['access_token'] = $result['access_token'];
+			$outlooknewdata['token_expire_at'] = time() + $result['expires_in'];
+			$outlooknewdata['refresh_token'] = (isset($result['refresh_token'])) ? $result['refresh_token'] : '';
+			$this->setConfig('outlook-details',$outlooknewdata,'outlook-details');
+			return array("status" => true, "message" => _("saved access token"));
+		} else {
+			return array("status" => false, "message" => $result['error']);
+		}
+	}
+
+	public function getOutlookTokenRefresh($outlookDetails) {
+		if(isset($outlookDetails['refresh_token'])) {
+			$this->loadAuthClass();
+			$result = json_decode($this->oauth->getTokenRefresh($outlookDetails),true);
+			if(isset($result['access_token'])) {
+				$outlookDetails['access_token'] = $result['access_token'];
+				$outlookDetails['token_expire_at'] = time() + $result['expires_in'];
+			}
+
+			if(isset($result['refresh_token'])) {
+				$outlookDetails['refresh_token'] = $result['refresh_token'];
+			}
+
+			$this->setConfig('outlook-details',$outlookDetails,'outlook-details');
+		}
+		return $outlookDetails;
+	}
 
 }
