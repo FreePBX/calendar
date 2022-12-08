@@ -9,7 +9,7 @@ if(!empty($message)) { ?>
 </div>
 <?php } ?>
 <div id="toolbar-all">
-	<div class="dropdown">
+	<div class="dropdown" style="display: inline-block !important;">
 		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 			<i class="fa fa-plus">&nbsp;</i><?php echo _("Add Calendar")?> <span class="caret"></span>
 		</button>
@@ -18,6 +18,11 @@ if(!empty($message)) { ?>
 				<li><a href="?display=calendar&amp;action=add&amp;type=<?php echo $name?>"><i class="fa fa-plus"></i> <strong><?php echo sprintf(_('Add %s'),$driver)?></strong></a></li>
 			<?php } ?>
 		</ul>
+	</div>
+	<div style="display: inline-block !important;">
+		<a class="btn btn-default" href = "?display=calendar&amp;action=outlooksettings">
+			<?php echo _("Outlook Oauth2 Settings")?>
+		</a>
 	</div>
 </div>
 <table data-toolbar="#toolbar-all" data-escape="true" data-toggle="table" data-url="ajax.php?module=calendar&amp;command=grid" data-maintain-selected="true" data-show-columns="true" data-show-toggle="true" data-toggle="table" data-pagination="true" data-search="true" id="table-all">
@@ -32,4 +37,27 @@ if(!empty($message)) { ?>
 	<tbody>
 	</tbody>
 </table>
-<script>var drivers = <?php echo json_encode($dropdown)?></script>
+<script>
+	var drivers = <?php echo json_encode($dropdown)?>;
+	$(document).ready(function() {
+		var pageurl = window.location.href;
+		if(pageurl.includes("code")) {
+			var origUrl = pageurl.split('&')[0];
+			var params = pageurl.split('&')[1];
+			var acode = params.split('=')[1];
+			$.post("ajax.php?module=calendar&command=saveOauth",{auth_code: acode}, function(data) {
+				if(data.status) {
+					$.post("ajax.php?module=calendar&command=getToken",{}, function(data) {
+						if(data.status) {
+							window.location.href = origUrl;
+						}
+					}).fail(function() {
+						alert(_("There was an error while getting auth token"));
+					});
+				}
+			}).fail(function() {
+				alert(_("There was an error"));
+			});
+		}
+	});
+</script>
