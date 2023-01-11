@@ -191,6 +191,7 @@ class Calendar {
 			$vEvent = new Event($id);
 			$vEvent->setSummary($event['subject']);
 			$vEvent->setLocation($event['location']['displayName']);
+			$vEvent->setDescription($event['bodyPreview']);
 			$vEvent->setCategories($event['categories']);
 			$start = new \DateTime($event['start']['dateTime']);
 			$vEvent->setDtStart($start);

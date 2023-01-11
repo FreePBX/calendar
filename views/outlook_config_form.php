@@ -6,7 +6,7 @@
 <div class = "display full-border">
     <div class="container-fluid">
 		<h1>
-			<span><?php echo _('Outlook Settings') ?></span>
+			<span><?php echo _('Outlook Config') ?></span>
 		</h1>
 	</div>
     <div class="row">
@@ -14,6 +14,51 @@
 			<div class="fpbx-container">
 				<div class="display full-border">
                 <form class="fpbx-submit settingsform" method="post" action="?display=calendar&action=saveoutlooksettings">
+                    <input id="id" name="id" type="hidden" class="form-control" value="<?php echo $outlookdata['id']; ?>">
+                    <div class="element-container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="control-label" for="name"><?php echo _("Name") ?></label>
+                                            <i class="fa fa-question-circle fpbx-help-icon" data-for="name"></i>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input id="name" name="name" type="text" class="form-control" value="<?php echo $outlookdata['name']; ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span id="name-help" class="help-block fpbx-help-block"><?php echo _("Name for the settings.")?></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="element-container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <label class="control-label" for="description"><?php echo _("Description") ?></label>
+                                            <i class="fa fa-question-circle fpbx-help-icon" data-for="description"></i>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <input id="description" name="description" type="text" class="form-control" value="<?php echo $outlookdata['description']; ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span id="description-help" class="help-block fpbx-help-block"><?php echo _("Description for the settings.")?></span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="element-container">
                         <div class="row">
                             <div class="col-md-12">
@@ -144,17 +189,22 @@
 <script>
     var generatedAuthUrl = '';
     $("#save").click(function() {
+        let id = $("#id").val();
+        let name = $("#name").val();
+        let description = $("#description").val();
         let pbxurl = $("#pbxurl").val();
         let tenant = $("#tenantid").val();
         let client = $("#consumerkey").val();
         let secreat = $("#consumersecret").val();
         let authurl = $("#outlookurl").val();
 
-        if(pbxurl && tenant && client && secreat && authurl) {
-            $.post("ajax.php?module=calendar&command=saveoutlooksettings",{ pbxurl: pbxurl, tenantid: tenant, consumerkey: client, consumersecret: secreat, outlookurl: authurl}, function(data) {
+        if(name && pbxurl && tenant && client && secreat && authurl) {
+            $.post("ajax.php?module=calendar&command=saveoutlooksettings",{ id: id, name: name, description: description, pbxurl: pbxurl, tenantid: tenant, consumerkey: client, consumersecret: secreat, outlookurl: authurl}, function(data) {
                 if(data.status) {
                     alert(_('You will be redirected to microsoft loging page for authorization, If you are not redirected please click on "Authorize access" button to give access to generate token.'));
                     window.location.href = data.authurl;
+                } else {
+                    fpbxToast(data.message,'','error');
                 }
             }).fail(function() {
                 alert(_("There was an error"));

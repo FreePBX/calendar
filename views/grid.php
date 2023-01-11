@@ -20,8 +20,8 @@ if(!empty($message)) { ?>
 		</ul>
 	</div>
 	<div style="display: inline-block !important;">
-		<a class="btn btn-default" href = "?display=calendar&amp;action=outlooksettings">
-			<?php echo _("Outlook Oauth2 Settings")?>
+		<a class="btn btn-default" href = "?display=calendar&amp;action=oauthsettings">
+			<?php echo _("Outlook Oauth2 Config")?>
 		</a>
 	</div>
 </div>
@@ -44,12 +44,22 @@ if(!empty($message)) { ?>
 		if(pageurl.includes("code")) {
 			var origUrl = pageurl.split('&')[0];
 			var params = pageurl.split('&')[1];
+			var params2 = pageurl.split('&')[2];
 			var acode = params.split('=')[1];
-			$.post("ajax.php?module=calendar&command=saveOauth",{auth_code: acode}, function(data) {
+			var state = params2.split('=')[1];
+			$.post("ajax.php?module=calendar&command=saveOauth",{id: state, auth_code: acode}, function(data) {
 				if(data.status) {
-					$.post("ajax.php?module=calendar&command=getToken",{}, function(data) {
+					$.post("ajax.php?module=calendar&command=getToken",{id: state}, function(data) {
 						if(data.status) {
-							window.location.href = origUrl;
+							fpbxToast(_('Auth token generated successfully.'));
+							setTimeout(function(){
+								window.location.href = origUrl;
+							}, 1000);
+						} else {
+							fpbxToast(_('Invalid client credentials.'),'','error');
+							setTimeout(function(){
+								window.location.href = origUrl;
+							}, 1000);
 						}
 					}).fail(function() {
 						alert(_("There was an error while getting auth token"));
