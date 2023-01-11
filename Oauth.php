@@ -43,12 +43,12 @@ class Oauth {
     }
 
     //Getters and Setters.
-	public function getAuthURL($pbxurl = '') {
+	public function getAuthURL($id, $pbxurl = '') {
 		$oauthURL = $this->outlookurl.'/'.$this->tenant.'/oauth2/v2.0/authorize';
 		$pbxURL = empty($pbxurl)?$this->pbxURL:$pbxurl;
 		$pbxURL = rtrim($pbxURL,'/');
 		if($oauthURL && $this->key && $pbxURL && $this->scope) {
-			return sprintf('%s?client_id=%s&redirect_uri=%s/admin/config.php?display=calendar&response_type=code&scope=%s&state=auth_code&response_mode=query',$oauthURL,$this->key,$pbxURL,$this->scope);
+			return sprintf('%s?client_id=%s&redirect_uri=%s/admin/config.php?display=calendar&response_type=code&scope=%s&state=%s&response_mode=query',$oauthURL,$this->key,$pbxURL,$this->scope,$id);
 		} else {
 			return '';
 		}

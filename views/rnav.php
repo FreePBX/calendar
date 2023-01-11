@@ -1,5 +1,6 @@
 <div id="toolbar-nav">
 	<a href="?display=calendar" class="btn btn-default"><i class="fa fa-list"></i> <?php echo _("List Calendars")?></a>
+	<a  href = "?display=calendar&amp;action=oauthsettings" class="btn btn-default"><i class="fa fa-list"></i> <?php echo _("Outlook Oauth2 Config")?></a>
 	<div class="dropdown">
 		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 			<i class="fa fa-plus">&nbsp;</i><?php echo _("Add Calendar")?> <span class="caret"></span>
@@ -9,6 +10,7 @@
 			<li><a href="?display=calendar&amp;action=add&amp;type=ical"><i class="fa fa-plus"></i> <strong><?php echo _('Add Remote iCal Calendar')?></strong></a></li>
 			<li><a href="?display=calendar&amp;action=add&amp;type=caldav"><i class="fa fa-plus"></i> <strong><?php echo _('Add Remote CalDAV Calendar')?></strong></a></li>
 			<li><a href="?display=calendar&amp;action=add&amp;type=ews"><i class="fa fa-plus"></i> <strong><?php echo _('Add Remote Outlook Calendar')?></strong></a></li>
+			<li><a href="?display=calendar&amp;action=add&amp;type=oauth"><i class="fa fa-plus"></i> <strong><?php echo _('Add Remote Outlook Calendar using Oauth2')?></strong></a></li>
 		<!-- Temporary removal of outlook and google
 			<li><a href="?display=calendar&amp;action=add&amp;type=google"><i class="fa fa-plus"></i> <strong><?php echo _('Add Remote Google Calendar')?></strong></a></li>
 		-->

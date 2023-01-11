@@ -20,11 +20,6 @@ use \FreePBX\modules\Calendar\Oauth;
 class Calendar extends \DB_Helper implements \BMO {
 	private $guimessage;
 	private $oauth = null;
-	private $consumerkey = null;
-	private $consumersecret = null;
-	private $pbxurl = null;
-	private $outlookurl = null;
-	private $tenant = null;
 
 	public function __construct($freepbx = null) {
 		if ($freepbx == null) {
@@ -32,18 +27,6 @@ class Calendar extends \DB_Helper implements \BMO {
 		}
 		$this->FreePBX = $freepbx;
 		$this->db = $freepbx->Database;
-	}
-
-	public function loadAuthClass(){
-		$this->oauthdata = $this->getConfig("outlook-details","outlook-details");
-		$this->tenant = $this->oauthdata['tenantid'];
-		$this->consumerkey = $this->oauthdata['consumerkey'];
-		$this->consumersecret = $this->oauthdata['consumersecret'];
-		$this->pbxurl = $this->oauthdata['pbxurl'];
-		$this->outlookurl = $this->oauthdata['outlookurl'];
-		if(!is_object($this->oauth)) {
-			$this->oauth = new Oauth($this->tenant,$this->consumerkey, $this->consumersecret,null,null,$this->pbxurl,$this->outlookurl);
-		}
 	}
 
 	public function install(){
@@ -106,6 +89,9 @@ class Calendar extends \DB_Helper implements \BMO {
 					break;
 					case "delete":
 						$this->delCalendarByID($_REQUEST['id']);
+					break;
+					case "deletesettings":
+						$this->delCalendarSettingByID($_REQUEST['id']);
 					break;
 				}
 			break;
@@ -171,8 +157,11 @@ class Calendar extends \DB_Helper implements \BMO {
 		return $class::getEditDisplay($data);
 	}
 
-	public function getDriverDisplayAdd($driver) {
+	public function getDriverDisplayAdd($driver, $data = array()) {
 		$class = $this->prepareDriverClass($driver);
+		if($driver == 'oauth') {
+			return $class::getAddDisplay($data);
+		}
 		return $class::getAddDisplay();
 	}
 
@@ -222,6 +211,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			case "saveoutlooksettings":
 			case 'saveOauth':
 			case 'getToken':
+			case 'oauthsettings':
 				return true;
 			case 'ical':
 				//be aware
@@ -445,19 +435,38 @@ class Calendar extends \DB_Helper implements \BMO {
 				return $cal->refreshCalendar();
 			break;
 			case "saveoutlooksettings":
-				$this->setConfig('outlook-details',$_REQUEST,'outlook-details');
-				$this->loadAuthClass();
-				$authUrl =  $this->oauth->getAuthURL();
+				if($_REQUEST['id']) {
+					$uuid = $_REQUEST['id'];
+				} else {
+					$uuid = Uuid::uuid4()->toString();
+					$_REQUEST['id'] = $uuid;
+				}
+				//name and application id validation to avoid duplication
+				if(!$this->checkConfigExists($_REQUEST,$uuid)) {
+					return array("status" => false, "message" => _("Config name already exists."));
+				}
+				$this->setConfig($uuid,$_REQUEST,'outlook-details');
+				$oauth = new Oauth($_REQUEST['tenantid'],$_REQUEST['consumerkey'], $_REQUEST['consumersecret'],null,null,$_REQUEST['pbxurl'],$_REQUEST['outlookurl']);
+				$authUrl =  $oauth->getAuthURL($uuid);
 				return array("status" => true, "message" => _("Data saved"), "authurl" => ($authUrl) ? $authUrl : '');
 			break;
 			case 'saveOauth':
-				$outlookdata = $this->getConfig('outlook-details','outlook-details');
+				$outlookdata = $this->getConfig($_REQUEST['id'],'outlook-details');
 				$outlookdata['auth_code'] = $_REQUEST['auth_code'];
-				$this->setConfig('outlook-details',$outlookdata,'outlook-details');
+				$this->setConfig($_REQUEST['id'],$outlookdata,'outlook-details');
 				return array("status" => true, "message" => _("saved auth code"));
 			break;
 			case 'getToken':
-				return $this->outlookToken();
+				return $this->outlookToken($_REQUEST['id']);
+			break;
+			case 'oauthsettings':
+				$settings = $this->getAll('outlook-details');
+				$final = array();
+				foreach($settings as $id => $data) {
+					$data['id'] = $id;
+					$final[] = $data;
+				}
+				return $final;
 			break;
 		}
 	}
@@ -487,10 +496,17 @@ class Calendar extends \DB_Helper implements \BMO {
 		switch($action) {
 			case "add":
 				$type = !empty($_GET['type']) ? $_GET['type'] : '';
+				if($type == 'oauth') {
+					$data['configs_list'] = $this->getallOauthSettings();
+					return $this->getDriverDisplayAdd($type,$data);
+				}
 				return $this->getDriverDisplayAdd($type);
 			break;
 			case "edit":
 				$data = $this->getCalendarByID($_GET['id']);
+				if($data['type'] == 'oauth') {
+					$data['configs_list'] = $this->getallOauthSettings();
+				}
 				return $this->getDriverDisplayEdit($data['type'],$data);
 			break;
 			case "view":
@@ -500,12 +516,21 @@ class Calendar extends \DB_Helper implements \BMO {
 				$icallink = $data['calendar']->getMappingToken();
 				return load_view(__DIR__."/views/calendar.php",array('action' => 'view', 'type' => $data['type'], 'data' => $data, 'locale' => $locale, 'icallink' => (!empty($icallink) ? 'ajax.php?module=calendar&command=ical&token='.$icallink : '')));
 			break;
+			case 'editoutlooksettings':
 			case 'outlooksettings':
 				//load settings view
-				$outlookdata = $this->getConfig('outlook-details','outlook-details');
-				$this->loadAuthClass();
-				$outlookdata['authurl'] = $this->oauth->getAuthURL();
-				return load_view(__DIR__."/views/outlooksettings.php",array('outlookdata' => $outlookdata));
+				if(isset($_GET['id'])) {
+					$outlookdata = $this->getConfig($_GET['id'],'outlook-details');
+					$oauth = new Oauth($outlookdata['tenantid'],$outlookdata['consumerkey'], $outlookdata['consumersecret'],null,null,$outlookdata['pbxurl'],$outlookdata['outlookurl']);
+					$outlookdata['authurl'] = $oauth->getAuthURL($_GET['id']);
+					$outlookdata['id'] = $_GET['id'];
+				} else {
+					$outlookdata = array();
+				}
+				return load_view(__DIR__."/views/outlook_config_form.php",array('outlookdata' => $outlookdata));
+			break;
+			case 'oauthsettings':
+				return load_view(__DIR__."/views/outlook_configs_grid.php");
 			break;
 			default:
 				$dropdown = array();
@@ -547,6 +572,14 @@ class Calendar extends \DB_Helper implements \BMO {
 		$this->setConfig($id,false,'calendars');
 		$this->setConfig($id,false,'calendar-raw');
 		$this->setConfig($id,false,'calendar-sync');
+	}
+
+	/**
+	 * Delete outlook Calendar settings by ID
+	 * @param  string $id The settings calendar ID
+	 */
+	public function delCalendarSettingByID($id) {
+		$this->setConfig($id,false,'outlook-details');
 	}
 
 	/**
@@ -939,6 +972,8 @@ class Calendar extends \DB_Helper implements \BMO {
 			case "edit":
 			case "view":
 			case "outlooksettings":
+			case "oauthsettings":
+			case "editoutlooksettings":
 				return load_view(__DIR__."/views/rnav.php",array());
 			break;
 		}
@@ -1188,30 +1223,17 @@ class Calendar extends \DB_Helper implements \BMO {
 		return $timezone;
 	}
 
-	public function getAuthorizeUrl($tenentId,$screteId,$type,$redirectUri) {
-        $requestData = array(
-            "client_id" => $screteId,
-            "redirect_uri" => $redirectUri,
-            "response_type" => $type,
-            "scope" => $this->scope,
-            "state" => "auth_code"
-        );
-        $token_request_body = http_build_query($requestData);
-		$url = $this->authority.$tenentId.$this->authorizeUrl."?".$token_request_body;
-		return $url;
-    }
-
-	public function outlookToken() {
-		$outlookdata = $this->getConfig('outlook-details','outlook-details');
-		$this->loadAuthClass();
-		$result = json_decode($this->oauth->getAuthToken($outlookdata['auth_code']),true);
+	public function outlookToken($id) {
+		$outlookdata = $this->getConfig($id,'outlook-details');
+		$oauth = new Oauth($outlookdata['tenantid'],$outlookdata['consumerkey'], $outlookdata['consumersecret'],null,null,$outlookdata['pbxurl'],$outlookdata['outlookurl']);
+		$result = json_decode($oauth->getAuthToken($outlookdata['auth_code']),true);
 		$outlooknewdata = array();
 		if(isset($result['access_token'])) {
 			$outlooknewdata = $outlookdata;
 			$outlooknewdata['access_token'] = $result['access_token'];
 			$outlooknewdata['token_expire_at'] = time() + $result['expires_in'];
 			$outlooknewdata['refresh_token'] = (isset($result['refresh_token'])) ? $result['refresh_token'] : '';
-			$this->setConfig('outlook-details',$outlooknewdata,'outlook-details');
+			$this->setConfig($id,$outlooknewdata,'outlook-details');
 			return array("status" => true, "message" => _("saved access token"));
 		} else {
 			return array("status" => false, "message" => $result['error']);
@@ -1220,8 +1242,8 @@ class Calendar extends \DB_Helper implements \BMO {
 
 	public function getOutlookTokenRefresh($outlookDetails) {
 		if(isset($outlookDetails['refresh_token'])) {
-			$this->loadAuthClass();
-			$result = json_decode($this->oauth->getTokenRefresh($outlookDetails),true);
+			$oauth = new Oauth($outlookDetails['tenantid'],$outlookDetails['consumerkey'], $outlookDetails['consumersecret'],null,null,$outlookDetails['pbxurl'],$outlookDetails['outlookurl']);
+			$result = json_decode($oauth->getTokenRefresh($outlookDetails),true);
 			if(isset($result['access_token'])) {
 				$outlookDetails['access_token'] = $result['access_token'];
 				$outlookDetails['token_expire_at'] = time() + $result['expires_in'];
@@ -1231,9 +1253,35 @@ class Calendar extends \DB_Helper implements \BMO {
 				$outlookDetails['refresh_token'] = $result['refresh_token'];
 			}
 
-			$this->setConfig('outlook-details',$outlookDetails,'outlook-details');
+			$this->setConfig($outlookDetails['id'],$outlookDetails,'outlook-details');
 		}
 		return $outlookDetails;
 	}
 
+	public function getallOauthSettings()
+	{
+		$allsettings = $this->getAll('outlook-details');
+		$settings = [];
+		foreach ($allsettings as $key => $_sett) {
+			if($key) {
+				$settings[$key] = $_sett['name'];
+			}
+		}
+		return $settings;
+	}
+
+	public function checkConfigExists($data,$id)
+	{
+		$allConfig = $this->getallOauthSettings();
+		foreach ($allConfig as $key => $value) {
+			if($key == $id) {
+				continue;
+			}
+
+			if($value == $data['name']) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

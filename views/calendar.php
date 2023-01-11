@@ -2,7 +2,11 @@
 $url = "config.php?display=calendar&action=edit&type=calendar&id=".$data['id'];
 $readonly = $data['type'] !== 'local' ? 'true' : 'false';
 ?>
+<?php
 
+if($data['type'] == 'oauth') { ?>
+<div class="alert alert-warning" role="alert"><b> <?php echo _("NOTE:") ?></b> <?php echo _("If calendar is not syncing properly please check for the outlook config which is selected for this calendar.")?> </div>
+<?php } ?>
 <h1>
 	<?php echo sprintf(_("Viewing Calendar '%s'"),$data['name'])?>
 </h1>

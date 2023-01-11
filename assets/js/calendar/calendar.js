@@ -98,6 +98,9 @@ function typeformatter(v,r) {
 function actionformatter(v,r) {
 	return '<div class="actions"><a href="?display=calendar&amp;action=view&amp;type=calendar&amp;id='+r.id+'"><i class="fa fa-eye" aria-hidden="true"></i></a><a href="?display=calendar&amp;action=edit&amp;type=calendar&amp;id='+r.id+'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a class="delAction" href="?display=calendar&amp;action=delete&amp;type=calendar&amp;id='+r.id+'"><i class="fa fa-trash" aria-hidden="true"></i></a></div>';
 }
+function settingsactionformatter(v, r) {
+	return '<div class="actions"><a href="?display=calendar&amp;action=editoutlooksettings&amp;id=' + r.id + '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a class="delAction" href="?display=calendar&amp;action=deletesettings&amp;type=calendar&amp;id=' + r.id + '"><i class="fa fa-trash" aria-hidden="true"></i></a></div>';
+}
 var test = '';
 var buttons = {};
 if($('#calendar').length && !readonly) {
