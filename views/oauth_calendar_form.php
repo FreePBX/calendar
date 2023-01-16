@@ -138,6 +138,55 @@
 								</div>
 							</div>
 						</div>
+						<div class="element-container">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="form-group">
+											<div class="col-md-3">
+												<label class="control-label" for="auth_settings"><?php echo _("Oauth Config") ?></label>
+												<i class="fa fa-question-circle fpbx-help-icon" data-for="auth_settings"></i>
+											</div>
+											<div class="col-md-9">
+												<select id="auth_settings" class="form-control" name="auth_settings">
+													<option value=""><?php echo _('Please select a Config'); ?></option>
+													<?php foreach ( $data['configs_list'] as $key => $value) { ?>
+														<option value="<?php echo $key; ?>" <?php echo $data['auth_settings'] == $key ? 'selected' : '' ?>><?php echo $value; ?></option>
+													<?php } ?>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<span id="auth_settings-help" class="help-block fpbx-help-block"><?php echo _("Select the Oauth Config or credentials for this calendar")?></span>
+								</div>
+							</div>
+						</div>
+						<div class="element-container">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="form-group">
+											<div class="col-md-3">
+												<label class="control-label" for="timezone"><?php echo _("Timezone") ?></label>
+												<i class="fa fa-question-circle fpbx-help-icon" data-for="timezone"></i>
+											</div>
+											<div class="col-md-9">
+												<?php echo FreePBX::View()->timezoneDrawSelect('timezone',($data['timezone']) ? $data['timezone'] : date_default_timezone_get()); ?>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<span id="timezone-help" class="help-block fpbx-help-block"><?php echo _("Timezone for this Calendar")?></span>
+								</div>
+							</div>
+						</div>
 					</form>
 				</div>
 			</div>
@@ -149,11 +198,11 @@
 		if($("#username").val() == "") {
 			return warnInvalid($("#username"),_("Please define a valid username"));
 		}
-		if($("#password").val() == "") {
-			return warnInvalid($("#password"),_("Please define a valid password"));
+		if($("#email").val() == "") {
+			return warnInvalid($("#email"),_("Please define a valid email"));
 		}
-		if($("#url").val() == "") {
-			return warnInvalid($("#url"),_("Please define a valid url"));
+		if($("#auth_settings").val() == "") {
+			return warnInvalid($("#url"),_("Please select a outlook config for this calendar"));
 		}
 	});
 
