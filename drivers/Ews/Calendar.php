@@ -25,6 +25,7 @@ use \jamesiarmes\PhpEws\Type\TargetFolderIdType;
 use \jamesiarmes\PhpEws\Type\EmailAddressType;
 use \jamesiarmes\PhpEws\Type\FolderIdType;
 use \jamesiarmes\PhpEws\Type\ContainsExpressionType;
+use Carbon\Carbon;
 
 use Eluceo\iCal\Component\Calendar as iCalendar;
 use Eluceo\iCal\Component\Event;
@@ -200,6 +201,127 @@ class Calendar {
 			if(isset($event['isallday'])) {
 				$vEvent->setUseUtc(true);
 				$vEvent->setNoTime(true);
+			}
+
+			if(!empty($event['recurrence'])) {
+				if(isset($event['recurrence']['pattern'])) {
+					if(!empty($event['recurrence']['range']['startDate']) && !empty($event['recurrence']['range']['endDate'])) {
+						$recurrenceRule = new RecurrenceRule();
+						switch ($event['recurrence']['pattern']['type']) {
+							case 'daily':
+								$recurrenceRule->setFreq(RecurrenceRule::FREQ_DAILY);
+								break;
+							case 'weekly':
+								if(isset($event['recurrence']['pattern']['daysOfWeek']) && !empty($event['recurrence']['pattern']['daysOfWeek']) && is_array($event['recurrence']['pattern']['daysOfWeek'])) {
+									$days = array();
+									foreach($event['recurrence']['pattern']['daysOfWeek'] as $day) {
+										switch($day) {
+											case "monday":
+												$days[] = 'MO';
+											break;
+											case "tuesday":
+												$days[] = 'TU';
+											break;
+											case "wednesday":
+												$days[] = 'WE';
+											break;
+											case "thursday":
+												$days[] = 'TH';
+											break;
+											case "friday":
+												$days[] = 'FR';
+											break;
+											case "saturday":
+												$days[] = 'SA';
+											break;
+											case "sunday":
+												$days[] = 'SU';
+											break;
+											default:
+											break;
+										}
+									}
+									$recurrenceRule->setByDay(implode(",",$days));
+									$recurrenceRule->setFreq(RecurrenceRule::FREQ_WEEKLY);
+								}
+								break;
+							case 'absoluteMonthly':
+								$recurrenceRule->setFreq(RecurrenceRule::FREQ_MONTHLY);
+								$recurrenceRule->setByMonthDay($vEvent->getDtStart()->format('j') + 1);
+								break;
+							case 'relativeMonthly':
+								$recurrenceRule->setFreq(RecurrenceRule::FREQ_MONTHLY);
+								if(isset($event['recurrence']['pattern']['index']) && $event['recurrence']['pattern']['index']) {
+									$c = 0;
+									switch ($event['recurrence']['pattern']['index']) {
+										case 'first':
+											$c = 1;
+											break;
+										case 'second':
+											$c = 2;
+											break;
+										case 'third':
+											$c = 3;
+											break;
+										case 'fourth':
+											$c = 4;
+											break;
+										default:
+											break;
+									}
+									$d = strtoupper(substr($vEvent->getDtStart()->modify('+1 day')->format('D'), 0, -1));
+									$recurrenceRule->setByDay($c.$d);
+								}
+								break;
+							case 'absoluteYearly':
+								$recurrenceRule->setFreq(RecurrenceRule::FREQ_YEARLY);
+								$recurrenceRule->setByMonth((int)$vEvent->getDtStart()->format('n'));
+								$recurrenceRule->setByMonthDay($vEvent->getDtStart()->format('j') + 1);
+								break;
+							case 'relativeYearly':
+								$recurrenceRule->setFreq(RecurrenceRule::FREQ_YEARLY);
+								$recurrenceRule->setByMonth((int)$vEvent->getDtStart()->format('n'));
+								if(isset($event['recurrence']['pattern']['index']) && $event['recurrence']['pattern']['index']) {
+									$c = 0;
+									switch ($event['recurrence']['pattern']['index']) {
+										case 'first':
+											$c = 1;
+											break;
+										case 'second':
+											$c = 2;
+											break;
+										case 'third':
+											$c = 3;
+											break;
+										case 'fourth':
+											$c = 4;
+											break;
+										default:
+											break;
+									}
+									$d = strtoupper(substr($vEvent->getDtStart()->modify('+1 day')->format('D'), 0, -1));
+									$recurrenceRule->setByDay($c.$d);
+								}
+								break;
+							default:
+								break;
+						}
+
+						if(isset($event['recurrence']['pattern']['interval'])) {
+							$recurrenceRule->setInterval($event['recurrence']['pattern']['interval']);
+						}
+
+						if(isset($event['recurrence']['range']['numberOfOccurrences']) && $event['recurrence']['range']['numberOfOccurrences']) {
+							$recurrenceRule->setCount($event['recurrence']['range']['numberOfOccurrences']);
+						}
+
+						if(isset($event['recurrence']['range']['type']) && $event['recurrence']['range']['type'] != 'noEnd') {
+							$stop_date = date('Y-m-d H:i:s', strtotime($event['recurrence']['range']['endDate'] . ' +1 day'));
+							$recurrenceRule->setUntil(new Carbon($stop_date, $event['end']['timeZone']));
+						}
+						$vEvent->setRecurrenceRule($recurrenceRule);
+					}
+				}
 			}
 			$vCalendar->addComponent($vEvent);
 		}
