@@ -68,7 +68,7 @@ class IcalRangedParser extends IcalParser {
 			}
 		}
 
-		date_default_timezone_set($event['DTSTART']->getTimezone()->getName());
+		date_default_timezone_set(($event['DTSTART']->getTimezone()->getName() !== 'Z') ? $event['DTSTART']->getTimezone()->getName() : 'UTC');
 
 		$until = $recurring->getUntil();
 		if ($until === false) {
