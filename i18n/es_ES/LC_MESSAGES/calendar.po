@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-16 05:45+0000\n"
+"POT-Creation-Date: 2023-01-20 06:03+0000\n"
 "PO-Revision-Date: 2018-07-18 19:12+0000\n"
 "Last-Translator: Elvita Crespo <ecrespo@sangoma.com>\n"
 "Language-Team: Spanish <http://*/projects/freepbx/calendar/es/>\n"
@@ -606,7 +606,7 @@ msgstr ""
 msgid "No Match Found"
 msgstr ""
 
-#: drivers/Ews/Calendar.php:53
+#: drivers/Ews/Calendar.php:54
 msgid "No settings were discovered"
 msgstr ""
 
@@ -931,7 +931,7 @@ msgstr ""
 msgid "UID"
 msgstr ""
 
-#: drivers/Ews/Calendar.php:78
+#: drivers/Ews/Calendar.php:79
 msgid "Unable to determine server URL"
 msgstr ""
 
