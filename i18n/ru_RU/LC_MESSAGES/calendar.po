@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-16 05:44+0000\n"
+"POT-Creation-Date: 2023-01-20 06:03+0000\n"
 "PO-Revision-Date: 2017-03-15 16:31-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -598,7 +598,7 @@ msgstr ""
 msgid "No Match Found"
 msgstr ""
 
-#: drivers/Ews/Calendar.php:53
+#: drivers/Ews/Calendar.php:54
 msgid "No settings were discovered"
 msgstr ""
 
@@ -923,7 +923,7 @@ msgstr ""
 msgid "UID"
 msgstr ""
 
-#: drivers/Ews/Calendar.php:78
+#: drivers/Ews/Calendar.php:79
 msgid "Unable to determine server URL"
 msgstr ""
 
