@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-20 06:03+0000\n"
+"POT-Creation-Date: 2023-01-23 12:32+0000\n"
 "PO-Revision-Date: 2017-06-14 09:55+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese <http://weblate.freepbx.org/projects/freepbx/"
@@ -330,7 +330,7 @@ msgstr ""
 msgid "Day of the year (E.g. 2nd Monday in May)"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:385
+#: assets/js/calendar/calendar.js:388
 msgid "Days"
 msgstr "Các ngày"
 
@@ -366,7 +366,7 @@ msgstr ""
 msgid "Directory (tenant) ID"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:440
+#: assets/js/calendar/calendar.js:443
 msgid "Duplicate calendar name."
 msgstr ""
 
@@ -546,7 +546,7 @@ msgstr ""
 msgid "Monthly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:400
+#: assets/js/calendar/calendar.js:403
 msgid "Months"
 msgstr "Tháng"
 
@@ -653,7 +653,7 @@ msgstr ""
 msgid "Password"
 msgstr "Mật khẩu"
 
-#: assets/js/calendar/calendar.js:448
+#: assets/js/calendar/calendar.js:451
 msgid "Please define a valid url"
 msgstr ""
 
@@ -782,6 +782,12 @@ msgstr ""
 
 #: views/oauth_calendar_form.php:164
 msgid "Select the Oauth Config or credentials for this calendar"
+msgstr ""
+
+#: drivers/Oauth.php:92 assets/js/calendar/calendar.js:335
+msgid ""
+"Something went wrong while generating token. Please regenerate the auth "
+"token by checking the respective outlook config and try again"
 msgstr ""
 
 #: views/calendargroups.php:71
@@ -947,7 +953,7 @@ msgstr "Không thể xác định URL máy chủ"
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:887 assets/js/calendar/calendar.js:336
+#: Calendar.class.php:887 assets/js/calendar/calendar.js:339
 msgid "Update from Source"
 msgstr "Cập nhật từ nguồn"
 
@@ -996,7 +1002,7 @@ msgstr "Đang xem Lịch '%s'"
 msgid "Viewing from timezone '%s'"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:138 assets/js/calendar/calendar.js:440
+#: assets/js/calendar/calendar.js:138 assets/js/calendar/calendar.js:443
 msgid "Warning"
 msgstr ""
 
@@ -1004,7 +1010,7 @@ msgstr ""
 msgid "Weekly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:382
+#: assets/js/calendar/calendar.js:385
 msgid "Weeks"
 msgstr "Các tuần"
 
@@ -1024,7 +1030,7 @@ msgstr ""
 msgid "Yearly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:407
+#: assets/js/calendar/calendar.js:410
 msgid "Years"
 msgstr "Năm"
 
