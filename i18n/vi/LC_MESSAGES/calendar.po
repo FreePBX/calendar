@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-20 06:03+0000\n"
+"POT-Creation-Date: 2023-01-23 13:12+0000\n"
 "PO-Revision-Date: 2017-06-14 09:55+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese <http://weblate.freepbx.org/projects/freepbx/"
@@ -790,6 +790,12 @@ msgstr ""
 
 #: views/oauth_calendar_form.php:164
 msgid "Select the Oauth Config or credentials for this calendar"
+msgstr ""
+
+#: drivers/Oauth.php:92
+msgid ""
+"Something went wrong while generating token. Please regenerate the auth "
+"token by checking the respective outlook config and try again"
 msgstr ""
 
 #: views/calendargroups.php:71
