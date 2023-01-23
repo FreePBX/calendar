@@ -328,11 +328,14 @@ $(document).ready(function() {
 				command: "updatesource",
 				calendarid: calendarid
 			},
-			success: function(data) {
+			success: function (data) {
 				$("#timezone-display").text(data.timezone);
 				$("#calendar").fullCalendar( 'refetchEvents' );
+				if (data.status === false) {
+					fpbxToast(_("Something went wrong while generating token. Please regenerate the auth token by checking the respective outlook config and try again"), '', 'error');
+				}
 			},
-			complete: function(data) {
+			complete: function (data) {
 				$("#updatecal").text(_("Update from Source")).attr("disabled", false).removeClass("disabled");
 				$("body").css("cursor", "default");
 			},
