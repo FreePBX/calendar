@@ -336,7 +336,7 @@ $(document).ready(function() {
 					$("#calendar").fullCalendar('refetchEvents');
 				}
 			},
-			complete: function(data) {
+			complete: function (data) {
 				$("#updatecal").text(_("Update from Source")).attr("disabled", false).removeClass("disabled");
 				$("body").css("cursor", "default");
 			},

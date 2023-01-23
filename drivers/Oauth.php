@@ -76,14 +76,22 @@ class Oauth extends Base {
         if(isset($calendarDetails['token_expire_at']) && (time() > $calendarDetails['token_expire_at']) && $calendarDetails['refresh_token']) {
             $calendarDetails = $this->calendarClass->getOutlookTokenRefresh($calendarDetails);
         }
-        $eventsData = json_decode($this->getCalEvents($calendarDetails['access_token'],$this->calendar['username'],$this->calendar['timezone']),true);
-        if(isset($eventsData['value'])) {
-            $events = $eventsData['value'];
-            $version = constant('\jamesiarmes\PhpEws\Client::VERSION_2016');
-            $ews = new EWSCalendar($this->calendar['url'], $this->calendar['username'], $this->calendar['password'], $version);
-            $finalical = $ews->formatiCalNew($events);
-            $this->saveiCal($finalical);
-        }
+		if(isset($calendarDetails['access_token'])) {
+			$eventsData = json_decode($this->getCalEvents($calendarDetails['access_token'],$this->calendar['username'],$this->calendar['timezone']),true);
+			if(isset($eventsData['value'])) {
+				$events = $eventsData['value'];
+				$version = constant('\jamesiarmes\PhpEws\Client::VERSION_2016');
+				$ews = new EWSCalendar($this->calendar['url'], $this->calendar['username'], $this->calendar['password'], $version);
+				$finalical = $ews->formatiCalNew($events);
+				$this->saveiCal($finalical);
+			}
+		} else {
+			return $message = [
+				'status' => false,
+				'type' => 'danger',
+				'message' =>  _("Something went wrong while generating token. Please regenerate the auth token by checking the respective outlook config and try again")
+			];
+		}
 	}
 
 	private function getCalEvents($atoken,$caluser,$timezone) {
