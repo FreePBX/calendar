@@ -247,7 +247,7 @@ class Calendar {
 								break;
 							case 'absoluteMonthly':
 								$recurrenceRule->setFreq(RecurrenceRule::FREQ_MONTHLY);
-								$recurrenceRule->setByMonthDay($vEvent->getDtStart()->format('j') + 1);
+								$recurrenceRule->setByMonthDay($vEvent->getDtStart()->format('j'));
 								break;
 							case 'relativeMonthly':
 								$recurrenceRule->setFreq(RecurrenceRule::FREQ_MONTHLY);
@@ -269,14 +269,14 @@ class Calendar {
 										default:
 											break;
 									}
-									$d = strtoupper(substr($vEvent->getDtStart()->modify('+1 day')->format('D'), 0, -1));
+									$d = strtoupper(substr($vEvent->getDtStart()->format('D'), 0, -1));
 									$recurrenceRule->setByDay($c.$d);
 								}
 								break;
 							case 'absoluteYearly':
 								$recurrenceRule->setFreq(RecurrenceRule::FREQ_YEARLY);
 								$recurrenceRule->setByMonth((int)$vEvent->getDtStart()->format('n'));
-								$recurrenceRule->setByMonthDay($vEvent->getDtStart()->format('j') + 1);
+								$recurrenceRule->setByMonthDay($vEvent->getDtStart()->format('j'));
 								break;
 							case 'relativeYearly':
 								$recurrenceRule->setFreq(RecurrenceRule::FREQ_YEARLY);
@@ -299,7 +299,7 @@ class Calendar {
 										default:
 											break;
 									}
-									$d = strtoupper(substr($vEvent->getDtStart()->modify('+1 day')->format('D'), 0, -1));
+									$d = strtoupper(substr($vEvent->getDtStart()->format('D'), 0, -1));
 									$recurrenceRule->setByDay($c.$d);
 								}
 								break;
