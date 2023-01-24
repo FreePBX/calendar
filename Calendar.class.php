@@ -212,6 +212,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			case 'saveOauth':
 			case 'getToken':
 			case 'oauthsettings':
+			case 'oauthListCalendars':
 				return true;
 			case 'ical':
 				//be aware
@@ -468,6 +469,30 @@ class Calendar extends \DB_Helper implements \BMO {
 				}
 				return $final;
 			break;
+			case 'oauthListCalendars':
+				$username = $_REQUEST['username'];
+				$configId = $_REQUEST['configId'];
+				$outlookdata = $this->getConfig($configId,'outlook-details');
+				if(isset($outlookdata['access_token'])) {
+					$oauth = new Oauth($outlookdata['tenantid'],$outlookdata['consumerkey'], $outlookdata['consumersecret'],null,null,$outlookdata['pbxurl'],$outlookdata['outlookurl']);
+					$calendars =  $oauth->getUserCalendars($username,$outlookdata['access_token']);
+					if(isset($calendars['error'])) {
+						$msg = ($calendars['error']['code'] == 'ResourceNotFound') ? _("Invalid user name/config") : _("Please generated the auth token to list the user calendars.");
+						return array("status" => false, "message" => $msg);
+					} else if(isset($calendars['value'])) {
+						$calendarList = [];
+						foreach ($calendars['value'] as $_cal) {
+							$calendarList[] = [
+								'id' => $_cal['id'],
+								'name' => $_cal['name']
+							];
+						}
+						return array("status" => true, "message" => _("found user calendars"), "calendars" => $calendarList);
+					}
+				} else {
+					return array("status" => false, "message" => _("Please generated the auth token to list the user calendars."));
+				}
+			break;
 		}
 	}
 
@@ -596,6 +621,9 @@ class Calendar extends \DB_Helper implements \BMO {
 			return false;
 		}
 		$final['id'] = $id;
+		if(isset($final['calendars']) && !is_array($final['calendars'])) {
+			$final['usercalendar'] = $final['calendars'];
+		}
 		if (!isset($final['calendars']) || !is_array($final['calendars'])) {
 			$final['calendars'] = array();
 		}
