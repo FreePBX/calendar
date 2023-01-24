@@ -60,7 +60,7 @@ class Oauth extends Base {
 			"url" => $data['url'],
 			"username" => $data['username'],
 			"password" => $data['password'],
-			"calendars" => !empty($data['calendars']) ? $data['calendars'] : array(),
+			"calendars" => !empty($data['calendars']) ? $data['calendars'] : '',
 			"next" => !empty($data['next']) ? $data['next'] : 300,
 			"auth_settings" => !empty($data['auth_settings']) ? $data['auth_settings'] : '',
 			"timezone" => !empty($data['timezone']) ? $data['timezone'] : date_default_timezone_get(),
@@ -77,7 +77,7 @@ class Oauth extends Base {
             $calendarDetails = $this->calendarClass->getOutlookTokenRefresh($calendarDetails);
         }
 		if(isset($calendarDetails['access_token'])) {
-			$eventsData = json_decode($this->getCalEvents($calendarDetails['access_token'],$this->calendar['username'],$this->calendar['timezone']),true);
+			$eventsData = json_decode($this->getCalEvents($calendarDetails['access_token'],$this->calendar['username'],$this->calendar['timezone'],$this->calendar['calendars']),true);
 			if(isset($eventsData['value'])) {
 				$events = $eventsData['value'];
 				$version = constant('\jamesiarmes\PhpEws\Client::VERSION_2016');
@@ -94,10 +94,11 @@ class Oauth extends Base {
 		}
 	}
 
-	private function getCalEvents($atoken,$caluser,$timezone) {
+	private function getCalEvents($atoken,$caluser,$timezone,$calendarId) {
 		try {
 			//$cpt = curl_init("https://graph.microsoft.com/v1.0/me/calendar/events");
-			$cpt = curl_init("https://graph.microsoft.com/v1.0/users/".$caluser."/events");
+			// $cpt = curl_init("https://graph.microsoft.com/v1.0/users/".$caluser."/events");
+			$cpt = curl_init("https://graph.microsoft.com/v1.0/users/".$caluser."/calendars/".$calendarId."/events");
 			curl_setopt($cpt, CURLOPT_HTTPHEADER,
 					array(
 						'Authorization: Bearer '.$atoken,

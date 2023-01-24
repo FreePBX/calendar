@@ -16,6 +16,7 @@
 						<input type="hidden" name="type" value="oauth">
 						<input type="hidden" name="id" value="<?php echo !empty($data['id']) ? $data['id'] : ''?>">
 						<input type="hidden" id="auth_code" name="auth_code" value="">
+						<input type="hidden" id="usercalendar" value="<?php echo isset($data['usercalendar']) ? $data['usercalendar'] : ''?>">
 						<!--Name-->
 						<div class="element-container">
 							<div class="row">
@@ -171,6 +172,42 @@
 									<div class="row">
 										<div class="form-group">
 											<div class="col-md-3">
+												<label class="control-label" for="calendars"><?php echo _("Calendar") ?></label>
+												<i class="fa fa-question-circle fpbx-help-icon" data-for="calendars"></i>
+											</div>
+											<div class="col-md-9">
+												<?php
+												if (strtolower($action) == "add") {
+													$selclass = "hidden";
+													$unsetclass = "";
+												} else {
+													$selclass = "";
+													$unsetclass = "hidden";
+												}
+												?>
+												<span id='setspan' class="<?php echo $selclass; ?>">
+													<select id="calendars" name="calendars" class="form-control">
+													</select>
+												</span>
+												<span id='unsetspan' class="<?php echo $unsetclass; ?>"><?php echo _("Please enter valid credentials above"); ?></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<span id="calendars-help" class="help-block fpbx-help-block"><?php echo _("Select specific calendar")?></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="element-container">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="row">
+										<div class="form-group">
+											<div class="col-md-3">
 												<label class="control-label" for="timezone"><?php echo _("Timezone") ?></label>
 												<i class="fa fa-question-circle fpbx-help-icon" data-for="timezone"></i>
 											</div>
@@ -225,4 +262,56 @@
 		});
 
 	});
+
+	$(document).ready(function() {
+		$('#calendars').multiselect({
+				enableFiltering: true,
+				enableFullValueFiltering: true,
+				enableCaseInsensitiveFiltering: true,
+				buttonWidth: '50%'
+		});
+		getCallist();
+	});
+
+	$('#username').change(function() {
+		getCallist();
+	});
+
+	$('#auth_settings').change(function() {
+		getCallist();
+	});
+
+	function isEmail(email) {
+		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		return regex.test(email);
+	}
+
+	function getCallist() {
+		var username = $('#username').val();
+		var configId = $('#auth_settings').val();
+		if(username && isEmail(username) && configId) {
+			$.post("ajax.php?module=calendar&command=oauthListCalendars",{username: username, configId: configId}, function(data) {
+				if(data.status) {
+					$.each( data.calendars, function( key, value ) {
+						let selected = '';
+						if($('#usercalendar').val() == value.id) {
+							selected = 'selected="selected"';
+						}
+						$('#calendars').append('<option value="'+ value.id + '" ' + selected + '>'+value.name+'</option>');
+					});
+					$('#calendars').multiselect('rebuild');
+					$("#setspan").removeClass("hidden");
+					$("#unsetspan").addClass("hidden");
+					$(".diswhenloading").removeClass("disabled").attr("disabled", false);
+				} else {
+					fpbxToast(data.message,'','error');
+					$("#calendars").val("");
+					$("#calendars").multiselect("clearSelection");
+					$("#calendars").multiselect( 'refresh' );
+				}
+			}).fail(function() {
+				alert(_("There was an error"));
+			});
+		}
+	}
 </script>
