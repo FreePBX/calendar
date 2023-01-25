@@ -155,4 +155,25 @@ class Oauth {
 
 		return $result;
 	}
+
+	public function getUserCalendars($username,$atoken)
+	{
+		try {
+			$cpt = curl_init("https://graph.microsoft.com/v1.0/users/".$username."/calendars");
+			curl_setopt($cpt, CURLOPT_HTTPHEADER,
+					array(
+						'Authorization: Bearer '.$atoken,
+						'Content-Type: application/json'
+					)
+				);
+			curl_setopt($cpt, CURLOPT_RETURNTRANSFER, true);
+			$result = curl_exec($cpt);
+			return json_decode($result, true);
+		} catch(\Exception $e) {
+			$message = [
+				'type' => 'danger',
+				'message' => $e->getMessage()
+			];
+		}
+	}
 }
