@@ -3,6 +3,7 @@ namespace FreePBX\modules\Calendar\drivers;
 use FreePBX\modules\Calendar\IcalParser\IcalRangedParser;
 use Ramsey\Uuid\Uuid;
 use it\thecsea\simple_caldav_client\SimpleCalDAVClient;
+use it\thecsea\simple_caldav_client\CalDAVException;
 use Carbon\Carbon;
 class Caldav extends Base {
 	public $driver = 'Caldav';
@@ -35,17 +36,26 @@ class Caldav extends Base {
 	 */
 	public static function getEditDisplay($data) {
 		$caldavClient = new SimpleCalDAVClient();
-		$caldavClient->connect($data['purl'], $data['username'], $data['password']);
-		$cals = $caldavClient->findCalendars();
-		$calendars = array();
-		foreach($cals as $calendar) {
-			$id = $calendar->getCalendarID();
-			$calendars[$id] = array(
-				"id" => $id,
-				"name" => $calendar->getDisplayName(),
-				"selected" => in_array($id,$data['calendars'])
-			);
-		}
+        $calendars = array();
+      	
+        try {
+          $caldavClient->connect($data['purl'], $data['username'], $data['password']);
+          $cals = $caldavClient->findCalendars();
+          foreach($cals as $calendar) {
+              $id = $calendar->getCalendarID();
+              $calendars[$id] = array(
+                  "id" => $id,
+                  "name" => $calendar->getDisplayName(),
+                  "selected" => in_array($id,$data['calendars'])
+              );
+          }
+        } catch(CalDAVException $e) {
+          $calendars[0] = array(
+              "id" => 0,
+              "name" => _('Exception occured while retrieving the list of calendars. Are connection parameters correct?'),
+              "selected" => false
+          );
+        }
 		return load_view(dirname(__DIR__)."/views/remote_caldav_settings.php",array('action' => 'edit', 'data' => $data, 'calendars' => $calendars));
 	}
 
