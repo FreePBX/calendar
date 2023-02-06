@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-25 07:34+0000\n"
+"POT-Creation-Date: 2023-02-06 04:21+0000\n"
 "PO-Revision-Date: 2018-02-14 21:15+0200\n"
 "Last-Translator: jeremie <freepbx@famillecattan.com>\n"
 "Language-Team: French <http://weblate.freepbx.org/projects/freepbx/calendar/"
@@ -446,6 +446,12 @@ msgstr ""
 msgid "Every weekday (Monday to Friday"
 msgstr ""
 
+#: drivers/Caldav.php:55
+msgid ""
+"Exception occured while retrieving the list of calendars. Are connection "
+"parameters correct?"
+msgstr ""
+
 #: assets/js/calendargroups/calendargroups.js:11
 msgid "Expand Recurring Dates"
 msgstr ""
@@ -689,7 +695,7 @@ msgstr "Lien Privé iCal"
 msgid "Recurring"
 msgstr ""
 
-#: drivers/Caldav.php:17
+#: drivers/Caldav.php:18
 msgid "Remote CalDAV Calendar"
 msgstr "Agenda CalDAV distant"
 
