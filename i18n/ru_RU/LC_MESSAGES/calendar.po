@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-25 07:34+0000\n"
+"POT-Creation-Date: 2023-02-06 04:21+0000\n"
 "PO-Revision-Date: 2017-03-15 16:31-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -447,6 +447,12 @@ msgstr ""
 msgid "Every weekday (Monday to Friday"
 msgstr ""
 
+#: drivers/Caldav.php:55
+msgid ""
+"Exception occured while retrieving the list of calendars. Are connection "
+"parameters correct?"
+msgstr ""
+
 #: assets/js/calendargroups/calendargroups.js:11
 msgid "Expand Recurring Dates"
 msgstr ""
@@ -691,7 +697,7 @@ msgstr ""
 msgid "Recurring"
 msgstr ""
 
-#: drivers/Caldav.php:17
+#: drivers/Caldav.php:18
 msgid "Remote CalDAV Calendar"
 msgstr ""
 
