@@ -477,7 +477,7 @@ class Calendar extends \DB_Helper implements \BMO {
 					$oauth = new Oauth($outlookdata['tenantid'],$outlookdata['consumerkey'], $outlookdata['consumersecret'],null,null,$outlookdata['pbxurl'],$outlookdata['outlookurl']);
 					$calendars =  $oauth->getUserCalendars($username,$outlookdata['access_token']);
 					if(isset($calendars['error'])) {
-						$msg = ($calendars['error']['code'] == 'ResourceNotFound') ? _("Invalid user name/config") : _("Please generated the auth token to list the user calendars.");
+						$msg = ($calendars['error']['code'] == 'ResourceNotFound' || $calendars['error']['code'] == 'ErrorInvalidUser') ? _("Invalid user name/config") : _("Please generated the auth token to list the user calendars.");
 						return array("status" => false, "message" => $msg);
 					} else if(isset($calendars['value'])) {
 						$calendarList = [];
