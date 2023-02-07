@@ -198,13 +198,17 @@ $(document).ready(function() {
 			}],
 			eventClick: function( event, jsEvent, view ) {
 				var src = (typeof event.parent !== "undefined") ? event.parent : event,
-						tz = (typeof src.timezone !== "undefined" && src.timezone !== null) ? src.timezone : caltimezone,
-						ms = moment.unix(src.ustarttime).tz(tz),
-						me = moment.unix(src.uendtime).tz(tz),
+					tz = (typeof src.timezone !== "undefined" && src.timezone !== null) ? src.timezone : caltimezone,
+					ms = moment.unix(src.ustarttime).tz(tz),
+					me = moment.unix(src.uendtime).tz(tz),
 						allday = src.allDay;
 				resetModalForm();
 				if(allday) {
-					me = me.subtract(1, "days"); //force day to display correctly
+					if(caltype == 'local') {
+						ms = ms.add(1, "days"); //force day to display correctly
+					} else{
+						me = me.subtract(1, "days"); //force day to display correctly
+					}
 				}
 				$('#title').val(src.title);
 				$('#description').val(src.description);
@@ -212,7 +216,7 @@ $(document).ready(function() {
 					$('#categories').val(src.categories.join(','));
 				}
 				$('#eventid').val(src.linkedid);
-				$("#eventtype option[value='"+src.eventtype+"']").prop('selected', true);
+				$("#eventtype option[value='" + src.eventtype + "']").prop('selected', true);
 				$("#startdate")[0]._flatpickr.setDate(ms.format("YYYY-MM-DD"));
 				$("#enddate")[0]._flatpickr.setDate(me.format("YYYY-MM-DD"));
 				if(!allday) {
@@ -225,7 +229,6 @@ $(document).ready(function() {
 				}
 				$('#modalDelete').data('id', src.uid);
 				$('#eventModal').modal('show');
-				console.log(src);
 				if(src.recurring) {
 					$("#reoccurring").prop("checked",true);
 					if(src.rrules.interval !== "") {
