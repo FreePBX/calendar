@@ -29,6 +29,7 @@ if($data['type'] == 'oauth') { ?>
 var readonly = <?php echo $readonly; ?>;
 var calendarid = "<?php echo $data['id']; ?>";
 var caltimezone = "<?php echo $data['timezone']; ?>";
+var caltype = "<?php echo $data['type']; ?>";
 </script>
 <div id="calendar" class="calendar-readonly-<?php echo $readonly; ?>"></div>
 <div class="row">
