@@ -203,9 +203,13 @@ $(document).ready(function() {
 					me = moment.unix(src.uendtime).tz(tz),
 						allday = src.allDay;
 				resetModalForm();
-				if(allday) {
-					if(caltype == 'local') {
-						ms = ms.add(1, "days"); //force day to display correctly
+				if (allday) {
+					if (caltype == 'local') {
+						if (me.diff(ms, 'days') <= 1) {
+							ms = me.subtract(1, "days"); //force day to display correctly
+						} else {
+							me = me.subtract(1, "days"); //force day to display correctly
+						}
 					} else{
 						me = me.subtract(1, "days"); //force day to display correctly
 					}
