@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-07 11:17+0000\n"
+"POT-Creation-Date: 2023-03-21 11:27+0000\n"
 "PO-Revision-Date: 2017-06-14 09:55+0200\n"
 "Last-Translator: Peter Trinh <ftek@ymail.com>\n"
 "Language-Team: Vietnamese <http://weblate.freepbx.org/projects/freepbx/"
@@ -111,7 +111,7 @@ msgstr "5 phút"
 msgid "6 Hours"
 msgstr "6 giờ"
 
-#: IcalParser/IcalRangedParser.php:119
+#: IcalParser/IcalRangedParser.php:118
 msgid ""
 "A calendar you have added has an event that has a reoccuring rule of COUNT. "
 "When COUNT is used this slows down Calendar drastically. Please change your "
@@ -270,7 +270,7 @@ msgstr ""
 msgid "Calendar processed successfully"
 msgstr ""
 
-#: IcalParser/IcalRangedParser.php:119
+#: IcalParser/IcalRangedParser.php:118
 msgid "Calendar using COUNT"
 msgstr ""
 
@@ -334,7 +334,7 @@ msgstr ""
 msgid "Day of the year (E.g. 2nd Monday in May)"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:392
+#: assets/js/calendar/calendar.js:396
 msgid "Days"
 msgstr "Các ngày"
 
@@ -370,7 +370,7 @@ msgstr ""
 msgid "Directory (tenant) ID"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:447
+#: assets/js/calendar/calendar.js:451
 msgid "Duplicate calendar name."
 msgstr ""
 
@@ -564,7 +564,7 @@ msgstr ""
 msgid "Monthly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:407
+#: assets/js/calendar/calendar.js:411
 msgid "Months"
 msgstr "Tháng"
 
@@ -671,7 +671,7 @@ msgstr ""
 msgid "Password"
 msgstr "Mật khẩu"
 
-#: assets/js/calendar/calendar.js:455
+#: assets/js/calendar/calendar.js:459
 msgid "Please define a valid url"
 msgstr ""
 
@@ -977,11 +977,11 @@ msgstr "Không thể xác định URL máy chủ"
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:915 assets/js/calendar/calendar.js:343
+#: Calendar.class.php:915 assets/js/calendar/calendar.js:347
 msgid "Update from Source"
 msgstr "Cập nhật từ nguồn"
 
-#: assets/js/calendar/calendar.js:326
+#: assets/js/calendar/calendar.js:330
 msgid "Updating..."
 msgstr "Đang cập nhật..."
 
@@ -1026,7 +1026,7 @@ msgstr "Đang xem Lịch '%s'"
 msgid "Viewing from timezone '%s'"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:138 assets/js/calendar/calendar.js:447
+#: assets/js/calendar/calendar.js:138 assets/js/calendar/calendar.js:451
 msgid "Warning"
 msgstr ""
 
@@ -1034,7 +1034,7 @@ msgstr ""
 msgid "Weekly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:389
+#: assets/js/calendar/calendar.js:393
 msgid "Weeks"
 msgstr "Các tuần"
 
@@ -1054,7 +1054,7 @@ msgstr ""
 msgid "Yearly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:414
+#: assets/js/calendar/calendar.js:418
 msgid "Years"
 msgstr "Năm"
 
