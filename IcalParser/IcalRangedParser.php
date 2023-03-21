@@ -1,7 +1,6 @@
 <?php
 
 namespace FreePBX\modules\Calendar\IcalParser;
-use om\Freq;
 use om\Recurrence;
 use om\IcalParser;
 use Carbon\CarbonPeriod;
@@ -95,7 +94,7 @@ class IcalRangedParser extends IcalParser {
 		}
 
 		if(!isset($recurring->rrule['COUNT'])) {
-			$frequency = new Freq($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
+			$frequency = new Frequency($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
 			$nextTimestamp = ($event['DTSTART']->getTimestamp() > $this->ranges['start']->getTimestamp()) ? $event['DTSTART']->getTimestamp() : $this->ranges['start']->getTimestamp();
 
 			$out = $frequency->previousOccurrence($nextTimestamp);
@@ -113,7 +112,7 @@ class IcalRangedParser extends IcalParser {
 				$recurring->setUntil($end);
 			}
 
-			$frequency = new Freq($recurring->rrule, $start->getTimestamp(), $exclusions, $additions);
+			$frequency = new Frequency($recurring->rrule, $start->getTimestamp(), $exclusions, $additions);
 			$recurrenceTimestamps = $frequency->getAllOccurrences();
 		} elseif(class_exists('FreePBX')) {
 			\FreePBX::Notifications()->add_warning('calendar', 'RRULECOUNT', _('Calendar using COUNT'), _('A calendar you have added has an event that has a reoccuring rule of COUNT. When COUNT is used this slows down Calendar drastically. Please change your rule to another format'), "", true, true);
@@ -156,7 +155,7 @@ class IcalRangedParser extends IcalParser {
 
 			$recurrenceTimestamps = array_merge($recurrenceTimestamps,$additions);
 			*/
-			$frequency = new Freq($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
+			$frequency = new Frequency($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
 			$recurrenceTimestamps = $frequency->getAllOccurrences();
 		}
 
