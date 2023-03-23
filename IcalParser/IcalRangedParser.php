@@ -92,7 +92,7 @@ class IcalRangedParser extends IcalParser {
 				$recurring->rrule[$key] = str_replace('"','',$recurring->rrule[$key]);
 			}
 		}
-
+		
 		if(!isset($recurring->rrule['COUNT'])) {
 			$frequency = new Frequency($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
 			$nextTimestamp = ($event['DTSTART']->getTimestamp() > $this->ranges['start']->getTimestamp()) ? $event['DTSTART']->getTimestamp() : $this->ranges['start']->getTimestamp();
@@ -112,7 +112,7 @@ class IcalRangedParser extends IcalParser {
 				$recurring->setUntil($end);
 			}
 
-			$frequency = new Frequency($recurring->rrule, $start->getTimestamp(), $exclusions, $additions);
+			$frequency = new Frequency($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
 			$recurrenceTimestamps = $frequency->getAllOccurrences();
 		} elseif(class_exists('FreePBX')) {
 			\FreePBX::Notifications()->add_warning('calendar', 'RRULECOUNT', _('Calendar using COUNT'), _('A calendar you have added has an event that has a reoccuring rule of COUNT. When COUNT is used this slows down Calendar drastically. Please change your rule to another format'), "", true, true);
