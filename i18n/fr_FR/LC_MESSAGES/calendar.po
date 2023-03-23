@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-21 11:27+0000\n"
+"POT-Creation-Date: 2023-03-23 11:44+0000\n"
 "PO-Revision-Date: 2018-02-14 21:15+0200\n"
 "Last-Translator: jeremie <freepbx@famillecattan.com>\n"
 "Language-Team: French <http://weblate.freepbx.org/projects/freepbx/calendar/"
@@ -111,7 +111,7 @@ msgstr "5 minutes"
 msgid "6 Hours"
 msgstr "6 heures"
 
-#: IcalParser/IcalRangedParser.php:118
+#: IcalParser/IcalRangedParser.php:131
 msgid ""
 "A calendar you have added has an event that has a reoccuring rule of COUNT. "
 "When COUNT is used this slows down Calendar drastically. Please change your "
@@ -270,7 +270,7 @@ msgstr "Le nom du calendrier doit être unique."
 msgid "Calendar processed successfully"
 msgstr ""
 
-#: IcalParser/IcalRangedParser.php:118
+#: IcalParser/IcalRangedParser.php:131
 msgid "Calendar using COUNT"
 msgstr ""
 
