@@ -81,12 +81,12 @@ class Ews extends Base {
 			"description" => $data['description'],
 			"type" => "ews",
 			"email" => $data['email'],
-			"version" => $data['version'],
+			"version" => 'VERSION_2016',
 			"url" => $data['url'],
 			"username" => $data['username'],
 			"password" => $data['password'],
 			"calendars" => !empty($data['calendars']) ? $data['calendars'] : array(),
-			"next" => !empty($data['next']) ? $data['next'] : 300
+			"next" => !empty($data['next']) ? $data['next'] : 300,
 		);
 		$ret = parent::updateCalendar($calendar);
 		$this->processCalendar();
@@ -105,4 +105,5 @@ class Ews extends Base {
 			}
 		}
 	}
+
 }

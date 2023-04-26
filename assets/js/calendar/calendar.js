@@ -98,6 +98,9 @@ function typeformatter(v,r) {
 function actionformatter(v,r) {
 	return '<div class="actions"><a href="?display=calendar&amp;action=view&amp;type=calendar&amp;id='+r.id+'"><i class="fa fa-eye" aria-hidden="true"></i></a><a href="?display=calendar&amp;action=edit&amp;type=calendar&amp;id='+r.id+'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a class="delAction" href="?display=calendar&amp;action=delete&amp;type=calendar&amp;id='+r.id+'"><i class="fa fa-trash" aria-hidden="true"></i></a></div>';
 }
+function settingsactionformatter(v, r) {
+	return '<div class="actions"><a href="?display=calendar&amp;action=editoutlooksettings&amp;id=' + r.id + '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a class="delAction" href="?display=calendar&amp;action=deletesettings&amp;type=calendar&amp;id=' + r.id + '"><i class="fa fa-trash" aria-hidden="true"></i></a></div>';
+}
 var test = '';
 var buttons = {};
 if($('#calendar').length && !readonly) {
@@ -195,13 +198,21 @@ $(document).ready(function() {
 			}],
 			eventClick: function( event, jsEvent, view ) {
 				var src = (typeof event.parent !== "undefined") ? event.parent : event,
-						tz = (typeof src.timezone !== "undefined" && src.timezone !== null) ? src.timezone : caltimezone,
-						ms = moment.unix(src.ustarttime).tz(tz),
-						me = moment.unix(src.uendtime).tz(tz),
+					tz = (typeof src.timezone !== "undefined" && src.timezone !== null) ? src.timezone : caltimezone,
+					ms = moment.unix(src.ustarttime).tz(tz),
+					me = moment.unix(src.uendtime).tz(tz),
 						allday = src.allDay;
 				resetModalForm();
-				if(allday) {
-					me = me.subtract(1, "days"); //force day to display correctly
+				if (allday) {
+					if (caltype == 'local') {
+						if (me.diff(ms, 'days') <= 1) {
+							ms = me.subtract(1, "days"); //force day to display correctly
+						} else {
+							me = me.subtract(1, "days"); //force day to display correctly
+						}
+					} else{
+						me = me.subtract(1, "days"); //force day to display correctly
+					}
 				}
 				$('#title').val(src.title);
 				$('#description').val(src.description);
@@ -209,7 +220,7 @@ $(document).ready(function() {
 					$('#categories').val(src.categories.join(','));
 				}
 				$('#eventid').val(src.linkedid);
-				$("#eventtype option[value='"+src.eventtype+"']").prop('selected', true);
+				$("#eventtype option[value='" + src.eventtype + "']").prop('selected', true);
 				$("#startdate")[0]._flatpickr.setDate(ms.format("YYYY-MM-DD"));
 				$("#enddate")[0]._flatpickr.setDate(me.format("YYYY-MM-DD"));
 				if(!allday) {
@@ -222,7 +233,6 @@ $(document).ready(function() {
 				}
 				$('#modalDelete').data('id', src.uid);
 				$('#eventModal').modal('show');
-				console.log(src);
 				if(src.recurring) {
 					$("#reoccurring").prop("checked",true);
 					if(src.rrules.interval !== "") {
@@ -333,7 +343,7 @@ $(document).ready(function() {
 					$("#calendar").fullCalendar('refetchEvents');
 				}
 			},
-			complete: function(data) {
+			complete: function (data) {
 				$("#updatecal").text(_("Update from Source")).attr("disabled", false).removeClass("disabled");
 				$("body").css("cursor", "default");
 			},

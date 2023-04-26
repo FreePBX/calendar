@@ -1,7 +1,6 @@
 <?php
 
 namespace FreePBX\modules\Calendar\IcalParser;
-use om\Freq;
 use om\Recurrence;
 use om\IcalParser;
 use Carbon\CarbonPeriod;
@@ -69,7 +68,7 @@ class IcalRangedParser extends IcalParser {
 			}
 		}
 
-		date_default_timezone_set($event['DTSTART']->getTimezone()->getName());
+		date_default_timezone_set(($event['DTSTART']->getTimezone()->getName() !== 'Z') ? $event['DTSTART']->getTimezone()->getName() : 'UTC');
 
 		$until = $recurring->getUntil();
 		if ($until === false) {
@@ -94,8 +93,21 @@ class IcalRangedParser extends IcalParser {
 			}
 		}
 
+		$startdate = $event['DTSTART']->format('Y-m-d');
+		$enddate = $event['DTEND']->format('Y-m-d');
+		$starttime = $event['DTSTART']->format('H:i:s');
+		$endtime = $event['DTEND']->format('H:i:s');
+		$startTimeStamp = $event['DTSTART']->getTimestamp();
+
+		// Check for all day
+		if (!empty($event['RRULE']['FREQ']) && $event['RRULE']['FREQ'] === 'YEARLY' && $starttime === $endtime && $startdate !== $enddate) {
+			$startTimeStamp = new \DateTime($startdate);
+			$startTimeStamp->setTime(0, 0, 1);
+			$startTimeStamp = $startTimeStamp->getTimestamp();
+		}
+			
 		if(!isset($recurring->rrule['COUNT'])) {
-			$frequency = new Freq($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
+			$frequency = new Frequency($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
 			$nextTimestamp = ($event['DTSTART']->getTimestamp() > $this->ranges['start']->getTimestamp()) ? $event['DTSTART']->getTimestamp() : $this->ranges['start']->getTimestamp();
 
 			$out = $frequency->previousOccurrence($nextTimestamp);
@@ -113,7 +125,7 @@ class IcalRangedParser extends IcalParser {
 				$recurring->setUntil($end);
 			}
 
-			$frequency = new Freq($recurring->rrule, $start->getTimestamp(), $exclusions, $additions);
+			$frequency = new Frequency($recurring->rrule, $startTimeStamp, $exclusions, $additions);
 			$recurrenceTimestamps = $frequency->getAllOccurrences();
 		} elseif(class_exists('FreePBX')) {
 			\FreePBX::Notifications()->add_warning('calendar', 'RRULECOUNT', _('Calendar using COUNT'), _('A calendar you have added has an event that has a reoccuring rule of COUNT. When COUNT is used this slows down Calendar drastically. Please change your rule to another format'), "", true, true);
@@ -156,7 +168,7 @@ class IcalRangedParser extends IcalParser {
 
 			$recurrenceTimestamps = array_merge($recurrenceTimestamps,$additions);
 			*/
-			$frequency = new Freq($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
+			$frequency = new Frequency($recurring->rrule, $startTimeStamp, $exclusions, $additions);
 			$recurrenceTimestamps = $frequency->getAllOccurrences();
 		}
 
