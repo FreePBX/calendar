@@ -749,7 +749,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	/**
 	 * Dial Plan Function
 	 */
-	public function ext_calendar_goto($calendarid,$timezone=null,$true_dest,$false_dest) {
+	public function ext_calendar_goto($calendarid,$timezone=null,$true_dest='',$false_dest='') {
 		$timezone = empty($timezone) ? $this->systemtz : $timezone;
 		$cal = $this->getCalendarByID($calendarid);
 		if(empty($cal)) {
@@ -761,7 +761,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	/**
 	 * Dial Plan Function
 	 */
-	public function ext_calendar_group_goto($groupid,$timezone=null,$true_dest,$false_dest) {
+	public function ext_calendar_group_goto($groupid,$timezone=null,$true_dest='',$false_dest='') {
 		$timezone = empty($timezone) ? $this->systemtz : $timezone;
 		$group = $this->getGroup($groupid);
 		if(empty($group)) {
@@ -773,7 +773,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	/**
 	 * Dial Plan Function
 	 */
-	public function ext_calendar_execif($calendarid,$timezone=null,$true,$false) {
+	public function ext_calendar_execif($calendarid,$timezone=null,$true = '', $false = '') {
 		$timezone = empty($timezone) ? $this->systemtz : $timezone;
 		$cal = $this->getCalendarByID($calendarid);
 		if(empty($cal)) {
@@ -785,7 +785,7 @@ class Calendar extends \DB_Helper implements \BMO {
 	/**
 	 * Dial Plan Function
 	 */
-	public function ext_calendar_group_execif($groupid,$timezone=null,$true,$false) {
+	public function ext_calendar_group_execif($groupid,$timezone=null, $true = '', $false = '') {
 		$timezone = empty($timezone) ? $this->systemtz : $timezone;
 		$group = $this->getGroup($groupid);
 		if(empty($group)) {
