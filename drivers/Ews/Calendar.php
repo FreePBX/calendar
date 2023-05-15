@@ -194,9 +194,9 @@ class Calendar {
 			$vEvent->setLocation($event['location']['displayName']);
 			$vEvent->setDescription($event['bodyPreview']);
 			$vEvent->setCategories($event['categories']);
-			$start = new \DateTime($event['start']['dateTime']);
+			$start = new \DateTime($event['start']['dateTime'],new \DateTimeZone($event['start']['timeZone']));
 			$vEvent->setDtStart($start);
-			$end = new \DateTime($event['end']['dateTime']);
+			$end = new \DateTime($event['end']['dateTime'],new \DateTimeZone($event['end']['timeZone']));
 			$vEvent->setDtEnd($end);
 			if(isset($event['isallday'])) {
 				$vEvent->setUseUtc(true);
