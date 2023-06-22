@@ -70,16 +70,32 @@ class Oauth extends Base {
 		return $ret;
 	}
 
-	public function processCalendar() {
+	public function processCalendar($start = null, $end = null) {
         $calendarDetails = $this->calendarClass->getConfig($this->calendar['auth_settings'],'outlook-details');
         //token check
         if(isset($calendarDetails['token_expire_at']) && (time() > $calendarDetails['token_expire_at']) && $calendarDetails['refresh_token']) {
             $calendarDetails = $this->calendarClass->getOutlookTokenRefresh($calendarDetails);
         }
 		if(isset($calendarDetails['access_token'])) {
-			$eventsData = json_decode($this->getCalEvents($calendarDetails['access_token'],$this->calendar['username'],$this->calendar['timezone'],$this->calendar['calendars']),true);
+			$eventsData = $this->getCalEvents($calendarDetails['access_token'],$this->calendar['username'],$this->calendar['timezone'],$this->calendar['calendars'],$start,$end);
 			if(isset($eventsData['value'])) {
 				$events = $eventsData['value'];
+				if(isset($eventsData['@odata.nextLink']) && !empty($eventsData['@odata.nextLink'])) {
+					$nextLink = $eventsData['@odata.nextLink'];
+					$loadnext = true;
+					while($loadnext){
+						$nextevents = $nextEvents = $this->getCalEventsNextPage($calendarDetails['access_token'],$this->calendar['timezone'],$nextLink);
+						if(isset($nextevents['value'])) {
+							$events = array_merge($events,$nextevents['value']);
+						}
+
+						if(isset($nextevents['@odata.nextLink']) && !empty($nextevents['@odata.nextLink'])) {
+							$nextLink = $nextevents['@odata.nextLink'];
+						} else {
+							$loadnext = false;
+						}
+					}
+				}
 				$version = constant('\jamesiarmes\PhpEws\Client::VERSION_2016');
 				$ews = new EWSCalendar($this->calendar['url'], $this->calendar['username'], $this->calendar['password'], $version);
 				$finalical = $ews->formatiCalNew($events);
@@ -94,11 +110,23 @@ class Oauth extends Base {
 		}
 	}
 
-	private function getCalEvents($atoken,$caluser,$timezone,$calendarId) {
+	private function getCalEvents($atoken,$caluser,$timezone,$calendarId,$start,$end) {
 		try {
-			//$cpt = curl_init("https://graph.microsoft.com/v1.0/me/calendar/events");
-			// $cpt = curl_init("https://graph.microsoft.com/v1.0/users/".$caluser."/events");
-			$cpt = curl_init("https://graph.microsoft.com/v1.0/users/".$caluser."/calendars/".$calendarId."/events");
+			if($start && $end) {
+				$startstrpos = strpos($start, '+');
+				if ($startstrpos !== false) {
+					$start = substr($start, 0, $startstrpos);
+				}
+
+				$endstrpos = strpos($end, '+');
+				if ($endstrpos !== false) {
+					$end = substr($end, 0, $endstrpos);
+				}
+				$url = "https://graph.microsoft.com/v1.0/users/".$caluser."/calendars/".$calendarId."/calendarView?startDateTime=".$start."&endDateTime=".$end;
+			} else {
+				$url = "https://graph.microsoft.com/v1.0/users/".$caluser."/calendars/".$calendarId."/events";
+			}
+			$cpt = curl_init($url);
 			curl_setopt($cpt, CURLOPT_HTTPHEADER,
 					array(
 						'Authorization: Bearer '.$atoken,
@@ -107,7 +135,7 @@ class Oauth extends Base {
 				);
 			curl_setopt($cpt, CURLOPT_RETURNTRANSFER, true);
 			$result = curl_exec($cpt);
-			return $result;
+			return json_decode($result,true);
 		} catch(\Exception $e) {
 			$message = [
 				'type' => 'danger',
@@ -116,4 +144,23 @@ class Oauth extends Base {
 		}
 	}
 
+	private function getCalEventsNextPage($atoken,$timezone,$nextLink) {
+		try {
+			$cpt = curl_init($nextLink);
+			curl_setopt($cpt, CURLOPT_HTTPHEADER,
+					array(
+						'Authorization: Bearer '.$atoken,
+						'Prefer: outlook.timezone="'.$timezone.'"'
+					)
+				);
+			curl_setopt($cpt, CURLOPT_RETURNTRANSFER, true);
+			$result = curl_exec($cpt);
+			return json_decode($result,true);
+		} catch(\Exception $e) {
+			$message = [
+				'type' => 'danger',
+				'message' => $e->getMessage()
+			];
+		}
+	}
 }
