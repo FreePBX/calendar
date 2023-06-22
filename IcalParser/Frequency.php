@@ -50,7 +50,7 @@ class Frequency extends Freq
 
         if (isset($this->rules['until']) && is_string($this->rules['until'])) {
             $this->rules['until'] = strtotime($this->rules['until']);
-        } elseif ($this->rules['until'] instanceof DateTime) {
+        } elseif (isset($this->rules['until']) && $this->rules['until'] instanceof DateTime) {
             $this->rules['until'] = $this->rules['until']->getTimestamp();
         }
         $this->freq = strtolower($this->rules['freq']);
@@ -509,3 +509,4 @@ class Frequency extends Freq
         return $_t;
     }
 }
+
