@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 03:50+0000\n"
+"POT-Creation-Date: 2023-06-22 11:45+0000\n"
 "PO-Revision-Date: 2018-07-18 19:12+0000\n"
 "Last-Translator: Bastian Mertgen <b.mertgen@bastian-mertgen.de>\n"
 "Language-Team: German <http://*/projects/freepbx/calendar/de/>\n"
@@ -130,7 +130,7 @@ msgstr ""
 msgid "Actions"
 msgstr "Aktionen"
 
-#: Calendar.class.php:522
+#: Calendar.class.php:523
 msgid "Add"
 msgstr "Hinzufügen"
 
@@ -234,7 +234,7 @@ msgid ""
 "while registering your application"
 msgstr ""
 
-#: Calendar.class.php:1104 Console/Calendar.class.php:25 calendar.i18n.php:4
+#: Calendar.class.php:1105 Console/Calendar.class.php:25 calendar.i18n.php:4
 #: calendar.i18n.php:10 views/oauth_calendar_form.php:175
 #: views/remote_caldav_settings.php:133 views/remote_ews_settings.php:194
 msgid "Calendar"
@@ -313,7 +313,7 @@ msgstr "Schließen"
 msgid "Commands"
 msgstr ""
 
-#: Calendar.class.php:464
+#: Calendar.class.php:465
 msgid "Config name already exists."
 msgstr ""
 
@@ -325,7 +325,7 @@ msgstr ""
 msgid "Daily"
 msgstr ""
 
-#: Calendar.class.php:469
+#: Calendar.class.php:470
 msgid "Data saved"
 msgstr ""
 
@@ -353,7 +353,7 @@ msgstr "Tage"
 msgid "Define when to stop the reoccurrance"
 msgstr ""
 
-#: Calendar.class.php:987 Calendar.class.php:1025
+#: Calendar.class.php:988 Calendar.class.php:1026
 msgid "Delete"
 msgstr "Löschen"
 
@@ -393,11 +393,11 @@ msgstr "EWS-Server-URL"
 msgid "EWS Version"
 msgstr "EWS-Version"
 
-#: Calendar.class.php:527
+#: Calendar.class.php:528
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: Calendar.class.php:957
+#: Calendar.class.php:958
 msgid "Edit Settings"
 msgstr "Einstellungen bearbeiten"
 
@@ -531,7 +531,7 @@ msgstr ""
 msgid "Import Calendar by ID"
 msgstr ""
 
-#: Calendar.class.php:1081 Calendar.class.php:1089 views/ucp_config.php:18
+#: Calendar.class.php:1082 Calendar.class.php:1090 views/ucp_config.php:18
 msgid "Inherit"
 msgstr "Erben"
 
@@ -543,7 +543,7 @@ msgstr ""
 msgid "Invalid type"
 msgstr ""
 
-#: Calendar.class.php:497
+#: Calendar.class.php:498
 msgid "Invalid user name/config"
 msgstr ""
 
@@ -688,7 +688,7 @@ msgstr ""
 msgid "Please enter valid credentials above"
 msgstr "Bitte geben Sie oben gültige Zugangsdaten ein"
 
-#: Calendar.class.php:497 Calendar.class.php:510
+#: Calendar.class.php:498 Calendar.class.php:511
 msgid "Please generated the auth token to list the user calendars."
 msgstr ""
 
@@ -760,8 +760,8 @@ msgstr ""
 msgid "Repeats"
 msgstr ""
 
-#: Calendar.class.php:973 Calendar.class.php:992 Calendar.class.php:1011
-#: Calendar.class.php:1030
+#: Calendar.class.php:974 Calendar.class.php:993 Calendar.class.php:1012
+#: Calendar.class.php:1031
 msgid "Reset"
 msgstr "Zurücksetzen"
 
@@ -811,7 +811,7 @@ msgstr ""
 msgid "Select the Oauth Config or credentials for this calendar"
 msgstr ""
 
-#: drivers/Oauth.php:92
+#: drivers/Oauth.php:108
 msgid ""
 "Something went wrong while generating token. Please regenerate the auth "
 "token by checking the respective outlook config and try again"
@@ -841,8 +841,8 @@ msgstr "Anfangszeit"
 msgid "Starting Sync..."
 msgstr ""
 
-#: Calendar.class.php:978 Calendar.class.php:997 Calendar.class.php:1016
-#: Calendar.class.php:1035 views/calendar.php:543
+#: Calendar.class.php:979 Calendar.class.php:998 Calendar.class.php:1017
+#: Calendar.class.php:1036 views/calendar.php:543
 msgid "Submit"
 msgstr ""
 
@@ -854,7 +854,7 @@ msgstr ""
 msgid "Successfully reset the calendar"
 msgstr ""
 
-#: Calendar.class.php:440
+#: Calendar.class.php:441
 msgid "Successfully updated event"
 msgstr "Ereignis erfolgreich aktualisiert"
 
@@ -976,7 +976,7 @@ msgstr ""
 msgid "Unknown Calendar"
 msgstr "Unbekannter Kalender"
 
-#: Calendar.class.php:964 assets/js/calendar/calendar.js:347
+#: Calendar.class.php:965 assets/js/calendar/calendar.js:347
 msgid "Update from Source"
 msgstr ""
 
@@ -1066,11 +1066,11 @@ msgstr "Ja"
 msgid "You are missing the PHP SoapClient library. Please install to continue"
 msgstr ""
 
-#: Calendar.class.php:394 Calendar.class.php:437
+#: Calendar.class.php:394 Calendar.class.php:438
 msgid "You can only edit local calendars"
 msgstr ""
 
-#: Calendar.class.php:507
+#: Calendar.class.php:508
 msgid "found user calendars"
 msgstr ""
 
@@ -1082,11 +1082,11 @@ msgstr ""
 msgid "occurrences"
 msgstr "Vorkommen"
 
-#: Calendar.class.php:1332
+#: Calendar.class.php:1333
 msgid "saved access token"
 msgstr ""
 
-#: Calendar.class.php:475
+#: Calendar.class.php:476
 msgid "saved auth code"
 msgstr ""
 
