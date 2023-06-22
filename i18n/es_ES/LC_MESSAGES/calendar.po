@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-23 11:44+0000\n"
+"POT-Creation-Date: 2023-06-22 03:50+0000\n"
 "PO-Revision-Date: 2018-07-18 19:12+0000\n"
 "Last-Translator: Elvita Crespo <ecrespo@sangoma.com>\n"
 "Language-Team: Spanish <http://*/projects/freepbx/calendar/es/>\n"
@@ -110,7 +110,15 @@ msgstr ""
 msgid "6 Hours"
 msgstr ""
 
-#: IcalParser/IcalRangedParser.php:131
+#: IcalParser/IcalRangedParser.php:271 IcalParser/IcalRangedParser.php:341
+#, php-format
+msgid ""
+"A calendar you have added has an event called \"%event\" that has a "
+"RECURRENCE-ID rule. Because there is no full support yet they are ignored, "
+"please consider changing this to Exceptions/Additions."
+msgstr ""
+
+#: IcalParser/IcalRangedParser.php:120
 msgid ""
 "A calendar you have added has an event that has a reoccuring rule of COUNT. "
 "When COUNT is used this slows down Calendar drastically. Please change your "
@@ -122,7 +130,7 @@ msgstr ""
 msgid "Actions"
 msgstr ""
 
-#: Calendar.class.php:504
+#: Calendar.class.php:522
 msgid "Add"
 msgstr ""
 
@@ -175,7 +183,7 @@ msgstr ""
 msgid "After"
 msgstr ""
 
-#: Console/Calendar.class.php:112 views/calendar.php:185 views/calendar.php:190
+#: Console/Calendar.class.php:118 views/calendar.php:185 views/calendar.php:190
 msgid "All Day"
 msgstr ""
 
@@ -226,7 +234,7 @@ msgid ""
 "while registering your application"
 msgstr ""
 
-#: Calendar.class.php:1053 Console/Calendar.class.php:22 calendar.i18n.php:4
+#: Calendar.class.php:1104 Console/Calendar.class.php:25 calendar.i18n.php:4
 #: calendar.i18n.php:10 views/oauth_calendar_form.php:175
 #: views/remote_caldav_settings.php:133 views/remote_ews_settings.php:194
 msgid "Calendar"
@@ -267,8 +275,12 @@ msgstr ""
 msgid "Calendar processed successfully"
 msgstr ""
 
-#: IcalParser/IcalRangedParser.php:131
+#: IcalParser/IcalRangedParser.php:120
 msgid "Calendar using COUNT"
+msgstr ""
+
+#: IcalParser/IcalRangedParser.php:271 IcalParser/IcalRangedParser.php:341
+msgid "Calendar using RECURRENCE-ID"
 msgstr ""
 
 #: views/calendargroups.php:43
@@ -283,7 +295,7 @@ msgstr ""
 msgid "Categories this event belongs to, separated by comma"
 msgstr ""
 
-#: Console/Calendar.class.php:31
+#: Console/Calendar.class.php:34
 msgid "Check if match, value can be any timestamp"
 msgstr ""
 
@@ -295,11 +307,11 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: Console/Calendar.class.php:94
+#: Console/Calendar.class.php:99
 msgid "Commands"
 msgstr ""
 
-#: Calendar.class.php:447
+#: Calendar.class.php:464
 msgid "Config name already exists."
 msgstr ""
 
@@ -311,7 +323,7 @@ msgstr ""
 msgid "Daily"
 msgstr ""
 
-#: Calendar.class.php:452
+#: Calendar.class.php:469
 msgid "Data saved"
 msgstr ""
 
@@ -339,7 +351,7 @@ msgstr ""
 msgid "Define when to stop the reoccurrance"
 msgstr ""
 
-#: Calendar.class.php:938 Calendar.class.php:976
+#: Calendar.class.php:987 Calendar.class.php:1025
 msgid "Delete"
 msgstr ""
 
@@ -347,7 +359,7 @@ msgstr ""
 msgid "Delete Event"
 msgstr ""
 
-#: Console/Calendar.class.php:78 Console/Calendar.class.php:112
+#: Console/Calendar.class.php:83 Console/Calendar.class.php:118
 #: views/grid.php:32 views/local_settings.php:44
 #: views/oauth_calendar_form.php:49 views/outlook_config_form.php:46
 #: views/outlook_configs_grid.php:18 views/remote_caldav_settings.php:44
@@ -379,11 +391,11 @@ msgstr ""
 msgid "EWS Version"
 msgstr ""
 
-#: Calendar.class.php:509
+#: Calendar.class.php:527
 msgid "Edit"
 msgstr ""
 
-#: Calendar.class.php:908
+#: Calendar.class.php:957
 msgid "Edit Settings"
 msgstr ""
 
@@ -395,7 +407,7 @@ msgstr ""
 msgid "Enable Calendar"
 msgstr ""
 
-#: Console/Calendar.class.php:112
+#: Console/Calendar.class.php:118
 msgid "End"
 msgstr ""
 
@@ -457,23 +469,23 @@ msgstr ""
 msgid "Expand Recurring Dates"
 msgstr ""
 
-#: Console/Calendar.class.php:27
+#: Console/Calendar.class.php:30
 msgid "Export Calendar by ID"
 msgstr ""
 
-#: Console/Calendar.class.php:262
+#: Console/Calendar.class.php:269
 msgid "File does not exist"
 msgstr ""
 
-#: Console/Calendar.class.php:30
+#: Console/Calendar.class.php:33
 msgid "File location of the ics to import"
 msgstr ""
 
-#: Console/Calendar.class.php:236
+#: Console/Calendar.class.php:240
 msgid "Finished"
 msgstr ""
 
-#: Console/Calendar.class.php:25
+#: Console/Calendar.class.php:28
 msgid "Force command"
 msgstr ""
 
@@ -489,7 +501,7 @@ msgstr ""
 msgid "Get OAUTH2 Token for the Outlook API"
 msgstr ""
 
-#: Console/Calendar.class.php:93
+#: Console/Calendar.class.php:98
 msgid "Get more details about calendars, please run the commands below:"
 msgstr ""
 
@@ -502,7 +514,7 @@ msgstr ""
 msgid "How often this calendar will synchronize with the remote server"
 msgstr ""
 
-#: Console/Calendar.class.php:78
+#: Console/Calendar.class.php:83
 msgid "ID"
 msgstr ""
 
@@ -512,11 +524,11 @@ msgid ""
 "which is selected for this calendar."
 msgstr ""
 
-#: Console/Calendar.class.php:28
+#: Console/Calendar.class.php:31
 msgid "Import Calendar by ID"
 msgstr ""
 
-#: Calendar.class.php:1030 Calendar.class.php:1038 views/ucp_config.php:18
+#: Calendar.class.php:1081 Calendar.class.php:1089 views/ucp_config.php:18
 msgid "Inherit"
 msgstr ""
 
@@ -524,11 +536,11 @@ msgstr ""
 msgid "Invalid ical remote URL"
 msgstr ""
 
-#: Console/Calendar.class.php:228
+#: Console/Calendar.class.php:231
 msgid "Invalid type"
 msgstr ""
 
-#: Calendar.class.php:480
+#: Calendar.class.php:497
 msgid "Invalid user name/config"
 msgstr ""
 
@@ -536,7 +548,7 @@ msgstr ""
 msgid "List Calendars"
 msgstr ""
 
-#: Console/Calendar.class.php:26
+#: Console/Calendar.class.php:29
 msgid "List Events"
 msgstr ""
 
@@ -552,7 +564,7 @@ msgstr ""
 msgid "Match Found"
 msgstr ""
 
-#: Console/Calendar.class.php:212 Console/Calendar.class.php:221
+#: Console/Calendar.class.php:213 Console/Calendar.class.php:224
 msgid "Matched"
 msgstr ""
 
@@ -575,7 +587,7 @@ msgstr ""
 msgid "NOTE:"
 msgstr ""
 
-#: Console/Calendar.class.php:78 Console/Calendar.class.php:112
+#: Console/Calendar.class.php:83 Console/Calendar.class.php:118
 #: views/calendargroups.php:19 views/grid.php:31 views/local_settings.php:22
 #: views/oauth_calendar_form.php:27 views/outlook_config_form.php:24
 #: views/outlook_configs_grid.php:17 views/remote_caldav_settings.php:22
@@ -596,23 +608,23 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-#: Console/Calendar.class.php:122 Console/Calendar.class.php:123
-#: Console/Calendar.class.php:124 views/ucp_config.php:15
+#: Console/Calendar.class.php:128 Console/Calendar.class.php:129
+#: Console/Calendar.class.php:130 views/ucp_config.php:15
 msgid "No"
 msgstr ""
 
-#: Calendar.class.php:328
+#: Calendar.class.php:346
 #, php-format
 msgid "No Categories for %s"
 msgstr ""
 
-#: Calendar.class.php:342
+#: Calendar.class.php:360
 #, php-format
 msgid "No Events for %s"
 msgstr ""
 
-#: Console/Calendar.class.php:190 Console/Calendar.class.php:215
-#: Console/Calendar.class.php:224
+#: Console/Calendar.class.php:190 Console/Calendar.class.php:216
+#: Console/Calendar.class.php:227
 msgid "No Match Found"
 msgstr ""
 
@@ -620,7 +632,7 @@ msgstr ""
 msgid "No settings were discovered"
 msgstr ""
 
-#: Console/Calendar.class.php:112
+#: Console/Calendar.class.php:118
 msgid "Now Match"
 msgstr ""
 
@@ -636,11 +648,11 @@ msgstr ""
 msgid "On"
 msgstr ""
 
-#: Console/Calendar.class.php:33
+#: Console/Calendar.class.php:36
 msgid "One of: calendar id | event id | group id"
 msgstr ""
 
-#: Console/Calendar.class.php:32
+#: Console/Calendar.class.php:35
 msgid "One of: calendar | event | group"
 msgstr ""
 
@@ -673,7 +685,7 @@ msgstr ""
 msgid "Please enter valid credentials above"
 msgstr ""
 
-#: Calendar.class.php:480 Calendar.class.php:493
+#: Calendar.class.php:497 Calendar.class.php:510
 msgid "Please generated the auth token to list the user calendars."
 msgstr ""
 
@@ -693,7 +705,7 @@ msgstr ""
 msgid "Private iCal Link"
 msgstr ""
 
-#: Console/Calendar.class.php:112
+#: Console/Calendar.class.php:118
 msgid "Recurring"
 msgstr ""
 
@@ -745,16 +757,16 @@ msgstr ""
 msgid "Repeats"
 msgstr ""
 
-#: Calendar.class.php:924 Calendar.class.php:943 Calendar.class.php:962
-#: Calendar.class.php:981
+#: Calendar.class.php:973 Calendar.class.php:992 Calendar.class.php:1011
+#: Calendar.class.php:1030
 msgid "Reset"
 msgstr ""
 
-#: Console/Calendar.class.php:29
+#: Console/Calendar.class.php:32
 msgid "Reset Calendar by ID"
 msgstr ""
 
-#: Console/Calendar.class.php:247 Console/Calendar.class.php:257
+#: Console/Calendar.class.php:253 Console/Calendar.class.php:264
 msgid "Reset is only supported on local calendars!"
 msgstr ""
 
@@ -810,7 +822,7 @@ msgstr ""
 msgid "Specific Events"
 msgstr ""
 
-#: Console/Calendar.class.php:112
+#: Console/Calendar.class.php:118
 msgid "Start"
 msgstr ""
 
@@ -822,28 +834,28 @@ msgstr ""
 msgid "Start Time"
 msgstr ""
 
-#: Console/Calendar.class.php:234
+#: Console/Calendar.class.php:238
 msgid "Starting Sync..."
 msgstr ""
 
-#: Calendar.class.php:929 Calendar.class.php:948 Calendar.class.php:967
-#: Calendar.class.php:986 views/calendar.php:543
+#: Calendar.class.php:978 Calendar.class.php:997 Calendar.class.php:1016
+#: Calendar.class.php:1035 views/calendar.php:543
 msgid "Submit"
 msgstr "Enviar"
 
-#: Console/Calendar.class.php:266
+#: Console/Calendar.class.php:273
 msgid "Successfully imported calendar"
 msgstr ""
 
-#: Console/Calendar.class.php:251
+#: Console/Calendar.class.php:257
 msgid "Successfully reset the calendar"
 msgstr ""
 
-#: Calendar.class.php:423
+#: Calendar.class.php:440
 msgid "Successfully updated event"
 msgstr ""
 
-#: Console/Calendar.class.php:24
+#: Console/Calendar.class.php:27
 msgid "Syncronize all Calendars"
 msgstr ""
 
@@ -931,7 +943,7 @@ msgstr ""
 msgid "Time this event ends"
 msgstr ""
 
-#: Console/Calendar.class.php:78 Console/Calendar.class.php:112
+#: Console/Calendar.class.php:83 Console/Calendar.class.php:118
 #: views/calendar.php:258 views/local_settings.php:67
 #: views/oauth_calendar_form.php:211
 msgid "Timezone"
@@ -945,11 +957,11 @@ msgstr ""
 msgid "Timezone for this event"
 msgstr ""
 
-#: Console/Calendar.class.php:78 views/grid.php:33 views/rnav.php:33
+#: Console/Calendar.class.php:83 views/grid.php:33 views/rnav.php:33
 msgid "Type"
 msgstr ""
 
-#: Console/Calendar.class.php:112
+#: Console/Calendar.class.php:118
 msgid "UID"
 msgstr ""
 
@@ -957,11 +969,11 @@ msgstr ""
 msgid "Unable to determine server URL"
 msgstr ""
 
-#: drivers/Base.php:37
+#: drivers/Base.php:42
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:915 assets/js/calendar/calendar.js:347
+#: Calendar.class.php:964 assets/js/calendar/calendar.js:347
 msgid "Update from Source"
 msgstr ""
 
@@ -1042,8 +1054,8 @@ msgstr ""
 msgid "Years"
 msgstr ""
 
-#: Console/Calendar.class.php:122 Console/Calendar.class.php:123
-#: Console/Calendar.class.php:124 views/ucp_config.php:13
+#: Console/Calendar.class.php:128 Console/Calendar.class.php:129
+#: Console/Calendar.class.php:130 views/ucp_config.php:13
 msgid "Yes"
 msgstr ""
 
@@ -1051,11 +1063,11 @@ msgstr ""
 msgid "You are missing the PHP SoapClient library. Please install to continue"
 msgstr ""
 
-#: Calendar.class.php:376 Calendar.class.php:420
+#: Calendar.class.php:394 Calendar.class.php:437
 msgid "You can only edit local calendars"
 msgstr ""
 
-#: Calendar.class.php:490
+#: Calendar.class.php:507
 msgid "found user calendars"
 msgstr ""
 
@@ -1067,14 +1079,14 @@ msgstr ""
 msgid "occurrences"
 msgstr ""
 
-#: Calendar.class.php:1265
+#: Calendar.class.php:1332
 msgid "saved access token"
 msgstr ""
 
-#: Calendar.class.php:458
+#: Calendar.class.php:475
 msgid "saved auth code"
 msgstr ""
 
-#: Calendar.class.php:364
+#: Calendar.class.php:382
 msgid "to"
 msgstr ""

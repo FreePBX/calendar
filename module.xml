@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>16.0.22</version>
+	<version>16.0.23</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -14,6 +14,7 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
+		*16.0.23* FREEPBX-24259 Calendar match slower over time for recurring events 
 		*16.0.22* FREEI-48 
 		*16.0.21* Packaging of ver 16.0.21
 		*16.0.20* FREEI-5762 and FREEI-1486 
