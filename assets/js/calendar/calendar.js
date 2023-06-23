@@ -223,7 +223,11 @@ $(document).ready(function() {
 					$("#starttime")[0]._flatpickr.setDate(ms.format("kk:mm:ss"));
 					$("#endtime")[0]._flatpickr.setDate(me.format("kk:mm:ss"));
 				}
-				if(typeof src.timezone !== "undefined") {
+				if(typeof caltimezone !== "undefined") {
+					$("#timezone").val(caltimezone);
+					$("#timezone").multiselect('select', caltimezone);
+				}
+				else if(typeof src.timezone !== "undefined") {
 						$("#timezone").val(src.timezone);
 						$("#timezone").multiselect('select', src.timezone);
 				}
