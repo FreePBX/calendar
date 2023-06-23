@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 11:45+0000\n"
+"POT-Creation-Date: 2023-06-23 08:45+0000\n"
 "PO-Revision-Date: 2018-02-14 21:15+0200\n"
 "Last-Translator: jeremie <freepbx@famillecattan.com>\n"
 "Language-Team: French <http://weblate.freepbx.org/projects/freepbx/calendar/"
@@ -330,7 +330,7 @@ msgstr ""
 msgid "Day of the year (E.g. 2nd Monday in May)"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:391
+#: assets/js/calendar/calendar.js:395
 msgid "Days"
 msgstr "Jours"
 
@@ -366,7 +366,7 @@ msgstr ""
 msgid "Directory (tenant) ID"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:446
+#: assets/js/calendar/calendar.js:450
 msgid "Duplicate calendar name."
 msgstr ""
 
@@ -555,7 +555,7 @@ msgstr ""
 msgid "Monthly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:406
+#: assets/js/calendar/calendar.js:410
 msgid "Months"
 msgstr "Mois"
 
@@ -662,7 +662,7 @@ msgstr ""
 msgid "Password"
 msgstr "Mot de passe"
 
-#: assets/js/calendar/calendar.js:454
+#: assets/js/calendar/calendar.js:458
 msgid "Please define a valid url"
 msgstr ""
 
@@ -801,7 +801,7 @@ msgstr ""
 msgid "Select the Oauth Config or credentials for this calendar"
 msgstr ""
 
-#: drivers/Oauth.php:108 assets/js/calendar/calendar.js:338
+#: drivers/Oauth.php:108 assets/js/calendar/calendar.js:342
 msgid ""
 "Something went wrong while generating token. Please regenerate the auth "
 "token by checking the respective outlook config and try again"
@@ -969,11 +969,11 @@ msgstr "Incapable de déterminer l'URL du serveur"
 msgid "Unknown Calendar"
 msgstr "Calendrier inconnu"
 
-#: Calendar.class.php:916 assets/js/calendar/calendar.js:342
+#: Calendar.class.php:916 assets/js/calendar/calendar.js:346
 msgid "Update from Source"
 msgstr "Mise à jour de la source"
 
-#: assets/js/calendar/calendar.js:326
+#: assets/js/calendar/calendar.js:330
 msgid "Updating..."
 msgstr "En cours de mise à jour..."
 
@@ -1022,7 +1022,7 @@ msgstr "Visualisation de l'agenda '%s'"
 msgid "Viewing from timezone '%s'"
 msgstr "Affichage à partir du fuseau horaire '%s'"
 
-#: assets/js/calendar/calendar.js:138 assets/js/calendar/calendar.js:446
+#: assets/js/calendar/calendar.js:138 assets/js/calendar/calendar.js:450
 msgid "Warning"
 msgstr ""
 
@@ -1030,7 +1030,7 @@ msgstr ""
 msgid "Weekly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:388
+#: assets/js/calendar/calendar.js:392
 msgid "Weeks"
 msgstr "Semaines"
 
@@ -1050,7 +1050,7 @@ msgstr ""
 msgid "Yearly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:413
+#: assets/js/calendar/calendar.js:417
 msgid "Years"
 msgstr "Années"
 
