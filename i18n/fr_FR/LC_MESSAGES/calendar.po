@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-22 11:45+0000\n"
+"POT-Creation-Date: 2023-06-23 08:45+0000\n"
 "PO-Revision-Date: 2018-02-14 21:15+0200\n"
 "Last-Translator: jeremie <freepbx@famillecattan.com>\n"
 "Language-Team: French <http://weblate.freepbx.org/projects/freepbx/calendar/"
@@ -346,7 +346,7 @@ msgstr ""
 msgid "Day of the year (E.g. 2nd Monday in May)"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:396
+#: assets/js/calendar/calendar.js:400
 msgid "Days"
 msgstr "Jours"
 
@@ -382,7 +382,7 @@ msgstr ""
 msgid "Directory (tenant) ID"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:451
+#: assets/js/calendar/calendar.js:455
 msgid "Duplicate calendar name."
 msgstr ""
 
@@ -575,7 +575,7 @@ msgstr ""
 msgid "Monthly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:411
+#: assets/js/calendar/calendar.js:415
 msgid "Months"
 msgstr "Mois"
 
@@ -682,7 +682,7 @@ msgstr ""
 msgid "Password"
 msgstr "Mot de passe"
 
-#: assets/js/calendar/calendar.js:459
+#: assets/js/calendar/calendar.js:463
 msgid "Please define a valid url"
 msgstr ""
 
@@ -989,11 +989,11 @@ msgstr "Incapable de déterminer l'URL du serveur"
 msgid "Unknown Calendar"
 msgstr "Calendrier inconnu"
 
-#: Calendar.class.php:965 assets/js/calendar/calendar.js:347
+#: Calendar.class.php:965 assets/js/calendar/calendar.js:351
 msgid "Update from Source"
 msgstr "Mise à jour de la source"
 
-#: assets/js/calendar/calendar.js:330
+#: assets/js/calendar/calendar.js:334
 msgid "Updating..."
 msgstr "En cours de mise à jour..."
 
@@ -1042,7 +1042,7 @@ msgstr "Visualisation de l'agenda '%s'"
 msgid "Viewing from timezone '%s'"
 msgstr "Affichage à partir du fuseau horaire '%s'"
 
-#: assets/js/calendar/calendar.js:138 assets/js/calendar/calendar.js:451
+#: assets/js/calendar/calendar.js:138 assets/js/calendar/calendar.js:455
 msgid "Warning"
 msgstr ""
 
@@ -1050,7 +1050,7 @@ msgstr ""
 msgid "Weekly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:393
+#: assets/js/calendar/calendar.js:397
 msgid "Weeks"
 msgstr "Semaines"
 
@@ -1070,7 +1070,7 @@ msgstr ""
 msgid "Yearly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:418
+#: assets/js/calendar/calendar.js:422
 msgid "Years"
 msgstr "Années"
 
