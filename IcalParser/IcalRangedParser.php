@@ -86,12 +86,19 @@ class IcalRangedParser extends IcalParser
 
 		if (!isset($recurring->rrule['COUNT'])) {
 			$DTSTARTTimeStamp = $event['DTSTART']->getTimestamp();
-			$frequency = new Frequency($recurring->rrule, $DTSTARTTimeStamp, $exclusions, $additions);
-			$end = $until !== false && $until->getTimestamp() < $this->ranges['end']->getTimestamp() ? $until : $this->ranges['end']; //calc end based on the shortest term
 
-			if ($this->fast) { //calculate only the timestamps in the given timeframe, without generating an infinite list...
+			//calc end based on the shortest term
+			if ($until !== false) {
+				$untilTm = $until->getTimestamp();
+				$endTm = $this->ranges['end']->getTimestamp();
+				$end = $untilTm < $this->ranges['end']->getTimestamp() ? $untilTm : $endTm;
+			} else
+				$end = $this->ranges['end']->getTimestamp();
+
+			if ($this->fast) {
+				//end is not set on the recurring rule as it is not needed and would cause troubles in the current implementation
+				$frequency = new Frequency($recurring->rrule, $DTSTARTTimeStamp, $exclusions, $additions);
 				$startRange = $this->ranges['start']->getTimestamp();
-				$end = $end->getTimestamp();
 
 				$recurrences = [];
 				$startRange = $frequency->previousOccurrence($startRange);
@@ -111,7 +118,11 @@ class IcalRangedParser extends IcalParser
 
 				return $recurrences;
 			} else {
+				//setting end to the one defined above and generating a new Frequency object
 				$recurring->setUntil($end);
+				$frequency = new Frequency($recurring->rrule, $DTSTARTTimeStamp, $exclusions, $additions);
+
+				//get all the timestamps
 				$recurrenceTimestamps = $frequency->getAllOccurrences();
 			}
 		} elseif (class_exists('FreePBX')) {
