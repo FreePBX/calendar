@@ -201,14 +201,16 @@ abstract class Base
 		$end = clone ($start);
 		$start->sub(new \DateInterval(self::SUB_START));
 		$end->add(new \DateInterval(self::ADD_END));
-
-		$cal = new IcalRangedParser(true);
-		$cal->setStartRange($start);
-		$cal->setEndRange($end);
-		$raw = $cal->parseString($this->getIcal());
-		$this->calendarClass->setConfig($this->calendar['id'], serialize($raw), 'calendar-cache');
-		$this->calendarClass->setConfig($this->calendar['id'], $start->getTimestamp(), 'calendar-cache_valid_notbefore');
-		$this->calendarClass->setConfig($this->calendar['id'], $end->getTimestamp(), 'calendar-cache_valid_notafter');
+		$icalData = $this->getIcal();
+		if($icalData){
+			$cal = new IcalRangedParser(true);
+			$cal->setStartRange($start);
+			$cal->setEndRange($end);
+			$raw = $cal->parseString($icalData);
+			$this->calendarClass->setConfig($this->calendar['id'], serialize($raw), 'calendar-cache');
+			$this->calendarClass->setConfig($this->calendar['id'], $start->getTimestamp(), 'calendar-cache_valid_notbefore');
+			$this->calendarClass->setConfig($this->calendar['id'], $end->getTimestamp(), 'calendar-cache_valid_notafter');
+		}
 	}
 
 	/**
