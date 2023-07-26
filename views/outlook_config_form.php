@@ -1,6 +1,6 @@
 <?php
-    if($outlookdata['authurl']){
-        $button = '<a href="'.$outlookdata['authurl'].'" id="oauthbutton" class = "btn btn-danger">'._("Authorize access").'</a><p>Please click on Authorize access button if you are not redirected to outlook authorization page after saving the details.</p>';
+    if(isset($outlookdata['authurl'])){
+        $button = '<a href="'.$outlookdata['authurl'] ?? ''.'" id="oauthbutton" class = "btn btn-danger">'._("Authorize access").'</a><p>Please click on Authorize access button if you are not redirected to outlook authorization page after saving the details.</p>';
     }
 ?>
 <div class = "display full-border">
@@ -14,7 +14,7 @@
 			<div class="fpbx-container">
 				<div class="display full-border">
                 <form class="fpbx-submit settingsform" method="post" action="?display=calendar&action=saveoutlooksettings">
-                    <input id="id" name="id" type="hidden" class="form-control" value="<?php echo $outlookdata['id']; ?>">
+                    <input id="id" name="id" type="hidden" class="form-control" value="<?php echo $outlookdata['id'] ?? ''; ?>">
                     <div class="element-container">
                         <div class="row">
                             <div class="col-md-12">
@@ -25,7 +25,7 @@
                                             <i class="fa fa-question-circle fpbx-help-icon" data-for="name"></i>
                                         </div>
                                         <div class="col-md-9">
-                                            <input id="name" name="name" type="text" class="form-control" value="<?php echo $outlookdata['name']; ?>">
+                                            <input id="name" name="name" type="text" class="form-control" value="<?php echo $outlookdata['name'] ?? ''; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -47,7 +47,7 @@
                                             <i class="fa fa-question-circle fpbx-help-icon" data-for="description"></i>
                                         </div>
                                         <div class="col-md-9">
-                                            <input id="description" name="description" type="text" class="form-control" value="<?php echo $outlookdata['description']; ?>">
+                                            <input id="description" name="description" type="text" class="form-control" value="<?php echo $outlookdata['description'] ?? ''; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                     <i class="fa fa-question-circle fpbx-help-icon" data-for="tenantid"></i>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" id="tenantid" name="tenantid" value="<?php echo isset($outlookdata['tenantid'])?$outlookdata['tenantid']:''?>">
+                                    <input type="text" class="form-control" id="tenantid" name="tenantid" value="<?php echo $outlookdata['tenantid'] ?? ''?>">
                                 </div>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                                     <i class="fa fa-question-circle fpbx-help-icon" data-for="consumerkey"></i>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" id="consumerkey" name="consumerkey" value="<?php echo isset($outlookdata['consumerkey'])?$outlookdata['consumerkey']:''?>">
+                                    <input type="text" class="form-control" id="consumerkey" name="consumerkey" value="<?php echo $outlookdata['consumerkey'] ?? ''?>">
                                 </div>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
                                     <i class="fa fa-question-circle fpbx-help-icon" data-for="consumersecret"></i>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" id="consumersecret" name="consumersecret" value="<?php echo isset($outlookdata['consumersecret'])?$outlookdata['consumersecret']:''?>">
+                                    <input type="text" class="form-control" id="consumersecret" name="consumersecret" value="<?php echo $outlookdata['consumersecret'] ?? ''?>">
                                 </div>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                                     <i class="fa fa-question-circle fpbx-help-icon" data-for="outlookurl"></i>
                                 </div>
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control" id="outlookurl" name="outlookurl" required value="<?php echo isset($outlookdata['outlookurl'])?$outlookdata['outlookurl']: 'https://login.microsoftonline.com/'?>">
+                                    <input type="text" class="form-control" id="outlookurl" name="outlookurl" required value="<?php echo $outlookdata['outlookurl'] ?? 'https://login.microsoftonline.com/'?>">
                                 </div>
                             </div>
                         </div>
@@ -168,7 +168,7 @@
                                 </div>
                                 <div class="col-md-9">
                                     <a class = "btn btn-default" id="save"><?php echo _("Save")?></a>
-                                    <?php echo $button ?>
+                                    <?php echo $button ?? "" ?>
                                 </div>
                             </div>
                         </div>

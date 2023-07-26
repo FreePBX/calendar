@@ -8,7 +8,7 @@
 				<div class="display full-border">
 					<form action="config.php?display=calendargroups" method="post" class="fpbx-submit" id="cgform" name="cgform" data-fpbx-delete="config.php?display=calendargroups&amp;action=delete&amp;id=<?php echo $id?>">
 					<input type="hidden" name='action' value="<?php echo isset($group['id']) ? 'edit' : 'add' ?>">
-					<input type="hidden" name='id' value="<?php echo isset($group['id']) ? $group['id'] : '' ?>">
+					<input type="hidden" name='id' value="<?php echo $group['id'] ?? '' ?>">
 					<!--Description-->
 					<div class="element-container">
 						<div class="row">
@@ -20,7 +20,7 @@
 											<i class="fa fa-question-circle fpbx-help-icon" data-for="name"></i>
 										</div>
 										<div class="col-md-9">
-											<input type="text" class="form-control" id="description" name="name" value="<?php echo isset($group['name'])?$group['name'] :''?>">
+											<input type="text" class="form-control" id="description" name="name" value="<?php echo $group['name'] ?? ''?>">
 										</div>
 									</div>
 								</div>
@@ -118,7 +118,7 @@
 </div>
 </form>
 <script>
-	var categories = <?php echo !empty($group['categories']) ? json_encode($group['categories']) : '[]'?>;
-	var events = <?php echo !empty($group['events']) ? json_encode($group['events']) : '[]'?>;
+	var categories = <?php echo !empty($group['categories']) ? json_encode($group['categories'], JSON_THROW_ON_ERROR) : '[]'?>;
+	var events = <?php echo !empty($group['events']) ? json_encode($group['events'], JSON_THROW_ON_ERROR) : '[]'?>;
 	var expand = <?php echo !isset($group['expand']) || $group['expand']  ? 'true' : 'false'?>;
 </script>

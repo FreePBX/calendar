@@ -4,7 +4,7 @@
 <div class = "display full-border">
 	<div class="container-fluid">
 		<h1>
-			<span><?php echo sprintf(_('%s Outlook Calendar'),ucfirst($action)) ?></span>
+			<span><?php echo sprintf(_('%s Outlook Calendar'),ucfirst((string) $action)) ?></span>
 		</h1>
 	</div>
 	<div class="row">
@@ -16,7 +16,7 @@
 						<input type="hidden" name="type" value="oauth">
 						<input type="hidden" name="id" value="<?php echo !empty($data['id']) ? $data['id'] : ''?>">
 						<input type="hidden" id="auth_code" name="auth_code" value="">
-						<input type="hidden" id="usercalendar" value="<?php echo isset($data['usercalendar']) ? $data['usercalendar'] : ''?>">
+						<input type="hidden" id="usercalendar" value="<?php echo $data['usercalendar'] ?? ''?>">
 						<!--Name-->
 						<div class="element-container">
 							<div class="row">
@@ -177,7 +177,7 @@
 											</div>
 											<div class="col-md-9">
 												<?php
-												if (strtolower($action) == "add") {
+												if (strtolower((string) $action) == "add") {
 													$selclass = "hidden";
 													$unsetclass = "";
 												} else {
@@ -212,7 +212,7 @@
 												<i class="fa fa-question-circle fpbx-help-icon" data-for="timezone"></i>
 											</div>
 											<div class="col-md-9">
-												<?php echo FreePBX::View()->timezoneDrawSelect('timezone',($data['timezone']) ? $data['timezone'] : date_default_timezone_get()); ?>
+												<?php echo FreePBX::View()->timezoneDrawSelect('timezone',$data['timezone'] ?? date_default_timezone_get()); ?>
 											</div>
 										</div>
 									</div>

@@ -4,7 +4,7 @@
 <div class = "display full-border">
 	<div class="container-fluid">
 		<h1>
-			<span><?php echo sprintf(_('%s Outlook Calendar'),ucfirst($action)) ?></span>
+			<span><?php echo sprintf(_('%s Outlook Calendar'),ucfirst((string) $action)) ?></span>
 		</h1>
 	</div>
 	<div class="row">
@@ -164,15 +164,15 @@
 											</div>
 											<div class="col-md-9">
 												<select id="version" class="form-control" name="version">
-													<option value="VERSION_2007" data-name="Exchange2007" <?php echo $data['version'] == 'VERSION_2007' ? 'selected' : '' ?>>Exchange 2007</option>
-													<option value="VERSION_2007_SP1" data-name="Exchange2007_SP1" <?php echo $data['version'] == 'VERSION_2007_SP1' ? 'selected' : '' ?>>Exchange2007 SP1</option>
-													<option value="VERSION_2009" data-name="Exchange2009" <?php echo $data['version'] == 'VERSION_2009' ? 'selected' : '' ?>>Exchange 2009</option>
-													<option value="VERSION_2010" data-name="Exchange2010" <?php echo $data['version'] == 'VERSION_2010' ? 'selected' : '' ?>>Exchange 2010</option>
-													<option value="VERSION_2010_SP1" data-name="Exchange2010_SP1" <?php echo $data['version'] == 'VERSION_2010_SP1' ? 'selected' : '' ?>>Exchange 2010 SP1</option>
-													<option value="VERSION_2010_SP2" data-name="Exchange2010_SP2" <?php echo $data['version'] == 'VERSION_2010_SP2' ? 'selected' : '' ?>>Exchange 2010 SP2</option>
-													<option value="VERSION_2013" data-name="Exchange2013" <?php echo $data['version'] == 'VERSION_2013' ? 'selected' : '' ?>>Exchange 2013</option>
-													<option value="VERSION_2013_SP1" data-name="Exchange2013_SP1" <?php echo $data['version'] == 'VERSION_2013_SP1' ? 'selected' : '' ?>>Exchange 2013 SP1</option>
-													<option value="VERSION_2016" data-name="Exchange2016" <?php echo $data['version'] == 'VERSION_2016' ? 'selected' : '' ?>>Exchange 2016</option>
+													<option value="VERSION_2007" data-name="Exchange2007" <?php echo (isset($data['version']) && $data['version'] == 'VERSION_2007') ? 'selected' : '' ?>>Exchange 2007</option>
+													<option value="VERSION_2007_SP1" data-name="Exchange2007_SP1" <?php echo (isset($data['version']) && $data['version'] == 'VERSION_2007_SP1') ? 'selected' : '' ?>>Exchange2007 SP1</option>
+													<option value="VERSION_2009" data-name="Exchange2009" <?php echo (isset($data['version']) && $data['version'] == 'VERSION_2009') ? 'selected' : '' ?>>Exchange 2009</option>
+													<option value="VERSION_2010" data-name="Exchange2010" <?php echo (isset($data['version']) && $data['version'] == 'VERSION_2010') ? 'selected' : '' ?>>Exchange 2010</option>
+													<option value="VERSION_2010_SP1" data-name="Exchange2010_SP1" <?php echo (isset($data['version']) && $data['version'] == 'VERSION_2010_SP1') ? 'selected' : '' ?>>Exchange 2010 SP1</option>
+													<option value="VERSION_2010_SP2" data-name="Exchange2010_SP2" <?php echo (isset($data['version']) && $data['version'] == 'VERSION_2010_SP2') ? 'selected' : '' ?>>Exchange 2010 SP2</option>
+													<option value="VERSION_2013" data-name="Exchange2013" <?php echo (isset($data['version']) && $data['version'] == 'VERSION_2013') ? 'selected' : '' ?>>Exchange 2013</option>
+													<option value="VERSION_2013_SP1" data-name="Exchange2013_SP1" <?php echo (isset($data['version']) && $data['version'] == 'VERSION_2013_SP1') ? 'selected' : '' ?>>Exchange 2013 SP1</option>
+													<option value="VERSION_2016" data-name="Exchange2016" <?php echo (isset($data['version']) && $data['version'] == 'VERSION_2016') ? 'selected' : '' ?>>Exchange 2016</option>
 												</select>
 											</div>
 										</div>
@@ -196,7 +196,7 @@
 											</div>
 											<div class="col-md-9">
 <?php
-if (strtolower($action) == "add") {
+if (strtolower((string) $action) == "add") {
 	$selclass = "d-none";
 	$unsetclass = "";
 } else {
@@ -263,7 +263,7 @@ if (strtolower($action) == "add") {
 	</div>
 </div>
 <script>
-	var calendars = <?php echo !empty($data['calendars']) ? json_encode($data['calendars']) : '[]'?>;
+	var calendars = <?php echo !empty($data['calendars']) ? json_encode($data['calendars'], JSON_THROW_ON_ERROR) : '[]'?>;
 	$("#url").blur(function() {
 		updateCalendars();
 	});
@@ -281,9 +281,10 @@ if (strtolower($action) == "add") {
 			$("#setspan").addClass("hidden");
 			$(".diswhenloading").addClass("disabled").attr("disabled", true);
 			$.post( "ajax.php?module=calendar&command=getewscals", {purl: $("#url").val(), username: $("#username").val(), password: $("#password").val(), version: $("#version").val()}, function( data ) {
+				console.log(data);
 				$("#calendars").html(data.calshtml);
 				$('#calendars').multiselect('rebuild');
-				$("#setspan").removeClass("hidden");
+				$("#setspan").removeClass("d-none");
 				$("#unsetspan").addClass("hidden");
 				$(".diswhenloading").removeClass("disabled").attr("disabled", false);
 			}).always(function() {

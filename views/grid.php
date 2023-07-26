@@ -38,7 +38,7 @@ if(!empty($message)) { ?>
 	</tbody>
 </table>
 <script>
-	var drivers = <?php echo json_encode($dropdown)?>;
+	var drivers = <?php echo json_encode($dropdown, JSON_THROW_ON_ERROR)?>;
 	$(document).ready(function() {
 		var pageurl = window.location.href;
 		if(pageurl.includes("code")) {

@@ -281,6 +281,7 @@ class Calendar extends \DB_Helper implements \BMO {
 				foreach($ews->getAllCalendars() as $c) {
 					$chtml .= '<option value="'.$c['id'].'">'.$c['name'].'</option>';
 				}
+				dbug($chtml);
 				return array("calshtml" => $chtml);
 			break;
 			case 'getcaldavcals':

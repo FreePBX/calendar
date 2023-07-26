@@ -1,7 +1,7 @@
 <div class = "display full-border">
 	<div class="container-fluid">
 		<h1>
-			<span><?php echo sprintf(_('%s Local Calendar'),ucfirst($action)) ?></span>
+			<span><?php echo sprintf(_('%s Local Calendar'),ucfirst((string) $action)) ?></span>
 		</h1>
 	</div>
 	<div class="row">
@@ -23,7 +23,7 @@
 												<i class="fa fa-question-circle fpbx-help-icon" data-for="name"></i>
 											</div>
 											<div class="col-md-9">
-												<input type="text" onblur=checkduplicate(this.value,"<?php echo $data['id'];?>") class="form-control" id="name" name="name" value="<?php echo !empty($data['name']) ? $data['name'] : ''?>">
+												<input type="text" onblur=checkduplicate(this.value,"<?php echo (isset($data)) ? $data['id'] : '';?>") class="form-control" id="name" name="name" value="<?php echo isset($data) && isset($data['name']) ? $data['name'] : ''?>">
 											</div>
 										</div>
 									</div>

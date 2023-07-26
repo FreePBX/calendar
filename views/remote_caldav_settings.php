@@ -1,7 +1,7 @@
 <div class = "display full-border">
 	<div class="container-fluid">
 		<h1>
-			<span><?php echo sprintf(_('%s CalDAV Calendar'),ucfirst($action)) ?></span>
+			<span><?php echo sprintf(_('%s CalDAV Calendar'),ucfirst((string) $action)) ?></span>
 		</h1>
 	</div>
 	<div class="row">
@@ -135,7 +135,7 @@
 											</div>
 											<div class="col-md-9">
 <?php
-if (strtolower($action) == "add") {
+if (strtolower((string) $action) == "add") {
 	$selclass = "d-none";
 	$unsetclass = "";
 } else {
@@ -203,7 +203,7 @@ if (strtolower($action) == "add") {
 	</div>
 </div>
 <script>
-	var calendars = <?php echo !empty($data['calendars']) ? json_encode($data['calendars']) : '[]'?>;
+	var calendars = <?php echo !empty($data['calendars']) ? json_encode($data['calendars'], JSON_THROW_ON_ERROR) : '[]'?>;
 	$("#purl").blur(function() {
 		updateCalendars();
 	});

@@ -213,7 +213,7 @@ var caltype = "<?php echo $data['type']; ?>";
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="starttime"></i>
 														</div>
 														<div class="col-md-9">
-															<input type="text" class="form-control" id="starttime" name="starttime" value="<?php echo isset($starttime)?$starttime:''?>">
+															<input type="text" class="form-control" id="starttime" name="starttime" value="<?php echo $starttime ?? ''?>">
 														</div>
 													</div>
 												</div>
@@ -237,7 +237,7 @@ var caltype = "<?php echo $data['type']; ?>";
 															<i class="fa fa-question-circle fpbx-help-icon" data-for="endtime"></i>
 														</div>
 														<div class="col-md-9">
-															<input type="text" class="form-control" id="endtime" name="endtime" value="<?php echo isset($endtime)?$endtime:''?>">
+															<input type="text" class="form-control" id="endtime" name="endtime" value="<?php echo $endtime ?? ''?>">
 														</div>
 													</div>
 												</div>
