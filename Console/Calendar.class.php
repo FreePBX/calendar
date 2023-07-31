@@ -16,47 +16,51 @@ use Symfony\Component\Process\Process;
 use Symfony\Component\Console\Command\HelpCommand;
 
 use Carbon\Carbon;
-class Calendar extends Command {
-	protected function configure(){
+
+class Calendar extends Command
+{
+	protected function configure()
+	{
 		$this->setName('calendar')
-		->setDescription(_('Calendar'))
-		->setDefinition(array(
-			new InputOption('sync', null, InputOption::VALUE_NONE, _('Syncronize all Calendars')),
-			new InputOption('force', null, InputOption::VALUE_NONE, _('Force command')),
-			new InputOption('list', null, InputOption::VALUE_NONE, _('List Events')),
-			new InputOption('export', null, InputOption::VALUE_REQUIRED, _('Export Calendar by ID')),
-			new InputOption('import', null, InputOption::VALUE_REQUIRED, _('Import Calendar by ID')),
-			new InputOption('reset', null, InputOption::VALUE_REQUIRED, _('Reset Calendar by ID')),
-			new InputOption('file', null, InputOption::VALUE_REQUIRED, _('File location of the ics to import')),
-			new InputOption('match', null, InputOption::VALUE_REQUIRED, _('Check if match, value can be any timestamp')),
-			new InputOption('type', null, InputOption::VALUE_REQUIRED, _('One of: calendar | event | group')),
-			new InputOption('id', null, InputOption::VALUE_REQUIRED, _('One of: calendar id | event id | group id'))
-		));
+			->setDescription(_('Calendar'))
+			->setDefinition(array(
+				new InputOption('sync', null, InputOption::VALUE_NONE, _('Syncronize all Calendars')),
+				new InputOption('force', null, InputOption::VALUE_NONE, _('Force command')),
+				new InputOption('list', null, InputOption::VALUE_NONE, _('List Events')),
+				new InputOption('export', null, InputOption::VALUE_REQUIRED, _('Export Calendar by ID')),
+				new InputOption('import', null, InputOption::VALUE_REQUIRED, _('Import Calendar by ID')),
+				new InputOption('reset', null, InputOption::VALUE_REQUIRED, _('Reset Calendar by ID')),
+				new InputOption('file', null, InputOption::VALUE_REQUIRED, _('File location of the ics to import')),
+				new InputOption('match', null, InputOption::VALUE_REQUIRED, _('Check if match, value can be any timestamp')),
+				new InputOption('type', null, InputOption::VALUE_REQUIRED, _('One of: calendar | event | group')),
+				new InputOption('id', null, InputOption::VALUE_REQUIRED, _('One of: calendar id | event id | group id'))
+			));
 	}
-	protected function execute(InputInterface $input, OutputInterface $output){
+	protected function execute(InputInterface $input, OutputInterface $output)
+	{
 		$calendar = \FreePBX::create()->Calendar;
-		if($input->getOption('sync')) {
+		if ($input->getOption('sync')) {
 			return $this->sync($calendar, $input, $output);
 		}
 
-		if($input->getOption('export')) {
+		if ($input->getOption('export')) {
 			return $this->export($calendar, $input, $output);
 		}
 
-		if($input->getOption('import')) {
+		if ($input->getOption('import')) {
 			return $this->import($calendar, $input, $output);
 		}
 
-		if($input->getOption('reset')) {
+		if ($input->getOption('reset')) {
 			return $this->reset($calendar, $input, $output);
 		}
 
-		if($input->getOption('match') && $input->getOption('type')) {
+		if ($input->getOption('match') && $input->getOption('type')) {
 			return $this->match($calendar, $input, $output);
 		}
 
-		if($input->getOption('list')) {
-			if($input->getOption('id')){
+		if ($input->getOption('list')) {
+			if ($input->getOption('id')) {
 				return $this->listCalendarEvents($calendar, $input, $output);
 			}
 
@@ -69,15 +73,16 @@ class Calendar extends Command {
 		}
 		*/
 
-		$this->outputHelp($input,$output);
+		$this->outputHelp($input, $output);
 	}
 
-	private function listAllCalendar($calendar, InputInterface $input, OutputInterface $output) {
+	private function listAllCalendar($calendar, InputInterface $input, OutputInterface $output)
+	{
 		$calendars = $calendar->listCalendars();
 		$table = new Table($output);
-		$table->setHeaders(array(_('ID'),_('Name'),_('Description'),_('Type'),_("Timezone")));
+		$table->setHeaders(array(_('ID'), _('Name'), _('Description'), _('Type'), _("Timezone")));
 		$rows = $ids = array();
-		foreach($calendars as $id => $content){
+		foreach ($calendars as $id => $content) {
 			$ids[] = $id;
 			$rows[] = array(
 				$id,
@@ -90,28 +95,29 @@ class Calendar extends Command {
 		$table->setRows($rows);
 		$table->render();
 		$output->writeln('');
-		$output->writeln("<info>"._("Get more details about calendars, please run the commands below:")."</info>");
+		$output->writeln("<info>" . _("Get more details about calendars, please run the commands below:") . "</info>");
 		$table->setHeaders(array(_('Commands')));
 		$rows = array();
-		foreach($ids as $id){
+		foreach ($ids as $id) {
 			$rows[] = array(sprintf('fwconsole calendar --list --id=%s', $id));
 		}
 		$table->setRows($rows);
 		$table->render();
 	}
 
-	private function listCalendarEvents($calendar, InputInterface $input, OutputInterface $output) {
+	private function listCalendarEvents($calendar, InputInterface $input, OutputInterface $output)
+	{
 		$cal = $calendar->getDriverById($input->getOption('id'));
 		$start = $cal->getNow()->copy()->subMonth();
 		$stop = $cal->getNow()->copy()->addMonth();
-		$events = $cal->getEventsBetween($start,$stop);
+		$events = $cal->getEventsBetween($start, $stop);
 		if ($output->isVerbose()) {
 			print_r($events);
 		} else {
 			$table = new Table($output);
-			$table->setHeaders(array(_('Name'),_('Description'),_('Timezone'),_('Start'),_("End"), _("UID"),_("Recurring"),_("All Day"),_("Now Match")));
+			$table->setHeaders(array(_('Name'), _('Description'), _('Timezone'), _('Start'), _("End"), _("UID"), _("Recurring"), _("All Day"), _("Now Match")));
 			$rows = array();
-			foreach($events as $event) {
+			foreach ($events as $event) {
 				$rows[] = array(
 					$event['name'],
 					$event['description'],
@@ -161,105 +167,106 @@ class Calendar extends Command {
 	}
 	*/
 
-	private function match($calendar, InputInterface $input, OutputInterface $output) {
+	private function match($calendar, InputInterface $input, OutputInterface $output)
+	{
 		$match = $input->getOption('match');
 		$match = strtolower($match) !== 'now' ? $match : time();
-		if($match < time()) {
+		if ($match < time()) {
 			throw new \Exception("Match time can not be in the past");
 		}
 
 		$type = $input->getOption('type');
-		switch($type) {
+		switch ($type) {
 			case 'calendar':
-				$calendarid = $input->getOption('id');
-				if($calendar->matchCalendar($calendarid, $match)) {
-					$cal = $calendar->getDriverById($calendarid);
-					$cal->setNow($match);
-					$start = $cal->getNow()->copy()->subWeek();
-					$stop = $cal->getNow()->copy()->addWeek();
-					$events = $cal->getEventsBetween($start, $stop);
-					$matched = [];
-					foreach($events as $event) {
-						if($event['now']) {
-							$matched[] = $event;
-						}
-					}
-					$output->writeln("<info>"._("Match Found")."</info>");
-					$output->writeln(print_r($matched,true));
-				} else {
-					$output->writeln("<error>"._("No Match Found")."</error>");
-				}
-			break;
+				$calendarID = $input->getOption('id');
+				$cal = $calendar->getDriverById($calendarID);
+				$cal->setNow($match);
+				$events = $cal->fastHandler();
+
+				if ($events) {
+					$output->writeln("<info>" . _("Match Found") . "</info>");
+					$output->writeln(print_r($events, true));
+				} else
+					$output->writeln("<error>" . _("No Match Found") . "</error>");
+
+				break;
 			case 'event':
 				$eventID = $input->getOption('id');
 				$matched = [];
-				foreach($calendar->listCalendars() as $id => $c) {
-					if($calendar->matchEvent($id, $eventID, $match)) {
-						$cal = $calendar->getDriverById($id);
-						$cal->setNow($match);
-						$start = $cal->getNow()->copy()->subWeek();
-						$stop = $cal->getNow()->copy()->addWeek();
-						$events = $cal->getEventsBetween($start, $stop);
-						foreach($events as $event) {
-							if($event['now'] && ($event['uid'] === $eventID || $event['linkedid'] === $eventID)) {
-								$matched[] = $event;
-								break 2;
-							}
+				foreach ($calendar->listCalendars() as $id => $c) {
+					$cal = $calendar->getDriverById($id);
+					$cal->setNow($match);
+					$events = $cal->fastHandler();
+
+					//continue if there are no matching events in this calendar
+					if (!$events)
+						continue;
+
+					foreach ($events as $event) {
+						if ($event['UID'] === $eventID) {
+							$matched[] = $event;
+							break 2; //beacuse UID is unique (or should be) we can continue right away
 						}
 					}
 				}
-				if(!empty($matched)) {
-					$output->writeln("<info>"._("Matched")."</info>");
-					$output->writeln(print_r($matched,true));
-				} else {
-					$output->writeln("<error>"._("No Match Found")."</error>");
-				}
-			break;
+				if ($matched) {
+					$output->writeln("<info>" . _("Matched") . "</info>");
+					$output->writeln(print_r($matched, true));
+				} else
+					$output->writeln("<error>" . _("No Match Found") . "</error>");
+
+				break;
 			case 'group':
-				$matched = $calendar->matchGroupVerbose($input->getOption('id'), $match);
-				if(!empty($matched)) {
-					$output->writeln("<info>"._("Matched")."</info>");
-					$output->writeln(print_r($matched,true));
-				} else {
-					$output->writeln("<error>"._("No Match Found")."</error>");
-				}
-			break;
+				$groupID = $input->getOption('id');
+				$matched = $calendar->matchGroupVerbose($groupID, $match);
+
+				if (!empty($matched)) {
+					$output->writeln("<info>" . _("Matched") . "</info>");
+					$output->writeln(print_r($matched, true));
+				} else
+					$output->writeln("<error>" . _("No Match Found") . "</error>");
+
+				break;
 			default:
 				throw new \Exception(_("Invalid type"));
-			break;
+				break;
 		}
 	}
 
-	private function sync($calendar, InputInterface $input, OutputInterface $output) {
+	private function sync($calendar, InputInterface $input, OutputInterface $output)
+	{
 		$output->writeln(_("Starting Sync..."));
-		$calendar->sync($output,$input->getOption('force'));
+		$calendar->sync($output, $input->getOption('force'));
 		$output->writeln(_("Finished"));
 	}
 
-	private function export($calendar, InputInterface $input, OutputInterface $output) {
+	private function export($calendar, InputInterface $input, OutputInterface $output)
+	{
 		$driver = $calendar->getDriverById($input->getOption('export'));
 		$output->writeln($driver->getIcal());
 	}
 
-	private function reset($calendar, InputInterface $input, OutputInterface $output) {
+	private function reset($calendar, InputInterface $input, OutputInterface $output)
+	{
 		$info = $calendar->getCalendarById($input->getOption('reset'));
-		if($info['type'] !== 'local') {
-			$output->writeln("<error>"._("Reset is only supported on local calendars!")."</error>");
+		if ($info['type'] !== 'local') {
+			$output->writeln("<error>" . _("Reset is only supported on local calendars!") . "</error>");
 			exit(-1);
 		}
 		$output->writeln($info['calendar']->deleteiCal());
 		$output->writeln(_("Successfully reset the calendar"));
 	}
 
-	private function import($calendar, InputInterface $input, OutputInterface $output) {
+	private function import($calendar, InputInterface $input, OutputInterface $output)
+	{
 		$info = $calendar->getCalendarById($input->getOption('import'));
-		if($info['type'] !== 'local') {
-			$output->writeln("<error>"._("Reset is only supported on local calendars!")."</error>");
+		if ($info['type'] !== 'local') {
+			$output->writeln("<error>" . _("Reset is only supported on local calendars!") . "</error>");
 			exit(-1);
 		}
 		$file = $input->getOption('file');
-		if(!file_exists($file)) {
-			$output->writeln("<error>"._("File does not exist")."</error>");
+		if (!file_exists($file)) {
+			$output->writeln("<error>" . _("File does not exist") . "</error>");
 			exit(-1);
 		}
 		$info['calendar']->saveiCal(file_get_contents($file));
@@ -272,9 +279,11 @@ class Calendar extends Command {
 	 * @return int
 	 * @throws \Symfony\Component\Console\Exception\ExceptionInterface
 	 */
-	protected function outputHelp(InputInterface $input, OutputInterface $output)	 {
+	protected function outputHelp(InputInterface $input, OutputInterface $output)
+	{
 		$help = new HelpCommand();
 		$help->setCommand($this);
 		return $help->run($input, $output);
 	}
 }
+

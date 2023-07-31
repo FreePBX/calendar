@@ -1,7 +1,8 @@
 <?php
+
 namespace FreePBX\modules;
 
-include __DIR__."/vendor/autoload.php";
+include __DIR__ . "/vendor/autoload.php";
 
 use Moment\Moment;
 use Moment\CustomFormats\MomentJs;
@@ -17,11 +18,14 @@ use malkusch\lock\mutex\FlockMutex;
 use BMO;
 use DB_Helper;
 use \FreePBX\modules\Calendar\Oauth;
-class Calendar extends \DB_Helper implements \BMO {
+
+class Calendar extends \DB_Helper implements \BMO
+{
 	private $guimessage;
 	private $oauth = null;
 
-	public function __construct($freepbx = null) {
+	public function __construct($freepbx = null)
+	{
 		if ($freepbx == null) {
 			throw new Exception("Not given a FreePBX Object");
 		}
@@ -29,115 +33,119 @@ class Calendar extends \DB_Helper implements \BMO {
 		$this->db = $freepbx->Database;
 	}
 
-	public function install(){
+	public function install()
+	{
 		$allCalendars = $this->listCalendars();
 		$calendars = $this->getAll('calendar-ical');
-		foreach($calendars as $id => $ical) {
-			outn("Migrating ".$allCalendars[$id]['name']."...");
-			if(isset($allCalendars[$id])) {
+		foreach ($calendars as $id => $ical) {
+			outn("Migrating " . $allCalendars[$id]['name'] . "...");
+			if (isset($allCalendars[$id])) {
 				$driver = $this->getDriverById($id);
 				$driver->saveiCal($ical);
 			}
-			$this->setConfig($id,false,'calendar-ical');
-			$this->delById($id."-raw");
-			$this->delById($id."-events");
-			$this->delById($id."-linked-events");
-			$this->delById($id."-categories-events");
+			$this->setConfig($id, false, 'calendar-ical');
+			$this->delById($id . "-raw");
+			$this->delById($id . "-events");
+			$this->delById($id . "-linked-events");
+			$this->delById($id . "-categories-events");
 			out("Done. Please double check your calendars and calendar groups!");
 		}
 	}
-	public function uninstall(){
+	public function uninstall()
+	{
 		$crons = $this->FreePBX->Cron->getAll();
-		foreach($crons as $c) {
-			if(preg_match('/fwconsole calendar --sync/',$c,$matches)) {
+		foreach ($crons as $c) {
+			if (preg_match('/fwconsole calendar --sync/', $c, $matches)) {
 				$this->FreePBX->Cron->remove($c);
 			}
 		}
 	}
-	public function doConfigPageInit($page) {
+	public function doConfigPageInit($page)
+	{
 		switch ($page) {
 			case 'calendar':
-				$action = isset($_REQUEST['action'])?$_REQUEST['action']:'';
-				switch($action) {
+				$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
+				switch ($action) {
 					case "add":
-						if(isset($_POST['name'])) {
+						if (isset($_POST['name'])) {
 							$type = $_POST['type'];
-							$this->getDriverByAdd($type,$_POST);
+							$this->getDriverByAdd($type, $_POST);
 							try {
 								return array("status" => true);
-							} catch(\Exception $e) {
+							} catch (\Exception $e) {
 								$this->guimessage = array(
 									"type" => "danger",
 									"message" => $e->getMessage()
 								);
 							}
 						}
-					break;
+						break;
 					case "edit":
-						if(isset($_POST['name'])) {
+						if (isset($_POST['name'])) {
 							$id = $_POST['id'];
 							$driver = $this->getDriverById($id);
 							try {
 								return $driver->updateCalendar($_POST);
-							} catch(\Exception $e) {
+							} catch (\Exception $e) {
 								$this->guimessage = array(
 									"type" => "danger",
 									"message" => $e->getMessage()
 								);
 							}
 						}
-					break;
+						break;
 					case "delete":
 						$this->delCalendarByID($_REQUEST['id']);
-					break;
+						break;
 					case "deletesettings":
 						$this->delCalendarSettingByID($_REQUEST['id']);
-					break;
+						break;
 				}
-			break;
+				break;
 			case 'calendargroups':
-				$action = isset($_REQUEST['action'])?$_REQUEST['action']:'';
-				$description = isset($_REQUEST['description'])?$_REQUEST['description']:'';
-				$events = isset($_REQUEST['events'])?$_REQUEST['events']:array();
-				switch($action) {
+				$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
+				$description = isset($_REQUEST['description']) ? $_REQUEST['description'] : '';
+				$events = isset($_REQUEST['events']) ? $_REQUEST['events'] : array();
+				switch ($action) {
 					case "add":
-						if(isset($_POST['name'])) {
+						if (isset($_POST['name'])) {
 							$name = !empty($_POST['name']) ? $_POST['name'] : array();
 							$calendars = !empty($_POST['calendars']) ? $_POST['calendars'] : array();
 							$categories = !empty($_POST['categories']) ? $_POST['categories'] : array();
 							$events = !empty($_POST['events']) ? $_POST['events'] : array();
 							$expand = isset($_POST['expand']) && $_POST['expand'] === 'on' ? true : false;
-							$this->addGroup($name,$calendars,$categories,$events,$expand);
+							$this->addGroup($name, $calendars, $categories, $events, $expand);
 						}
-					break;
+						break;
 					case "edit":
-						if(isset($_POST['name'])) {
+						if (isset($_POST['name'])) {
 							$id = $_POST['id'];
 							$name = !empty($_POST['name']) ? $_POST['name'] : array();
 							$calendars = !empty($_POST['calendars']) ? $_POST['calendars'] : array();
 							$categories = !empty($_POST['categories']) ? $_POST['categories'] : array();
 							$events = !empty($_POST['events']) ? $_POST['events'] : array();
 							$expand = isset($_POST['expand']) && $_POST['expand'] === 'on' ? true : false;
-							$this->updateGroup($id,$name,$calendars,$categories,$events,$expand);
+							$this->updateGroup($id, $name, $calendars, $categories, $events, $expand);
 						}
-					break;
+						break;
 					case "delete":
 						$id = $_GET['id'];
 						$this->deleteGroup($id);
-					break;
+						break;
 				}
-			break;
+				break;
 		}
 	}
 
-	public function getAllDriversInfo() {
+	public function getAllDriversInfo()
+	{
 		$drivers = [];
-		foreach(glob(__DIR__."/drivers/*.php") as $driver) {
+		foreach (glob(__DIR__ . "/drivers/*.php") as $driver) {
 			$name = basename($driver);
-			$name = explode(".",$name);
+			$name = explode(".", $name);
 			$name = $name[0];
 			$name = ucfirst(strtolower($name));
-			if($name === 'Base') {
+			if ($name === 'Base') {
 				continue;
 			}
 			$class = $this->prepareDriverClass($name);
@@ -152,31 +160,35 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param  string    $driver The driver name
 	 * @return object            The object
 	 */
-	public function getDriverDisplayEdit($driver, $data) {
+	public function getDriverDisplayEdit($driver, $data)
+	{
 		$class = $this->prepareDriverClass($driver);
 		return $class::getEditDisplay($data);
 	}
 
-	public function getDriverDisplayAdd($driver, $data = array()) {
+	public function getDriverDisplayAdd($driver, $data = array())
+	{
 		$class = $this->prepareDriverClass($driver);
-		if($driver == 'oauth') {
+		if ($driver == 'oauth') {
 			return $class::getAddDisplay($data);
 		}
 		return $class::getAddDisplay();
 	}
 
-	public function getDriverByAdd($driver, $data) {
+	public function getDriverByAdd($driver, $data)
+	{
 		$class = $this->prepareDriverClass($driver);
 		return $class::addCalendar($data);
 	}
 
-	public function getDriverById($id) {
-		if(empty($id)) {
+	public function getDriverById($id)
+	{
+		if (empty($id)) {
 			throw new \Exception("Cant except empty calendar ID");
 		}
-		$final = $this->getConfig($id,'calendars');
+		$final = $this->getConfig($id, 'calendars');
 		$final['id'] = $id;
-		if(empty($final)) {
+		if (empty($final)) {
 			return false;
 		}
 		$driver = $final['type'];
@@ -184,17 +196,19 @@ class Calendar extends \DB_Helper implements \BMO {
 		return new $class($this, $final);
 	}
 
-	private function prepareDriverClass($driver) {
+	private function prepareDriverClass($driver)
+	{
 		$driver = basename($driver);
 		$driver = ucfirst(strtolower($driver));
-		if(!file_exists(__DIR__."/drivers/".$driver.".php") || $driver === 'Base') {
+		if (!file_exists(__DIR__ . "/drivers/" . $driver . ".php") || $driver === 'Base') {
 			throw new \Exception("Driver [$driver] does not exist!");
 		}
-		return "\FreePBX\modules\Calendar\drivers\\".$driver;
+		return "\FreePBX\modules\Calendar\drivers\\" . $driver;
 	}
 
-	public function ajaxRequest($req, &$setting) {
-		switch($req){
+	public function ajaxRequest($req, &$setting)
+	{
+		switch ($req) {
 			case 'grid':
 			case 'events':
 			case 'eventform':
@@ -224,90 +238,94 @@ class Calendar extends \DB_Helper implements \BMO {
 		}
 	}
 
-	public function ajaxCustomHandler() {
-		switch($_REQUEST['command']) {
+	public function ajaxCustomHandler()
+	{
+		switch ($_REQUEST['command']) {
 			case "ical":
 				$calendar = $this->getCalendarByMappingToken($_REQUEST['token']);
-				if(empty($calendar)) {
+				if (empty($calendar)) {
 					return false;
 				}
 				header('Content-Type: text/calendar; charset=utf-8');
-				header('Content-Disposition: attachment; filename='.$calendar['name'].'.ics');
+				header('Content-Disposition: attachment; filename=' . $calendar['name'] . '.ics');
 				echo $calendar['calendar']->getIcal();
 				return true;
-			break;
+				break;
 		}
 		return false;
 	}
 
-	public function getCalendarByMappingToken($mappingToken) {
+	public function getCalendarByMappingToken($mappingToken)
+	{
 		$mapping = $this->getConfig('ical-mapping');
 		$calid = null;
-		foreach($mapping as $id => $token) {
-			if($mappingToken === $token) {
+		foreach ($mapping as $id => $token) {
+			if ($mappingToken === $token) {
 				$calid = $id;
 				break;
 			}
 		}
-		if(!empty($calid)) {
-			return$this->getCalendarById($calid);
+		if (!empty($calid)) {
+			return $this->getCalendarById($calid);
 		}
 	}
 
-	public function ajaxHandler() {
+	public function ajaxHandler()
+	{
 		switch ($_REQUEST['command']) {
 			case 'generateical':
 				$uuid = Uuid::uuid4()->toString();
 				$cal = $this->getDriverById($_REQUEST['id']);
 				$cal->updateiCalMapping($uuid);
-				return array("status" => true, "href" => "ajax.php?module=calendar&command=ical&token=".$uuid);
-			break;
+				return array("status" => true, "href" => "ajax.php?module=calendar&command=ical&token=" . $uuid);
+				break;
 			case 'ewsautodetect':
 				try {
 					$settings = EWSCalendar::autoDiscoverSettings($_POST['email'], $_POST['password']);
-				} catch(\Exception $e) {
+				} catch (\Exception $e) {
 					return array("status" => false, "message" => $e->getMessage());
 				}
 				$settings['status'] = true;
 				return $settings;
-			break;
+				break;
 			case 'getewscals':
 				$server = $_POST['purl'];
 				$username = $_POST['username'];
 				$password = $_POST['password'];
-				$version = constant('\jamesiarmes\PhpEws\Client::'.$_POST['version']);
+				$version = constant('\jamesiarmes\PhpEws\Client::' . $_POST['version']);
 				$ews = new EWSCalendar($server, $username, $password, $version);
 				$chtml = '';
-				foreach($ews->getAllCalendars() as $c) {
-					$chtml .= '<option value="'.$c['id'].'">'.$c['name'].'</option>';
+				foreach ($ews->getAllCalendars() as $c) {
+					$chtml .= '<option value="' . $c['id'] . '">' . $c['name'] . '</option>';
 				}
 				dbug($chtml);
 				return array("calshtml" => $chtml);
-			break;
+				break;
 			case 'getcaldavcals':
 				$caldavClient = new SimpleCalDAVClient();
 				try {
 					$caldavClient->connect($_POST['purl'], $_POST['username'], $_POST['password']);
 				} catch (\Exception $e) {
-					$chtml = $e->getMessage().'<input type="hidden" id="urlerror" value="error">';
+					$chtml = $e->getMessage() . '<input type="hidden" id="urlerror" value="error">';
 					return array("calshtml" => $chtml, 'status' => false);
 				}
 				$calendars = $caldavClient->findCalendars();
 				$chtml = '';
-				foreach($calendars as $calendar) {
-					$chtml .= '<option value="'.$calendar->getCalendarID().'">'.$calendar->getDisplayName().'</option>';
+				foreach ($calendars as $calendar) {
+					$chtml .= '<option value="' . $calendar->getCalendarID() . '">' . $calendar->getDisplayName() . '</option>';
 				}
 				return array("calshtml" => $chtml, 'status' => true);
-			break;
+				break;
 			case 'checkical':
 				$req = \FreePBX::Curl()->requests($_POST['url']);
 				try {
 					$finalical = $req->get($_POST['url'])->body;
-				} catch (\Exception $e) {dbug($e->getMessage());
+				} catch (\Exception $e) {
+					dbug($e->getMessage());
 					return array("message" => $e->getMessage(), 'status' => false);
 				}
 				return array('status' => true);
-			break;
+				break;
 			case 'groupeventshtml':
 				$allCalendars = $this->listCalendars();
 				$calendars = !empty($_POST['calendars']) ? $_POST['calendars'] : array();
@@ -317,170 +335,170 @@ class Calendar extends \DB_Helper implements \BMO {
 				$now = Carbon::now();
 				$searchStart = $now->copy()->subYear();
 				$searchEnd = $now->copy()->addYear();
-				foreach($dcategories as $cat) {
-					$parts = explode("_",$cat,2);
+				foreach ($dcategories as $cat) {
+					$parts = explode("_", $cat, 2);
 					$categories[$parts[0]][] = $parts[1];
 				}
 				$chtml = '';
-				foreach($calendars as $calendarID) {
+				foreach ($calendars as $calendarID) {
 					$cal = $this->getDriverById($calendarID);
-					$cats = $cal->getCategories($searchStart,$searchEnd);
-					if(empty($cats)){
-						$chtml .= '<optgroup label="'.sprintf(_("No Categories for %s"),$allCalendars[$calendarID]['name']).'">';
+					$cats = $cal->getCategories($searchStart, $searchEnd);
+					if (empty($cats)) {
+						$chtml .= '<optgroup label="' . sprintf(_("No Categories for %s"), $allCalendars[$calendarID]['name']) . '">';
 						continue;
 					}
-					$chtml .= '<optgroup label="'.$allCalendars[$calendarID]['name'].'">';
-					foreach($cats as $name) {
-						$chtml .= '<option value="'.$calendarID.'_'.$name.'">'.$name.'</option>';
+					$chtml .= '<optgroup label="' . $allCalendars[$calendarID]['name'] . '">';
+					foreach ($cats as $name) {
+						$chtml .= '<option value="' . $calendarID . '_' . $name . '">' . $name . '</option>';
 					}
 					$chtml .= '</optgroup>';
 				}
 				$ehtml = '';
-				foreach($calendars as $calendarID) {
+				foreach ($calendars as $calendarID) {
 					$cal = $this->getDriverById($calendarID);
-					$events = $cal->getEventsBetween($searchStart,$searchEnd, $expand);
-					if(empty($events)){
-						$ehtml .= '<optgroup label="'.sprintf(_("No Events for %s"),$allCalendars[$calendarID]['name']).'">';
+					$events = $cal->getEventsBetween($searchStart, $searchEnd, $expand);
+					if (empty($events)) {
+						$ehtml .= '<optgroup label="' . sprintf(_("No Events for %s"), $allCalendars[$calendarID]['name']) . '">';
 						continue;
 					}
-					if(!empty($categories[$calendarID])) {
+					if (!empty($categories[$calendarID])) {
 						$valid = array();
 						$cats = $categories[$calendarID];
-						$events = array_filter($events, function($event) use($cats) {
-							if(empty($event['categories'])) {
+						$events = array_filter($events, function ($event) use ($cats) {
+							if (empty($event['categories'])) {
 								return false;
 							}
-							foreach($event['categories'] as $c) {
-								if(in_array($c,$cats)) {
+							foreach ($event['categories'] as $c) {
+								if (in_array($c, $cats)) {
 									return true;
 								}
 							}
 							return false;
 						});
-					} elseif(!empty($categories)) {
+					} elseif (!empty($categories)) {
 						$events = array();
 					}
-					$ehtml .= '<optgroup label="'.$allCalendars[$calendarID]['name'].'">';
-					foreach($events as $event) {
-						$extended = $event['allDay'] ? $event['startdate'] : $event['startdate'].' '._('to').' '.$event['enddate'];
-						$ehtml .= '<option value="'.$calendarID.'_'.$event['uid'].'">'.$event['name'].' ('.$extended.')</option>';
+					$ehtml .= '<optgroup label="' . $allCalendars[$calendarID]['name'] . '">';
+					foreach ($events as $event) {
+						$extended = $event['allDay'] ? $event['startdate'] : $event['startdate'] . ' ' . _('to') . ' ' . $event['enddate'];
+						$ehtml .= '<option value="' . $calendarID . '_' . $event['uid'] . '">' . $event['name'] . ' (' . $extended . ')</option>';
 					}
 					$ehtml .= '</optgroup>';
 				}
 				return array("eventshtml" => $ehtml, "categorieshtml" => $chtml);
-			break;
+				break;
 			case 'delevent':
 				$calendarID = $_POST['calendarid'];
 				$eventID = $_POST['eventid'];
 				$calendar = $this->getCalendarById($calendarID);
-				if($calendar['type'] !== 'local') {
+				if ($calendar['type'] !== 'local') {
 					return array("status" => false, "message" => _("You can only edit local calendars"));
 				}
 				$calendar['calendar']->deleteEvent($eventID);
-			break;
+				break;
 			case 'duplicate':
 				$name = $_REQUEST['value'];
 				$id = $_REQUEST['id'];
-				$calendars = $this ->listCalendars();
+				$calendars = $this->listCalendars();
 				//check whether its edit or add
-				if (array_key_exists($id,$calendars)){
+				if (array_key_exists($id, $calendars)) {
 					// its an edit check name changed or duplicated
 					// so unset the array key and before doing the duplicate check
 					unset($calendars[$id]);
 				}
 				$calnames = array();
-				foreach($calendars as $cal) {
+				foreach ($calendars as $cal) {
 					$calnames[] = trim($cal['name']);
 				}
-				if (in_array($name, $calnames)){
+				if (in_array($name, $calnames)) {
 					return array('value' => 1);
-				}
-				else{
+				} else {
 					return array('value' => 0);
 				}
-			break;
+				break;
 			case 'grid':
 				$calendars = $this->listCalendars();
 				$final = array();
-				foreach($calendars as $id => $data) {
+				foreach ($calendars as $id => $data) {
 					$data['id'] = $id;
 					$final[] = $data;
 				}
 				return $final;
-			break;
+				break;
 			case 'events':
-				$start = new Carbon($_GET['start'],$_GET['timezone']);
-				$end = new Carbon($_GET['end'],$_GET['timezone']);
+				$start = new Carbon($_GET['start'], $_GET['timezone']);
+				$end = new Carbon($_GET['end'], $_GET['timezone']);
 				$calendar = $this->getCalendarById($_REQUEST['calendarid']);
+				$calendar['calendar']->processCalendar($start->toIso8601String(), $end->toIso8601String());
 				$events = $calendar['calendar']->getEventsBetween($start, $end);
 				return array_values($events);
-			break;
+				break;
 			case 'eventform':
 				$calendar = $this->getCalendarById($_POST['calendarid']);
-				if($calendar['type'] !== 'local') {
+				if ($calendar['type'] !== 'local') {
 					return array("status" => false, "message" => _("You can only edit local calendars"));
 				}
 				$calendar['calendar']->updateEvent($_POST);
 				return array("status" => true, "message" => _("Successfully updated event"));
-			break;
+				break;
 			case 'groupsgrid':
 				$groups =  $this->listGroups();
 				$final = array();
-				foreach($groups as $id => $data) {
+				foreach ($groups as $id => $data) {
 					$data['id'] = $id;
 					$final[] = $data;
 				}
 				return $final;
-			break;
+				break;
 			case 'updatesource':
 				$cal = $this->getDriverByID($_REQUEST['calendarid']);
 				return $cal->refreshCalendar();
-			break;
+				break;
 			case "saveoutlooksettings":
-				if($_REQUEST['id']) {
+				if ($_REQUEST['id']) {
 					$uuid = $_REQUEST['id'];
 				} else {
 					$uuid = Uuid::uuid4()->toString();
 					$_REQUEST['id'] = $uuid;
 				}
 				//name and application id validation to avoid duplication
-				if(!$this->checkConfigExists($_REQUEST,$uuid)) {
+				if (!$this->checkConfigExists($_REQUEST, $uuid)) {
 					return array("status" => false, "message" => _("Config name already exists."));
 				}
-				$this->setConfig($uuid,$_REQUEST,'outlook-details');
-				$oauth = new Oauth($_REQUEST['tenantid'],$_REQUEST['consumerkey'], $_REQUEST['consumersecret'],null,null,$_REQUEST['pbxurl'],$_REQUEST['outlookurl']);
+				$this->setConfig($uuid, $_REQUEST, 'outlook-details');
+				$oauth = new Oauth($_REQUEST['tenantid'], $_REQUEST['consumerkey'], $_REQUEST['consumersecret'], null, null, $_REQUEST['pbxurl'], $_REQUEST['outlookurl']);
 				$authUrl =  $oauth->getAuthURL($uuid);
 				return array("status" => true, "message" => _("Data saved"), "authurl" => ($authUrl) ? $authUrl : '');
-			break;
+				break;
 			case 'saveOauth':
-				$outlookdata = $this->getConfig($_REQUEST['id'],'outlook-details');
+				$outlookdata = $this->getConfig($_REQUEST['id'], 'outlook-details');
 				$outlookdata['auth_code'] = $_REQUEST['auth_code'];
-				$this->setConfig($_REQUEST['id'],$outlookdata,'outlook-details');
+				$this->setConfig($_REQUEST['id'], $outlookdata, 'outlook-details');
 				return array("status" => true, "message" => _("saved auth code"));
-			break;
+				break;
 			case 'getToken':
 				return $this->outlookToken($_REQUEST['id']);
-			break;
+				break;
 			case 'oauthsettings':
 				$settings = $this->getAll('outlook-details');
 				$final = array();
-				foreach($settings as $id => $data) {
+				foreach ($settings as $id => $data) {
 					$data['id'] = $id;
 					$final[] = $data;
 				}
 				return $final;
-			break;
+				break;
 			case 'oauthListCalendars':
 				$username = $_REQUEST['username'];
 				$configId = $_REQUEST['configId'];
-				$outlookdata = $this->getConfig($configId,'outlook-details');
-				if(isset($outlookdata['access_token'])) {
-					$oauth = new Oauth($outlookdata['tenantid'],$outlookdata['consumerkey'], $outlookdata['consumersecret'],null,null,$outlookdata['pbxurl'],$outlookdata['outlookurl']);
-					$calendars =  $oauth->getUserCalendars($username,$outlookdata['access_token']);
-					if(isset($calendars['error'])) {
+				$outlookdata = $this->getConfig($configId, 'outlook-details');
+				if (isset($outlookdata['access_token'])) {
+					$oauth = new Oauth($outlookdata['tenantid'], $outlookdata['consumerkey'], $outlookdata['consumersecret'], null, null, $outlookdata['pbxurl'], $outlookdata['outlookurl']);
+					$calendars =  $oauth->getUserCalendars($username, $outlookdata['access_token']);
+					if (isset($calendars['error'])) {
 						$msg = ($calendars['error']['code'] == 'ResourceNotFound' || $calendars['error']['code'] == 'ErrorInvalidUser') ? _("Invalid user name/config") : _("Please generated the auth token to list the user calendars.");
 						return array("status" => false, "message" => $msg);
-					} else if(isset($calendars['value'])) {
+					} else if (isset($calendars['value'])) {
 						$calendarList = [];
 						foreach ($calendars['value'] as $_cal) {
 							$calendarList[] = [
@@ -493,80 +511,82 @@ class Calendar extends \DB_Helper implements \BMO {
 				} else {
 					return array("status" => false, "message" => _("Please generated the auth token to list the user calendars."));
 				}
-			break;
+				break;
 		}
 	}
 
-	public function showCalendarGroupsPage() {
+	public function showCalendarGroupsPage()
+	{
 		$action = !empty($_GET['action']) ? $_GET['action'] : '';
-		switch($action) {
+		switch ($action) {
 			case "add":
 				$calendars = $this->listCalendars();
-				return load_view(__DIR__."/views/calendargroups.php",array("calendars" => $calendars, "action" => _("Add")));
-			break;
+				return load_view(__DIR__ . "/views/calendargroups.php", array("calendars" => $calendars, "action" => _("Add")));
+				break;
 			case "edit":
 				$calendars = $this->listCalendars();
 				$group = $this->getGroup($_REQUEST['id']);
-				return load_view(__DIR__."/views/calendargroups.php",array("calendars" => $calendars, "group" => $group,'id' => $_GET['id'],"action" => _("Edit")));
-			break;
+				return load_view(__DIR__ . "/views/calendargroups.php", array("calendars" => $calendars, "group" => $group, 'id' => $_GET['id'], "action" => _("Edit")));
+				break;
 			case "view":
-			break;
+				break;
 			default:
-				return load_view(__DIR__."/views/calendargroupgrid.php",array());
-			break;
+				return load_view(__DIR__ . "/views/calendargroupgrid.php", array());
+				break;
 		}
 	}
 
-	public function showCalendarPage() {
+	public function showCalendarPage()
+	{
 		$action = !empty($_GET['action']) ? $_GET['action'] : '';
-		switch($action) {
+		switch ($action) {
 			case "add":
 				$type = !empty($_GET['type']) ? $_GET['type'] : '';
-				if($type == 'oauth') {
+				if ($type == 'oauth') {
 					$data['configs_list'] = $this->getallOauthSettings();
-					return $this->getDriverDisplayAdd($type,$data);
+					return $this->getDriverDisplayAdd($type, $data);
 				}
 				return $this->getDriverDisplayAdd($type);
-			break;
+				break;
 			case "edit":
 				$data = $this->getCalendarByID($_GET['id']);
-				if($data['type'] == 'oauth') {
+				if ($data['type'] == 'oauth') {
 					$data['configs_list'] = $this->getallOauthSettings();
 				}
-				return $this->getDriverDisplayEdit($data['type'],$data);
-			break;
+				return $this->getDriverDisplayEdit($data['type'], $data);
+				break;
 			case "view":
 				$data = $this->getCalendarByID($_GET['id']);
 				\Moment\Moment::setLocale('en_US'); //get this from freepbx...
 				$locale = \Moment\MomentLocale::getLocaleContent();
 				$icallink = $data['calendar']->getMappingToken();
-				return load_view(__DIR__."/views/calendar.php",array('action' => 'view', 'type' => $data['type'], 'data' => $data, 'locale' => $locale, 'icallink' => (!empty($icallink) ? 'ajax.php?module=calendar&command=ical&token='.$icallink : '')));
-			break;
+				return load_view(__DIR__ . "/views/calendar.php", array('action' => 'view', 'type' => $data['type'], 'data' => $data, 'locale' => $locale, 'icallink' => (!empty($icallink) ? 'ajax.php?module=calendar&command=ical&token=' . $icallink : '')));
+				break;
 			case 'editoutlooksettings':
 			case 'outlooksettings':
 				//load settings view
-				if(isset($_GET['id'])) {
-					$outlookdata = $this->getConfig($_GET['id'],'outlook-details');
-					$oauth = new Oauth($outlookdata['tenantid'],$outlookdata['consumerkey'], $outlookdata['consumersecret'],null,null,$outlookdata['pbxurl'],$outlookdata['outlookurl']);
+				if (isset($_GET['id'])) {
+					$outlookdata = $this->getConfig($_GET['id'], 'outlook-details');
+					$oauth = new Oauth($outlookdata['tenantid'], $outlookdata['consumerkey'], $outlookdata['consumersecret'], null, null, $outlookdata['pbxurl'], $outlookdata['outlookurl']);
 					$outlookdata['authurl'] = $oauth->getAuthURL($_GET['id']);
 					$outlookdata['id'] = $_GET['id'];
 				} else {
 					$outlookdata = array();
 				}
-				return load_view(__DIR__."/views/outlook_config_form.php",array('outlookdata' => $outlookdata));
-			break;
+				return load_view(__DIR__ . "/views/outlook_config_form.php", array('outlookdata' => $outlookdata));
+				break;
 			case 'oauthsettings':
-				return load_view(__DIR__."/views/outlook_configs_grid.php");
-			break;
+				return load_view(__DIR__ . "/views/outlook_configs_grid.php");
+				break;
 			default:
 				$dropdown = array();
 				$drivers = $this->getAllDriversInfo();
-				foreach($drivers as $driver => $data) {
+				foreach ($drivers as $driver => $data) {
 					$dropdown[$driver] = $data['name'];
 				}
 				$authType = $this->FreePBX->Config->get_conf_setting('OUTLOOK_AUTH_METHOD');
-				return load_view(__DIR__."/views/grid.php",array('message' => $this->guimessage, 'dropdown' => $dropdown, 'auth_type' => $authType));
-			break;
+				return load_view(__DIR__ . "/views/grid.php", array('message' => $this->guimessage, 'dropdown' => $dropdown, 'auth_type' => $authType));
+				break;
 		}
 	}
 
@@ -574,17 +594,19 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * List Calendars
 	 * @return array The returned calendar array
 	 */
-	public function listCalendars() {
+	public function listCalendars()
+	{
 		$calendars = $this->getAll('calendars');
 		return $calendars;
 	}
 
-	public function getCalendarNames(){
+	public function getCalendarNames()
+	{
 		$cals = $this->listCalendars();
 		$ret = array();
-		$cals = is_array($cals)?$cals:array();
+		$cals = is_array($cals) ? $cals : array();
 		foreach ($cals as $cal) {
-			if(isset($cal['name'])){
+			if (isset($cal['name'])) {
 				$ret[] = $cal['name'];
 			}
 		}
@@ -594,18 +616,20 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * Delete Calendar by ID
 	 * @param  string $id The calendar ID
 	 */
-	public function delCalendarByID($id) {
-		$this->setConfig($id,false,'calendars');
-		$this->setConfig($id,false,'calendar-raw');
-		$this->setConfig($id,false,'calendar-sync');
+	public function delCalendarByID($id)
+	{
+		$this->setConfig($id, false, 'calendars');
+		$this->setConfig($id, false, 'calendar-raw');
+		$this->setConfig($id, false, 'calendar-sync');
 	}
 
 	/**
 	 * Delete outlook Calendar settings by ID
 	 * @param  string $id The settings calendar ID
 	 */
-	public function delCalendarSettingByID($id) {
-		$this->setConfig($id,false,'outlook-details');
+	public function delCalendarSettingByID($id)
+	{
+		$this->setConfig($id, false, 'outlook-details');
 	}
 
 	/**
@@ -613,16 +637,17 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param  string $id The Calendar ID
 	 * @return array     Calendar data
 	 */
-	public function getCalendarByID($id) {
-		if(empty($id)) {
+	public function getCalendarByID($id)
+	{
+		if (empty($id)) {
 			throw new \Exception("Cant except empty calendar ID");
 		}
-		$final = $this->getConfig($id,'calendars');
-		if(empty($final)) {
+		$final = $this->getConfig($id, 'calendars');
+		if (empty($final)) {
 			return false;
 		}
 		$final['id'] = $id;
-		if(isset($final['calendars']) && !is_array($final['calendars'])) {
+		if (isset($final['calendars']) && !is_array($final['calendars'])) {
 			$final['usercalendar'] = $final['calendars'];
 		}
 		if (!isset($final['calendars']) || !is_array($final['calendars'])) {
@@ -634,31 +659,30 @@ class Calendar extends \DB_Helper implements \BMO {
 	}
 
 	/**
-	 * Sync Calendars
+	 * Sync and cache calendars
 	 */
-	public function sync($output, $force = false) {
+	public function sync($output, $force = false)
+	{
 		$cal = $this;
 		$mutex = new FlockMutex(fopen(__FILE__, "r"));
-		$mutex->synchronized(function () use ($cal,$output, $force) {
+		$mutex->synchronized(function () use ($cal, $output, $force) {
 			$calendars = $cal->listCalendars();
-			foreach($calendars as $id => $calendar) {
-				if($calendar['type'] === "local") {
+			foreach ($calendars as $id => $calendar) {
+				if ($calendar['type'] === "local")
 					continue;
-				}
-				$output->write("\tSyncing ".$calendar['name']."...");
-				$last = $cal->getConfig($id,'calendar-sync');
+				$output->write("\tSyncing " . $calendar['name'] . "...");
+				$last = $cal->getConfig($id, 'calendar-sync');
 				$last = !empty($last) ? $last : 0;
 				$next = !empty($calendar['next']) ? $calendar['next'] : 300;
-				if($force || ($last + $next) < time()) {
+				if ($force || ($last + $next) < time()) {
 					$calendar['id'] = $id;
 					$c = $cal->getDriverById($id);
 					$c->processCalendar($calendar);
-					$cal->setConfig($id,time(),'calendar-sync');
+					$cal->setConfig($id, time(), 'calendar-sync');
 					$output->writeln("Done");
 					$this->FreePBX->Hooks->processHooks($calendar['id']);
-				} else {
+				} else
 					$output->writeln("Skipping");
-				}
 			}
 		});
 	}
@@ -668,9 +692,10 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param string $description   The Event Group name
 	 * @param array $events The event group events
 	 */
-	public function addGroup($name,$calendars,$categories,$events,$expand) {
+	public function addGroup($name, $calendars, $categories, $events, $expand)
+	{
 		$uuid = Uuid::uuid4()->toString();
-		$this->updateGroup($uuid,$name,$calendars,$categories,$events,$expand);
+		$this->updateGroup($uuid, $name, $calendars, $categories, $events, $expand);
 	}
 
 	/**
@@ -679,8 +704,9 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param string $description   The Event Group name
 	 * @param array $events The event group events
 	 */
-	public function updateGroup($id,$name,$calendars,$categories,$events,$expand) {
-		if(empty($id)) {
+	public function updateGroup($id, $name, $calendars, $categories, $events, $expand)
+	{
+		if (empty($id)) {
 			throw new \Exception("Event ID can not be blank");
 		}
 		$event = array(
@@ -690,14 +716,15 @@ class Calendar extends \DB_Helper implements \BMO {
 			"events" => $events,
 			"expand" => $expand
 		);
-		$this->setConfig($id,$event,"groups");
+		$this->setConfig($id, $event, "groups");
 	}
 
 	/**
 	 * Delete Event Group
 	 * @param  string $id The event group id
 	 */
-	public function deleteGroup($id){
+	public function deleteGroup($id)
+	{
 		$this->setConfig($id, false, 'groups');
 	}
 
@@ -706,8 +733,9 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param  string $id The event group id
 	 * @return array     Event Group array
 	 */
-	public function getGroup($id){
-		$grp = $this->getConfig($id,'groups');
+	public function getGroup($id)
+	{
+		$grp = $this->getConfig($id, 'groups');
 		$grp['id'] = $id;
 		$grp['expand'] = isset($grp['expand']) ? $grp['expand'] : true;
 		return $grp;
@@ -717,34 +745,37 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * List all Event Groups
 	 * @return array Even Groups
 	 */
-	public function listGroups(){
-			return $this->getAll('groups');
+	public function listGroups()
+	{
+		return $this->getAll('groups');
 	}
 
 	/**
 	 * Dial Plan Function
 	 */
-	public function ext_calendar_variable($calendarid,$timezone=null,$integer=false) {
+	public function ext_calendar_variable($calendarid, $timezone = null, $integer = false)
+	{
 		$timezone = empty($timezone) ? $this->systemtz : $timezone;
 		$cal = $this->getCalendarByID($calendarid);
-		if(empty($cal)) {
+		if (empty($cal)) {
 			throw new \Exception("Calendar $calendarid does not exist!");
 		}
 		$type = $integer ? 'integer' : 'boolean';
-		return new \ext_agi('calendar.agi,calendar,'.$type.','.$calendarid.','.$timezone);
+		return new \ext_agi('calendar.agi,calendar,' . $type . ',' . $calendarid . ',' . $timezone);
 	}
 
 	/**
 	 * Dial Plan Function
 	 */
-	public function ext_calendar_group_variable($groupid,$timezone=null,$integer=false) {
+	public function ext_calendar_group_variable($groupid, $timezone = null, $integer = false)
+	{
 		$timezone = empty($timezone) ? $this->systemtz : $timezone;
 		$group = $this->getGroup($groupid);
-		if(empty($group)) {
+		if (empty($group)) {
 			throw new \Exception("Group $groupid does not exist!");
 		}
 		$type = $integer ? 'integer' : 'boolean';
-		return new \ext_agi('calendar.agi,group,'.$type.','.$groupid.','.$timezone);
+		return new \ext_agi('calendar.agi,group,' . $type . ',' . $groupid . ',' . $timezone);
 	}
 
 	/**
@@ -753,10 +784,10 @@ class Calendar extends \DB_Helper implements \BMO {
 	public function ext_calendar_goto($calendarid,$timezone=null,$true_dest='',$false_dest='') {
 		$timezone = empty($timezone) ? $this->systemtz : $timezone;
 		$cal = $this->getCalendarByID($calendarid);
-		if(empty($cal)) {
+		if (empty($cal)) {
 			throw new \Exception("Calendar $calendarid does not exist!");
 		}
-		return new \ext_agi('calendar.agi,calendar,goto,'.$calendarid.','.$timezone.','.base64_encode($true_dest).','.base64_encode($false_dest));
+		return new \ext_agi('calendar.agi,calendar,goto,' . $calendarid . ',' . $timezone . ',' . base64_encode($true_dest) . ',' . base64_encode($false_dest));
 	}
 
 	/**
@@ -765,10 +796,10 @@ class Calendar extends \DB_Helper implements \BMO {
 	public function ext_calendar_group_goto($groupid,$timezone=null,$true_dest='',$false_dest='') {
 		$timezone = empty($timezone) ? $this->systemtz : $timezone;
 		$group = $this->getGroup($groupid);
-		if(empty($group)) {
+		if (empty($group)) {
 			throw new \Exception("Group $groupid does not exist!");
 		}
-		return new \ext_agi('calendar.agi,group,goto,'.$groupid.','.$timezone.','.base64_encode($true_dest).','.base64_encode($false_dest));
+		return new \ext_agi('calendar.agi,group,goto,' . $groupid . ',' . $timezone . ',' . base64_encode($true_dest) . ',' . base64_encode($false_dest));
 	}
 
 	/**
@@ -777,10 +808,10 @@ class Calendar extends \DB_Helper implements \BMO {
 	public function ext_calendar_execif($calendarid,$timezone=null,$true = '', $false = '') {
 		$timezone = empty($timezone) ? $this->systemtz : $timezone;
 		$cal = $this->getCalendarByID($calendarid);
-		if(empty($cal)) {
+		if (empty($cal)) {
 			throw new \Exception("Calendar $calendarid does not exist!");
 		}
-		return new \ext_agi('calendar.agi,calendar,execif,'.$calendarid.','.$timezone.','.base64_encode($true).','.base64_encode($false));
+		return new \ext_agi('calendar.agi,calendar,execif,' . $calendarid . ',' . $timezone . ',' . base64_encode($true) . ',' . base64_encode($false));
 	}
 
 	/**
@@ -789,117 +820,132 @@ class Calendar extends \DB_Helper implements \BMO {
 	public function ext_calendar_group_execif($groupid,$timezone=null, $true = '', $false = '') {
 		$timezone = empty($timezone) ? $this->systemtz : $timezone;
 		$group = $this->getGroup($groupid);
-		if(empty($group)) {
+		if (empty($group)) {
 			throw new \Exception("Group $groupid does not exist!");
 		}
-		return new \ext_agi('calendar.agi,group,execif,'.$groupid.','.$timezone.','.base64_encode($true).','.base64_encode($false));
+		return new \ext_agi('calendar.agi,group,execif,' . $groupid . ',' . $timezone . ',' . base64_encode($true) . ',' . base64_encode($false));
 	}
 
-	public function matchGroupVerbose($groupID, $now = null, $timezone = null) {
+	public function matchGroupVerbose($groupID, $now = null, $timezone = null)
+	{
 		$group = $this->getGroup($groupID);
-		if(empty($group)) {
-			return [];
-		}
 
-		if(empty($group['calendars'])) {
+		if (empty($group) || empty($group['calendars']))
 			return [];
-		}
 
 		$now = !empty($now) ? $now : time();
-		$start = Carbon::createFromTimestamp($now)->subWeek();
-		$stop = Carbon::createFromTimestamp($now)->addWeek();
-		$calendars = $this->listCalendars();
-
 		$matchingEvents = [];
 
-		if(empty($group['events']) && empty($group['categories'])) {
-			//calendars only
-			foreach($group['calendars'] as $cid) {
+		if (empty($group['events']) && empty($group['categories'])) { //calendars only
+			foreach ($group['calendars'] as $cid) {
+				//initialize the driver
 				$cal = $this->getDriverById($cid);
 				$cal->setTimezone($timezone);
 				$cal->setNow($now);
-				$events = $cal->getEventsBetween($start, $stop);
-				foreach($events as $event) {
-					if($event['now']) {
-						$matchingEvents[] = $event;
+				$events = $cal->fastHandler(); //get the events
+
+				//continue if there are no matching events in this calendar
+				if (!$events)
+					continue;
+
+				//fastHandler automatically filter matching events. No need to further check if the timew is right. And the calendar is obviously the one we requested
+				// so copying the entire array is enough
+				$matchingEvents = array_merge($matchingEvents, $events);
+			}
+		} else if (empty($group['events']) && !empty($group['categories'])) { //categories only
+			//first extract the categories we are searching for and the calendar associated with it
+			$groupCategories = [];
+			foreach ($group['categories'] as $categoryid) {
+				$parts = explode("_", $categoryid, 2);
+
+				if (!is_array($groupCategories[$parts[0]]))
+					$groupCategories[$parts[0]] = [];
+
+				array_push($groupCategories[$parts[0]], $parts[1]); //category is second part, calendarid is first
+			}
+
+			//now search in every calendar
+			$calendars = $this->listCalendars();
+			foreach ($calendars as $cid => $calendar) {
+				if (!in_array($cid, $group['calendars']))
+					continue; //this calendar is not in the group
+
+				//initialize the driver
+				$cal = $this->getDriverById($cid);
+				$cal->setTimezone($timezone);
+				$cal->setNow($now);
+				$events = $cal->fastHandler();
+
+				//continue if there are no matching events or no categories in this calendar
+				if (!$events || !isset($groupCategories[$cid]))
+					continue;
+
+				//fastHandler automatically filter events happening now, this check is skipped. We must instead check if categories matches
+				//not using array_filter for faster speed (https://www.levijackson.xyz/posts/are-array_-functions-faster-than-loops/)
+				$filtered = [];
+				foreach ($events as $event) {
+					if (empty($event['CATEGORIES']))
+						continue;
+
+					foreach ($event['CATEGORIES'] as $c) {
+						foreach ($groupCategories[$cid] as $cat) { //no need to check is_array($groupCategories[$cid]) beacuse it is always an array
+							if ($cat === $c) {
+								array_push($filtered, $event);
+								continue 3;
+							}
+						}
 					}
 				}
-			}
-		} else if(empty($group['events']) && !empty($group['categories'])) {
-			//categories only
-			$groupCategories = [];
-			foreach($group['categories'] as $categoryid) {
-              $parts = explode("_",$categoryid,2);
-              
-              if(!is_array($groupCategories[$parts[0]]))
-                $groupCategories[$parts[0]] = [];
-              
-              array_push($groupCategories[$parts[0]], $parts[1]); //category is second part, calendarid is first
-            }
 
-			foreach($calendars as $cid => $calendar) {
-				if(!in_array($cid, $group['calendars']))
-					continue;
-				
-				$cal = $this->getDriverById($cid);
-				$cal->setTimezone($timezone);
-				$cal->setNow($now);
-				$events = $cal->getEventsBetween($start, $stop);
-				$filtered = array_filter($events, function($event) use($groupCategories, $cid) {
-                  if(isset($groupCategories[$cid]) && !empty($event['categories']) && $event['now']) {
-                    foreach($event['categories'] as $c) {
-                      foreach($groupCategories[$cid] as $cat) { //no need to check is_array($groupCategories[$cid]) beacuse it is always an array
-                        if($cat === $c)
-                          return true;
-                      }
-                    }
-                  }
-                  return false;
-                });
 				$matchingEvents = array_merge($matchingEvents, $filtered);
 			}
-		} else if(!empty($group['events'])) {
-			$matchingEvents = [];
+		} else if (!empty($group['events'])) { //events only
+			//first extract the events we are searching for and the calendar associated with it
 			$groupEvents = [];
-			foreach($group['events'] as $eventid) {
-				$parts = explode("_",$eventid,2);
-				$groupEvents[$parts[1]] = $parts[0]; //eventid is second part, calendarid is first
+			foreach ($group['events'] as $eventid) {
+				$parts = explode("_", $eventid, 3);
+				$groupEvents[$parts[1]] = [$parts[0], $parts[2]]; //$parts[0] = calendar id - $parts[1] = event uid - $parts[2] = event recurrence number (0 for non recurring events)
 			}
-			foreach($calendars as $cid => $calendar) {
-				if(!in_array($cid, $group['calendars'])) {
-					continue;
-				}
+
+			//now search in every calendar
+			$calendars = $this->listCalendars();
+			foreach ($calendars as $cid => $calendar) {
+				if (!in_array($cid, $group['calendars']))
+					continue; //this calendar is not in the group
+
+				//initialize the driver
 				$cal = $this->getDriverById($cid);
 				$cal->setTimezone($timezone);
 				$cal->setNow($now);
-				$events = $cal->getEventsBetween($start, $stop);
-				$filtered = array_filter($events, function($event) use($groupEvents, $cid) {
-					if(isset($groupEvents[$event['uid']]) || isset($groupEvents[$event['linkedid']])
-						&& ($groupEvents[$event['uid']] === $cid || $groupEvents[$event['linkedid']] === $cid)
-						&& $event['now']) {
-							$unow 		= (int) strtotime("now");
-							$ustart 	= (int) $event["ustarttime"];
-							$uend 		= (int) $event["uendtime"];
-							$uresult 	= false;
-							if($ustart <= $unow && $uend >= $unow){
-								$uresult = true;
-							}
-							return $uresult;
-					}
-					return false;
-				});
+				$events = $cal->fastHandler();
+
+				//continue if there are no matching events in this calendar
+				if (!$events)
+					continue;
+
+				//fastHandler automatically filter events happening now, this check is skipped. We must instead check if the event UID is matching
+				//not using array_filter for faster speed (https://www.levijackson.xyz/posts/are-array_-functions-faster-than-loops/)
+				$filtered = [];
+				foreach ($events as $event) {
+					//TODO recurrence instance is not checked because I didn't come up with a solution to calculate it (fast) in fastHandler. Is this important at all? Calendar always worked without it anyway (as a consequence "Expand Reccuring Dates" in Calendar group does not stictly match the event selected but all the ones from the begin)
+					if (isset($groupEvents[$event['UID']])/* && $event['RECURRENCE_INSTANCE'] >= $parts[2]*/)
+						array_push($filtered, $event);
+				}
+
 				$matchingEvents = array_merge($matchingEvents, $filtered);
 			}
 		}
+
 		return $matchingEvents;
 	}
 
-	public function getActionBar($request) {
+	public function getActionBar($request)
+	{
 		$buttons = array();
-		switch($request['display']) {
+		switch ($request['display']) {
 			case 'calendar':
 				$action = !empty($_GET['action']) ? $_GET['action'] : '';
-				switch($action) {
+				switch ($action) {
 					case "view":
 						$calendar = $this->getCalendarByID($_REQUEST['id']);
 						$buttons = array(
@@ -909,14 +955,14 @@ class Calendar extends \DB_Helper implements \BMO {
 								'value' => _('Edit Settings')
 							)
 						);
-						if($calendar['type'] !== 'local') {
+						if ($calendar['type'] !== 'local') {
 							$buttons['updatecal'] = array(
 								'name' => 'updatecal',
 								'id' => 'updatecal',
 								'value' => _("Update from Source")
 							);
 						}
-					break;
+						break;
 					case "add":
 						$buttons = array(
 							'reset' => array(
@@ -930,7 +976,7 @@ class Calendar extends \DB_Helper implements \BMO {
 								'value' => _('Submit')
 							)
 						);
-					break;
+						break;
 					case "edit":
 						$buttons = array(
 							'delete' => array(
@@ -949,98 +995,100 @@ class Calendar extends \DB_Helper implements \BMO {
 								'value' => _('Submit')
 							)
 						);
-					break;
+						break;
 				}
-			break;
+				break;
 			case 'calendargroups':
-			$action = !empty($_GET['action']) ? $_GET['action'] : '';
-			switch($action) {
-				case "add":
-					$buttons = array(
-						'reset' => array(
-							'name' => 'reset',
-							'id' => 'reset',
-							'value' => _('Reset')
-						),
-						'submit' => array(
-							'name' => 'submit',
-							'id' => 'submit',
-							'value' => _('Submit')
-						)
-					);
+				$action = !empty($_GET['action']) ? $_GET['action'] : '';
+				switch ($action) {
+					case "add":
+						$buttons = array(
+							'reset' => array(
+								'name' => 'reset',
+								'id' => 'reset',
+								'value' => _('Reset')
+							),
+							'submit' => array(
+								'name' => 'submit',
+								'id' => 'submit',
+								'value' => _('Submit')
+							)
+						);
+						break;
+					case "edit":
+						$buttons = array(
+							'delete' => array(
+								'name' => 'delete',
+								'id' => 'delete',
+								'value' => _('Delete')
+							),
+							'reset' => array(
+								'name' => 'reset',
+								'id' => 'reset',
+								'value' => _('Reset')
+							),
+							'submit' => array(
+								'name' => 'submit',
+								'id' => 'submit',
+								'value' => _('Submit')
+							)
+						);
+						break;
+				}
 				break;
-				case "edit":
-					$buttons = array(
-						'delete' => array(
-							'name' => 'delete',
-							'id' => 'delete',
-							'value' => _('Delete')
-						),
-						'reset' => array(
-							'name' => 'reset',
-							'id' => 'reset',
-							'value' => _('Reset')
-						),
-						'submit' => array(
-							'name' => 'submit',
-							'id' => 'submit',
-							'value' => _('Submit')
-						)
-					);
-				break;
-			}
-			break;
 		}
 		return $buttons;
 	}
 
-	public function getRightNav($request) {
+	public function getRightNav($request)
+	{
 		$request['action'] = !empty($request['action']) ? $request['action'] : '';
-		switch($request['action']) {
+		switch ($request['action']) {
 			case "add":
 			case "edit":
 			case "view":
 			case "outlooksettings":
 			case "oauthsettings":
 			case "editoutlooksettings":
-				return load_view(__DIR__."/views/rnav.php",array());
-			break;
+				return load_view(__DIR__ . "/views/rnav.php", array());
+				break;
 		}
 	}
 
 	//UCP STUFF
-	public function ucpConfigPage($mode, $user, $action) {
-		if(empty($user)) {
+	public function ucpConfigPage($mode, $user, $action)
+	{
+		if (empty($user)) {
 			$enabled = ($mode == 'group') ? true : null;
 		} else {
-			if($mode == 'group') {
-				$allowedcals = $this->FreePBX->Ucp->getSettingByGID($user['id'],'Calendar','allowedcals');
-				$allowedgroups = $this->FreePBX->Ucp->getSettingByGID($user['id'],'Calendar','allowedgroups');
-				$enabled = $this->FreePBX->Ucp->getSettingByGID($user['id'],'Calendar','enabled');
+			if ($mode == 'group') {
+				$allowedcals = $this->FreePBX->Ucp->getSettingByGID($user['id'], 'Calendar', 'allowedcals');
+				$allowedgroups = $this->FreePBX->Ucp->getSettingByGID($user['id'], 'Calendar', 'allowedgroups');
+				$enabled = $this->FreePBX->Ucp->getSettingByGID($user['id'], 'Calendar', 'enabled');
 				$enabled = !($enabled) ? false : true;
 			} else {
-				$allowedcals = $this->FreePBX->Ucp->getSettingByID($user['id'],'Calendar','allowedcals');
-				$allowedgroups = $this->FreePBX->Ucp->getSettingByID($user['id'],'Calendar','allowedgroups');
-				$enabled = $this->FreePBX->Ucp->getSettingByID($user['id'],'Calendar','enabled');
+				$allowedcals = $this->FreePBX->Ucp->getSettingByID($user['id'], 'Calendar', 'allowedcals');
+				$allowedgroups = $this->FreePBX->Ucp->getSettingByID($user['id'], 'Calendar', 'allowedgroups');
+				$enabled = $this->FreePBX->Ucp->getSettingByID($user['id'], 'Calendar', 'enabled');
 			}
 		}
-		$allowedcals = (!empty($allowedcals))?$allowedcals:array();
-		$allowedgroups = (!empty($allowedgroups))?$allowedgroups:array();
+		$allowedcals = (!empty($allowedcals)) ? $allowedcals : array();
+		$allowedgroups = (!empty($allowedgroups)) ? $allowedgroups : array();
 		$calopts = '';
-		if($mode != 'group'){
-			$calopts = '<option value="inherit">'._("Inherit").'</option>';
+		if ($mode != 'group') {
+			$calopts = '<option value="inherit">' . _("Inherit") . '</option>';
 		}
 		foreach ($this->listCalendars() as $key => $value) {
-			$selected = (in_array($key, $allowedcals))?'SELECTED':'';
-			$calopts .= '<option value="'.$key.'" '.$selected.'>'.$value['name'].'</option>';
+			$selected = (in_array($key, $allowedcals)) ? 'SELECTED' : '';
+			$calopts .= '<option value="' . $key . '" ' . $selected . '>' . $value['name'] . '</option>';
 		}
 		$grpopts = '';
-		if($mode != 'group'){
-			$grpopts = '<option value="inherit">'._("Inherit").'</option>';
+		if ($mode != 'group') {
+			$grpopts = '<option value="inherit">' . _("Inherit") . '</option>';
 		}
 		foreach ($this->listGroups() as $key => $value) {
-			$selected = (in_array($key, $allowedgroups))?'SELECTED':'';
-			$grpopts .= '<option value="'.$key.'" '.$selected.'>'.$value['name'].'</option>';
+			$selected = (in_array($key, $allowedgroups)) ? 'SELECTED' : '';
+			$grpopts .= '<option value="' . $key . '" ' . $selected . '>' . $value['name'] . '</option>';
 		}
 
 		$config = array(
@@ -1053,89 +1101,101 @@ class Calendar extends \DB_Helper implements \BMO {
 		$html[0] = array(
 			"title" => _("Calendar"),
 			"rawname" => "calendar",
-			"content" => load_view(dirname(__FILE__)."/views/ucp_config.php",$config)
+			"content" => load_view(dirname(__FILE__) . "/views/ucp_config.php", $config)
 		);
 		return $html;
 	}
-	public function ucpAddUser($id, $display, $ucpStatus, $data) {
+	public function ucpAddUser($id, $display, $ucpStatus, $data)
+	{
 		$this->ucpUpdateUser($id, $display, $ucpStatus, $data);
 	}
-	public function ucpUpdateUser($id, $display, $ucpStatus, $data) {
-		if($display == 'userman' && isset($_POST['type']) && $_POST['type'] == 'user') {
-			if(isset($_POST['calendar_enable']) && $_POST['calendar_enable'] == 'yes') {
-				$this->FreePBX->Ucp->setSettingByID($id,'Calendar','enabled',true);
-			}elseif(isset($_POST['calendar_enable']) && $_POST['calendar_enable'] == 'no') {
-				$this->FreePBX->Ucp->setSettingByID($id,'Calendar','enabled',false);
-			} elseif(isset($_POST['calendar_enable']) && $_POST['calendar_enable'] == 'inherit') {
-				$this->FreePBX->Ucp->setSettingByID($id,'Calendar','enabled',null);
+	public function ucpUpdateUser($id, $display, $ucpStatus, $data)
+	{
+		if ($display == 'userman' && isset($_POST['type']) && $_POST['type'] == 'user') {
+			if (isset($_POST['calendar_enable']) && $_POST['calendar_enable'] == 'yes') {
+				$this->FreePBX->Ucp->setSettingByID($id, 'Calendar', 'enabled', true);
+			} elseif (isset($_POST['calendar_enable']) && $_POST['calendar_enable'] == 'no') {
+				$this->FreePBX->Ucp->setSettingByID($id, 'Calendar', 'enabled', false);
+			} elseif (isset($_POST['calendar_enable']) && $_POST['calendar_enable'] == 'inherit') {
+				$this->FreePBX->Ucp->setSettingByID($id, 'Calendar', 'enabled', null);
 			}
-			if(isset($_POST['calendar_allowedcalendars'])){
-				$data = (is_array($_POST['calendar_allowedcalendars']))?$_POST['calendar_allowedcalendars']:array($_POST['calendar_allowedcalendars']);
-				$this->FreePBX->Ucp->setSettingByID($id,'Calendar','allowedcals',$data);
+			if (isset($_POST['calendar_allowedcalendars'])) {
+				$data = (is_array($_POST['calendar_allowedcalendars'])) ? $_POST['calendar_allowedcalendars'] : array($_POST['calendar_allowedcalendars']);
+				$this->FreePBX->Ucp->setSettingByID($id, 'Calendar', 'allowedcals', $data);
 			}
-			if(isset($_POST['calendar_allowedgroups'])){
-				$data = (is_array($_POST['calendar_allowedgroups']))?$_POST['calendar_allowedgroups']:array($_POST['calendar_allowedgroups']);
-				$this->FreePBX->Ucp->setSettingByID($id,'Calendar','allowedgroups',$data);
+			if (isset($_POST['calendar_allowedgroups'])) {
+				$data = (is_array($_POST['calendar_allowedgroups'])) ? $_POST['calendar_allowedgroups'] : array($_POST['calendar_allowedgroups']);
+				$this->FreePBX->Ucp->setSettingByID($id, 'Calendar', 'allowedgroups', $data);
 			}
 		}
 	}
-	public function ucpDelUser($id, $display, $ucpStatus, $data) {}
-	public function ucpAddGroup($id, $display, $data) {
-		$this->ucpUpdateGroup($id,$display,$data);
+	public function ucpDelUser($id, $display, $ucpStatus, $data)
+	{
 	}
-	public function ucpUpdateGroup($id,$display,$data) {
-		if($display == 'userman' && isset($_POST['type']) && $_POST['type'] == 'group') {
-			if(isset($_POST['calendar_enable']) && $_POST['calendar_enable'] == 'yes') {
-				$this->FreePBX->Ucp->setSettingByGID($id,'Calendar','enabled',true);
+	public function ucpAddGroup($id, $display, $data)
+	{
+		$this->ucpUpdateGroup($id, $display, $data);
+	}
+	public function ucpUpdateGroup($id, $display, $data)
+	{
+		if ($display == 'userman' && isset($_POST['type']) && $_POST['type'] == 'group') {
+			if (isset($_POST['calendar_enable']) && $_POST['calendar_enable'] == 'yes') {
+				$this->FreePBX->Ucp->setSettingByGID($id, 'Calendar', 'enabled', true);
 			} else {
-				$this->FreePBX->Ucp->setSettingByGID($id,'Calendar','enabled',false);
+				$this->FreePBX->Ucp->setSettingByGID($id, 'Calendar', 'enabled', false);
 			}
-			if(isset($_POST['calendar_allowedcalendars'])){
-				$data = (is_array($_POST['calendar_allowedcalendars']))?$_POST['calendar_allowedcalendars']:array($_POST['calendar_allowedcalendars']);
-				$this->FreePBX->Ucp->setSettingByGID($id,'Calendar','allowedcals',$data);
+			if (isset($_POST['calendar_allowedcalendars'])) {
+				$data = (is_array($_POST['calendar_allowedcalendars'])) ? $_POST['calendar_allowedcalendars'] : array($_POST['calendar_allowedcalendars']);
+				$this->FreePBX->Ucp->setSettingByGID($id, 'Calendar', 'allowedcals', $data);
 			}
-			if(isset($_POST['calendar_allowedgroups'])){
-				$data = (is_array($_POST['calendar_allowedgroups']))?$_POST['calendar_allowedgroups']:array($_POST['calendar_allowedgroups']);
-				$this->FreePBX->Ucp->setSettingByGID($id,'Calendar','allowedgroups',$data);
+			if (isset($_POST['calendar_allowedgroups'])) {
+				$data = (is_array($_POST['calendar_allowedgroups'])) ? $_POST['calendar_allowedgroups'] : array($_POST['calendar_allowedgroups']);
+				$this->FreePBX->Ucp->setSettingByGID($id, 'Calendar', 'allowedgroups', $data);
 			}
 		}
 	}
-	public function ucpDelGroup($id,$display,$data) {
-
+	public function ucpDelGroup($id, $display, $data)
+	{
 	}
 
 	/**
-	 * Checks if the Group Matches the time provided
-	 * @param  string $groupID The Group ID
-	 * @return boolean          True if match, False if no match
+	 * Checks if the Group Matches the time provided. This will use fast if possible.
+	 * @param  string	$groupID		The Group ID
+	 * @param  int		$now			Time to check against
+	 * @param  int		$timezone		Timezone to check against
+	 * @return boolean        			True if match, False if no match
 	 */
-	public function matchGroup($groupID, $now = null, $timezone = null) {
+	public function matchGroup($groupID, $now = null, $timezone = null)
+	{
 		return !empty($this->matchGroupVerbose($groupID, $now, $timezone));
 	}
 
 	/**
-	 * Checks if the Calendar matches the time provided
+	 * Checks if the Calendar matches the time provided. This will use fast if possible.
 	 *
 	 * @param [type] $calendarid
 	 * @param [type] $now
 	 * @param [type] $timezone
 	 * @return void
 	 */
-	public function matchCalendar($calendarid, $now = null, $timezone = null) {
+	public function matchCalendar($calendarid, $now = null, $timezone = null)
+	{
 		$driver = $this->getDriverById($calendarid);
 		$driver->setTimezone($timezone);
 		$driver->setNow($now);
-		return $driver->matchCalendar();
+		return $driver->fastHandler();
 	}
 
-	public function getNextEvent($calendarid, $now = null, $timezone = null) {
+	public function getNextEvent($calendarid, $now = null, $timezone = null)
+	{
 		$driver = $this->getDriverById($calendarid);
 		$driver->setTimezone($timezone);
 		$driver->setNow($now);
 		return $driver->getNextEvent();
 	}
 
-	public function matchEvent($calendarid, $eventid, $now = null, $timezone = null) {
+	public function matchEvent($calendarid, $eventid, $now = null, $timezone = null)
+	{
 		$driver = $this->getDriverById($calendarid);
 		$driver->setTimezone($timezone);
 		$driver->setNow($now);
@@ -1148,9 +1208,10 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param  str $groupid groupid id
 	 * @return array  the Found event or empty
 	 */
-	public function getNextEventByGroup($groupid, $now = null, $timezone=null){
+	public function getNextEventByGroup($groupid, $now = null, $timezone = null)
+	{
 		$group = $this->getGroup($groupid);
-		if(empty($group)) {
+		if (empty($group)) {
 			return array();
 		}
 		$events = array();
@@ -1159,7 +1220,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			$cal->setTimezone($timezone);
 			$cal->setNow($now);
 			$ev = $cal->getNextEvent($cal);
-			if(!empty($ev)){
+			if (!empty($ev)) {
 				$events[$ev['startdate']] = $ev;
 			}
 		}
@@ -1173,14 +1234,15 @@ class Calendar extends \DB_Helper implements \BMO {
 	 * @param  string $command command to run
 	 * @return string         formatted cronline
 	 */
-	public function objToCron($obj, $command){
+	public function objToCron($obj, $command)
+	{
 		try {
 			$reflect = new \ReflectionClass($obj);
 			$name = $reflect->getShortName();
 		} catch (\ReflectionException $e) {
-			if(is_string($obj)){
+			if (is_string($obj)) {
 				$name = "text";
-			}else{
+			} else {
 				$name = "unknown";
 			}
 		}
@@ -1188,23 +1250,23 @@ class Calendar extends \DB_Helper implements \BMO {
 			case 'Moment':
 				$obj->setTimezone($this->getSystemTimezone());
 				$min = (int)$obj->format("i"); //remove leading zeros
-				$cronstring = $min." ".$obj->format("G j n *");
-			break;
+				$cronstring = $min . " " . $obj->format("G j n *");
+				break;
 			case 'Carbon':
 			case 'DateTime':
 				$obj->setTimezone(new \DateTimeZone($this->getSystemTimezone()));
 				$min = (int)$obj->format("i"); //remove leading zeros
-				$cronstring = $min." ".$obj->format("G j n *");
-			break;
+				$cronstring = $min . " " . $obj->format("G j n *");
+				break;
 			case 'text':
-				if(is_numeric($obj)){
+				if (is_numeric($obj)) {
 					$date = new \DateTime();
 					try {
 						$date->setTimestamp($obj);
 					} catch (\Exception $e) {
 						return false;
 					}
-				}else{
+				} else {
 					try {
 						$date = new \DateTime($obj);
 					} catch (\Exception $e) {
@@ -1213,16 +1275,17 @@ class Calendar extends \DB_Helper implements \BMO {
 				}
 				$date->setTimezone(new \DateTimeZone($this->getSystemTimezone()));
 				$min = (int)$date->format("i"); //remove leading zeros
-				$cronstring = $min." ".$date->format("G j n *");
-			break;
+				$cronstring = $min . " " . $date->format("G j n *");
+				break;
 			default:
 				return false;
-			break;
+				break;
 		}
-		return sprintf("%s %s", $cronstring,$command);
+		return sprintf("%s %s", $cronstring, $command);
 	}
 
-	private function getSystemTimezone() {
+	private function getSystemTimezone()
+	{
 		$timezone = '';
 		if (is_link('/etc/localtime')) {
 			// Mac OS X (and older Linuxes)
@@ -1231,7 +1294,7 @@ class Calendar extends \DB_Helper implements \BMO {
 			$filename = readlink('/etc/localtime');
 			$pathpos = strpos($filename, '/usr/share/zoneinfo/');
 			if ($pathpos !== false) {
-				$timezone = trim(substr($filename,($pathpos + 20)));
+				$timezone = trim(substr($filename, ($pathpos + 20)));
 			}
 		} elseif (file_exists('/etc/timezone')) {
 			// Ubuntu / Debian.
@@ -1246,43 +1309,45 @@ class Calendar extends \DB_Helper implements \BMO {
 				$timezone = trim($data['ZONE']);
 			}
 		}
-		if(empty($timezone)) {
+		if (empty($timezone)) {
 			throw new \Exception("Unable to determine system timezone");
 		}
 		return $timezone;
 	}
 
-	public function outlookToken($id) {
-		$outlookdata = $this->getConfig($id,'outlook-details');
-		$oauth = new Oauth($outlookdata['tenantid'],$outlookdata['consumerkey'], $outlookdata['consumersecret'],null,null,$outlookdata['pbxurl'],$outlookdata['outlookurl']);
-		$result = json_decode($oauth->getAuthToken($outlookdata['auth_code']),true);
+	public function outlookToken($id)
+	{
+		$outlookdata = $this->getConfig($id, 'outlook-details');
+		$oauth = new Oauth($outlookdata['tenantid'], $outlookdata['consumerkey'], $outlookdata['consumersecret'], null, null, $outlookdata['pbxurl'], $outlookdata['outlookurl']);
+		$result = json_decode($oauth->getAuthToken($outlookdata['auth_code']), true);
 		$outlooknewdata = array();
-		if(isset($result['access_token'])) {
+		if (isset($result['access_token'])) {
 			$outlooknewdata = $outlookdata;
 			$outlooknewdata['access_token'] = $result['access_token'];
 			$outlooknewdata['token_expire_at'] = time() + $result['expires_in'];
 			$outlooknewdata['refresh_token'] = (isset($result['refresh_token'])) ? $result['refresh_token'] : '';
-			$this->setConfig($id,$outlooknewdata,'outlook-details');
+			$this->setConfig($id, $outlooknewdata, 'outlook-details');
 			return array("status" => true, "message" => _("saved access token"));
 		} else {
 			return array("status" => false, "message" => $result['error']);
 		}
 	}
 
-	public function getOutlookTokenRefresh($outlookDetails) {
-		if(isset($outlookDetails['refresh_token'])) {
-			$oauth = new Oauth($outlookDetails['tenantid'],$outlookDetails['consumerkey'], $outlookDetails['consumersecret'],null,null,$outlookDetails['pbxurl'],$outlookDetails['outlookurl']);
-			$result = json_decode($oauth->getTokenRefresh($outlookDetails),true);
-			if(isset($result['access_token'])) {
+	public function getOutlookTokenRefresh($outlookDetails)
+	{
+		if (isset($outlookDetails['refresh_token'])) {
+			$oauth = new Oauth($outlookDetails['tenantid'], $outlookDetails['consumerkey'], $outlookDetails['consumersecret'], null, null, $outlookDetails['pbxurl'], $outlookDetails['outlookurl']);
+			$result = json_decode($oauth->getTokenRefresh($outlookDetails), true);
+			if (isset($result['access_token'])) {
 				$outlookDetails['access_token'] = $result['access_token'];
 				$outlookDetails['token_expire_at'] = time() + $result['expires_in'];
 			}
 
-			if(isset($result['refresh_token'])) {
+			if (isset($result['refresh_token'])) {
 				$outlookDetails['refresh_token'] = $result['refresh_token'];
 			}
 
-			$this->setConfig($outlookDetails['id'],$outlookDetails,'outlook-details');
+			$this->setConfig($outlookDetails['id'], $outlookDetails, 'outlook-details');
 		}
 		return $outlookDetails;
 	}
@@ -1292,25 +1357,26 @@ class Calendar extends \DB_Helper implements \BMO {
 		$allsettings = $this->getAll('outlook-details');
 		$settings = [];
 		foreach ($allsettings as $key => $_sett) {
-			if($key) {
+			if ($key) {
 				$settings[$key] = $_sett['name'];
 			}
 		}
 		return $settings;
 	}
 
-	public function checkConfigExists($data,$id)
+	public function checkConfigExists($data, $id)
 	{
 		$allConfig = $this->getallOauthSettings();
 		foreach ($allConfig as $key => $value) {
-			if($key == $id) {
+			if ($key == $id) {
 				continue;
 			}
 
-			if($value == $data['name']) {
+			if ($value == $data['name']) {
 				return false;
 			}
 		}
 		return true;
 	}
 }
+

@@ -1,27 +1,42 @@
 <?php
 
 namespace FreePBX\modules\Calendar\IcalParser;
+
 use om\Recurrence;
 use om\IcalParser;
 use Carbon\CarbonPeriod;
-class IcalRangedParser extends IcalParser {
+use Exception;
+
+class IcalRangedParser extends IcalParser
+{
 	private $ranges = [
 		'start' => null,
 		'end' => null
 	];
-	public function __construct() {
+
+	private $fast;
+
+	/**
+	 * @param $fast	The request to parse is for scrpting purpose. Setting this to false takes much longer because it parses every 
+	 * single recurring event from the start, else only the relevant one are extracted
+	 */
+	public function __construct($fast = false)
+	{
 		parent::__construct();
 		$this->ranges['start'] = new \DateTime('now', new \DateTimeZone('UTC'));
 		$this->ranges['start']->sub(new \DateInterval('P6M'));
 		$this->ranges['end'] = new \DateTime('now', new \DateTimeZone('UTC'));
 		$this->ranges['end']->add(new \DateInterval('P6M'));
+		$this->fast = $fast;
 	}
 
-	public function setStartRange(\DateTime $start) {
+	public function setStartRange(\DateTime $start)
+	{
 		$this->ranges['start'] = $start;
 	}
 
-	public function setEndRange(\DateTime $end) {
+	public function setEndRange(\DateTime $end)
+	{
 		$this->ranges['end'] = $end;
 	}
 
@@ -37,46 +52,22 @@ class IcalRangedParser extends IcalParser {
 		$additions = [];
 
 		if (!empty($event['EXDATES'])) {
-			foreach ($event['EXDATES'] as $exDate) {
-				if (is_array($exDate)) {
-					foreach ($exDate as $singleExDate) {
-						if($this->eventDateInCalendarRange($singleExDate)) {
-							$exclusions[] = $singleExDate->getTimestamp();
-						}
-					}
-				} else {
-					if($this->eventDateInCalendarRange($exDate)) {
-						$exclusions[] = $exDate->getTimestamp();
-					}
-				}
-			}
+			//no need to do any fancy check here. See Frequency (or Freq) and you will find out that dates are only removed if the timestamp is EXACTLY the same.
+			//So it is enough to pass the array with timestamp without checking anything fancy
+			foreach ($event['EXDATES'] as $ex)
+				array_push($exclusions, $ex->getTimestamp());
 		}
 
 		if (!empty($event['RDATES'])) {
-			foreach ($event['RDATES'] as $rDate) {
-				if (is_array($rDate)) {
-					foreach ($rDate as $singleRDate) {
-						if($this->eventDateInCalendarRange($singleRDate)) {
-							$additions[] = $singleRDate->getTimestamp();
-						}
-					}
-				} else {
-					if($this->eventDateInCalendarRange($rDate)) {
-						$additions[] = $rDate->getTimestamp();
-					}
-				}
-			}
+			//no need to do any fancy check here. See Frequency (or Freq) and you will find out that dates are added when needed in the timeframe defined.
+			//So it is enough to pass the array with timestamp without checking anything fancy
+			foreach ($event['RDATES'] as $add)
+				array_push($additions, $add->getTimestamp());
 		}
 
 		date_default_timezone_set(($event['DTSTART']->getTimezone()->getName() !== 'Z') ? $event['DTSTART']->getTimezone()->getName() : 'UTC');
 
 		$until = $recurring->getUntil();
-		if ($until === false) {
-			//forever... limit to 15 years
-			$end = clone($event['DTSTART']);
-			$end->add(new \DateInterval('P15Y')); // + 15 years
-			$recurring->setUntil($end);
-		}
 
 		$byKeys = [
 			'BYWEEKNO',
@@ -87,48 +78,58 @@ class IcalRangedParser extends IcalParser {
 			'BYMINUTE',
 			'BYSECOND'
 		];
-		foreach($byKeys as $key) {
-			if(isset($recurring->rrule[$key])) {
-				$recurring->rrule[$key] = str_replace('"','',$recurring->rrule[$key]);
+		foreach ($byKeys as $key) {
+			if (isset($recurring->rrule[$key])) {
+				$recurring->rrule[$key] = str_replace('"', '', $recurring->rrule[$key]);
 			}
 		}
 
-		$startdate = $event['DTSTART']->format('Y-m-d');
-		$enddate = $event['DTEND']->format('Y-m-d');
-		$starttime = $event['DTSTART']->format('H:i:s');
-		$endtime = $event['DTEND']->format('H:i:s');
-		$startTimeStamp = $event['DTSTART']->getTimestamp();
+		if (!isset($recurring->rrule['COUNT'])) {
+			$DTSTARTTimeStamp = $event['DTSTART']->getTimestamp();
 
-		// Check for all day
-		if (!empty($event['RRULE']['FREQ']) && $event['RRULE']['FREQ'] === 'YEARLY' && $starttime === $endtime && $startdate !== $enddate) {
-			$startTimeStamp = new \DateTime($startdate);
-			$startTimeStamp->setTime(0, 0, 1);
-			$startTimeStamp = $startTimeStamp->getTimestamp();
-		}
-			
-		if(!isset($recurring->rrule['COUNT'])) {
-			$frequency = new Frequency($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
-			$nextTimestamp = ($event['DTSTART']->getTimestamp() > $this->ranges['start']->getTimestamp()) ? $event['DTSTART']->getTimestamp() : $this->ranges['start']->getTimestamp();
+			//calc end based on the shortest term
+			if ($until !== false) {
+				$untilTm = $until->getTimestamp();
+				$endTm = $this->ranges['end']->getTimestamp();
+				$end = $untilTm < $this->ranges['end']->getTimestamp() ? $untilTm : $endTm;
+			} else
+				$end = $this->ranges['end']->getTimestamp();
 
-			$out = $frequency->previousOccurrence($nextTimestamp);
-			$start = clone($event['DTSTART']);
-			$start->setTimestamp($out);
+			if ($this->fast) {
+				//end is not set on the recurring rule as it is not needed and would cause troubles in the current implementation
+				$frequency = new Frequency($recurring->rrule, $DTSTARTTimeStamp, $exclusions, $additions);
+				$startRange = $this->ranges['start']->getTimestamp();
 
-			$d1 = $this->ranges['start'];
+				$recurrences = [];
+				$startRange = $frequency->previousOccurrence($startRange);
+				array_push($recurrences, $startRange); //push first recurrence into the array
 
-			$end = $until !== false && $until->getTimestamp() < $this->ranges['end']->getTimestamp() ? $until : $this->ranges['end'];
+				//keep pushing recurrences in the period
+				while (true) {
+					if ($startRange > $end)
+						break; //we are out of maximum range, exit the loop
 
-			$diff = $start->diff($end);
-			if ($until === false) {
-				$end = clone($start);
-				$end->add($diff);
+					$next = $frequency->nextOccurrence($startRange);
+					if ($next != null)
+						array_push($recurrences, $next);
+
+					$startRange = $next + 1; //go to the next recurrence
+				}
+
+				return $recurrences;
+			} else {
+				//setting end to the one defined above and generating a new Frequency object
 				$recurring->setUntil($end);
-			}
+				$frequency = new Frequency($recurring->rrule, $DTSTARTTimeStamp, $exclusions, $additions);
 
-			$frequency = new Frequency($recurring->rrule, $startTimeStamp, $exclusions, $additions);
-			$recurrenceTimestamps = $frequency->getAllOccurrences();
-		} elseif(class_exists('FreePBX')) {
+				//get all the timestamps
+				$recurrenceTimestamps = $frequency->getAllOccurrences();
+			}
+		} elseif (class_exists('FreePBX')) {
+			//fast is not implemented here for obvious reasons
+
 			\FreePBX::Notifications()->add_warning('calendar', 'RRULECOUNT', _('Calendar using COUNT'), _('A calendar you have added has an event that has a reoccuring rule of COUNT. When COUNT is used this slows down Calendar drastically. Please change your rule to another format'), "", true, true);
+
 			/*
 			$period = CarbonPeriod::between($event['DTSTART'],$this->ranges['end']);
 			switch ($event['RRULE']['FREQ']) {
@@ -168,7 +169,15 @@ class IcalRangedParser extends IcalParser {
 
 			$recurrenceTimestamps = array_merge($recurrenceTimestamps,$additions);
 			*/
-			$frequency = new Frequency($recurring->rrule, $startTimeStamp, $exclusions, $additions);
+
+			if ($until === false) {
+				//forever... limit to 15 years
+				$end = clone ($event['DTSTART']);
+				$end->add(new \DateInterval('P15Y')); // + 15 years
+				$recurring->setUntil($end);
+			}
+
+			$frequency = new Frequency($recurring->rrule, $event['DTSTART']->getTimestamp(), $exclusions, $additions);
 			$recurrenceTimestamps = $frequency->getAllOccurrences();
 		}
 
@@ -179,8 +188,10 @@ class IcalRangedParser extends IcalParser {
 
 			$recurrenceIDDate = $tmp->format('Ymd');
 			$recurrenceIDDateTime = $tmp->format('Ymd\THis');
-			if (empty($this->data['_RECURRENCE_IDS'][$recurrenceIDDate]) &&
-				empty($this->data['_RECURRENCE_IDS'][$recurrenceIDDateTime])) {
+			if (
+				empty($this->data['_RECURRENCE_IDS'][$recurrenceIDDate]) &&
+				empty($this->data['_RECURRENCE_IDS'][$recurrenceIDDateTime])
+			) {
 				$gmtCheck = new \DateTime("now", new \DateTimeZone('UTC'));
 				$gmtCheck->setTimestamp($recurrenceTimestamp);
 				$recurrenceIDDateTimeZ = $gmtCheck->format('Ymd\THis\Z');
@@ -194,10 +205,16 @@ class IcalRangedParser extends IcalParser {
 	}
 
 	/**
-	 * @return array
+	 * Returns events inside the given range in the current data. Can only be used outside of fast mode
+	 * @return	array
+	 * @throws	Exception		If we are in fast mode
 	 */
 	public function getEvents(): array
 	{
+		//fast uses a different data structure (for recurrences) so it is mandatory to call getEventsNow to properly handle it. Warn the developer to take care of this
+		if ($this->fast)
+			throw new Exception('This function can only be called when not in fast mode.');
+
 		$events = [];
 		if (isset($this->data['VEVENT'])) {
 			for ($i = 0; $i < count($this->data['VEVENT']); $i++) {
@@ -205,46 +222,68 @@ class IcalRangedParser extends IcalParser {
 
 				if (empty($event['RECURRENCES'])) {
 					if (!empty($event['RECURRENCE-ID']) && !empty($event['UID']) && isset($event['SEQUENCE'])) {
-						$modifiedEventUID = $event['UID'];
-						$modifiedEventRecurID = $event['RECURRENCE-ID'];
-						$modifiedEventSeq = intval($event['SEQUENCE'], 10);
+						/**
+						 * You may ask why I abandoned all this code, I will try to explain as clearly as possible:
+						 * 
+						 * First problem -> the recurring rule could have many formats, but as it is now only a specific one can be interpreted. This is not a big problem, we could generate a warning if we were unable to decode it. Here are some exmaples:
+						 * RECURRENCE-ID;RANGE=THISANDFUTURE:19960120T120000Z -> Becomes 19960120T120000Z (not matched becasue of the final "Z" + RANGE ignored)
+						 * RECURRENCE-ID;VALUE=DATE:19960401 -> Becomes 19960401 (not matched beacuse it is only a date)
+						 * RECURRENCE-ID;RANGE=THISANDFUTURE:TZID=UTC:20230531T120000 -> Becomes TZID=UTC:20230531T120000 (not matched because of the extra TZID)
+						 * RECURRENCE-ID;TZID=UTC:20230531T120000 -> Becomes 20230531T120000 (matched)
+						 * RECURRENCE-ID;VALUE=DATE-TIME:20210115T100000 -> Becomes 20230531T120000 (matched)
+						 * 
+						 * Second problem -> If we were able to overcome the first point and we get a match with the exact same DTSTART and an increased sequence (look at the first "if" below) the event is replaced entirely. Fine you'll say but there is a catch, recurrences are calculated on the original event and not updated causing all sort of problems (beside that, why don't you update the original event directly instead of using this quirks?)
+						 * 
+						 * Third problem -> If we instead fall into the second "if" we will search for recurrences to replace inside the original event. Perfect! But there is a catch! You see as soon as we find a recurrence that match we delete it and... nothing more! So the user is expecting this particular recurrence to be replaced by the new event but instead will find that recurrence completely deleted!
+						 * 
+						 * So all in all fixing all this is issues is too complicated, if someone wants to do it free to do so, but be careful of the speed too...
+						 */
 
-						if (isset($this->data["_RECURRENCE_COUNTERS_BY_UID"][$modifiedEventUID])) {
-							$counter = $this->data["_RECURRENCE_COUNTERS_BY_UID"][$modifiedEventUID];
-
-							$originalEvent = $this->data["VEVENT"][$counter];
-							if (isset($originalEvent['SEQUENCE'])) {
-								$originalEventSeq = intval($originalEvent['SEQUENCE'], 10);
-								$originalEventFormattedStartDate = $originalEvent['DTSTART']->format('Ymd\THis');
-								if ($modifiedEventRecurID === $originalEventFormattedStartDate && $modifiedEventSeq > $originalEventSeq) {
-									// this modifies the original event
-									$modifiedEvent = array_replace_recursive($originalEvent, $event);
-									$this->data["VEVENT"][$counter] = $modifiedEvent;
-									foreach ($events as $z => $event) {
-										if ($events[$z]['UID'] === $originalEvent['UID'] &&
-											$events[$z]['SEQUENCE'] === $originalEvent['SEQUENCE']) {
-											// replace the original event with the modified event
-											$events[$z] = $modifiedEvent;
-											break;
+						/*
+							$modifiedEventUID = $event['UID'];
+							$modifiedEventRecurID = $event['RECURRENCE-ID'];
+							$modifiedEventSeq = intval($event['SEQUENCE'], 10);
+	
+							if (isset($this->data["_RECURRENCE_COUNTERS_BY_UID"][$modifiedEventUID])) {
+								$counter = $this->data["_RECURRENCE_COUNTERS_BY_UID"][$modifiedEventUID];
+	
+								$originalEvent = $this->data["VEVENT"][$counter];
+								if (isset($originalEvent['SEQUENCE'])) {
+									$originalEventSeq = intval($originalEvent['SEQUENCE'], 10);
+									$originalEventFormattedStartDate = $originalEvent['DTSTART']->format('Ymd\THis');
+									if ($modifiedEventRecurID === $originalEventFormattedStartDate && $modifiedEventSeq > $originalEventSeq) {
+										// this modifies the original event
+										$modifiedEvent = array_replace_recursive($originalEvent, $event);
+										$this->data["VEVENT"][$counter] = $modifiedEvent;
+										foreach ($events as $z => $event) {
+											if ($events[$z]['UID'] === $originalEvent['UID'] &&
+												$events[$z]['SEQUENCE'] === $originalEvent['SEQUENCE']) {
+												// replace the original event with the modified event
+												$events[$z] = $modifiedEvent;
+												break;
+											}
 										}
-									}
-									$event = null; // don't add this to the $events[] array again
-								} else if (!empty($originalEvent['RECURRENCES'])) {
-									for ($j = 0; $j < count($originalEvent['RECURRENCES']); $j++) {
-										$recurDate = $originalEvent['RECURRENCES'][$j];
-										$formattedStartDate = $recurDate->format('Ymd\THis');
-										if ($formattedStartDate === $modifiedEventRecurID) {
-											unset($this->data["VEVENT"][$counter]['RECURRENCES'][$j]);
-											$this->data["VEVENT"][$counter]['RECURRENCES'] = array_values($this->data["VEVENT"][$counter]['RECURRENCES']);
-											break;
+										$event = null; // don't add this to the $events[] array again
+									} else if (!empty($originalEvent['RECURRENCES'])) {
+										for ($j = 0; $j < count($originalEvent['RECURRENCES']); $j++) {
+											$recurDate = $originalEvent['RECURRENCES'][$j];
+											$formattedStartDate = $recurDate->format('Ymd\THis');
+											if ($formattedStartDate === $modifiedEventRecurID) {
+												unset($this->data["VEVENT"][$counter]['RECURRENCES'][$j]);
+												$this->data["VEVENT"][$counter]['RECURRENCES'] = array_values($this->data["VEVENT"][$counter]['RECURRENCES']);
+												break;
+											}
 										}
 									}
 								}
 							}
-						}
+							*/
+
+						\FreePBX::Notifications()->add_warning('calendar', 'RECURRENCEID', _('Calendar using RECURRENCE-ID'), str_replace('%event', $event['SUMMARY'], _('A calendar you have added has an event called "%event" that has a RECURRENCE-ID rule. Because there is no full support yet they are ignored, please consider changing this to Exceptions/Additions.')), "", true, true);
+						$event = null; //this is an event that modifies another one. In every case (even if we weren't able to overwrite the original one for whatever reason) it should not end up in the output
 					} else {
 						//neither start nor end is within range so skip it
-						if(!$this->eventRangeInCalendarRange($event['DTSTART'],$event['DTEND'])) {
+						if (!$this->eventRangeInCalendarRange($event['DTSTART'], $event['DTEND'])) {
 							$event = null;
 						}
 					}
@@ -272,11 +311,11 @@ class IcalRangedParser extends IcalParser {
 							];
 							unset($newEvent['RECURRENCES']);
 							$newEvent['DTSTART'] = $recurDate;
-							$newEvent['DTEND'] = clone($recurDate);
+							$newEvent['DTEND'] = clone ($recurDate);
 							$newEvent['DTEND']->add($eventInterval);
 						}
 
-						if($this->eventRangeInCalendarRange($newEvent['DTSTART'],$newEvent['DTEND'])) {
+						if ($this->eventRangeInCalendarRange($newEvent['DTSTART'], $newEvent['DTEND'])) {
 							$newEvent['RECURRENCE_INSTANCE'] = $j;
 							$events[] = $newEvent;
 						}
@@ -289,17 +328,65 @@ class IcalRangedParser extends IcalParser {
 		return $events;
 	}
 
-	public function eventDateInCalendarRange(\DateTime $timestamp) {
+
+	/** Returns events matching the provided $now inside the current data. Can only be used in fast mode
+	 * @param	int	$now		the now timestamp
+	 * @return	array|false
+	 * @throws	Exception		If we are not in fast mode
+	 */
+	public function getEventsNow($now = 0)
+	{
+		if (!$this->fast)
+			throw new Exception('This function can only be called with fast bit set.');
+
+		$events = [];
+		if ($now == 0)
+			$now = time();
+
+		if (isset($this->data['VEVENT'])) {
+			for ($i = 0; $i < count($this->data['VEVENT']); $i++) {
+				$event = $this->data['VEVENT'][$i];
+
+				if (empty($event['RECURRENCES'])) {
+					if (!empty($event['RECURRENCE-ID']) && !empty($event['UID']) && isset($event['SEQUENCE'])) {
+						\FreePBX::Notifications()->add_warning('calendar', 'RECURRENCEID', _('Calendar using RECURRENCE-ID'), str_replace('%event', $event['SUMMARY'], _('A calendar you have added has an event called "%event" that has a RECURRENCE-ID rule. Because there is no full support yet they are ignored, please consider changing this to Exceptions/Additions.')), "", true, true);
+					} else {
+						if ($event['DTSTART']->getTimestamp() < $now && $now < $event['DTEND']->getTimestamp())
+							array_push($events, $event); //event is now, keep it
+					}
+				} else {
+					$recurrences = $event['RECURRENCES'];
+					$event['RECURRING'] = true;
+					$event['RECURRENCE_INSTANCE'] = 0; //TODO RECURRENCE_INSTANCE cannot be calculated in an easy and fast way here. But do we really need it? (see also Calendar.class.php)
+					$eventDuration = $event['DTEND']->getTimestamp() - $event['DTSTART']->getTimestamp();
+
+					foreach ($recurrences as $recurrenceTimestamp) {
+						if ($now > $recurrenceTimestamp && $now < ($recurrenceTimestamp + $eventDuration)) {
+							array_push($events, $event); //at least one recurrence is now, keep it
+							continue 2; //go to the next event
+						}
+					}
+				}
+			}
+		}
+
+		return $events ? $events : false;
+	}
+
+	public function eventDateInCalendarRange(\DateTime $timestamp)
+	{
 		return ($timestamp->getTimestamp() > $this->ranges['start']->getTimestamp() && $timestamp->getTimestamp() < $this->ranges['end']->getTimestamp());
 	}
 
-	public function eventRangeInCalendarRange(\DateTime $eventStart, \DateTime $eventEnd) {
+	public function eventRangeInCalendarRange(\DateTime $eventStart, \DateTime $eventEnd)
+	{
 		$event = CarbonPeriod::between($eventStart, $eventEnd);
 		foreach ($event as $date) {
-			if($date->between($this->ranges['start'], $this->ranges['end'])) {
+			if ($date->between($this->ranges['start'], $this->ranges['end'])) {
 				return true;
 			}
 		}
 		return false;
 	}
 }
+
