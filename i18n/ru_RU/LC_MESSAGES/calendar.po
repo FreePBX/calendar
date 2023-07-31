@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-05-12 07:46+0000\n"
+"POT-Creation-Date: 2023-07-31 05:51+0000\n"
 "PO-Revision-Date: 2017-03-15 16:31-0700\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -35,7 +35,7 @@ msgstr ""
 msgid "%s Local Calendar"
 msgstr ""
 
-#: views/remote_ews_settings.php:7
+#: views/oauth_calendar_form.php:7 views/remote_ews_settings.php:7
 #, php-format
 msgid "%s Outlook Calendar"
 msgstr ""
@@ -45,7 +45,7 @@ msgstr ""
 msgid "%s iCal Calendar"
 msgstr ""
 
-#: views/calendar.php:20
+#: views/calendar.php:24
 msgid "(Re)Generate Link"
 msgstr ""
 
@@ -60,68 +60,69 @@ msgid ""
 "this.isAutoScroll&&this.listenTo(t,"
 msgstr ""
 
-#: views/remote_caldav_settings.php:184 views/remote_ews_settings.php:245
-#: views/remote_ical_settings.php:102
+#: views/oauth_calendar_form.php:128 views/remote_caldav_settings.php:184
+#: views/remote_ews_settings.php:245 views/remote_ical_settings.php:102
 msgid "1 Day"
 msgstr ""
 
-#: views/remote_caldav_settings.php:180 views/remote_ews_settings.php:241
-#: views/remote_ical_settings.php:98
+#: views/oauth_calendar_form.php:124 views/remote_caldav_settings.php:180
+#: views/remote_ews_settings.php:241 views/remote_ical_settings.php:98
 msgid "1 Hour"
 msgstr ""
 
-#: views/remote_caldav_settings.php:176 views/remote_ews_settings.php:237
-#: views/remote_ical_settings.php:94
+#: views/oauth_calendar_form.php:120 views/remote_caldav_settings.php:176
+#: views/remote_ews_settings.php:237 views/remote_ical_settings.php:94
 msgid "1 Minute"
 msgstr ""
 
-#: views/remote_caldav_settings.php:185 views/remote_ews_settings.php:246
-#: views/remote_ical_settings.php:103
+#: views/oauth_calendar_form.php:129 views/remote_caldav_settings.php:185
+#: views/remote_ews_settings.php:246 views/remote_ical_settings.php:103
 msgid "1 Week"
 msgstr ""
 
-#: views/remote_caldav_settings.php:178 views/remote_ews_settings.php:239
-#: views/remote_ical_settings.php:96
+#: views/oauth_calendar_form.php:122 views/remote_caldav_settings.php:178
+#: views/remote_ews_settings.php:239 views/remote_ical_settings.php:96
 msgid "10 Minutes"
 msgstr ""
 
-#: views/remote_caldav_settings.php:183 views/remote_ews_settings.php:244
-#: views/remote_ical_settings.php:101
+#: views/oauth_calendar_form.php:127 views/remote_caldav_settings.php:183
+#: views/remote_ews_settings.php:244 views/remote_ical_settings.php:101
 msgid "12 Hours"
 msgstr ""
 
-#: views/remote_caldav_settings.php:181 views/remote_ews_settings.php:242
-#: views/remote_ical_settings.php:99
+#: views/oauth_calendar_form.php:125 views/remote_caldav_settings.php:181
+#: views/remote_ews_settings.php:242 views/remote_ical_settings.php:99
 msgid "2 Hours"
 msgstr ""
 
-#: views/remote_caldav_settings.php:179 views/remote_ews_settings.php:240
-#: views/remote_ical_settings.php:97
+#: views/oauth_calendar_form.php:123 views/remote_caldav_settings.php:179
+#: views/remote_ews_settings.php:240 views/remote_ical_settings.php:97
 msgid "30 Minutes"
 msgstr ""
 
-#: views/remote_caldav_settings.php:177 views/remote_ews_settings.php:238
-#: views/remote_ical_settings.php:95
+#: views/oauth_calendar_form.php:121 views/remote_caldav_settings.php:177
+#: views/remote_ews_settings.php:238 views/remote_ical_settings.php:95
 msgid "5 Minutes"
 msgstr ""
 
-#: views/remote_caldav_settings.php:182 views/remote_ews_settings.php:243
-#: views/remote_ical_settings.php:100
+#: views/oauth_calendar_form.php:126 views/remote_caldav_settings.php:182
+#: views/remote_ews_settings.php:243 views/remote_ical_settings.php:100
 msgid "6 Hours"
 msgstr ""
 
-#: IcalParser/IcalRangedParser.php:119
+#: IcalParser/IcalRangedParser.php:131
 msgid ""
 "A calendar you have added has an event that has a reoccuring rule of COUNT. "
 "When COUNT is used this slows down Calendar drastically. Please change your "
 "rule to another format"
 msgstr ""
 
-#: views/calendargroupgrid.php:38 views/grid.php:29
+#: views/calendargroupgrid.php:38 views/grid.php:34
+#: views/outlook_configs_grid.php:20
 msgid "Actions"
 msgstr ""
 
-#: Calendar.class.php:434
+#: Calendar.class.php:505
 msgid "Add"
 msgstr ""
 
@@ -130,11 +131,15 @@ msgstr ""
 msgid "Add %s"
 msgstr ""
 
-#: views/grid.php:14 views/rnav.php:5
+#: views/grid.php:14 views/rnav.php:6
 msgid "Add Calendar"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:106
+#: views/outlook_configs_grid.php:10
+msgid "Add Config"
+msgstr ""
+
+#: assets/js/calendar/calendar.js:109
 msgid "Add Event"
 msgstr ""
 
@@ -142,35 +147,39 @@ msgstr ""
 msgid "Add Group"
 msgstr ""
 
-#: views/rnav.php:8
+#: views/rnav.php:9
 msgid "Add New Local Calendar"
 msgstr ""
 
-#: views/rnav.php:10
+#: views/rnav.php:11
 msgid "Add Remote CalDAV Calendar"
 msgstr ""
 
-#: views/rnav.php:13
+#: views/rnav.php:15
 msgid "Add Remote Google Calendar"
 msgstr ""
 
-#: views/rnav.php:11
+#: views/rnav.php:12
 msgid "Add Remote Outlook Calendar"
 msgstr ""
 
-#: views/rnav.php:9
+#: views/rnav.php:13
+msgid "Add Remote Outlook Calendar using Oauth2"
+msgstr ""
+
+#: views/rnav.php:10
 msgid "Add Remote iCal Calendar"
 msgstr ""
 
-#: views/calendar.php:471 views/calendar.php:516
+#: views/calendar.php:476 views/calendar.php:521
 msgid "After"
 msgstr ""
 
-#: Console/Calendar.class.php:79 views/calendar.php:182 views/calendar.php:187
+#: Console/Calendar.class.php:112 views/calendar.php:187 views/calendar.php:192
 msgid "All Day"
 msgstr ""
 
-#: views/calendar.php:195
+#: views/calendar.php:200
 msgid "All Day Event"
 msgstr ""
 
@@ -182,6 +191,14 @@ msgstr ""
 msgid "Allowed Calendars"
 msgstr ""
 
+#: views/outlook_config_form.php:107
+msgid "Application (client) ID"
+msgstr ""
+
+#: calendar.i18n.php:6
+msgid "Applications"
+msgstr ""
+
 #: views/remote_ews_settings.php:280
 msgid "Attempting to load"
 msgstr ""
@@ -190,8 +207,12 @@ msgstr ""
 msgid "Attempting to load..."
 msgstr ""
 
-#: views/remote_caldav_settings.php:171 views/remote_ews_settings.php:232
-#: views/remote_ical_settings.php:89
+#: views/outlook_config_form.php:3
+msgid "Authorize access"
+msgstr ""
+
+#: views/oauth_calendar_form.php:115 views/remote_caldav_settings.php:171
+#: views/remote_ews_settings.php:232 views/remote_ical_settings.php:89
 msgid "Auto Refresh"
 msgstr ""
 
@@ -199,9 +220,20 @@ msgstr ""
 msgid "Autodetect"
 msgstr ""
 
-#: Calendar.class.php:938 Console/Calendar.class.php:22
+#: views/outlook_config_form.php:98
+msgid ""
+"Azzure Active Directory Id or Tenant Id, which you will get on azure portal "
+"while registering your application"
+msgstr ""
+
+#: Calendar.class.php:1054 Console/Calendar.class.php:22 calendar.i18n.php:4
+#: calendar.i18n.php:10 views/oauth_calendar_form.php:175
 #: views/remote_caldav_settings.php:133 views/remote_ews_settings.php:194
 msgid "Calendar"
+msgstr ""
+
+#: calendar.i18n.php:12
+msgid "Calendar Event Groups"
 msgstr ""
 
 #: functions.inc.php:15 functions.inc.php:28
@@ -223,11 +255,11 @@ msgstr ""
 msgid "Calendar groups the user may utilize."
 msgstr ""
 
-#: assets/js/calendar/calendar.js:135
+#: assets/js/calendar/calendar.js:138
 msgid "Calendar name cannot be empty."
 msgstr ""
 
-#: assets/js/calendar/calendar.js:130
+#: assets/js/calendar/calendar.js:133
 msgid "Calendar names should be unique."
 msgstr ""
 
@@ -235,7 +267,7 @@ msgstr ""
 msgid "Calendar processed successfully"
 msgstr ""
 
-#: IcalParser/IcalRangedParser.php:119
+#: IcalParser/IcalRangedParser.php:131
 msgid "Calendar using COUNT"
 msgstr ""
 
@@ -247,7 +279,7 @@ msgstr ""
 msgid "Calendars the user may utilize"
 msgstr ""
 
-#: views/calendar.php:116
+#: views/calendar.php:121
 msgid "Categories this event belongs to, separated by comma"
 msgstr ""
 
@@ -255,57 +287,87 @@ msgstr ""
 msgid "Check if match, value can be any timestamp"
 msgstr ""
 
-#: views/calendar.php:539
+#: views/outlook_config_form.php:127
+msgid "Clent Secret Value"
+msgstr ""
+
+#: views/calendar.php:544
 msgid "Close"
 msgstr ""
 
-#: views/calendar.php:308
+#: Console/Calendar.class.php:94
+msgid "Commands"
+msgstr ""
+
+#: Calendar.class.php:448
+msgid "Config name already exists."
+msgstr ""
+
+#: views/outlook_config_form.php:117
+msgid "Consumer Key For Outlook"
+msgstr ""
+
+#: views/calendar.php:313
 msgid "Daily"
 msgstr ""
 
-#: views/calendar.php:419
+#: Calendar.class.php:453
+msgid "Data saved"
+msgstr ""
+
+#: views/calendar.php:424
 msgid "Date of the month (E.g. 16th)"
 msgstr ""
 
-#: views/calendar.php:444
+#: views/calendar.php:449
 msgid "Date of the year (E.g. May 16th)"
 msgstr ""
 
-#: views/calendar.php:421
+#: views/calendar.php:426
 msgid "Day of the month (E.g. 2nd Monday)"
 msgstr ""
 
-#: views/calendar.php:446
+#: views/calendar.php:451
 msgid "Day of the year (E.g. 2nd Monday in May)"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:386
+#: assets/js/calendar/calendar.js:396
 msgid "Days"
 msgstr ""
 
-#: views/calendar.php:481
+#: views/calendar.php:486
 msgid "Define when to stop the reoccurrance"
 msgstr ""
 
-#: Calendar.class.php:826 Calendar.class.php:864
+#: Calendar.class.php:939 Calendar.class.php:977
 msgid "Delete"
 msgstr ""
 
-#: views/calendar.php:538
+#: views/calendar.php:543
 msgid "Delete Event"
 msgstr ""
 
-#: Console/Calendar.class.php:79 views/grid.php:27 views/local_settings.php:44
-#: views/remote_caldav_settings.php:44 views/remote_ews_settings.php:47
-#: views/remote_ical_settings.php:45
+#: Console/Calendar.class.php:78 Console/Calendar.class.php:112
+#: views/grid.php:32 views/local_settings.php:44
+#: views/oauth_calendar_form.php:49 views/outlook_config_form.php:46
+#: views/outlook_configs_grid.php:18 views/remote_caldav_settings.php:44
+#: views/remote_ews_settings.php:47 views/remote_ical_settings.php:45
 msgid "Description"
 msgstr ""
 
-#: views/calendar.php:92
+#: views/calendar.php:97
 msgid "Description for the event"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:441
+#: views/outlook_config_form.php:58
+msgid "Description for the settings."
+msgstr ""
+
+#: views/outlook_config_form.php:88
+msgid "Directory (tenant) ID"
+msgstr ""
+
+#: assets/js/calendar/calendar.js:451
 msgid "Duplicate calendar name."
 msgstr ""
 
@@ -317,15 +379,15 @@ msgstr ""
 msgid "EWS Version"
 msgstr ""
 
-#: Calendar.class.php:439
+#: Calendar.class.php:510
 msgid "Edit"
 msgstr ""
 
-#: Calendar.class.php:796
+#: Calendar.class.php:909
 msgid "Edit Settings"
 msgstr ""
 
-#: views/remote_ews_settings.php:69
+#: views/oauth_calendar_form.php:71 views/remote_ews_settings.php:69
 msgid "Email"
 msgstr ""
 
@@ -333,35 +395,35 @@ msgstr ""
 msgid "Enable Calendar"
 msgstr ""
 
-#: Console/Calendar.class.php:79
+#: Console/Calendar.class.php:112
 msgid "End"
 msgstr ""
 
-#: views/calendar.php:155
+#: views/calendar.php:160
 msgid "End Date"
 msgstr ""
 
-#: views/calendar.php:231
+#: views/calendar.php:236
 msgid "End Time"
 msgstr ""
 
-#: views/calendar.php:464
+#: views/calendar.php:469
 msgid "Ends"
 msgstr ""
 
-#: views/calendar.php:38
+#: views/calendar.php:43
 msgid "Event"
 msgstr ""
 
-#: views/calendar.php:104
+#: views/calendar.php:109
 msgid "Event Categories"
 msgstr ""
 
-#: views/calendar.php:80
+#: views/calendar.php:85
 msgid "Event Description"
 msgstr ""
 
-#: views/calendar.php:56
+#: views/calendar.php:61
 msgid "Event Title"
 msgstr ""
 
@@ -373,16 +435,22 @@ msgstr ""
 msgid "Events to include in to this group"
 msgstr ""
 
-#: views/calendar.php:310
+#: views/calendar.php:315
 msgid "Every Monday, Wednesday, and Friday"
 msgstr ""
 
-#: views/calendar.php:311
+#: views/calendar.php:316
 msgid "Every Tuesday and Thursday"
 msgstr ""
 
-#: views/calendar.php:309
+#: views/calendar.php:314
 msgid "Every weekday (Monday to Friday"
+msgstr ""
+
+#: drivers/Caldav.php:55
+msgid ""
+"Exception occured while retrieving the list of calendars. Are connection "
+"parameters correct?"
 msgstr ""
 
 #: assets/js/calendargroups/calendargroups.js:11
@@ -393,15 +461,23 @@ msgstr ""
 msgid "Export Calendar by ID"
 msgstr ""
 
+#: Console/Calendar.class.php:262
+msgid "File does not exist"
+msgstr ""
+
 #: Console/Calendar.class.php:30
 msgid "File location of the ics to import"
+msgstr ""
+
+#: Console/Calendar.class.php:236
+msgid "Finished"
 msgstr ""
 
 #: Console/Calendar.class.php:25
 msgid "Force command"
 msgstr ""
 
-#: views/calendar.php:68
+#: views/calendar.php:73
 msgid "Friendly name for the event"
 msgstr ""
 
@@ -409,25 +485,51 @@ msgstr ""
 msgid "Generating..."
 msgstr ""
 
+#: views/outlook_config_form.php:177
+msgid "Get OAUTH2 Token for the Outlook API"
+msgstr ""
+
+#: Console/Calendar.class.php:93
+msgid "Get more details about calendars, please run the commands below:"
+msgstr ""
+
 #: views/calendargroupgrid.php:37
 msgid "Group"
 msgstr ""
 
-#: views/remote_caldav_settings.php:194 views/remote_ews_settings.php:255
-#: views/remote_ical_settings.php:112
+#: views/oauth_calendar_form.php:138 views/remote_caldav_settings.php:194
+#: views/remote_ews_settings.php:255 views/remote_ical_settings.php:112
 msgid "How often this calendar will synchronize with the remote server"
+msgstr ""
+
+#: Console/Calendar.class.php:78
+msgid "ID"
+msgstr ""
+
+#: views/calendar.php:8
+msgid ""
+"If calendar is not syncing properly please check for the outlook config "
+"which is selected for this calendar."
 msgstr ""
 
 #: Console/Calendar.class.php:28
 msgid "Import Calendar by ID"
 msgstr ""
 
-#: Calendar.class.php:915 Calendar.class.php:923 views/ucp_config.php:18
+#: Calendar.class.php:1031 Calendar.class.php:1039 views/ucp_config.php:18
 msgid "Inherit"
 msgstr ""
 
 #: drivers/Ical.php:62
 msgid "Invalid ical remote URL"
+msgstr ""
+
+#: Console/Calendar.class.php:228
+msgid "Invalid type"
+msgstr ""
+
+#: Calendar.class.php:481
+msgid "Invalid user name/config"
 msgstr ""
 
 #: views/rnav.php:2
@@ -442,11 +544,23 @@ msgstr ""
 msgid "Local Calendar"
 msgstr ""
 
-#: views/calendar.php:313
+#: views/outlook_config_form.php:157
+msgid "Login URL for Outlook"
+msgstr ""
+
+#: Console/Calendar.class.php:187
+msgid "Match Found"
+msgstr ""
+
+#: Console/Calendar.class.php:212 Console/Calendar.class.php:221
+msgid "Matched"
+msgstr ""
+
+#: views/calendar.php:318
 msgid "Monthly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:401
+#: assets/js/calendar/calendar.js:411
 msgid "Months"
 msgstr ""
 
@@ -457,49 +571,68 @@ msgid ""
 "single group!"
 msgstr ""
 
-#: Console/Calendar.class.php:79 views/calendargroups.php:19 views/grid.php:26
-#: views/local_settings.php:22 views/remote_caldav_settings.php:22
+#: views/calendar.php:8
+msgid "NOTE:"
+msgstr ""
+
+#: Console/Calendar.class.php:78 Console/Calendar.class.php:112
+#: views/calendargroups.php:19 views/grid.php:31 views/local_settings.php:22
+#: views/oauth_calendar_form.php:27 views/outlook_config_form.php:24
+#: views/outlook_configs_grid.php:17 views/remote_caldav_settings.php:22
 #: views/remote_ews_settings.php:25 views/remote_ical_settings.php:23
-#: views/rnav.php:30
+#: views/rnav.php:32
 msgid "Name"
+msgstr ""
+
+#: views/outlook_config_form.php:36
+msgid "Name for the settings."
 msgstr ""
 
 #: views/calendargroups.php:31
 msgid "Name of this group"
 msgstr ""
 
-#: views/calendar.php:469
+#: views/calendar.php:474
 msgid "Never"
 msgstr ""
 
-#: Console/Calendar.class.php:89 Console/Calendar.class.php:90
-#: Console/Calendar.class.php:91 views/ucp_config.php:15
+#: Console/Calendar.class.php:122 Console/Calendar.class.php:123
+#: Console/Calendar.class.php:124 views/ucp_config.php:15
 msgid "No"
 msgstr ""
 
-#: Calendar.class.php:316
+#: Calendar.class.php:329
 #, php-format
 msgid "No Categories for %s"
 msgstr ""
 
-#: Calendar.class.php:330
+#: Calendar.class.php:343
 #, php-format
 msgid "No Events for %s"
 msgstr ""
 
-#: drivers/Ews/Calendar.php:51
+#: Console/Calendar.class.php:190 Console/Calendar.class.php:215
+#: Console/Calendar.class.php:224
+msgid "No Match Found"
+msgstr ""
+
+#: drivers/Ews/Calendar.php:54
 msgid "No settings were discovered"
 msgstr ""
 
-#: Console/Calendar.class.php:79
+#: Console/Calendar.class.php:112
 msgid "Now Match"
 msgstr ""
 
-#: views/calendar.php:491
+#: views/oauth_calendar_form.php:148
+msgid "Oauth Config"
+msgstr ""
+
+#: views/calendar.php:496
 msgid "Occurrences"
 msgstr ""
 
-#: views/calendar.php:473
+#: views/calendar.php:478
 msgid "On"
 msgstr ""
 
@@ -511,40 +644,69 @@ msgstr ""
 msgid "One of: calendar | event | group"
 msgstr ""
 
+#: views/outlook_config_form.php:147
+msgid "Outlook Auth URL"
+msgstr ""
+
+#: views/outlook_config_form.php:9
+msgid "Outlook Config"
+msgstr ""
+
+#: views/grid.php:24 views/rnav.php:3
+msgid "Outlook Oauth2 Config"
+msgstr ""
+
+#: views/outlook_config_form.php:68
+msgid "PBX URL"
+msgstr ""
+
 #: views/remote_caldav_settings.php:110 views/remote_ews_settings.php:113
 msgid "Password"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:449
+#: assets/js/calendar/calendar.js:459
 msgid "Please define a valid url"
 msgstr ""
 
-#: views/remote_caldav_settings.php:153 views/remote_ews_settings.php:214
+#: views/oauth_calendar_form.php:192 views/remote_caldav_settings.php:153
+#: views/remote_ews_settings.php:214
 msgid "Please enter valid credentials above"
+msgstr ""
+
+#: Calendar.class.php:481 Calendar.class.php:494
+msgid "Please generated the auth token to list the user calendars."
+msgstr ""
+
+#: views/oauth_calendar_form.php:153
+msgid "Please select a Config"
 msgstr ""
 
 #: views/remote_caldav_settings.php:66
 msgid "Principal URL"
 msgstr ""
 
-#: views/calendar.php:20
+#: views/calendar.php:24
 msgid "Private address in iCal format"
 msgstr ""
 
-#: views/calendar.php:22
+#: views/calendar.php:26
 msgid "Private iCal Link"
 msgstr ""
 
-#: Console/Calendar.class.php:79
+#: Console/Calendar.class.php:112
 msgid "Recurring"
 msgstr ""
 
-#: drivers/Caldav.php:17
+#: drivers/Caldav.php:18
 msgid "Remote CalDAV Calendar"
 msgstr ""
 
 #: drivers/Ews.php:16
 msgid "Remote Outlook Calendar"
+msgstr ""
+
+#: drivers/Oauth.php:16
+msgid "Remote Outlook Calendar using Oauth2"
 msgstr ""
 
 #: views/remote_ical_settings.php:67
@@ -555,36 +717,36 @@ msgstr ""
 msgid "Remote iCal Calendar"
 msgstr ""
 
-#: views/calendar.php:279 views/calendar.php:284
+#: views/calendar.php:284 views/calendar.php:289
 msgid "Reoccurring"
 msgstr ""
 
-#: views/calendar.php:292
+#: views/calendar.php:297
 msgid "Reoccurring Event"
 msgstr ""
 
-#: views/calendar.php:333
+#: views/calendar.php:338
 msgid "Repeat Every"
 msgstr ""
 
-#: views/calendar.php:389
+#: views/calendar.php:394
 msgid "Repeat On"
 msgstr ""
 
-#: views/calendar.php:414 views/calendar.php:439
+#: views/calendar.php:419 views/calendar.php:444
 msgid "Repeat by"
 msgstr ""
 
-#: views/calendar.php:379
+#: views/calendar.php:384
 msgid "Repeat every X interval"
 msgstr ""
 
-#: views/calendar.php:303
+#: views/calendar.php:308
 msgid "Repeats"
 msgstr ""
 
-#: Calendar.class.php:812 Calendar.class.php:831 Calendar.class.php:850
-#: Calendar.class.php:869
+#: Calendar.class.php:925 Calendar.class.php:944 Calendar.class.php:963
+#: Calendar.class.php:982
 msgid "Reset"
 msgstr ""
 
@@ -592,19 +754,28 @@ msgstr ""
 msgid "Reset Calendar by ID"
 msgstr ""
 
-#: views/calendar.php:404
+#: Console/Calendar.class.php:247 Console/Calendar.class.php:257
+msgid "Reset is only supported on local calendars!"
+msgstr ""
+
+#: views/outlook_config_form.php:170
+msgid "Save"
+msgstr ""
+
+#: views/calendar.php:409
 msgid "Select day of week to repeat on"
 msgstr ""
 
-#: views/calendar.php:323
+#: views/calendar.php:328
 msgid "Select how often this event repeats"
 msgstr ""
 
-#: views/calendar.php:429 views/calendar.php:454
+#: views/calendar.php:434 views/calendar.php:459
 msgid "Select how to repeat"
 msgstr ""
 
-#: views/remote_caldav_settings.php:161 views/remote_ews_settings.php:222
+#: views/oauth_calendar_form.php:200 views/remote_caldav_settings.php:161
+#: views/remote_ews_settings.php:222
 msgid "Select specific calendar"
 msgstr ""
 
@@ -621,6 +792,16 @@ msgid ""
 "categories are selected then all events in said categories will match"
 msgstr ""
 
+#: views/oauth_calendar_form.php:165
+msgid "Select the Oauth Config or credentials for this calendar"
+msgstr ""
+
+#: drivers/Oauth.php:92
+msgid ""
+"Something went wrong while generating token. Please regenerate the auth "
+"token by checking the respective outlook config and try again"
+msgstr ""
+
 #: views/calendargroups.php:71
 msgid "Specific Categories"
 msgstr ""
@@ -629,24 +810,36 @@ msgstr ""
 msgid "Specific Events"
 msgstr ""
 
-#: Console/Calendar.class.php:79
+#: Console/Calendar.class.php:112
 msgid "Start"
 msgstr ""
 
-#: views/calendar.php:128
+#: views/calendar.php:133
 msgid "Start Date"
 msgstr ""
 
-#: views/calendar.php:207
+#: views/calendar.php:212
 msgid "Start Time"
 msgstr ""
 
-#: Calendar.class.php:817 Calendar.class.php:836 Calendar.class.php:855
-#: Calendar.class.php:874 views/calendar.php:540
+#: Console/Calendar.class.php:234
+msgid "Starting Sync..."
+msgstr ""
+
+#: Calendar.class.php:930 Calendar.class.php:949 Calendar.class.php:968
+#: Calendar.class.php:987 views/calendar.php:545
 msgid "Submit"
 msgstr ""
 
-#: Calendar.class.php:411
+#: Console/Calendar.class.php:266
+msgid "Successfully imported calendar"
+msgstr ""
+
+#: Console/Calendar.class.php:251
+msgid "Successfully reset the calendar"
+msgstr ""
+
+#: Calendar.class.php:424
 msgid "Successfully updated event"
 msgstr ""
 
@@ -654,21 +847,31 @@ msgstr ""
 msgid "Syncronize all Calendars"
 msgstr ""
 
+#: views/outlook_configs_grid.php:19
+msgid "Tenant Id"
+msgstr ""
+
+#: views/outlook_config_form.php:80
+msgid "The PBX URL to get on which you will get auth responses."
+msgstr ""
+
 #: views/remote_caldav_settings.php:100
 msgid "The Userman for this calendar"
 msgstr ""
 
-#: views/local_settings.php:56 views/remote_caldav_settings.php:56
-#: views/remote_ews_settings.php:59 views/remote_ical_settings.php:57
+#: views/local_settings.php:56 views/oauth_calendar_form.php:61
+#: views/remote_caldav_settings.php:56 views/remote_ews_settings.php:59
+#: views/remote_ical_settings.php:57
 msgid "The description of this calendar"
 msgstr ""
 
-#: views/remote_ews_settings.php:81
+#: views/oauth_calendar_form.php:83 views/remote_ews_settings.php:81
 msgid "The email address of this calendar's user [Optional]"
 msgstr ""
 
-#: views/local_settings.php:34 views/remote_caldav_settings.php:34
-#: views/remote_ews_settings.php:37 views/remote_ical_settings.php:35
+#: views/local_settings.php:34 views/oauth_calendar_form.php:39
+#: views/remote_caldav_settings.php:34 views/remote_ews_settings.php:37
+#: views/remote_ical_settings.php:35
 msgid "The name of this calendar"
 msgstr ""
 
@@ -689,7 +892,7 @@ msgstr ""
 msgid "The remote url for this calendar"
 msgstr ""
 
-#: views/calendar.php:143
+#: views/calendar.php:148
 msgid "The time to start the event"
 msgstr ""
 
@@ -697,7 +900,13 @@ msgstr ""
 msgid "The username of this calendar's user"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:193
+#: views/oauth_calendar_form.php:105
+msgid ""
+"The username of this calendar's user. Please make sure username must be the "
+"micrsoft outlook's username"
+msgstr ""
+
+#: assets/js/calendar/calendar.js:196
 msgid "There was an error fetching the events"
 msgstr ""
 
@@ -705,40 +914,46 @@ msgstr ""
 msgid "These groups can then be linked to various applications or utilities"
 msgstr ""
 
-#: views/calendar.php:219
+#: calendar.i18n.php:8
+msgid ""
+"This module is used to manage calendar and time based events for FreePBX"
+msgstr ""
+
+#: views/calendar.php:224
 msgid "Time event starts"
 msgstr ""
 
-#: views/calendar.php:243
+#: views/calendar.php:248
 msgid "Time the event ends"
 msgstr ""
 
-#: views/calendar.php:170
+#: views/calendar.php:175
 msgid "Time this event ends"
 msgstr ""
 
-#: Console/Calendar.class.php:79 views/calendar.php:255
-#: views/local_settings.php:67
+#: Console/Calendar.class.php:78 Console/Calendar.class.php:112
+#: views/calendar.php:260 views/local_settings.php:67
+#: views/oauth_calendar_form.php:211
 msgid "Timezone"
 msgstr ""
 
-#: views/local_settings.php:79
+#: views/local_settings.php:79 views/oauth_calendar_form.php:223
 msgid "Timezone for this Calendar"
 msgstr ""
 
-#: views/calendar.php:267
+#: views/calendar.php:272
 msgid "Timezone for this event"
 msgstr ""
 
-#: views/grid.php:28 views/rnav.php:31
+#: Console/Calendar.class.php:78 views/grid.php:33 views/rnav.php:33
 msgid "Type"
 msgstr ""
 
-#: Console/Calendar.class.php:79
+#: Console/Calendar.class.php:112
 msgid "UID"
 msgstr ""
 
-#: drivers/Ews/Calendar.php:76
+#: drivers/Ews/Calendar.php:79
 msgid "Unable to determine server URL"
 msgstr ""
 
@@ -746,11 +961,11 @@ msgstr ""
 msgid "Unknown Calendar"
 msgstr ""
 
-#: Calendar.class.php:803 assets/js/calendar/calendar.js:337
+#: Calendar.class.php:916 assets/js/calendar/calendar.js:347
 msgid "Update from Source"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:320
+#: assets/js/calendar/calendar.js:330
 msgid "Updating..."
 msgstr ""
 
@@ -762,19 +977,20 @@ msgstr ""
 msgid "Use All Events"
 msgstr ""
 
-#: views/calendar.php:259
+#: views/calendar.php:264
 msgid "Use Calendar Timezone"
 msgstr ""
 
-#: views/remote_caldav_settings.php:88 views/remote_ews_settings.php:91
+#: views/oauth_calendar_form.php:93 views/remote_caldav_settings.php:88
+#: views/remote_ews_settings.php:91
 msgid "Username"
 msgstr ""
 
-#: views/calendar.php:14
+#: views/calendar.php:18
 msgid "Utilizing the calendar timezone (You can change this in Edit Settings)"
 msgstr ""
 
-#: views/calendar.php:16
+#: views/calendar.php:20
 msgid ""
 "Utilizing your timezone (You can change this in Advanced Settings or User "
 "Manager)"
@@ -784,25 +1000,25 @@ msgstr ""
 msgid "View Calendars"
 msgstr ""
 
-#: views/calendar.php:7
+#: views/calendar.php:11
 #, php-format
 msgid "Viewing Calendar '%s'"
 msgstr ""
 
-#: views/calendar.php:10
+#: views/calendar.php:14
 #, php-format
 msgid "Viewing from timezone '%s'"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:135 assets/js/calendar/calendar.js:441
+#: assets/js/calendar/calendar.js:138 assets/js/calendar/calendar.js:451
 msgid "Warning"
 msgstr ""
 
-#: views/calendar.php:312
+#: views/calendar.php:317
 msgid "Weekly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:383
+#: assets/js/calendar/calendar.js:393
 msgid "Weeks"
 msgstr ""
 
@@ -814,20 +1030,20 @@ msgstr ""
 msgid "Whether to allow this user to be able to access the calendar in UCP"
 msgstr ""
 
-#: views/calendar.php:531
+#: views/calendar.php:536
 msgid "X number of occurances"
 msgstr ""
 
-#: views/calendar.php:314
+#: views/calendar.php:319
 msgid "Yearly"
 msgstr ""
 
-#: assets/js/calendar/calendar.js:408
+#: assets/js/calendar/calendar.js:418
 msgid "Years"
 msgstr ""
 
-#: Console/Calendar.class.php:89 Console/Calendar.class.php:90
-#: Console/Calendar.class.php:91 views/ucp_config.php:13
+#: Console/Calendar.class.php:122 Console/Calendar.class.php:123
+#: Console/Calendar.class.php:124 views/ucp_config.php:13
 msgid "Yes"
 msgstr ""
 
@@ -835,14 +1051,30 @@ msgstr ""
 msgid "You are missing the PHP SoapClient library. Please install to continue"
 msgstr ""
 
-#: Calendar.class.php:364 Calendar.class.php:408
+#: Calendar.class.php:377 Calendar.class.php:421
 msgid "You can only edit local calendars"
 msgstr ""
 
-#: views/calendar.php:497 views/calendar.php:506
+#: Calendar.class.php:491
+msgid "found user calendars"
+msgstr ""
+
+#: views/outlook_config_form.php:137
+msgid "helptext"
+msgstr ""
+
+#: views/calendar.php:502 views/calendar.php:511
 msgid "occurrences"
 msgstr ""
 
-#: Calendar.class.php:352
+#: Calendar.class.php:1266
+msgid "saved access token"
+msgstr ""
+
+#: Calendar.class.php:459
+msgid "saved auth code"
+msgstr ""
+
+#: Calendar.class.php:365
 msgid "to"
 msgstr ""
