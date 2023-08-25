@@ -21,5 +21,5 @@ class NonEmptyArrayOfFolderChangesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\FolderChangeType[]
      */
-    public $FolderChange = array();
+    public $FolderChange = [];
 }

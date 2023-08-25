@@ -115,30 +115,30 @@ try {
 	 * findCalendars()
 	 * setCalendar()
 	 */
-	
+
 	$client->connect('http://yourServer/baikal/cal.php/calendars/yourUser/yourCalendar', 'username', 'password');
-	
+
 	$arrayOfCalendars = $client->findCalendars(); // Returns an array of all accessible calendars on the server.
-	
+
 	$client->setCalendar($arrayOfCalendars["myCalendarID"]); // Here: Use the calendar ID of your choice. If you don't know which calendar ID to use, try config/listCalendars.php
-	
-    
-    
-    
-    
+
+
+
+
+
 	/*
 	 * You can create calendar objects (e.g. events, todos,...) on the server with create().
 	 * Just pass a string with the iCalendar-data which should be saved on the server.
 	 * The function returns a CalDAVObject (see CalDAVObject.php) with the stored information about the new object on the server
 	 */
-	
+
 	$firstNewEventOnServer = $client->create($firstNewEvent); // Creates $firstNewEvent on the server and a CalDAVObject representing the event.
 	$secondNewEventOnServer = $client->create($secondNewEvent); // Creates $firstNewEvent on the server and a CalDAVObject representing the event.
-	
-    
-    
-    
-    
+
+
+
+
+
 	/*
 	 * You can getEvents with getEvents()
 	 */
@@ -153,7 +153,7 @@ try {
 	 * $o->getHref() and $o->getEtag() can be used to change or to delete the object.
 	 * $o->getData() can be processed further on, e.g. printed
 	 */
-	
+
 	$firstNewEventOnServer = $client->change($firstNewEventOnServer->getHref(),$changedFirstEvent, $firstNewEventOnServer->getEtag());
 	// Change the first event on the server from $firstNewEvent to $changedFirstEvent
 	// and overwrite $firstNewEventOnServer with the new representation of the changed event on the server.
@@ -161,26 +161,26 @@ try {
 	$events = $client->getEvents('20140418T103000Z', '20140419T200000Z'); // Returns array($secondNewEventOnServer);
 
 	echo $events[0]->getData(); // Prints $secondNewEvent. See CalDAVObject.php
-	
+
 	$client->delete($secondNewEventOnServer->getHref(), $secondNewEventOnServer->getEtag()); // Deletes the second new event from the server.
 
 	$client->getEvents('20140418T103000Z', '20140419T200000Z'); // Returns an empty array
-	
-    
-    
-    
-    
+
+
+
+
+
     /*
      * You can create custom queries to the server via CalDAVFilter. See CalDAVFilter.php
      */
-     
+
     $filter = new CalDAVFilter("VEVENT");
     $filter->mustInclude("SUMMARY"); // Should include a SUMMARY
     $filter->mustInclude("PRIORITY", TRUE); // Should not include a PRIORITY
     $filter->mustIncludeMatchSubstr("DESCRIPTION", "ExampleDescription2", TRUE); // "ExampleDescription1" should not be a substring of the DESCRIPTION
     $filter->mustOverlapWithTimerange(NULL, "20140420T100000Z");
     $events = $client->getCustomReport($filter->toXML()); // Returns array($changedFirstEvent)
-    
+
     $client->delete($events[0]->getHref(), $events[0]->getEtag()); // Deletes the changed first event from the server.
 }
 

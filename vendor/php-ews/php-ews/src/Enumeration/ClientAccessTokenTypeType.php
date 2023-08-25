@@ -21,7 +21,7 @@ class ClientAccessTokenTypeType extends Enumeration
      *
      * @var string
      */
-    const CALLER_IDENTITY = 'CallerIdentity';
+    final public const CALLER_IDENTITY = 'CallerIdentity';
 
     /**
      * Undocumented.
@@ -32,7 +32,7 @@ class ClientAccessTokenTypeType extends Enumeration
      *
      * @todo Update once documentation exists.
      */
-    const CONNECTORS = 'Connectors';
+    final public const CONNECTORS = 'Connectors';
 
     /**
      * An extension callback client access token.
@@ -41,7 +41,7 @@ class ClientAccessTokenTypeType extends Enumeration
      *
      * @var string
      */
-    const EXTENSION_CALLBACK = 'ExtensionCallback';
+    final public const EXTENSION_CALLBACK = 'ExtensionCallback';
 
     /**
      * Undocumented.
@@ -52,7 +52,7 @@ class ClientAccessTokenTypeType extends Enumeration
      *
      * @todo Update once documentation exists.
      */
-    const EXTENSION_REST_API_CALLBACK = 'ExtensionRestApiCallback';
+    final public const EXTENSION_REST_API_CALLBACK = 'ExtensionRestApiCallback';
 
     /**
      * Undocumented.
@@ -63,7 +63,7 @@ class ClientAccessTokenTypeType extends Enumeration
      *
      * @todo Update once documentation exists.
      */
-    const LOKI = 'Loki';
+    final public const LOKI = 'Loki';
 
     /**
      * Indicates that the client access token is a scoped token.
@@ -72,5 +72,5 @@ class ClientAccessTokenTypeType extends Enumeration
      *
      * @var string
      */
-    const SCOPED_TOKEN = 'ScopedToken';
+    final public const SCOPED_TOKEN = 'ScopedToken';
 }

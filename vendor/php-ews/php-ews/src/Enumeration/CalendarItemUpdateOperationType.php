@@ -23,7 +23,7 @@ class CalendarItemUpdateOperationType extends Enumeration
      *
      * @var string
      */
-    const SEND_ONLY_TO_ALL = 'SendOnlyToAll';
+    final public const SEND_ONLY_TO_ALL = 'SendOnlyToAll';
 
     /**
      * The calendar item is updated and the meeting update is sent only to
@@ -33,7 +33,7 @@ class CalendarItemUpdateOperationType extends Enumeration
      *
      * @var string
      */
-    const SEND_ONLY_TO_CHANGED = 'SendOnlyToChanged';
+    final public const SEND_ONLY_TO_CHANGED = 'SendOnlyToChanged';
 
     /**
      * The calendar item is updated, the meeting update is sent to all
@@ -43,7 +43,7 @@ class CalendarItemUpdateOperationType extends Enumeration
      *
      * @var string
      */
-    const SEND_TO_ALL_AND_SAVE_COPY = 'SendToAllAndSaveCopy';
+    final public const SEND_TO_ALL_AND_SAVE_COPY = 'SendToAllAndSaveCopy';
 
     /**
      * The calendar item is updated, the meeting update is sent to all attendees
@@ -54,7 +54,7 @@ class CalendarItemUpdateOperationType extends Enumeration
      *
      * @var string
      */
-    const SEND_TO_CHANGED_AND_SAVE_COPY = 'SendToChangedAndSaveCopy';
+    final public const SEND_TO_CHANGED_AND_SAVE_COPY = 'SendToChangedAndSaveCopy';
 
     /**
      * The calendar item is updated but updates are not sent to attendees.
@@ -63,5 +63,5 @@ class CalendarItemUpdateOperationType extends Enumeration
      *
      * @var string
      */
-    const SEND_TO_NONE = 'SendToNone';
+    final public const SEND_TO_NONE = 'SendToNone';
 }

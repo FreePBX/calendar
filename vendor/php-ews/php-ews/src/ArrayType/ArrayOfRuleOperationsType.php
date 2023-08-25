@@ -21,7 +21,7 @@ class ArrayOfRuleOperationsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\CreateRuleOperationType[]
      */
-    public $CreateRuleOperation = array();
+    public $CreateRuleOperation = [];
 
     /**
      * Represents an operation to delete an Inbox rule.
@@ -30,7 +30,7 @@ class ArrayOfRuleOperationsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\DeleteRuleOperationType[]
      */
-    public $DeleteRuleOperation = array();
+    public $DeleteRuleOperation = [];
 
     /**
      * Represents an operation to update an Inbox rule.
@@ -39,5 +39,5 @@ class ArrayOfRuleOperationsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\SetRuleOperationType[]
      */
-    public $SetRuleOperation = array();
+    public $SetRuleOperation = [];
 }

@@ -16,11 +16,6 @@ class ArrayValueTest extends \PHPUnit_Framework_TestCase
 
     public function arrayValuesProvider()
     {
-        return array(
-            array(array(), ''),
-            array(array('Lorem'), 'Lorem'),
-            array(array('Lorem', 'Ipsum'), 'Lorem,Ipsum'),
-            array(array('Lorem', '"doublequotes"'), 'Lorem,\"doublequotes\"'),
-        );
+        return [[[], ''], [['Lorem'], 'Lorem'], [['Lorem', 'Ipsum'], 'Lorem,Ipsum'], [['Lorem', '"doublequotes"'], 'Lorem,\"doublequotes\"']];
     }
 }

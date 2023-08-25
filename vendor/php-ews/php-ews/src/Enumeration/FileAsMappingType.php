@@ -21,7 +21,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const COMPANY = 'Company';
+    final public const COMPANY = 'Company';
 
     /**
      * File as mapping for "last name, first name".
@@ -30,7 +30,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var
      */
-    const COMPANY_LAST_COMMA_FIRST = 'CompanyLastCommaFirst';
+    final public const COMPANY_LAST_COMMA_FIRST = 'CompanyLastCommaFirst';
 
     /**
      * File as mapping for "company last name first name".
@@ -39,7 +39,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const COMPANY_LAST_FIRST = 'CompanyLastFirst';
+    final public const COMPANY_LAST_FIRST = 'CompanyLastFirst';
 
     /**
      * File as mapping for "company last name first name".
@@ -48,7 +48,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const COMPANY_LAST_SPACE_FIRST = 'CompanyLastSpaceFirst';
+    final public const COMPANY_LAST_SPACE_FIRST = 'CompanyLastSpaceFirst';
 
     /**
      * File as mapping for "display name".
@@ -57,7 +57,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const DISPLAY_NAME = 'DisplayName';
+    final public const DISPLAY_NAME = 'DisplayName';
 
     /**
      * File as mapping to use when no mapping is defined.
@@ -66,7 +66,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const EMPTY_MAPPING = 'Empty';
+    final public const EMPTY_MAPPING = 'Empty';
 
     /**
      * File as mapping for "first name".
@@ -75,7 +75,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const FIRST_NAME = 'FirstName';
+    final public const FIRST_NAME = 'FirstName';
 
     /**
      * File as mapping for "first name last name".
@@ -84,7 +84,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const FIRST_SPACE_LAST = 'FirstSpaceLast';
+    final public const FIRST_SPACE_LAST = 'FirstSpaceLast';
 
     /**
      * File as mapping for "last name, first name".
@@ -93,7 +93,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const LAST_COMMA_FIRST = 'LastCommaFirst';
+    final public const LAST_COMMA_FIRST = 'LastCommaFirst';
 
     /**
      * File as mapping for "last name, first name company".
@@ -102,7 +102,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const LAST_COMMA_FIRST_COMPANY = 'LastCommaFirstCompany';
+    final public const LAST_COMMA_FIRST_COMPANY = 'LastCommaFirstCompany';
 
     /**
      * File as mapping for "last name first name".
@@ -111,7 +111,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const LAST_FIRST = 'LastFirst';
+    final public const LAST_FIRST = 'LastFirst';
 
     /**
      * File as mapping for "last name first name company".
@@ -120,7 +120,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const LAST_FIRST_COMPANY = 'LastFirstCompany';
+    final public const LAST_FIRST_COMPANY = 'LastFirstCompany';
 
     /**
      * File as mapping for "last name first name middle name suffix".
@@ -129,7 +129,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const LAST_FIRST_MIDDLE_SUFFIX = 'LastFirstMiddleSuffix';
+    final public const LAST_FIRST_MIDDLE_SUFFIX = 'LastFirstMiddleSuffix';
 
     /**
      * File as mapping for "last name first name suffix".
@@ -138,7 +138,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const LAST_FIRST_SUFFIX = 'LastFirstSuffix';
+    final public const LAST_FIRST_SUFFIX = 'LastFirstSuffix';
 
     /**
      * File as mapping for "last name".
@@ -147,7 +147,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const LAST_NAME = 'LastName';
+    final public const LAST_NAME = 'LastName';
 
     /**
      * File as mapping for "last name first name".
@@ -156,7 +156,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const LAST_SPACE_FIRST = 'LastSpaceFirst';
+    final public const LAST_SPACE_FIRST = 'LastSpaceFirst';
 
     /**
      * File as mapping for "last name first name company".
@@ -165,7 +165,7 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const LAST_SPACE_FIRST_COMPANY = 'LastSpaceFirstCompany';
+    final public const LAST_SPACE_FIRST_COMPANY = 'LastSpaceFirstCompany';
 
     /**
      * File as mapping to use when no mapping is desired.
@@ -174,5 +174,5 @@ class FileAsMappingType extends Enumeration
      *
      * @var string
      */
-    const NONE = 'None';
+    final public const NONE = 'None';
 }

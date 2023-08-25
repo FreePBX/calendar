@@ -49,25 +49,10 @@ class Autodiscover extends \jamesiarmes\PhpEws\Autodiscover {
 		$this->reset();
 
 		$ch = curl_init();
-		$opts = array(
-				CURLOPT_URL             => $url,
-				CURLOPT_HTTPAUTH        => $authType,
-				CURLOPT_CUSTOMREQUEST   => 'POST',
-				CURLOPT_POSTFIELDS      => $this->getAutoDiscoverRequest(),
-				CURLOPT_RETURNTRANSFER  => true,
-				CURLOPT_USERPWD         => $this->username.':'.$this->password,
-				CURLOPT_TIMEOUT         => $timeout,
-				CURLOPT_CONNECTTIMEOUT  => $this->connection_timeout,
-				CURLOPT_FOLLOWLOCATION  => true,
-				CURLOPT_HEADER          => false,
-				CURLOPT_HEADERFUNCTION  => array($this, 'readHeaders'),
-				CURLOPT_IPRESOLVE       => CURL_IPRESOLVE_V4,
-				CURLOPT_SSL_VERIFYPEER  => true,
-				CURLOPT_SSL_VERIFYHOST  => 2,
-		);
+		$opts = [CURLOPT_URL             => $url, CURLOPT_HTTPAUTH        => $authType, CURLOPT_CUSTOMREQUEST   => 'POST', CURLOPT_POSTFIELDS      => $this->getAutoDiscoverRequest(), CURLOPT_RETURNTRANSFER  => true, CURLOPT_USERPWD         => $this->username.':'.$this->password, CURLOPT_TIMEOUT         => $timeout, CURLOPT_CONNECTTIMEOUT  => $this->connection_timeout, CURLOPT_FOLLOWLOCATION  => true, CURLOPT_HEADER          => false, CURLOPT_HEADERFUNCTION  => $this->readHeaders(...), CURLOPT_IPRESOLVE       => CURL_IPRESOLVE_V4, CURLOPT_SSL_VERIFYPEER  => true, CURLOPT_SSL_VERIFYHOST  => 2];
 
 		// Set the appropriate content-type.
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/xml; charset=utf-8'));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: text/xml; charset=utf-8']);
 
 		if (! empty($this->cainfo)) {
 				$opts[CURLOPT_CAINFO] = $this->cainfo;

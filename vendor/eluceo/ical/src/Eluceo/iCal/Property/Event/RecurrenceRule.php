@@ -22,21 +22,21 @@ use InvalidArgumentException;
  */
 class RecurrenceRule implements ValueInterface
 {
-    const FREQ_YEARLY   = 'YEARLY';
-    const FREQ_MONTHLY  = 'MONTHLY';
-    const FREQ_WEEKLY   = 'WEEKLY';
-    const FREQ_DAILY    = 'DAILY';
-    const FREQ_HOURLY   = 'HOURLY';
-    const FREQ_MINUTELY = 'MINUTELY';
-    const FREQ_SECONDLY = 'SECONDLY';
+    final public const FREQ_YEARLY   = 'YEARLY';
+    final public const FREQ_MONTHLY  = 'MONTHLY';
+    final public const FREQ_WEEKLY   = 'WEEKLY';
+    final public const FREQ_DAILY    = 'DAILY';
+    final public const FREQ_HOURLY   = 'HOURLY';
+    final public const FREQ_MINUTELY = 'MINUTELY';
+    final public const FREQ_SECONDLY = 'SECONDLY';
 
-    const WEEKDAY_SUNDAY    = 'SU';
-    const WEEKDAY_MONDAY    = 'MO';
-    const WEEKDAY_TUESDAY   = 'TU';
-    const WEEKDAY_WEDNESDAY = 'WE';
-    const WEEKDAY_THURSDAY  = 'TH';
-    const WEEKDAY_FRIDAY    = 'FR';
-    const WEEKDAY_SATURDAY  = 'SA';
+    final public const WEEKDAY_SUNDAY    = 'SU';
+    final public const WEEKDAY_MONDAY    = 'MO';
+    final public const WEEKDAY_TUESDAY   = 'TU';
+    final public const WEEKDAY_WEDNESDAY = 'WE';
+    final public const WEEKDAY_THURSDAY  = 'TH';
+    final public const WEEKDAY_FRIDAY    = 'FR';
+    final public const WEEKDAY_SATURDAY  = 'SA';
 
     /**
      * The frequency of an Event.

@@ -21,7 +21,7 @@ class ViewFilterType extends Enumeration
      *
      * @var string
      */
-    const ALL = 'All';
+    final public const ALL = 'All';
 
     /**
      * For internal use only.
@@ -30,7 +30,7 @@ class ViewFilterType extends Enumeration
      *
      * @var string
      */
-    const CLUTTER = 'Clutter';
+    final public const CLUTTER = 'Clutter';
 
     /**
      * Find flagged conversations.
@@ -39,7 +39,7 @@ class ViewFilterType extends Enumeration
      *
      * @var string
      */
-    const FLAGGED = 'Flagged';
+    final public const FLAGGED = 'Flagged';
 
     /**
      * Find conversations with attachments.
@@ -48,7 +48,7 @@ class ViewFilterType extends Enumeration
      *
      * @var string
      */
-    const HAS_ATTACHMENT = 'HasAttachment';
+    final public const HAS_ATTACHMENT = 'HasAttachment';
 
     /**
      * For internal use only.
@@ -57,7 +57,7 @@ class ViewFilterType extends Enumeration
      *
      * @var string
      */
-    const NO_CLUTTER = 'NoClutter';
+    final public const NO_CLUTTER = 'NoClutter';
 
     /**
      * Find active tasks.
@@ -66,7 +66,7 @@ class ViewFilterType extends Enumeration
      *
      * @var string
      */
-    const TASK_ACTIVE = 'TaskActive';
+    final public const TASK_ACTIVE = 'TaskActive';
 
     /**
      * Find completed tasks.
@@ -75,7 +75,7 @@ class ViewFilterType extends Enumeration
      *
      * @var string
      */
-    const TASK_COMPLETED = 'TaskCompleted';
+    final public const TASK_COMPLETED = 'TaskCompleted';
 
     /**
      * Find overdue tasks.
@@ -84,7 +84,7 @@ class ViewFilterType extends Enumeration
      *
      * @var string
      */
-    const TASK_OVERDUE = 'TaskOverdue';
+    final public const TASK_OVERDUE = 'TaskOverdue';
 
     /**
      * Find conversations addressed or cc'd to me.
@@ -93,7 +93,7 @@ class ViewFilterType extends Enumeration
      *
      * @var string
      */
-    const TO_OR_CC_ME = 'ToOrCcMe';
+    final public const TO_OR_CC_ME = 'ToOrCcMe';
 
     /**
      * Find unread conversations.
@@ -102,5 +102,5 @@ class ViewFilterType extends Enumeration
      *
      * @var string
      */
-    const UNREAD = 'Unread';
+    final public const UNREAD = 'Unread';
 }

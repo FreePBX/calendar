@@ -25,7 +25,7 @@ class NonEmptyArrayOfFolderChangeDescriptionsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\AppendToFolderFieldType[]
      */
-    public $AppendToFolderField = array();
+    public $AppendToFolderField = [];
 
     /**
      * Represents an operation to delete a given property from a folder during
@@ -35,7 +35,7 @@ class NonEmptyArrayOfFolderChangeDescriptionsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\DeleteFolderFieldType[]
      */
-    public $DeleteFolderField = array();
+    public $DeleteFolderField = [];
 
     /**
      * Represents an update to a single property on a folder in an UpdateFolder
@@ -45,5 +45,5 @@ class NonEmptyArrayOfFolderChangeDescriptionsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\SetFolderFieldType[]
      */
-    public $SetFolderField = array();
+    public $SetFolderField = [];
 }

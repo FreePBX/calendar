@@ -22,7 +22,7 @@ class NonEmptyArrayOfPathsToElementType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\PathToExtendedFieldType[]
      */
-    public $ExtendedFieldURI = array();
+    public $ExtendedFieldURI = [];
 
     /**
      * Identifies frequently referenced properties by URI.
@@ -31,7 +31,7 @@ class NonEmptyArrayOfPathsToElementType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\PathToUnindexedFieldType[]
      */
-    public $FieldURI = array();
+    public $FieldURI = [];
 
     /**
      * Identifies frequently referenced dictionary properties by URI.
@@ -40,5 +40,5 @@ class NonEmptyArrayOfPathsToElementType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\PathToIndexedFieldType[]
      */
-    public $IndexedFieldURI = array();
+    public $IndexedFieldURI = [];
 }

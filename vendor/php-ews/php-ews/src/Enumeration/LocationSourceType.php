@@ -22,7 +22,7 @@ class LocationSourceType extends Enumeration
      *
      * @var string
      */
-    const CONTACT = 'Contact';
+    final public const CONTACT = 'Contact';
 
     /**
      * The information was obtained from the device.
@@ -31,7 +31,7 @@ class LocationSourceType extends Enumeration
      *
      * @var string
      */
-    const DEVICE = 'Device';
+    final public const DEVICE = 'Device';
 
     /**
      * The information was obtained from location services.
@@ -40,7 +40,7 @@ class LocationSourceType extends Enumeration
      *
      * @var string
      */
-    const LOCATION_SERVICES = 'LocationServices';
+    final public const LOCATION_SERVICES = 'LocationServices';
 
     /**
      * There is no location source.
@@ -49,7 +49,7 @@ class LocationSourceType extends Enumeration
      *
      * @var string
      */
-    const NONE = 'None';
+    final public const NONE = 'None';
 
     /**
      * The information was obtained from phonebook services.
@@ -58,7 +58,7 @@ class LocationSourceType extends Enumeration
      *
      * @var string
      */
-    const PHONEBOOK_SERVICES = 'PhonebookServices';
+    final public const PHONEBOOK_SERVICES = 'PhonebookServices';
 
     /**
      * The information was obtained from a resource.
@@ -67,5 +67,5 @@ class LocationSourceType extends Enumeration
      *
      * @var string
      */
-    const RESOURCE = 'Resource';
+    final public const RESOURCE = 'Resource';
 }

@@ -22,5 +22,5 @@ class NonEmptyArrayOfMailboxSearchScopesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\MailboxSearchScopeType[]
      */
-    public $MailboxSearchScope = array();
+    public $MailboxSearchScope = [];
 }

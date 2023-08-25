@@ -21,7 +21,7 @@ class CalendarItemTypeType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION = 'Exception';
+    final public const EXCEPTION = 'Exception';
 
     /**
      * The item is an occurrence of a recurring calendar item.
@@ -30,7 +30,7 @@ class CalendarItemTypeType extends Enumeration
      *
      * @var string
      */
-    const OCCURRENCE = 'Occurrence';
+    final public const OCCURRENCE = 'Occurrence';
 
     /**
      * The item is master for a set of recurring calendar items.
@@ -39,7 +39,7 @@ class CalendarItemTypeType extends Enumeration
      *
      * @var string
      */
-    const RECURRING_MASTER = 'RecurringMaster';
+    final public const RECURRING_MASTER = 'RecurringMaster';
 
     /**
      * The item is not associated with a recurring calendar item.
@@ -48,5 +48,5 @@ class CalendarItemTypeType extends Enumeration
      *
      * @var string
      */
-    const SINGLE = 'Single';
+    final public const SINGLE = 'Single';
 }

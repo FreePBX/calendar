@@ -27,7 +27,7 @@ class MessageDispositionType extends Enumeration
      *
      * @var string
      */
-    const SAVE_ONLY = 'SaveOnly';
+    final public const SAVE_ONLY = 'SaveOnly';
 
     /**
      * The item is sent and a copy is saved in the folder that is identified by
@@ -46,7 +46,7 @@ class MessageDispositionType extends Enumeration
      *
      * @var string
      */
-    const SEND_AND_SAVE_COPY = 'SendAndSaveCopy';
+    final public const SEND_AND_SAVE_COPY = 'SendAndSaveCopy';
 
     /**
      * The item is sent but no copy is saved in the Sent Items folder.
@@ -62,5 +62,5 @@ class MessageDispositionType extends Enumeration
      *
      * @var string
      */
-    const SEND_ONLY = 'SendOnly';
+    final public const SEND_ONLY = 'SendOnly';
 }

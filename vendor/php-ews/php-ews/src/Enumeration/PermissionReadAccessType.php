@@ -21,7 +21,7 @@ class PermissionReadAccessType extends Enumeration
      *
      * @var string
      */
-    const FULL_DETAILS = 'FullDetails';
+    final public const FULL_DETAILS = 'FullDetails';
 
     /**
      * Indicates that the user does not have permission to read items in the
@@ -31,5 +31,5 @@ class PermissionReadAccessType extends Enumeration
      *
      * @var string
      */
-    const NONE = 'None';
+    final public const NONE = 'None';
 }

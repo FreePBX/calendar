@@ -21,7 +21,7 @@ class ArrayOfFoldersType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\CalendarFolderType[]
      */
-    public $CalendarFolder = array();
+    public $CalendarFolder = [];
 
     /**
      * Represents a Contacts folder in a mailbox.
@@ -30,7 +30,7 @@ class ArrayOfFoldersType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\ContactsFolderType[]
      */
-    public $ContactsFolder = array();
+    public $ContactsFolder = [];
 
     /**
      * Identifies a folder to create, get, find, synchronize, or update.
@@ -39,7 +39,7 @@ class ArrayOfFoldersType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\FolderType[]
      */
-    public $Folder = array();
+    public $Folder = [];
 
     /**
      * Represents a Search folder contained in a mailbox.
@@ -48,7 +48,7 @@ class ArrayOfFoldersType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\SearchFolderType[]
      */
-    public $SearchFolder = array();
+    public $SearchFolder = [];
 
     /**
      * Represents a Tasks folder in a mailbox.
@@ -57,5 +57,5 @@ class ArrayOfFoldersType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\TasksFolderType[]
      */
-    public $TasksFolder = array();
+    public $TasksFolder = [];
 }

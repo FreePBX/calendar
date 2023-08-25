@@ -21,7 +21,7 @@ class MailTipTypes extends Enumeration
      *
      * @var string
      */
-    const ALL = 'All';
+    final public const ALL = 'All';
 
     /**
      * Represents a custom mail tip.
@@ -30,7 +30,7 @@ class MailTipTypes extends Enumeration
      *
      * @var string
      */
-    const CUSTOM_MAIL_TIP = 'CustomMailTip';
+    final public const CUSTOM_MAIL_TIP = 'CustomMailTip';
 
     /**
      * Indicates whether delivery restrictions will prevent the sender's message
@@ -40,7 +40,7 @@ class MailTipTypes extends Enumeration
      *
      * @var string
      */
-    const DELIVERY_RESTRICTION = 'DeliveryRestriction';
+    final public const DELIVERY_RESTRICTION = 'DeliveryRestriction';
 
     /**
      * Represents the count of external members.
@@ -49,7 +49,7 @@ class MailTipTypes extends Enumeration
      *
      * @var string
      */
-    const EXTERNAL_MEMBER_COUNT = 'ExternalMemberCount';
+    final public const EXTERNAL_MEMBER_COUNT = 'ExternalMemberCount';
 
     /**
      * Indicates whether the recipient is invalid.
@@ -58,7 +58,7 @@ class MailTipTypes extends Enumeration
      *
      * @var string
      */
-    const INVALID_RECIPIENT = 'InvalidRecipient';
+    final public const INVALID_RECIPIENT = 'InvalidRecipient';
 
     /**
      * Represents the status for a mailbox that is full.
@@ -67,7 +67,7 @@ class MailTipTypes extends Enumeration
      *
      * @var string
      */
-    const MAILBOX_FULL_STATUS = 'MailboxFullStatus';
+    final public const MAILBOX_FULL_STATUS = 'MailboxFullStatus';
 
     /**
      * Represents the maximum message size a recipient can accept.
@@ -76,7 +76,7 @@ class MailTipTypes extends Enumeration
      *
      * @var string
      */
-    const MAX_MESSAGE_SIZE = 'MaxMessageSize';
+    final public const MAX_MESSAGE_SIZE = 'MaxMessageSize';
 
     /**
      * Indicates whether the sender's message will be reviewed by a moderator.
@@ -85,7 +85,7 @@ class MailTipTypes extends Enumeration
      *
      * @var string
      */
-    const MODERATION_STATUS = 'ModerationStatus';
+    final public const MODERATION_STATUS = 'ModerationStatus';
 
     /**
      * Represents the Out of Office (OOF) message.
@@ -94,7 +94,7 @@ class MailTipTypes extends Enumeration
      *
      * @var string
      */
-    const OUT_OF_OFFICE_MESSAGE = 'OutOfOfficeMessage';
+    final public const OUT_OF_OFFICE_MESSAGE = 'OutOfOfficeMessage';
 
     /**
      * Represents the count of all members.
@@ -103,5 +103,5 @@ class MailTipTypes extends Enumeration
      *
      * @var string
      */
-    const TOTAL_MEMBER_COUNT = 'TotalMemberCount';
+    final public const TOTAL_MEMBER_COUNT = 'TotalMemberCount';
 }

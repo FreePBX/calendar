@@ -27,13 +27,13 @@ class XMLDocument {
   * holds the namespaces which this document has been configured for.
   * @var namespaces
   */
-  private $namespaces;
+  private $namespaces = [];
 
   /**
   * holds the prefixes which are shorthand for the namespaces.
   * @var prefixes
   */
-  private $prefixes;
+  private $prefixes = [];
 
   /**
   * Holds the root document for the tree
@@ -47,8 +47,6 @@ class XMLDocument {
   * @param array $namespaces An array of 'namespace' => 'prefix' pairs, where the prefix is used as a short form for the namespace.
   */
   function __construct( $namespaces = null ) {
-    $this->namespaces = array();
-    $this->prefixes = array();
     if ( $namespaces != null ) {
       foreach( $namespaces AS $ns => $prefix ) {
         $this->namespaces[$ns] = $prefix;
@@ -124,7 +122,7 @@ class XMLDocument {
   */
   function GetXmlNsArray() {
 
-    $ns = array();
+    $ns = [];
     foreach( $this->namespaces AS $n => $p ) {
       if ( $p == "" ) $ns["xmlns"] = $n; else $ns["xmlns:$p"] = $n;
     }
@@ -182,8 +180,8 @@ class XMLDocument {
   * @param string $namespace The namespace for the tag
   *
   */
-  function NSElement( &$element, $in_tag, $content=false, $attributes=false, $namespace=null ) {
-    if ( $namespace == null && preg_match('/^(.*):([^:]+)$/', $in_tag, $matches) ) {
+  function NSElement( &$element, $in_tag, mixed $content=false, $attributes=false, $namespace=null ) {
+    if ( $namespace == null && preg_match('/^(.*):([^:]+)$/', (string) $in_tag, $matches) ) {
       $namespace = $matches[1];
       if ( preg_match('{^[A-Z][A-Z0-9]*$}', $namespace ) ) {
         throw new Exception("Dodgy looking namespace from '".$in_tag."'!");
@@ -193,7 +191,7 @@ class XMLDocument {
     else {
       $tag = $in_tag;
       if ( isset($namespace) ) {
-        $tag = str_replace($namespace.':', '', $tag);
+        $tag = str_replace($namespace.':', '', (string) $tag);
       }
     }
 
@@ -210,7 +208,7 @@ class XMLDocument {
   * @param mixed  $content The content of the tag
   * @param array  $attributes An array of key/value pairs of attributes.
   */
-  function DAVElement( &$element, $tag, $content=false, $attributes=false ) {
+  function DAVElement( &$element, $tag, mixed $content=false, $attributes=false ) {
     if ( !isset($this->namespaces[self::$ns_dav]) ) $this->AddNamespace( self::$ns_dav, '' );
     return $this->NSElement( $element, $tag, $content, $attributes, self::$ns_dav );
   }
@@ -223,7 +221,7 @@ class XMLDocument {
   * @param mixed  $content The content of the tag
   * @param array  $attributes An array of key/value pairs of attributes.
   */
-  function CalDAVElement( &$element, $tag, $content=false, $attributes=false ) {
+  function CalDAVElement( &$element, $tag, mixed $content=false, $attributes=false ) {
     if ( !isset($this->namespaces[self::$ns_caldav]) ) $this->AddNamespace( self::$ns_caldav, 'C' );
     return $this->NSElement( $element, $tag, $content, $attributes, self::$ns_caldav );
   }
@@ -237,7 +235,7 @@ class XMLDocument {
   * @param mixed  $content The content of the tag
   * @param array  $attributes An array of key/value pairs of attributes.
   */
-  function CardDAVElement( &$element, $tag, $content=false, $attributes=false ) {
+  function CardDAVElement( &$element, $tag, mixed $content=false, $attributes=false ) {
     if ( !isset($this->namespaces[self::$ns_carddav]) ) $this->AddNamespace( self::$ns_carddav, 'VC' );
     return $this->NSElement( $element, $tag, $content, $attributes, self::$ns_carddav );
   }
@@ -251,7 +249,7 @@ class XMLDocument {
   * @param mixed  $content The content of the tag
   * @param array  $attributes An array of key/value pairs of attributes.
   */
-  function CalendarserverElement( &$element, $tag, $content=false, $attributes=false ) {
+  function CalendarserverElement( &$element, $tag, mixed $content=false, $attributes=false ) {
     if ( !isset($this->namespaces[self::$ns_calendarserver]) ) $this->AddNamespace( self::$ns_calendarserver, 'A' );
     return $this->NSElement( $element, $tag, $content, $attributes, self::$ns_calendarserver );
   }
@@ -263,7 +261,7 @@ class XMLDocument {
   * @param array $attributes An array of attribute name/value pairs
   * @param array $xmlns An XML namespace specifier
   */
-  function NewXMLElement( $in_tag, $content=false, $attributes=false, $xmlns=null ) {
+  function NewXMLElement( $in_tag, mixed $content=false, $attributes=false, $xmlns=null ) {
     if ( $xmlns == null && preg_match('/^(.*):([^:]+)$/', $in_tag, $matches) ) {
       $xmlns = $matches[1];
       $tagname = $matches[2];
@@ -286,7 +284,7 @@ class XMLDocument {
   *
   * @return A rendered namespaced XML document.
   */
-  function Render( $root, $content=false, $attributes=false, $xmlns=null ) {
+  function Render( mixed $root, mixed $content=false, $attributes=false, $xmlns=null ) {
     if ( is_object($root) ) {
       /** They handed us a pre-existing object.  We'll just use it... */
       $this->root = $root;
@@ -313,17 +311,17 @@ class XMLDocument {
   *
   * @return XMLElement The newly created XMLElement object.
   */
-  function href($url) {
+  function href(mixed $url) {
     if ( is_array($url) ) {
-      $set = array();
+      $set = [];
       foreach( $url AS $href ) {
         $set[] = $this->href( $href );
       }
       return $set;
     }
-    if ( preg_match('[@+ ]',$url) ) {
+    if ( preg_match('[@+ ]',(string) $url) ) {
       trace_bug('URL "%s" was not encoded before call to XMLDocument::href()', $url );
-      $url = str_replace( '%2F', '/', rawurlencode($url));
+      $url = str_replace( '%2F', '/', rawurlencode((string) $url));
     }
     return $this->NewXMLElement('href', $url, false, 'DAV:');
   }

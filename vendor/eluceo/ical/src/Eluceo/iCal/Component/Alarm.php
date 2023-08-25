@@ -27,9 +27,9 @@ class Alarm extends Component
      *
      * @link http://tools.ietf.org/html/rfc5545#section-3.8.6.1
      */
-    const ACTION_AUDIO   = 'AUDIO';
-    const ACTION_DISPLAY = 'DISPLAY';
-    const ACTION_EMAIL   = 'EMAIL';
+    final public const ACTION_AUDIO   = 'AUDIO';
+    final public const ACTION_DISPLAY = 'DISPLAY';
+    final public const ACTION_EMAIL   = 'EMAIL';
 
     protected $action;
     protected $repeat;

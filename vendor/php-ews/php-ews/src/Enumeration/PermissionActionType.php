@@ -23,7 +23,7 @@ class PermissionActionType extends Enumeration
      *
      * @var string
      */
-    const ALL = 'All';
+    final public const ALL = 'All';
 
     /**
      * Indicates that the user does not have permission to perform the action on
@@ -33,7 +33,7 @@ class PermissionActionType extends Enumeration
      *
      * @var string
      */
-    const NONE = 'None';
+    final public const NONE = 'None';
 
     /**
      * Indicates that the user has permission to perform the action on the items
@@ -43,5 +43,5 @@ class PermissionActionType extends Enumeration
      *
      * @var string
      */
-    const OWNED = 'Owned';
+    final public const OWNED = 'Owned';
 }

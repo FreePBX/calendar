@@ -21,7 +21,7 @@ class ReminderActionType extends Enumeration
      *
      * @var string
      */
-    const DISMISS = 'Dismiss';
+    final public const DISMISS = 'Dismiss';
 
     /**
      * Snooze the reminder.
@@ -30,5 +30,5 @@ class ReminderActionType extends Enumeration
      *
      * @var string
      */
-    const SNOOZE = 'Snooze';
+    final public const SNOOZE = 'Snooze';
 }

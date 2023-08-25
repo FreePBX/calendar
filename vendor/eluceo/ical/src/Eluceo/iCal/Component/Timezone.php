@@ -20,13 +20,10 @@ use Eluceo\iCal\PropertyBag;
 class Timezone extends Component
 {
     /**
-     * @var string
+     * @param string $timezone
      */
-    protected $timezone;
-
-    public function __construct($timezone)
+    public function __construct(protected $timezone)
     {
-        $this->timezone = $timezone;
     }
 
     /**

@@ -21,5 +21,5 @@ class ArrayOfImGroupType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\ImGroupType[]
      */
-    public $ImGroup = array();
+    public $ImGroup = [];
 }

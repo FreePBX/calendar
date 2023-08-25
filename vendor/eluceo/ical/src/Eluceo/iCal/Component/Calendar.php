@@ -26,14 +26,14 @@ class Calendar extends Component
      * And then according to RFC 2446: 3 APPLICATION PROTOCOL ELEMENTS
      * @link https://www.ietf.org/rfc/rfc2446.txt
      */
-    const METHOD_PUBLISH        = 'PUBLISH';
-    const METHOD_REQUEST        = 'REQUEST';
-    const METHOD_REPLY          = 'REPLY';
-    const METHOD_ADD            = 'ADD';
-    const METHOD_CANCEL         = 'CANCEL';
-    const METHOD_REFRESH        = 'REFRESH';
-    const METHOD_COUNTER        = 'COUNTER';
-    const METHOD_DECLINECOUNTER = 'DECLINECOUNTER';
+    final public const METHOD_PUBLISH        = 'PUBLISH';
+    final public const METHOD_REQUEST        = 'REQUEST';
+    final public const METHOD_REPLY          = 'REPLY';
+    final public const METHOD_ADD            = 'ADD';
+    final public const METHOD_CANCEL         = 'CANCEL';
+    final public const METHOD_REFRESH        = 'REFRESH';
+    final public const METHOD_COUNTER        = 'COUNTER';
+    final public const METHOD_DECLINECOUNTER = 'DECLINECOUNTER';
 
     /**
      * This property defines the calendar scale used for the calendar information specified in the iCalendar object.
@@ -42,7 +42,7 @@ class Calendar extends Component
      *
      * @link http://tools.ietf.org/html/rfc5545#section-3.7
      */
-    const CALSCALE_GREGORIAN = 'GREGORIAN';
+    final public const CALSCALE_GREGORIAN = 'GREGORIAN';
 
     /**
      * The Product Identifier.
@@ -300,8 +300,6 @@ class Calendar extends Component
      *
      * @see        Eluceo\iCal::addComponent
      * @deprecated Please, use public method addComponent() from abstract Component class
-     *
-     * @param Event $event
      */
     public function addEvent(Event $event)
     {

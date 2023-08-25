@@ -23,7 +23,7 @@ class ConversationActionTypeType extends Enumeration
      *
      * @var string
      */
-    const ALWAYS_CATEGORIZE = 'AlwaysCategorize';
+    final public const ALWAYS_CATEGORIZE = 'AlwaysCategorize';
 
     /**
      * The current items and new items in the conversation will automatically be
@@ -35,7 +35,7 @@ class ConversationActionTypeType extends Enumeration
      *
      * @var string
      */
-    const ALWAYS_DELETE = 'AlwaysDelete';
+    final public const ALWAYS_DELETE = 'AlwaysDelete';
 
     /**
      * The current items and new items in the conversation will automatically be
@@ -45,7 +45,7 @@ class ConversationActionTypeType extends Enumeration
      *
      * @var string
      */
-    const ALWAYS_MOVE = 'AlwaysMove';
+    final public const ALWAYS_MOVE = 'AlwaysMove';
 
     /**
      * The current items in the conversation will be copied to the folder
@@ -57,7 +57,7 @@ class ConversationActionTypeType extends Enumeration
      *
      * @var string
      */
-    const COPY = 'Copy';
+    final public const COPY = 'Copy';
 
     /**
      * The current items in the conversation will be deleted.
@@ -69,7 +69,7 @@ class ConversationActionTypeType extends Enumeration
      *
      * @var string
      */
-    const DELETE = 'Delete';
+    final public const DELETE = 'Delete';
 
     /**
      * The current items in the conversation will be moved to the folder
@@ -81,7 +81,7 @@ class ConversationActionTypeType extends Enumeration
      *
      * @var string
      */
-    const MOVE = 'Move';
+    final public const MOVE = 'Move';
 
     /**
      * The current items in the conversation will have their read state set.
@@ -92,5 +92,5 @@ class ConversationActionTypeType extends Enumeration
      *
      * @var string
      */
-    const SET_READ_STATE = 'SetReadState';
+    final public const SET_READ_STATE = 'SetReadState';
 }

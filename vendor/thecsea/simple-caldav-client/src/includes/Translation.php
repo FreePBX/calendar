@@ -99,8 +99,8 @@ if ( !function_exists('awl_set_locale') ) {
   function awl_set_locale( $locale ) {
     global $c;
 
-    if ( !is_array($locale) && ! preg_match('/^[a-z]{2}(_[A-Z]{2})?\./', $locale ) ) {
-      $locale = array( $locale, $locale.'.UTF-8');
+    if ( !is_array($locale) && ! preg_match('/^[a-z]{2}(_[A-Z]{2})?\./', (string) $locale ) ) {
+      $locale = [$locale, $locale.'.UTF-8'];
     }
     if ( !function_exists('setlocale') ) {
       dbg_log_array('WARN','No "setlocale()" function?  PHP gettext support missing?' );

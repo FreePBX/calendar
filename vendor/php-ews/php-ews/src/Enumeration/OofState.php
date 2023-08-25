@@ -21,7 +21,7 @@ class OofState extends Enumeration
      *
      * @var string
      */
-    const DISABLED = 'Disabled';
+    final public const DISABLED = 'Disabled';
 
     /**
      * The user's OOF setting is currently enabled.
@@ -30,7 +30,7 @@ class OofState extends Enumeration
      *
      * @var string
      */
-    const ENABLED = 'Enabled';
+    final public const ENABLED = 'Enabled';
 
     /**
      * The user's OOF setting is scheduled to start at a specific date and end
@@ -40,5 +40,5 @@ class OofState extends Enumeration
      *
      * @var string
      */
-    const SCHEDULED = 'Scheduled';
+    final public const SCHEDULED = 'Scheduled';
 }

@@ -23,5 +23,5 @@ class ArrayOfEncryptedSharedFolderDataType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\EncryptedSharedFolderDataType[]
      */
-    public $EncryptedSharedFolderData = array();
+    public $EncryptedSharedFolderData = [];
 }

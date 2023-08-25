@@ -21,5 +21,5 @@ class ArrayOfExtendedPropertyAttributedValueType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\ExtendedPropertyAttributedValueType[]
      */
-    public $ExtendedPropertyAttributedValue = array();
+    public $ExtendedPropertyAttributedValue = [];
 }

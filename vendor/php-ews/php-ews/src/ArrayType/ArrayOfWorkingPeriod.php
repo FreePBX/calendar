@@ -21,5 +21,5 @@ class ArrayOfWorkingPeriod extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\WorkingPeriod[]
      */
-    public $WorkingPeriod = array();
+    public $WorkingPeriod = [];
 }

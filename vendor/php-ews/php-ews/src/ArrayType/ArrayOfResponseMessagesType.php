@@ -22,7 +22,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ApplyConversationActionResponseMessageType[]
      */
-    public $ApplyConversationActionResponseMessage = array();
+    public $ApplyConversationActionResponseMessage = [];
 
     /**
      * Contains the status and result of a single ArchiveItem request.
@@ -31,7 +31,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ItemInfoResponseMessageType[]
      */
-    public $ArchiveItemResponseMessage = array();
+    public $ArchiveItemResponseMessage = [];
 
     /**
      * Contains the status and result of a ConvertId request.
@@ -40,7 +40,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ConvertIdResponseMessageType[]
      */
-    public $ConvertIdResponseMessage = array();
+    public $ConvertIdResponseMessage = [];
 
     /**
      * Contains the status and result of a single CopyFolder request.
@@ -49,7 +49,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\FolderInfoResponseMessageType[]
      */
-    public $CopyFolderResponseMessage = array();
+    public $CopyFolderResponseMessage = [];
 
     /**
      * Contains the status and result of a single CopyItem request.
@@ -58,7 +58,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ItemInfoResponseMessageType[]
      */
-    public $CopyItemResponseMessage = array();
+    public $CopyItemResponseMessage = [];
 
     /**
      * Contains the status and result of a single CreateAttachment request.
@@ -67,7 +67,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\AttachmentInfoResponseMessageType[]
      */
-    public $CreateAttachmentResponseMessage = array();
+    public $CreateAttachmentResponseMessage = [];
 
     /**
      * Contains the status and result of a single CreateFolder request.
@@ -76,7 +76,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\FolderInfoResponseMessageType[]
      */
-    public $CreateFolderResponseMessage = array();
+    public $CreateFolderResponseMessage = [];
 
     /**
      * Contains the status and result of a single CreateItem request.
@@ -85,7 +85,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ItemInfoResponseMessageType[]
      */
-    public $CreateItemResponseMessage = array();
+    public $CreateItemResponseMessage = [];
 
     /**
      * Contains the status and result of a single CreateManagedFolder request.
@@ -94,7 +94,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\FolderInfoResponseMessageType[]
      */
-    public $CreateManagedFolderResponseMessage = array();
+    public $CreateManagedFolderResponseMessage = [];
 
     /**
      * Contains the status and results of a CreateUserConfiguration request.
@@ -103,7 +103,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ResponseMessageType[]
      */
-    public $CreateUserConfigurationResponseMessage = array();
+    public $CreateUserConfigurationResponseMessage = [];
 
     /**
      * Contains the status and result of a single DeleteAttachment request.
@@ -112,7 +112,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\DeleteAttachmentResponseMessageType[]
      */
-    public $DeleteAttachmentResponseMessage = array();
+    public $DeleteAttachmentResponseMessage = [];
 
     /**
      * Contains the status and result of a single DeleteFolder request.
@@ -121,7 +121,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ResponseMessageType[]
      */
-    public $DeleteFolderResponseMessage = array();
+    public $DeleteFolderResponseMessage = [];
 
     /**
      * Contains the status and result of a single DeleteItem request.
@@ -130,7 +130,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ResponseMessageType[]
      */
-    public $DeleteItemResponseMessage = array();
+    public $DeleteItemResponseMessage = [];
 
     /**
      * Contains the status and results of a DeleteUserConfiguration request.
@@ -139,7 +139,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ResponseMessageType[]
      */
-    public $DeleteUserConfigurationResponseMessage = array();
+    public $DeleteUserConfigurationResponseMessage = [];
 
     /**
      * Contains the status and result of a single EmptyFolder request.
@@ -148,7 +148,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ResponseMessageType[]
      */
-    public $EmptyFolderResponseMessage = array();
+    public $EmptyFolderResponseMessage = [];
 
     /**
      * Contains the status and result of a single ExpandDL request.
@@ -157,7 +157,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ExpandDLResponseMessageType[]
      */
-    public $ExpandDLResponseMessage = array();
+    public $ExpandDLResponseMessage = [];
 
     /**
      * Contains the status and results of a single ExportItems request.
@@ -166,7 +166,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ExportItemsResponseMessageType[]
      */
-    public $ExportItemsResponseMessage = array();
+    public $ExportItemsResponseMessage = [];
 
     /**
      * Contains the status and result of a single FindFolder request.
@@ -175,7 +175,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\FindFolderResponseMessageType[]
      */
-    public $FindFolderResponseMessage = array();
+    public $FindFolderResponseMessage = [];
 
     /**
      * Contains the status and result of a single FindItem request.
@@ -184,7 +184,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\FindItemResponseMessageType[]
      */
-    public $FindItemResponseMessage = array();
+    public $FindItemResponseMessage = [];
 
     /**
      * Contains the status and result of a single FindMailboxStatisticsByKeyword
@@ -194,7 +194,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\FindMailboxStatisticsByKeywordsResponseMessageType[]
      */
-    public $FindMailboxStatisticsByKeywordsResponseMessage = array();
+    public $FindMailboxStatisticsByKeywordsResponseMessage = [];
 
     /**
      * Contains the status and result of a single GetAttachment request.
@@ -203,7 +203,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\AttachmentInfoResponseMessageType[]
      */
-    public $GetAttachmentResponseMessage = array();
+    public $GetAttachmentResponseMessage = [];
 
     /**
      * Contains the status and result of a single GetClientAccessToken request.
@@ -212,7 +212,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\GetClientAccessTokenResponseMessageType[]
      */
-    public $GetClientAccessTokenResponseMessage = array();
+    public $GetClientAccessTokenResponseMessage = [];
 
     /**
      * Specifies the response message for a GetConversationItems request.
@@ -221,7 +221,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\GetConversationItemsResponseMessageType[]
      */
-    public $GetConversationItemsResponseMessage = array();
+    public $GetConversationItemsResponseMessage = [];
 
     /**
      * Contains the status and result of a single GetEvents request.
@@ -230,7 +230,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\GetEventsResponseMessageType[]
      */
-    public $GetEventsResponseMessage = array();
+    public $GetEventsResponseMessage = [];
 
     /**
      * Contains the status and result of a single GetFolder request.
@@ -239,7 +239,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\FolderInfoResponseMessageType[]
      */
-    public $GetFolderResponseMessage = array();
+    public $GetFolderResponseMessage = [];
 
     /**
      * Contains the status and result of a single GetItem request.
@@ -248,7 +248,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ItemInfoResponseMessageType[]
      */
-    public $GetItemResponseMessage = array();
+    public $GetItemResponseMessage = [];
 
     /**
      * Contains the status and results of a GetReminders request.
@@ -257,7 +257,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\GetRemindersResponseMessageType[]
      */
-    public $GetRemindersResponse = array();
+    public $GetRemindersResponse = [];
 
     /**
      * Contains the status and results of a GetRoomLists request.
@@ -266,7 +266,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\GetRoomListsResponseMessageType[]
      */
-    public $GetRoomListsResponse = array();
+    public $GetRoomListsResponse = [];
 
     /**
      * Contains the status and results of a GetRooms request.
@@ -275,7 +275,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\GetRoomsResponseMessageType[]
      */
-    public $GetRoomsResponse = array();
+    public $GetRoomsResponse = [];
 
     /**
      * Contains the status and result of a single GetServerTimeZones request.
@@ -284,7 +284,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\GetServerTimeZonesResponseMessageType[]
      */
-    public $GetServerTimeZonesResponseMessage = array();
+    public $GetServerTimeZonesResponseMessage = [];
 
     /**
      * Contains the status and results of a GetSharingFolder request.
@@ -293,7 +293,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\GetSharingFolderResponseMessageType[]
      */
-    public $GetSharingFolderResponseMessage = array();
+    public $GetSharingFolderResponseMessage = [];
 
     /**
      * Contains the status and results of a GetSharingMetadata request.
@@ -302,7 +302,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\GetSharingMetadataResponseMessageType[]
      */
-    public $GetSharingMetadataResponseMessage = array();
+    public $GetSharingMetadataResponseMessage = [];
 
     /**
      * Contains the status and result of a single GetStreamingEvents request.
@@ -311,7 +311,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\GetStreamingEventsResponseMessageType[]
      */
-    public $GetStreamingEventsResponseMessage = array();
+    public $GetStreamingEventsResponseMessage = [];
 
     /**
      * Contains the status and results of a GetUserConfiguration request.
@@ -320,7 +320,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\GetUserConfigurationResponseMessageType[]
      */
-    public $GetUserConfigurationResponseMessage = array();
+    public $GetUserConfigurationResponseMessage = [];
 
     /**
      * Contains the status and results of a GetUserPhoto request.
@@ -329,7 +329,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\GetUserPhotoResponseMessageType[]
      */
-    public $GetUserPhotoResponseMessage = array();
+    public $GetUserPhotoResponseMessage = [];
 
     /**
      * Defines a response message for a MarkAllItemsAsRead request.
@@ -338,7 +338,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ResponseMessageType
      */
-    public $MarkAllItemsAsReadResponseMessage = array();
+    public $MarkAllItemsAsReadResponseMessage = [];
 
     /**
      * Defines a response message for a MarkAsJunk request.
@@ -347,7 +347,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\MarkAsJunkResponseMessageType
      */
-    public $MarkAsJunkResponseMessage = array();
+    public $MarkAsJunkResponseMessage = [];
 
     /**
      * Contains the status and result of a single MoveFolder request.
@@ -356,7 +356,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\FolderInfoResponseMessageType[]
      */
-    public $MoveFolderResponseMessage = array();
+    public $MoveFolderResponseMessage = [];
 
     /**
      * Contains the status and result of a single MoveItem request.
@@ -365,7 +365,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ItemInfoResponseMessageType[]
      */
-    public $MoveItemResponseMessage = array();
+    public $MoveItemResponseMessage = [];
 
     /**
      * Contains the status and results of a PerformReminderAction request.
@@ -374,7 +374,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\PerformReminderActionResponseMessageType[]
      */
-    public $PerformReminderActionResponse = array();
+    public $PerformReminderActionResponse = [];
 
     /**
      * Contains the status and results of a RefreshSharingFolder request.
@@ -383,7 +383,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\RefreshSharingFolderResponseMessageType[]
      */
-    public $RefreshSharingFolderResponseMessage = array();
+    public $RefreshSharingFolderResponseMessage = [];
 
     /**
      * Contains the status and result of a ResolveNames request.
@@ -392,7 +392,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ResolveNamesResponseMessageType[]
      */
-    public $ResolveNamesResponseMessage = array();
+    public $ResolveNamesResponseMessage = [];
 
     /**
      * Contains the status and result of a SearchMailboxes request.
@@ -401,7 +401,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\SearchMailboxesResponseMessageType[]
      */
-    public $SearchMailboxesResponseMessage = array();
+    public $SearchMailboxesResponseMessage = [];
 
     /**
      * Contains the status and result of a single SendItem request.
@@ -410,7 +410,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ResponseMessageType[]
      */
-    public $SendItemResponseMessage = array();
+    public $SendItemResponseMessage = [];
 
     /**
      * Contains the status and result of a single SendNotification request.
@@ -419,7 +419,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\SendNotificationResponseMessageType[]
      */
-    public $SendNotificationResponseMessage = array();
+    public $SendNotificationResponseMessage = [];
 
     /**
      * Contains the status and result of a SetHoldOnMailboxes request.
@@ -428,7 +428,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\SetHoldOnMailboxesResponseMessageType[]
      */
-    public $SetHoldOnMailboxesResponseMessage = array();
+    public $SetHoldOnMailboxesResponseMessage = [];
 
     /**
      * Contains the status and result of a single Subscribe request.
@@ -437,7 +437,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\SubscribeResponseMessageType[]
      */
-    public $SubscribeResponseMessage = array();
+    public $SubscribeResponseMessage = [];
 
     /**
      * Contains the status and result of a SyncFolderHierarchy request.
@@ -446,7 +446,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\SyncFolderHierarchyResponseMessageType[]
      */
-    public $SyncFolderHierarchyResponseMessage = array();
+    public $SyncFolderHierarchyResponseMessage = [];
 
     /**
      * Contains the status and result of a SyncFolderItems request.
@@ -455,7 +455,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\SyncFolderItemsResponseMessageType[]
      */
-    public $SyncFolderItemsResponseMessage = array();
+    public $SyncFolderItemsResponseMessage = [];
 
     /**
      * Contains the status and result of a single Unsubscribe request.
@@ -464,7 +464,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ResponseMessageType[]
      */
-    public $UnsubscribeResponseMessage = array();
+    public $UnsubscribeResponseMessage = [];
 
     /**
      * Contains the status and result of a single UpdateFolder request.
@@ -473,7 +473,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\FolderInfoResponseMessageType[]
      */
-    public $UpdateFolderResponseMessage = array();
+    public $UpdateFolderResponseMessage = [];
 
     /**
      * Contains the status and result of a single UpdateItem request.
@@ -482,7 +482,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\UpdateItemResponseMessageType[]
      */
-    public $UpdateItemResponseMessage = array();
+    public $UpdateItemResponseMessage = [];
 
     /**
      * Contains the status and results of an UpdateUserConfiguration request.
@@ -491,7 +491,7 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\ResponseMessageType[]
      */
-    public $UpdateUserConfigurationResponseMessage = array();
+    public $UpdateUserConfigurationResponseMessage = [];
 
     /**
      * Contains the status and results of a single UploadItems request.
@@ -500,5 +500,5 @@ class ArrayOfResponseMessagesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Response\UploadItemsResponseMessageType[]
      */
-    public $UploadItemsResponseMessage = array();
+    public $UploadItemsResponseMessage = [];
 }

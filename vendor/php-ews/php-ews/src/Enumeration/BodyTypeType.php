@@ -21,7 +21,7 @@ class BodyTypeType extends Enumeration
      *
      * @var string
      */
-    const HTML = 'HTML';
+    final public const HTML = 'HTML';
 
     /**
      * Indicates that the body is in text.
@@ -30,5 +30,5 @@ class BodyTypeType extends Enumeration
      *
      * @var string
      */
-    const TEXT = 'Text';
+    final public const TEXT = 'Text';
 }

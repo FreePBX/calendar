@@ -21,7 +21,7 @@ class SearchPageDirectionType extends Enumeration
      *
      * @var string
      */
-    const NEXT = 'Next';
+    final public const NEXT = 'Next';
 
     /**
      * Move to the previous page in the result set.
@@ -30,5 +30,5 @@ class SearchPageDirectionType extends Enumeration
      *
      * @var string
      */
-    const PREVIOUS = 'Previous';
+    final public const PREVIOUS = 'Previous';
 }

@@ -36,8 +36,6 @@ class ArrayValue implements ValueInterface
 
     public function getEscapedValue()
     {
-        return implode(',', array_map(function ($value) {
-            return PropertyValueUtil::escapeValue((string) $value);
-        }, $this->values));
+        return implode(',', array_map(fn($value) => PropertyValueUtil::escapeValue((string) $value), $this->values));
     }
 }

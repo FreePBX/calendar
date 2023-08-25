@@ -23,7 +23,7 @@ class IndexBasePointType extends Enumeration
      *
      * @var string
      */
-    const BEGINNING = 'Beginning';
+    final public const BEGINNING = 'Beginning';
 
     /**
      * The paged view starts at the end of the found conversation or item set.
@@ -32,5 +32,5 @@ class IndexBasePointType extends Enumeration
      *
      * @var string
      */
-    const END = 'End';
+    final public const END = 'End';
 }

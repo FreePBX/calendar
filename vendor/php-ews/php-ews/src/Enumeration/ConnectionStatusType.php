@@ -21,7 +21,7 @@ class ConnectionStatusType extends Enumeration
      *
      * @var string
      */
-    const CLOSED = 'Closed';
+    final public const CLOSED = 'Closed';
 
     /**
      * Specifies that the connection is open.
@@ -30,5 +30,5 @@ class ConnectionStatusType extends Enumeration
      *
      * @var string
      */
-    const OK = 'OK';
+    final public const OK = 'OK';
 }

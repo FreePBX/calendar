@@ -16,9 +16,9 @@ use Eluceo\iCal\Property;
 class Attendees extends Property
 {
     /** @var Property[] */
-    protected $attendees = array();
+    protected $attendees = [];
 
-    const PROPERTY_NAME = 'ATTENDEES';
+    final public const PROPERTY_NAME = 'ATTENDEES';
 
     public function __construct()
     {
@@ -31,7 +31,7 @@ class Attendees extends Property
      *
      * @return $this
      */
-    public function add($value, $params = array())
+    public function add($value, $params = [])
     {
         $this->attendees[] = new Property('ATTENDEE', $value, $params);
 
@@ -63,7 +63,7 @@ class Attendees extends Property
      */
     public function toLines()
     {
-        $lines = array();
+        $lines = [];
         foreach ($this->attendees as $attendee) {
             $lines[] = $attendee->toLine();
         }
@@ -77,7 +77,7 @@ class Attendees extends Property
      *
      * @throws \BadMethodCallException
      */
-    public function setParam($name, $value)
+    public function setParam($name, $value): never
     {
         throw new \BadMethodCallException('Cannot call setParam on Attendees Property');
     }
@@ -87,7 +87,7 @@ class Attendees extends Property
      *
      * @throws \BadMethodCallException
      */
-    public function getParam($name)
+    public function getParam($name): never
     {
         throw new \BadMethodCallException('Cannot call getParam on Attendees Property');
     }

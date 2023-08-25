@@ -21,5 +21,5 @@ class ArrayOfBodyContentAttributedValuesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\BodyContentAttributedValueType[]
      */
-    public $BodyContentAttributedValue = array();
+    public $BodyContentAttributedValue = [];
 }

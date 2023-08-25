@@ -21,7 +21,7 @@ class ContainmentComparisonType extends Enumeration
      *
      * @var string
      */
-    const EXACT = 'Exact';
+    final public const EXACT = 'Exact';
 
     /**
      * The comparison ignores casing.
@@ -30,7 +30,7 @@ class ContainmentComparisonType extends Enumeration
      *
      * @var string
      */
-    const IGNORE_CASE = 'IgnoreCase';
+    final public const IGNORE_CASE = 'IgnoreCase';
 
     /**
      * The comparison ignores non-spacing characters.
@@ -39,7 +39,7 @@ class ContainmentComparisonType extends Enumeration
      *
      * @var string
      */
-    const IGNORE_CASE_AND_NON_SPACING_CHARS = 'IgnoreCaseAndNonSpacingCharacters';
+    final public const IGNORE_CASE_AND_NON_SPACING_CHARS = 'IgnoreCaseAndNonSpacingCharacters';
 
     /**
      * The comparison ignores casing and non-spacing characters.
@@ -48,7 +48,7 @@ class ContainmentComparisonType extends Enumeration
      *
      * @var string
      */
-    const IGNORE_NON_SPACING_CHARS = 'IgnoreNonSpacingCharacters';
+    final public const IGNORE_NON_SPACING_CHARS = 'IgnoreNonSpacingCharacters';
 
     /**
      * To be removed.
@@ -58,7 +58,7 @@ class ContainmentComparisonType extends Enumeration
      *
      * @var string
      */
-    const LOOSE = 'Loose';
+    final public const LOOSE = 'Loose';
 
     /**
      * To be removed.
@@ -68,7 +68,7 @@ class ContainmentComparisonType extends Enumeration
      *
      * @var string
      */
-    const LOOSE_AND_IGNORE_CASE = 'LooseAndIgnoreCase';
+    final public const LOOSE_AND_IGNORE_CASE = 'LooseAndIgnoreCase';
 
     /**
      * To be removed.
@@ -78,7 +78,7 @@ class ContainmentComparisonType extends Enumeration
      *
      * @var string
      */
-    const LOOSE_AND_IGNORE_CASE_AND_IGNORE_NON_SPACING_CARS = 'LooseAndIgnoreCaseAndIgnoreNonSpace';
+    final public const LOOSE_AND_IGNORE_CASE_AND_IGNORE_NON_SPACING_CARS = 'LooseAndIgnoreCaseAndIgnoreNonSpace';
 
     /**
      * To be removed.
@@ -88,5 +88,5 @@ class ContainmentComparisonType extends Enumeration
      *
      * @var string
      */
-    const LOOSE_AND_IGNORE_NON_SPACING_CHARS = 'LooseAndIgnoreNonSpace';
+    final public const LOOSE_AND_IGNORE_NON_SPACING_CHARS = 'LooseAndIgnoreNonSpace';
 }

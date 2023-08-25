@@ -21,8 +21,8 @@ use Eluceo\iCal\Property\Event\RecurrenceRule;
  */
 class TimezoneRule extends Component
 {
-    const TYPE_DAYLIGHT = 'DAYLIGHT';
-    const TYPE_STANDARD = 'STANDARD';
+    final public const TYPE_DAYLIGHT = 'DAYLIGHT';
+    final public const TYPE_STANDARD = 'STANDARD';
 
     /**
      * @var string
@@ -138,8 +138,6 @@ class TimezoneRule extends Component
     }
 
     /**
-     * @param \DateTime $dtStart
-     *
      * @return $this
      */
     public function setDtStart(\DateTime $dtStart)
@@ -150,8 +148,6 @@ class TimezoneRule extends Component
     }
 
     /**
-     * @param RecurrenceRule $recurrenceRule
-     *
      * @return $this
      */
     public function setRecurrenceRule(RecurrenceRule $recurrenceRule)

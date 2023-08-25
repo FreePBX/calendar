@@ -22,7 +22,7 @@ class MessageTrackingReportTemplateType extends Enumeration
      *
      * @var string
      */
-    const RECIPIENT_PATH = 'RecipientPath';
+    final public const RECIPIENT_PATH = 'RecipientPath';
 
     /**
      * Specifies that the report will display all the recipients of the message
@@ -32,5 +32,5 @@ class MessageTrackingReportTemplateType extends Enumeration
      *
      * @var string
      */
-    const SUMMARY = 'Summary';
+    final public const SUMMARY = 'Summary';
 }

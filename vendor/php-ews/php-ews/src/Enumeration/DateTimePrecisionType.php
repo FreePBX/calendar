@@ -21,7 +21,7 @@ class DateTimePrecisionType extends Enumeration
      *
      * @var string
      */
-    const MILLISECONDS = 'Milliseconds';
+    final public const MILLISECONDS = 'Milliseconds';
 
     /**
      * Indicates that date/time values should be precise to the second.
@@ -30,5 +30,5 @@ class DateTimePrecisionType extends Enumeration
      *
      * @var string
      */
-    const SECONDS = 'Seconds';
+    final public const SECONDS = 'Seconds';
 }

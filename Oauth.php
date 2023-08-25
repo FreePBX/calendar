@@ -9,8 +9,8 @@ class Oauth {
 	private $instance_url = null;
 	private $refresh_token = null;
 	private $pbxURL = null;
-	private $outlookurl = 'https://login.microsoftonline.com/';
-	private $scope = 'Calendars.ReadWrite offline_access User.Read';
+	private string $outlookurl = 'https://login.microsoftonline.com/';
+	private string $scope = 'Calendars.ReadWrite offline_access User.Read';
 
     public function __construct($tenant = null,$key = null, $secret = null, $access_token = null, $refresh_token = null, $pbxURL = null, $outlookurl = 'https://login.microsoftonline.com/') {
         if(!empty($instance_url)){
@@ -46,7 +46,7 @@ class Oauth {
 	public function getAuthURL($id, $pbxurl = '') {
 		$oauthURL = $this->outlookurl.'/'.$this->tenant.'/oauth2/v2.0/authorize';
 		$pbxURL = empty($pbxurl)?$this->pbxURL:$pbxurl;
-		$pbxURL = rtrim($pbxURL,'/');
+		$pbxURL = rtrim((string) $pbxURL,'/');
 		if($oauthURL && $this->key && $pbxURL && $this->scope) {
 			return sprintf('%s?client_id=%s&redirect_uri=%s/admin/config.php?display=calendar&response_type=code&scope=%s&state=%s&response_mode=query',$oauthURL,$this->key,$pbxURL,$this->scope,$id);
 		} else {
@@ -93,11 +93,12 @@ class Oauth {
 	}
 
 	public function setOutlookUrl($outlookurl) {
-		$this->outlookurl = rtrim($outlookurl,'/');
+		$this->outlookurl = rtrim((string) $outlookurl,'/');
 	}
 
 	public function getEvents() {
-		$ch = curl_init();
+		$cURLConnection = null;
+  $ch = curl_init();
 		curl_setopt($cURLConnection, CURLOPT_URL, 'https://hostname.tld/phone-list');
 	}
 
@@ -126,9 +127,7 @@ class Oauth {
 	public function getCalEvents($atoken) {
 		$cpt = curl_init("https://graph.microsoft.com/v1.0/me/calendar/events");
 		curl_setopt($cpt, CURLOPT_HTTPHEADER,
-				array(
-					'Authorization: Bearer '.$atoken,
-				)
+				['Authorization: Bearer '.$atoken]
 			);
 		curl_setopt($cpt, CURLOPT_RETURNTRANSFER, true);
 		$result = curl_exec($cpt);
@@ -161,14 +160,11 @@ class Oauth {
 		try {
 			$cpt = curl_init("https://graph.microsoft.com/v1.0/users/".$username."/calendars");
 			curl_setopt($cpt, CURLOPT_HTTPHEADER,
-					array(
-						'Authorization: Bearer '.$atoken,
-						'Content-Type: application/json'
-					)
+					['Authorization: Bearer '.$atoken, 'Content-Type: application/json']
 				);
 			curl_setopt($cpt, CURLOPT_RETURNTRANSFER, true);
 			$result = curl_exec($cpt);
-			return json_decode($result, true);
+			return json_decode($result, true, 512, JSON_THROW_ON_ERROR);
 		} catch(\Exception $e) {
 			$message = [
 				'type' => 'danger',

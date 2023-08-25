@@ -21,7 +21,7 @@ class ResponseTypeType extends Enumeration
      *
      * @var string
      */
-    const ACCEPT = 'Accept';
+    final public const ACCEPT = 'Accept';
 
     /**
      * Response type indicating that a request has been declined.
@@ -30,7 +30,7 @@ class ResponseTypeType extends Enumeration
      *
      * @var string
      */
-    const DECLINE = 'Decline';
+    final public const DECLINE = 'Decline';
 
     /**
      * Response type indicating that no response has been received.
@@ -39,7 +39,7 @@ class ResponseTypeType extends Enumeration
      *
      * @var string
      */
-    const NONE = 'NoResponseReceived';
+    final public const NONE = 'NoResponseReceived';
 
     /**
      * Response type indicating that the attendee is the organizer.
@@ -48,7 +48,7 @@ class ResponseTypeType extends Enumeration
      *
      * @var string
      */
-    const ORGANIZER = 'Organizer';
+    final public const ORGANIZER = 'Organizer';
 
     /**
      * Response type indicating that a request has been tentatively accepted.
@@ -57,7 +57,7 @@ class ResponseTypeType extends Enumeration
      *
      * @var string
      */
-    const TENTATIVE = 'Tentative';
+    final public const TENTATIVE = 'Tentative';
 
     /**
      * Response type indicating that the response is unknown.
@@ -66,5 +66,5 @@ class ResponseTypeType extends Enumeration
      *
      * @var string
      */
-    const UNKNOWN = 'Unknown';
+    final public const UNKNOWN = 'Unknown';
 }

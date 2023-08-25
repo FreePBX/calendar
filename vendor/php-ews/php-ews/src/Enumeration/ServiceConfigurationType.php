@@ -21,7 +21,7 @@ class ServiceConfigurationType extends Enumeration
      *
      * @var string
      */
-    const MAIL_TIPS = 'MailTips';
+    final public const MAIL_TIPS = 'MailTips';
 
     /**
      * Identifies the Protection Rules service configuration.
@@ -30,7 +30,7 @@ class ServiceConfigurationType extends Enumeration
      *
      * @var string
      */
-    const PROTECTION_RULES = 'ProtectionRules';
+    final public const PROTECTION_RULES = 'ProtectionRules';
 
     /**
      * Identifies the Unified Messaging service configuration.
@@ -39,5 +39,5 @@ class ServiceConfigurationType extends Enumeration
      *
      * @var string
      */
-    const UNIFIED_MESSAGING_CONFIG = 'UnifiedMessagingConfiguration';
+    final public const UNIFIED_MESSAGING_CONFIG = 'UnifiedMessagingConfiguration';
 }

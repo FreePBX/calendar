@@ -21,5 +21,5 @@ class ArrayOfCalendarPermissionsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\CalendarPermissionType[]
      */
-    public $CalendarPermission = array();
+    public $CalendarPermission = [];
 }

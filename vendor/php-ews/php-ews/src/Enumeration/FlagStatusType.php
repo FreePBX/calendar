@@ -21,7 +21,7 @@ class FlagStatusType extends Enumeration
      *
      * @var string
      */
-    const COMPLETE = 'Complete';
+    final public const COMPLETE = 'Complete';
 
     /**
      * Indicates the flagged status.
@@ -30,7 +30,7 @@ class FlagStatusType extends Enumeration
      *
      * @var string
      */
-    const FLAGGED = 'Flagged';
+    final public const FLAGGED = 'Flagged';
 
     /**
      * Indicates the not-flagged status.
@@ -39,5 +39,5 @@ class FlagStatusType extends Enumeration
      *
      * @var string
      */
-    const NOT_FLAGGED = 'NotFlagged';
+    final public const NOT_FLAGGED = 'NotFlagged';
 }

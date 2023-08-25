@@ -14,9 +14,7 @@ class Caldav extends Base {
 	 * @return array  array of information
 	 */
 	public static function getInfo() {
-		return array(
-			"name" => _("Remote CalDAV Calendar")
-		);
+		return ["name" => _("Remote CalDAV Calendar")];
 	}
 
 	/**
@@ -25,7 +23,7 @@ class Caldav extends Base {
 	 * @return string              HTML to display
 	 */
 	public static function getAddDisplay() {
-		return load_view(dirname(__DIR__)."/views/remote_caldav_settings.php",array('action' => 'add', 'calendars' => array(), 'data' => array('next' => 86400)));
+		return load_view(dirname(__DIR__)."/views/remote_caldav_settings.php",['action' => 'add', 'calendars' => [], 'data' => ['next' => 86400]]);
 	}
 
 	/**
@@ -36,27 +34,19 @@ class Caldav extends Base {
 	 */
 	public static function getEditDisplay($data) {
 		$caldavClient = new SimpleCalDAVClient();
-        $calendars = array();
+        $calendars = [];
       	
         try {
           $caldavClient->connect($data['purl'], $data['username'], $data['password']);
           $cals = $caldavClient->findCalendars();
           foreach($cals as $calendar) {
               $id = $calendar->getCalendarID();
-              $calendars[$id] = array(
-                  "id" => $id,
-                  "name" => $calendar->getDisplayName(),
-                  "selected" => in_array($id,$data['calendars'])
-              );
+              $calendars[$id] = ["id" => $id, "name" => $calendar->getDisplayName(), "selected" => in_array($id,$data['calendars'])];
           }
-        } catch(CalDAVException $e) {
-          $calendars[0] = array(
-              "id" => 0,
-              "name" => _('Exception occured while retrieving the list of calendars. Are connection parameters correct?'),
-              "selected" => false
-          );
+        } catch(CalDAVException) {
+          $calendars[0] = ["id" => 0, "name" => _('Exception occured while retrieving the list of calendars. Are connection parameters correct?'), "selected" => false];
         }
-		return load_view(dirname(__DIR__)."/views/remote_caldav_settings.php",array('action' => 'edit', 'data' => $data, 'calendars' => $calendars));
+		return load_view(dirname(__DIR__)."/views/remote_caldav_settings.php",['action' => 'edit', 'data' => $data, 'calendars' => $calendars]);
 	}
 
 	/**
@@ -67,17 +57,7 @@ class Caldav extends Base {
 	 * @return boolean               true or false
 	 */
 	public function updateCalendar($data) {
-		$calendar = array(
-			"name" => $data['name'],
-			"description" => $data['description'],
-			"type" => "caldav",
-			"purl" => $data['purl'],
-			"surl" => $data['surl'],
-			"username" => $data['username'],
-			"password" => $data['password'],
-			"calendars" => !empty($data['calendars']) ? $data['calendars'] : array(),
-			"next" => !empty($data['next']) ? $data['next'] : 300
-		);
+		$calendar = ["name" => $data['name'], "description" => $data['description'], "type" => "caldav", "purl" => $data['purl'], "surl" => $data['surl'], "username" => $data['username'], "password" => $data['password'], "calendars" => !empty($data['calendars']) ? $data['calendars'] : [], "next" => !empty($data['next']) ? $data['next'] : 300];
 		$ret = $this->processCalendar();
 		parent::updateCalendar($calendar);
 		return $ret;
@@ -91,7 +71,9 @@ class Caldav extends Base {
 	 * @return boolean                    true or false
 	 */
 	public function processCalendar() {
-		$caldavClient = new SimpleCalDAVClient();
+		$headerSection = null;
+  $eventsSection = null;
+  $caldavClient = new SimpleCalDAVClient();
 		$caldavClient->connect($this->calendar['purl'], $this->calendar['username'], $this->calendar['password']);
 		$cals = $caldavClient->findCalendars();
 		$start = Carbon::Now()->subYear();
@@ -107,10 +89,10 @@ class Caldav extends Base {
 				foreach($events as $event) {
 					$ical = $event->getData();
 					if($i == 0){
-						preg_match_all("/^(.*)BEGIN:VEVENT/s",$ical,$matches);
+						preg_match_all("/^(.*)BEGIN:VEVENT/s",(string) $ical,$matches);
 						$headerSection = $matches[1][0];
 					}
-					preg_match_all("/BEGIN:VEVENT(.*)END:VEVENT/s",$ical,$matches);
+					preg_match_all("/BEGIN:VEVENT(.*)END:VEVENT/s",(string) $ical,$matches);
 					$eventsSection .= $matches[0][0]."\n";
 					$i++;
 				}

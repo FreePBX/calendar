@@ -19,7 +19,7 @@ class CalendarPermissionLevelType extends PermissionLevelType
      *
      * @var string
      */
-    const FREE_BUSY_ONLY = 'FreeBusyTimeOnly';
+    final public const FREE_BUSY_ONLY = 'FreeBusyTimeOnly';
 
     /**
      * Indicates that the user can view free/busy time within the calendar and
@@ -29,5 +29,5 @@ class CalendarPermissionLevelType extends PermissionLevelType
      *
      * @var string
      */
-    const FREE_BUSY_SUBJECT_AND_LOCATION = 'FreeBusyTimeAndSubjectAndLocation';
+    final public const FREE_BUSY_SUBJECT_AND_LOCATION = 'FreeBusyTimeAndSubjectAndLocation';
 }

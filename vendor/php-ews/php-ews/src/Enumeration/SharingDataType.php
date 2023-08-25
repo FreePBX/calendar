@@ -21,7 +21,7 @@ class SharingDataType extends Enumeration
      *
      * @var string
      */
-    const CALENDAR = 'Calendar';
+    final public const CALENDAR = 'Calendar';
 
     /**
      * Indicates that the shared folder contains contact information.
@@ -30,5 +30,5 @@ class SharingDataType extends Enumeration
      *
      * @var string
      */
-    const CONTACTS = 'Contacts';
+    final public const CONTACTS = 'Contacts';
 }

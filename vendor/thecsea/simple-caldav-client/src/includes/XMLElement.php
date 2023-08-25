@@ -19,10 +19,8 @@ require_once(__DIR__.'/AWLUtilities.php');
 *
 * @package   awl
 */
-class XMLElement {
-  protected $tagname;
+class XMLElement implements \Stringable {
   protected $xmlns;
-  protected $attributes;
   protected $content;
   protected $_parent;
 
@@ -34,17 +32,15 @@ class XMLElement {
   * @param array $attributes An array of attribute name/value pairs
   * @param string $xmlns An XML namespace specifier
   */
-  function __construct( $tagname, $content=false, $attributes=false, $xmlns=null ) {
-    $this->tagname=$tagname;
+  function __construct( protected $tagname, mixed $content=false, protected $attributes=false, $xmlns=null ) {
     if ( gettype($content) == "object" ) {
       // Subtree to be parented here
-      $this->content = array(&$content);
+      $this->content = [&$content];
     }
     else {
       // Array or text
       $this->content = $content;
     }
-    $this->attributes = $attributes;
     if ( isset($xmlns) ) {
       $this->xmlns = $xmlns;
     }
@@ -81,9 +77,9 @@ class XMLElement {
   * @param string The attribute value
   */
   function SetAttribute($k,$v) {
-    if ( gettype($this->attributes) != "array" ) $this->attributes = array();
+    if ( gettype($this->attributes) != "array" ) $this->attributes = [];
     $this->attributes[$k] = $v;
-    if ( strtolower($k) == 'xmlns' ) {
+    if ( strtolower((string) $k) == 'xmlns' ) {
       $this->xmlns = $v;
     }
   }
@@ -122,8 +118,7 @@ class XMLElement {
   */
   function GetAttribute( $attr ) {
     if ( $attr == 'xmlns' ) return $this->xmlns;
-    if ( isset($this->attributes[$attr]) ) return $this->attributes[$attr];
-    return null;
+    return $this->attributes[$attr] ?? null;
   }
 
   /**
@@ -151,7 +146,8 @@ class XMLElement {
   * @return array The XMLElements within the tree which match this tag
   */
   function GetElements( $tag=null, $recursive=false ) {
-    $elements = array();
+    $v = null;
+    $elements = [];
     if ( gettype($this->content) == "array" ) {
       foreach( $this->content AS $k => $v ) {
         if ( empty($tag) || $v->GetNSTag() == $tag ) {
@@ -175,9 +171,9 @@ class XMLElement {
   * @return array The XMLElements within the tree which match this tag
   */
   function GetPath( $path ) {
-    $elements = array();
+    $elements = [];
     // printf( "Querying within '%s' for path '%s'\n", $this->tagname, $path );
-    if ( !preg_match( '#(/)?([^/]+)(/?.*)$#', $path, $matches ) ) return $elements;
+    if ( !preg_match( '#(/)?([^/]+)(/?.*)$#', (string) $path, $matches ) ) return $elements;
     // printf( "Matches: %s -- %s -- %s\n", $matches[1], $matches[2], $matches[3] );
     if ( $matches[2] == '*' || $matches[2] == $this->GetNSTag()) {
       if ( $matches[3] == '' ) {
@@ -215,7 +211,7 @@ class XMLElement {
   * @param object An XMLElement to be appended to the array of sub-elements
   */
   function AddSubTag(&$v) {
-    if ( gettype($this->content) != "array" ) $this->content = array();
+    if ( gettype($this->content) != "array" ) $this->content = [];
     $this->content[] =& $v;
     return count($this->content);
   }
@@ -230,7 +226,7 @@ class XMLElement {
   * @return objectref A reference to the new XMLElement
   */
   function &NewElement( $tagname, $content=false, $attributes=false, $xmlns=null ) {
-    if ( gettype($this->content) != "array" ) $this->content = array();
+    if ( gettype($this->content) != "array" ) $this->content = [];
     $element = new XMLElement($tagname,$content,$attributes,$xmlns);
     $this->content[] =& $element;
     return $element;
@@ -261,17 +257,17 @@ class XMLElement {
       * Render the content, with special characters escaped
       *
       */
-      if(strpos($this->content, '<![CDATA[')===0 && strrpos($this->content, ']]>')===strlen($this->content)-3)
-        $r .= '<![CDATA[' . str_replace(']]>', ']]]]><![CDATA[>', substr($this->content, 9, -3)) . ']]>';
+      if(str_starts_with((string) $this->content, '<![CDATA[') && strrpos((string) $this->content, ']]>')===strlen((string) $this->content)-3)
+        $r .= '<![CDATA[' . str_replace(']]>', ']]]]><![CDATA[>', substr((string) $this->content, 9, -3)) . ']]>';
       else if ( defined('ENT_XML1') && defined('ENT_DISALLOWED') )
         // Newer PHP versions allow specifying ENT_XML1, but default to ENT_HTML401.  Go figure.  #PHPWTF
-        $r .= htmlspecialchars($this->content, ENT_NOQUOTES |  ENT_XML1 | ENT_DISALLOWED );
+        $r .= htmlspecialchars((string) $this->content, ENT_NOQUOTES |  ENT_XML1 | ENT_DISALLOWED );
       // Need to work out exactly how to do this in PHP.
       // else if ( preg_match('{^[\t\n\r\x0020-\xD7FF\xE000-\xFFFD\x10000-\x10FFFF]+$}u', utf8ToUnicode($this->content)) )
       //   $r .= '<![CDATA[' . $this->content . ']]>';
       else
         // Older PHP versions default to ENT_XML1.
-        $r .= htmlspecialchars($this->content, ENT_NOQUOTES );
+        $r .= htmlspecialchars((string) $this->content, ENT_NOQUOTES );
     }
     return $r;
   }
@@ -295,14 +291,14 @@ class XMLElement {
       foreach( $this->attributes AS $k => $v ) {
         if ( preg_match('#^xmlns(:?(.+))?$#', $k, $matches ) ) {
 //          if ( $force_xmlns ) printf( "1: %s: %s\n", $this->tagname, $this->xmlns );
-          if ( !isset($nslist) ) $nslist = array();
-          $prefix = (isset($matches[2]) ? $matches[2] : '');
+          if ( !isset($nslist) ) $nslist = [];
+          $prefix = ($matches[2] ?? '');
           if ( isset($nslist[$v]) && $nslist[$v] == $prefix ) continue; // No need to include in list as it's in a wrapping element
           $nslist[$v] = $prefix;
           if ( !isset($this->xmlns) ) $this->xmlns = $v;
           $xmlns_done = true;
         }
-        $attr .= sprintf( ' %s="%s"', $k, htmlspecialchars($v) );
+        $attr .= sprintf( ' %s="%s"', $k, htmlspecialchars((string) $v) );
       }
     }
     if ( isset($this->xmlns) && isset($nslist[$this->xmlns]) && $nslist[$this->xmlns] != '' ) {
@@ -321,7 +317,7 @@ class XMLElement {
     
     $r .= substr("                        ",0,$indent) . '<' . $tagname . $attr;
 
-    if ( (is_array($this->content) && count($this->content) > 0) || (!is_array($this->content) && strlen($this->content) > 0) ) {
+    if ( (is_array($this->content) && count($this->content) > 0) || (!is_array($this->content) && strlen((string) $this->content) > 0) ) {
       $r .= ">";
       $r .= $this->RenderContent($indent,$nslist,$force_xmlns);
       $r .= '</' . $tagname.">\n";
@@ -333,8 +329,8 @@ class XMLElement {
   }
 
 
-  function __tostring() {
-    return $this->Render();
+  function __tostring(): string {
+    return (string) $this->Render();
   }
 }
 
@@ -348,7 +344,7 @@ class XMLElement {
 * @return mixed Either a single XMLElement, or an array of XMLElement objects.
 */
 function BuildXMLTree( $xmltags, &$start_from ) {
-  $content = array();
+  $content = [];
 
   if ( !isset($start_from) ) $start_from = 0;
 
@@ -358,17 +354,17 @@ function BuildXMLTree( $xmltags, &$start_from ) {
     if ( $tagdata['type'] == "close" ) break;
     $xmlns = null;
     $tag = $tagdata['tag'];
-    if ( preg_match( '{^(.*):([^:]*)$}', $tag, $matches) ) {
+    if ( preg_match( '{^(.*):([^:]*)$}', (string) $tag, $matches) ) {
       $xmlns = $matches[1];
       $tag = $matches[2];
     }
-    $attributes = ( isset($tagdata['attributes']) ? $tagdata['attributes'] : false );
+    $attributes = ( $tagdata['attributes'] ?? false );
     if ( $tagdata['type'] == "open" ) {
       $subtree = BuildXMLTree( $xmltags, $start_from );
       $content[] = new XMLElement($tag, $subtree, $attributes, $xmlns );
     }
     else if ( $tagdata['type'] == "complete" ) {
-      $value = ( isset($tagdata['value']) ? $tagdata['value'] : false );
+      $value = ( $tagdata['value'] ?? false );
       $content[] = new XMLElement($tag, $value, $attributes, $xmlns );
     }
   }

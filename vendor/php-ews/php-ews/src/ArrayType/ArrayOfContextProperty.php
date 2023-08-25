@@ -21,5 +21,5 @@ class ArrayOfContextProperty extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\ContextPropertyType[]
      */
-    public $ContextProperty = array();
+    public $ContextProperty = [];
 }

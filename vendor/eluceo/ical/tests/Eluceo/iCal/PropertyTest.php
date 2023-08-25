@@ -15,7 +15,7 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
 
     public function testPropertyWithValueAndParams()
     {
-        $property = new Property('DTSTAMP', '20131020T153112', array('TZID' => 'Europe/Berlin'));
+        $property = new Property('DTSTAMP', '20131020T153112', ['TZID' => 'Europe/Berlin']);
         $this->assertEquals(
             'DTSTAMP;TZID=Europe/Berlin:20131020T153112',
             $property->toLine()
@@ -33,7 +33,7 @@ class PropertyTest extends \PHPUnit_Framework_TestCase
 
     public function testPropertyWithEscapedValues()
     {
-        $property = new Property('SOMEPROP', 'Escape me!"', array('TEST' => 'Lorem "test" ipsum'));
+        $property = new Property('SOMEPROP', 'Escape me!"', ['TEST' => 'Lorem "test" ipsum']);
         $this->assertEquals(
             'SOMEPROP;TEST="Lorem \\"test\\" ipsum":Escape me!\\"',
             $property->toLine()

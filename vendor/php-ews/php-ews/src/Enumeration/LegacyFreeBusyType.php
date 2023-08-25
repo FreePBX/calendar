@@ -22,7 +22,7 @@ class LegacyFreeBusyType extends Enumeration
      *
      * @var string
      */
-    const BUSY = 'Busy';
+    final public const BUSY = 'Busy';
 
     /**
      * The calendar item represents free time.
@@ -31,7 +31,7 @@ class LegacyFreeBusyType extends Enumeration
      *
      * @var string
      */
-    const FREE = 'Free';
+    final public const FREE = 'Free';
 
     /**
      * The calendar item's status is not defined.
@@ -40,7 +40,7 @@ class LegacyFreeBusyType extends Enumeration
      *
      * @var string
      */
-    const NO_DATA = 'NoData';
+    final public const NO_DATA = 'NoData';
 
     /**
      * The calendar item represents time out of the office.
@@ -49,7 +49,7 @@ class LegacyFreeBusyType extends Enumeration
      *
      * @var string
      */
-    const OUT_OF_OFFICE = 'OOF';
+    final public const OUT_OF_OFFICE = 'OOF';
 
     /**
      * The calendar item represents tentatively busy time.
@@ -58,7 +58,7 @@ class LegacyFreeBusyType extends Enumeration
      *
      * @var string
      */
-    const TENTATIVE = 'Tentative';
+    final public const TENTATIVE = 'Tentative';
 
     /**
      * The calendar item represents time working off site.
@@ -67,5 +67,5 @@ class LegacyFreeBusyType extends Enumeration
      *
      * @var string
      */
-    const WORKING_ELSEWHERE = 'WorkingElsewhere';
+    final public const WORKING_ELSEWHERE = 'WorkingElsewhere';
 }

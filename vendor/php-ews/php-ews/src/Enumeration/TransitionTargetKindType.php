@@ -22,7 +22,7 @@ class TransitionTargetKindType extends Enumeration
      *
      * @var string
      */
-    const GROUP = 'Group';
+    final public const GROUP = 'Group';
 
     /**
      * Specifies that the time zone transition target is a time zone period.
@@ -31,5 +31,5 @@ class TransitionTargetKindType extends Enumeration
      *
      * @var string
      */
-    const PERIOD = 'Period';
+    final public const PERIOD = 'Period';
 }

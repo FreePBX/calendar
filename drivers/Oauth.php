@@ -12,9 +12,7 @@ class Oauth extends Base {
 	 * @return array  array of information
 	 */
 	public static function getInfo() {
-		return array(
-			"name" => _("Remote Outlook Calendar using Oauth2")
-		);
+		return ["name" => _("Remote Outlook Calendar using Oauth2")];
 	}
 
 	/**
@@ -30,7 +28,7 @@ class Oauth extends Base {
         $password = $data['password'];
         $version = constant('\jamesiarmes\PhpEws\Client::VERSION_2016');
         $ews = new EWSCalendar($server, $username, $password, $version);
-        return load_view(dirname(__DIR__)."/views/oauth_calendar_form.php",array('action' => 'edit', 'data' => $data, 'message' => $message));
+        return load_view(dirname(__DIR__)."/views/oauth_calendar_form.php",['action' => 'edit', 'data' => $data, 'message' => $message]);
 	}
 
 	/**
@@ -38,9 +36,9 @@ class Oauth extends Base {
 	 * @method getAddDisplay
 	 * @return string              HTML to display
 	 */
-	public static function getAddDisplay($data = array()) {
+	public static function getAddDisplay($data = []) {
 		$data['next'] = 86400;
-		return load_view(dirname(__DIR__)."/views/oauth_calendar_form.php",array('action' => 'add', 'data' => $data));
+		return load_view(dirname(__DIR__)."/views/oauth_calendar_form.php",['action' => 'add', 'data' => $data]);
 	}
 
 	/**
@@ -51,20 +49,7 @@ class Oauth extends Base {
 	 * @return boolean               true or false
 	 */
 	public function updateCalendar($data) {
-		$calendar = array(
-			"name" => $data['name'],
-			"description" => $data['description'],
-			"type" => "oauth",
-			"email" => $data['email'],
-			"version" => 'VERSION_2016',
-			"url" => $data['url'],
-			"username" => $data['username'],
-			"password" => $data['password'],
-			"calendars" => !empty($data['calendars']) ? $data['calendars'] : '',
-			"next" => !empty($data['next']) ? $data['next'] : 300,
-			"auth_settings" => !empty($data['auth_settings']) ? $data['auth_settings'] : '',
-			"timezone" => !empty($data['timezone']) ? $data['timezone'] : date_default_timezone_get(),
-		);
+		$calendar = ["name" => $data['name'], "description" => $data['description'], "type" => "oauth", "email" => $data['email'], "version" => 'VERSION_2016', "url" => $data['url'], "username" => $data['username'], "password" => $data['password'], "calendars" => !empty($data['calendars']) ? $data['calendars'] : '', "next" => !empty($data['next']) ? $data['next'] : 300, "auth_settings" => !empty($data['auth_settings']) ? $data['auth_settings'] : '', "timezone" => !empty($data['timezone']) ? $data['timezone'] : date_default_timezone_get()];
 		$ret = parent::updateCalendar($calendar);
 		$this->processCalendar();
 		return $ret;
@@ -113,14 +98,14 @@ class Oauth extends Base {
 	private function getCalEvents($atoken,$caluser,$timezone,$calendarId,$start,$end) {
 		try {
 			if($start && $end) {
-				$startstrpos = strpos($start, '+');
+				$startstrpos = strpos((string) $start, '+');
 				if ($startstrpos !== false) {
-					$start = substr($start, 0, $startstrpos);
+					$start = substr((string) $start, 0, $startstrpos);
 				}
 
-				$endstrpos = strpos($end, '+');
+				$endstrpos = strpos((string) $end, '+');
 				if ($endstrpos !== false) {
-					$end = substr($end, 0, $endstrpos);
+					$end = substr((string) $end, 0, $endstrpos);
 				}
 				$url = "https://graph.microsoft.com/v1.0/users/".$caluser."/calendars/".$calendarId."/calendarView?startDateTime=".$start."&endDateTime=".$end;
 			} else {
@@ -128,14 +113,11 @@ class Oauth extends Base {
 			}
 			$cpt = curl_init($url);
 			curl_setopt($cpt, CURLOPT_HTTPHEADER,
-					array(
-						'Authorization: Bearer '.$atoken,
-						'Prefer: outlook.timezone="'.$timezone.'"'
-					)
+					['Authorization: Bearer '.$atoken, 'Prefer: outlook.timezone="'.$timezone.'"']
 				);
 			curl_setopt($cpt, CURLOPT_RETURNTRANSFER, true);
 			$result = curl_exec($cpt);
-			return json_decode($result,true);
+			return json_decode($result,true, 512, JSON_THROW_ON_ERROR);
 		} catch(\Exception $e) {
 			$message = [
 				'type' => 'danger',
@@ -148,14 +130,11 @@ class Oauth extends Base {
 		try {
 			$cpt = curl_init($nextLink);
 			curl_setopt($cpt, CURLOPT_HTTPHEADER,
-					array(
-						'Authorization: Bearer '.$atoken,
-						'Prefer: outlook.timezone="'.$timezone.'"'
-					)
+					['Authorization: Bearer '.$atoken, 'Prefer: outlook.timezone="'.$timezone.'"']
 				);
 			curl_setopt($cpt, CURLOPT_RETURNTRANSFER, true);
 			$result = curl_exec($cpt);
-			return json_decode($result,true);
+			return json_decode($result,true, 512, JSON_THROW_ON_ERROR);
 		} catch(\Exception $e) {
 			$message = [
 				'type' => 'danger',

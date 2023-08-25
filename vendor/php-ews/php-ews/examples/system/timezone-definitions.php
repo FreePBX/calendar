@@ -10,10 +10,7 @@ use \jamesiarmes\PhpEws\Enumeration\ResponseClassType;
 
 // Replace with timezone ids to get the definition for. An empty array will
 // result in all timezones being returned.
-$timezones = array(
-    'Eastern Standard Time',
-    'Pacific Standard Time',
-);
+$timezones = ['Eastern Standard Time', 'Pacific Standard Time'];
 
 // Set connection information.
 $host = '';

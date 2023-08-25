@@ -22,7 +22,7 @@ class ImportanceChoicesType extends Enumeration
      *
      * @var string
      */
-    const HIGH = 'High';
+    final public const HIGH = 'High';
 
     /**
      * Low importance level.
@@ -31,7 +31,7 @@ class ImportanceChoicesType extends Enumeration
      *
      * @var string
      */
-    const LOW = 'Low';
+    final public const LOW = 'Low';
 
     /**
      * Normal importance level.
@@ -40,5 +40,5 @@ class ImportanceChoicesType extends Enumeration
      *
      * @var string
      */
-    const NORMAL = 'Normal';
+    final public const NORMAL = 'Normal';
 }

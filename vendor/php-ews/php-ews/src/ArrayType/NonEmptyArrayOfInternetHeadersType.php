@@ -23,5 +23,5 @@ class NonEmptyArrayOfInternetHeadersType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\InternetHeaderType[]
      */
-    public $InternetMessageHeader = array();
+    public $InternetMessageHeader = [];
 }

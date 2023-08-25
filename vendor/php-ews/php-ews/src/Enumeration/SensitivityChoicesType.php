@@ -21,7 +21,7 @@ class SensitivityChoicesType extends Enumeration
      *
      * @var string
      */
-    const CONFIDENTIAL = 'Confidential';
+    final public const CONFIDENTIAL = 'Confidential';
 
     /**
      * Indicates that the item has a normal sensitivity.
@@ -30,7 +30,7 @@ class SensitivityChoicesType extends Enumeration
      *
      * @var string
      */
-    const NORMAL = 'Normal';
+    final public const NORMAL = 'Normal';
 
     /**
      * Indicates that the item is personal.
@@ -39,7 +39,7 @@ class SensitivityChoicesType extends Enumeration
      *
      * @var string
      */
-    const PERSONAL = 'Personal';
+    final public const PERSONAL = 'Personal';
 
     /**
      * Indicates that the item is private.
@@ -48,5 +48,5 @@ class SensitivityChoicesType extends Enumeration
      *
      * @var string
      */
-    const PRIVATE_ITEM = 'Private';
+    final public const PRIVATE_ITEM = 'Private';
 }

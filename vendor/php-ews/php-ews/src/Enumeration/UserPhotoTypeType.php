@@ -21,7 +21,7 @@ class UserPhotoTypeType extends Enumeration
      *
      * @var string
      */
-    const PROFILE_HEADER_PHOTO = 'ProfileHeaderPhoto';
+    final public const PROFILE_HEADER_PHOTO = 'ProfileHeaderPhoto';
 
     /**
      * Identifies a user photo as the user's primary photo.
@@ -30,5 +30,5 @@ class UserPhotoTypeType extends Enumeration
      *
      * @var string
      */
-    const USER_PHOTO = 'UserPhoto';
+    final public const USER_PHOTO = 'UserPhoto';
 }

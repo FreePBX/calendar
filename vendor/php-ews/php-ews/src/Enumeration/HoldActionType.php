@@ -21,7 +21,7 @@ class HoldActionType extends Enumeration
      *
      * @var string
      */
-    const CREATE = 'Create';
+    final public const CREATE = 'Create';
 
     /**
      * Indicates that a mailbox hold will be removed.
@@ -30,7 +30,7 @@ class HoldActionType extends Enumeration
      *
      * @var string
      */
-    const REMOVE = 'Remove';
+    final public const REMOVE = 'Remove';
 
     /**
      * Indicates that a mailbox hold will be updated.
@@ -39,5 +39,5 @@ class HoldActionType extends Enumeration
      *
      * @var string
      */
-    const UPDATE = 'Update';
+    final public const UPDATE = 'Update';
 }

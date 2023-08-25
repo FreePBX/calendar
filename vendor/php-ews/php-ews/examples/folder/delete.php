@@ -16,9 +16,7 @@ use \jamesiarmes\PhpEws\Enumeration\ResponseClassType;
 use \jamesiarmes\PhpEws\Type\FolderIdType;
 
 // Replace with ids of the folders to be deleted.
-$folder_ids = array(
-    '',
-);
+$folder_ids = [''];
 
 // Set connection information.
 $host = '';

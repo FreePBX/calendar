@@ -25,7 +25,7 @@ class CreateActionType extends Enumeration
      *
      * @var string
      */
-    const CREATE = 'CreateNew';
+    final public const CREATE = 'CreateNew';
 
     /**
      * Specifies that the item indicated by the ItemId element will be updated.
@@ -37,7 +37,7 @@ class CreateActionType extends Enumeration
      *
      * @var string
      */
-    const UPDATE = 'Update';
+    final public const UPDATE = 'Update';
 
     /**
      * Indicates that an attempt is first made to update the item.
@@ -49,5 +49,5 @@ class CreateActionType extends Enumeration
      *
      * @var string
      */
-    const UPDATE_OR_CREATE = 'UpdateOrCreate';
+    final public const UPDATE_OR_CREATE = 'UpdateOrCreate';
 }

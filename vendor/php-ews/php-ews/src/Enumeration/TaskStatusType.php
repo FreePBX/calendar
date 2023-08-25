@@ -21,7 +21,7 @@ class TaskStatusType extends Enumeration
      *
      * @var string
      */
-    const COMPLETED = 'Completed';
+    final public const COMPLETED = 'Completed';
 
     /**
      * Indicates that the task has been deferred.
@@ -30,7 +30,7 @@ class TaskStatusType extends Enumeration
      *
      * @var string
      */
-    const DEFERRED = 'Deferred';
+    final public const DEFERRED = 'Deferred';
 
     /**
      * Indicates that the task has been started.
@@ -39,7 +39,7 @@ class TaskStatusType extends Enumeration
      *
      * @var string
      */
-    const IN_PROGRESS = 'InProgress';
+    final public const IN_PROGRESS = 'InProgress';
 
     /**
      * Indicates that the task has not yet been started.
@@ -48,7 +48,7 @@ class TaskStatusType extends Enumeration
      *
      * @var string
      */
-    const NOT_STARTED = 'NotStarted';
+    final public const NOT_STARTED = 'NotStarted';
 
     /**
      * Indicates that the task is waiting on others.
@@ -57,5 +57,5 @@ class TaskStatusType extends Enumeration
      *
      * @var string
      */
-    const WAITING_ON_OTHERS = 'WaitingOnOthers';
+    final public const WAITING_ON_OTHERS = 'WaitingOnOthers';
 }

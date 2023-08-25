@@ -17,7 +17,7 @@ class ComponentTest extends \PHPUnit_Framework_TestCase
         $vAlarm = new \Eluceo\iCal\Component\Alarm;
         $vAlarm->setAction(\Eluceo\iCal\Component\Alarm::ACTION_DISPLAY);
         $vAlarm->setDescription($input);
-        $vAlarm->setTrigger('PT0S', true);
+        $vAlarm->setTrigger('PT0S');
         $vEvent->addComponent($vAlarm);
 
         $vCalendar->addComponent($vEvent);

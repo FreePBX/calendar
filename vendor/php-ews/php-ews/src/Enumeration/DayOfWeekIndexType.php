@@ -21,7 +21,7 @@ class DayOfWeekIndexType extends Enumeration
      *
      * @var string
      */
-    const FIRST = 'First';
+    final public const FIRST = 'First';
 
     /**
      * Represents the fourth day of a week.
@@ -30,7 +30,7 @@ class DayOfWeekIndexType extends Enumeration
      *
      * @var string
      */
-    const FOURTH = 'Fourth';
+    final public const FOURTH = 'Fourth';
 
     /**
      * Represents the last day of a week.
@@ -39,7 +39,7 @@ class DayOfWeekIndexType extends Enumeration
      *
      * @var string
      */
-    const LAST = 'Last';
+    final public const LAST = 'Last';
 
     /**
      * Represents the second day of a week.
@@ -48,7 +48,7 @@ class DayOfWeekIndexType extends Enumeration
      *
      * @var string
      */
-    const SECOND = 'Second';
+    final public const SECOND = 'Second';
 
     /**
      * Represents the Third day of a week.
@@ -57,5 +57,5 @@ class DayOfWeekIndexType extends Enumeration
      *
      * @var string
      */
-    const THIRD = 'Third';
+    final public const THIRD = 'Third';
 }

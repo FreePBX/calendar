@@ -25,12 +25,13 @@ class DateTimesProperty extends Property
      */
     public function __construct(
         $name,
-        $dateTimes = array(),
+        $dateTimes = [],
         $noTime = false,
         $useTimezone = false,
         $useUtc = false
     ) {
-        $dates = array();
+        $dateTime = null;
+        $dates = [];
         foreach ($dateTimes as $dateTime) {
             $dates[] = DateUtil::getDateString($dateTime, $noTime, $useTimezone, $useUtc);
         }

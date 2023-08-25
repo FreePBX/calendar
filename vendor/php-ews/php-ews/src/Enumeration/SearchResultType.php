@@ -21,7 +21,7 @@ class SearchResultType extends Enumeration
      *
      * @var string
      */
-    const PREVIEW_ONLY = 'PreviewOnly';
+    final public const PREVIEW_ONLY = 'PreviewOnly';
 
     /**
      * Return the search statistics.
@@ -30,5 +30,5 @@ class SearchResultType extends Enumeration
      *
      * @var string
      */
-    const STATISTICS_ONLY = 'StatisticsOnly';
+    final public const STATISTICS_ONLY = 'StatisticsOnly';
 }

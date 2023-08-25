@@ -22,7 +22,7 @@ class Occurrence extends Enumeration
      *
      * @var integer
      */
-    const FIRST_FROM_BEGINNING = 1;
+    final public const FIRST_FROM_BEGINNING = 1;
 
     /**
      * The first occurrence of the specified day of the week from the end of the
@@ -32,7 +32,7 @@ class Occurrence extends Enumeration
      *
      * @var integer
      */
-    const FIRST_FROM_END = -1;
+    final public const FIRST_FROM_END = -1;
 
     /**
      * The fourth occurrence of the specified day of the week from the beginning
@@ -42,7 +42,7 @@ class Occurrence extends Enumeration
      *
      * @var integer
      */
-    const FOURTH_FROM_BEGINNING = 4;
+    final public const FOURTH_FROM_BEGINNING = 4;
 
     /**
      * The fourth occurrence of the specified day of the week from the end of the
@@ -52,7 +52,7 @@ class Occurrence extends Enumeration
      *
      * @var integer
      */
-    const FOURTH_FROM_END = -4;
+    final public const FOURTH_FROM_END = -4;
 
     /**
      * The second occurrence of the specified day of the week from the beginning
@@ -62,7 +62,7 @@ class Occurrence extends Enumeration
      *
      * @var integer
      */
-    const SECOND_FROM_BEGINNING = 2;
+    final public const SECOND_FROM_BEGINNING = 2;
 
     /**
      * The second occurrence of the specified day of the week from the end of
@@ -72,7 +72,7 @@ class Occurrence extends Enumeration
      *
      * @var integer
      */
-    const SECOND_FROM_END = -2;
+    final public const SECOND_FROM_END = -2;
 
     /**
      * The third occurrence of the specified day of the week from the beginning
@@ -82,7 +82,7 @@ class Occurrence extends Enumeration
      *
      * @var integer
      */
-    const THIRD_FROM_BEGINNING = 3;
+    final public const THIRD_FROM_BEGINNING = 3;
 
     /**
      * The third occurrence of the specified day of the week from the end of the
@@ -92,5 +92,5 @@ class Occurrence extends Enumeration
      *
      * @var integer
      */
-    const THIRD_FROM_END = -3;
+    final public const THIRD_FROM_END = -3;
 }

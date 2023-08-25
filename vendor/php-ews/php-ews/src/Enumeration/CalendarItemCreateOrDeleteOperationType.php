@@ -22,7 +22,7 @@ class CalendarItemCreateOrDeleteOperationType extends Enumeration
      *
      * @var string
      */
-    const SEND_ONLY_TO_ALL = 'SendOnlyToAll';
+    final public const SEND_ONLY_TO_ALL = 'SendOnlyToAll';
 
     /**
      * The meeting request is sent to all attendees and a copy is saved in the
@@ -32,7 +32,7 @@ class CalendarItemCreateOrDeleteOperationType extends Enumeration
      *
      * @var string
      */
-    const SEND_TO_ALL_AND_SAVE_COPY = 'SendToAllAndSaveCopy';
+    final public const SEND_TO_ALL_AND_SAVE_COPY = 'SendToAllAndSaveCopy';
 
     /**
      * If the item is a meeting request, it is saved as a calendar item but not
@@ -42,5 +42,5 @@ class CalendarItemCreateOrDeleteOperationType extends Enumeration
      *
      * @var string
      */
-    const SEND_TO_NONE = 'SendToNone';
+    final public const SEND_TO_NONE = 'SendToNone';
 }

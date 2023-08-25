@@ -55,7 +55,7 @@ foreach ($response_messages as $response_message) {
     // to load the namespace XSD.
     $config = $response_message->UserConfiguration;
     $data = simplexml_load_string(
-        $config->XmlData,
+        (string) $config->XmlData,
         'SimpleXMLElement',
         LIBXML_NOWARNING
     );
@@ -82,34 +82,7 @@ foreach ($response_messages as $response_message) {
  */
 function getColors($index)
 {
-    $colors = array(
-        -1 => array('background' => 'FFFFFF', 'text' => 'black'),
-        0 => array('background' => 'D6252E', 'text' => 'black'),
-        1 => array('background' => 'F06C15', 'text' => 'black'),
-        2 => array('background' => 'FFCA4C', 'text' => 'black'),
-        3 => array('background' => 'FFFE3D', 'text' => 'black'),
-        4 => array('background' => '4AB63F', 'text' => 'black'),
-        5 => array('background' => '40BD95', 'text' => 'black'),
-        6 => array('background' => '859A52', 'text' => 'black'),
-        7 => array('background' => '3267B8', 'text' => 'black'),
-        8 => array('background' => '613DB4', 'text' => 'black'),
-        9 => array('background' => 'A34E78', 'text' => 'black'),
-        10 => array('background' => 'C4CCDD', 'text' => 'black'),
-        11 => array('background' => '8C9CBD', 'text' => 'black'),
-        12 => array('background' => 'C4C4C4', 'text' => 'black'),
-        13 => array('background' => 'A5A5A5', 'text' => 'black'),
-        14 => array('background' => '1C1C1C', 'text' => 'white'),
-        15 => array('background' => 'AF1E25', 'text' => 'white'),
-        16 => array('background' => 'B14F0D', 'text' => 'white'),
-        17 => array('background' => 'AB7B05', 'text' => 'white'),
-        18 => array('background' => '999400', 'text' => 'black'),
-        19 => array('background' => '35792B', 'text' => 'black'),
-        20 => array('background' => '2E7D64', 'text' => 'black'),
-        21 => array('background' => '5F6C3A', 'text' => 'black'),
-        22 => array('background' => '2A5191', 'text' => 'white'),
-        23 => array('background' => '50328F', 'text' => 'white'),
-        24 => array('background' => '82375F', 'text' => 'white'),
-    );
+    $colors = [-1 => ['background' => 'FFFFFF', 'text' => 'black'], 0 => ['background' => 'D6252E', 'text' => 'black'], 1 => ['background' => 'F06C15', 'text' => 'black'], 2 => ['background' => 'FFCA4C', 'text' => 'black'], 3 => ['background' => 'FFFE3D', 'text' => 'black'], 4 => ['background' => '4AB63F', 'text' => 'black'], 5 => ['background' => '40BD95', 'text' => 'black'], 6 => ['background' => '859A52', 'text' => 'black'], 7 => ['background' => '3267B8', 'text' => 'black'], 8 => ['background' => '613DB4', 'text' => 'black'], 9 => ['background' => 'A34E78', 'text' => 'black'], 10 => ['background' => 'C4CCDD', 'text' => 'black'], 11 => ['background' => '8C9CBD', 'text' => 'black'], 12 => ['background' => 'C4C4C4', 'text' => 'black'], 13 => ['background' => 'A5A5A5', 'text' => 'black'], 14 => ['background' => '1C1C1C', 'text' => 'white'], 15 => ['background' => 'AF1E25', 'text' => 'white'], 16 => ['background' => 'B14F0D', 'text' => 'white'], 17 => ['background' => 'AB7B05', 'text' => 'white'], 18 => ['background' => '999400', 'text' => 'black'], 19 => ['background' => '35792B', 'text' => 'black'], 20 => ['background' => '2E7D64', 'text' => 'black'], 21 => ['background' => '5F6C3A', 'text' => 'black'], 22 => ['background' => '2A5191', 'text' => 'white'], 23 => ['background' => '50328F', 'text' => 'white'], 24 => ['background' => '82375F', 'text' => 'white']];
 
     return $colors[$index];
 }

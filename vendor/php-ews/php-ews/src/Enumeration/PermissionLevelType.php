@@ -22,7 +22,7 @@ class PermissionLevelType extends Enumeration
      *
      * @var string
      */
-    const AUTHOR = 'Author';
+    final public const AUTHOR = 'Author';
 
     /**
      * Indicates that the user can create items in the folder.
@@ -33,7 +33,7 @@ class PermissionLevelType extends Enumeration
      *
      * @var string
      */
-    const CONTRIBUTOR = 'Contributor';
+    final public const CONTRIBUTOR = 'Contributor';
 
     /**
      * Indicates that the user has custom access permissions on the folder.
@@ -42,7 +42,7 @@ class PermissionLevelType extends Enumeration
      *
      * @var string
      */
-    const CUSTOM = 'Custom';
+    final public const CUSTOM = 'Custom';
 
     /**
      * Indicates that the user can create, read, edit, and delete all items in
@@ -52,7 +52,7 @@ class PermissionLevelType extends Enumeration
      *
      * @var string
      */
-    const EDITOR = 'Editor';
+    final public const EDITOR = 'Editor';
 
     /**
      * Indicates that the user can create and read all items in the folder, and
@@ -62,7 +62,7 @@ class PermissionLevelType extends Enumeration
      *
      * @var string
      */
-    const NON_EDITING_AUTHOR = 'NoneditingAuthor';
+    final public const NON_EDITING_AUTHOR = 'NoneditingAuthor';
 
     /**
      * Indicates that the user has no permissions on the folder.
@@ -71,7 +71,7 @@ class PermissionLevelType extends Enumeration
      *
      * @var string
      */
-    const NONE = 'None';
+    final public const NONE = 'None';
 
     /**
      * Indicates that the user can create, read, edit, and delete all items in
@@ -83,7 +83,7 @@ class PermissionLevelType extends Enumeration
      *
      * @var string
      */
-    const OWNER = 'Owner';
+    final public const OWNER = 'Owner';
 
     /**
      * Indicates that the user can create and read all items in the folder,
@@ -93,7 +93,7 @@ class PermissionLevelType extends Enumeration
      *
      * @var string
      */
-    const PUBLISHING_AUTHOR = 'PublishingAuthor';
+    final public const PUBLISHING_AUTHOR = 'PublishingAuthor';
 
     /**
      * Indicates that the user can create, read, edit, and delete all items in
@@ -103,7 +103,7 @@ class PermissionLevelType extends Enumeration
      *
      * @var string
      */
-    const PUBLISHING_EDITOR = 'PublishingEditor';
+    final public const PUBLISHING_EDITOR = 'PublishingEditor';
 
     /**
      * Indicates that the user can read all items in the folder.
@@ -112,5 +112,5 @@ class PermissionLevelType extends Enumeration
      *
      * @var string
      */
-    const REVIEWER = 'Reviewer';
+    final public const REVIEWER = 'Reviewer';
 }

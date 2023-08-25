@@ -21,7 +21,7 @@ class ImAddressKeyType extends Enumeration
      *
      * @var string
      */
-    const IM_ADDRESS_1 = 'ImAddress1';
+    final public const IM_ADDRESS_1 = 'ImAddress1';
 
     /**
      * Instant messenger key for instant messenger address two.
@@ -30,7 +30,7 @@ class ImAddressKeyType extends Enumeration
      *
      * @var string
      */
-    const IM_ADDRESS_2 = 'ImAddress2';
+    final public const IM_ADDRESS_2 = 'ImAddress2';
 
     /**
      * Instant messenger key for instant messenger address three.
@@ -39,5 +39,5 @@ class ImAddressKeyType extends Enumeration
      *
      * @var string
      */
-    const IM_ADDRESS_3 = 'ImAddress3';
+    final public const IM_ADDRESS_3 = 'ImAddress3';
 }

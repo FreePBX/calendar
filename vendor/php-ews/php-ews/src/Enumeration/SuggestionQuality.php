@@ -22,7 +22,7 @@ class SuggestionQuality extends Enumeration
      *
      * @var string
      */
-    const EXCELLENT = 'Excellent';
+    final public const EXCELLENT = 'Excellent';
 
     /**
      * Indicates that the suggested meeting time is fair.
@@ -31,7 +31,7 @@ class SuggestionQuality extends Enumeration
      *
      * @var string
      */
-    const FAIR = 'Fair';
+    final public const FAIR = 'Fair';
 
     /**
      * Indicates that the suggested meeting time is good.
@@ -40,7 +40,7 @@ class SuggestionQuality extends Enumeration
      *
      * @var string
      */
-    const GOOD = 'Good';
+    final public const GOOD = 'Good';
 
     /**
      * Indicates that the suggested meeting time is poor.
@@ -49,5 +49,5 @@ class SuggestionQuality extends Enumeration
      *
      * @var string
      */
-    const POOR = 'Poor';
+    final public const POOR = 'Poor';
 }

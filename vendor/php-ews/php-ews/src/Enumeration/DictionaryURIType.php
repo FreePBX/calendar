@@ -21,7 +21,7 @@ class DictionaryURIType extends Enumeration
      *
      * @var string
      */
-    const CONTACTS_EMAIL_ADDRESS = 'contacts:EmailAddress';
+    final public const CONTACTS_EMAIL_ADDRESS = 'contacts:EmailAddress';
 
     /**
      * Represents the instant messaging address of a contact.
@@ -30,7 +30,7 @@ class DictionaryURIType extends Enumeration
      *
      * @var string
      */
-    const CONTACTS_IM_ADDRESS = 'contacts:ImAddress';
+    final public const CONTACTS_IM_ADDRESS = 'contacts:ImAddress';
 
     /**
      * Represents the phone number of a contact.
@@ -39,7 +39,7 @@ class DictionaryURIType extends Enumeration
      *
      * @var string
      */
-    const CONTACTS_PHONE_NUMBER = 'contacts:PhoneNumber';
+    final public const CONTACTS_PHONE_NUMBER = 'contacts:PhoneNumber';
 
     /**
      * Represents the city of a contact.
@@ -48,7 +48,7 @@ class DictionaryURIType extends Enumeration
      *
      * @var string
      */
-    const CONTACTS_PHYSICAL_ADDRESS_CITY = 'contacts:PhysicalAddress:City';
+    final public const CONTACTS_PHYSICAL_ADDRESS_CITY = 'contacts:PhysicalAddress:City';
 
     /**
      * Represents the country of a contact.
@@ -57,7 +57,7 @@ class DictionaryURIType extends Enumeration
      *
      * @var string
      */
-    const CONTACTS_PHYSICAL_ADDRESS_COUNTRY = 'contacts:PhysicalAddress:Country';
+    final public const CONTACTS_PHYSICAL_ADDRESS_COUNTRY = 'contacts:PhysicalAddress:Country';
 
     /**
      * Represents the postal code of a contact.
@@ -66,7 +66,7 @@ class DictionaryURIType extends Enumeration
      *
      * @var string
      */
-    const CONTACTS_PHYSICAL_ADDRESS_POSTAL_CODE = 'contacts:PhysicalAddress:PostalCode';
+    final public const CONTACTS_PHYSICAL_ADDRESS_POSTAL_CODE = 'contacts:PhysicalAddress:PostalCode';
 
     /**
      * Represents the state of a contact.
@@ -75,7 +75,7 @@ class DictionaryURIType extends Enumeration
      *
      * @var string
      */
-    const CONTACTS_PHYSICAL_ADDRESS_STATE = 'contacts:PhysicalAddress:State';
+    final public const CONTACTS_PHYSICAL_ADDRESS_STATE = 'contacts:PhysicalAddress:State';
 
     /**
      * Represents the street address of a contact.
@@ -84,7 +84,7 @@ class DictionaryURIType extends Enumeration
      *
      * @var string
      */
-    const CONTACTS_PHYSICAL_ADDRESS_STREET = 'contacts:PhysicalAddress:Street';
+    final public const CONTACTS_PHYSICAL_ADDRESS_STREET = 'contacts:PhysicalAddress:Street';
 
     /**
      * Represents a member of a distribution list.
@@ -93,7 +93,7 @@ class DictionaryURIType extends Enumeration
      *
      * @var string
      */
-    const DISTRIBUTION_LIST_MEMBERS_MEMBER = 'distributionlist:Members:Member';
+    final public const DISTRIBUTION_LIST_MEMBERS_MEMBER = 'distributionlist:Members:Member';
 
     /**
      * Represents the message header of an item.
@@ -102,5 +102,5 @@ class DictionaryURIType extends Enumeration
      *
      * @var string
      */
-    const ITEM_INTERNET_MESSAGE_HEADER = 'item:InternetMessageHeader';
+    final public const ITEM_INTERNET_MESSAGE_HEADER = 'item:InternetMessageHeader';
 }

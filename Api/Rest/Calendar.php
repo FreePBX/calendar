@@ -139,7 +139,7 @@ class Calendar extends Base {
             try {
                 $ret = $calendar['calendar']->updateCalendar($params);
                 needreload();
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 $ret = false;
             }
 
@@ -185,7 +185,7 @@ class Calendar extends Base {
                 needreload();
 
                 $ret = true;
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 $ret = false;
             }
 

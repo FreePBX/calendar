@@ -21,7 +21,7 @@ class PhysicalAddressIndexType extends Enumeration
      *
      * @var string
      */
-    const BUSINESS = 'Business';
+    final public const BUSINESS = 'Business';
 
     /**
      * Address index for home.
@@ -30,7 +30,7 @@ class PhysicalAddressIndexType extends Enumeration
      *
      * @var string
      */
-    const HOME = 'Home';
+    final public const HOME = 'Home';
 
     /**
      * Address index for none.
@@ -39,7 +39,7 @@ class PhysicalAddressIndexType extends Enumeration
      *
      * @var string
      */
-    const NONE = 'None';
+    final public const NONE = 'None';
 
     /**
      * Address index for other.
@@ -48,5 +48,5 @@ class PhysicalAddressIndexType extends Enumeration
      *
      * @var string
      */
-    const OTHER = 'Other';
+    final public const OTHER = 'Other';
 }

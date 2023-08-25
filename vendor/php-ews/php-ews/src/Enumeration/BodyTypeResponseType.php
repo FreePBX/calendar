@@ -28,7 +28,7 @@ class BodyTypeResponseType extends Enumeration
      *
      * @var string
      */
-    const BEST = 'Best';
+    final public const BEST = 'Best';
 
     /**
      * The response will return an item body as HTML.
@@ -37,7 +37,7 @@ class BodyTypeResponseType extends Enumeration
      *
      * @var string
      */
-    const HTML = 'HTML';
+    final public const HTML = 'HTML';
 
     /**
      * The response will return an item body as plain text.
@@ -46,5 +46,5 @@ class BodyTypeResponseType extends Enumeration
      *
      * @var string
      */
-    const TEXT = 'Text';
+    final public const TEXT = 'Text';
 }

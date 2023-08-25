@@ -29,12 +29,12 @@ use Eluceo\iCal\Property\DateTimesProperty;
  */
 class Event extends Component
 {
-    const TIME_TRANSPARENCY_OPAQUE      = 'OPAQUE';
-    const TIME_TRANSPARENCY_TRANSPARENT = 'TRANSPARENT';
+    final public const TIME_TRANSPARENCY_OPAQUE      = 'OPAQUE';
+    final public const TIME_TRANSPARENCY_TRANSPARENT = 'TRANSPARENT';
 
-    const STATUS_TENTATIVE = 'TENTATIVE';
-    const STATUS_CONFIRMED = 'CONFIRMED';
-    const STATUS_CANCELLED = 'CANCELLED';
+    final public const STATUS_TENTATIVE = 'TENTATIVE';
+    final public const STATUS_CONFIRMED = 'CONFIRMED';
+    final public const STATUS_CANCELLED = 'CANCELLED';
 
     /**
      * @var string
@@ -150,7 +150,7 @@ class Event extends Component
     /**
      * @var array
      */
-    protected $recurrenceRules = array();
+    protected $recurrenceRules = [];
 
     /**
      * This property specifies the date and time that the calendar
@@ -207,7 +207,7 @@ class Event extends Component
      *
      * @var \DateTime[]
      */
-    protected $exDates = array();
+    protected $exDates = [];
 
     /**
      * @var RecurrenceId
@@ -272,12 +272,7 @@ class Event extends Component
                     new Property(
                         'X-APPLE-STRUCTURED-LOCATION',
                         new RawStringValue('geo:' . $this->locationGeo->getGeoLocationAsString(',')),
-                        array(
-                            'VALUE'          => 'URI',
-                            'X-ADDRESS'      => $this->location,
-                            'X-APPLE-RADIUS' => 49,
-                            'X-TITLE'        => $this->locationTitle,
-                        )
+                        ['VALUE'          => 'URI', 'X-ADDRESS'      => $this->location, 'X-APPLE-RADIUS' => 49, 'X-TITLE'        => $this->locationTitle]
                     )
                 );
             }
@@ -306,9 +301,7 @@ class Event extends Component
                 new Property(
                     'X-ALT-DESC',
                     $this->descriptionHTML,
-                    array(
-                        'FMTTYPE' => 'text/html',
-                    )
+                    ['FMTTYPE' => 'text/html']
                 )
             );
         }
@@ -426,7 +419,7 @@ class Event extends Component
         if (is_scalar($geo)) {
             $geo = Geo::fromString($geo);
         } else if (!is_null($geo) && !$geo instanceof Geo) {
-            $className = get_class($geo);
+            $className = $geo::class;
             throw new \InvalidArgumentException(
                 "The parameter 'geo' must be a string or an instance of \\Eluceo\\iCal\\Property\\Event\\Geo"
                 . " but an instance of {$className} was given."
@@ -441,7 +434,6 @@ class Event extends Component
     }
 
     /**
-     * @param Geo $geoProperty
      * @return $this
      */
     public function setGeoLocation(Geo $geoProperty)
@@ -484,8 +476,6 @@ class Event extends Component
     }
 
     /**
-     * @param Organizer $organizer
-     *
      * @return $this
      */
     public function setOrganizer(Organizer $organizer)
@@ -560,8 +550,6 @@ class Event extends Component
     }
 
     /**
-     * @param Attendees $attendees
-     *
      * @return $this
      */
     public function setAttendees(Attendees $attendees)
@@ -577,7 +565,7 @@ class Event extends Component
      *
      * @return $this
      */
-    public function addAttendee($attendee, $params = array())
+    public function addAttendee($attendee, $params = [])
     {
         if (!isset($this->attendees)) {
             $this->attendees = new Attendees();
@@ -668,7 +656,7 @@ class Event extends Component
      */
     public function setTimeTransparency($transparency)
     {
-        $transparency = strtoupper($transparency);
+        $transparency = strtoupper((string) $transparency);
         if ($transparency === self::TIME_TRANSPARENCY_OPAQUE
             || $transparency === self::TIME_TRANSPARENCY_TRANSPARENT
         ) {
@@ -689,7 +677,7 @@ class Event extends Component
      */
     public function setStatus($status)
     {
-        $status = strtoupper($status);
+        $status = strtoupper((string) $status);
         if ($status == self::STATUS_CANCELLED
             || $status == self::STATUS_CONFIRMED
             || $status == self::STATUS_TENTATIVE
@@ -705,7 +693,6 @@ class Event extends Component
     /**
      * @deprecated Deprecated since version 0.11.0, to be removed in 1.0. Use addRecurrenceRule instead.
      *
-     * @param RecurrenceRule $recurrenceRule
      *
      * @return $this
      */
@@ -731,8 +718,6 @@ class Event extends Component
     }
 
     /**
-     * @param RecurrenceRule $recurrenceRule
-     *
      * @return $this
      */
     public function addRecurrenceRule(RecurrenceRule $recurrenceRule)
@@ -801,8 +786,6 @@ class Event extends Component
     }
 
     /**
-     * @param \DateTime $dateTime
-     *
      * @return \Eluceo\iCal\Component\Event
      */
     public function addExDate(\DateTime $dateTime)
@@ -841,8 +824,6 @@ class Event extends Component
     }
 
     /**
-     * @param RecurrenceId $recurrenceId
-     *
      * @return \Eluceo\iCal\Component\Event
      */
     public function setRecurrenceId(RecurrenceId $recurrenceId)

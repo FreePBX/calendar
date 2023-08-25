@@ -44,7 +44,7 @@ namespace it\thecsea\simple_caldav_client;
 
 
 class SimpleCalDAVClient {
-	private $client;
+	private ?\it\thecsea\simple_caldav_client\CalDAVClient $client = null;
     private $url;
 
 	/**
@@ -139,7 +139,7 @@ class SimpleCalDAVClient {
 		$this->client->SetCalendar($this->client->first_url_part.$calendar->getURL());
         
         // Is there a '/' at the end of the calendar_url?
-		if ( ! preg_match( '#^.*?/$#', $this->client->calendar_url, $matches ) ) { $this->url = $this->client->calendar_url.'/'; }
+		if ( ! preg_match( '#^.*?/$#', (string) $this->client->calendar_url, $matches ) ) { $this->url = $this->client->calendar_url.'/'; }
 		else { $this->url = $this->client->calendar_url; }
 	}
 	
@@ -165,7 +165,7 @@ class SimpleCalDAVClient {
 		if(!isset($this->client->calendar_url)) throw new Exception('No calendar selected. Try findCalendars() and setCalendar().');
 		
 		// Parse $cal for UID
-		if (! preg_match( '#^UID:(.*?)\r?\n?$#m', $cal, $matches ) ) { throw new Exception('Can\'t find UID in $cal'); }
+		if (! preg_match( '#^UID:(.*?)\r?\n?$#m', (string) $cal, $matches ) ) { throw new Exception('Can\'t find UID in $cal'); }
 		else { $uid = $matches[1]; }
 	
 		// Does $this->url.$uid.'.ics' already exist?
@@ -257,7 +257,7 @@ class SimpleCalDAVClient {
 	
 		// Does $href exist?
 		$result = $this->client->GetEntryByHref($href);
-		if(count($result) == 0) throw new CalDAVException('Can\'t find '.$href.'on server', $this->client);
+		if((is_countable($result) ? count($result) : 0) == 0) throw new CalDAVException('Can\'t find '.$href.'on server', $this->client);
 		
 		// $etag correct?
 		if($result[0]['etag'] != $etag) { throw new CalDAVException('Wrong entity tag. The entity seems to have changed.', $this->client); }
@@ -296,8 +296,8 @@ class SimpleCalDAVClient {
 		if(!isset($this->client->calendar_url)) throw new Exception('No calendar selected. Try findCalendars() and setCalendar().');
 		
 		// Are $start and $end in the correct format?
-		if ( ( isset($start) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', $start, $matches ) )
-		  or ( isset($end) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', $end, $matches ) ) )
+		if ( ( isset($start) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', (string) $start, $matches ) )
+		  or ( isset($end) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', (string) $end, $matches ) ) )
 		{ trigger_error('$start or $end are in the wrong format. They must have the format yyyymmddThhmmssZ and should be in GMT', E_USER_ERROR); }
 	
 		// Get it!
@@ -310,7 +310,7 @@ class SimpleCalDAVClient {
 		}
 		
 		// Reformat
-		$report = array();
+		$report = [];
 		foreach($results as $event) $report[] = new CalDAVObject($this->url.$event['href'], $event['data'], $event['etag']);
 	
 		return $report;
@@ -343,8 +343,8 @@ class SimpleCalDAVClient {
 		if(!isset($this->client->calendar_url)) throw new Exception('No calendar selected. Try findCalendars() and setCalendar().');
 	
 		// Are $start and $end in the correct format?
-		if ( ( isset($start) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', $start, $matches ) )
-		  or ( isset($end) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', $end, $matches ) ) )
+		if ( ( isset($start) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', (string) $start, $matches ) )
+		  or ( isset($end) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', (string) $end, $matches ) ) )
 		{ trigger_error('$start or $end are in the wrong format. They must have the format yyyymmddThhmmssZ and should be in GMT', E_USER_ERROR); }
 	
 		// Get it!
@@ -357,7 +357,7 @@ class SimpleCalDAVClient {
 		}
 	
 		// Reformat
-		$report = array();
+		$report = [];
 		foreach($results as $event) $report[] = new CalDAVObject($this->url.$event['href'], $event['data'], $event['etag']);
 	
 		return $report;
@@ -401,7 +401,7 @@ class SimpleCalDAVClient {
 		}
 	
 		// Reformat
-		$report = array();
+		$report = [];
 		foreach($results as $event) $report[] = new CalDAVObject($this->url.$event['href'], $event['data'], $event['etag']);
 	
 		return $report;

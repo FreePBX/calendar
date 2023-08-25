@@ -23,5 +23,5 @@ class ArrayOfStringAttributedValuesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\StringAttributedValueType[]
      */
-    public $StringAttributedValue = array();
+    public $StringAttributedValue = [];
 }

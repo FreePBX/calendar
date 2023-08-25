@@ -21,7 +21,7 @@ class MonthNamesType extends Enumeration
      *
      * @var string
      */
-    const APRIL = 'April';
+    final public const APRIL = 'April';
 
     /**
      * Text value for the month of August.
@@ -30,7 +30,7 @@ class MonthNamesType extends Enumeration
      *
      * @var string
      */
-    const AUGUST = 'August';
+    final public const AUGUST = 'August';
 
     /**
      * Text value for the month of February.
@@ -39,7 +39,7 @@ class MonthNamesType extends Enumeration
      *
      * @var string
      */
-    const FEBRUARY = 'February';
+    final public const FEBRUARY = 'February';
 
     /**
      * Text value for the month of December.
@@ -48,7 +48,7 @@ class MonthNamesType extends Enumeration
      *
      * @var string
      */
-    const DECEMBER = 'December';
+    final public const DECEMBER = 'December';
 
     /**
      * Text value for the month of January.
@@ -57,7 +57,7 @@ class MonthNamesType extends Enumeration
      *
      * @var string
      */
-    const JANUARY = 'January';
+    final public const JANUARY = 'January';
 
     /**
      * Text value for the month of July.
@@ -66,7 +66,7 @@ class MonthNamesType extends Enumeration
      *
      * @var string
      */
-    const JULY = 'July';
+    final public const JULY = 'July';
 
     /**
      * Text value for the month of June.
@@ -75,7 +75,7 @@ class MonthNamesType extends Enumeration
      *
      * @var string
      */
-    const JUNE = 'June';
+    final public const JUNE = 'June';
 
     /**
      * Text value for the month of March.
@@ -84,7 +84,7 @@ class MonthNamesType extends Enumeration
      *
      * @var string
      */
-    const MARCH = 'March';
+    final public const MARCH = 'March';
 
     /**
      * Text value for the month of May.
@@ -93,7 +93,7 @@ class MonthNamesType extends Enumeration
      *
      * @var string
      */
-    const MAY = 'May';
+    final public const MAY = 'May';
 
     /**
      * Text value for the month of November.
@@ -102,7 +102,7 @@ class MonthNamesType extends Enumeration
      *
      * @var string
      */
-    const NOVEMBER = 'November';
+    final public const NOVEMBER = 'November';
 
     /**
      * Text value for the month of October.
@@ -111,7 +111,7 @@ class MonthNamesType extends Enumeration
      *
      * @var string
      */
-    const OCTOBER = 'October';
+    final public const OCTOBER = 'October';
 
     /**
      * Text value for the month of September.
@@ -120,5 +120,5 @@ class MonthNamesType extends Enumeration
      *
      * @var string
      */
-    const SEPTEMBER = 'September';
+    final public const SEPTEMBER = 'September';
 }

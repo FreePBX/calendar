@@ -23,18 +23,7 @@ class Calendar extends Command
 	{
 		$this->setName('calendar')
 			->setDescription(_('Calendar'))
-			->setDefinition(array(
-				new InputOption('sync', null, InputOption::VALUE_NONE, _('Syncronize all Calendars')),
-				new InputOption('force', null, InputOption::VALUE_NONE, _('Force command')),
-				new InputOption('list', null, InputOption::VALUE_NONE, _('List Events')),
-				new InputOption('export', null, InputOption::VALUE_REQUIRED, _('Export Calendar by ID')),
-				new InputOption('import', null, InputOption::VALUE_REQUIRED, _('Import Calendar by ID')),
-				new InputOption('reset', null, InputOption::VALUE_REQUIRED, _('Reset Calendar by ID')),
-				new InputOption('file', null, InputOption::VALUE_REQUIRED, _('File location of the ics to import')),
-				new InputOption('match', null, InputOption::VALUE_REQUIRED, _('Check if match, value can be any timestamp')),
-				new InputOption('type', null, InputOption::VALUE_REQUIRED, _('One of: calendar | event | group')),
-				new InputOption('id', null, InputOption::VALUE_REQUIRED, _('One of: calendar id | event id | group id'))
-			));
+			->setDefinition([new InputOption('sync', null, InputOption::VALUE_NONE, _('Syncronize all Calendars')), new InputOption('force', null, InputOption::VALUE_NONE, _('Force command')), new InputOption('list', null, InputOption::VALUE_NONE, _('List Events')), new InputOption('export', null, InputOption::VALUE_REQUIRED, _('Export Calendar by ID')), new InputOption('import', null, InputOption::VALUE_REQUIRED, _('Import Calendar by ID')), new InputOption('reset', null, InputOption::VALUE_REQUIRED, _('Reset Calendar by ID')), new InputOption('file', null, InputOption::VALUE_REQUIRED, _('File location of the ics to import')), new InputOption('match', null, InputOption::VALUE_REQUIRED, _('Check if match, value can be any timestamp')), new InputOption('type', null, InputOption::VALUE_REQUIRED, _('One of: calendar | event | group')), new InputOption('id', null, InputOption::VALUE_REQUIRED, _('One of: calendar id | event id | group id'))]);
 	}
 	protected function execute(InputInterface $input, OutputInterface $output)
 	{
@@ -80,26 +69,20 @@ class Calendar extends Command
 	{
 		$calendars = $calendar->listCalendars();
 		$table = new Table($output);
-		$table->setHeaders(array(_('ID'), _('Name'), _('Description'), _('Type'), _("Timezone")));
-		$rows = $ids = array();
+		$table->setHeaders([_('ID'), _('Name'), _('Description'), _('Type'), _("Timezone")]);
+		$rows = $ids = [];
 		foreach ($calendars as $id => $content) {
 			$ids[] = $id;
-			$rows[] = array(
-				$id,
-				$content["name"],
-				$content["description"],
-				$content["type"],
-				$content["timezone"],
-			);
+			$rows[] = [$id, $content["name"], $content["description"], $content["type"], $content["timezone"]];
 		}
 		$table->setRows($rows);
 		$table->render();
 		$output->writeln('');
 		$output->writeln("<info>" . _("Get more details about calendars, please run the commands below:") . "</info>");
-		$table->setHeaders(array(_('Commands')));
-		$rows = array();
+		$table->setHeaders([_('Commands')]);
+		$rows = [];
 		foreach ($ids as $id) {
-			$rows[] = array(sprintf('fwconsole calendar --list --id=%s', $id));
+			$rows[] = [sprintf('fwconsole calendar --list --id=%s', $id)];
 		}
 		$table->setRows($rows);
 		$table->render();
@@ -115,20 +98,10 @@ class Calendar extends Command
 			print_r($events);
 		} else {
 			$table = new Table($output);
-			$table->setHeaders(array(_('Name'), _('Description'), _('Timezone'), _('Start'), _("End"), _("UID"), _("Recurring"), _("All Day"), _("Now Match")));
-			$rows = array();
+			$table->setHeaders([_('Name'), _('Description'), _('Timezone'), _('Start'), _("End"), _("UID"), _("Recurring"), _("All Day"), _("Now Match")]);
+			$rows = [];
 			foreach ($events as $event) {
-				$rows[] = array(
-					$event['name'],
-					$event['description'],
-					$event['timezone'],
-					$event['start'],
-					$event['end'],
-					$event['linkedid'],
-					$event['recurring'] ? _('Yes') : _('No'),
-					$event['allDay'] ? _('Yes') : _('No'),
-					$event['now'] ? _('Yes') : _('No')
-				);
+				$rows[] = [$event['name'], $event['description'], $event['timezone'], $event['start'], $event['end'], $event['linkedid'], $event['recurring'] ? _('Yes') : _('No'), $event['allDay'] ? _('Yes') : _('No'), $event['now'] ? _('Yes') : _('No')];
 			}
 			$table->setRows($rows);
 			$table->render();
@@ -170,7 +143,7 @@ class Calendar extends Command
 	private function match($calendar, InputInterface $input, OutputInterface $output)
 	{
 		$match = $input->getOption('match');
-		$match = strtolower($match) !== 'now' ? $match : time();
+		$match = strtolower((string) $match) !== 'now' ? $match : time();
 		if ($match < time()) {
 			throw new \Exception("Match time can not be in the past");
 		}

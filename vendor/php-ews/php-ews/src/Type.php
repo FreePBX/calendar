@@ -32,7 +32,7 @@ abstract class Type
                 // empty array then update it as we go it ends up being empty.
                 // If we use a new array that we then set as the value of
                 // $this->$property all is well.
-                $new_value = array();
+                $new_value = [];
                 foreach ($value as $index => $array_value) {
                     $new_value[$index] = (is_object($array_value) ? clone $array_value : $array_value);
                 }

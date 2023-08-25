@@ -23,5 +23,5 @@ class ArrayOfSearchItemKindsType extends ArrayType
      *
      * @see \jamesiarmes\PhpEws\Enumeration\SearchItemKindType[]
      */
-    public $SearchItemKind = array();
+    public $SearchItemKind = [];
 }

@@ -21,7 +21,7 @@ class TaskDelegateStateType extends Enumeration
      *
      * @var string
      */
-    const ACCEPTED = 'Accepted';
+    final public const ACCEPTED = 'Accepted';
 
     /**
      * Indicates that the delegate has declined the task.
@@ -30,7 +30,7 @@ class TaskDelegateStateType extends Enumeration
      *
      * @var string
      */
-    const DECLINED = 'Declined';
+    final public const DECLINED = 'Declined';
 
     /**
      * Indicates that the task request is out of bounds.
@@ -41,7 +41,7 @@ class TaskDelegateStateType extends Enumeration
      *
      * @var string
      */
-    const MAX = 'Max';
+    final public const MAX = 'Max';
 
     /**
      * Indicates that the task is not delegated or the task request has been
@@ -51,7 +51,7 @@ class TaskDelegateStateType extends Enumeration
      *
      * @var string
      */
-    const NO_MATCH = 'NoMatch';
+    final public const NO_MATCH = 'NoMatch';
 
     /**
      * Indicates that the task is a new task request that has been sent, but the
@@ -61,7 +61,7 @@ class TaskDelegateStateType extends Enumeration
      *
      * @var string
      */
-    const OWN_NEW = 'OwnNew';
+    final public const OWN_NEW = 'OwnNew';
 
     /**
      * Indicates that the task is owned.
@@ -72,5 +72,5 @@ class TaskDelegateStateType extends Enumeration
      *
      * @var string
      */
-    const OWNED = 'Owned';
+    final public const OWNED = 'Owned';
 }

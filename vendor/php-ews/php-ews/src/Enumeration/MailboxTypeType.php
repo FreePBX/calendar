@@ -21,7 +21,7 @@ class MailboxTypeType extends Enumeration
      *
      * @var string
      */
-    const CONTACT = 'Contact';
+    final public const CONTACT = 'Contact';
 
     /**
      * Represents a mail-enabled Active Directory object.
@@ -30,7 +30,7 @@ class MailboxTypeType extends Enumeration
      *
      * @var string
      */
-    const MAILBOX = 'Mailbox';
+    final public const MAILBOX = 'Mailbox';
 
     /**
      * Represents a one-off member of a personal distribution list.
@@ -39,7 +39,7 @@ class MailboxTypeType extends Enumeration
      *
      * @var string
      */
-    const ONE_OFF = 'OneOff';
+    final public const ONE_OFF = 'OneOff';
 
     /**
      * Represents a private distribution list in a user's mailbox.
@@ -48,7 +48,7 @@ class MailboxTypeType extends Enumeration
      *
      * @var string
      */
-    const PRIVATE_DISTRIBUTION_LIST = 'PrivateDL';
+    final public const PRIVATE_DISTRIBUTION_LIST = 'PrivateDL';
 
     /**
      * Represents a public distribution list.
@@ -57,7 +57,7 @@ class MailboxTypeType extends Enumeration
      *
      * @var string
      */
-    const PUBLIC_DISTRIBUTION_LIST = 'PublicDL';
+    final public const PUBLIC_DISTRIBUTION_LIST = 'PublicDL';
 
     /**
      * Represents a public folder.
@@ -66,7 +66,7 @@ class MailboxTypeType extends Enumeration
      *
      * @var string
      */
-    const PUBLIC_FOLDER = 'PublicFolder';
+    final public const PUBLIC_FOLDER = 'PublicFolder';
 
     /**
      * Represents an unknown type of mailbox.
@@ -75,5 +75,5 @@ class MailboxTypeType extends Enumeration
      *
      * @var string
      */
-    const UNKNOWN = 'Unknown';
+    final public const UNKNOWN = 'Unknown';
 }

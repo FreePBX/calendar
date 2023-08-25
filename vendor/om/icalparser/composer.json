@@ -1,20 +1,20 @@
 {
 	"name": "om/icalparser",
 	"license": "BSD-3-Clause",
-	"description": "Simple ical parser",
+	"description": "Simple iCal parser",
 	"keywords": [
-		"ical",
+		"iCal",
 		"calendar",
 		"parser"
 	],
 	"authors": [
 		{
 			"name": "Roman Ožana",
-			"email": "roman@omdesign.cz"
+			"email": "roman@ozana.cz"
 		}
 	],
 	"require": {
-		"php": ">=7.1.0"
+		"php": ">=8.0.0"
 	},
 	"suggest": {
 		"ext-dom": "for timezone tool"
@@ -27,8 +27,7 @@
 	"scripts": {
 		"test": "tester tests -s -p php"
 	},
-
 	"require-dev": {
-		"nette/tester": "*"
+		"nette/tester": "^2.4"
 	}
 }

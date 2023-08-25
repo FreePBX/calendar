@@ -21,7 +21,7 @@ class MeetingAttendeeType extends Enumeration
      *
      * @var string
      */
-    const OPTIONAL = 'Optional';
+    final public const OPTIONAL = 'Optional';
 
     /**
      * The mailbox user and attendee who created the calendar item.
@@ -30,7 +30,7 @@ class MeetingAttendeeType extends Enumeration
      *
      * @var string
      */
-    const ORGANIZER = 'Organizer';
+    final public const ORGANIZER = 'Organizer';
 
     /**
      * A mailbox user who is a required attendee to the meeting.
@@ -39,7 +39,7 @@ class MeetingAttendeeType extends Enumeration
      *
      * @var string
      */
-    const REQUIRED = 'Required';
+    final public const REQUIRED = 'Required';
 
     /**
      * A resource such as a TV or projector that is scheduled for use in the meeting.
@@ -48,7 +48,7 @@ class MeetingAttendeeType extends Enumeration
      *
      * @var string
      */
-    const RESOURCE = 'Resource';
+    final public const RESOURCE = 'Resource';
 
     /**
      * A mailbox entity that represents a room resource used for the meeting.
@@ -57,5 +57,5 @@ class MeetingAttendeeType extends Enumeration
      *
      * @var string
      */
-    const ROOM = 'Room';
+    final public const ROOM = 'Room';
 }

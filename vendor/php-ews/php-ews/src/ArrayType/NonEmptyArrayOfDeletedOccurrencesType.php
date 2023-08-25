@@ -21,5 +21,5 @@ class NonEmptyArrayOfDeletedOccurrencesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\DeletedOccurrenceInfoType[]
      */
-    public $DeletedOccurrence = array();
+    public $DeletedOccurrence = [];
 }

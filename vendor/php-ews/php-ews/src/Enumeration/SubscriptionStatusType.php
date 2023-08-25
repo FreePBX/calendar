@@ -22,7 +22,7 @@ class SubscriptionStatusType extends Enumeration
      *
      * @var string
      */
-    const OK = 'OK';
+    final public const OK = 'OK';
 
     /**
      * Indicates that push notifications from the subscription should be ceased.
@@ -31,5 +31,5 @@ class SubscriptionStatusType extends Enumeration
      *
      * @var string
      */
-    const UNSUBSCRIBE = 'Unsubscribe';
+    final public const UNSUBSCRIBE = 'Unsubscribe';
 }

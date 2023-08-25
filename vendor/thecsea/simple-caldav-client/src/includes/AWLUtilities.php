@@ -29,10 +29,10 @@ if ( !function_exists('dbg_error_log') ) {
     $args = func_get_args();
     $type = "DBG";
     $component = array_shift($args);
-    if ( substr( $component, 0, 3) == "LOG" ) {
+    if ( str_starts_with((string) $component, "LOG") ) {
       // Special escape case for stuff that always gets logged.
       $type = 'LOG';
-      $component = substr($component,4);
+      $component = substr((string) $component,4);
     }
     else if ( $component == "ERROR" ) {
       $type = "***";
@@ -40,7 +40,7 @@ if ( !function_exists('dbg_error_log') ) {
     else if ( isset($c->dbg["ALL"]) ) {
       $type = "ALL";
     }
-    else if ( !isset($c->dbg[strtolower($component)]) ) return;
+    else if ( !isset($c->dbg[strtolower((string) $component)]) ) return;
 
     $argc = func_num_args();
     if ( 2 <= $argc ) {
@@ -56,6 +56,7 @@ if ( !function_exists('dbg_error_log') ) {
 
 if ( !function_exists('fatal') ) {
   function fatal() {
+    $component = null;
     global $c;
     $args = func_get_args();
     $argc = func_num_args();
@@ -75,9 +76,9 @@ if ( !function_exists('fatal') ) {
  	  @error_log( sprintf(" ===>  %s[%d] calls %s%s%s()",
 	               $v['file'],
 	               $v['line'],
-	               (isset($v['class'])?$v['class']:''),
-	               (isset($v['type'])?$v['type']:''),
-	               (isset($v['function'])?$v['function']:'')
+	               ($v['class'] ?? ''),
+	               ($v['type'] ?? ''),
+	               ($v['function'] ?? '')
 	      ));
     }
     echo "Fatal Error";
@@ -91,6 +92,7 @@ if ( !function_exists('trace_bug') ) {
 * Not as sever as a fatal() call, but we want to log and trace it
 */
   function trace_bug() {
+    $component = null;
     global $c;
     $args = func_get_args();
     $argc = func_num_args();
@@ -110,9 +112,9 @@ if ( !function_exists('trace_bug') ) {
  	  @error_log( sprintf(" ===>  %s[%d] calls %s%s%s()",
 	               $v['file'],
 	               $v['line'],
-	               (isset($v['class'])?$v['class']:''),
-	               (isset($v['type'])?$v['type']:''),
-	               (isset($v['function'])?$v['function']:'')
+	               ($v['class'] ?? ''),
+	               ($v['type'] ?? ''),
+	               ($v['function'] ?? '')
 	      ));
     }
   }
@@ -192,7 +194,7 @@ if ( !function_exists("session_salted_md5") ) {
   * @return string The salt, a * and the MD5 of the salted string, as in SALT*SALTEDHASH
   */
   function session_salted_md5( $instr, $salt = "" ) {
-    if ( $salt == "" ) $salt = substr( md5(rand(100000,999999)), 2, 8);
+    if ( $salt == "" ) $salt = substr( md5(random_int(100000,999999)), 2, 8);
     global $c;
     if ( isset($c->dbg['password']) ) dbg_error_log( "Login", "Making salted MD5: salt=$salt, instr=$instr, md5($salt$instr)=".md5($salt . $instr) );
     return ( sprintf("*%s*%s", $salt, md5($salt . $instr) ) );
@@ -216,7 +218,7 @@ if ( !function_exists("session_salted_sha1") ) {
   * @return string A *, the salt, a * and the SHA1 of the salted string, as in *SALT*SALTEDHASH
   */
   function session_salted_sha1( $instr, $salt = "" ) {
-    if ( $salt == "" ) $salt = substr( str_replace('*','',base64_encode(sha1(rand(100000,9999999),true))), 2, 9);
+    if ( $salt == "" ) $salt = substr( str_replace('*','',base64_encode(sha1(random_int(100000,9_999_999),true))), 2, 9);
     global $c;
     if ( isset($c->dbg['password']) ) dbg_error_log( "Login", "Making salted SHA1: salt=$salt, instr=$instr, encoded($instr$salt)=".base64_encode(sha1($instr . $salt, true).$salt) );
     return ( sprintf("*%s*{SSHA}%s", $salt, base64_encode(sha1($instr.$salt, true) . $salt ) ) );
@@ -233,6 +235,8 @@ if ( !function_exists("session_validate_password") ) {
   * @return boolean Whether or not the users attempt matches what is already on file.
   */
   function session_validate_password( $they_sent, $we_have ) {
+    $password = null;
+    $hash = null;
     global $c;
     if ( preg_match('/^\*\*.+$/', $we_have ) ) {
       //  The "forced" style of "**plaintext" to allow easier admin setting
@@ -363,14 +367,14 @@ if ( !function_exists("uuid") ) {
     // The field names refer to RFC 4122 section 4.1.2
 
     return sprintf('%04x%04x-%04x-%03x4-%04x-%04x%04x%04x',
-        mt_rand(0, 65535), mt_rand(0, 65535), // 32 bits for "time_low"
-        mt_rand(0, 65535), // 16 bits for "time_mid"
-        mt_rand(0, 4095),  // 12 bits before the 0100 of (version) 4 for "time_hi_and_version"
-        bindec(substr_replace(sprintf('%016b', mt_rand(0, 65535)), '01', 6, 2)),
+        random_int(0, 65535), random_int(0, 65535), // 32 bits for "time_low"
+        random_int(0, 65535), // 16 bits for "time_mid"
+        random_int(0, 4095),  // 12 bits before the 0100 of (version) 4 for "time_hi_and_version"
+        bindec(substr_replace(sprintf('%016b', random_int(0, 65535)), '01', 6, 2)),
             // 8 bits, the last two of which (positions 6 and 7) are 01, for "clk_seq_hi_res"
             // (hence, the 2nd hex digit after the 3rd hyphen can only be 1, 5, 9 or d)
             // 8 bits for "clk_seq_low"
-        mt_rand(0, 65535), mt_rand(0, 65535), mt_rand(0, 65535) // 48 bits for "node"
+        random_int(0, 65535), random_int(0, 65535), random_int(0, 65535) // 48 bits for "node"
     );
   }
 }
@@ -395,7 +399,7 @@ if ( !function_exists("quoted_printable_encode") ) {
   * the spaces aren't encoded as =20 though.
   */
   function quoted_printable_encode($string) {
-    return preg_replace('/[^\r\n]{73}[^=\r\n]{2}/', "$0=\r\n", str_replace("%","=",str_replace("%20"," ",rawurlencode($string))));
+    return preg_replace('/[^\r\n]{73}[^=\r\n]{2}/', "$0=\r\n", str_replace("%","=",str_replace("%20"," ",rawurlencode((string) $string))));
   }
 }
 
@@ -417,7 +421,7 @@ if ( !function_exists("check_by_regex") ) {
       }
     }
     else if ( ! is_object($val) ) {
-      if ( preg_match( $regex, $val, $matches) ) {
+      if ( preg_match( $regex, (string) $val, $matches) ) {
         $val = $matches[0];
       }
       else {
@@ -479,7 +483,7 @@ if ( !function_exists("get_fields") ) {
   /**
   * @var array $_AWL_field_cache is a cache of the field names for a table
   */
-  $_AWL_field_cache = array();
+  $_AWL_field_cache = [];
   
   /**
   * Get the names of the fields for a particular table
@@ -495,7 +499,7 @@ if ( !function_exists("get_fields") ) {
       $db = $qry->GetConnection();
       $qry->SetSQL($db->GetFields($tablename));
       $qry->Exec("core");
-      $fields = array();
+      $fields = [];
       while( $row = $qry->Fetch() ) {
         $fields[$row->fieldname] = $row->typename . ($row->precision >= 0 ? sprintf('(%d)',$row->precision) : '');
       }
@@ -522,35 +526,61 @@ if ( !function_exists("force_utf8") ) {
     $nibble_good_chars = "/^($ascii_char+|$utf8_2|$utf8_3|$utf8_4|$utf8_5)(.*)$/s";
 
     # From http://unicode.org/Public/MAPPINGS/VENDORS/MICSFT/WINDOWS/CP1252.TXT
-    $byte_map = array(
-        "\x80" => "\xE2\x82\xAC",  # EURO SIGN
-        "\x82" => "\xE2\x80\x9A",  # SINGLE LOW-9 QUOTATION MARK
-        "\x83" => "\xC6\x92",      # LATIN SMALL LETTER F WITH HOOK
-        "\x84" => "\xE2\x80\x9E",  # DOUBLE LOW-9 QUOTATION MARK
-        "\x85" => "\xE2\x80\xA6",  # HORIZONTAL ELLIPSIS
-        "\x86" => "\xE2\x80\xA0",  # DAGGER
-        "\x87" => "\xE2\x80\xA1",  # DOUBLE DAGGER
-        "\x88" => "\xCB\x86",      # MODIFIER LETTER CIRCUMFLEX ACCENT
-        "\x89" => "\xE2\x80\xB0",  # PER MILLE SIGN
-        "\x8A" => "\xC5\xA0",      # LATIN CAPITAL LETTER S WITH CARON
-        "\x8B" => "\xE2\x80\xB9",  # SINGLE LEFT-POINTING ANGLE QUOTATION MARK
-        "\x8C" => "\xC5\x92",      # LATIN CAPITAL LIGATURE OE
-        "\x8E" => "\xC5\xBD",      # LATIN CAPITAL LETTER Z WITH CARON
-        "\x91" => "\xE2\x80\x98",  # LEFT SINGLE QUOTATION MARK
-        "\x92" => "\xE2\x80\x99",  # RIGHT SINGLE QUOTATION MARK
-        "\x93" => "\xE2\x80\x9C",  # LEFT DOUBLE QUOTATION MARK
-        "\x94" => "\xE2\x80\x9D",  # RIGHT DOUBLE QUOTATION MARK
-        "\x95" => "\xE2\x80\xA2",  # BULLET
-        "\x96" => "\xE2\x80\x93",  # EN DASH
-        "\x97" => "\xE2\x80\x94",  # EM DASH
-        "\x98" => "\xCB\x9C",      # SMALL TILDE
-        "\x99" => "\xE2\x84\xA2",  # TRADE MARK SIGN
-        "\x9A" => "\xC5\xA1",      # LATIN SMALL LETTER S WITH CARON
-        "\x9B" => "\xE2\x80\xBA",  # SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
-        "\x9C" => "\xC5\x93",      # LATIN SMALL LIGATURE OE
-        "\x9E" => "\xC5\xBE",      # LATIN SMALL LETTER Z WITH CARON
-        "\x9F" => "\xC5\xB8",      # LATIN CAPITAL LETTER Y WITH DIAERESIS
-    );
+    $byte_map = [
+        "\x80" => "\xE2\x82\xAC",
+        # EURO SIGN
+        "\x82" => "\xE2\x80\x9A",
+        # SINGLE LOW-9 QUOTATION MARK
+        "\x83" => "\xC6\x92",
+        # LATIN SMALL LETTER F WITH HOOK
+        "\x84" => "\xE2\x80\x9E",
+        # DOUBLE LOW-9 QUOTATION MARK
+        "\x85" => "\xE2\x80\xA6",
+        # HORIZONTAL ELLIPSIS
+        "\x86" => "\xE2\x80\xA0",
+        # DAGGER
+        "\x87" => "\xE2\x80\xA1",
+        # DOUBLE DAGGER
+        "\x88" => "\xCB\x86",
+        # MODIFIER LETTER CIRCUMFLEX ACCENT
+        "\x89" => "\xE2\x80\xB0",
+        # PER MILLE SIGN
+        "\x8A" => "\xC5\xA0",
+        # LATIN CAPITAL LETTER S WITH CARON
+        "\x8B" => "\xE2\x80\xB9",
+        # SINGLE LEFT-POINTING ANGLE QUOTATION MARK
+        "\x8C" => "\xC5\x92",
+        # LATIN CAPITAL LIGATURE OE
+        "\x8E" => "\xC5\xBD",
+        # LATIN CAPITAL LETTER Z WITH CARON
+        "\x91" => "\xE2\x80\x98",
+        # LEFT SINGLE QUOTATION MARK
+        "\x92" => "\xE2\x80\x99",
+        # RIGHT SINGLE QUOTATION MARK
+        "\x93" => "\xE2\x80\x9C",
+        # LEFT DOUBLE QUOTATION MARK
+        "\x94" => "\xE2\x80\x9D",
+        # RIGHT DOUBLE QUOTATION MARK
+        "\x95" => "\xE2\x80\xA2",
+        # BULLET
+        "\x96" => "\xE2\x80\x93",
+        # EN DASH
+        "\x97" => "\xE2\x80\x94",
+        # EM DASH
+        "\x98" => "\xCB\x9C",
+        # SMALL TILDE
+        "\x99" => "\xE2\x84\xA2",
+        # TRADE MARK SIGN
+        "\x9A" => "\xC5\xA1",
+        # LATIN SMALL LETTER S WITH CARON
+        "\x9B" => "\xE2\x80\xBA",
+        # SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
+        "\x9C" => "\xC5\x93",
+        # LATIN SMALL LIGATURE OE
+        "\x9E" => "\xC5\xBE",
+        # LATIN SMALL LETTER Z WITH CARON
+        "\x9F" => "\xC5\xB8",
+    ];
 
     for( $i=160; $i < 256; $i++ ) {
       $ch = chr($i);
@@ -566,12 +596,12 @@ if ( !function_exists("force_utf8") ) {
     $char   = '';
     $rest   = '';
     while( $input != '' ) {
-      if ( preg_match( $nibble_good_chars, $input, $matches ) ) {
+      if ( preg_match( $nibble_good_chars, (string) $input, $matches ) ) {
         $output .= $matches[1];
         $rest = $matches[2];
       }
       else {
-        preg_match( '/^(.)(.*)$/s', $input, $matches );
+        preg_match( '/^(.)(.*)$/s', (string) $input, $matches );
         $char = $matches[1];
         $rest = $matches[2];
         if ( isset($byte_map[$char]) ) {
@@ -597,7 +627,7 @@ function olson_from_tzstring( $tzstring ) {
   global $c;
   
   if ( function_exists('timezone_identifiers_list') && in_array($tzstring,timezone_identifiers_list()) ) return $tzstring;
-  if ( preg_match( '{((Antarctica|America|Africa|Atlantic|Asia|Australia|Indian|Europe|Pacific)/(([^/]+)/)?[^/]+)$}', $tzstring, $matches ) ) {
+  if ( preg_match( '{((Antarctica|America|Africa|Atlantic|Asia|Australia|Indian|Europe|Pacific)/(([^/]+)/)?[^/]+)$}', (string) $tzstring, $matches ) ) {
 //    dbg_error_log( 'INFO', 'Found timezone "%s" from string "%s"', $matches[1], $tzstring );
     return $matches[1];
   }
@@ -651,14 +681,16 @@ if ( !function_exists("gzdecode") ) {
   function gzdecode( $instring ) {
     global $c;
     if ( !isset($c->use_pipe_gunzip) || $c->use_pipe_gunzip ) {
-      $descriptorspec = array(
-         0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
-         1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
-         2 => array("file", "/dev/null", "a") // stderr is discarded
-      );
+      $descriptorspec = [
+          0 => ["pipe", "r"],
+          // stdin is a pipe that the child will read from
+          1 => ["pipe", "w"],
+          // stdout is a pipe that the child will write to
+          2 => ["file", "/dev/null", "a"],
+      ];
       $process = proc_open('gunzip',$descriptorspec, $pipes);
       if ( is_resource($process) ) {
-        fwrite($pipes[0],$instring);
+        fwrite($pipes[0],(string) $instring);
         fclose($pipes[0]);
         
         $outstring = stream_get_contents($pipes[1]);

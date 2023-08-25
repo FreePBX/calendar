@@ -4,30 +4,23 @@
 */
 
 function calendar_getdest($exten) {
-	return array("calendargroups,$exten,1");
+	return ["calendargroups,$exten,1"];
 }
 
 function calendar_destinations(){
-	$extens = array();
+	$extens = [];
 	foreach(FreePBX::Calendar()->listGroups() as $id => $group){
-		$extens[] = array(
-			'destination' => 'calendargroups,'.$id.',1',
-			'description' => sprintf(_("Calendar Group: %s"),$group['name']),
-			'category' => _('Calendar Groups'),
-		);
+		$extens[] = ['destination' => 'calendargroups,'.$id.',1', 'description' => sprintf(_("Calendar Group: %s"),$group['name']), 'category' => _('Calendar Groups')];
 	}
 	return $extens;
 }
 
 
 function calendar_getdestinfo($dest) {
-	if (substr(trim($dest),0,14) == 'calendargroups') {
-		$parts = explode(',', $dest);
+	if (str_starts_with(trim((string) $dest), 'calendargroups')) {
+		$parts = explode(',', (string) $dest);
 		$group = FreePBX::Calendar()->getGroup($parts[1]);
-		return array(
-			'description' => sprintf(_("Calendar Group: %s"),$group['name']),
-			'edit_url' => '?display=calendargroups&action=edit&id='.$parts[1]
-		);
+		return ['description' => sprintf(_("Calendar Group: %s"),$group['name']), 'edit_url' => '?display=calendargroups&action=edit&id='.$parts[1]];
 	} else {
 		return false;
 	}

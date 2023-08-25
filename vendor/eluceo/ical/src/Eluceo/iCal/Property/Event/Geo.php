@@ -12,20 +12,11 @@ use Eluceo\iCal\Property;
 class Geo extends Property
 {
     /**
-     * @var float
+     * @param float $latitude
+     * @param float $longitude
      */
-    private $latitude;
-
-    /**
-     * @var float
-     */
-    private $longitude;
-
-    public function __construct($latitude, $longitude)
+    public function __construct(private $latitude, private $longitude)
     {
-        $this->latitude = $latitude;
-        $this->longitude = $longitude;
-
         if ($this->latitude < -90 || $this->latitude > 90) {
             throw new \InvalidArgumentException(
                 "The geographical latitude must be a value between -90 and 90 degrees. '{$this->latitude}' was given."

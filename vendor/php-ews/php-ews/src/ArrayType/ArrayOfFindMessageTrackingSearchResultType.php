@@ -22,5 +22,5 @@ class ArrayOfFindMessageTrackingSearchResultType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\FindMessageTrackingSearchResultType[]
      */
-    public $MessageTrackingSearchResult = array();
+    public $MessageTrackingSearchResult = [];
 }

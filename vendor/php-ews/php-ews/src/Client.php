@@ -19,77 +19,77 @@ class Client
      *
      * @var string
      */
-    const VERSION_2007 = 'Exchange2007';
+    final public const VERSION_2007 = 'Exchange2007';
 
     /**
      * Microsoft Exchange 2007 SP1
      *
      * @var string
      */
-    const VERSION_2007_SP1 = 'Exchange2007_SP1';
+    final public const VERSION_2007_SP1 = 'Exchange2007_SP1';
 
     /**
      * Microsoft Exchange 2007 SP2
      *
      * @var string
      */
-    const VERSION_2009 = 'Exchange2009';
+    final public const VERSION_2009 = 'Exchange2009';
 
     /**
      * Microsoft Exchange 2010
      *
      * @var string
      */
-    const VERSION_2010 = 'Exchange2010';
+    final public const VERSION_2010 = 'Exchange2010';
 
     /**
      * Microsoft Exchange 2010 SP1
      *
      * @var string
      */
-    const VERSION_2010_SP1 = 'Exchange2010_SP1';
+    final public const VERSION_2010_SP1 = 'Exchange2010_SP1';
 
     /**
      * Microsoft Exchange 2010 SP2
      *
      * @var string
      */
-    const VERSION_2010_SP2 = 'Exchange2010_SP2';
+    final public const VERSION_2010_SP2 = 'Exchange2010_SP2';
 
     /**
      * Microsoft Exchange 2013.
      *
      * @var string
      */
-    const VERSION_2013 = 'Exchange2013';
+    final public const VERSION_2013 = 'Exchange2013';
 
     /**
      * Microsoft Exchange 2013 SP1.
      *
      * @var string
      */
-    const VERSION_2013_SP1 = 'Exchange2013_SP1';
+    final public const VERSION_2013_SP1 = 'Exchange2013_SP1';
 
     /**
      * Microsoft Exchange 2016.
      *
      * @var string
      */
-    const VERSION_2016 = 'Exchange2016';
+    final public const VERSION_2016 = 'Exchange2016';
 
     /**
      * cURL options to be passed to the SOAP client.
      *
      * @var array
      */
-    protected $curl_options = array();
+    protected $curl_options = [];
 
     /**
      * SOAP headers used for requests.
      *
      * @var \SoapHeader[]
      */
-    protected $headers = array();
+    protected $headers = [];
 
     /**
      * Password to use when connecting to the Exchange server.
@@ -187,8 +187,6 @@ class Client
 
     /**
      * Sets the cURL options that will be set on the SOAP client.
-     *
-     * @param array $options
      */
     public function setCurlOptions(array $options)
     {
@@ -208,7 +206,7 @@ class Client
         $this->impersonation = $impersonation;
 
         // We need to re-build the SOAP headers.
-        $this->headers = array();
+        $this->headers = [];
     }
 
     /**
@@ -247,7 +245,7 @@ class Client
         $this->timezone = $timezone;
 
         // We need to re-build the SOAP headers.
-        $this->headers = array();
+        $this->headers = [];
     }
 
     /**
@@ -273,7 +271,7 @@ class Client
         $this->version = $version;
 
         // We need to re-build the SOAP headers.
-        $this->headers = array();
+        $this->headers = [];
     }
 
     /**
@@ -1601,15 +1599,8 @@ class Client
     protected function initializeSoapClient()
     {
         $this->soap = new SoapClient(
-            dirname(__FILE__) . '/assets/services.wsdl',
-            array(
-                'user' => $this->username,
-                'password' => $this->password,
-                'location' => 'https://' . $this->server . '/EWS/Exchange.asmx',
-                'classmap' => ClassMap::getMap(),
-                'curlopts' => $this->curl_options,
-                'features' => SOAP_SINGLE_ELEMENT_ARRAYS,
-            )
+            __DIR__ . '/assets/services.wsdl',
+            ['user' => $this->username, 'password' => $this->password, 'location' => 'https://' . $this->server . '/EWS/Exchange.asmx', 'classmap' => ClassMap::getMap(), 'curlopts' => $this->curl_options, 'features' => SOAP_SINGLE_ELEMENT_ARRAYS]
         );
 
         return $this->soap;
@@ -1668,7 +1659,7 @@ class Client
             return $this->headers;
         }
 
-        $this->headers = array();
+        $this->headers = [];
 
         // Set the schema version.
         $this->headers[] = new \SoapHeader(
@@ -1689,11 +1680,7 @@ class Client
             $this->headers[] = new \SoapHeader(
                 'http://schemas.microsoft.com/exchange/services/2006/types',
                 'TimeZoneContext',
-                array(
-                    'TimeZoneDefinition' => array(
-                        'Id' => $this->timezone,
-                    )
-                )
+                ['TimeZoneDefinition' => ['Id' => $this->timezone]]
             );
         }
 

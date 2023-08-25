@@ -46,13 +46,7 @@ class SoapClient extends \SoapClient
     public function __construct($wsdl, array $options = null)
     {
         // Set missing indexes to their default value.
-        $options += array(
-            'user' => null,
-            'password' => null,
-            'curlopts' => array(),
-            'strip_bad_chars' => true,
-            'warn_on_bad_chars' => false,
-        );
+        $options += ['user' => null, 'password' => null, 'curlopts' => [], 'strip_bad_chars' => true, 'warn_on_bad_chars' => false];
         $this->options = $options;
 
         // Verify that a user name and password were entered.
@@ -135,14 +129,7 @@ class SoapClient extends \SoapClient
      */
     protected function buildHeaders($action)
     {
-        return array(
-            'Method: POST',
-            'Connection: Keep-Alive',
-            'User-Agent: PHP-SOAP-CURL',
-            'Content-Type: text/xml; charset=utf-8',
-            "SOAPAction: \"$action\"",
-            'Expect: 100-continue',
-        );
+        return ['Method: POST', 'Connection: Keep-Alive', 'User-Agent: PHP-SOAP-CURL', 'Content-Type: text/xml; charset=utf-8', "SOAPAction: \"$action\"", 'Expect: 100-continue'];
     }
 
     /**
@@ -161,7 +148,7 @@ class SoapClient extends \SoapClient
         $this->__last_response = preg_replace(
             '/(?!&#x0?(9|A|D))(&#x[0-1]?[0-9A-F];)/',
             ' ',
-            $this->__last_response,
+            (string) $this->__last_response,
             -1,
             $count
         );
@@ -188,15 +175,8 @@ class SoapClient extends \SoapClient
      */
     protected function curlOptions($action, $request)
     {
-        $options = $this->options['curlopts'] + array(
-            CURLOPT_SSL_VERIFYPEER => true,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_HTTPHEADER => $this->buildHeaders($action),
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_HTTPAUTH => CURLAUTH_BASIC | CURLAUTH_NTLM,
-            CURLOPT_USERPWD => $this->options['user'] . ':'
-                               . $this->options['password'],
-        );
+        $options = $this->options['curlopts'] + [CURLOPT_SSL_VERIFYPEER => true, CURLOPT_RETURNTRANSFER => true, CURLOPT_HTTPHEADER => $this->buildHeaders($action), CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1, CURLOPT_HTTPAUTH => CURLAUTH_BASIC | CURLAUTH_NTLM, CURLOPT_USERPWD => $this->options['user'] . ':'
+                           . $this->options['password']];
 
         // We shouldn't allow these options to be overridden.
         $options[CURLOPT_HEADER] = true;

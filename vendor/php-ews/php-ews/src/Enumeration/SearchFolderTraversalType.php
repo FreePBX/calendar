@@ -22,7 +22,7 @@ class SearchFolderTraversalType extends Enumeration
      *
      * @var string
      */
-    const DEEP = 'Deep';
+    final public const DEEP = 'Deep';
 
     /**
      * Consider only direct children of the parent in question.
@@ -31,5 +31,5 @@ class SearchFolderTraversalType extends Enumeration
      *
      * @var string
      */
-    const SHALLOW = 'Shallow';
+    final public const SHALLOW = 'Shallow';
 }

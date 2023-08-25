@@ -21,7 +21,7 @@ class Scope extends Enumeration
      *
      * @var string
      */
-    const FOREST = 'Forest';
+    final public const FOREST = 'Forest';
 
     /**
      * The message tracking scopes spans across an organization.
@@ -30,7 +30,7 @@ class Scope extends Enumeration
      *
      * @var string
      */
-    const ORGANIZATION = 'Organization';
+    final public const ORGANIZATION = 'Organization';
 
     /**
      * The message tracking scopes spans across a site.
@@ -39,5 +39,5 @@ class Scope extends Enumeration
      *
      * @var string
      */
-    const SITE = 'Site';
+    final public const SITE = 'Site';
 }

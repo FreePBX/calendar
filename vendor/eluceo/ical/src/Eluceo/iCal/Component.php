@@ -16,23 +16,21 @@ use Eluceo\iCal\Util\ComponentUtil;
 /**
  * Abstract Calender Component.
  */
-abstract class Component
+abstract class Component implements \Stringable
 {
     /**
      * Array of Components.
      *
      * @var Component[]
      */
-    protected $components = array();
+    protected $components = [];
 
     /**
      * The order in which the components will be rendered during build.
      *
      * Not defined components will be appended at the end.
-     *
-     * @var array
      */
-    private $componentsBuildOrder = array('VTIMEZONE', 'DAYLIGHT', 'STANDARD');
+    private array $componentsBuildOrder = ['VTIMEZONE', 'DAYLIGHT', 'STANDARD'];
 
     /**
      * The type of the concrete Component.
@@ -76,7 +74,7 @@ abstract class Component
      */
     public function build()
     {
-        $lines = array();
+        $lines = [];
 
         $lines[] = sprintf('BEGIN:%s', $this->getType());
 
@@ -91,7 +89,7 @@ abstract class Component
 
         $lines[] = sprintf('END:%s', $this->getType());
 
-        $ret = array();
+        $ret = [];
 
         foreach ($lines as $line) {
             foreach (ComponentUtil::fold($line) as $l) {
@@ -117,7 +115,7 @@ abstract class Component
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->render();
     }
@@ -129,13 +127,13 @@ abstract class Component
      */
     private function buildComponents(array &$lines)
     {
-        $componentsByType = array();
+        $componentsByType = [];
 
         /** @var $component Component */
         foreach ($this->components as $component) {
             $type = $component->getType();
             if (!isset($componentsByType[$type])) {
-                $componentsByType[$type] = array();
+                $componentsByType[$type] = [];
             }
             $componentsByType[$type][] = $component;
         }
@@ -159,10 +157,6 @@ abstract class Component
         }
     }
 
-    /**
-     * @param array     $lines
-     * @param Component $component
-     */
     private function addComponentLines(array &$lines, Component $component)
     {
         foreach ($component->build() as $l) {

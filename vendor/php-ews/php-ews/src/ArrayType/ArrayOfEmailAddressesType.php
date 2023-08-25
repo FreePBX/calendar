@@ -21,5 +21,5 @@ class ArrayOfEmailAddressesType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\EmailAddressType[]
      */
-    public $Address = array();
+    public $Address = [];
 }

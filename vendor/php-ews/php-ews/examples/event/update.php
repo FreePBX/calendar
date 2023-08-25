@@ -24,13 +24,7 @@ use \jamesiarmes\PhpEws\Type\SetItemFieldType;
 
 // Replace with the events to be updated along with their new start and end
 // times.
-$event_updates = array(
-    array(
-        'id' => 'AAMkADk0N2E4OTQxLWRlOTYtNGUxZC05NzE1LTU4ZmI5NGVkZTZmYQBGAAAAAADeofKHfJ96S5ndHNLg9VfeBwAr1MfeoTJdQ7jgaw/bSgljAAAAAAENAAAr1MfeoTJdQ7jgaw/bSgljAABPwPPwAAA=',
-        'start' => new DateTime('tomorrow 3:00pm'),
-        'end' => new DateTime('tomorrow 4:30pm'),
-    )
-);
+$event_updates = [['id' => 'AAMkADk0N2E4OTQxLWRlOTYtNGUxZC05NzE1LTU4ZmI5NGVkZTZmYQBGAAAAAADeofKHfJ96S5ndHNLg9VfeBwAr1MfeoTJdQ7jgaw/bSgljAAAAAAENAAAr1MfeoTJdQ7jgaw/bSgljAABPwPPwAAA=', 'start' => new DateTime('tomorrow 3:00pm'), 'end' => new DateTime('tomorrow 4:30pm')]];
 
 // Set connection information.
 $host = '';

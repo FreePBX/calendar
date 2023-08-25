@@ -23,5 +23,5 @@ class StandardGroupByType extends Enumeration
      *
      * @var string
      */
-    const CONVERSATION_TOPIC = 'ConversationTopic';
+    final public const CONVERSATION_TOPIC = 'ConversationTopic';
 }

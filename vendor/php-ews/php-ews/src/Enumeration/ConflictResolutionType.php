@@ -21,7 +21,7 @@ class ConflictResolutionType extends Enumeration
      *
      * @var string
      */
-    const ALWAYS_OVERWRITE = 'AlwaysOverwrite';
+    final public const ALWAYS_OVERWRITE = 'AlwaysOverwrite';
 
     /**
      * The update operation automatically resolves any conflict.
@@ -30,7 +30,7 @@ class ConflictResolutionType extends Enumeration
      *
      * @var string
      */
-    const AUTO_RESOLVE = 'AutoResolve';
+    final public const AUTO_RESOLVE = 'AutoResolve';
 
     /**
      * If there is a conflict, the update operation fails and an error is
@@ -40,5 +40,5 @@ class ConflictResolutionType extends Enumeration
      *
      * @var string
      */
-    const NEVER_OVERWRITE = 'NeverOverwrite';
+    final public const NEVER_OVERWRITE = 'NeverOverwrite';
 }

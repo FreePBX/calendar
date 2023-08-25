@@ -22,7 +22,7 @@ class NonEmptyArrayOfResponseObjectsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\AcceptItemType[]
      */
-    public $AcceptItem = array();
+    public $AcceptItem = [];
 
     /**
      * Used to accept an invitation that allows access to another user’s
@@ -32,7 +32,7 @@ class NonEmptyArrayOfResponseObjectsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\AcceptSharingInvitationType[]
      */
-    public $AcceptSharingInvitation = array();
+    public $AcceptSharingInvitation = [];
 
     /**
      * Represents the response object used to cancel a meeting.
@@ -41,7 +41,7 @@ class NonEmptyArrayOfResponseObjectsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\CalendarItemType[]
      */
-    public $CancelCalendarItem = array();
+    public $CancelCalendarItem = [];
 
     /**
      * Represents a Decline reply to a meeting request.
@@ -50,7 +50,7 @@ class NonEmptyArrayOfResponseObjectsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\DeclineItemType[]
      */
-    public $DeclineItem = array();
+    public $DeclineItem = [];
 
     /**
      * Contains an Exchange store item to forward to recipients.
@@ -59,7 +59,7 @@ class NonEmptyArrayOfResponseObjectsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\ForwardItemType[]
      */
-    public $ForwardItem = array();
+    public $ForwardItem = [];
 
     /**
      * Contains a reply to a post item.
@@ -68,7 +68,7 @@ class NonEmptyArrayOfResponseObjectsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\PostReplyItemType[]
      */
-    public $PostReplyItem = array();
+    public $PostReplyItem = [];
 
     /**
      * Specifies a response object that indicates that the meeting attendee can
@@ -78,7 +78,7 @@ class NonEmptyArrayOfResponseObjectsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\ProposeNewTimeType[]
      */
-    public $ProposeNewTime = array();
+    public $ProposeNewTime = [];
 
     /**
      * Removes an item from the Exchange store.
@@ -87,7 +87,7 @@ class NonEmptyArrayOfResponseObjectsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\RemoveItemType[]
      */
-    public $RemoveItem = array();
+    public $RemoveItem = [];
 
     /**
      * Contains a reply to all identified recipients of an item in the Exchange
@@ -97,7 +97,7 @@ class NonEmptyArrayOfResponseObjectsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\ReplyAllToItemType[]
      */
-    public $ReplyAllToItem = array();
+    public $ReplyAllToItem = [];
 
     /**
      * Contains a reply to the creator of an item in the Exchange store.
@@ -106,7 +106,7 @@ class NonEmptyArrayOfResponseObjectsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\ReplyToItemType[]
      */
-    public $ReplyToItem = array();
+    public $ReplyToItem = [];
 
     /**
      * Used to suppress read receipt requests.
@@ -115,7 +115,7 @@ class NonEmptyArrayOfResponseObjectsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\SuppressReadReceiptType[]
      */
-    public $SuppressReadReceipt = array();
+    public $SuppressReadReceipt = [];
 
     /**
      * Represents a Tentative reply to a meeting request.
@@ -124,5 +124,5 @@ class NonEmptyArrayOfResponseObjectsType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\TentativelyAcceptItemType[]
      */
-    public $TentativelyAcceptItem = array();
+    public $TentativelyAcceptItem = [];
 }

@@ -21,7 +21,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const APPROVED_MODERATION = 'ApprovedModeration';
+    final public const APPROVED_MODERATION = 'ApprovedModeration';
 
     /**
      * Indicates the event is for a message that has been delayed after
@@ -31,7 +31,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const DELAYED_AFTER_TRANSFER_TO_PARTNER_ORG = 'DelayedAfterTransferToPartnerOrg';
+    final public const DELAYED_AFTER_TRANSFER_TO_PARTNER_ORG = 'DelayedAfterTransferToPartnerOrg';
 
     /**
      * Indicates the event is for a delivered message.
@@ -40,7 +40,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const DELIVERED = 'Delivered';
+    final public const DELIVERED = 'Delivered';
 
     /**
      * Indicates the event is for an expanded message.
@@ -49,7 +49,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const EXPANDED = 'Expanded';
+    final public const EXPANDED = 'Expanded';
 
     /**
      * Indicates the event is for a message that failed with a general error.
@@ -58,7 +58,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const FAILED_GENERAL = 'FailedGeneral';
+    final public const FAILED_GENERAL = 'FailedGeneral';
 
     /**
      * Indicates the event is for a message that failed moderation.
@@ -67,7 +67,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const FAILED_MODERATION = 'FailedModeration';
+    final public const FAILED_MODERATION = 'FailedModeration';
 
     /**
      * Indicates the event is for a message that failed transport rules.
@@ -76,7 +76,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const FAILED_TRANSPORT_RULES = 'FailedTransportRules';
+    final public const FAILED_TRANSPORT_RULES = 'FailedTransportRules';
 
     /**
      * Indicates the event is for a forwarded message.
@@ -85,7 +85,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const FORWARDED = 'Forwarded';
+    final public const FORWARDED = 'Forwarded';
 
     /**
      * Indicates the event is for a message that was deferred.
@@ -94,7 +94,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const MESSAGE_DEFER = 'MessageDefer';
+    final public const MESSAGE_DEFER = 'MessageDefer';
 
     /**
      * Indicates the event is for a message that was moved by an inbox rule.
@@ -103,7 +103,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const MOVED_TO_FOLDER_BY_INBOX_RULE = 'MovedToFolderByInboxRule';
+    final public const MOVED_TO_FOLDER_BY_INBOX_RULE = 'MovedToFolderByInboxRule';
 
     /**
      * Indicates the event is for a not read message.
@@ -112,7 +112,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const NOT_READ = 'NotRead';
+    final public const NOT_READ = 'NotRead';
 
     /**
      * Indicates the event is for a pending message.
@@ -121,7 +121,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const PENDING = 'Pending';
+    final public const PENDING = 'Pending';
 
     /**
      * Indicates the event is for a message pending moderation.
@@ -130,7 +130,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const PENDING_MODERATION = 'PendingModeration';
+    final public const PENDING_MODERATION = 'PendingModeration';
 
     /**
      * Indicates the event is for a message that was queued to be retried.
@@ -139,7 +139,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const QUEUE_RETRY = 'QueueRetry';
+    final public const QUEUE_RETRY = 'QueueRetry';
 
     /**
      * Indicates the event is for a queued to be retried without a time.
@@ -148,7 +148,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const QUEUE_RETRY_NO_RETRY_TIME = 'QueueRetryNoRetryTime';
+    final public const QUEUE_RETRY_NO_RETRY_TIME = 'QueueRetryNoRetryTime';
 
     /**
      * Indicates the event is for a read message.
@@ -157,7 +157,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const READ = 'Read';
+    final public const READ = 'Read';
 
     /**
      * Indicates the event is for a resolved message.
@@ -166,7 +166,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const RESOLVED = 'Resolved';
+    final public const RESOLVED = 'Resolved';
 
     /**
      * Indicates the event is for a message that was CCed by a rule.
@@ -175,7 +175,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const RULES_CC = 'RulesCc';
+    final public const RULES_CC = 'RulesCc';
 
     /**
      * Indicates the event is for a message that was received via SMTP.
@@ -184,7 +184,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const SMTP_RECEIVE = 'SmtpReceive';
+    final public const SMTP_RECEIVE = 'SmtpReceive';
 
     /**
      * Indicates the event is for a message that was sent via SMTP.
@@ -193,7 +193,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const SMTP_SEND = 'SmtpSend';
+    final public const SMTP_SEND = 'SmtpSend';
 
     /**
      * Indicates the event is for a message that was sent cross forest via SMTP.
@@ -202,7 +202,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const SMTP_SEND_CROSS_FOREST = 'SmtpSendCrossForest';
+    final public const SMTP_SEND_CROSS_FOREST = 'SmtpSendCrossForest';
 
     /**
      * Indicates the event is for a message that was sent cross site via SMTP.
@@ -211,7 +211,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const SMTP_SEND_CROSS_SITE = 'SmtpSendCrossSite';
+    final public const SMTP_SEND_CROSS_SITE = 'SmtpSendCrossSite';
 
     /**
      * Indicates the event is for a submitted message.
@@ -220,7 +220,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const SUBMITTED = 'Submitted';
+    final public const SUBMITTED = 'Submitted';
 
     /**
      * Indicates the event is for a message that was transferred to a foreign
@@ -230,7 +230,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const TRANSFERRED_TO_FOREIGN_ORG = 'TransferredToForeignOrg';
+    final public const TRANSFERRED_TO_FOREIGN_ORG = 'TransferredToForeignOrg';
 
     /**
      * Indicates the event is for a message that was transferred to a legacy
@@ -240,7 +240,7 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const TRANSFERRED_TO_LEGACY_EXCHANGE_SERVER = 'TransferredToLegacyExchangeServer';
+    final public const TRANSFERRED_TO_LEGACY_EXCHANGE_SERVER = 'TransferredToLegacyExchangeServer';
 
     /**
      * Indicates the event is for a message that was transferred to a partner
@@ -250,5 +250,5 @@ class MessageTrackingEventDescriptionType extends Enumeration
      *
      * @var string
      */
-    const TRANSFERRED_TO_PARTNER_ORG = 'TransferredToPartnerOrg';
+    final public const TRANSFERRED_TO_PARTNER_ORG = 'TransferredToPartnerOrg';
 }

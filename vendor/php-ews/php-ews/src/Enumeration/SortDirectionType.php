@@ -21,7 +21,7 @@ class SortDirectionType extends Enumeration
      *
      * @var string
      */
-    const ASCENDING = 'Ascending';
+    final public const ASCENDING = 'Ascending';
 
     /**
      * Items are sorted in descending order.
@@ -30,5 +30,5 @@ class SortDirectionType extends Enumeration
      *
      * @var string
      */
-    const DESCENDING = 'Descending';
+    final public const DESCENDING = 'Descending';
 }

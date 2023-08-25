@@ -106,29 +106,29 @@
         },
         {
             "name": "om/icalparser",
-            "version": "v1.0.0",
-            "version_normalized": "1.0.0.0",
+            "version": "v3.0.6",
+            "version_normalized": "3.0.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OzzyCzech/icalparser.git",
-                "reference": "1b7c1bb103e165fd637a76def39848696bbdbac5"
+                "reference": "1481bc442a48cd1678291958b33efa22a628fb0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OzzyCzech/icalparser/zipball/1b7c1bb103e165fd637a76def39848696bbdbac5",
-                "reference": "1b7c1bb103e165fd637a76def39848696bbdbac5",
+                "url": "https://api.github.com/repos/OzzyCzech/icalparser/zipball/1481bc442a48cd1678291958b33efa22a628fb0b",
+                "reference": "1481bc442a48cd1678291958b33efa22a628fb0b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1.0"
+                "php": ">=8.0.0"
             },
             "require-dev": {
-                "nette/tester": "*"
+                "nette/tester": "^2.4"
             },
             "suggest": {
                 "ext-dom": "for timezone tool"
             },
-            "time": "2020-09-11T11:28:28+00:00",
+            "time": "2023-02-09T07:45:07+00:00",
             "type": "library",
             "installation-source": "source",
             "autoload": {
@@ -143,10 +143,10 @@
             "authors": [
                 {
                     "name": "Roman Ožana",
-                    "email": "roman@omdesign.cz"
+                    "email": "roman@ozana.cz"
                 }
             ],
-            "description": "Simple ical parser",
+            "description": "Simple iCal parser",
             "keywords": [
                 "calendar",
                 "ical",
@@ -154,7 +154,7 @@
             ],
             "support": {
                 "issues": "https://github.com/OzzyCzech/icalparser/issues",
-                "source": "https://github.com/OzzyCzech/icalparser/tree/v1.0.0"
+                "source": "https://github.com/OzzyCzech/icalparser/tree/v3.0.6"
             },
             "install-path": "../om/icalparser"
         },

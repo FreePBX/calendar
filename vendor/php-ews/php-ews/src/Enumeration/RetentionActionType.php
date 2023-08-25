@@ -21,7 +21,7 @@ class RetentionActionType extends Enumeration
      *
      * @var string
      */
-    const DELETE_AND_ALLOW_RECOVERY = 'DeleteAndAllowRecovery';
+    final public const DELETE_AND_ALLOW_RECOVERY = 'DeleteAndAllowRecovery';
 
     /**
      * The item is marked as having exceeded the retention time limit.
@@ -30,7 +30,7 @@ class RetentionActionType extends Enumeration
      *
      * @var string
      */
-    const MARK_AS_PAST_RETENTION_LIMIT = 'MarkAsPastRetentionLimit';
+    final public const MARK_AS_PAST_RETENTION_LIMIT = 'MarkAsPastRetentionLimit';
 
     /**
      * The item is moved to the archive mailbox.
@@ -39,7 +39,7 @@ class RetentionActionType extends Enumeration
      *
      * @var string
      */
-    const MOVE_TO_ARCHIVE = 'MoveToArchive';
+    final public const MOVE_TO_ARCHIVE = 'MoveToArchive';
 
     /**
      * The item is moved to the default Deleted Items folder.
@@ -48,7 +48,7 @@ class RetentionActionType extends Enumeration
      *
      * @var string
      */
-    const MOVE_TO_DELETED_ITEMS = 'MoveToDeletedItems';
+    final public const MOVE_TO_DELETED_ITEMS = 'MoveToDeletedItems';
 
     /**
      * The item is moved to a specified folder.
@@ -57,7 +57,7 @@ class RetentionActionType extends Enumeration
      *
      * @var string
      */
-    const MOVE_TO_FOLDER = 'MoveToFolder';
+    final public const MOVE_TO_FOLDER = 'MoveToFolder';
 
     /**
      * No action is performed on the item.
@@ -66,7 +66,7 @@ class RetentionActionType extends Enumeration
      *
      * @var string
      */
-    const NONE = 'None';
+    final public const NONE = 'None';
 
     /**
      * The item is permanently deleted from the mailbox.
@@ -75,5 +75,5 @@ class RetentionActionType extends Enumeration
      *
      * @var string
      */
-    const PERMANENTLY_DELETE = 'PermanentlyDelete';
+    final public const PERMANENTLY_DELETE = 'PermanentlyDelete';
 }

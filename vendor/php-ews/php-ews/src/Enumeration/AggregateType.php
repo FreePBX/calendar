@@ -22,7 +22,7 @@ class AggregateType extends Enumeration
      *
      * @var string
      */
-    const MAXIMUM = 'Maximum';
+    final public const MAXIMUM = 'Maximum';
 
     /**
      * Indicates that a minimum aggregation should be used.
@@ -31,5 +31,5 @@ class AggregateType extends Enumeration
      *
      * @var string
      */
-    const MINIMUM = 'Minimum';
+    final public const MINIMUM = 'Minimum';
 }

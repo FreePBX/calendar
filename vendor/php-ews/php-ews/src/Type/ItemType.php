@@ -142,7 +142,7 @@ class ItemType extends Type
      *
      * @var \jamesiarmes\PhpEws\Type\ExtendedPropertyType[]
      */
-    public $ExtendedProperty = array();
+    public $ExtendedProperty = [];
 
     /**
      * Represents a property that is set to true if an item has at least one

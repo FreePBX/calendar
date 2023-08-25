@@ -11,25 +11,24 @@
 
 namespace Eluceo\iCal;
 
-class ParameterBag
+class ParameterBag implements \Stringable
 {
     /**
-     * The params.
-     *
-     * @var array
+     * @param mixed[] $params
      */
-    protected $params;
-
-    public function __construct($params = array())
+    public function __construct(
+        /**
+         * The params.
+         */
+        protected $params = []
+    )
     {
-        $this->params = $params;
     }
 
     /**
      * @param string $name
-     * @param mixed  $value
      */
-    public function setParam($name, $value)
+    public function setParam($name, mixed $value)
     {
         $this->params[$name] = $value;
     }
@@ -62,7 +61,7 @@ class ParameterBag
         $line = '';
         foreach ($this->params as $param => $paramValues) {
             if (!is_array($paramValues)) {
-                $paramValues = array($paramValues);
+                $paramValues = [$paramValues];
             }
             foreach ($paramValues as $k => $v) {
                 $paramValues[$k] = $this->escapeParamValue($v);
@@ -91,7 +90,7 @@ class ParameterBag
         $value = str_replace('\\', '\\\\', $value);
         $value = str_replace('"', '\"', $value, $count);
         $value = str_replace("\n", '\\n', $value);
-        if (false !== strpos($value, ';') || false !== strpos($value, ',') || false !== strpos($value, ':') || $count) {
+        if (str_contains($value, ';') || str_contains($value, ',') || str_contains($value, ':') || $count) {
             $value = '"' . $value . '"';
         }
 
@@ -101,7 +100,7 @@ class ParameterBag
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->toString();
     }

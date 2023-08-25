@@ -33,7 +33,7 @@ class FreeBusyViewType extends Enumeration
      *
      * @var string
      */
-    const DETAILED = 'Detailed';
+    final public const DETAILED = 'Detailed';
 
     /**
      * Represents all the properties in Detailed with a stream of merged
@@ -47,7 +47,7 @@ class FreeBusyViewType extends Enumeration
      *
      * @var string
      */
-    const DETAILED_MERGED = 'DetailedMerged';
+    final public const DETAILED_MERGED = 'DetailedMerged';
 
     /**
      * Represents the legacy status information: free, busy, tentative, and OOF.
@@ -60,7 +60,7 @@ class FreeBusyViewType extends Enumeration
      *
      * @var string
      */
-    const FREE_BUSY = 'FreeBusy';
+    final public const FREE_BUSY = 'FreeBusy';
 
     /**
      * Represents all the properties in FreeBusy with a stream of merged
@@ -70,7 +70,7 @@ class FreeBusyViewType extends Enumeration
      *
      * @var string
      */
-    const FREE_BUSY_MERGED = 'FreeBusyMerged';
+    final public const FREE_BUSY_MERGED = 'FreeBusyMerged';
 
     /**
      * Represents an aggregated free/busy stream.
@@ -85,7 +85,7 @@ class FreeBusyViewType extends Enumeration
      *
      * @var string
      */
-    const MERGED_ONLY = 'MergedOnly';
+    final public const MERGED_ONLY = 'MergedOnly';
 
     /**
      * This value is not valid for requests but is valid for responses.
@@ -94,5 +94,5 @@ class FreeBusyViewType extends Enumeration
      *
      * @var string
      */
-    const NONE = 'None';
+    final public const NONE = 'None';
 }

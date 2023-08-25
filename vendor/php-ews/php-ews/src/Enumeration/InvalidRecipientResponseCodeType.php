@@ -22,7 +22,7 @@ class InvalidRecipientResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_OBTAIN_TOKEN_FROM_STS = 'CannotObtainTokenFromSTS';
+    final public const CANNOT_OBTAIN_TOKEN_FROM_STS = 'CannotObtainTokenFromSTS';
 
     /**
      * Indicates that the error is not specified by another error response code.
@@ -31,7 +31,7 @@ class InvalidRecipientResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const OTHER = 'OtherError';
+    final public const OTHER = 'OtherError';
 
     /**
      * Indicates that the secure token service that is used by the specified
@@ -41,7 +41,7 @@ class InvalidRecipientResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const RECIPIENT_ORG_FEDERATED_UNKNOWN_TOKEN_ISSUER = 'RecipientOrganizationFederatedWithUnknownTokenIssuer';
+    final public const RECIPIENT_ORG_FEDERATED_UNKNOWN_TOKEN_ISSUER = 'RecipientOrganizationFederatedWithUnknownTokenIssuer';
 
     /**
      * Indicates that a sharing relationship is not available with the
@@ -51,7 +51,7 @@ class InvalidRecipientResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const RECIPIENT_ORG_NOT_FEDERATED = 'RecipientOrganizationNotFederated';
+    final public const RECIPIENT_ORG_NOT_FEDERATED = 'RecipientOrganizationNotFederated';
 
     /**
      * Indicates that the system administrator has set a system policy that
@@ -61,5 +61,5 @@ class InvalidRecipientResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SYSTEM_POLICY_BLOCKS_SHARING_WITH_RECIPIENT = 'SystemPolicyBlocksSharingWithThisRecipient';
+    final public const SYSTEM_POLICY_BLOCKS_SHARING_WITH_RECIPIENT = 'SystemPolicyBlocksSharingWithThisRecipient';
 }

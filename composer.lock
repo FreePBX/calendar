@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "48b95e1c512efd4a47b529d5fd556b83",
+    "content-hash": "5e7ba2f04087f850adb37fd9064cdc94",
     "packages": [
         {
             "name": "eluceo/ical",
@@ -41,14 +41,14 @@
             ],
             "authors": [
                 {
-                    "name": "Maciej Łebkowski",
-                    "email": "m.lebkowski@gmail.com",
-                    "role": "Contributor"
-                },
-                {
                     "name": "Markus Poerschke",
                     "email": "markus@eluceo.de",
                     "role": "Developer"
+                },
+                {
+                    "name": "Maciej Łebkowski",
+                    "email": "m.lebkowski@gmail.com",
+                    "role": "Contributor"
                 }
             ],
             "description": "The eluceo/iCal package offers a abstraction layer for creating iCalendars. You can easily create iCal files by using PHP object instead of typing your *.ics file by hand. The output will follow RFC 2445 as best as possible.",
@@ -60,6 +60,10 @@
                 "ics",
                 "php calendar"
             ],
+            "support": {
+                "issues": "https://github.com/markuspoerschke/iCal/issues",
+                "source": "https://github.com/markuspoerschke/iCal"
+            },
             "time": "2018-04-30T07:46:32+00:00"
         },
         {
@@ -102,27 +106,31 @@
                 }
             ],
             "description": "Library for communicating with Microsoft services using NTLM authentication.",
+            "support": {
+                "issues": "https://github.com/jamesiarmes/php-ntlm/issues",
+                "source": "https://github.com/jamesiarmes/php-ntlm/tree/master"
+            },
             "time": "2017-10-04T01:14:17+00:00"
         },
         {
             "name": "om/icalparser",
-            "version": "v1.0.0",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OzzyCzech/icalparser.git",
-                "reference": "1b7c1bb103e165fd637a76def39848696bbdbac5"
+                "reference": "1481bc442a48cd1678291958b33efa22a628fb0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OzzyCzech/icalparser/zipball/1b7c1bb103e165fd637a76def39848696bbdbac5",
-                "reference": "1b7c1bb103e165fd637a76def39848696bbdbac5",
+                "url": "https://api.github.com/repos/OzzyCzech/icalparser/zipball/1481bc442a48cd1678291958b33efa22a628fb0b",
+                "reference": "1481bc442a48cd1678291958b33efa22a628fb0b",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1.0"
+                "php": ">=8.0.0"
             },
             "require-dev": {
-                "nette/tester": "*"
+                "nette/tester": "^2.4"
             },
             "suggest": {
                 "ext-dom": "for timezone tool"
@@ -140,10 +148,10 @@
             "authors": [
                 {
                     "name": "Roman Ožana",
-                    "email": "roman@omdesign.cz"
+                    "email": "roman@ozana.cz"
                 }
             ],
-            "description": "Simple ical parser",
+            "description": "Simple iCal parser",
             "keywords": [
                 "calendar",
                 "ical",
@@ -151,9 +159,9 @@
             ],
             "support": {
                 "issues": "https://github.com/OzzyCzech/icalparser/issues",
-                "source": "https://github.com/OzzyCzech/icalparser/tree/v1.0.0"
+                "source": "https://github.com/OzzyCzech/icalparser/tree/v3.0.6"
             },
-            "time": "2020-09-11T11:28:28+00:00"
+            "time": "2023-02-09T07:45:07+00:00"
         },
         {
             "name": "php-ews/php-ews",
@@ -200,6 +208,10 @@
             ],
             "description": "Library for communicating with Exchange Web Services.",
             "homepage": "http://jamesarmes.com/php-ews/",
+            "support": {
+                "issues": "https://github.com/jamesiarmes/php-ews/issues",
+                "source": "https://github.com/jamesiarmes/php-ews/tree/master"
+            },
             "time": "2017-10-04T01:18:36+00:00"
         },
         {
@@ -243,6 +255,9 @@
                 "Simple",
                 "client"
             ],
+            "support": {
+                "source": "https://github.com/thecsea/simpleCalDAV/tree/packagist"
+            },
             "time": "2015-12-02T19:10:12+00:00"
         }
     ],
@@ -254,5 +269,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.3.0"
 }

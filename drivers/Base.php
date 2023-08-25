@@ -38,9 +38,7 @@ abstract class Base
 	 */
 	public static function getInfo()
 	{
-		return array(
-			"name" => _("Unknown Calendar")
-		);
+		return ["name" => _("Unknown Calendar")];
 	}
 
 	/**
@@ -71,7 +69,7 @@ abstract class Base
 	 */
 	public static function addCalendar($data)
 	{
-		$class = get_called_class();
+		$class = static::class;
 		$uuid = Uuid::uuid4()->toString();
 		$data['id'] = $uuid;
 		$self = new $class(\FreePBX::create()->Calendar, $data);
@@ -187,8 +185,8 @@ abstract class Base
 	}
 
 	//cache range
-	const SUB_START = 'PT1H';
-	const ADD_END = 'PT25H';
+	final public const SUB_START = 'PT1H';
+	final public const ADD_END = 'PT25H';
 
 	/**
 	 * Build and store the cache for the current calendar. If an old cache is there already it will be overwritten.
@@ -282,7 +280,7 @@ abstract class Base
 	public function getMappingToken()
 	{
 		$mapping = $this->calendarClass->getConfig('ical-mapping');
-		return isset($mapping[$this->calendar['id']]) ? $mapping[$this->calendar['id']] : null;
+		return $mapping[$this->calendar['id']] ?? null;
 	}
 
 	/**
@@ -294,7 +292,7 @@ abstract class Base
 	public function updateiCalMapping($token)
 	{
 		$mapping = $this->calendarClass->getConfig('ical-mapping');
-		$mapping = !empty($mapping) ? $mapping : array();
+		$mapping = !empty($mapping) ? $mapping : [];
 		$mapping[$this->calendar['id']] = $token;
 		$this->calendarClass->setConfig('ical-mapping', $mapping);
 		return true;
@@ -322,7 +320,8 @@ abstract class Base
 	 */
 	public function fastHandler()
 	{
-		if ($this->now == null)
+		$cache = null;
+  if ($this->now == null)
 			throw new Exception('Now must be set before calling this method!');
 
 		$cal = new IcalRangedParser(true);
@@ -349,7 +348,7 @@ abstract class Base
 				if (!$cache)
 					throw new Exception(); //should never happen because of isInCacheRange(). Anyway lets build the cache if this happens
 			}
-		} catch (Exception $ignored) {
+		} catch (Exception) {
 			//cache not built yet, build it for the first time. This should happen only once, then sync will take care
 			$this->buildCache();
 			goto checkrange;
@@ -390,7 +389,7 @@ abstract class Base
 			if (!$expandRecurring && isset($event['ORIGINAL_VEVENT'])) {
 				continue;
 			}
-			$event['UID'] = isset($event['UID']) ? $event['UID'] : $i;
+			$event['UID'] ??= $i;
 
 			// If there is no end event, set it to the start time
 			if (!isset($event['DTEND']) || !is_object($event['DTEND'])) {
@@ -398,7 +397,7 @@ abstract class Base
 			}
 
 			if ($event['DTSTART']->getTimezone() != $event['DTEND']->getTimezone()) {
-				throw new \Exception("Start timezone and end timezone are different! Not sure what to do here" . json_encode($event));
+				throw new \Exception("Start timezone and end timezone are different! Not sure what to do here" . json_encode($event, JSON_THROW_ON_ERROR));
 			}
 
 			$event['DTSTART'] = Carbon::instance($event['DTSTART']);
@@ -422,12 +421,12 @@ abstract class Base
 				continue;
 			}
 
-			$event['RECURRENCE_INSTANCE'] = isset($event['RECURRENCE_INSTANCE']) ? $event['RECURRENCE_INSTANCE'] : 0;
+			$event['RECURRENCE_INSTANCE'] ??= 0;
 
 			$e = [
-				'name' => $event['SUMMARY']  ? $event['SUMMARY'] : "",
-				'description' => isset($event['DESCRIPTION']) ? $event['DESCRIPTION'] : '',
-				'recurring' => isset($event['RECURRING']) ? $event['RECURRING'] : false,
+				'name' => $event['SUMMARY'] ?: "",
+				'description' => $event['DESCRIPTION'] ?? '',
+				'recurring' => $event['RECURRING'] ?? false,
 				'rrules' => [],
 				'categories' => (!empty($event['CATEGORIES']) && is_array($event['CATEGORIES'])) ? $event['CATEGORIES'] : [],
 				'timezone' => null,
@@ -439,7 +438,7 @@ abstract class Base
 				'renddate' => isset($event['ORIGINAL_VEVENT']) ? $event['ORIGINAL_VEVENT']['DTEND']->getTimestamp() : null,
 				'ustarttime' => $event['DTSTART']->getTimestamp(),
 				'uendtime' => $event['DTEND']->getTimestamp(),
-				'title' => $event['SUMMARY']  ? $event['SUMMARY'] : "",
+				'title' => $event['SUMMARY'] ?: "",
 				'startdate' => $event['DTSTART']->format('Y-m-d'),
 				'enddate' => $event['DTEND']->format('Y-m-d'),
 				'start' => sprintf('%sT%s', $event['DTSTART']->format('Y-m-d'), $event['DTSTART']->format('H:i:s')),
@@ -455,8 +454,8 @@ abstract class Base
 			if (!empty($event['RECURRING'])) {
 				$e['rrules'] = [
 					"frequency" => $event['RRULE']['FREQ'],
-					"days" => !empty($event['RRULE']['BYDAY']) ? explode(",", str_replace('"', '', $event['RRULE']['BYDAY'])) : [],
-					"byday" => !empty($event['RRULE']['BYDAY']) ? str_replace('"', '', $event['RRULE']['BYDAY']) : [],
+					"days" => !empty($event['RRULE']['BYDAY']) ? explode(",", str_replace('"', '', (string) $event['RRULE']['BYDAY'])) : [],
+					"byday" => !empty($event['RRULE']['BYDAY']) ? str_replace('"', '', (string) $event['RRULE']['BYDAY']) : [],
 					"interval" => !empty($event['RRULE']['INTERVAL']) ? $event['RRULE']['INTERVAL'] : "",
 					"count" => !empty($event['RRULE']['COUNT']) ? $event['RRULE']['COUNT'] : "",
 					"until" => !empty($event['RRULE']['UNTIL']) ? $event['RRULE']['UNTIL']->format('U') : ""
@@ -535,26 +534,14 @@ abstract class Base
 	 */
 	public function getNextEvent()
 	{
-		$dates = array(
-			$this->now->copy()->endOfWeek(),
-			$this->now->copy()->endOfMonth(),
-			$this->now->copy()->addMonth(),
-			$this->now->copy()->addMonths(2),
-			$this->now->copy()->addMonths(4),
-			$this->now->copy()->addMonths(6),
-			$this->now->copy()->addYear(),
-			$this->now->copy()->addYears(2),
-			$this->now->copy()->addYears(4),
-			$this->now->copy()->addYears(6),
-			$this->now->copy()->addYears(10)
-		);
+		$dates = [$this->now->copy()->endOfWeek(), $this->now->copy()->endOfMonth(), $this->now->copy()->addMonth(), $this->now->copy()->addMonths(2), $this->now->copy()->addMonths(4), $this->now->copy()->addMonths(6), $this->now->copy()->addYear(), $this->now->copy()->addYears(2), $this->now->copy()->addYears(4), $this->now->copy()->addYears(6), $this->now->copy()->addYears(10)];
 		foreach ($dates as $date) {
 			$events = $this->getEventsBetween($this->now, $date);
 			if (!empty($events)) {
 				return reset($events);
 			}
 		}
-		return array();
+		return [];
 	}
 
 	/**

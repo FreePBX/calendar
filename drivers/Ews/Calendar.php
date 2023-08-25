@@ -32,15 +32,9 @@ use Eluceo\iCal\Component\Event;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
 
 class Calendar {
-	private $server;
-	private $username;
-	private $password;
 	private $vesion;
 
-	public function __construct($server, $username, $password, $version) {
-		$this->server = $server;
-		$this->username = $username;
-		$this->password = $password;
+	public function __construct(private $server, private $username, private $password, $version) {
 		$this->version = $version;
 	}
 
@@ -74,7 +68,7 @@ class Calendar {
 				// EWS class default.
 				$version = Client::VERSION_2007;
 			}
-			return array("version" => $version, "server" => $server, "username" => (!empty($_POST['username']) ? $_POST['username'] : $_POST['email']));
+			return ["version" => $version, "server" => $server, "username" => (!empty($_POST['username']) ? $_POST['username'] : $_POST['email'])];
 		} else {
 			throw new \Exception(_("Unable to determine server URL"));
 		}
@@ -93,17 +87,14 @@ class Calendar {
 		$parent->Id = DistinguishedFolderIdNameType::ROOT;
 		$request->ParentFolderIds->DistinguishedFolderId[] = $parent;
 		$response = $client->FindFolder($request);
-		$calendars = array();
+		$calendars = [];
 		foreach($response->ResponseMessages->FindFolderResponseMessage as $item) {
 			if ($item->RootFolder->TotalItemsInView > 0){
 				$cals = $item->RootFolder->Folders->CalendarFolder;
 				$chtml = '';
 				foreach($cals as $calendar) {
 					$id = (string)$calendar->FolderId->Id;
-					$calendars[$id] = array(
-						"id" => $id,
-						"name" => (string)$calendar->DisplayName
-					);
+					$calendars[$id] = ["id" => $id, "name" => (string)$calendar->DisplayName];
 				}
 			}
 		}
@@ -112,7 +103,7 @@ class Calendar {
 
 	public function getCalendarByID($id) {
 		$calendars = $this->getAllCalendars();
-		return !empty($calendars[$id]) ? $calendars[$id] : array();
+		return !empty($calendars[$id]) ? $calendars[$id] : [];
 	}
 
 	public function getAllEventsByCalendarID($folderID) {
@@ -131,7 +122,7 @@ class Calendar {
 		$request->ParentFolderIds->FolderId->Id = $folderID;
 		$response = $client->FindItem($request);
 
-		$es = array();
+		$es = [];
 		foreach($response->ResponseMessages->FindItemResponseMessage as $item) {
 			// Loop through each item if event(s) were found in the timeframe specified
 			if ($item->RootFolder->TotalItemsInView > 0){
@@ -147,15 +138,7 @@ class Calendar {
 						$end = new \DateTime($event->End);
 					}
 
-					$es[$id] = array(
-						"subject" => $event->Subject,
-						"start" => new \DateTime($event->Start),
-						"end" => $end,
-						"type" => $event->CalendarItemType,
-						"location" => $event->Location,
-						"categories" => (isset($event->Categories->String)) ? $event->Categories->String : array(),
-						"allday" => $event->IsAllDayEvent
-					);
+					$es[$id] = ["subject" => $event->Subject, "start" => new \DateTime($event->Start), "end" => $end, "type" => $event->CalendarItemType, "location" => $event->Location, "categories" => $event->Categories->String ?? [], "allday" => $event->IsAllDayEvent];
 				}
 			} else {
 				// No items returned
@@ -213,7 +196,7 @@ class Calendar {
 								break;
 							case 'weekly':
 								if(isset($event['recurrence']['pattern']['daysOfWeek']) && !empty($event['recurrence']['pattern']['daysOfWeek']) && is_array($event['recurrence']['pattern']['daysOfWeek'])) {
-									$days = array();
+									$days = [];
 									foreach($event['recurrence']['pattern']['daysOfWeek'] as $day) {
 										switch($day) {
 											case "monday":
@@ -269,7 +252,7 @@ class Calendar {
 										default:
 											break;
 									}
-									$d = strtoupper(substr($vEvent->getDtStart()->format('D'), 0, -1));
+									$d = strtoupper(substr((string) $vEvent->getDtStart()->format('D'), 0, -1));
 									$recurrenceRule->setByDay($c.$d);
 								}
 								break;
@@ -299,7 +282,7 @@ class Calendar {
 										default:
 											break;
 									}
-									$d = strtoupper(substr($vEvent->getDtStart()->format('D'), 0, -1));
+									$d = strtoupper(substr((string) $vEvent->getDtStart()->format('D'), 0, -1));
 									$recurrenceRule->setByDay($c.$d);
 								}
 								break;

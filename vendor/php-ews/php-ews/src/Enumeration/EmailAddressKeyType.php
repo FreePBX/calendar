@@ -21,7 +21,7 @@ class EmailAddressKeyType extends Enumeration
      *
      * @var string
      */
-    const EMAIL_ADDRESS_1 = 'EmailAddress1';
+    final public const EMAIL_ADDRESS_1 = 'EmailAddress1';
 
     /**
      * Key for a contacts second email address.
@@ -30,7 +30,7 @@ class EmailAddressKeyType extends Enumeration
      *
      * @var string
      */
-    const EMAIL_ADDRESS_2 = 'EmailAddress2';
+    final public const EMAIL_ADDRESS_2 = 'EmailAddress2';
 
     /**
      * Key for a contacts third email address.
@@ -39,5 +39,5 @@ class EmailAddressKeyType extends Enumeration
      *
      * @var string
      */
-    const EMAIL_ADDRESS_3 = 'EmailAddress3';
+    final public const EMAIL_ADDRESS_3 = 'EmailAddress3';
 }

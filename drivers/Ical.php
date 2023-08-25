@@ -11,9 +11,7 @@ class Ical extends Base {
 	 * @return array  array of information
 	 */
 	public static function getInfo() {
-		return array(
-			"name" => _("Remote iCal Calendar")
-		);
+		return ["name" => _("Remote iCal Calendar")];
 	}
 
 	/**
@@ -23,7 +21,7 @@ class Ical extends Base {
 	 * @return string               HTML to display
 	 */
 	public static function getEditDisplay($data) {
-		return load_view(dirname(__DIR__)."/views/remote_ical_settings.php",array('action' => 'edit', 'data' => $data));
+		return load_view(dirname(__DIR__)."/views/remote_ical_settings.php",['action' => 'edit', 'data' => $data]);
 	}
 
 	/**
@@ -32,7 +30,7 @@ class Ical extends Base {
 	 * @return string              HTML to display
 	 */
 	public static function getAddDisplay() {
-		return load_view(dirname(__DIR__)."/views/remote_ical_settings.php",array('action' => 'add', 'data' => array('next' => 86400)));
+		return load_view(dirname(__DIR__)."/views/remote_ical_settings.php",['action' => 'add', 'data' => ['next' => 86400]]);
 	}
 
 	/**
@@ -43,13 +41,7 @@ class Ical extends Base {
 	 * @return boolean               true or false
 	 */
 	public function updateCalendar($data) {
-		$calendar = array(
-			"name" => $data['name'],
-			"description" => $data['description'],
-			"type" => "ical",
-			"url" => $data['url'],
-			"next" => !empty($data['next']) ? $data['next'] : 300
-		);
+		$calendar = ["name" => $data['name'], "description" => $data['description'], "type" => "ical", "url" => $data['url'], "next" => !empty($data['next']) ? $data['next'] : 300];
 		$ret = parent::updateCalendar($calendar);
 		$this->processCalendar();
 		return $ret;
@@ -58,10 +50,10 @@ class Ical extends Base {
 	public function processCalendar() {
 		$req = \FreePBX::Curl()->requests($this->calendar['url']);
 		$finalical = $req->get($this->calendar['url'])->body;
-		if (!preg_match('/BEGIN:VCALENDAR/', $finalical)) {
-			return  array("status" => false, "message" => _("Invalid ical remote URL"));
+		if (!preg_match('/BEGIN:VCALENDAR/', (string) $finalical)) {
+			return  ["status" => false, "message" => _("Invalid ical remote URL")];
 		}
 		$this->saveiCal($finalical);
-		return  array("status" => true, "message" => _("Calendar processed successfully"));
+		return  ["status" => true, "message" => _("Calendar processed successfully")];
 	}
 }

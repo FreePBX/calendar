@@ -24,5 +24,5 @@ class MembersListType extends Type
      *
      * @var \jamesiarmes\PhpEws\Type\MemberType[]
      */
-    public $Member = array();
+    public $Member = [];
 }

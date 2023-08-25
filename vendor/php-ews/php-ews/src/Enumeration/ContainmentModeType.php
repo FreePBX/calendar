@@ -21,7 +21,7 @@ class ContainmentModeType extends Enumeration
      *
      * @var string
      */
-    const EXACT_PHRASE = 'ExactPhrase';
+    final public const EXACT_PHRASE = 'ExactPhrase';
 
     /**
      * The comparison is between the full string and the constant.
@@ -32,7 +32,7 @@ class ContainmentModeType extends Enumeration
      *
      * @var string
      */
-    const FULL_STRING = 'FullString';
+    final public const FULL_STRING = 'FullString';
 
     /**
      * The comparison is between a prefix on individual words in the string and
@@ -42,7 +42,7 @@ class ContainmentModeType extends Enumeration
      *
      * @var string
      */
-    const PREFIX_ON_WORDS = 'PrefixOnWords';
+    final public const PREFIX_ON_WORDS = 'PrefixOnWords';
 
     /**
      * The comparison is between the string prefix and the constant.
@@ -51,7 +51,7 @@ class ContainmentModeType extends Enumeration
      *
      * @var string
      */
-    const PREFIXED = 'Prefixed';
+    final public const PREFIXED = 'Prefixed';
 
     /**
      * The comparison is between a substring of the string and the constant.
@@ -60,5 +60,5 @@ class ContainmentModeType extends Enumeration
      *
      * @var string
      */
-    const SUBSTRING = 'Substring';
+    final public const SUBSTRING = 'Substring';
 }

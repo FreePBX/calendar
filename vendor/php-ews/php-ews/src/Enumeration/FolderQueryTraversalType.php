@@ -22,7 +22,7 @@ class FolderQueryTraversalType extends Enumeration
      *
      * @var string
      */
-    const DEEP = 'Deep';
+    final public const DEEP = 'Deep';
 
     /**
      * Consider only folders that are direct children of the parent folder(s) in
@@ -32,7 +32,7 @@ class FolderQueryTraversalType extends Enumeration
      *
      * @var string
      */
-    const SHALLOW = 'Shallow';
+    final public const SHALLOW = 'Shallow';
 
     /**
      * Consider only those items that are soft deleted from the parent folders
@@ -42,5 +42,5 @@ class FolderQueryTraversalType extends Enumeration
      *
      * @var string
      */
-    const SOFT_DELETED = 'SoftDeleted';
+    final public const SOFT_DELETED = 'SoftDeleted';
 }

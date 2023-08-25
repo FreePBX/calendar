@@ -23,7 +23,7 @@ class DeliverMeetingRequestsType extends Enumeration
      *
      * @var string
      */
-    const DELEGATES_AND_ME = 'DelegatesAndMe';
+    final public const DELEGATES_AND_ME = 'DelegatesAndMe';
 
     /**
      * Meeting requests are forwarded to the delegate and remain in the Inbox
@@ -34,7 +34,7 @@ class DeliverMeetingRequestsType extends Enumeration
      *
      * @var string
      */
-    const DELEGATES_AND_SEND_INFO_TO_ME = 'DelegatesAndSendInformationToMe';
+    final public const DELEGATES_AND_SEND_INFO_TO_ME = 'DelegatesAndSendInformationToMe';
 
     /**
      * Meeting requests are forwarded to the delegate and moved to the Deleted
@@ -44,7 +44,7 @@ class DeliverMeetingRequestsType extends Enumeration
      *
      * @var string
      */
-    const DELEGATES_ONLY = 'DelegatesOnly';
+    final public const DELEGATES_ONLY = 'DelegatesOnly';
 
     /**
      * Meeting requests are not forwarded to the delegate.
@@ -53,5 +53,5 @@ class DeliverMeetingRequestsType extends Enumeration
      *
      * @var string
      */
-    const NO_FORWARD = 'NoForward';
+    final public const NO_FORWARD = 'NoForward';
 }

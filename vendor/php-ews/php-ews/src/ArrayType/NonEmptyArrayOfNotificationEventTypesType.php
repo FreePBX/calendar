@@ -25,5 +25,5 @@ class NonEmptyArrayOfNotificationEventTypesType extends ArrayType
      *
      * @see \jamesiarmes\PhpEws\Enumeration\NotificationEventTypeType[]
      */
-    public $EventType = array();
+    public $EventType = [];
 }

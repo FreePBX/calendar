@@ -21,5 +21,5 @@ class RoutingType extends Enumeration
      *
      * @var string
      */
-    const SMTP = 'SMTP';
+    final public const SMTP = 'SMTP';
 }

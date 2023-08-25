@@ -22,7 +22,7 @@ class IdFormatType extends Enumeration
      *
      * @var string
      */
-    const ENTRY_ID = 'EntryId';
+    final public const ENTRY_ID = 'EntryId';
 
     /**
      * Describes identifiers that are produced by Exchange Web Services starting
@@ -32,7 +32,7 @@ class IdFormatType extends Enumeration
      *
      * @var string
      */
-    const EWS_ID = 'EwsId';
+    final public const EWS_ID = 'EwsId';
 
     /**
      * Describes identifiers that are produced by Exchange Web Services in the
@@ -42,7 +42,7 @@ class IdFormatType extends Enumeration
      *
      * @var string
      */
-    const EWS_LEGACY_ID = 'EwsLegacyId';
+    final public const EWS_LEGACY_ID = 'EwsLegacyId';
 
     /**
      * Describes a hexadecimal-encoded representation of the PR_ENTRYID
@@ -54,7 +54,7 @@ class IdFormatType extends Enumeration
      *
      * @var string
      */
-    const HEX_ENTRY_ID = 'HexEntryId';
+    final public const HEX_ENTRY_ID = 'HexEntryId';
 
     /**
      * Describes a Microsoft Office Outlook Web Access identifier.
@@ -63,7 +63,7 @@ class IdFormatType extends Enumeration
      *
      * @var string
      */
-    const OWA_ID = 'OwaId';
+    final public const OWA_ID = 'OwaId';
 
     /**
      * Describes Exchange store identifiers.
@@ -72,5 +72,5 @@ class IdFormatType extends Enumeration
      *
      * @var string
      */
-    const STORE_ID = 'StoreId';
+    final public const STORE_ID = 'StoreId';
 }

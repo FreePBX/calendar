@@ -22,7 +22,7 @@ class UserConfigurationPropertyType extends Enumeration
      *
      * @var string
      */
-    const ALL = 'All';
+    final public const ALL = 'All';
 
     /**
      * Specifies binary data property types.
@@ -31,7 +31,7 @@ class UserConfigurationPropertyType extends Enumeration
      *
      * @var string
      */
-    const BINARY_DATA = 'BinaryData';
+    final public const BINARY_DATA = 'BinaryData';
 
     /**
      * Specifies dictionary property types.
@@ -40,7 +40,7 @@ class UserConfigurationPropertyType extends Enumeration
      *
      * @var string
      */
-    const DICTIONARY = 'Dictionary';
+    final public const DICTIONARY = 'Dictionary';
 
     /**
      * Specifies the identifier property.
@@ -49,7 +49,7 @@ class UserConfigurationPropertyType extends Enumeration
      *
      * @var string
      */
-    const ID = 'Id';
+    final public const ID = 'Id';
 
     /**
      * Specifies XML data property types.
@@ -58,5 +58,5 @@ class UserConfigurationPropertyType extends Enumeration
      *
      * @var string
      */
-    const XML_DATA = 'XmlData';
+    final public const XML_DATA = 'XmlData';
 }

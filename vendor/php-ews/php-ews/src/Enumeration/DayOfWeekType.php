@@ -21,7 +21,7 @@ class DayOfWeekType extends Enumeration
      *
      * @var string
      */
-    const DAY = 'Day';
+    final public const DAY = 'Day';
 
     /**
      * Represents Friday.
@@ -30,7 +30,7 @@ class DayOfWeekType extends Enumeration
      *
      * @var string
      */
-    const FRIDAY = 'Friday';
+    final public const FRIDAY = 'Friday';
 
     /**
      * Represents Monday.
@@ -39,7 +39,7 @@ class DayOfWeekType extends Enumeration
      *
      * @var string
      */
-    const MONDAY = 'Monday';
+    final public const MONDAY = 'Monday';
 
     /**
      * Represents Saturday.
@@ -48,7 +48,7 @@ class DayOfWeekType extends Enumeration
      *
      * @var string
      */
-    const SATURDAY = 'Saturday';
+    final public const SATURDAY = 'Saturday';
 
     /**
      * Represents Sunday.
@@ -57,7 +57,7 @@ class DayOfWeekType extends Enumeration
      *
      * @var string
      */
-    const SUNDAY = 'Sunday';
+    final public const SUNDAY = 'Sunday';
 
     /**
      * Represents Thursday.
@@ -66,7 +66,7 @@ class DayOfWeekType extends Enumeration
      *
      * @var string
      */
-    const THURSDAY = 'Thursday';
+    final public const THURSDAY = 'Thursday';
 
     /**
      * Represents Tuesday.
@@ -75,7 +75,7 @@ class DayOfWeekType extends Enumeration
      *
      * @var string
      */
-    const TUESDAY = 'Tuesday';
+    final public const TUESDAY = 'Tuesday';
 
     /**
      * Represents Wednesday.
@@ -84,7 +84,7 @@ class DayOfWeekType extends Enumeration
      *
      * @var string
      */
-    const WEDNESDAY = 'Wednesday';
+    final public const WEDNESDAY = 'Wednesday';
 
     /**
      * Represents a weekday.
@@ -93,7 +93,7 @@ class DayOfWeekType extends Enumeration
      *
      * @var string
      */
-    const WEEKDAY = 'Weekday';
+    final public const WEEKDAY = 'Weekday';
 
     /**
      * Represents a weekend day.
@@ -102,5 +102,5 @@ class DayOfWeekType extends Enumeration
      *
      * @var string
      */
-    const WEEKEND_DAY = 'WeekendDay';
+    final public const WEEKEND_DAY = 'WeekendDay';
 }

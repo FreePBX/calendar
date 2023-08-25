@@ -25,17 +25,16 @@
 namespace it\thecsea\simple_caldav_client;
 
 class CalDAVFilter {
-	private $resourceType;
-	private $mustIncludes = array();
+	private array $mustIncludes = [];
     
     /*
      * @param $type The type of resource you want to get. Has to be either
      *               "VEVENT", "VTODO", "VJOURNAL", "VFREEBUSY" or "VALARM".
      *               You have to decide.
      */
-    public function __construct ( $type ) {
-		$this->resourceType = $type;
-	}
+    public function __construct(private $resourceType)
+    {
+    }
 	
 	/**
 	 * function mustInclude()
@@ -58,7 +57,7 @@ class CalDAVFilter {
      *                 the property $field
 	 */
     public function mustInclude ( $field, $inverse = FALSE ) {
-        $this->mustIncludes[] = array("mustInclude", $field, $inverse);
+        $this->mustIncludes[] = ["mustInclude", $field, $inverse];
     }
     
     /**
@@ -82,7 +81,7 @@ class CalDAVFilter {
      *                 include the $substring
 	 */
     public function mustIncludeMatchSubstr ( $field, $substring, $inverse = FALSE ) {
-        $this->mustIncludes[] = array("mustIncludeMatchSubstr", $field, $substring, $inverse);
+        $this->mustIncludes[] = ["mustIncludeMatchSubstr", $field, $substring, $inverse];
     }
     
     /**
@@ -100,11 +99,11 @@ class CalDAVFilter {
 	 */
     public function mustOverlapWithTimerange ( $start = NULL, $end = NULL) {
         // Are $start and $end in the correct format?
-		if ( ( isset($start) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', $start, $matches ) )
-		  or ( isset($end) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', $end, $matches ) ) )
+		if ( ( isset($start) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', (string) $start, $matches ) )
+		  or ( isset($end) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', (string) $end, $matches ) ) )
 		{ trigger_error('$start or $end are in the wrong format. They must have the format yyyymmddThhmmssZ and should be in GMT', E_USER_ERROR); }
         
-        $this->mustIncludes[] = array("mustOverlapWithTimerange", $start, $end);
+        $this->mustIncludes[] = ["mustOverlapWithTimerange", $start, $end];
     }
     
     /**

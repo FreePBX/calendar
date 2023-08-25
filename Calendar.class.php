@@ -21,7 +21,7 @@ use \FreePBX\modules\Calendar\Oauth;
 
 class Calendar extends \DB_Helper implements \BMO
 {
-	private $guimessage;
+	private ?array $guimessage = null;
 	private $oauth = null;
 
 	public function __construct($freepbx = null)
@@ -55,7 +55,7 @@ class Calendar extends \DB_Helper implements \BMO
 	{
 		$crons = $this->FreePBX->Cron->getAll();
 		foreach ($crons as $c) {
-			if (preg_match('/fwconsole calendar --sync/', $c, $matches)) {
+			if (preg_match('/fwconsole calendar --sync/', (string) $c, $matches)) {
 				$this->FreePBX->Cron->remove($c);
 			}
 		}
@@ -64,19 +64,16 @@ class Calendar extends \DB_Helper implements \BMO
 	{
 		switch ($page) {
 			case 'calendar':
-				$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
+				$action = $_REQUEST['action'] ?? '';
 				switch ($action) {
 					case "add":
 						if (isset($_POST['name'])) {
 							$type = $_POST['type'];
 							$this->getDriverByAdd($type, $_POST);
 							try {
-								return array("status" => true);
+								return ["status" => true];
 							} catch (\Exception $e) {
-								$this->guimessage = array(
-									"type" => "danger",
-									"message" => $e->getMessage()
-								);
+								$this->guimessage = ["type" => "danger", "message" => $e->getMessage()];
 							}
 						}
 						break;
@@ -87,10 +84,7 @@ class Calendar extends \DB_Helper implements \BMO
 							try {
 								return $driver->updateCalendar($_POST);
 							} catch (\Exception $e) {
-								$this->guimessage = array(
-									"type" => "danger",
-									"message" => $e->getMessage()
-								);
+								$this->guimessage = ["type" => "danger", "message" => $e->getMessage()];
 							}
 						}
 						break;
@@ -103,16 +97,16 @@ class Calendar extends \DB_Helper implements \BMO
 				}
 				break;
 			case 'calendargroups':
-				$action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
-				$description = isset($_REQUEST['description']) ? $_REQUEST['description'] : '';
-				$events = isset($_REQUEST['events']) ? $_REQUEST['events'] : array();
+				$action = $_REQUEST['action'] ?? '';
+				$description = $_REQUEST['description'] ?? '';
+				$events = $_REQUEST['events'] ?? [];
 				switch ($action) {
 					case "add":
 						if (isset($_POST['name'])) {
-							$name = !empty($_POST['name']) ? $_POST['name'] : array();
-							$calendars = !empty($_POST['calendars']) ? $_POST['calendars'] : array();
-							$categories = !empty($_POST['categories']) ? $_POST['categories'] : array();
-							$events = !empty($_POST['events']) ? $_POST['events'] : array();
+							$name = !empty($_POST['name']) ? $_POST['name'] : [];
+							$calendars = !empty($_POST['calendars']) ? $_POST['calendars'] : [];
+							$categories = !empty($_POST['categories']) ? $_POST['categories'] : [];
+							$events = !empty($_POST['events']) ? $_POST['events'] : [];
 							$expand = isset($_POST['expand']) && $_POST['expand'] === 'on' ? true : false;
 							$this->addGroup($name, $calendars, $categories, $events, $expand);
 						}
@@ -120,10 +114,10 @@ class Calendar extends \DB_Helper implements \BMO
 					case "edit":
 						if (isset($_POST['name'])) {
 							$id = $_POST['id'];
-							$name = !empty($_POST['name']) ? $_POST['name'] : array();
-							$calendars = !empty($_POST['calendars']) ? $_POST['calendars'] : array();
-							$categories = !empty($_POST['categories']) ? $_POST['categories'] : array();
-							$events = !empty($_POST['events']) ? $_POST['events'] : array();
+							$name = !empty($_POST['name']) ? $_POST['name'] : [];
+							$calendars = !empty($_POST['calendars']) ? $_POST['calendars'] : [];
+							$categories = !empty($_POST['categories']) ? $_POST['categories'] : [];
+							$events = !empty($_POST['events']) ? $_POST['events'] : [];
 							$expand = isset($_POST['expand']) && $_POST['expand'] === 'on' ? true : false;
 							$this->updateGroup($id, $name, $calendars, $categories, $events, $expand);
 						}
@@ -166,7 +160,7 @@ class Calendar extends \DB_Helper implements \BMO
 		return $class::getEditDisplay($data);
 	}
 
-	public function getDriverDisplayAdd($driver, $data = array())
+	public function getDriverDisplayAdd($driver, $data = [])
 	{
 		$class = $this->prepareDriverClass($driver);
 		if ($driver == 'oauth') {
@@ -198,7 +192,7 @@ class Calendar extends \DB_Helper implements \BMO
 
 	private function prepareDriverClass($driver)
 	{
-		$driver = basename($driver);
+		$driver = basename((string) $driver);
 		$driver = ucfirst(strtolower($driver));
 		if (!file_exists(__DIR__ . "/drivers/" . $driver . ".php") || $driver === 'Base') {
 			throw new \Exception("Driver [$driver] does not exist!");
@@ -277,13 +271,13 @@ class Calendar extends \DB_Helper implements \BMO
 				$uuid = Uuid::uuid4()->toString();
 				$cal = $this->getDriverById($_REQUEST['id']);
 				$cal->updateiCalMapping($uuid);
-				return array("status" => true, "href" => "ajax.php?module=calendar&command=ical&token=" . $uuid);
+				return ["status" => true, "href" => "ajax.php?module=calendar&command=ical&token=" . $uuid];
 				break;
 			case 'ewsautodetect':
 				try {
 					$settings = EWSCalendar::autoDiscoverSettings($_POST['email'], $_POST['password']);
 				} catch (\Exception $e) {
-					return array("status" => false, "message" => $e->getMessage());
+					return ["status" => false, "message" => $e->getMessage()];
 				}
 				$settings['status'] = true;
 				return $settings;
@@ -299,7 +293,7 @@ class Calendar extends \DB_Helper implements \BMO
 					$chtml .= '<option value="' . $c['id'] . '">' . $c['name'] . '</option>';
 				}
 				dbug($chtml);
-				return array("calshtml" => $chtml);
+				return ["calshtml" => $chtml];
 				break;
 			case 'getcaldavcals':
 				$caldavClient = new SimpleCalDAVClient();
@@ -307,14 +301,14 @@ class Calendar extends \DB_Helper implements \BMO
 					$caldavClient->connect($_POST['purl'], $_POST['username'], $_POST['password']);
 				} catch (\Exception $e) {
 					$chtml = $e->getMessage() . '<input type="hidden" id="urlerror" value="error">';
-					return array("calshtml" => $chtml, 'status' => false);
+					return ["calshtml" => $chtml, 'status' => false];
 				}
 				$calendars = $caldavClient->findCalendars();
 				$chtml = '';
 				foreach ($calendars as $calendar) {
 					$chtml .= '<option value="' . $calendar->getCalendarID() . '">' . $calendar->getDisplayName() . '</option>';
 				}
-				return array("calshtml" => $chtml, 'status' => true);
+				return ["calshtml" => $chtml, 'status' => true];
 				break;
 			case 'checkical':
 				$req = \FreePBX::Curl()->requests($_POST['url']);
@@ -322,21 +316,21 @@ class Calendar extends \DB_Helper implements \BMO
 					$finalical = $req->get($_POST['url'])->body;
 				} catch (\Exception $e) {
 					dbug($e->getMessage());
-					return array("message" => $e->getMessage(), 'status' => false);
+					return ["message" => $e->getMessage(), 'status' => false];
 				}
-				return array('status' => true);
+				return ['status' => true];
 				break;
 			case 'groupeventshtml':
 				$allCalendars = $this->listCalendars();
-				$calendars = !empty($_POST['calendars']) ? $_POST['calendars'] : array();
-				$dcategories = !empty($_POST['categories']) ? $_POST['categories'] : array();
+				$calendars = !empty($_POST['calendars']) ? $_POST['calendars'] : [];
+				$dcategories = !empty($_POST['categories']) ? $_POST['categories'] : [];
 				$expand = $_POST['expand'] === 'false' ? false : true;
-				$categories = array();
+				$categories = [];
 				$now = Carbon::now();
 				$searchStart = $now->copy()->subYear();
 				$searchEnd = $now->copy()->addYear();
 				foreach ($dcategories as $cat) {
-					$parts = explode("_", $cat, 2);
+					$parts = explode("_", (string) $cat, 2);
 					$categories[$parts[0]][] = $parts[1];
 				}
 				$chtml = '';
@@ -362,7 +356,7 @@ class Calendar extends \DB_Helper implements \BMO
 						continue;
 					}
 					if (!empty($categories[$calendarID])) {
-						$valid = array();
+						$valid = [];
 						$cats = $categories[$calendarID];
 						$events = array_filter($events, function ($event) use ($cats) {
 							if (empty($event['categories'])) {
@@ -376,7 +370,7 @@ class Calendar extends \DB_Helper implements \BMO
 							return false;
 						});
 					} elseif (!empty($categories)) {
-						$events = array();
+						$events = [];
 					}
 					$ehtml .= '<optgroup label="' . $allCalendars[$calendarID]['name'] . '">';
 					foreach ($events as $event) {
@@ -385,14 +379,14 @@ class Calendar extends \DB_Helper implements \BMO
 					}
 					$ehtml .= '</optgroup>';
 				}
-				return array("eventshtml" => $ehtml, "categorieshtml" => $chtml);
+				return ["eventshtml" => $ehtml, "categorieshtml" => $chtml];
 				break;
 			case 'delevent':
 				$calendarID = $_POST['calendarid'];
 				$eventID = $_POST['eventid'];
 				$calendar = $this->getCalendarById($calendarID);
 				if ($calendar['type'] !== 'local') {
-					return array("status" => false, "message" => _("You can only edit local calendars"));
+					return ["status" => false, "message" => _("You can only edit local calendars")];
 				}
 				$calendar['calendar']->deleteEvent($eventID);
 				break;
@@ -406,19 +400,19 @@ class Calendar extends \DB_Helper implements \BMO
 					// so unset the array key and before doing the duplicate check
 					unset($calendars[$id]);
 				}
-				$calnames = array();
+				$calnames = [];
 				foreach ($calendars as $cal) {
-					$calnames[] = trim($cal['name']);
+					$calnames[] = trim((string) $cal['name']);
 				}
 				if (in_array($name, $calnames)) {
-					return array('value' => 1);
+					return ['value' => 1];
 				} else {
-					return array('value' => 0);
+					return ['value' => 0];
 				}
 				break;
 			case 'grid':
 				$calendars = $this->listCalendars();
-				$final = array();
+				$final = [];
 				foreach ($calendars as $id => $data) {
 					$data['id'] = $id;
 					$final[] = $data;
@@ -436,14 +430,14 @@ class Calendar extends \DB_Helper implements \BMO
 			case 'eventform':
 				$calendar = $this->getCalendarById($_POST['calendarid']);
 				if ($calendar['type'] !== 'local') {
-					return array("status" => false, "message" => _("You can only edit local calendars"));
+					return ["status" => false, "message" => _("You can only edit local calendars")];
 				}
 				$calendar['calendar']->updateEvent($_POST);
-				return array("status" => true, "message" => _("Successfully updated event"));
+				return ["status" => true, "message" => _("Successfully updated event")];
 				break;
 			case 'groupsgrid':
 				$groups =  $this->listGroups();
-				$final = array();
+				$final = [];
 				foreach ($groups as $id => $data) {
 					$data['id'] = $id;
 					$final[] = $data;
@@ -463,25 +457,25 @@ class Calendar extends \DB_Helper implements \BMO
 				}
 				//name and application id validation to avoid duplication
 				if (!$this->checkConfigExists($_REQUEST, $uuid)) {
-					return array("status" => false, "message" => _("Config name already exists."));
+					return ["status" => false, "message" => _("Config name already exists.")];
 				}
 				$this->setConfig($uuid, $_REQUEST, 'outlook-details');
 				$oauth = new Oauth($_REQUEST['tenantid'], $_REQUEST['consumerkey'], $_REQUEST['consumersecret'], null, null, $_REQUEST['pbxurl'], $_REQUEST['outlookurl']);
 				$authUrl =  $oauth->getAuthURL($uuid);
-				return array("status" => true, "message" => _("Data saved"), "authurl" => ($authUrl) ? $authUrl : '');
+				return ["status" => true, "message" => _("Data saved"), "authurl" => $authUrl ?: ''];
 				break;
 			case 'saveOauth':
 				$outlookdata = $this->getConfig($_REQUEST['id'], 'outlook-details');
 				$outlookdata['auth_code'] = $_REQUEST['auth_code'];
 				$this->setConfig($_REQUEST['id'], $outlookdata, 'outlook-details');
-				return array("status" => true, "message" => _("saved auth code"));
+				return ["status" => true, "message" => _("saved auth code")];
 				break;
 			case 'getToken':
 				return $this->outlookToken($_REQUEST['id']);
 				break;
 			case 'oauthsettings':
 				$settings = $this->getAll('outlook-details');
-				$final = array();
+				$final = [];
 				foreach ($settings as $id => $data) {
 					$data['id'] = $id;
 					$final[] = $data;
@@ -497,7 +491,7 @@ class Calendar extends \DB_Helper implements \BMO
 					$calendars =  $oauth->getUserCalendars($username, $outlookdata['access_token']);
 					if (isset($calendars['error'])) {
 						$msg = ($calendars['error']['code'] == 'ResourceNotFound' || $calendars['error']['code'] == 'ErrorInvalidUser') ? _("Invalid user name/config") : _("Please generated the auth token to list the user calendars.");
-						return array("status" => false, "message" => $msg);
+						return ["status" => false, "message" => $msg];
 					} else if (isset($calendars['value'])) {
 						$calendarList = [];
 						foreach ($calendars['value'] as $_cal) {
@@ -506,10 +500,10 @@ class Calendar extends \DB_Helper implements \BMO
 								'name' => $_cal['name']
 							];
 						}
-						return array("status" => true, "message" => _("found user calendars"), "calendars" => $calendarList);
+						return ["status" => true, "message" => _("found user calendars"), "calendars" => $calendarList];
 					}
 				} else {
-					return array("status" => false, "message" => _("Please generated the auth token to list the user calendars."));
+					return ["status" => false, "message" => _("Please generated the auth token to list the user calendars.")];
 				}
 				break;
 		}
@@ -521,17 +515,17 @@ class Calendar extends \DB_Helper implements \BMO
 		switch ($action) {
 			case "add":
 				$calendars = $this->listCalendars();
-				return load_view(__DIR__ . "/views/calendargroups.php", array("calendars" => $calendars, "action" => _("Add")));
+				return load_view(__DIR__ . "/views/calendargroups.php", ["calendars" => $calendars, "action" => _("Add")]);
 				break;
 			case "edit":
 				$calendars = $this->listCalendars();
 				$group = $this->getGroup($_REQUEST['id']);
-				return load_view(__DIR__ . "/views/calendargroups.php", array("calendars" => $calendars, "group" => $group, 'id' => $_GET['id'], "action" => _("Edit")));
+				return load_view(__DIR__ . "/views/calendargroups.php", ["calendars" => $calendars, "group" => $group, 'id' => $_GET['id'], "action" => _("Edit")]);
 				break;
 			case "view":
 				break;
 			default:
-				return load_view(__DIR__ . "/views/calendargroupgrid.php", array());
+				return load_view(__DIR__ . "/views/calendargroupgrid.php", []);
 				break;
 		}
 	}
@@ -560,7 +554,7 @@ class Calendar extends \DB_Helper implements \BMO
 				\Moment\Moment::setLocale('en_US'); //get this from freepbx...
 				$locale = \Moment\MomentLocale::getLocaleContent();
 				$icallink = $data['calendar']->getMappingToken();
-				return load_view(__DIR__ . "/views/calendar.php", array('action' => 'view', 'type' => $data['type'], 'data' => $data, 'locale' => $locale, 'icallink' => (!empty($icallink) ? 'ajax.php?module=calendar&command=ical&token=' . $icallink : '')));
+				return load_view(__DIR__ . "/views/calendar.php", ['action' => 'view', 'type' => $data['type'], 'data' => $data, 'locale' => $locale, 'icallink' => (!empty($icallink) ? 'ajax.php?module=calendar&command=ical&token=' . $icallink : '')]);
 				break;
 			case 'editoutlooksettings':
 			case 'outlooksettings':
@@ -571,21 +565,21 @@ class Calendar extends \DB_Helper implements \BMO
 					$outlookdata['authurl'] = $oauth->getAuthURL($_GET['id']);
 					$outlookdata['id'] = $_GET['id'];
 				} else {
-					$outlookdata = array();
+					$outlookdata = [];
 				}
-				return load_view(__DIR__ . "/views/outlook_config_form.php", array('outlookdata' => $outlookdata));
+				return load_view(__DIR__ . "/views/outlook_config_form.php", ['outlookdata' => $outlookdata]);
 				break;
 			case 'oauthsettings':
 				return load_view(__DIR__ . "/views/outlook_configs_grid.php");
 				break;
 			default:
-				$dropdown = array();
+				$dropdown = [];
 				$drivers = $this->getAllDriversInfo();
 				foreach ($drivers as $driver => $data) {
 					$dropdown[$driver] = $data['name'];
 				}
 				$authType = $this->FreePBX->Config->get_conf_setting('OUTLOOK_AUTH_METHOD');
-				return load_view(__DIR__ . "/views/grid.php", array('message' => $this->guimessage, 'dropdown' => $dropdown, 'auth_type' => $authType));
+				return load_view(__DIR__ . "/views/grid.php", ['message' => $this->guimessage, 'dropdown' => $dropdown, 'auth_type' => $authType]);
 				break;
 		}
 	}
@@ -603,8 +597,8 @@ class Calendar extends \DB_Helper implements \BMO
 	public function getCalendarNames()
 	{
 		$cals = $this->listCalendars();
-		$ret = array();
-		$cals = is_array($cals) ? $cals : array();
+		$ret = [];
+		$cals = is_array($cals) ? $cals : [];
 		foreach ($cals as $cal) {
 			if (isset($cal['name'])) {
 				$ret[] = $cal['name'];
@@ -651,7 +645,7 @@ class Calendar extends \DB_Helper implements \BMO
 			$final['usercalendar'] = $final['calendars'];
 		}
 		if (!isset($final['calendars']) || !is_array($final['calendars'])) {
-			$final['calendars'] = array();
+			$final['calendars'] = [];
 		}
 		$final['calendar'] = $this->getDriverByID($id);
 		$final['timezone'] = $final['calendar']->getTimezone();
@@ -709,13 +703,7 @@ class Calendar extends \DB_Helper implements \BMO
 		if (empty($id)) {
 			throw new \Exception("Event ID can not be blank");
 		}
-		$event = array(
-			"name" => $name,
-			"calendars" => $calendars,
-			"categories" => $categories,
-			"events" => $events,
-			"expand" => $expand
-		);
+		$event = ["name" => $name, "calendars" => $calendars, "categories" => $categories, "events" => $events, "expand" => $expand];
 		$this->setConfig($id, $event, "groups");
 	}
 
@@ -737,7 +725,7 @@ class Calendar extends \DB_Helper implements \BMO
 	{
 		$grp = $this->getConfig($id, 'groups');
 		$grp['id'] = $id;
-		$grp['expand'] = isset($grp['expand']) ? $grp['expand'] : true;
+		$grp['expand'] ??= true;
 		return $grp;
 	}
 
@@ -787,7 +775,7 @@ class Calendar extends \DB_Helper implements \BMO
 		if (empty($cal)) {
 			throw new \Exception("Calendar $calendarid does not exist!");
 		}
-		return new \ext_agi('calendar.agi,calendar,goto,' . $calendarid . ',' . $timezone . ',' . base64_encode($true_dest) . ',' . base64_encode($false_dest));
+		return new \ext_agi('calendar.agi,calendar,goto,' . $calendarid . ',' . $timezone . ',' . base64_encode((string) $true_dest) . ',' . base64_encode((string) $false_dest));
 	}
 
 	/**
@@ -799,7 +787,7 @@ class Calendar extends \DB_Helper implements \BMO
 		if (empty($group)) {
 			throw new \Exception("Group $groupid does not exist!");
 		}
-		return new \ext_agi('calendar.agi,group,goto,' . $groupid . ',' . $timezone . ',' . base64_encode($true_dest) . ',' . base64_encode($false_dest));
+		return new \ext_agi('calendar.agi,group,goto,' . $groupid . ',' . $timezone . ',' . base64_encode((string) $true_dest) . ',' . base64_encode((string) $false_dest));
 	}
 
 	/**
@@ -811,7 +799,7 @@ class Calendar extends \DB_Helper implements \BMO
 		if (empty($cal)) {
 			throw new \Exception("Calendar $calendarid does not exist!");
 		}
-		return new \ext_agi('calendar.agi,calendar,execif,' . $calendarid . ',' . $timezone . ',' . base64_encode($true) . ',' . base64_encode($false));
+		return new \ext_agi('calendar.agi,calendar,execif,' . $calendarid . ',' . $timezone . ',' . base64_encode((string) $true) . ',' . base64_encode((string) $false));
 	}
 
 	/**
@@ -823,7 +811,7 @@ class Calendar extends \DB_Helper implements \BMO
 		if (empty($group)) {
 			throw new \Exception("Group $groupid does not exist!");
 		}
-		return new \ext_agi('calendar.agi,group,execif,' . $groupid . ',' . $timezone . ',' . base64_encode($true) . ',' . base64_encode($false));
+		return new \ext_agi('calendar.agi,group,execif,' . $groupid . ',' . $timezone . ',' . base64_encode((string) $true) . ',' . base64_encode((string) $false));
 	}
 
 	public function matchGroupVerbose($groupID, $now = null, $timezone = null)
@@ -856,7 +844,7 @@ class Calendar extends \DB_Helper implements \BMO
 			//first extract the categories we are searching for and the calendar associated with it
 			$groupCategories = [];
 			foreach ($group['categories'] as $categoryid) {
-				$parts = explode("_", $categoryid, 2);
+				$parts = explode("_", (string) $categoryid, 2);
 
 				if (!is_array($groupCategories[$parts[0]]))
 					$groupCategories[$parts[0]] = [];
@@ -903,7 +891,7 @@ class Calendar extends \DB_Helper implements \BMO
 			//first extract the events we are searching for and the calendar associated with it
 			$groupEvents = [];
 			foreach ($group['events'] as $eventid) {
-				$parts = explode("_", $eventid, 3);
+				$parts = explode("_", (string) $eventid, 3);
 				$groupEvents[$parts[1]] = [$parts[0], $parts[2]]; //$parts[0] = calendar id - $parts[1] = event uid - $parts[2] = event recurrence number (0 for non recurring events)
 			}
 
@@ -932,7 +920,7 @@ class Calendar extends \DB_Helper implements \BMO
 						array_push($filtered, $event);
 				}
 
-				$matchingEvents = array_merge($matchingEvents, $filtered);
+				$matchingEvents = [...$matchingEvents, ...$filtered];
 			}
 		}
 
@@ -941,60 +929,23 @@ class Calendar extends \DB_Helper implements \BMO
 
 	public function getActionBar($request)
 	{
-		$buttons = array();
+		$buttons = [];
 		switch ($request['display']) {
 			case 'calendar':
 				$action = !empty($_GET['action']) ? $_GET['action'] : '';
 				switch ($action) {
 					case "view":
 						$calendar = $this->getCalendarByID($_REQUEST['id']);
-						$buttons = array(
-							'link' => array(
-								'name' => 'link',
-								'id' => 'link',
-								'value' => _('Edit Settings')
-							)
-						);
+						$buttons = ['link' => ['name' => 'link', 'id' => 'link', 'value' => _('Edit Settings')]];
 						if ($calendar['type'] !== 'local') {
-							$buttons['updatecal'] = array(
-								'name' => 'updatecal',
-								'id' => 'updatecal',
-								'value' => _("Update from Source")
-							);
+							$buttons['updatecal'] = ['name' => 'updatecal', 'id' => 'updatecal', 'value' => _("Update from Source")];
 						}
 						break;
 					case "add":
-						$buttons = array(
-							'reset' => array(
-								'name' => 'reset',
-								'id' => 'reset',
-								'value' => _('Reset')
-							),
-							'submit' => array(
-								'name' => 'submit',
-								'id' => 'submit',
-								'value' => _('Submit')
-							)
-						);
+						$buttons = ['reset' => ['name' => 'reset', 'id' => 'reset', 'value' => _('Reset')], 'submit' => ['name' => 'submit', 'id' => 'submit', 'value' => _('Submit')]];
 						break;
 					case "edit":
-						$buttons = array(
-							'delete' => array(
-								'name' => 'delete',
-								'id' => 'delete',
-								'value' => _('Delete')
-							),
-							'reset' => array(
-								'name' => 'reset',
-								'id' => 'reset',
-								'value' => _('Reset')
-							),
-							'submit' => array(
-								'name' => 'submit',
-								'id' => 'submit',
-								'value' => _('Submit')
-							)
-						);
+						$buttons = ['delete' => ['name' => 'delete', 'id' => 'delete', 'value' => _('Delete')], 'reset' => ['name' => 'reset', 'id' => 'reset', 'value' => _('Reset')], 'submit' => ['name' => 'submit', 'id' => 'submit', 'value' => _('Submit')]];
 						break;
 				}
 				break;
@@ -1002,37 +953,10 @@ class Calendar extends \DB_Helper implements \BMO
 				$action = !empty($_GET['action']) ? $_GET['action'] : '';
 				switch ($action) {
 					case "add":
-						$buttons = array(
-							'reset' => array(
-								'name' => 'reset',
-								'id' => 'reset',
-								'value' => _('Reset')
-							),
-							'submit' => array(
-								'name' => 'submit',
-								'id' => 'submit',
-								'value' => _('Submit')
-							)
-						);
+						$buttons = ['reset' => ['name' => 'reset', 'id' => 'reset', 'value' => _('Reset')], 'submit' => ['name' => 'submit', 'id' => 'submit', 'value' => _('Submit')]];
 						break;
 					case "edit":
-						$buttons = array(
-							'delete' => array(
-								'name' => 'delete',
-								'id' => 'delete',
-								'value' => _('Delete')
-							),
-							'reset' => array(
-								'name' => 'reset',
-								'id' => 'reset',
-								'value' => _('Reset')
-							),
-							'submit' => array(
-								'name' => 'submit',
-								'id' => 'submit',
-								'value' => _('Submit')
-							)
-						);
+						$buttons = ['delete' => ['name' => 'delete', 'id' => 'delete', 'value' => _('Delete')], 'reset' => ['name' => 'reset', 'id' => 'reset', 'value' => _('Reset')], 'submit' => ['name' => 'submit', 'id' => 'submit', 'value' => _('Submit')]];
 						break;
 				}
 				break;
@@ -1050,7 +974,7 @@ class Calendar extends \DB_Helper implements \BMO
 			case "outlooksettings":
 			case "oauthsettings":
 			case "editoutlooksettings":
-				return load_view(__DIR__ . "/views/rnav.php", array());
+				return load_view(__DIR__ . "/views/rnav.php", []);
 				break;
 		}
 	}
@@ -1072,8 +996,8 @@ class Calendar extends \DB_Helper implements \BMO
 				$enabled = $this->FreePBX->Ucp->getSettingByID($user['id'], 'Calendar', 'enabled');
 			}
 		}
-		$allowedcals = (!empty($allowedcals)) ? $allowedcals : array();
-		$allowedgroups = (!empty($allowedgroups)) ? $allowedgroups : array();
+		$allowedcals = (!empty($allowedcals)) ? $allowedcals : [];
+		$allowedgroups = (!empty($allowedgroups)) ? $allowedgroups : [];
 		$calopts = '';
 		if ($mode != 'group') {
 			$calopts = '<option value="inherit">' . _("Inherit") . '</option>';
@@ -1091,18 +1015,9 @@ class Calendar extends \DB_Helper implements \BMO
 			$grpopts .= '<option value="' . $key . '" ' . $selected . '>' . $value['name'] . '</option>';
 		}
 
-		$config = array(
-			'mode' => $mode,
-			'enabled' => $enabled,
-			'calopts' => $calopts,
-			'grpopts' => $grpopts,
-		);
-		$html = array();
-		$html[0] = array(
-			"title" => _("Calendar"),
-			"rawname" => "calendar",
-			"content" => load_view(dirname(__FILE__) . "/views/ucp_config.php", $config)
-		);
+		$config = ['mode' => $mode, 'enabled' => $enabled, 'calopts' => $calopts, 'grpopts' => $grpopts];
+		$html = [];
+		$html[0] = ["title" => _("Calendar"), "rawname" => "calendar", "content" => load_view(__DIR__ . "/views/ucp_config.php", $config)];
 		return $html;
 	}
 	public function ucpAddUser($id, $display, $ucpStatus, $data)
@@ -1120,11 +1035,11 @@ class Calendar extends \DB_Helper implements \BMO
 				$this->FreePBX->Ucp->setSettingByID($id, 'Calendar', 'enabled', null);
 			}
 			if (isset($_POST['calendar_allowedcalendars'])) {
-				$data = (is_array($_POST['calendar_allowedcalendars'])) ? $_POST['calendar_allowedcalendars'] : array($_POST['calendar_allowedcalendars']);
+				$data = (is_array($_POST['calendar_allowedcalendars'])) ? $_POST['calendar_allowedcalendars'] : [$_POST['calendar_allowedcalendars']];
 				$this->FreePBX->Ucp->setSettingByID($id, 'Calendar', 'allowedcals', $data);
 			}
 			if (isset($_POST['calendar_allowedgroups'])) {
-				$data = (is_array($_POST['calendar_allowedgroups'])) ? $_POST['calendar_allowedgroups'] : array($_POST['calendar_allowedgroups']);
+				$data = (is_array($_POST['calendar_allowedgroups'])) ? $_POST['calendar_allowedgroups'] : [$_POST['calendar_allowedgroups']];
 				$this->FreePBX->Ucp->setSettingByID($id, 'Calendar', 'allowedgroups', $data);
 			}
 		}
@@ -1145,11 +1060,11 @@ class Calendar extends \DB_Helper implements \BMO
 				$this->FreePBX->Ucp->setSettingByGID($id, 'Calendar', 'enabled', false);
 			}
 			if (isset($_POST['calendar_allowedcalendars'])) {
-				$data = (is_array($_POST['calendar_allowedcalendars'])) ? $_POST['calendar_allowedcalendars'] : array($_POST['calendar_allowedcalendars']);
+				$data = (is_array($_POST['calendar_allowedcalendars'])) ? $_POST['calendar_allowedcalendars'] : [$_POST['calendar_allowedcalendars']];
 				$this->FreePBX->Ucp->setSettingByGID($id, 'Calendar', 'allowedcals', $data);
 			}
 			if (isset($_POST['calendar_allowedgroups'])) {
-				$data = (is_array($_POST['calendar_allowedgroups'])) ? $_POST['calendar_allowedgroups'] : array($_POST['calendar_allowedgroups']);
+				$data = (is_array($_POST['calendar_allowedgroups'])) ? $_POST['calendar_allowedgroups'] : [$_POST['calendar_allowedgroups']];
 				$this->FreePBX->Ucp->setSettingByGID($id, 'Calendar', 'allowedgroups', $data);
 			}
 		}
@@ -1212,9 +1127,9 @@ class Calendar extends \DB_Helper implements \BMO
 	{
 		$group = $this->getGroup($groupid);
 		if (empty($group)) {
-			return array();
+			return [];
 		}
-		$events = array();
+		$events = [];
 		foreach ($group['calendars'] as $calid) {
 			$cal = $this->getDriverById($calid);
 			$cal->setTimezone($timezone);
@@ -1239,7 +1154,7 @@ class Calendar extends \DB_Helper implements \BMO
 		try {
 			$reflect = new \ReflectionClass($obj);
 			$name = $reflect->getShortName();
-		} catch (\ReflectionException $e) {
+		} catch (\ReflectionException) {
 			if (is_string($obj)) {
 				$name = "text";
 			} else {
@@ -1263,13 +1178,13 @@ class Calendar extends \DB_Helper implements \BMO
 					$date = new \DateTime();
 					try {
 						$date->setTimestamp($obj);
-					} catch (\Exception $e) {
+					} catch (\Exception) {
 						return false;
 					}
 				} else {
 					try {
 						$date = new \DateTime($obj);
-					} catch (\Exception $e) {
+					} catch (\Exception) {
 						return false;
 					}
 				}
@@ -1306,7 +1221,7 @@ class Calendar extends \DB_Helper implements \BMO
 			// RHEL / CentOS
 			$data = @parse_ini_file('/etc/sysconfig/clock');
 			if (!empty($data['ZONE'])) {
-				$timezone = trim($data['ZONE']);
+				$timezone = trim((string) $data['ZONE']);
 			}
 		}
 		if (empty($timezone)) {
@@ -1319,17 +1234,17 @@ class Calendar extends \DB_Helper implements \BMO
 	{
 		$outlookdata = $this->getConfig($id, 'outlook-details');
 		$oauth = new Oauth($outlookdata['tenantid'], $outlookdata['consumerkey'], $outlookdata['consumersecret'], null, null, $outlookdata['pbxurl'], $outlookdata['outlookurl']);
-		$result = json_decode($oauth->getAuthToken($outlookdata['auth_code']), true);
-		$outlooknewdata = array();
+		$result = json_decode((string) $oauth->getAuthToken($outlookdata['auth_code']), true, 512, JSON_THROW_ON_ERROR);
+		$outlooknewdata = [];
 		if (isset($result['access_token'])) {
 			$outlooknewdata = $outlookdata;
 			$outlooknewdata['access_token'] = $result['access_token'];
 			$outlooknewdata['token_expire_at'] = time() + $result['expires_in'];
-			$outlooknewdata['refresh_token'] = (isset($result['refresh_token'])) ? $result['refresh_token'] : '';
+			$outlooknewdata['refresh_token'] = $result['refresh_token'] ?? '';
 			$this->setConfig($id, $outlooknewdata, 'outlook-details');
-			return array("status" => true, "message" => _("saved access token"));
+			return ["status" => true, "message" => _("saved access token")];
 		} else {
-			return array("status" => false, "message" => $result['error']);
+			return ["status" => false, "message" => $result['error']];
 		}
 	}
 
@@ -1337,7 +1252,7 @@ class Calendar extends \DB_Helper implements \BMO
 	{
 		if (isset($outlookDetails['refresh_token'])) {
 			$oauth = new Oauth($outlookDetails['tenantid'], $outlookDetails['consumerkey'], $outlookDetails['consumersecret'], null, null, $outlookDetails['pbxurl'], $outlookDetails['outlookurl']);
-			$result = json_decode($oauth->getTokenRefresh($outlookDetails), true);
+			$result = json_decode((string) $oauth->getTokenRefresh($outlookDetails), true, 512, JSON_THROW_ON_ERROR);
 			if (isset($result['access_token'])) {
 				$outlookDetails['access_token'] = $result['access_token'];
 				$outlookDetails['token_expire_at'] = time() + $result['expires_in'];

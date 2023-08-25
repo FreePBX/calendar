@@ -25,7 +25,7 @@ class AddInStateType extends Enumeration
      *
      * @todo Update once documentation exists.
      */
-    const FLAGGED = 'Flagged';
+    final public const FLAGGED = 'Flagged';
 
     /**
      * Undocumented.
@@ -36,7 +36,7 @@ class AddInStateType extends Enumeration
      *
      * @todo Update once documentation exists.
      */
-    const OK = 'OK';
+    final public const OK = 'OK';
 
     /**
      * Undocumented.
@@ -47,7 +47,7 @@ class AddInStateType extends Enumeration
      *
      * @todo Update once documentation exists.
      */
-    const REMOVED = 'Removed';
+    final public const REMOVED = 'Removed';
 
     /**
      * Undocumented.
@@ -58,7 +58,7 @@ class AddInStateType extends Enumeration
      *
      * @todo Update once documentation exists.
      */
-    const UNDEFINED = 'Undefined';
+    final public const UNDEFINED = 'Undefined';
 
     /**
      * Undocumented.
@@ -69,7 +69,7 @@ class AddInStateType extends Enumeration
      *
      * @todo Update once documentation exists.
      */
-    const WITHDRAWING_SOON = 'WithdrawingSoon';
+    final public const WITHDRAWING_SOON = 'WithdrawingSoon';
 
     /**
      * Undocumented.
@@ -80,5 +80,5 @@ class AddInStateType extends Enumeration
      *
      * @todo Update once documentation exists.
      */
-    const WITHDRAWN = 'Withdrawn';
+    final public const WITHDRAWN = 'Withdrawn';
 }

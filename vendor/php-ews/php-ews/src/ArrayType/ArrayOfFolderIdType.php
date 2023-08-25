@@ -21,5 +21,5 @@ class ArrayOfFolderIdType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\FolderIdType[]
      */
-    public $FolderId = array();
+    public $FolderId = [];
 }

@@ -21,7 +21,7 @@ class ConversationNodeSortOrder extends Enumeration
      *
      * @var string
      */
-    const DATE_ORDER_ASC = 'DateOrderAscending';
+    final public const DATE_ORDER_ASC = 'DateOrderAscending';
 
     /**
      * Order the conversations by their date in descending order.
@@ -30,7 +30,7 @@ class ConversationNodeSortOrder extends Enumeration
      *
      * @var string
      */
-    const DATE_ORDER_DESC = 'DateOrderDescending';
+    final public const DATE_ORDER_DESC = 'DateOrderDescending';
 
     /**
      * Returns the conversations according to the tree in ascending order.
@@ -39,7 +39,7 @@ class ConversationNodeSortOrder extends Enumeration
      *
      * @var string
      */
-    const TREE_ORDER_ASC = 'TreeOrderAscending';
+    final public const TREE_ORDER_ASC = 'TreeOrderAscending';
 
     /**
      * Returns the conversations according to the tree in descending order.
@@ -48,5 +48,5 @@ class ConversationNodeSortOrder extends Enumeration
      *
      * @var string
      */
-    const TREE_ORDER_DESC = 'TreeOrderDescending';
+    final public const TREE_ORDER_DESC = 'TreeOrderDescending';
 }

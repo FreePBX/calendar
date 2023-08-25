@@ -21,7 +21,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const ALL = 'All';
+    final public const ALL = 'All';
 
     /**
      * Indicates that the folder is a calendar folder.
@@ -30,7 +30,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const CALENDAR = 'Calendar';
+    final public const CALENDAR = 'Calendar';
 
     /**
      * Indicates that the folder is a contacts folder.
@@ -39,7 +39,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const CONTACTS = 'Contacts';
+    final public const CONTACTS = 'Contacts';
 
     /**
      * Indicates that the folder is a conversation history folder.
@@ -48,7 +48,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const CONVERSATION_HISTORY = 'ConversationHistory';
+    final public const CONVERSATION_HISTORY = 'ConversationHistory';
 
     /**
      * Indicates that the folder is a deleted items folder.
@@ -57,7 +57,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const DELETED_ITEMS = 'DeletedItems';
+    final public const DELETED_ITEMS = 'DeletedItems';
 
     /**
      * Indicates that the folder is a drafts folder.
@@ -66,7 +66,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const DRAFTS = 'Drafts';
+    final public const DRAFTS = 'Drafts';
 
     /**
      * Indicates that the folder is an inbox folder.
@@ -75,7 +75,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const INBOX = 'Inbox';
+    final public const INBOX = 'Inbox';
 
     /**
      * Indicates that the folder is a journal folder.
@@ -84,7 +84,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const JOURNAL = 'Journal';
+    final public const JOURNAL = 'Journal';
 
     /**
      * Indicates that the folder is a junk email folder.
@@ -93,7 +93,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const JUNK_EMAIL = 'JunkEmail';
+    final public const JUNK_EMAIL = 'JunkEmail';
 
     /**
      * Indicates that the folder is a managed custom folder.
@@ -102,7 +102,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const MANAGED_CUSTOM_FOLDER = 'ManagedCustomFolder';
+    final public const MANAGED_CUSTOM_FOLDER = 'ManagedCustomFolder';
 
     /**
      * Indicates that the folder is a non implemented root folder.
@@ -111,7 +111,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const NON_IMPLEMENTED_ROOT = 'NonIpmRoot';
+    final public const NON_IMPLEMENTED_ROOT = 'NonIpmRoot';
 
     /**
      * Indicates that the folder is a notes folder.
@@ -120,7 +120,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const NOTES = 'Notes';
+    final public const NOTES = 'Notes';
 
     /**
      * Indicates that the folder is a outbox folder.
@@ -129,7 +129,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const OUTBOX = 'Outbox';
+    final public const OUTBOX = 'Outbox';
 
     /**
      * Indicates that the folder is a personal folder.
@@ -138,7 +138,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const PERSONAL = 'Personal';
+    final public const PERSONAL = 'Personal';
 
     /**
      * Indicates that the folder is a recoverable items folder.
@@ -147,7 +147,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const RECOVERABLE_ITEMS = 'RecoverableItems';
+    final public const RECOVERABLE_ITEMS = 'RecoverableItems';
 
     /**
      * Indicates that the folder is an RSS subscription folder.
@@ -156,7 +156,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const RSS_SUBSCRIPTION = 'RssSubscriptions';
+    final public const RSS_SUBSCRIPTION = 'RssSubscriptions';
 
     /**
      * Indicates that the folder is a sent items folder.
@@ -165,7 +165,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const SENT_ITEMS = 'SentItems';
+    final public const SENT_ITEMS = 'SentItems';
 
     /**
      * Indicates that the folder is a sync issues folder.
@@ -174,7 +174,7 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const SYNC_ISSUES = 'SyncIssues';
+    final public const SYNC_ISSUES = 'SyncIssues';
 
     /**
      * Indicates that the folder is a tasks folder.
@@ -183,5 +183,5 @@ class ElcFolderType extends Enumeration
      *
      * @var string
      */
-    const TASKS = 'Tasks';
+    final public const TASKS = 'Tasks';
 }

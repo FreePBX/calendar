@@ -14,7 +14,7 @@
 
 namespace it\thecsea\simple_caldav_client;
 
-class CalDAVException extends \Exception {
+class CalDAVException extends \Exception implements \Stringable {
 	private $requestHeader;
 	private $requestBody;
 	private $responseHeader;
@@ -29,7 +29,7 @@ class CalDAVException extends \Exception {
     	$this->responseBody = $client->GetResponseBody();
     }
     
-    public function __toString() {
+    public function __toString(): string {
     	$string = '';
     	$dom = new DOMDocument();
     	$dom->preserveWhiteSpace = FALSE;
@@ -45,12 +45,12 @@ class CalDAVException extends \Exception {
     	
     	if(!empty($this->requestBody)) {
     		
-    		if(!preg_match( '#^Content-type:.*?text/calendar.*?$#', $this->requestHeader, $matches)) {
+    		if(!preg_match( '#^Content-type:.*?text/calendar.*?$#', (string) $this->requestHeader, $matches)) {
     			$dom->loadXML($this->requestBody);
-    			$string .= htmlentities($dom->saveXml());
+    			$string .= htmlentities((string) $dom->saveXml());
     		}
     		
-    		else $string .= htmlentities($this->requestBody).'<br><br>';
+    		else $string .= htmlentities((string) $this->requestBody).'<br><br>';
     	}
 
     	$string .= '<br>last response:<br><br>';
@@ -58,12 +58,12 @@ class CalDAVException extends \Exception {
     	$string .= $this->responseHeader;
     	
     	if(!empty($this->responseBody)) {
-    		if(!preg_match( '#^Content-type:.*?text/calendar.*?$#', $this->responseHeader, $matches)) {
+    		if(!preg_match( '#^Content-type:.*?text/calendar.*?$#', (string) $this->responseHeader, $matches)) {
     			$dom->loadXML($this->responseBody);
-    			$string .= htmlentities($dom->saveXml());
+    			$string .= htmlentities((string) $dom->saveXml());
     		}
 	    	
-    		else $string .= htmlentities($this->responseBody);
+    		else $string .= htmlentities((string) $this->responseBody);
     	}
     	
     	$string .= '<br><br>';

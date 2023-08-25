@@ -12,16 +12,14 @@ require_once "$base_path/vendor/autoload.php";
 
 // Defines overrides for any files that had to be renamed to avoid reserved
 // words.
-$overrides = array(
-    'Type\\\StringType' => 'String',
-);
+$overrides = ['Type\\\StringType' => 'String'];
 
 // Iterate over the different type namespaces, building out the mapping for
 // each.
-$map = array();
-foreach (array('ArrayType', 'Request', 'Response', 'Type') as $namespace) {
+$map = [];
+foreach (['ArrayType', 'Request', 'Response', 'Type'] as $namespace) {
     $i = count($map);
-    $map[$i] = array('namespace' => $namespace, 'map' => array());
+    $map[$i] = ['namespace' => $namespace, 'map' => []];
 
     // Iterate over the files for this namespace, adding each to the map.
     foreach (new DirectoryIterator("$src_path/$namespace") as $file) {
@@ -36,10 +34,7 @@ foreach (array('ArrayType', 'Request', 'Response', 'Type') as $namespace) {
             $basename = $overrides["$namespace\\\\$basename"];
         }
 
-        $map[$i]['map'][] = array(
-            'type' => $basename,
-            'class' => "\\\\jamesiarmes\\\\PhpEws\\\\$namespace\\\\$classname",
-        );
+        $map[$i]['map'][] = ['type' => $basename, 'class' => "\\\\jamesiarmes\\\\PhpEws\\\\$namespace\\\\$classname"];
     }
 }
 
@@ -48,16 +43,11 @@ $updated = new DateTime();
 $updated->setTimezone(new DateTimeZone('UTC'));
 
 // Load and render the template.
-$engine = new Mustache_Engine(array(
-    'loader' => new Mustache_Loader_FilesystemLoader($base_path . '/templates')
-));
+$engine = new Mustache_Engine(['loader' => new Mustache_Loader_FilesystemLoader($base_path . '/templates')]);
 $template = $engine->loadTemplate('ClassMap');
 file_put_contents(
     "$src_path/ClassMap.php",
-    $template->render(array(
-        'maps' => $map,
-        'updated' => $updated->format('Y-m-d H:i:s e'),
-    ))
+    $template->render(['maps' => $map, 'updated' => $updated->format('Y-m-d H:i:s e')])
 );
 
 fwrite(STDOUT, "Class map written to \"$src_path/ClassMap.php\".\n");

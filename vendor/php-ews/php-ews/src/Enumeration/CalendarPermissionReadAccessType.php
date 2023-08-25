@@ -21,7 +21,7 @@ class CalendarPermissionReadAccessType extends PermissionReadAccessType
      *
      * @var string
      */
-    const TIME_ONLY = 'TimeOnly';
+    final public const TIME_ONLY = 'TimeOnly';
 
     /**
      * Indicates that the user has permission to view free/busy time in the
@@ -31,5 +31,5 @@ class CalendarPermissionReadAccessType extends PermissionReadAccessType
      *
      * @var string
      */
-    const TIME_SUBJECT_AND_LOCATION = 'TimeAndSubjectAndLocation';
+    final public const TIME_SUBJECT_AND_LOCATION = 'TimeAndSubjectAndLocation';
 }

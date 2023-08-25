@@ -21,7 +21,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const ACTION_ASSIGN_CATEGORIES = 'Action:AssignCategories';
+    final public const ACTION_ASSIGN_CATEGORIES = 'Action:AssignCategories';
 
     /**
      * Specifies the Action:CopyToFolder field.
@@ -30,7 +30,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const ACTION_COPY_TO_FOLDER = 'Action:CopyToFolder';
+    final public const ACTION_COPY_TO_FOLDER = 'Action:CopyToFolder';
 
     /**
      * Specifies the Action:Delete field.
@@ -39,7 +39,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const ACTION_DELETE = 'Action:Delete';
+    final public const ACTION_DELETE = 'Action:Delete';
 
     /**
      * Specifies the Action:ForwardAsAttachmentToRecipients field.
@@ -48,7 +48,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const ACTION_FORWARD_AS_ATTACHMENT_TO_RECIPIENTS = 'Action:ForwardAsAttachmentToRecipients';
+    final public const ACTION_FORWARD_AS_ATTACHMENT_TO_RECIPIENTS = 'Action:ForwardAsAttachmentToRecipients';
 
     /**
      * Specifies the Action:ForwardToRecipients field.
@@ -57,7 +57,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const ACTION_FORWARD_TO_RECIPIENTS = 'Action:ForwardToRecipients';
+    final public const ACTION_FORWARD_TO_RECIPIENTS = 'Action:ForwardToRecipients';
 
     /**
      * Specifies the Action:MarkAsRead field.
@@ -66,7 +66,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const ACTION_MARK_AS_READ = 'Action:MarkAsRead';
+    final public const ACTION_MARK_AS_READ = 'Action:MarkAsRead';
 
     /**
      * Specifies the Action:MarkImportance field.
@@ -75,7 +75,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const ACTION_MARK_IMPORTANCE = 'Action:MarkImportance';
+    final public const ACTION_MARK_IMPORTANCE = 'Action:MarkImportance';
 
     /**
      * Specifies the Action:MoveToFolder field.
@@ -84,7 +84,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const ACTION_MOVE_TO_FOLDER = 'Action:MoveToFolder';
+    final public const ACTION_MOVE_TO_FOLDER = 'Action:MoveToFolder';
 
     /**
      * Specifies the Action:PermanentDelete field.
@@ -93,7 +93,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const ACTION_PERMANENT_DELETE = 'Action:PermanentDelete';
+    final public const ACTION_PERMANENT_DELETE = 'Action:PermanentDelete';
 
     /**
      * Specifies the Action:RedirectToRecipients field.
@@ -102,7 +102,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const ACTION_REDIRECT_TO_RECIPIENTS = 'Action:RedirectToRecipients';
+    final public const ACTION_REDIRECT_TO_RECIPIENTS = 'Action:RedirectToRecipients';
 
     /**
      * Specifies the Action:SendSMSAlertToRecipients field.
@@ -111,7 +111,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const ACTION_SEND_SMS_ALERT_TO_RECIPIENTS = 'Action:SendSMSAlertToRecipients';
+    final public const ACTION_SEND_SMS_ALERT_TO_RECIPIENTS = 'Action:SendSMSAlertToRecipients';
 
     /**
      * Specifies the Action:ServerReplyWithMessage field.
@@ -120,7 +120,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const ACTION_SERVER_REPLY_WITH_MESSAGE = 'Action:ServerReplyWithMessage';
+    final public const ACTION_SERVER_REPLY_WITH_MESSAGE = 'Action:ServerReplyWithMessage';
 
     /**
      * Specifies the Action:StopProcessingRules field.
@@ -129,7 +129,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const ACTION_STOP_PROCESSING_RULES = 'Action:StopProcessingRules';
+    final public const ACTION_STOP_PROCESSING_RULES = 'Action:StopProcessingRules';
 
     /**
      * Specifies the Actions field.
@@ -138,7 +138,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const ACTIONS = 'Actions';
+    final public const ACTIONS = 'Actions';
 
     /**
      * Specifies the Condition:Categories field.
@@ -147,7 +147,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_CATEGORIES = 'Condition:Categories';
+    final public const CONDITION_CATEGORIES = 'Condition:Categories';
 
     /**
      * Specifies the Condition:ContainsBodyStrings field.
@@ -156,7 +156,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_CONTAINS_BODY_STRINGS = 'Condition:ContainsBodyStrings';
+    final public const CONDITION_CONTAINS_BODY_STRINGS = 'Condition:ContainsBodyStrings';
 
     /**
      * Specifies the Condition:ContainsHeaderStrings field.
@@ -165,7 +165,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_CONTAINS_HEADER_STRINGS = 'Condition:ContainsHeaderStrings';
+    final public const CONDITION_CONTAINS_HEADER_STRINGS = 'Condition:ContainsHeaderStrings';
 
     /**
      * Specifies the Condition:ContainsRecipientStrings field.
@@ -174,7 +174,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_CONTAINS_RECIPIENT_STRINGS = 'Condition:ContainsRecipientStrings';
+    final public const CONDITION_CONTAINS_RECIPIENT_STRINGS = 'Condition:ContainsRecipientStrings';
 
     /**
      * Specifies the Condition:ContainsSenderStrings field.
@@ -183,7 +183,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_CONTAINS_SENDER_STRINGS = 'Condition:ContainsSenderStrings';
+    final public const CONDITION_CONTAINS_SENDER_STRINGS = 'Condition:ContainsSenderStrings';
 
     /**
      * Specifies the Condition:ContainsSubjectOrBodyStrings field.
@@ -192,7 +192,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_CONTAINS_SUBJECT_OR_BODY_STRINGS = 'Condition:ContainsSubjectOrBodyStrings';
+    final public const CONDITION_CONTAINS_SUBJECT_OR_BODY_STRINGS = 'Condition:ContainsSubjectOrBodyStrings';
 
     /**
      * Specifies the Condition:ContainsSubjectStrings field.
@@ -201,7 +201,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_CONTAINS_SUBJECT_STRINGS = 'Condition:ContainsSubjectStrings';
+    final public const CONDITION_CONTAINS_SUBJECT_STRINGS = 'Condition:ContainsSubjectStrings';
 
     /**
      * Specifies the Condition:FlaggedForAction field.
@@ -210,7 +210,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_FLAGGED_FOR_ACTION = 'Condition:FlaggedForAction';
+    final public const CONDITION_FLAGGED_FOR_ACTION = 'Condition:FlaggedForAction';
 
     /**
      * Specifies the Condition:FromAddresses field.
@@ -219,7 +219,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_FROM_ADDRESSES = 'Condition:FromAddresses';
+    final public const CONDITION_FROM_ADDRESSES = 'Condition:FromAddresses';
 
     /**
      * Specifies the Condition:FromConnectedAccounts field.
@@ -228,7 +228,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_FROM_CONNECTED_ACCOUNTS = 'Condition:FromConnectedAccounts';
+    final public const CONDITION_FROM_CONNECTED_ACCOUNTS = 'Condition:FromConnectedAccounts';
 
     /**
      * Specifies the Condition:HasAttachments field.
@@ -237,7 +237,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_HAS_ATTACHMENTS = 'Condition:HasAttachments';
+    final public const CONDITION_HAS_ATTACHMENTS = 'Condition:HasAttachments';
 
     /**
      * Specifies the Condition:Importance field.
@@ -246,7 +246,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_IMPORTANCE = 'Condition:Importance';
+    final public const CONDITION_IMPORTANCE = 'Condition:Importance';
 
     /**
      * Specifies the Condition:IsApprovalRequest field.
@@ -255,7 +255,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_IS_APPROVAL_REQUEST = 'Condition:IsApprovalRequest';
+    final public const CONDITION_IS_APPROVAL_REQUEST = 'Condition:IsApprovalRequest';
 
     /**
      * Specifies the Condition:IsAutomaticForward field.
@@ -264,7 +264,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_IS_AUTOMATIC_FORWARD = 'Condition:IsAutomaticForward';
+    final public const CONDITION_IS_AUTOMATIC_FORWARD = 'Condition:IsAutomaticForward';
 
     /**
      * Specifies the Condition:IsAutomaticReply field.
@@ -273,7 +273,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_IS_AUTOMATIC_REPLY = 'Condition:IsAutomaticReply';
+    final public const CONDITION_IS_AUTOMATIC_REPLY = 'Condition:IsAutomaticReply';
 
     /**
      * Specifies the Condition:IsEncrypted field.
@@ -282,7 +282,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_IS_ENCRYPTED = 'Condition:IsEncrypted';
+    final public const CONDITION_IS_ENCRYPTED = 'Condition:IsEncrypted';
 
     /**
      * Specifies the Condition:IsMeetingRequest field.
@@ -291,7 +291,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_IS_MEETING_REQUEST = 'Condition:IsMeetingRequest';
+    final public const CONDITION_IS_MEETING_REQUEST = 'Condition:IsMeetingRequest';
 
     /**
      * Specifies the Condition:IsMeetingResponse field.
@@ -300,7 +300,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_IS_MEETING_RESPONSE = 'Condition:IsMeetingResponse';
+    final public const CONDITION_IS_MEETING_RESPONSE = 'Condition:IsMeetingResponse';
 
     /**
      * Specifies the Condition:IsNDR field.
@@ -309,7 +309,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_IS_NDR = 'Condition:IsNDR';
+    final public const CONDITION_IS_NDR = 'Condition:IsNDR';
 
     /**
      * Specifies the Condition:IsPermissionControlled field.
@@ -318,7 +318,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_IS_PERMISSION_CONTROLLED = 'Condition:IsPermissionControlled';
+    final public const CONDITION_IS_PERMISSION_CONTROLLED = 'Condition:IsPermissionControlled';
 
     /**
      * Specifies the Condition:IsReadReceipt field.
@@ -327,7 +327,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_IS_READ_RECEIPT = 'Condition:IsReadReceipt';
+    final public const CONDITION_IS_READ_RECEIPT = 'Condition:IsReadReceipt';
 
     /**
      * Specifies the Condition:IsSigned field.
@@ -336,7 +336,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_IS_SIGNED = 'Condition:IsSigned';
+    final public const CONDITION_IS_SIGNED = 'Condition:IsSigned';
 
     /**
      * Specifies the Condition:IsVoicemail field.
@@ -345,7 +345,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_IS_VOICEMAIL = 'Condition:IsVoicemail';
+    final public const CONDITION_IS_VOICEMAIL = 'Condition:IsVoicemail';
 
     /**
      * Specifies the Condition:ItemClasses field.
@@ -354,7 +354,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_ITEM_CLASSES = 'Condition:ItemClasses';
+    final public const CONDITION_ITEM_CLASSES = 'Condition:ItemClasses';
 
     /**
      * Specifies the Condition:MessageClassifications field.
@@ -363,7 +363,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_MESSAGE_CLASSIFICATIONS = 'Condition:MessageClassifications';
+    final public const CONDITION_MESSAGE_CLASSIFICATIONS = 'Condition:MessageClassifications';
 
     /**
      * Specifies the Condition:NotSentToMe field.
@@ -372,7 +372,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_NOT_SENT_TO_ME = 'Condition:NotSentToMe';
+    final public const CONDITION_NOT_SENT_TO_ME = 'Condition:NotSentToMe';
 
     /**
      * Specifies the Condition:Sensitivity field.
@@ -381,7 +381,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_SENSITIVITY = 'Condition:Sensitivity';
+    final public const CONDITION_SENSITIVITY = 'Condition:Sensitivity';
 
     /**
      * Specifies the Condition:SentCcMe field.
@@ -390,7 +390,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_SENT_CC_ME = 'Condition:SentCcMe';
+    final public const CONDITION_SENT_CC_ME = 'Condition:SentCcMe';
 
     /**
      * Specifies the Condition:SentOnlyToMe field.
@@ -399,7 +399,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_SENT_ONLY_TO_ME = 'Condition:SentOnlyToMe';
+    final public const CONDITION_SENT_ONLY_TO_ME = 'Condition:SentOnlyToMe';
 
     /**
      * Specifies the Condition:SentToAddresses field.
@@ -408,7 +408,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_SENT_TO_ADDRESSES = 'Condition:SentToAddresses';
+    final public const CONDITION_SENT_TO_ADDRESSES = 'Condition:SentToAddresses';
 
     /**
      * Specifies the Condition:SentToMe field.
@@ -417,7 +417,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_SENT_TO_ME = 'Condition:SentToMe';
+    final public const CONDITION_SENT_TO_ME = 'Condition:SentToMe';
 
     /**
      * Specifies the Condition:SentToOrCcMe field.
@@ -426,7 +426,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_SENT_TO_OR_CC_ME = 'Condition:SentToOrCcMe';
+    final public const CONDITION_SENT_TO_OR_CC_ME = 'Condition:SentToOrCcMe';
 
     /**
      * Specifies the Condition:WithinDateRange field.
@@ -435,7 +435,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_WITHIN_DATE_RANGE = 'Condition:WithinDateRange';
+    final public const CONDITION_WITHIN_DATE_RANGE = 'Condition:WithinDateRange';
 
     /**
      * Specifies the Condition:WithinSizeRange field.
@@ -444,7 +444,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITION_WITHIN_SIZE_RANGE = 'Condition:WithinSizeRange';
+    final public const CONDITION_WITHIN_SIZE_RANGE = 'Condition:WithinSizeRange';
 
     /**
      * Specifies the Conditions field.
@@ -453,7 +453,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const CONDITIONS = 'Conditions';
+    final public const CONDITIONS = 'Conditions';
 
     /**
      * Specifies the DisplayName field.
@@ -462,7 +462,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const DISPLAY_NAME = 'DisplayName';
+    final public const DISPLAY_NAME = 'DisplayName';
 
     /**
      * Specifies the Exception:Categories field.
@@ -471,7 +471,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_CATEGORIES = 'Exception:Categories';
+    final public const EXCEPTION_CATEGORIES = 'Exception:Categories';
 
     /**
      * Specifies the Exception:ContainsBodyStrings field.
@@ -480,7 +480,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_CONTAINS_BODY_STRINGS = 'Exception:ContainsBodyStrings';
+    final public const EXCEPTION_CONTAINS_BODY_STRINGS = 'Exception:ContainsBodyStrings';
 
     /**
      * Specifies the Exception:ContainsHeaderStrings field.
@@ -489,7 +489,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_CONTAINS_HEADER_STRINGS = 'Exception:ContainsHeaderStrings';
+    final public const EXCEPTION_CONTAINS_HEADER_STRINGS = 'Exception:ContainsHeaderStrings';
 
     /**
      * Specifies the Exception:ContainsRecipientStrings field.
@@ -498,7 +498,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_CONTAINS_RECIPIENT_STRINGS = 'Exception:ContainsRecipientStrings';
+    final public const EXCEPTION_CONTAINS_RECIPIENT_STRINGS = 'Exception:ContainsRecipientStrings';
 
     /**
      * Specifies the Exception:ContainsSenderStrings field.
@@ -507,7 +507,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_CONTAINS_SENDER_STRINGS = 'Exception:ContainsSenderStrings';
+    final public const EXCEPTION_CONTAINS_SENDER_STRINGS = 'Exception:ContainsSenderStrings';
 
     /**
      * Specifies the Exception:ContainsSubjectOrBodyStrings field.
@@ -516,7 +516,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_CONTAINS_SUBJECT_OR_BODY_STRINGS = 'Exception:ContainsSubjectOrBodyStrings';
+    final public const EXCEPTION_CONTAINS_SUBJECT_OR_BODY_STRINGS = 'Exception:ContainsSubjectOrBodyStrings';
 
     /**
      * Specifies the Exception:ContainsSubjectStrings field.
@@ -525,7 +525,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_CONTAINS_SUBJECT_STRINGS = 'Exception:ContainsSubjectStrings';
+    final public const EXCEPTION_CONTAINS_SUBJECT_STRINGS = 'Exception:ContainsSubjectStrings';
 
     /**
      * Specifies the Exception:FlaggedForAction field.
@@ -534,7 +534,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_FLAGGED_FOR_ACTION = 'Exception:FlaggedForAction';
+    final public const EXCEPTION_FLAGGED_FOR_ACTION = 'Exception:FlaggedForAction';
 
     /**
      * Specifies the Exception:FromAddresses field.
@@ -543,7 +543,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_FROM_ADDRESSES = 'Exception:FromAddresses';
+    final public const EXCEPTION_FROM_ADDRESSES = 'Exception:FromAddresses';
 
     /**
      * Specifies the Exception:FromConnectedAccounts field.
@@ -552,7 +552,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_FROM_CONNECTED_ACCOUNTS = 'Exception:FromConnectedAccounts';
+    final public const EXCEPTION_FROM_CONNECTED_ACCOUNTS = 'Exception:FromConnectedAccounts';
 
     /**
      * Specifies the Exception:HasAttachments field.
@@ -561,7 +561,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_HAS_ATTACHMENTS = 'Exception:HasAttachments';
+    final public const EXCEPTION_HAS_ATTACHMENTS = 'Exception:HasAttachments';
 
     /**
      * Specifies the Exception:Importance field.
@@ -570,7 +570,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_IMPORTANCE = 'Exception:Importance';
+    final public const EXCEPTION_IMPORTANCE = 'Exception:Importance';
 
     /**
      * Specifies the Exception:IsApprovalRequest field.
@@ -579,7 +579,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_IS_APPROVAL_REQUEST = 'Exception:IsApprovalRequest';
+    final public const EXCEPTION_IS_APPROVAL_REQUEST = 'Exception:IsApprovalRequest';
 
     /**
      * Specifies the Exception:IsAutomaticForward field.
@@ -588,7 +588,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_IS_AUTOMATIC_FORWARD = 'Exception:IsAutomaticForward';
+    final public const EXCEPTION_IS_AUTOMATIC_FORWARD = 'Exception:IsAutomaticForward';
 
     /**
      * Specifies the Exception:IsAutomaticReply field.
@@ -597,7 +597,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_IS_AUTOMATIC_REPLY = 'Exception:IsAutomaticReply';
+    final public const EXCEPTION_IS_AUTOMATIC_REPLY = 'Exception:IsAutomaticReply';
 
     /**
      * Specifies the Exception:IsEncrypted field.
@@ -606,7 +606,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_IS_ENCRYPTED = 'Exception:IsEncrypted';
+    final public const EXCEPTION_IS_ENCRYPTED = 'Exception:IsEncrypted';
 
     /**
      * Specifies the Exception:IsMeetingRequest field.
@@ -615,7 +615,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_IS_MEETING_REQUEST = 'Exception:IsMeetingRequest';
+    final public const EXCEPTION_IS_MEETING_REQUEST = 'Exception:IsMeetingRequest';
 
     /**
      * Specifies the Exception:IsMeetingResponse field.
@@ -624,7 +624,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_IS_MEETING_RESPONSE = 'Exception:IsMeetingResponse';
+    final public const EXCEPTION_IS_MEETING_RESPONSE = 'Exception:IsMeetingResponse';
 
     /**
      * Specifies the Exception:IsNDR field.
@@ -633,7 +633,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_IS_NDR = 'Exception:IsNDR';
+    final public const EXCEPTION_IS_NDR = 'Exception:IsNDR';
 
     /**
      * Specifies the Exception:IsPermissionControlled field.
@@ -642,7 +642,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_IS_PERMISSION_CONTROLLED = 'Exception:IsPermissionControlled';
+    final public const EXCEPTION_IS_PERMISSION_CONTROLLED = 'Exception:IsPermissionControlled';
 
     /**
      * Specifies the Exception:IsReadReceipt field.
@@ -651,7 +651,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_IS_READ_RECEIPT = 'Exception:IsReadReceipt';
+    final public const EXCEPTION_IS_READ_RECEIPT = 'Exception:IsReadReceipt';
 
     /**
      * Specifies the Exception:IsSigned field.
@@ -660,7 +660,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_IS_SIGNED = 'Exception:IsSigned';
+    final public const EXCEPTION_IS_SIGNED = 'Exception:IsSigned';
 
     /**
      * Specifies the Exception:IsVoicemail field.
@@ -669,7 +669,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_IS_VOICEMAIL = 'Exception:IsVoicemail';
+    final public const EXCEPTION_IS_VOICEMAIL = 'Exception:IsVoicemail';
 
     /**
      * Specifies the Exception:ItemClasses field.
@@ -678,7 +678,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_ITEM_CLASSES = 'Exception:ItemClasses';
+    final public const EXCEPTION_ITEM_CLASSES = 'Exception:ItemClasses';
 
     /**
      * Specifies the Exception:MessageClassifications field.
@@ -687,7 +687,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_MESSAGE_CLASSIFICATIONS = 'Exception:MessageClassifications';
+    final public const EXCEPTION_MESSAGE_CLASSIFICATIONS = 'Exception:MessageClassifications';
 
     /**
      * Specifies the Exception:NotSentToMe field.
@@ -696,7 +696,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_NOT_SENT_TO_ME = 'Exception:NotSentToMe';
+    final public const EXCEPTION_NOT_SENT_TO_ME = 'Exception:NotSentToMe';
 
     /**
      * Specifies the Exception:Sensitivity field.
@@ -705,7 +705,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_SENSITIVITY = 'Exception:Sensitivity';
+    final public const EXCEPTION_SENSITIVITY = 'Exception:Sensitivity';
 
     /**
      * Specifies the Exception:SentCcMe field.
@@ -714,7 +714,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_SENT_CC_ME = 'Exception:SentCcMe';
+    final public const EXCEPTION_SENT_CC_ME = 'Exception:SentCcMe';
 
     /**
      * Specifies the Exception:SentOnlyToMe field.
@@ -723,7 +723,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_SENT_ONLY_TO_ME = 'Exception:SentOnlyToMe';
+    final public const EXCEPTION_SENT_ONLY_TO_ME = 'Exception:SentOnlyToMe';
 
     /**
      * Specifies the Exception:SentToAddresses field.
@@ -732,7 +732,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_SENT_TO_ADDRESSES = 'Exception:SentToAddresses';
+    final public const EXCEPTION_SENT_TO_ADDRESSES = 'Exception:SentToAddresses';
 
     /**
      * Specifies the Exception:SentToMe field.
@@ -741,7 +741,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_SENT_TO_ME = 'Exception:SentToMe';
+    final public const EXCEPTION_SENT_TO_ME = 'Exception:SentToMe';
 
     /**
      * Specifies the Exception:SentToOrCcMe field.
@@ -750,7 +750,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_SENT_TO_OR_CC_ME = 'Exception:SentToOrCcMe';
+    final public const EXCEPTION_SENT_TO_OR_CC_ME = 'Exception:SentToOrCcMe';
 
     /**
      * Specifies the Exception:WithinDateRange field.
@@ -759,7 +759,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_WITHIN_DATE_RANGE = 'Exception:WithinDateRange';
+    final public const EXCEPTION_WITHIN_DATE_RANGE = 'Exception:WithinDateRange';
 
     /**
      * Specifies the Exception:WithinSizeRange field.
@@ -768,7 +768,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTION_WITHIN_SIZE_RANGE = 'Exception:WithinSizeRange';
+    final public const EXCEPTION_WITHIN_SIZE_RANGE = 'Exception:WithinSizeRange';
 
     /**
      * Specifies the Exceptions field.
@@ -777,7 +777,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const EXCEPTIONS = 'Exceptions';
+    final public const EXCEPTIONS = 'Exceptions';
 
     /**
      * Specifies the IsEnabled field.
@@ -786,7 +786,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const IS_ENABLED = 'IsEnabled';
+    final public const IS_ENABLED = 'IsEnabled';
 
     /**
      * Specifies the IsInError field.
@@ -795,7 +795,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const IS_IN_ERROR = 'IsInError';
+    final public const IS_IN_ERROR = 'IsInError';
 
     /**
      * Specifies the IsNotSupported field.
@@ -804,7 +804,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const IS_NOT_SUPPORTED = 'IsNotSupported';
+    final public const IS_NOT_SUPPORTED = 'IsNotSupported';
 
     /**
      * Specifies the Priority field.
@@ -813,7 +813,7 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const PRIORITY = 'Priority';
+    final public const PRIORITY = 'Priority';
 
     /**
      * Specifies the RuleId field.
@@ -822,5 +822,5 @@ class RuleFieldURIType extends Enumeration
      *
      * @var string
      */
-    const RULE_ID = 'RuleId';
+    final public const RULE_ID = 'RuleId';
 }

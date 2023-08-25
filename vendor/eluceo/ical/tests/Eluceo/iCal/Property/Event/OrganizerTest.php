@@ -36,7 +36,7 @@ class OrganizerTest extends \PHPUnit_Framework_TestCase
         $expected = "ORGANIZER;CN=$param:$value";
 
         $vCalendar = $this->createCalendarWithOrganizer(
-            new \Eluceo\iCal\Property\Event\Organizer($value, array('CN' => $param))
+            new \Eluceo\iCal\Property\Event\Organizer($value, ['CN' => $param])
         );
 
         foreach (explode("\n", $vCalendar->render()) as $line)
@@ -49,7 +49,6 @@ class OrganizerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param Organizer $vOrganizer
      * @return \Eluceo\iCal\Component\Calendar
      */
     private function createCalendarWithOrganizer(\Eluceo\iCal\Property\Event\Organizer $vOrganizer)

@@ -21,7 +21,7 @@ class AvailabilityProxyRequestType extends Enumeration
      *
      * @var string
      */
-    const CROSS_FOREST = 'CrossForest';
+    final public const CROSS_FOREST = 'CrossForest';
 
     /**
      * Indicates that this request is cross-site.
@@ -30,5 +30,5 @@ class AvailabilityProxyRequestType extends Enumeration
      *
      * @var string
      */
-    const CROSS_SITE = 'CrossSite';
+    final public const CROSS_SITE = 'CrossSite';
 }

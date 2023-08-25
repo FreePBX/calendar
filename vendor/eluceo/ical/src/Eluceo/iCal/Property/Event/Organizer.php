@@ -18,13 +18,13 @@ use Eluceo\iCal\Property;
  */
 class Organizer extends Property
 {
-    const PROPERTY_NAME = 'ORGANIZER';
+    final public const PROPERTY_NAME = 'ORGANIZER';
 
     /**
      * @param string $value
      * @param array  $params
      */
-    public function __construct($value, $params = array())
+    public function __construct($value, $params = [])
     {
         parent::__construct(self::PROPERTY_NAME, $value, $params);
     }

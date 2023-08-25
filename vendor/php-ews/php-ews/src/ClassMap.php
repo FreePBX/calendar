@@ -17,7 +17,7 @@ namespace jamesiarmes\PhpEws;
  */
 class ClassMap {
     public static function getMap() {
-        return array(
+        return [
             // Map for ArrayType classes.
             'ArrayOfRecipientTrackingEventType' => '\\jamesiarmes\\PhpEws\\ArrayType\\ArrayOfRecipientTrackingEventType',
             'ArrayOfDLExpansionType' => '\\jamesiarmes\\PhpEws\\ArrayType\\ArrayOfDLExpansionType',
@@ -679,6 +679,6 @@ class ClassMap {
             'YearlyRegeneratingPatternType' => '\\jamesiarmes\\PhpEws\\Type\\YearlyRegeneratingPatternType',
             'CancelCalendarItemType' => '\\jamesiarmes\\PhpEws\\Type\\CancelCalendarItemType',
             'RequestServerVersion' => '\\jamesiarmes\\PhpEws\\Type\\RequestServerVersion',
-        );
+        ];
     }
 }

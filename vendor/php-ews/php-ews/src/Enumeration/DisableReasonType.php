@@ -21,7 +21,7 @@ class DisableReasonType extends Enumeration
      *
      * @var string
      */
-    const MOBILE_CLIENT_PERFORMANCE = 'MobileClientPerformance';
+    final public const MOBILE_CLIENT_PERFORMANCE = 'MobileClientPerformance';
 
     /**
      * No reason given.
@@ -30,7 +30,7 @@ class DisableReasonType extends Enumeration
      *
      * @var string
      */
-    const NO_REASON = 'NoReason';
+    final public const NO_REASON = 'NoReason';
 
     /**
      * To improve email client performance.
@@ -39,7 +39,7 @@ class DisableReasonType extends Enumeration
      *
      * @var string
      */
-    const OUTLOOK_CLIENT_PERFORMANCE = 'OutlookClientPerformance';
+    final public const OUTLOOK_CLIENT_PERFORMANCE = 'OutlookClientPerformance';
 
     /**
      * To improve Web app client performance.
@@ -48,5 +48,5 @@ class DisableReasonType extends Enumeration
      *
      * @var string
      */
-    const OWA_CLIENT_PERFORMANCE = 'OWAClientPerformance';
+    final public const OWA_CLIENT_PERFORMANCE = 'OWAClientPerformance';
 }

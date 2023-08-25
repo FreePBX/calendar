@@ -21,7 +21,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const ASSISTANT_PHONE = 'AssistantPhone';
+    final public const ASSISTANT_PHONE = 'AssistantPhone';
 
     /**
      * Phone number key for business fax number.
@@ -30,7 +30,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const BUSINESS_FAX = 'BusinessFax';
+    final public const BUSINESS_FAX = 'BusinessFax';
 
     /**
      * Phone number key for business phone number.
@@ -39,7 +39,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const BUSINESS_PHONE = 'BusinessPhone';
+    final public const BUSINESS_PHONE = 'BusinessPhone';
 
     /**
      * Phone number key for second business phone number.
@@ -48,7 +48,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const BUSINESS_PHONE_2 = 'BusinessPhone2';
+    final public const BUSINESS_PHONE_2 = 'BusinessPhone2';
 
     /**
      * Phone number key for callback.
@@ -57,7 +57,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const CALLBACK = 'Callback';
+    final public const CALLBACK = 'Callback';
 
     /**
      * Phone number key for car phone.
@@ -66,7 +66,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const CAR_PHONE = 'CarPhone';
+    final public const CAR_PHONE = 'CarPhone';
 
     /**
      * Phone number key for company main phone.
@@ -75,7 +75,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const COMPANY_MAIN_PHONE = 'CompanyMainPhone';
+    final public const COMPANY_MAIN_PHONE = 'CompanyMainPhone';
 
     /**
      * Phone number key for home fax number.
@@ -84,7 +84,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const HOME_FAX = 'HomeFax';
+    final public const HOME_FAX = 'HomeFax';
 
     /**
      * Phone number key for home phone number.
@@ -93,7 +93,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const HOME_PHONE = 'HomePhone';
+    final public const HOME_PHONE = 'HomePhone';
 
     /**
      * Phone number key for second home phone number.
@@ -102,7 +102,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const HOME_PHONE_2 = 'HomePhone2';
+    final public const HOME_PHONE_2 = 'HomePhone2';
 
     /**
      * Phone number key for ISDN line.
@@ -111,7 +111,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const ISDN = 'Isdn';
+    final public const ISDN = 'Isdn';
 
     /**
      * Phone number key for mobile phone number.
@@ -120,7 +120,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const MOBILE_PHONE = 'MobilePhone';
+    final public const MOBILE_PHONE = 'MobilePhone';
 
     /**
      * Phone number key for other fax number.
@@ -129,7 +129,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const OTHER_FAX = 'OtherFax';
+    final public const OTHER_FAX = 'OtherFax';
 
     /**
      * Phone number key for other phone number.
@@ -138,7 +138,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const OTHER_PHONE = 'OtherTelephone';
+    final public const OTHER_PHONE = 'OtherTelephone';
 
     /**
      * Phone number key for pager.
@@ -147,7 +147,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const PAGER = 'Pager';
+    final public const PAGER = 'Pager';
 
     /**
      * Phone number key for primary phone number.
@@ -156,7 +156,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const PRIMARY_PHONE = 'PrimaryPhone';
+    final public const PRIMARY_PHONE = 'PrimaryPhone';
 
     /**
      * Phone number key for radio phone number.
@@ -165,7 +165,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const RADIO_PHONE = 'RadioPhone';
+    final public const RADIO_PHONE = 'RadioPhone';
 
     /**
      * Phone number key for telex.
@@ -174,7 +174,7 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const TELEX = 'Telex';
+    final public const TELEX = 'Telex';
 
     /**
      * Phone number key for TTY TTD phone number.
@@ -183,5 +183,5 @@ class PhoneNumberKeyType extends Enumeration
      *
      * @var string
      */
-    const TTY_TTD_PHONE = 'TtyTtdPhone';
+    final public const TTY_TTD_PHONE = 'TtyTtdPhone';
 }

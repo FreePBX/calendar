@@ -10,17 +10,15 @@ class Local extends Base {
 	public $driver = 'Local';
 
 	public static function getInfo() {
-		return array(
-			"name" => _("Local Calendar")
-		);
+		return ["name" => _("Local Calendar")];
 	}
 
 	public static function getEditDisplay($data) {
-		return load_view(dirname(__DIR__)."/views/local_settings.php",array('action' => 'edit', 'data' => $data, 'timezone' => $data['timezone']));
+		return load_view(dirname(__DIR__)."/views/local_settings.php",['action' => 'edit', 'data' => $data, 'timezone' => $data['timezone']]);
 	}
 
 	public static function getAddDisplay() {
-		return load_view(dirname(__DIR__)."/views/local_settings.php",array('action' => 'add', 'timezone' => \FreePBX::View()->getTimezone()));
+		return load_view(dirname(__DIR__)."/views/local_settings.php",['action' => 'add', 'timezone' => \FreePBX::View()->getTimezone()]);
 	}
 
 	public function deleteEvent($eventID) {
@@ -47,12 +45,7 @@ class Local extends Base {
 	}
 
 	public function updateCalendar($data) {
-		$calendar = array(
-			"name" => $data['name'],
-			"description" => $data['description'],
-			"type" => 'local',
-			"timezone" => $data['timezone']
-		);
+		$calendar = ["name" => $data['name'], "description" => $data['description'], "type" => 'local', "timezone" => $data['timezone']];
 		return parent::updateCalendar($calendar);
 	}
 
@@ -60,18 +53,18 @@ class Local extends Base {
 		$timezone = !empty($event['timezone']) ? $event['timezone'] : $this->timezone;
 		$vEvent = new Event();
 		// Make sure there is a title
-		if (!isset($event['title']) || !trim($event['title'])) {
+		if (!isset($event['title']) || !trim((string) $event['title'])) {
 			throw new \Exception("No title provided");
 		}
-		$vEvent->setSummary(trim($event['title']));
+		$vEvent->setSummary(trim((string) $event['title']));
 		if (!isset($event['description'])) {
 			$vEvent->setDescription("");
 		} else {
-			$vEvent->setDescription(trim($event['description']));
+			$vEvent->setDescription(trim((string) $event['description']));
 		}
 
 		if(!empty($event['categories'])) {
-			$vEvent->setCategories(explode(",",$event['categories']));
+			$vEvent->setCategories(explode(",",(string) $event['categories']));
 		}
 
 		$vEvent->setUseTimezone(true);
@@ -108,7 +101,7 @@ class Local extends Base {
 				break;
 				case "4":
 					if(!empty($event['weekday']) && is_array($event['weekday'])) {
-						$days = array();
+						$days = [];
 						foreach($event['weekday'] as $day) {
 							switch($day) {
 								case "0":
@@ -153,7 +146,7 @@ class Local extends Base {
 								//day of month
 								//FREQ=MONTHLY;INTERVAL=1;BYDAY=3TH
 								$c = ceil($vEvent->getDtStart()->format('j') / 7);
-								$d = strtoupper(substr($vEvent->getDtStart()->format('D'), 0, -1));
+								$d = strtoupper(substr((string) $vEvent->getDtStart()->format('D'), 0, -1));
 								$recurrenceRule->setByDay($c.$d);
 							break;
 						}
@@ -174,7 +167,7 @@ class Local extends Base {
 								//FREQ=YEARLY;INTERVAL=1;BYMONTH=05;BYDAY=3TH
 								$recurrenceRule->setByMonth((int)$vEvent->getDtStart()->format('n'));
 								$c = ceil($vEvent->getDtStart()->format('j') / 7);
-								$d = strtoupper(substr($vEvent->getDtStart()->format('D'), 0, -1));
+								$d = strtoupper(substr((string) $vEvent->getDtStart()->format('D'), 0, -1));
 								$recurrenceRule->setByDay($c.$d);
 							break;
 						}

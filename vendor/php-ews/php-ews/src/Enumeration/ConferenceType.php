@@ -21,7 +21,7 @@ class ConferenceType extends Enumeration
      *
      * @var integer
      */
-    const CHAT = 2;
+    final public const CHAT = 2;
 
     /**
      * The meeting is an Internet meeting.
@@ -30,7 +30,7 @@ class ConferenceType extends Enumeration
      *
      * @var integer
      */
-    const NET_MEETING = 0;
+    final public const NET_MEETING = 0;
 
     /**
      * The meeting is an Internet show (such as a webinar).
@@ -39,5 +39,5 @@ class ConferenceType extends Enumeration
      *
      * @var integer
      */
-    const NET_SHOW = 1;
+    final public const NET_SHOW = 1;
 }

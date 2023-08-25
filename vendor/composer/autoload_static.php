@@ -856,6 +856,7 @@ class ComposerStaticInit678a1299a219628bd23671dbba7bffe5
         'jamesiarmes\\PhpEws\\Type\\WorkingPeriod' => __DIR__ . '/..' . '/php-ews/php-ews/src/Type/WorkingPeriod.php',
         'jamesiarmes\\PhpEws\\Type\\YearlyRegeneratingPatternType' => __DIR__ . '/..' . '/php-ews/php-ews/src/Type/YearlyRegeneratingPatternType.php',
         'jamesiarmes\\PhpNtlm\\SoapClient' => __DIR__ . '/..' . '/jamesiarmes/php-ntlm/src/SoapClient.php',
+        'om\\EventsList' => __DIR__ . '/..' . '/om/icalparser/src/EventsList.php',
         'om\\Freq' => __DIR__ . '/..' . '/om/icalparser/src/Freq.php',
         'om\\IcalParser' => __DIR__ . '/..' . '/om/icalparser/src/IcalParser.php',
         'om\\Recurrence' => __DIR__ . '/..' . '/om/icalparser/src/Recurrence.php',

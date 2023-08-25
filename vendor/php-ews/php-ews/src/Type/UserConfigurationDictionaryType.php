@@ -21,5 +21,5 @@ class UserConfigurationDictionaryType extends Type
      *
      * @var \jamesiarmes\PhpEws\Type\UserConfigurationDictionaryEntryType[]
      */
-    public $DictionaryEntry = array();
+    public $DictionaryEntry = [];
 }

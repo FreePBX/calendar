@@ -22,7 +22,7 @@ class ExternalAudience extends Enumeration
      *
      * @var string
      */
-    const ALL = 'All';
+    final public const ALL = 'All';
 
     /**
      * E-mail senders outside the mailbox user's organization who send messages
@@ -33,7 +33,7 @@ class ExternalAudience extends Enumeration
      *
      * @var string
      */
-    const KNOWN = 'Known';
+    final public const KNOWN = 'Known';
 
     /**
      * E-mail senders outside the mailbox user's organization who send messages
@@ -43,5 +43,5 @@ class ExternalAudience extends Enumeration
      *
      * @var string
      */
-    const NONE = 'None';
+    final public const NONE = 'None';
 }

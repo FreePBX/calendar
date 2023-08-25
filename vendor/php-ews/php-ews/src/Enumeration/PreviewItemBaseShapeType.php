@@ -21,7 +21,7 @@ class PreviewItemBaseShapeType extends Enumeration
      *
      * @var string
      */
-    const COMPACT = 'Compact';
+    final public const COMPACT = 'Compact';
 
     /**
      * Indicates that all properties are shown.
@@ -30,5 +30,5 @@ class PreviewItemBaseShapeType extends Enumeration
      *
      * @var string
      */
-    const DEFAULT_SHAPE = 'Default';
+    final public const DEFAULT_SHAPE = 'Default';
 }

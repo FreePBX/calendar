@@ -34,25 +34,7 @@ class CalendarIntegrationTest extends \PHPUnit_Framework_TestCase
         // 3. Add event to calendar
         $vCalendar->addComponent($vEvent);
 
-        $lines = array(
-            '/BEGIN:VCALENDAR/',
-            '/VERSION:2\.0/',
-            '/PRODID:www\.example\.com/',
-            '/X-PUBLISHED-TTL:P1W/',
-            '/BEGIN:VEVENT/',
-            '/UID:123456/',
-            '/DTSTART;VALUE=DATE:20121231/',
-            '/SEQUENCE:0/',
-            '/TRANSP:OPAQUE/',
-            '/DTEND;VALUE=DATE:20130101/',
-            '/SUMMARY:New Year’s Eve/',
-            '/CLASS:PRIVATE/',
-            '/RRULE:FREQ=YEARLY;INTERVAL=1/',
-            '/X-MICROSOFT-CDO-ALLDAYEVENT:TRUE/',
-            '/DTSTAMP:20\d{6}T\d{6}Z/',
-            '/END:VEVENT/',
-            '/END:VCALENDAR/',
-        );
+        $lines = ['/BEGIN:VCALENDAR/', '/VERSION:2\.0/', '/PRODID:www\.example\.com/', '/X-PUBLISHED-TTL:P1W/', '/BEGIN:VEVENT/', '/UID:123456/', '/DTSTART;VALUE=DATE:20121231/', '/SEQUENCE:0/', '/TRANSP:OPAQUE/', '/DTEND;VALUE=DATE:20130101/', '/SUMMARY:New Year’s Eve/', '/CLASS:PRIVATE/', '/RRULE:FREQ=YEARLY;INTERVAL=1/', '/X-MICROSOFT-CDO-ALLDAYEVENT:TRUE/', '/DTSTAMP:20\d{6}T\d{6}Z/', '/END:VEVENT/', '/END:VCALENDAR/'];
 
         foreach (explode("\n", $vCalendar->render()) as $key => $line)
         {

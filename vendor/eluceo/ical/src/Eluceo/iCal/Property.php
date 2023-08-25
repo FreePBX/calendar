@@ -37,18 +37,13 @@ class Property
     protected $parameterBag;
 
     /**
-     * @var string
-     */
-    protected $name;
-
-    /**
      * @param       $name
      * @param       $value
      * @param array $params
+     * @param string $name
      */
-    public function __construct($name, $value, $params = array())
+    public function __construct(protected $name, $value, $params = [])
     {
-        $this->name = $name;
         $this->setValue($value);
         $this->parameterBag = new ParameterBag($params);
     }
@@ -82,7 +77,7 @@ class Property
      */
     public function toLines()
     {
-        return array($this->toLine());
+        return [$this->toLine()];
     }
 
     /**

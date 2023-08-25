@@ -21,7 +21,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const ACTIVITY = 'IPM.Activity';
+    final public const ACTIVITY = 'IPM.Activity';
 
     /**
      * Class used to identify a form for appointments.
@@ -30,7 +30,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const APPOINTMENT = 'IPM.Appointment';
+    final public const APPOINTMENT = 'IPM.Appointment';
 
     /**
      * Class used to identify a form for contacts.
@@ -39,7 +39,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const CONTACT = 'IPM.Contact';
+    final public const CONTACT = 'IPM.Contact';
 
     /**
      * Class used to identify a form for distribution lists.
@@ -48,7 +48,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const DISTRIBUTION_LIST = 'IPM.DistList';
+    final public const DISTRIBUTION_LIST = 'IPM.DistList';
 
     /**
      * Class used to identify a form for documents.
@@ -57,7 +57,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const DOCUMENT = 'IPM.Document';
+    final public const DOCUMENT = 'IPM.Document';
 
     /**
      * Class used to identify a form for items for which the specified form
@@ -67,7 +67,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const IPM = 'IPM';
+    final public const IPM = 'IPM';
 
     /**
      * Class used to identify a form for e-mail messages.
@@ -76,7 +76,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const NOTE = 'IPM.Note';
+    final public const NOTE = 'IPM.Note';
 
     /**
      * Class used to identify a form for reports from the Internet Mail Connect
@@ -86,7 +86,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const NOTE_IMC_NOTIFICATION = 'IPM.Note.IMC.Notification';
+    final public const NOTE_IMC_NOTIFICATION = 'IPM.Note.IMC.Notification';
 
     /**
      * Class used to identify a form for out-of-office templates.
@@ -95,7 +95,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const NOTE_RULES_OOF_TEMPLATE_MICROSOFT = 'IPM.Note.Rules.Oof.Template.Microsoft';
+    final public const NOTE_RULES_OOF_TEMPLATE_MICROSOFT = 'IPM.Note.Rules.Oof.Template.Microsoft';
 
     /**
      * Class used to identify a form for editing rule reply templates.
@@ -104,7 +104,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const NOTE_RULES_REPLY_TEMPLATE_MICROSOFT = 'IPM.Note.Rules.ReplyTemplate.Microsoft';
+    final public const NOTE_RULES_REPLY_TEMPLATE_MICROSOFT = 'IPM.Note.Rules.ReplyTemplate.Microsoft';
 
     /**
      * Class used to identify a form for encrypted notes to other people.
@@ -113,7 +113,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const NOTE_SECURE = 'IPM.Note.Secure';
+    final public const NOTE_SECURE = 'IPM.Note.Secure';
 
     /**
      * Class used to identify a form for digitally signed notes to other people.
@@ -122,7 +122,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const NOTE_SECURE_SIGN = 'IPM.Note.Secure.Sign';
+    final public const NOTE_SECURE_SIGN = 'IPM.Note.Secure.Sign';
 
     /**
      * Class used to identify a form for the exception item of a recurrence
@@ -132,7 +132,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const OLE_CLASS = 'IPM.OLE.Class';
+    final public const OLE_CLASS = 'IPM.OLE.Class';
 
     /**
      * Class used to identify a form for recalling sent messages from recipient
@@ -142,7 +142,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const OUTLOOK_RECALL = 'IPM.Outlook.Recall';
+    final public const OUTLOOK_RECALL = 'IPM.Outlook.Recall';
 
     /**
      * Class used to identify a form for posting notes in a folder.
@@ -151,7 +151,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const POST = 'IPM.Post';
+    final public const POST = 'IPM.Post';
 
     /**
      * Class used to identify a form for message recall reports.
@@ -160,7 +160,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const RECALL_REPORT = 'IPM.Recall.Report';
+    final public const RECALL_REPORT = 'IPM.Recall.Report';
 
     /**
      * Class used to identify a form for remote Mail message headers.
@@ -169,7 +169,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const REMOTE = 'IPM.Remote';
+    final public const REMOTE = 'IPM.Remote';
 
     /**
      * Class used to identify a form for reporting item status.
@@ -178,7 +178,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const REPORT = 'IPM.Report';
+    final public const REPORT = 'IPM.Report';
 
     /**
      * Class used to identify a form for resending a failed message.
@@ -187,7 +187,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const RESEND = 'IPM.Resend';
+    final public const RESEND = 'IPM.Resend';
 
     /**
      * Class used to identify a form for meeting cancellations.
@@ -196,7 +196,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const SCHEDULE_MEETING_CANCELED = 'IPM.Schedule.Meeting.Canceled';
+    final public const SCHEDULE_MEETING_CANCELED = 'IPM.Schedule.Meeting.Canceled';
 
     /**
      * Class used to identify a form for meeting requests.
@@ -205,7 +205,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const SCHEDULE_MEETING_REQUEST = 'IPM.Schedule.Meeting.Request';
+    final public const SCHEDULE_MEETING_REQUEST = 'IPM.Schedule.Meeting.Request';
 
     /**
      * Class used to identify a form for responses to decline meeting requests.
@@ -214,7 +214,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const SCHEDULE_MEETING_RESP_NEG = 'IPM.Schedule.Meeting.Resp.Neg';
+    final public const SCHEDULE_MEETING_RESP_NEG = 'IPM.Schedule.Meeting.Resp.Neg';
 
     /**
      * Class used to identify a form for responses to accept meeting requests.
@@ -223,7 +223,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const SCHEDULE_MEETING_RESP_POS = 'IPM.Schedule.Meeting.Resp.Pos';
+    final public const SCHEDULE_MEETING_RESP_POS = 'IPM.Schedule.Meeting.Resp.Pos';
 
     /**
      * Class used to identify a form for responses to tentatively accept meeting
@@ -233,7 +233,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const SCHEDULE_MEETING_RESP_TENT = 'IPM.Schedule.Meeting.Resp.Tent';
+    final public const SCHEDULE_MEETING_RESP_TENT = 'IPM.Schedule.Meeting.Resp.Tent';
 
     /**
      * Class used to identify a form for creating notes.
@@ -242,7 +242,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const STICKY_NOTE = 'IPM.StickyNote';
+    final public const STICKY_NOTE = 'IPM.StickyNote';
 
     /**
      * Class used to identify a form for tasks.
@@ -251,7 +251,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const TASK = 'IPM.Task';
+    final public const TASK = 'IPM.Task';
 
     /**
      * Class used to identify a form for task requests.
@@ -260,7 +260,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const TASK_REQUEST = 'IPM.TaskRequest';
+    final public const TASK_REQUEST = 'IPM.TaskRequest';
 
     /**
      * Class used to identify a form for responses to accept task requests.
@@ -269,7 +269,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const TASK_REQUEST_ACCEPT = 'IPM.TaskRequest.Accept';
+    final public const TASK_REQUEST_ACCEPT = 'IPM.TaskRequest.Accept';
 
     /**
      * Class used to identify a form for responses to decline task requests.
@@ -278,7 +278,7 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const TASK_REQUEST_DECLINE = 'IPM.TaskRequest.Decline';
+    final public const TASK_REQUEST_DECLINE = 'IPM.TaskRequest.Decline';
 
     /**
      * Class used to identify a form for updates to requested tasks.
@@ -287,5 +287,5 @@ class ItemClassType extends Enumeration
      *
      * @var string
      */
-    const TASK_REQUEST_UPDATE = 'IPM.TaskRequest.Update';
+    final public const TASK_REQUEST_UPDATE = 'IPM.TaskRequest.Update';
 }

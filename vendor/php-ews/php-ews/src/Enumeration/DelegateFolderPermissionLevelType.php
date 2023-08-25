@@ -21,7 +21,7 @@ class DelegateFolderPermissionLevelType extends Enumeration
      *
      * @var string
      */
-    const AUTHOR = 'Author';
+    final public const AUTHOR = 'Author';
 
     /**
      * The delegate user has custom access permissions to the folder.
@@ -30,7 +30,7 @@ class DelegateFolderPermissionLevelType extends Enumeration
      *
      * @var string
      */
-    const CUSTOM = 'Custom';
+    final public const CUSTOM = 'Custom';
 
     /**
      * The delegate user can read, create, and modify items in the folder.
@@ -39,7 +39,7 @@ class DelegateFolderPermissionLevelType extends Enumeration
      *
      * @var string
      */
-    const EDITOR = 'Editor';
+    final public const EDITOR = 'Editor';
 
     /**
      * The delegate user has no access permissions to the folder.
@@ -48,7 +48,7 @@ class DelegateFolderPermissionLevelType extends Enumeration
      *
      * @var string
      */
-    const NONE = 'None';
+    final public const NONE = 'None';
 
     /**
      * The delegate user can read items in the folder.
@@ -57,5 +57,5 @@ class DelegateFolderPermissionLevelType extends Enumeration
      *
      * @var string
      */
-    const REVIEWER = 'Reviewer';
+    final public const REVIEWER = 'Reviewer';
 }

@@ -23,7 +23,7 @@ class MailboxSearchLocationType extends Enumeration
      *
      * @var string
      */
-    const ALL = 'All';
+    final public const ALL = 'All';
 
     /**
      * Indicates a scope that targets the archive mailbox for a user.
@@ -32,7 +32,7 @@ class MailboxSearchLocationType extends Enumeration
      *
      * @var string
      */
-    const ARCHIVE = 'ArchiveOnly';
+    final public const ARCHIVE = 'ArchiveOnly';
 
     /**
      * Indicates a scope that targets the primary mailbox for a user.
@@ -41,5 +41,5 @@ class MailboxSearchLocationType extends Enumeration
      *
      * @var string
      */
-    const PRIMARY = 'PrimaryOnly';
+    final public const PRIMARY = 'PrimaryOnly';
 }

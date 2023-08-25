@@ -21,7 +21,7 @@ class NotificationEventTypeType extends Enumeration
      *
      * @var string
      */
-    const COPIED_EVENT = 'CopiedEvent';
+    final public const COPIED_EVENT = 'CopiedEvent';
 
     /**
      * Indicates the notification is for an item created event.
@@ -30,7 +30,7 @@ class NotificationEventTypeType extends Enumeration
      *
      * @var string
      */
-    const CREATED_EVENT = 'CreatedEvent';
+    final public const CREATED_EVENT = 'CreatedEvent';
 
     /**
      * Indicates the notification is for an item deleted event.
@@ -39,7 +39,7 @@ class NotificationEventTypeType extends Enumeration
      *
      * @var string
      */
-    const DELETED_EVENT = 'DeletedEvent';
+    final public const DELETED_EVENT = 'DeletedEvent';
 
     /**
      * Indicates the notification is for a free or busy change event.
@@ -48,7 +48,7 @@ class NotificationEventTypeType extends Enumeration
      *
      * @var string
      */
-    const FREE_BUSY_CHANGED_EVENT = 'FreeBusyChangedEvent';
+    final public const FREE_BUSY_CHANGED_EVENT = 'FreeBusyChangedEvent';
 
     /**
      * Indicates the notification is for an item modified event.
@@ -57,7 +57,7 @@ class NotificationEventTypeType extends Enumeration
      *
      * @var string
      */
-    const MODIFIED_EVENT = 'ModifiedEvent';
+    final public const MODIFIED_EVENT = 'ModifiedEvent';
 
     /**
      * Indicates the notification is for an item moved event.
@@ -66,7 +66,7 @@ class NotificationEventTypeType extends Enumeration
      *
      * @var string
      */
-    const MOVED_EVENT = 'MovedEvent';
+    final public const MOVED_EVENT = 'MovedEvent';
 
     /**
      * Indicates the notification is for a new mail event.
@@ -75,5 +75,5 @@ class NotificationEventTypeType extends Enumeration
      *
      * @var string
      */
-    const NEW_MAIL_EVENT = 'NewMailEvent';
+    final public const NEW_MAIL_EVENT = 'NewMailEvent';
 }

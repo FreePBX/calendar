@@ -22,7 +22,7 @@ class DefaultShapeNamesType extends Enumeration
      *
      * @var string
      */
-    const ALL_PROPERTIES = 'AllProperties';
+    final public const ALL_PROPERTIES = 'AllProperties';
 
     /**
      * Returns a set of properties that are defined as the default for the item
@@ -32,7 +32,7 @@ class DefaultShapeNamesType extends Enumeration
      *
      * @var string
      */
-    const DEFAULT_PROPERTIES = 'Default';
+    final public const DEFAULT_PROPERTIES = 'Default';
 
     /**
      * Returns only the item or folder ID.
@@ -41,5 +41,5 @@ class DefaultShapeNamesType extends Enumeration
      *
      * @var string
      */
-    const ID_ONLY = 'IdOnly';
+    final public const ID_ONLY = 'IdOnly';
 }

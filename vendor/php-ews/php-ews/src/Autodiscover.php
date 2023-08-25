@@ -40,35 +40,35 @@ class Autodiscover
      *
      * @var string
      */
-    const AUTODISCOVER_PATH = '/autodiscover/autodiscover.xml';
+    final public const AUTODISCOVER_PATH = '/autodiscover/autodiscover.xml';
 
     /**
      * Server was discovered using the TLD method.
      *
      * @var integer
      */
-    const AUTODISCOVERED_VIA_TLD = 10;
+    final public const AUTODISCOVERED_VIA_TLD = 10;
 
     /**
      * Server was discovered using the subdomain method.
      *
      * @var integer
      */
-    const AUTODISCOVERED_VIA_SUBDOMAIN = 11;
+    final public const AUTODISCOVERED_VIA_SUBDOMAIN = 11;
 
     /**
      * Server was discovered using the unauthenticated GET method.
      *
      * @var integer
      */
-    const AUTODISCOVERED_VIA_UNAUTHENTICATED_GET = 12;
+    final public const AUTODISCOVERED_VIA_UNAUTHENTICATED_GET = 12;
 
     /**
      * Server was discovered using the DNS SRV redirect method.
      *
      * @var integer
      */
-    const AUTODISCOVERED_VIA_SRV_RECORD = 13;
+    final public const AUTODISCOVERED_VIA_SRV_RECORD = 13;
 
     /**
      * Server was discovered using the HTTP redirect method.
@@ -77,21 +77,7 @@ class Autodiscover
      *
      * @todo We do not currently support this.
      */
-    const AUTODISCOVERED_VIA_RESPONSE_REDIRECT = 14;
-
-    /**
-     * The email address to attempt autodiscovery against.
-     *
-     * @var string
-     */
-    protected $email;
-
-    /**
-     * The password to present during autodiscovery.
-     *
-     * @var string
-     */
-    protected $password;
+    final public const AUTODISCOVERED_VIA_RESPONSE_REDIRECT = 14;
 
     /**
      * The Exchange username to use during authentication. If unspecified,
@@ -221,10 +207,8 @@ class Autodiscover
      * @param string $username
      *   If left blank, the email provided will be used.
      */
-    public function __construct($email, $password, $username = null)
+    public function __construct(protected $email, protected $password, $username = null)
     {
-        $this->email = $email;
-        $this->password = $password;
         if ($username === null) {
             $this->username = $email;
         } else {
@@ -450,18 +434,7 @@ class Autodiscover
         $this->reset();
         $url = 'http://autodiscover.' . $this->tld . self::AUTODISCOVER_PATH;
         $ch = curl_init();
-        $opts = array(
-            CURLOPT_URL                 => $url,
-            CURLOPT_HTTPGET             => true,
-            CURLOPT_RETURNTRANSFER      => true,
-            CURLOPT_TIMEOUT             => 4,
-            CURLOPT_CONNECTTIMEOUT      => $this->connection_timeout,
-            CURLOPT_FOLLOWLOCATION      => false,
-            CURLOPT_HEADER              => false,
-            CURLOPT_HEADERFUNCTION      => array($this, 'readHeaders'),
-            CURLOPT_HTTP200ALIASES      => array(301, 302),
-            CURLOPT_IPRESOLVE           => CURL_IPRESOLVE_V4
-        );
+        $opts = [CURLOPT_URL                 => $url, CURLOPT_HTTPGET             => true, CURLOPT_RETURNTRANSFER      => true, CURLOPT_TIMEOUT             => 4, CURLOPT_CONNECTTIMEOUT      => $this->connection_timeout, CURLOPT_FOLLOWLOCATION      => false, CURLOPT_HEADER              => false, CURLOPT_HEADERFUNCTION      => $this->readHeaders(...), CURLOPT_HTTP200ALIASES      => [301, 302], CURLOPT_IPRESOLVE           => CURL_IPRESOLVE_V4];
         curl_setopt_array($ch, $opts);
         $this->last_response    = curl_exec($ch);
         $this->last_info        = curl_getinfo($ch);
@@ -564,25 +537,10 @@ class Autodiscover
         $this->reset();
 
         $ch = curl_init();
-        $opts = array(
-            CURLOPT_URL             => $url,
-            CURLOPT_HTTPAUTH        => CURLAUTH_BASIC | CURLAUTH_NTLM,
-            CURLOPT_CUSTOMREQUEST   => 'POST',
-            CURLOPT_POSTFIELDS      => $this->getAutoDiscoverRequest(),
-            CURLOPT_RETURNTRANSFER  => true,
-            CURLOPT_USERPWD         => $this->username . ':' . $this->password,
-            CURLOPT_TIMEOUT         => $timeout,
-            CURLOPT_CONNECTTIMEOUT  => $this->connection_timeout,
-            CURLOPT_FOLLOWLOCATION  => true,
-            CURLOPT_HEADER          => false,
-            CURLOPT_HEADERFUNCTION  => array($this, 'readHeaders'),
-            CURLOPT_IPRESOLVE       => CURL_IPRESOLVE_V4,
-            CURLOPT_SSL_VERIFYPEER  => true,
-            CURLOPT_SSL_VERIFYHOST  => 2,
-        );
+        $opts = [CURLOPT_URL             => $url, CURLOPT_HTTPAUTH        => CURLAUTH_BASIC | CURLAUTH_NTLM, CURLOPT_CUSTOMREQUEST   => 'POST', CURLOPT_POSTFIELDS      => $this->getAutoDiscoverRequest(), CURLOPT_RETURNTRANSFER  => true, CURLOPT_USERPWD         => $this->username . ':' . $this->password, CURLOPT_TIMEOUT         => $timeout, CURLOPT_CONNECTTIMEOUT  => $this->connection_timeout, CURLOPT_FOLLOWLOCATION  => true, CURLOPT_HEADER          => false, CURLOPT_HEADERFUNCTION  => $this->readHeaders(...), CURLOPT_IPRESOLVE       => CURL_IPRESOLVE_V4, CURLOPT_SSL_VERIFYPEER  => true, CURLOPT_SSL_VERIFYHOST  => 2];
 
         // Set the appropriate content-type.
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: text/xml; charset=utf-8'));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: text/xml; charset=utf-8']);
 
         if (!empty($this->cainfo)) {
             $opts[CURLOPT_CAINFO] = $this->cainfo;
@@ -621,7 +579,7 @@ class Autodiscover
     protected function parseAutodiscoverResponse()
     {
         // Content-type isn't trustworthy, unfortunately. Shame on Microsoft.
-        if (substr($this->last_response, 0, 5) !== '<?xml') {
+        if (!str_starts_with($this->last_response, '<?xml')) {
             return false;
         }
 
@@ -635,14 +593,10 @@ class Autodiscover
         // Check the account action for redirect.
         switch ($response['Account']['Action']) {
             case 'redirectUrl':
-                $this->redirect = array(
-                    'redirectUrl' => $response['Account']['RedirectUrl']
-                );
+                $this->redirect = ['redirectUrl' => $response['Account']['RedirectUrl']];
                 return false;
             case 'redirectAddr':
-                $this->redirect = array(
-                    'redirectAddr' => $response['Account']['RedirectAddr']
-                );
+                $this->redirect = ['redirectAddr' => $response['Account']['RedirectAddr']];
                 return false;
             case 'settings':
             default:
@@ -676,8 +630,8 @@ class Autodiscover
      */
     public function reset()
     {
-        $this->last_response_headers = array();
-        $this->last_info = array();
+        $this->last_response_headers = [];
+        $this->last_info = [];
         $this->last_curl_errno = 0;
         $this->last_curl_error = '';
 
@@ -769,7 +723,7 @@ class Autodiscover
      */
     protected function nodeToArray($node)
     {
-        $output = array();
+        $output = [];
         switch ($node->nodeType) {
             case XML_CDATA_SECTION_NODE:
             case XML_TEXT_NODE:
@@ -782,7 +736,7 @@ class Autodiscover
                     if (isset($child->tagName)) {
                         $t = $child->tagName;
                         if (!isset($output[$t])) {
-                            $output[$t] = array();
+                            $output[$t] = [];
                         }
                         $output[$t][] = $v;
                     } elseif ($v || $v === '0') {
@@ -794,12 +748,12 @@ class Autodiscover
                 // attributes. this way we'll retain text and attributes for
                 // this node.
                 if (is_string($output) && $node->attributes->length) {
-                    $output = array('@text' => $output);
+                    $output = ['@text' => $output];
                 }
 
                 if (is_array($output)) {
                     if ($node->attributes->length) {
-                        $a = array();
+                        $a = [];
                         foreach ($node->attributes as $attrName => $attrNode) {
                             $a[$attrName] = (string) $attrNode->value;
                         }
@@ -825,16 +779,11 @@ class Autodiscover
      * @return string Server version.
      */
     protected function parseVersion2007($minorversion) {
-        switch ($minorversion) {
-            case 0:
-                return Client::VERSION_2007;
-            case 1:
-            case 2:
-            case 3:
-                return Client::VERSION_2007_SP1;
-            default:
-                return Client::VERSION_2007;
-        }
+        return match ($minorversion) {
+            0 => Client::VERSION_2007,
+            1, 2, 3 => Client::VERSION_2007_SP1,
+            default => Client::VERSION_2007,
+        };
     }
 
     /**
@@ -845,16 +794,12 @@ class Autodiscover
      * @return string Server version.
      */
     protected function parseVersion2010($minorversion) {
-        switch ($minorversion) {
-            case 0:
-                return Client::VERSION_2010;
-            case 1:
-                return Client::VERSION_2010_SP1;
-            case 2:
-                return Client::VERSION_2010_SP2;
-            default:
-                return Client::VERSION_2010;
-        }
+        return match ($minorversion) {
+            0 => Client::VERSION_2010,
+            1 => Client::VERSION_2010_SP1,
+            2 => Client::VERSION_2010_SP2,
+            default => Client::VERSION_2010,
+        };
     }
 
     /**

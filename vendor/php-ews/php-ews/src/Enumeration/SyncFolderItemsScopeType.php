@@ -23,7 +23,7 @@ class SyncFolderItemsScopeType extends Enumeration
      *
      * @var string
      */
-    const NORMAL = 'NormalItems';
+    final public const NORMAL = 'NormalItems';
 
     /**
      * Specifies that both items in the folder and folder associated information
@@ -33,5 +33,5 @@ class SyncFolderItemsScopeType extends Enumeration
      *
      * @var string
      */
-    const NORMAL_AND_ASSOCIATED = 'NormalAndAssociatedItems';
+    final public const NORMAL_AND_ASSOCIATED = 'NormalAndAssociatedItems';
 }

@@ -21,7 +21,7 @@ class MemberStatusType extends Enumeration
      *
      * @var string
      */
-    const DEMOTED = 'Demoted';
+    final public const DEMOTED = 'Demoted';
 
     /**
      * Member information in a distribution list is in sync with the referenced
@@ -31,7 +31,7 @@ class MemberStatusType extends Enumeration
      *
      * @var string
      */
-    const NORMAL = 'Normal';
+    final public const NORMAL = 'Normal';
 
     /**
      * Member information is invalid or unrecognized.
@@ -40,5 +40,5 @@ class MemberStatusType extends Enumeration
      *
      * @var string
      */
-    const UNRECOGNIZED = 'Unrecognized';
+    final public const UNRECOGNIZED = 'Unrecognized';
 }

@@ -24,26 +24,7 @@ use \jamesiarmes\PhpEws\Type\UserConfigurationType;
 
 // Update these values with those you would like to set. Although an options
 // type may be boolean, the value should still be a string 'true' or 'false'.
-$options = array(
-    array(
-        'name' => 'autoaddsignature',
-        'type' => UserConfigurationDictionaryObjectTypesType::BOOLEAN,
-        'value' => 'true',
-    ),
-    array(
-        'name' => 'autoaddsignatureonreply',
-        'type' => UserConfigurationDictionaryObjectTypesType::BOOLEAN,
-        'value' => 'false',
-    ),
-    array(
-        'name' => 'signaturetext',
-        'type' => UserConfigurationDictionaryObjectTypesType::STRING,
-        'value' => '~ Homer J. Simpson',
-    ),
-    array(
-        'name' => 'signaturehtml',
-        'type' => UserConfigurationDictionaryObjectTypesType::STRING,
-        'value' => '<html>
+$options = [['name' => 'autoaddsignature', 'type' => UserConfigurationDictionaryObjectTypesType::BOOLEAN, 'value' => 'true'], ['name' => 'autoaddsignatureonreply', 'type' => UserConfigurationDictionaryObjectTypesType::BOOLEAN, 'value' => 'false'], ['name' => 'signaturetext', 'type' => UserConfigurationDictionaryObjectTypesType::STRING, 'value' => '~ Homer J. Simpson'], ['name' => 'signaturehtml', 'type' => UserConfigurationDictionaryObjectTypesType::STRING, 'value' => '<html>
 <head>
 <style type="text/css" style="display:none">
 <!--
@@ -58,9 +39,7 @@ p
 <p>~ Homer J. Simpson</p>
 </div>
 </body>
-</html>',
-    ),
-);
+</html>']];
 
 // Set connection information.
 $host = '';

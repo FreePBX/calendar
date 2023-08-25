@@ -22,7 +22,7 @@ class ContactSourceType extends Enumeration
      *
      * @var string
      */
-    const ACTIVE_DIRECTORY = 'ActiveDirectory';
+    final public const ACTIVE_DIRECTORY = 'ActiveDirectory';
 
     /**
      * Indicates that the contact is stored in the Exchange Store.
@@ -31,5 +31,5 @@ class ContactSourceType extends Enumeration
      *
      * @var string
      */
-    const EXCHANGE_STORE = 'Store';
+    final public const EXCHANGE_STORE = 'Store';
 }

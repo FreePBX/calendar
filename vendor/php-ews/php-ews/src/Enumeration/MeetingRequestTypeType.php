@@ -23,7 +23,7 @@ class MeetingRequestTypeType extends Enumeration
      *
      * @var string
      */
-    const FULL_UPDATE = 'FullUpdate';
+    final public const FULL_UPDATE = 'FullUpdate';
 
     /**
      * Identifies the meeting request as only containing updated informational
@@ -33,7 +33,7 @@ class MeetingRequestTypeType extends Enumeration
      *
      * @var string
      */
-    const INFORMATIONAL_UPDATE = 'InformationalUpdate';
+    final public const INFORMATIONAL_UPDATE = 'InformationalUpdate';
 
     /**
      * Identifies the meeting request as a new meeting request.
@@ -42,7 +42,7 @@ class MeetingRequestTypeType extends Enumeration
      *
      * @var string
      */
-    const NEW_MEETING_REQUEST = 'NewMeetingRequest';
+    final public const NEW_MEETING_REQUEST = 'NewMeetingRequest';
 
     /**
      * Indicates that the meeting request type is not defined.
@@ -51,7 +51,7 @@ class MeetingRequestTypeType extends Enumeration
      *
      * @var string
      */
-    const NONE = 'None';
+    final public const NONE = 'None';
 
     /**
      * Identifies the meeting request as outdated.
@@ -60,7 +60,7 @@ class MeetingRequestTypeType extends Enumeration
      *
      * @var string
      */
-    const OUTDATED = 'Outdated';
+    final public const OUTDATED = 'Outdated';
 
     /**
      * Indicates that the meeting request belongs to a principal who has
@@ -71,7 +71,7 @@ class MeetingRequestTypeType extends Enumeration
      *
      * @var string
      */
-    const PRINCIPAL_WANTS_COPY = 'PrincipalWantsCopy';
+    final public const PRINCIPAL_WANTS_COPY = 'PrincipalWantsCopy';
 
     /**
      * Identifies the meeting request as a silent update to an existing meeting.
@@ -80,5 +80,5 @@ class MeetingRequestTypeType extends Enumeration
      *
      * @var string
      */
-    const SILENT_UPDATE = 'SilentUpdate';
+    final public const SILENT_UPDATE = 'SilentUpdate';
 }

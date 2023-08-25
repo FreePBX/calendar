@@ -21,7 +21,7 @@ class DistinguishedPropertySetType extends Enumeration
      *
      * @var string
      */
-    const ADDRESS = 'Address';
+    final public const ADDRESS = 'Address';
 
     /**
      * Identifies the appointment property set ID by name.
@@ -30,7 +30,7 @@ class DistinguishedPropertySetType extends Enumeration
      *
      * @var string
      */
-    const APPOINTMENT = 'Appointment';
+    final public const APPOINTMENT = 'Appointment';
 
     /**
      * Identifies the calendar assistant property set ID by name.
@@ -39,7 +39,7 @@ class DistinguishedPropertySetType extends Enumeration
      *
      * @var string
      */
-    const CALENDAR_ASSISTANT = 'CalendarAssistant';
+    final public const CALENDAR_ASSISTANT = 'CalendarAssistant';
 
     /**
      * Identifies the common property set ID by name.
@@ -48,7 +48,7 @@ class DistinguishedPropertySetType extends Enumeration
      *
      * @var string
      */
-    const COMMON = 'Common';
+    final public const COMMON = 'Common';
 
     /**
      * Identifies the Internet headers property set ID by name.
@@ -57,7 +57,7 @@ class DistinguishedPropertySetType extends Enumeration
      *
      * @var string
      */
-    const INTERNET_HEADERS = 'InternetHeaders';
+    final public const INTERNET_HEADERS = 'InternetHeaders';
 
     /**
      * Identifies the meeting property set ID by name.
@@ -66,7 +66,7 @@ class DistinguishedPropertySetType extends Enumeration
      *
      * @var string
      */
-    const MEETING = 'Meeting';
+    final public const MEETING = 'Meeting';
 
     /**
      * Identifies the public strings property set ID by name.
@@ -75,7 +75,7 @@ class DistinguishedPropertySetType extends Enumeration
      *
      * @var string
      */
-    const PUBLIC_STRINGS = 'PublicStrings';
+    final public const PUBLIC_STRINGS = 'PublicStrings';
 
     /**
      * Identifies the sharing property set ID by name.
@@ -84,7 +84,7 @@ class DistinguishedPropertySetType extends Enumeration
      *
      * @var string
      */
-    const SHARING = 'Sharing';
+    final public const SHARING = 'Sharing';
 
     /**
      * Indicates a task.
@@ -93,7 +93,7 @@ class DistinguishedPropertySetType extends Enumeration
      *
      * @var string
      */
-    const TASK = 'Task';
+    final public const TASK = 'Task';
 
     /**
      * Identifies the unified messaging property set ID by name.
@@ -102,5 +102,5 @@ class DistinguishedPropertySetType extends Enumeration
      *
      * @var string
      */
-    const UNIFIED_MESSAGING = 'UnifiedMessaging';
+    final public const UNIFIED_MESSAGING = 'UnifiedMessaging';
 }

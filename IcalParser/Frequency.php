@@ -21,10 +21,9 @@ class Frequency extends Freq
     protected $simpleMode = true;
 
     protected $rules = ['freq' => 'yearly', 'interval' => 1];
-    protected $start = 0;
     protected $freq = '';
 
-    protected $excluded; //EXDATE
+    protected $excluded = []; //EXDATE
     protected $added;    //RDATE
 
     protected $cache; // getAllOccurrences()
@@ -38,14 +37,14 @@ class Frequency extends Freq
      * @param $added array of int (timestamps), see RDATE documentation
      * @throws Exception
      */
-    public function __construct($rule, $start, $excluded = [], $added = [])
+    public function __construct($rule, protected $start, $excluded = [], $added = [])
     {
-        $this->start = $start;
-        $this->excluded = [];
+        $cache = [];
+        $ts = null;
 
         $rules = [];
         foreach ($rule as $k => $v) {
-            $this->rules[strtolower($k)] = $v;
+            $this->rules[strtolower((string) $k)] = $v;
         }
 
         if (isset($this->rules['until']) && is_string($this->rules['until'])) {
@@ -53,7 +52,7 @@ class Frequency extends Freq
         } elseif (isset($this->rules['until']) && $this->rules['until'] instanceof DateTime) {
             $this->rules['until'] = $this->rules['until']->getTimestamp();
         }
-        $this->freq = strtolower($this->rules['freq']);
+        $this->freq = strtolower((string) $this->rules['freq']);
 
         foreach ($this->knownRules as $rule) {
             if (isset($this->rules['by' . $rule])) {
@@ -219,7 +218,7 @@ class Frequency extends Freq
         foreach ($this->knownRules as $rule) {
             if ($found && isset($this->rules['by' . $rule])) {
                 if ($this->isPrerule($rule, $this->freq)) {
-                    $subrules = explode(',', $this->rules['by' . $rule]);
+                    $subrules = explode(',', (string) $this->rules['by' . $rule]);
                     $_t = null;
                     foreach ($subrules as $subrule) {
                         $imm = call_user_func_array([$this, 'ruleBy' . $rule], [$subrule, $t]);
@@ -227,7 +226,7 @@ class Frequency extends Freq
                             break;
                         }
                         if ($debug) {
-                            echo strtoupper($rule) . ': ' . date(
+                            echo strtoupper((string) $rule) . ': ' . date(
                                 'r',
                                 $imm
                             ) . ' A: ' . ((int)($imm > $offset && $imm < $eop)) . "\n";
@@ -278,7 +277,7 @@ class Frequency extends Freq
     private function findStartingPoint($offset, $interval, $truncate = true)
     {
         $_freq = ($this->freq === 'daily') ? 'day__' : $this->freq;
-        $t = '+' . $interval . ' ' . substr($_freq, 0, -2) . 's';
+        $t = '+' . $interval . ' ' . substr((string) $_freq, 0, -2) . 's';
         if ($_freq === 'monthly' && $truncate) {
             if ($interval > 1) {
                 $offset = strtotime('+' . ($interval - 1) . ' months ', $offset);
@@ -346,13 +345,13 @@ class Frequency extends Freq
         }
 
         if (isset($this->rules['bymonth'])) {
-            $months = explode(',', $this->rules['bymonth']);
+            $months = explode(',', (string) $this->rules['bymonth']);
             if (!in_array(date('m', $t), $months)) {
                 return false;
             }
         }
         if (isset($this->rules['byday'])) {
-            $days = explode(',', $this->rules['byday']);
+            $days = explode(',', (string) $this->rules['byday']);
             foreach ($days as $i => $k) {
                 $days[$i] = $this->weekdays[preg_replace('/[^A-Z]/', '', $k)];
             }
@@ -361,13 +360,13 @@ class Frequency extends Freq
             }
         }
         if (isset($this->rules['byweekno'])) {
-            $weeks = explode(',', $this->rules['byweekno']);
+            $weeks = explode(',', (string) $this->rules['byweekno']);
             if (!in_array(date('W', $t), $weeks)) {
                 return false;
             }
         }
         if (isset($this->rules['bymonthday'])) {
-            $weekdays = explode(',', $this->rules['bymonthday']);
+            $weekdays = explode(',', (string) $this->rules['bymonthday']);
             foreach ($weekdays as $i => $k) {
                 if ($k < 0) {
                     $weekdays[$i] = date('t', $t) + $k + 1;
@@ -378,7 +377,7 @@ class Frequency extends Freq
             }
         }
         if (isset($this->rules['byhour'])) {
-            $hours = explode(',', $this->rules['byhour']);
+            $hours = explode(',', (string) $this->rules['byhour']);
             if (!in_array(date('H', $t), $hours)) {
                 return false;
             }
@@ -403,7 +402,7 @@ class Frequency extends Freq
         $s = $dir_t . ' ' . $d . ' ' . date('H:i:s', $t);
 
         if ($rule == substr($rule, -2)) {
-            if (date('l', $t) == ucfirst($d)) {
+            if (date('l', $t) == ucfirst((string) $d)) {
                 $s = 'today ' . date('H:i:s', $t);
             }
 
@@ -433,7 +432,7 @@ class Frequency extends Freq
 
             $n = $_t;
             while ($c > 0) {
-                if ($dir == 1 && $c == 1 && date('l', $t) == ucfirst($d)) {
+                if ($dir == 1 && $c == 1 && date('l', $t) == ucfirst((string) $d)) {
                     $s = 'today ' . date('H:i:s', $t);
                 }
                 $n = strtotime($s, $n);

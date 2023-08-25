@@ -22,7 +22,7 @@ class MessageTrackingDeliveryStatusType extends Enumeration
      *
      * @var string
      */
-    const DELIVERED = 'Delivered';
+    final public const DELIVERED = 'Delivered';
 
     /**
      * Specifies that the message is waiting for approval from a moderator.
@@ -31,7 +31,7 @@ class MessageTrackingDeliveryStatusType extends Enumeration
      *
      * @var string
      */
-    const PENDING = 'Pending';
+    final public const PENDING = 'Pending';
 
     /**
      * Specifies that the message was delivered and read by the recipients.
@@ -40,7 +40,7 @@ class MessageTrackingDeliveryStatusType extends Enumeration
      *
      * @var string
      */
-    const READ = 'Read';
+    final public const READ = 'Read';
 
     /**
      * Specifies that the message was transferred to a server outside the search
@@ -50,7 +50,7 @@ class MessageTrackingDeliveryStatusType extends Enumeration
      *
      * @var string
      */
-    const TRANSFERRED = 'Transferred';
+    final public const TRANSFERRED = 'Transferred';
 
     /**
      * Specifies that a message was not delivered.
@@ -59,5 +59,5 @@ class MessageTrackingDeliveryStatusType extends Enumeration
      *
      * @var string
      */
-    const UNSUCCESSFUL = 'Unsuccessful';
+    final public const UNSUCCESSFUL = 'Unsuccessful';
 }

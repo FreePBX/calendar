@@ -21,7 +21,7 @@ class ExceptionPropertyURIType extends Enumeration
      *
      * @var string
      */
-    const ATTACHMENT_CONTENT = 'attachment:Content';
+    final public const ATTACHMENT_CONTENT = 'attachment:Content';
 
     /**
      * Identifies the content type as containing an error.
@@ -30,7 +30,7 @@ class ExceptionPropertyURIType extends Enumeration
      *
      * @var string
      */
-    const ATTACHMENT_CONTENT_TYPE = 'attachment:ContentType';
+    final public const ATTACHMENT_CONTENT_TYPE = 'attachment:ContentType';
 
     /**
      * Identifies the attachment name as containing an error.
@@ -39,7 +39,7 @@ class ExceptionPropertyURIType extends Enumeration
      *
      * @var string
      */
-    const ATTACHMENT_NAME = 'attachment:Name';
+    final public const ATTACHMENT_NAME = 'attachment:Name';
 
     /**
      * Identifies the DayOfMonth as containing an error.
@@ -48,7 +48,7 @@ class ExceptionPropertyURIType extends Enumeration
      *
      * @var string
      */
-    const RECURRENCE_DAY_OF_MONTH = 'recurrence:DayOfMonth';
+    final public const RECURRENCE_DAY_OF_MONTH = 'recurrence:DayOfMonth';
 
     /**
      * Identifies the day of week index as containing an error.
@@ -57,7 +57,7 @@ class ExceptionPropertyURIType extends Enumeration
      *
      * @var string
      */
-    const RECURRENCE_DAY_OF_WEEK_INDEX = 'recurrence:DayOfWeekIndex';
+    final public const RECURRENCE_DAY_OF_WEEK_INDEX = 'recurrence:DayOfWeekIndex';
 
     /**
      * Identifies the DaysOfWeek property as containing an error.
@@ -66,7 +66,7 @@ class ExceptionPropertyURIType extends Enumeration
      *
      * @var string
      */
-    const RECURRENCE_DAYS_OF_WEEK = 'recurrence:DaysOfWeek';
+    final public const RECURRENCE_DAYS_OF_WEEK = 'recurrence:DaysOfWeek';
 
     /**
      * Identifies the interval as containing an error.
@@ -75,7 +75,7 @@ class ExceptionPropertyURIType extends Enumeration
      *
      * @var string
      */
-    const RECURRENCE_INTERVAL = 'recurrence:Interval';
+    final public const RECURRENCE_INTERVAL = 'recurrence:Interval';
 
     /**
      * Identifies the month field as containing an error.
@@ -84,7 +84,7 @@ class ExceptionPropertyURIType extends Enumeration
      *
      * @var string
      */
-    const RECURRENCE_MONTH = 'recurrence:Month';
+    final public const RECURRENCE_MONTH = 'recurrence:Month';
 
     /**
      * Identifies the number of occurrences as containing an error.
@@ -93,5 +93,5 @@ class ExceptionPropertyURIType extends Enumeration
      *
      * @var string
      */
-    const RECURRENCE_NUMBER_OF_OCCURRENCES = 'recurrence:NumberOfOccurrences';
+    final public const RECURRENCE_NUMBER_OF_OCCURRENCES = 'recurrence:NumberOfOccurrences';
 }

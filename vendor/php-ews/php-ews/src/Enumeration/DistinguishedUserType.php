@@ -22,7 +22,7 @@ class DistinguishedUserType extends Enumeration
      *
      * @var string
      */
-    const ANONYMOUS = 'Anonymous';
+    final public const ANONYMOUS = 'Anonymous';
 
     /**
      * Describes the default setting for delegate users who are added to the
@@ -32,5 +32,5 @@ class DistinguishedUserType extends Enumeration
      *
      * @var string
      */
-    const DEFAULT_USER = 'Default';
+    final public const DEFAULT_USER = 'Default';
 }

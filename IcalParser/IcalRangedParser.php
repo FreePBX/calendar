@@ -4,30 +4,29 @@ namespace FreePBX\modules\Calendar\IcalParser;
 
 use om\Recurrence;
 use om\IcalParser;
+use om\EventsList;
+
 use Carbon\CarbonPeriod;
 use Exception;
 
-class IcalRangedParser extends IcalParser
+class IcalRangedParser extends \om\IcalParser
 {
 	private $ranges = [
 		'start' => null,
 		'end' => null
 	];
 
-	private $fast;
-
 	/**
 	 * @param $fast	The request to parse is for scrpting purpose. Setting this to false takes much longer because it parses every 
 	 * single recurring event from the start, else only the relevant one are extracted
 	 */
-	public function __construct($fast = false)
+	public function __construct(private $fast = false)
 	{
 		parent::__construct();
 		$this->ranges['start'] = new \DateTime('now', new \DateTimeZone('UTC'));
 		$this->ranges['start']->sub(new \DateInterval('P6M'));
 		$this->ranges['end'] = new \DateTime('now', new \DateTimeZone('UTC'));
 		$this->ranges['end']->add(new \DateInterval('P6M'));
-		$this->fast = $fast;
 	}
 
 	public function setStartRange(\DateTime $start)
@@ -80,7 +79,7 @@ class IcalRangedParser extends IcalParser
 		];
 		foreach ($byKeys as $key) {
 			if (isset($recurring->rrule[$key])) {
-				$recurring->rrule[$key] = str_replace('"', '', $recurring->rrule[$key]);
+				$recurring->rrule[$key] = str_replace('"', '', (string) $recurring->rrule[$key]);
 			}
 		}
 
@@ -209,15 +208,16 @@ class IcalRangedParser extends IcalParser
 	 * @return	array
 	 * @throws	Exception		If we are in fast mode
 	 */
-	public function getEvents(): array
+	public function getEvents(): EventsList
 	{
 		//fast uses a different data structure (for recurrences) so it is mandatory to call getEventsNow to properly handle it. Warn the developer to take care of this
 		if ($this->fast)
 			throw new Exception('This function can only be called when not in fast mode.');
 
 		$events = [];
+		$eventsList = new EventsList();
 		if (isset($this->data['VEVENT'])) {
-			for ($i = 0; $i < count($this->data['VEVENT']); $i++) {
+			for ($i = 0; $i < (is_countable($this->data['VEVENT']) ? count($this->data['VEVENT']) : 0); $i++) {
 				$event = $this->data['VEVENT'][$i];
 
 				if (empty($event['RECURRENCES'])) {
@@ -243,10 +243,10 @@ class IcalRangedParser extends IcalParser
 							$modifiedEventUID = $event['UID'];
 							$modifiedEventRecurID = $event['RECURRENCE-ID'];
 							$modifiedEventSeq = intval($event['SEQUENCE'], 10);
-	
+
 							if (isset($this->data["_RECURRENCE_COUNTERS_BY_UID"][$modifiedEventUID])) {
 								$counter = $this->data["_RECURRENCE_COUNTERS_BY_UID"][$modifiedEventUID];
-	
+
 								$originalEvent = $this->data["VEVENT"][$counter];
 								if (isset($originalEvent['SEQUENCE'])) {
 									$originalEventSeq = intval($originalEvent['SEQUENCE'], 10);
@@ -289,7 +289,7 @@ class IcalRangedParser extends IcalParser
 					}
 
 					if (!empty($event)) {
-						$events[] = $event;
+						$eventsList[] = $event;
 					}
 				} else {
 					$recurrences = $event['RECURRENCES'];
@@ -317,7 +317,7 @@ class IcalRangedParser extends IcalParser
 
 						if ($this->eventRangeInCalendarRange($newEvent['DTSTART'], $newEvent['DTEND'])) {
 							$newEvent['RECURRENCE_INSTANCE'] = $j;
-							$events[] = $newEvent;
+							$eventsList[]=$newEvent;
 						}
 
 						$firstEvent = false;
@@ -325,7 +325,7 @@ class IcalRangedParser extends IcalParser
 				}
 			}
 		}
-		return $events;
+		return $eventsList;
 	}
 
 
@@ -344,7 +344,7 @@ class IcalRangedParser extends IcalParser
 			$now = time();
 
 		if (isset($this->data['VEVENT'])) {
-			for ($i = 0; $i < count($this->data['VEVENT']); $i++) {
+			for ($i = 0; $i < (is_countable($this->data['VEVENT']) ? count($this->data['VEVENT']) : 0); $i++) {
 				$event = $this->data['VEVENT'][$i];
 
 				if (empty($event['RECURRENCES'])) {
@@ -370,7 +370,7 @@ class IcalRangedParser extends IcalParser
 			}
 		}
 
-		return $events ? $events : false;
+		return $events ?: false;
 	}
 
 	public function eventDateInCalendarRange(\DateTime $timestamp)

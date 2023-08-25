@@ -31,7 +31,7 @@ class ResponseClassType extends Enumeration
      *
      * @var string
      */
-    const ERROR = 'Error';
+    final public const ERROR = 'Error';
 
     /**
      * Describes a request that is fulfilled.
@@ -40,7 +40,7 @@ class ResponseClassType extends Enumeration
      *
      * @var string
      */
-    const SUCCESS = 'Success';
+    final public const SUCCESS = 'Success';
 
     /**
      * Describes a request that was not processed.
@@ -59,5 +59,5 @@ class ResponseClassType extends Enumeration
      *
      * @var string
      */
-    const WARNING = 'Warning';
+    final public const WARNING = 'Warning';
 }

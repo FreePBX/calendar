@@ -24,7 +24,7 @@ class ArrayOfResolutionType extends ArrayType
      *
      * @var integer
      */
-    public $AbsoluteDenominator = array();
+    public $AbsoluteDenominator = [];
 
     /**
      * This attribute will be true if the current results contain the last item
@@ -34,7 +34,7 @@ class ArrayOfResolutionType extends ArrayType
      *
      * @var boolean
      */
-    public $IncludesLastItemInRange = array();
+    public $IncludesLastItemInRange = [];
 
     /**
      * Represents the next index that should be used for the next request when
@@ -44,7 +44,7 @@ class ArrayOfResolutionType extends ArrayType
      *
      * @var integer
      */
-    public $IndexedPagingOffset = array();
+    public $IndexedPagingOffset = [];
 
     /**
      * Represents the new numerator value to use for the next request when you
@@ -54,7 +54,7 @@ class ArrayOfResolutionType extends ArrayType
      *
      * @var integer
      */
-    public $NumeratorOffset = array();
+    public $NumeratorOffset = [];
 
     /**
      * Contains a single resolved entity.
@@ -63,7 +63,7 @@ class ArrayOfResolutionType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\ResolutionType[]
      */
-    public $Resolution = array();
+    public $Resolution = [];
 
     /**
      * Represents the total number of items in the view.
@@ -72,5 +72,5 @@ class ArrayOfResolutionType extends ArrayType
      *
      * @var integer
      */
-    public $TotalItemsInView = array();
+    public $TotalItemsInView = [];
 }

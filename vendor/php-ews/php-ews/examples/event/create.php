@@ -20,16 +20,7 @@ use \jamesiarmes\PhpEws\Type\EmailAddressType;
 // Replace this with your desired start/end times and guests.
 $start = new DateTime('tomorrow 4:00pm');
 $end = new DateTime('tomorrow 5:00pm');
-$guests = array(
-    array(
-        'name' => 'Homer Simpson',
-        'email' => 'hsimpson@example.com',
-    ),
-    array(
-        'name' => 'Marge Simpson',
-        'email' => 'msimpson@example.com',
-    ),
-);
+$guests = [['name' => 'Homer Simpson', 'email' => 'hsimpson@example.com'], ['name' => 'Marge Simpson', 'email' => 'msimpson@example.com']];
 
 // Set connection information.
 $host = '';

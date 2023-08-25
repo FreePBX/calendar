@@ -21,7 +21,7 @@ class HoldStatusType extends Enumeration
      *
      * @var string
      */
-    const FAILED = 'Failed';
+    final public const FAILED = 'Failed';
 
     /**
      * Indicates that the mailbox is not on hold.
@@ -30,7 +30,7 @@ class HoldStatusType extends Enumeration
      *
      * @var string
      */
-    const NOT_ON_HOLD = 'NotOnHold';
+    final public const NOT_ON_HOLD = 'NotOnHold';
 
     /**
      * Indicates that the mailbox is on hold.
@@ -39,7 +39,7 @@ class HoldStatusType extends Enumeration
      *
      * @var string
      */
-    const ON_HOLD = 'OnHold';
+    final public const ON_HOLD = 'OnHold';
 
     /**
      * Indicates that the mailbox is on a partial hold.
@@ -48,7 +48,7 @@ class HoldStatusType extends Enumeration
      *
      * @var string
      */
-    const PARTIAL_HOLD = 'PartialHold';
+    final public const PARTIAL_HOLD = 'PartialHold';
 
     /**
      * Indicates that a hold on the mailbox is pending.
@@ -57,5 +57,5 @@ class HoldStatusType extends Enumeration
      *
      * @var string
      */
-    const PENDING = 'Pending';
+    final public const PENDING = 'Pending';
 }

@@ -21,7 +21,7 @@ class ReminderGroup extends Enumeration
      *
      * @var string
      */
-    const CALENDAR = 'Calendar';
+    final public const CALENDAR = 'Calendar';
 
     /**
      * Specifies that the reminder is for a task item.
@@ -30,5 +30,5 @@ class ReminderGroup extends Enumeration
      *
      * @var string
      */
-    const TASK = 'Task';
+    final public const TASK = 'Task';
 }

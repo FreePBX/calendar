@@ -23,7 +23,7 @@ class AffectedTaskOccurrencesType extends Enumeration
      *
      * @var string
      */
-    const ALL = 'AllOccurrences';
+    final public const ALL = 'AllOccurrences';
 
     /**
      * A delete item request deletes only specific occurrences of a task.
@@ -32,5 +32,5 @@ class AffectedTaskOccurrencesType extends Enumeration
      *
      * @var string
      */
-    const SPECIFIED = 'SpecifiedOccurrenceOnly';
+    final public const SPECIFIED = 'SpecifiedOccurrenceOnly';
 }

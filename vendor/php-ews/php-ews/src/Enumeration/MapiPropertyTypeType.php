@@ -22,7 +22,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const APPLICATION_TIME = 'ApplicationTime';
+    final public const APPLICATION_TIME = 'ApplicationTime';
 
     /**
      * An array of double values that are interpreted as a date and time.
@@ -31,7 +31,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const APPLICATION_TIME_ARRAY = 'ApplicationTimeArray';
+    final public const APPLICATION_TIME_ARRAY = 'ApplicationTimeArray';
 
     /**
      * A Base64-encoded binary value.
@@ -40,7 +40,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const BINARY = 'Binary';
+    final public const BINARY = 'Binary';
 
     /**
      * An array of Base64-encoded binary values.
@@ -49,7 +49,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const BINARY_ARRAY = 'BinaryArray';
+    final public const BINARY_ARRAY = 'BinaryArray';
 
     /**
      * A Boolean true or false.
@@ -58,7 +58,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const BOOLEAN = 'Boolean';
+    final public const BOOLEAN = 'Boolean';
 
     /**
      * A GUID string.
@@ -67,7 +67,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const CLSID = 'CLSID';
+    final public const CLSID = 'CLSID';
 
     /**
      * An array of GUID strings.
@@ -76,7 +76,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const CLSID_ARRAY = 'CLSIDArray';
+    final public const CLSID_ARRAY = 'CLSIDArray';
 
     /**
      * A 64-bit integer that is interpreted as the number of cents.
@@ -85,7 +85,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const CURRENCY = 'Currency';
+    final public const CURRENCY = 'Currency';
 
     /**
      * An array of 64-bit integers that are interpreted as the number of cents.
@@ -94,7 +94,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const CURRENCY_ARRAY = 'CurrencyArray';
+    final public const CURRENCY_ARRAY = 'CurrencyArray';
 
     /**
      * A 64-bit floating-point value.
@@ -103,7 +103,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const DOUBLE = 'Double';
+    final public const DOUBLE = 'Double';
 
     /**
      * An array of 64-bit floating-point values.
@@ -112,7 +112,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const DOUBLE_ARRAY = 'DoubleArray';
+    final public const DOUBLE_ARRAY = 'DoubleArray';
 
     /**
      * SCODE value; 32-bit unsigned integer.
@@ -124,7 +124,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const ERROR = 'Error';
+    final public const ERROR = 'Error';
 
     /**
      * A 32-bit floating-point value.
@@ -133,7 +133,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const FLOAT = 'Float';
+    final public const FLOAT = 'Float';
 
     /**
      * An array of 32-bit floating-point values.
@@ -142,7 +142,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const FLOAT_ARRAY = 'FloatArray';
+    final public const FLOAT_ARRAY = 'FloatArray';
 
     /**
      * A signed 32-bit (Int32) integer.
@@ -151,7 +151,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const INTEGER = 'Integer';
+    final public const INTEGER = 'Integer';
 
     /**
      * An array of signed 32-bit (Int32) integers.
@@ -160,7 +160,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const INTEGER_ARRAY = 'IntegerArray';
+    final public const INTEGER_ARRAY = 'IntegerArray';
 
     /**
      * A signed or unsigned 64-bit (Int64) integer.
@@ -169,7 +169,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const LONG = 'Long';
+    final public const LONG = 'Long';
 
     /**
      * An array of signed or unsigned 64-bit (Int64) integers.
@@ -178,7 +178,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const LONG_ARRAY = 'LongArray';
+    final public const LONG_ARRAY = 'LongArray';
 
     /**
      * Indicates no property value.
@@ -190,7 +190,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const NULL_TYPE = 'Null';
+    final public const NULL_TYPE = 'Null';
 
     /**
      * A pointer to an object that implements the IUnknown interface.
@@ -202,7 +202,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const OBJECT = 'Object';
+    final public const OBJECT = 'Object';
 
     /**
      * An array of pointers to objects that implement the IUnknown interface.
@@ -214,7 +214,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const OBJECT_ARRAY = 'ObjectArray';
+    final public const OBJECT_ARRAY = 'ObjectArray';
 
     /**
      * A signed 16-bit integer.
@@ -223,7 +223,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const SHORT = 'Short';
+    final public const SHORT = 'Short';
 
     /**
      * An array of signed 16-bit integers.
@@ -232,7 +232,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const SHORT_ARRAY = 'ShortArray';
+    final public const SHORT_ARRAY = 'ShortArray';
 
     /**
      * A 64-bit integer data and time value in the form of a FILETIME structure.
@@ -241,7 +241,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const SYSTEM_TIME = 'SystemTime';
+    final public const SYSTEM_TIME = 'SystemTime';
 
     /**
      * An array of 64-bit integer data and time values in the form of a FILETIME
@@ -251,7 +251,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const SYSTEM_TIME_ARRAY = 'SystemTimeArray';
+    final public const SYSTEM_TIME_ARRAY = 'SystemTimeArray';
 
     /**
      * A Unicode string.
@@ -260,7 +260,7 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const STRING = 'String';
+    final public const STRING = 'String';
 
     /**
      * An array of Unicode strings.
@@ -269,5 +269,5 @@ class MapiPropertyTypeType extends Enumeration
      *
      * @var string
      */
-    const STRING_ARRAY = 'StringArray';
+    final public const STRING_ARRAY = 'StringArray';
 }

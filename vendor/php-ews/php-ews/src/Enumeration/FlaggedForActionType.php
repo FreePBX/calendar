@@ -22,7 +22,7 @@ class FlaggedForActionType extends Enumeration
      *
      * @var string
      */
-    const ANY = 'Any';
+    final public const ANY = 'Any';
 
     /**
      * Indicates that the message has been flagged for a call.
@@ -31,7 +31,7 @@ class FlaggedForActionType extends Enumeration
      *
      * @var string
      */
-    const CALL = 'Call';
+    final public const CALL = 'Call';
 
     /**
      * Indicates that the message is not to be forwarded.
@@ -40,7 +40,7 @@ class FlaggedForActionType extends Enumeration
      *
      * @var string
      */
-    const DO_NOT_FORWARD = 'DoNotForward';
+    final public const DO_NOT_FORWARD = 'DoNotForward';
 
     /**
      * Indicates that the message has been flagged for a follow up.
@@ -49,7 +49,7 @@ class FlaggedForActionType extends Enumeration
      *
      * @var string
      */
-    const FOLLOW_UP = 'FollowUp';
+    final public const FOLLOW_UP = 'FollowUp';
 
     /**
      * Indicates that the message is to be forwarded.
@@ -58,7 +58,7 @@ class FlaggedForActionType extends Enumeration
      *
      * @var string
      */
-    const FORWARD = 'Forward';
+    final public const FORWARD = 'Forward';
 
     /**
      * Indicates that the message has been flagged as FYI.
@@ -67,7 +67,7 @@ class FlaggedForActionType extends Enumeration
      *
      * @var string
      */
-    const FYI = 'FYI';
+    final public const FYI = 'FYI';
 
     /**
      * Indicates that the message does not require a response.
@@ -76,7 +76,7 @@ class FlaggedForActionType extends Enumeration
      *
      * @var string
      */
-    const NO_RESPONSE_NECESSARY = 'NoResponseNecessary';
+    final public const NO_RESPONSE_NECESSARY = 'NoResponseNecessary';
 
     /**
      * Indicates that the message is to be read.
@@ -85,7 +85,7 @@ class FlaggedForActionType extends Enumeration
      *
      * @var string
      */
-    const READ = 'Read';
+    final public const READ = 'Read';
 
     /**
      * Indicates that the message needs a reply.
@@ -94,7 +94,7 @@ class FlaggedForActionType extends Enumeration
      *
      * @var string
      */
-    const REPLY = 'Reply';
+    final public const REPLY = 'Reply';
 
     /**
      * Indicates that the message needs a reply to all recipients.
@@ -103,7 +103,7 @@ class FlaggedForActionType extends Enumeration
      *
      * @var string
      */
-    const REPLY_TO_ALL = 'ReplyToAll';
+    final public const REPLY_TO_ALL = 'ReplyToAll';
 
     /**
      * Indicates that the message has been flagged for review.
@@ -112,5 +112,5 @@ class FlaggedForActionType extends Enumeration
      *
      * @var string
      */
-    const REVIEW = 'Review';
+    final public const REVIEW = 'Review';
 }

@@ -21,7 +21,7 @@ class ResolveNamesSearchScopeType extends Enumeration
      *
      * @var string
      */
-    const ACTIVE_DIRECTORY = 'ActiveDirectory';
+    final public const ACTIVE_DIRECTORY = 'ActiveDirectory';
 
     /**
      * Active Directory is searched first, and then the contact folders that are
@@ -31,7 +31,7 @@ class ResolveNamesSearchScopeType extends Enumeration
      *
      * @var string
      */
-    const ACTIVE_DIRECTORY_CONTACTS = 'ActiveDirectoryContacts';
+    final public const ACTIVE_DIRECTORY_CONTACTS = 'ActiveDirectoryContacts';
 
     /**
      * Only the contact folders that are identified by the ParentFolderIds
@@ -41,7 +41,7 @@ class ResolveNamesSearchScopeType extends Enumeration
      *
      * @var string
      */
-    const CONTACTS = 'Contacts';
+    final public const CONTACTS = 'Contacts';
 
     /**
      * Contact folders that are identified by the ParentFolderIds property are
@@ -51,5 +51,5 @@ class ResolveNamesSearchScopeType extends Enumeration
      *
      * @var string
      */
-    const CONTACTS_ACTIVE_DIRECTORY = 'ContactsActiveDirectory';
+    final public const CONTACTS_ACTIVE_DIRECTORY = 'ContactsActiveDirectory';
 }

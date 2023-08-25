@@ -32,5 +32,5 @@ class UserConfigurationDictionaryObjectType extends Type
      *
      * @var string[]
      */
-    public $Value = array();
+    public $Value = [];
 }

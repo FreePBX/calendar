@@ -10,7 +10,7 @@ namespace jamesiarmes\PhpEws;
  *
  * @package php-ews\Enumeration
  */
-class Enumeration extends Type
+class Enumeration extends Type implements \Stringable
 {
     /**
      * Element value.
@@ -29,7 +29,7 @@ class Enumeration extends Type
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->_;
     }

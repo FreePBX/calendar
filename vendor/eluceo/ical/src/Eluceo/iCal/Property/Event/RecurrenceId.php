@@ -23,14 +23,14 @@ use Eluceo\iCal\Property\ValueInterface;
  */
 class RecurrenceId extends Property
 {
-    const PROPERTY_NAME = 'RECURRENCE-ID';
+    final public const PROPERTY_NAME = 'RECURRENCE-ID';
 
     /**
      * The effective range of recurrence instances from the instance
      * specified by the recurrence identifier specified by the property.
      */
-    const RANGE_THISANDPRIOR  = 'THISANDPRIOR';
-    const RANGE_THISANDFUTURE = 'THISANDFUTURE';
+    final public const RANGE_THISANDPRIOR  = 'THISANDPRIOR';
+    final public const RANGE_THISANDFUTURE = 'THISANDFUTURE';
 
     /**
      * The dateTime to identify a particular instance of a recurring event which is getting modified.
@@ -56,7 +56,7 @@ class RecurrenceId extends Property
 
     public function applyTimeSettings($noTime = false, $useTimezone = false, $useUtc = false)
     {
-        $params = DateUtil::getDefaultParams($this->dateTime, $noTime, $useTimezone, $useUtc);
+        $params = DateUtil::getDefaultParams($this->dateTime, $noTime, $useTimezone);
         foreach ($params as $name => $value) {
             $this->parameterBag->setParam($name, $value);
         }
@@ -77,8 +77,6 @@ class RecurrenceId extends Property
     }
 
     /**
-     * @param \DateTime $dateTime
-     *
      * @return \Eluceo\iCal\Property\Event\RecurrenceId
      */
     public function setDatetime(\DateTime $dateTime)

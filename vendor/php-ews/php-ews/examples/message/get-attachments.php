@@ -70,7 +70,7 @@ foreach ($response_messages as $response_message) {
     }
 
     // Iterate over the messages, getting the attachments for each.
-    $attachments = array();
+    $attachments = [];
     foreach ($response_message->Items->Message as $item) {
         // If there are no attachments for the item, move on to the next
         // message.

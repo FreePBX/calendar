@@ -21,7 +21,7 @@ class PhoneCallStateType extends Enumeration
      *
      * @var string
      */
-    const ALERTED = 'Alerted';
+    final public const ALERTED = 'Alerted';
 
     /**
      * The call is in the connected state.
@@ -30,7 +30,7 @@ class PhoneCallStateType extends Enumeration
      *
      * @var string
      */
-    const CONNECTED = 'Connected';
+    final public const CONNECTED = 'Connected';
 
     /**
      * The system is dialing this call.
@@ -39,7 +39,7 @@ class PhoneCallStateType extends Enumeration
      *
      * @var string
      */
-    const CONNECTING = 'Connecting';
+    final public const CONNECTING = 'Connecting';
 
     /**
      * The call is disconnected.
@@ -48,7 +48,7 @@ class PhoneCallStateType extends Enumeration
      *
      * @var string
      */
-    const DISCONNECTED = 'Disconnected';
+    final public const DISCONNECTED = 'Disconnected';
 
     /**
      * The call is being forwarded to another destination.
@@ -57,7 +57,7 @@ class PhoneCallStateType extends Enumeration
      *
      * @var string
      */
-    const FORWARDING = 'Forwarding';
+    final public const FORWARDING = 'Forwarding';
 
     /**
      * Initial call state.
@@ -66,7 +66,7 @@ class PhoneCallStateType extends Enumeration
      *
      * @var string
      */
-    const IDLE = 'Idle';
+    final public const IDLE = 'Idle';
 
     /**
      * The call is inbound.
@@ -75,7 +75,7 @@ class PhoneCallStateType extends Enumeration
      *
      * @var string
      */
-    const INCOMING = 'Incoming';
+    final public const INCOMING = 'Incoming';
 
     /**
      * The call is being transferred to another destination.
@@ -84,5 +84,5 @@ class PhoneCallStateType extends Enumeration
      *
      * @var string
      */
-    const TRANSFERRING = 'Transferring';
+    final public const TRANSFERRING = 'Transferring';
 }

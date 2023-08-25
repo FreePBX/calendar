@@ -21,7 +21,7 @@ class SearchItemKindType extends Enumeration
      *
      * @var string
      */
-    const CONTACT = 'Contacts';
+    final public const CONTACT = 'Contacts';
 
     /**
      * Indicates that documents are searched for keywords.
@@ -30,7 +30,7 @@ class SearchItemKindType extends Enumeration
      *
      * @var string
      */
-    const DOCUMENT = 'Docs';
+    final public const DOCUMENT = 'Docs';
 
     /**
      * Indicates that email messages are searched for keywords.
@@ -39,7 +39,7 @@ class SearchItemKindType extends Enumeration
      *
      * @var string
      */
-    const EMAIL = 'Email';
+    final public const EMAIL = 'Email';
 
     /**
      * Indicates that faxes are searched for keywords.
@@ -48,7 +48,7 @@ class SearchItemKindType extends Enumeration
      *
      * @var string
      */
-    const FAX = 'Faxes';
+    final public const FAX = 'Faxes';
 
     /**
      * Indicates that instant messages are searched for keywords.
@@ -57,7 +57,7 @@ class SearchItemKindType extends Enumeration
      *
      * @var string
      */
-    const INSTANT_MESSAGE = 'Im';
+    final public const INSTANT_MESSAGE = 'Im';
 
     /**
      * Indicates that journals are searched for keywords.
@@ -66,7 +66,7 @@ class SearchItemKindType extends Enumeration
      *
      * @var string
      */
-    const JOURNAL = 'Journals';
+    final public const JOURNAL = 'Journals';
 
     /**
      * Indicates that meetings are searched for keywords.
@@ -75,7 +75,7 @@ class SearchItemKindType extends Enumeration
      *
      * @var string
      */
-    const MEETING = 'Meetings';
+    final public const MEETING = 'Meetings';
 
     /**
      * Indicates that notes are searched for keywords.
@@ -84,7 +84,7 @@ class SearchItemKindType extends Enumeration
      *
      * @var string
      */
-    const NOTE = 'Notes';
+    final public const NOTE = 'Notes';
 
     /**
      * Indicates that posts are searched for keywords.
@@ -93,7 +93,7 @@ class SearchItemKindType extends Enumeration
      *
      * @var string
      */
-    const POST = 'Posts';
+    final public const POST = 'Posts';
 
     /**
      * Indicates that RSS feeds are searched for keywords.
@@ -102,7 +102,7 @@ class SearchItemKindType extends Enumeration
      *
      * @var string
      */
-    const RSS_FEEDS = 'Rssfeeds';
+    final public const RSS_FEEDS = 'Rssfeeds';
 
     /**
      * Indicates that tasks are searched for keywords.
@@ -111,7 +111,7 @@ class SearchItemKindType extends Enumeration
      *
      * @var string
      */
-    const TASK = 'Tasks';
+    final public const TASK = 'Tasks';
 
     /**
      * Indicates that voice mails are searched for keywords.
@@ -120,5 +120,5 @@ class SearchItemKindType extends Enumeration
      *
      * @var string
      */
-    const VOICEMAIL = 'Voicemail';
+    final public const VOICEMAIL = 'Voicemail';
 }

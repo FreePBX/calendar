@@ -12,7 +12,7 @@ use \jamesiarmes\PhpEws\ArrayType;
  *
  * @package php-ews\Array
  */
-class ArrayOfStringsType extends ArrayType
+class ArrayOfStringsType extends ArrayType implements \Stringable
 {
     /**
      * Contains a single string.
@@ -21,7 +21,7 @@ class ArrayOfStringsType extends ArrayType
      *
      * @var string[]
      */
-    public $String = array();
+    public $String = [];
 
     /**
      * Properly converts the value of this type to a string.
@@ -30,8 +30,8 @@ class ArrayOfStringsType extends ArrayType
      *
      * @todo Determine if this is needed.
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->String;
+        return (string) $this->String;
     }
 }

@@ -21,15 +21,15 @@ use Eluceo\iCal\Util\PropertyValueUtil;
 class Description implements ValueInterface
 {
     /**
-     * The value.
-     *
-     * @var string
+     * @param string $value
      */
-    protected $value;
-
-    public function __construct($value)
+    public function __construct(
+        /**
+         * The value.
+         */
+        protected $value
+    )
     {
-        $this->value = $value;
     }
 
     /**

@@ -21,7 +21,7 @@ class PhysicalAddressKeyType extends Enumeration
      *
      * @var string
      */
-    const BUSINESS = 'Business';
+    final public const BUSINESS = 'Business';
 
     /**
      * Indicates that the address is a home.
@@ -30,7 +30,7 @@ class PhysicalAddressKeyType extends Enumeration
      *
      * @var string
      */
-    const HOME = 'Home';
+    final public const HOME = 'Home';
 
     /**
      * Indicates that the address is another type of location.
@@ -39,5 +39,5 @@ class PhysicalAddressKeyType extends Enumeration
      *
      * @var string
      */
-    const OTHER = 'Other';
+    final public const OTHER = 'Other';
 }

@@ -308,7 +308,7 @@ class IcalRangedParserTest extends PHPUnit_Framework_TestCase {
 	}
 
 	function assertEvents($assertEvents, $events) {
-		$this->assertEquals(count($events), count($assertEvents));
+		$this->assertEquals(is_countable($events) ? count($events) : 0, is_countable($assertEvents) ? count($assertEvents) : 0);
 		foreach($assertEvents as $k => $args) {
 			$msg = 'Failed asserting that '.$k.'('.implode(",",$args).") is between ".Carbon::instance($events[$k]['DTSTART'])->format('c')." and ".Carbon::instance($events[$k]['DTEND'])->format('c');
 			$this->assertTrue(call_user_func_array('Carbon\Carbon::create',$args)->between(Carbon::instance($events[$k]['DTSTART']),Carbon::instance($events[$k]['DTEND'])),$msg);

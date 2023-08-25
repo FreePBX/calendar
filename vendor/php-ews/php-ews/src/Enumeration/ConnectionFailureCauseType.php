@@ -21,7 +21,7 @@ class ConnectionFailureCauseType extends Enumeration
      *
      * @var string
      */
-    const NO_ANSWER = 'NoAnswer';
+    final public const NO_ANSWER = 'NoAnswer';
 
     /**
      * Call state is not disconnected or the disconnect reason is not known.
@@ -30,7 +30,7 @@ class ConnectionFailureCauseType extends Enumeration
      *
      * @var string
      */
-    const NONE = 'None';
+    final public const NONE = 'None';
 
     /**
      * Catch-all for other disconnect reasons.
@@ -39,7 +39,7 @@ class ConnectionFailureCauseType extends Enumeration
      *
      * @var string
      */
-    const OTHER = 'Other';
+    final public const OTHER = 'Other';
 
     /**
      * The called party number was not available.
@@ -48,7 +48,7 @@ class ConnectionFailureCauseType extends Enumeration
      *
      * @var string
      */
-    const UNAVAILABLE = 'Unavailable';
+    final public const UNAVAILABLE = 'Unavailable';
 
     /**
      * The called party line was busy.
@@ -57,5 +57,5 @@ class ConnectionFailureCauseType extends Enumeration
      *
      * @var string
      */
-    const USER_BUSY = 'UserBusy';
+    final public const USER_BUSY = 'UserBusy';
 }

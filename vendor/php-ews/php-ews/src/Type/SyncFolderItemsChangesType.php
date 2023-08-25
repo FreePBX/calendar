@@ -23,7 +23,7 @@ class SyncFolderItemsChangesType extends Type
      *
      * @var \jamesiarmes\PhpEws\Type\SyncFolderItemsCreateOrUpdateType[]
      */
-    public $Create = array();
+    public $Create = [];
 
     /**
      * Identifies a single item to delete in the local client store.
@@ -32,7 +32,7 @@ class SyncFolderItemsChangesType extends Type
      *
      * @var \jamesiarmes\PhpEws\Type\SyncFolderItemsDeleteType[]
      */
-    public $Delete = array();
+    public $Delete = [];
 
     /**
      * Returned in SyncFolderItems operation responses when an item has been
@@ -44,7 +44,7 @@ class SyncFolderItemsChangesType extends Type
      *
      * @var \jamesiarmes\PhpEws\Type\SyncFolderItemsReadFlagType[]
      */
-    public $ReadFlagChange = array();
+    public $ReadFlagChange = [];
 
     /**
      * Identifies a single item to update in the local client store.
@@ -53,5 +53,5 @@ class SyncFolderItemsChangesType extends Type
      *
      * @var \jamesiarmes\PhpEws\Type\SyncFolderItemsCreateOrUpdateType[]
      */
-    public $Update = array();
+    public $Update = [];
 }

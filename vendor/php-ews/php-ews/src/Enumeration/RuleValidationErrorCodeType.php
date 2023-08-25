@@ -22,7 +22,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const AD_OPERATION_FAILURE = 'ADOperationFailure';
+    final public const AD_OPERATION_FAILURE = 'ADOperationFailure';
 
     /**
      * Indicates a connected account could not be found.
@@ -31,7 +31,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const CONNECTED_ACCOUNT_NOT_FOUND = 'ConnectedAccountNotFound';
+    final public const CONNECTED_ACCOUNT_NOT_FOUND = 'ConnectedAccountNotFound';
 
     /**
      * Indicates an error creating a rule with an id.
@@ -40,7 +40,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const CREATE_WITH_RULE_ID = 'CreateWithRuleId';
+    final public const CREATE_WITH_RULE_ID = 'CreateWithRuleId';
 
     /**
      * Indicates an error duplicating an operation on the same rule.
@@ -49,7 +49,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const DUPLICATED_OPERATION_ON_THE_SAME_RULE = 'DuplicatedOperationOnTheSameRule';
+    final public const DUPLICATED_OPERATION_ON_THE_SAME_RULE = 'DuplicatedOperationOnTheSameRule';
 
     /**
      * Indicates an error with a duplicated priority.
@@ -58,7 +58,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const DUPLICATED_PRIORITY = 'DuplicatedPriority';
+    final public const DUPLICATED_PRIORITY = 'DuplicatedPriority';
 
     /**
      * Indicates an empty value.
@@ -67,7 +67,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const EMPTY_VALUE_FOUND = 'EmptyValueFound';
+    final public const EMPTY_VALUE_FOUND = 'EmptyValueFound';
 
     /**
      * Indicates that a folder does not exist.
@@ -76,7 +76,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const FOLDER_DOES_NOT_EXIST = 'FolderDoesNotExist';
+    final public const FOLDER_DOES_NOT_EXIST = 'FolderDoesNotExist';
 
     /**
      * Indicates an invalid address.
@@ -85,7 +85,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ADDRESS = 'InvalidAddress';
+    final public const INVALID_ADDRESS = 'InvalidAddress';
 
     /**
      * Indicates an invalid date range
@@ -94,7 +94,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_DATE_RANGE = 'InvalidDateRange';
+    final public const INVALID_DATE_RANGE = 'InvalidDateRange';
 
     /**
      * Indicates an invalid folder id.
@@ -103,7 +103,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_FOLDER_ID = 'InvalidFolderId';
+    final public const INVALID_FOLDER_ID = 'InvalidFolderId';
 
     /**
      * Indicates an invalid size range
@@ -112,7 +112,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SIZE_RANGE = 'InvalidSizeRange';
+    final public const INVALID_SIZE_RANGE = 'InvalidSizeRange';
 
     /**
      * Indicates an invalid value.
@@ -121,7 +121,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_VALUE = 'InvalidValue';
+    final public const INVALID_VALUE = 'InvalidValue';
 
     /**
      * Indicates that a message classification could not be found.
@@ -130,7 +130,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const MESSAGE_CLASSIFICATION_NOT_FOUND = 'MessageClassificationNotFound';
+    final public const MESSAGE_CLASSIFICATION_NOT_FOUND = 'MessageClassificationNotFound';
 
     /**
      * Indicates an action is missing.
@@ -139,7 +139,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const MISSING_ACTION = 'MissingAction';
+    final public const MISSING_ACTION = 'MissingAction';
 
     /**
      * Indicates a missing parameter.
@@ -148,7 +148,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const MISSING_PARAMETER = 'MissingParameter';
+    final public const MISSING_PARAMETER = 'MissingParameter';
 
     /**
      * Indicates an error MissingRangeValue.
@@ -157,7 +157,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const MISSING_RANGE_VALUE = 'MissingRangeValue';
+    final public const MISSING_RANGE_VALUE = 'MissingRangeValue';
 
     /**
      * Indicates a field is not settable.
@@ -166,7 +166,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const NOT_SETTABLE = 'NotSettable';
+    final public const NOT_SETTABLE = 'NotSettable';
 
     /**
      * Indicates that a recipient does not exist.
@@ -175,7 +175,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const RECIPIENT_DOES_NOT_EXIST = 'RecipientDoesNotExist';
+    final public const RECIPIENT_DOES_NOT_EXIST = 'RecipientDoesNotExist';
 
     /**
      * Indicates that a rule could not be found.
@@ -184,7 +184,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const RULE_NOT_FOUND = 'RuleNotFound';
+    final public const RULE_NOT_FOUND = 'RuleNotFound';
 
     /**
      * Indicates that a size less than zero was specified.
@@ -193,7 +193,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const SIZE_LESS_THAN_ZERO = 'SizeLessThanZero';
+    final public const SIZE_LESS_THAN_ZERO = 'SizeLessThanZero';
 
     /**
      * Indicates that a strings value is too large.
@@ -202,7 +202,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const STRING_VALUE_TOO_BIG = 'StringValueTooBig';
+    final public const STRING_VALUE_TOO_BIG = 'StringValueTooBig';
 
     /**
      * Indicates an unknown error.
@@ -211,7 +211,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const UNEXPECTED_ERROR = 'UnexpectedError';
+    final public const UNEXPECTED_ERROR = 'UnexpectedError';
 
     /**
      * Indicates an unsupported address.
@@ -220,7 +220,7 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const UNSUPPORTED_ADDRESS = 'UnsupportedAddress';
+    final public const UNSUPPORTED_ADDRESS = 'UnsupportedAddress';
 
     /**
      * Indicates an unsupported rule.
@@ -229,5 +229,5 @@ class RuleValidationErrorCodeType extends Enumeration
      *
      * @var string
      */
-    const UNSUPPORTED_RULE = 'UnsupportedRule';
+    final public const UNSUPPORTED_RULE = 'UnsupportedRule';
 }

@@ -21,5 +21,5 @@ class NonEmptyArrayOfApplyConversationActionType extends ArrayType
      *
      * @var \jamesiarmes\PhpEws\Type\ConversationActionType[]
      */
-    public $ConversationAction = array();
+    public $ConversationAction = [];
 }

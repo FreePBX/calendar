@@ -12,9 +12,7 @@ class Ews extends Base {
 	 * @return array  array of information
 	 */
 	public static function getInfo() {
-		return array(
-			"name" => _("Remote Outlook Calendar")
-		);
+		return ["name" => _("Remote Outlook Calendar")];
 	}
 
 	/**
@@ -37,11 +35,7 @@ class Ews extends Base {
 		try {
 			foreach($ews->getAllCalendars() as $calendar) {
 				$id = $calendar['id'];
-				$calendars[$id] = array(
-					"id" => $id,
-					"name" => $calendar['name'],
-					"selected" => in_array($id,$data['calendars'])
-				);
+				$calendars[$id] = ["id" => $id, "name" => $calendar['name'], "selected" => in_array($id,$data['calendars'])];
 			}
 		} catch(\Exception $e) {
 			$message = [
@@ -50,7 +44,7 @@ class Ews extends Base {
 			];
 		}
 
-		return load_view(dirname(__DIR__)."/views/remote_ews_settings.php",array('action' => 'edit', 'data' => $data, 'calendars' => $calendars, 'message' => $message));
+		return load_view(dirname(__DIR__)."/views/remote_ews_settings.php",['action' => 'edit', 'data' => $data, 'calendars' => $calendars, 'message' => $message]);
 	}
 
 	/**
@@ -62,7 +56,7 @@ class Ews extends Base {
 		if(!class_exists('SoapClient')) {
 			return _("You are missing the PHP SoapClient library. Please install to continue");
 		}
-		return load_view(dirname(__DIR__)."/views/remote_ews_settings.php",array('action' => 'add', 'calendars' => array(), 'data' => array('next' => 86400)));
+		return load_view(dirname(__DIR__)."/views/remote_ews_settings.php",['action' => 'add', 'calendars' => [], 'data' => ['next' => 86400]]);
 	}
 
 	/**
@@ -76,18 +70,7 @@ class Ews extends Base {
 		if(!class_exists('SoapClient')) {
 			return false;
 		}
-		$calendar = array(
-			"name" => $data['name'],
-			"description" => $data['description'],
-			"type" => "ews",
-			"email" => $data['email'],
-			"version" => 'VERSION_2016',
-			"url" => $data['url'],
-			"username" => $data['username'],
-			"password" => $data['password'],
-			"calendars" => !empty($data['calendars']) ? $data['calendars'] : array(),
-			"next" => !empty($data['next']) ? $data['next'] : 300,
-		);
+		$calendar = ["name" => $data['name'], "description" => $data['description'], "type" => "ews", "email" => $data['email'], "version" => 'VERSION_2016', "url" => $data['url'], "username" => $data['username'], "password" => $data['password'], "calendars" => !empty($data['calendars']) ? $data['calendars'] : [], "next" => !empty($data['next']) ? $data['next'] : 300];
 		$ret = parent::updateCalendar($calendar);
 		$this->processCalendar();
 		return $ret;

@@ -21,7 +21,7 @@ class AppointmentState extends Enumeration
      *
      * @var string
      */
-    const CANCELED = 4;
+    final public const CANCELED = 4;
 
     /**
      * This appointment was forwarded.
@@ -30,7 +30,7 @@ class AppointmentState extends Enumeration
      *
      * @var string
      */
-    const FORWARD = 8;
+    final public const FORWARD = 8;
 
     /**
      * This appointment is a meeting.
@@ -39,7 +39,7 @@ class AppointmentState extends Enumeration
      *
      * @var string
      */
-    const MEETING = 1;
+    final public const MEETING = 1;
 
     /**
      * No flags have been set.
@@ -50,7 +50,7 @@ class AppointmentState extends Enumeration
      *
      * @var string
      */
-    const NONE = 0;
+    final public const NONE = 0;
 
     /**
      * This appointment has been received.
@@ -59,5 +59,5 @@ class AppointmentState extends Enumeration
      *
      * @var string
      */
-    const RECEIVED = 2;
+    final public const RECEIVED = 2;
 }

@@ -21,7 +21,7 @@ class ItemQueryTraversalType extends Enumeration
      *
      * @var string
      */
-    const ASSOCIATED = 'Associated';
+    final public const ASSOCIATED = 'Associated';
 
     /**
      * Returns only the identities of items in the folder.
@@ -30,7 +30,7 @@ class ItemQueryTraversalType extends Enumeration
      *
      * @var string
      */
-    const SHALLOW = 'Shallow';
+    final public const SHALLOW = 'Shallow';
 
     /**
      * Returns only the identities of items that are in a folder's dumpster.
@@ -43,5 +43,5 @@ class ItemQueryTraversalType extends Enumeration
      *
      * @var string
      */
-    const SOFT_DELETED = 'SoftDeleted';
+    final public const SOFT_DELETED = 'SoftDeleted';
 }

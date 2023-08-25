@@ -22,7 +22,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ACCESS_DENIED = 'ErrorAccessDenied';
+    final public const ACCESS_DENIED = 'ErrorAccessDenied';
 
     /**
      * This error is for internal use only. This error is not returned.
@@ -31,7 +31,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ACCESS_MODE_SPECIFIED = 'ErrorAccessModeSpecified';
+    final public const ACCESS_MODE_SPECIFIED = 'ErrorAccessModeSpecified';
 
     /**
      * This error occurs when the account in question has been disabled.
@@ -40,7 +40,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ACCOUNT_DISABLED = 'ErrorAccountDisabled';
+    final public const ACCOUNT_DISABLED = 'ErrorAccountDisabled';
 
     /**
      * This error occurs when AD DS is unavailable; Try your request again
@@ -50,7 +50,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const AD_UNAVAILABLE = 'ErrorADUnavailable';
+    final public const AD_UNAVAILABLE = 'ErrorADUnavailable';
 
     /**
      * This error occurs when a list with added delegates cannot be saved.
@@ -59,7 +59,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ADD_DELEGATES_FAILED = 'ErrorAddDelegatesFailed';
+    final public const ADD_DELEGATES_FAILED = 'ErrorAddDelegatesFailed';
 
     /**
      * This error occurs when the address space record, or Domain Name System
@@ -70,7 +70,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ADDRESS_SPACE_NOT_FOUND = 'ErrorAddressSpaceNotFound';
+    final public const ADDRESS_SPACE_NOT_FOUND = 'ErrorAddressSpaceNotFound';
 
     /**
      * This error indicates that the AffectedTaskOccurrences attribute was not
@@ -86,7 +86,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const AFFECTED_TASK_OCCURRENCES_REQUIRED = 'ErrorAffectedTaskOccurrencesRequired';
+    final public const AFFECTED_TASK_OCCURRENCES_REQUIRED = 'ErrorAffectedTaskOccurrencesRequired';
 
     /**
      * This error MUST be returned if an action cannot be applied to one or more
@@ -96,7 +96,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const APPLY_CONVERSATION_ACTION_FAILED = 'ErrorApplyConversationActionFailed';
+    final public const APPLY_CONVERSATION_ACTION_FAILED = 'ErrorApplyConversationActionFailed';
 
     /**
      * Indicates that the archive mailbox was not enabled.
@@ -105,7 +105,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ARCHIVE_MAILBOX_NOT_ENABLED = 'ErrorArchiveMailboxNotEnabled';
+    final public const ARCHIVE_MAILBOX_NOT_ENABLED = 'ErrorArchiveMailboxNotEnabled';
 
     /**
      * This error is returned when an archive mailbox search is unsuccessful.
@@ -114,7 +114,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ARCHIVE_MAILBOX_SEARCH_FAILED = 'ErrorArchiveMailboxSearchFailed';
+    final public const ARCHIVE_MAILBOX_SEARCH_FAILED = 'ErrorArchiveMailboxSearchFailed';
 
     /**
      * Indicates that archive mailbox service discovery failed.
@@ -123,7 +123,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ARCHIVE_MAILBOX_SERVICE_DISCOVERY_FAILED = 'ErrorArchiveMailboxServiceDiscoveryFailed';
+    final public const ARCHIVE_MAILBOX_SERVICE_DISCOVERY_FAILED = 'ErrorArchiveMailboxServiceDiscoveryFailed';
 
     /**
      * Specifies that an attempt was made to create an item with more than 10
@@ -133,7 +133,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ATTACHMENT_NEST_LEVEL_LIMIT_EXCEEDED = 'ErrorAttachmentNestLevelLimitExceeded';
+    final public const ATTACHMENT_NEST_LEVEL_LIMIT_EXCEEDED = 'ErrorAttachmentNestLevelLimitExceeded';
 
     /**
      * This error occurs if an attempt to create or retrieve an attachment with
@@ -143,7 +143,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ATTACHMENT_SIZE_LIMIT_EXCEEDED = 'ErrorAttachmentSizeLimitExceeded';
+    final public const ATTACHMENT_SIZE_LIMIT_EXCEEDED = 'ErrorAttachmentSizeLimitExceeded';
 
     /**
      * This error indicates that Exchange Web Services tried to determine the
@@ -155,7 +155,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const AUTO_DISCOVERY_FAILED = 'ErrorAutoDiscoverFailed';
+    final public const AUTO_DISCOVERY_FAILED = 'ErrorAutoDiscoverFailed';
 
     /**
      * This error indicates that the availability configuration information for
@@ -165,7 +165,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const AVAILABILITY_CONFIG_NOT_FOUND = 'ErrorAvailabilityConfigNotFound';
+    final public const AVAILABILITY_CONFIG_NOT_FOUND = 'ErrorAvailabilityConfigNotFound';
 
     /**
      * This error indicates that an exception occurred while processing an item
@@ -195,7 +195,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const BATCH_PROCESSING_STOPPED = 'ErrorBatchProcessingStopped';
+    final public const BATCH_PROCESSING_STOPPED = 'ErrorBatchProcessingStopped';
 
     /**
      * This error is reported on Create/Update calendar item or task recurrence
@@ -208,7 +208,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CALENDAR_OUT_OF_RANGE = 'ErrorCalendarOutOfRange';
+    final public const CALENDAR_OUT_OF_RANGE = 'ErrorCalendarOutOfRange';
 
     /**
      * Indicates that an attempt was made to archive a calendar contact task folder.
@@ -217,7 +217,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_ARCHIVE_CALENDAR_CONTACT_TASK_FOLDER = 'ErrorCannotArchiveCalendarContactTaskFolderException';
+    final public const CANNOT_ARCHIVE_CALENDAR_CONTACT_TASK_FOLDER = 'ErrorCannotArchiveCalendarContactTaskFolderException';
 
     /**
      * Indicates that attempt was made to archive items in the archive mailbox.
@@ -226,7 +226,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_ARCHIVE_ITEM_IN_ARCHIVE_MAILBOX = 'ErrorCannotArchiveItemsInArchiveMailbox';
+    final public const CANNOT_ARCHIVE_ITEM_IN_ARCHIVE_MAILBOX = 'ErrorCannotArchiveItemsInArchiveMailbox';
 
     /**
      * Indicates that an attempt was made to archive items in public folders.
@@ -235,7 +235,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_ARCHIVE_ITEMS_IN_PUBLIC_FOLDERS = 'ErrorCannotArchiveItemsInPublicFolders';
+    final public const CANNOT_ARCHIVE_ITEMS_IN_PUBLIC_FOLDERS = 'ErrorCannotArchiveItemsInPublicFolders';
 
     /**
      * This error occurs when a calendar item is being created and the
@@ -245,7 +245,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_CREATE_CALENDAR_ITEM_FOLDER = 'ErrorCannotCreateCalendarItemInNonCalendarFolder';
+    final public const CANNOT_CREATE_CALENDAR_ITEM_FOLDER = 'ErrorCannotCreateCalendarItemInNonCalendarFolder';
 
     /**
      * This error occurs when a contact is being created and the
@@ -255,7 +255,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_CREATE_CONTACT_IN_FOLDER = 'ErrorCannotCreateContactInNonContactFolder';
+    final public const CANNOT_CREATE_CONTACT_IN_FOLDER = 'ErrorCannotCreateContactInNonContactFolder';
 
     /**
      * This error indicates that a post item cannot be created in a folder other
@@ -265,7 +265,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_CREATE_POST_IN_FOLDER = 'ErrorCannotCreatePostItemInNonMailFolder';
+    final public const CANNOT_CREATE_POST_IN_FOLDER = 'ErrorCannotCreatePostItemInNonMailFolder';
 
     /**
      * This error occurs when a task is being created and the SavedItemFolderId
@@ -275,7 +275,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_CREATE_TASK_IN_FOLDER = 'ErrorCannotCreateTaskInNonTaskFolder';
+    final public const CANNOT_CREATE_TASK_IN_FOLDER = 'ErrorCannotCreateTaskInNonTaskFolder';
 
     /**
      * This error occurs when the item or folder to delete cannot be deleted.
@@ -284,7 +284,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_DELETE_OBJECT = 'ErrorCannotDeleteObject';
+    final public const CANNOT_DELETE_OBJECT = 'ErrorCannotDeleteObject';
 
     /**
      * The DeleteItem Operation returns this error when it fails to delete the
@@ -297,7 +297,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_DELETE_TASK_OCCURRENCE = 'ErrorCannotDeleteTaskOccurrence';
+    final public const CANNOT_DELETE_TASK_OCCURRENCE = 'ErrorCannotDeleteTaskOccurrence';
 
     /**
      * Indicates that an attempt was made to disable a mandatory extension.
@@ -306,7 +306,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_DISABLE_MANDATORY_EXTENSION = 'ErrorCannotDisableMandatoryExtension';
+    final public const CANNOT_DISABLE_MANDATORY_EXTENSION = 'ErrorCannotDisableMandatoryExtension';
 
     /**
      * This error must be returned when the server cannot empty a folder.
@@ -315,7 +315,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_EMPTY_FOLDER = 'ErrorCannotEmptyFolder';
+    final public const CANNOT_EMPTY_FOLDER = 'ErrorCannotEmptyFolder';
 
     /**
      * Specifies that the server could not retrieve the external URL for Outlook
@@ -325,7 +325,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_GET_EXTERNAL_ECP_URL = 'ErrorCannotGetExternalEcpUrl';
+    final public const CANNOT_GET_EXTERNAL_ECP_URL = 'ErrorCannotGetExternalEcpUrl';
 
     /**
      * Indicates that the source folder path could not be retrieved.
@@ -334,7 +334,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_GET_SOURCE_FOLDER_PATH = 'ErrorCannotGetSourceFolderPath';
+    final public const CANNOT_GET_SOURCE_FOLDER_PATH = 'ErrorCannotGetSourceFolderPath';
 
     /**
      * This error occurs when an attempt is made to move or copy an occurrence
@@ -344,7 +344,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_MOVE_OR_COPY_OCCURRENCE = 'ErrorCalendarCannotMoveOrCopyOccurrence';
+    final public const CANNOT_MOVE_OR_COPY_OCCURRENCE = 'ErrorCalendarCannotMoveOrCopyOccurrence';
 
     /**
      * The GetAttachment operation returns this error if it cannot retrieve the
@@ -354,7 +354,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_OPEN_FILE_ATTACHMENT = 'ErrorCannotOpenFileAttachment';
+    final public const CANNOT_OPEN_FILE_ATTACHMENT = 'ErrorCannotOpenFileAttachment';
 
     /**
      * This error indicates that the caller tried to set calendar permissions on
@@ -364,7 +364,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_SET_CALENDAR_PERMISSION_ON_FOLDER = 'ErrorCannotSetCalendarPermissionOnNonCalendarFolder';
+    final public const CANNOT_SET_CALENDAR_PERMISSION_ON_FOLDER = 'ErrorCannotSetCalendarPermissionOnNonCalendarFolder';
 
     /**
      * This error indicates that the caller tried to set non-calendar permissions on a calendar folder.
@@ -373,7 +373,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_SET_NON_CALENDAR_PERMISSION_ON_FOLDER = 'ErrorCannotSetNonCalendarPermissionOnCalendarFolder';
+    final public const CANNOT_SET_NON_CALENDAR_PERMISSION_ON_FOLDER = 'ErrorCannotSetNonCalendarPermissionOnCalendarFolder';
 
     /**
      * This error indicates that you cannot set unknown permissions in a
@@ -383,7 +383,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_SET_PERMISSION_UNKNOWN_ENTRIES = 'ErrorCannotSetPermissionUnknownEntries';
+    final public const CANNOT_SET_PERMISSION_UNKNOWN_ENTRIES = 'ErrorCannotSetPermissionUnknownEntries';
 
     /**
      * Indicates that an attempt was made to specify the search folder as the
@@ -393,7 +393,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_SPECIFY_SEARCH_FOLDER_AS_SOURCE = 'ErrorCannotSpecifySearchFolderAsSourceFolder';
+    final public const CANNOT_SPECIFY_SEARCH_FOLDER_AS_SOURCE = 'ErrorCannotSpecifySearchFolderAsSourceFolder';
 
     /**
      * This error occurs when an attempt is made to update a calendar item that
@@ -414,7 +414,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_UPDATE_DELETED_ITEM = 'ErrorCalendarCannotUpdateDeletedItem';
+    final public const CANNOT_UPDATE_DELETED_ITEM = 'ErrorCalendarCannotUpdateDeletedItem';
 
     /**
      * This error occurs when a request that requires an item identifier is
@@ -424,7 +424,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_USE_FOLDER_ID_FOR_ITEM_ID = 'ErrorCannotUseFolderIdForItemId';
+    final public const CANNOT_USE_FOLDER_ID_FOR_ITEM_ID = 'ErrorCannotUseFolderIdForItemId';
 
     /**
      * This error occurs when the UpdateItem, GetItem, DeleteItem, MoveItem,
@@ -435,7 +435,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_USE_ID_FOR_OCCURRENCE_ID = 'ErrorCalendarCannotUseIdForOccurrenceId';
+    final public const CANNOT_USE_ID_FOR_OCCURRENCE_ID = 'ErrorCalendarCannotUseIdForOccurrenceId';
 
     /**
      * This error occurs when the UpdateItem, GetItem, DeleteItem, MoveItem,
@@ -446,7 +446,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_USE_ID_FOR_RECURRING_MASTER_ID = 'ErrorCalendarCannotUseIdForRecurringMasterId';
+    final public const CANNOT_USE_ID_FOR_RECURRING_MASTER_ID = 'ErrorCalendarCannotUseIdForRecurringMasterId';
 
     /**
      * This error occurs when a request that requires a folder identifier is
@@ -456,7 +456,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CANNOT_USE_ITEM_ID_FOR_FOLDER_ID = 'ErrorCannotUseItemIdForFolderId';
+    final public const CANNOT_USE_ITEM_ID_FOR_FOLDER_ID = 'ErrorCannotUseItemIdForFolderId';
 
     /**
      * This response code has been replaced by
@@ -467,7 +467,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CHANGE_KEY_REQUIRED = 'ErrorChangeKeyRequired';
+    final public const CHANGE_KEY_REQUIRED = 'ErrorChangeKeyRequired';
 
     /**
      * This error is returned when the change key for an item is missing or
@@ -482,7 +482,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CHANGE_KEY_REQUIRED_FOR_WRITE = 'ErrorChangeKeyRequiredForWriteOperations';
+    final public const CHANGE_KEY_REQUIRED_FOR_WRITE = 'ErrorChangeKeyRequiredForWriteOperations';
 
     /**
      * Specifies that the client was disconnected.
@@ -491,7 +491,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CLIENT_DISCONNECTED = 'ErrorClientDisconnected';
+    final public const CLIENT_DISCONNECTED = 'ErrorClientDisconnected';
 
     /**
      * This error is intended for internal use only.
@@ -500,7 +500,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CLIENT_INTENT_INVALID_STATE_DEFINITION = 'ErrorClientIntentInvalidStateDefinition';
+    final public const CLIENT_INTENT_INVALID_STATE_DEFINITION = 'ErrorClientIntentInvalidStateDefinition';
 
     /**
      * This error is intended for internal use only.
@@ -509,7 +509,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CLIENT_INTENT_NOT_FOUND = 'ErrorClientIntentNotFound';
+    final public const CLIENT_INTENT_NOT_FOUND = 'ErrorClientIntentNotFound';
 
     /**
      * This error occurs when Exchange Web Services cannot connect to the
@@ -519,7 +519,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CONNECTION_FAILED = 'ErrorConnectionFailed';
+    final public const CONNECTION_FAILED = 'ErrorConnectionFailed';
 
     /**
      * This error indicates that the property that was inspected for a Contains
@@ -529,7 +529,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CONTAINS_FILTER_WRONG_TYPE = 'ErrorContainsFilterWrongType';
+    final public const CONTAINS_FILTER_WRONG_TYPE = 'ErrorContainsFilterWrongType';
 
     /**
      * The GetItem operation returns this error when Exchange Web Services is
@@ -544,7 +544,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CONTENT_CONVERSION_FAILED = 'ErrorContentConversionFailed';
+    final public const CONTENT_CONVERSION_FAILED = 'ErrorContentConversionFailed';
 
     /**
      * This error occurs when a search request is made using the QueryString
@@ -554,7 +554,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CONTENT_INDEXING_NOT_ENABLED = 'ErrorContentIndexingNotEnabled';
+    final public const CONTENT_INDEXING_NOT_ENABLED = 'ErrorContentIndexingNotEnabled';
 
     /**
      * This error occurs when the data is corrupted and cannot be processed.
@@ -563,7 +563,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CORRUPT_DATA = 'ErrorCorruptData';
+    final public const CORRUPT_DATA = 'ErrorCorruptData';
 
     /**
      * This error occurs when the caller does not have permission to create the
@@ -573,7 +573,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CREATE_ITEM_ACCESS_DENIED = 'ErrorCreateItemAccessDenied';
+    final public const CREATE_ITEM_ACCESS_DENIED = 'ErrorCreateItemAccessDenied';
 
     /**
      * This error occurs when one or more of the managed folders that were
@@ -587,7 +587,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CREATE_MANAGED_FOLDER_PARTIAL_COMPLETION = 'ErrorCreateManagedFolderPartialCompletion';
+    final public const CREATE_MANAGED_FOLDER_PARTIAL_COMPLETION = 'ErrorCreateManagedFolderPartialCompletion';
 
     /**
      * This error occurs when the calling account does not have the permissions
@@ -597,7 +597,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CREATE_SUBFOLDER_ACCESS_DENIED = 'ErrorCreateSubfolderAccessDenied';
+    final public const CREATE_SUBFOLDER_ACCESS_DENIED = 'ErrorCreateSubfolderAccessDenied';
 
     /**
      * This error occurs when an attempt is made to move an item or folder
@@ -608,7 +608,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CROSS_MAILBOX_MOVE_COPY = 'ErrorCrossMailboxMoveCopy';
+    final public const CROSS_MAILBOX_MOVE_COPY = 'ErrorCrossMailboxMoveCopy';
 
     /**
      * This error indicates that the request is not allowed because the Client
@@ -618,7 +618,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const CROSS_SITE_REQUEST = 'ErrorCrossSiteRequest';
+    final public const CROSS_SITE_REQUEST = 'ErrorCrossSiteRequest';
 
     /**
      * This error can occur in the following scenarios:
@@ -634,7 +634,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DATA_SIZE_LIMIT_EXCEEDED = 'ErrorDataSizeLimitExceeded';
+    final public const DATA_SIZE_LIMIT_EXCEEDED = 'ErrorDataSizeLimitExceeded';
 
     /**
      * This error occurs when the underlying data provider fails to complete the
@@ -644,7 +644,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DATA_SOURCE_OPERATION = 'ErrorDataSourceOperation';
+    final public const DATA_SOURCE_OPERATION = 'ErrorDataSourceOperation';
 
     /**
      * This error occurs in an AddDelegate operation when the specified user
@@ -654,7 +654,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DELEGATE_ALREADY_EXISTS = 'ErrorDelegateAlreadyExists';
+    final public const DELEGATE_ALREADY_EXISTS = 'ErrorDelegateAlreadyExists';
 
     /**
      * This error occurs in an AddDelegate operation when the specified user to
@@ -664,7 +664,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DELEGATE_CANNOT_ADD_OWNER = 'ErrorDelegateCannotAddOwner';
+    final public const DELEGATE_CANNOT_ADD_OWNER = 'ErrorDelegateCannotAddOwner';
 
     /**
      * This error occurs in a GetDelegate operation when either there is no
@@ -676,7 +676,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DELEGATE_MISSING_CONFIGURATION = 'ErrorDelegateMissingConfiguration';
+    final public const DELEGATE_MISSING_CONFIGURATION = 'ErrorDelegateMissingConfiguration';
 
     /**
      * This error occurs when a specified user cannot be mapped to a user in AD
@@ -686,7 +686,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DELEGATE_NO_USER = 'ErrorDelegateNoUser';
+    final public const DELEGATE_NO_USER = 'ErrorDelegateNoUser';
 
     /**
      * This error occurs in the AddDelegate operation when an added delegate
@@ -696,7 +696,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DELEGATE_VALIDATION_FAILED = 'ErrorDelegateValidationFailed';
+    final public const DELEGATE_VALIDATION_FAILED = 'ErrorDelegateValidationFailed';
 
     /**
      * This error occurs when an attempt is made to delete a distinguished
@@ -706,7 +706,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DELETE_DISTINGUISHED_FOLDER = 'ErrorDeleteDistinguishedFolder';
+    final public const DELETE_DISTINGUISHED_FOLDER = 'ErrorDeleteDistinguishedFolder';
 
     /**
      * This response code is not used.
@@ -715,7 +715,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DELETE_ITEMS_FAILED = 'ErrorDeleteItemsFailed';
+    final public const DELETE_ITEMS_FAILED = 'ErrorDeleteItemsFailed';
 
     /**
      * This error is intended for internal use only.
@@ -724,7 +724,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DELETE_UNIFIED_MESSAGING_PROMPT_FAILED = 'ErrorDeleteUnifiedMessagingPromptFailed';
+    final public const DELETE_UNIFIED_MESSAGING_PROMPT_FAILED = 'ErrorDeleteUnifiedMessagingPromptFailed';
 
     /**
      * This error is returned when discovery searches are disabled on a tenant
@@ -734,7 +734,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DISCOVERY_SEARCHES_DISABLED = 'ErrorDiscoverySearchesDisabled';
+    final public const DISCOVERY_SEARCHES_DISABLED = 'ErrorDiscoverySearchesDisabled';
 
     /**
      * This error indicates that a distinguished user ID is not valid for the
@@ -744,7 +744,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DISTINGUISHED_USER_NOT_SUPPORTED = 'ErrorDistinguishedUserNotSupported';
+    final public const DISTINGUISHED_USER_NOT_SUPPORTED = 'ErrorDistinguishedUserNotSupported';
 
     /**
      * This error indicates that a request distribution list member does not
@@ -754,7 +754,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DISTRIBUTION_LIST_MEMBER_NOT_EXIST = 'ErrorDistributionListMemberNotExist';
+    final public const DISTRIBUTION_LIST_MEMBER_NOT_EXIST = 'ErrorDistributionListMemberNotExist';
 
     /**
      * This error occurs when duplicate folder names are specified within the
@@ -764,7 +764,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DUPLICATE_INPUT_FOLDER_NAMES = 'ErrorDuplicateInputFolderNames';
+    final public const DUPLICATE_INPUT_FOLDER_NAMES = 'ErrorDuplicateInputFolderNames';
 
     /**
      * This error is returned when there are duplicate legacy distinguished
@@ -774,7 +774,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DUPLICATE_LEGACY_DISTINGUISHED_NAME = 'ErrorDuplicateLegacyDistinguishedName';
+    final public const DUPLICATE_LEGACY_DISTINGUISHED_NAME = 'ErrorDuplicateLegacyDistinguishedName';
 
     /**
      * This error indicates that there are duplicate SOAP headers.
@@ -783,7 +783,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DUPLICATE_SOAP_HEADER = 'ErrorDuplicateSOAPHeader';
+    final public const DUPLICATE_SOAP_HEADER = 'ErrorDuplicateSOAPHeader';
 
     /**
      * This error indicates that a duplicate user ID has been found in a
@@ -794,7 +794,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DUPLICATE_USER_IDS = 'ErrorDuplicateUserIdsSpecified';
+    final public const DUPLICATE_USER_IDS = 'ErrorDuplicateUserIdsSpecified';
 
     /**
      * This error occurs during a CreateItem or UpdateItem operation when a
@@ -805,7 +805,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const DURATION_IS_TOO_LONG = 'ErrorCalendarDurationIsTooLong';
+    final public const DURATION_IS_TOO_LONG = 'ErrorCalendarDurationIsTooLong';
 
     /**
      * This error occurs when a request attempts to create/update the search
@@ -818,7 +818,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const EMAIL_ADDRESS_MISMATCH = 'ErrorEmailAddressMismatch';
+    final public const EMAIL_ADDRESS_MISMATCH = 'ErrorEmailAddressMismatch';
 
     /**
      * This error occurs when a calendar End time is set to the same time or
@@ -828,7 +828,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const END_DATE_IS_EARLIER_THAN_START_DATE = 'ErrorCalendarEndDateIsEarlierThanStartDate';
+    final public const END_DATE_IS_EARLIER_THAN_START_DATE = 'ErrorCalendarEndDateIsEarlierThanStartDate';
 
     /**
      * This error occurs when the operation failed because of communication
@@ -838,7 +838,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ERROR_AD_OPERATION = 'ErrorADOperation';
+    final public const ERROR_AD_OPERATION = 'ErrorADOperation';
 
     /**
      * This error occurs when a ResolveNames operation request specifies a name
@@ -848,7 +848,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ERROR_AD_SESSION_FILTER = 'ErrorADSessionFilter';
+    final public const ERROR_AD_SESSION_FILTER = 'ErrorADSessionFilter';
 
     /**
      * Indicates an error in archive folder path creation.
@@ -857,7 +857,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ERROR_ARCHIVE_FOLDER_PATH_CREATION = 'ErrorArchiveFolderPathCreation';
+    final public const ERROR_ARCHIVE_FOLDER_PATH_CREATION = 'ErrorArchiveFolderPathCreation';
 
     /**
      * This error occurs when the event that is associated with a watermark is
@@ -869,7 +869,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const EVENT_NOT_FOUND = 'ErrorEventNotFound';
+    final public const EVENT_NOT_FOUND = 'ErrorEventNotFound';
 
     /**
      * This error indicates that there are more concurrent requests against the
@@ -879,7 +879,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const EXCEEDED_CONNECTION_COUNT = 'ErrorExceededConnectionCount';
+    final public const EXCEEDED_CONNECTION_COUNT = 'ErrorExceededConnectionCount';
 
     /**
      * This error indicates that a search operation call has exceeded the total
@@ -889,7 +889,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const EXCEEDED_FIND_COUNT = 'ErrorExceededFindCountLimit';
+    final public const EXCEEDED_FIND_COUNT = 'ErrorExceededFindCountLimit';
 
     /**
      * This error indicates that a user's throttling policy maximum subscription
@@ -899,7 +899,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const EXCEEDED_SUBSCRIPTION_COUNT = 'ErrorExceededSubscriptionCount';
+    final public const EXCEEDED_SUBSCRIPTION_COUNT = 'ErrorExceededSubscriptionCount';
 
     /**
      * This error occurs if the GetEvents Operation is called as a subscription
@@ -909,7 +909,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const EXPIRED_SUBSCRIPTION = 'ErrorExpiredSubscription';
+    final public const EXPIRED_SUBSCRIPTION = 'ErrorExpiredSubscription';
 
     /**
      * Indicates that the extension was not found.
@@ -918,7 +918,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const EXTENSION_NOT_FOUND = 'ErrorExtensionNotFound';
+    final public const EXTENSION_NOT_FOUND = 'ErrorExtensionNotFound';
 
     /**
      * This error occurs when the folder is corrupted and cannot be saved.
@@ -927,7 +927,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const FOLDER_CORRUPT = 'ErrorFolderCorrupt';
+    final public const FOLDER_CORRUPT = 'ErrorFolderCorrupt';
 
     /**
      * This error occurs when an attempt is made to create a folder that has the
@@ -939,7 +939,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const FOLDER_EXISTS = 'ErrorFolderExists';
+    final public const FOLDER_EXISTS = 'ErrorFolderExists';
 
     /**
      * This error occurs when the specified folder for a FindItem operation with
@@ -949,7 +949,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const FOLDER_INVALID_FOR_CALENDAR_VIEW = 'ErrorCalendarFolderIsInvalidForCalendarView';
+    final public const FOLDER_INVALID_FOR_CALENDAR_VIEW = 'ErrorCalendarFolderIsInvalidForCalendarView';
 
     /**
      * This error indicates that the folder ID that was specified does not
@@ -960,7 +960,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const FOLDER_NOT_FOUND = 'ErrorFolderNotFound';
+    final public const FOLDER_NOT_FOUND = 'ErrorFolderNotFound';
 
     /**
      * This error indicates that the requested property could not be retrieved.
@@ -972,7 +972,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const FOLDER_PROPERTY_REQUEST_FAILED = 'ErrorFolderPropertRequestFailed';
+    final public const FOLDER_PROPERTY_REQUEST_FAILED = 'ErrorFolderPropertRequestFailed';
 
     /**
      * This error indicates that the folder could not be created or updated
@@ -982,7 +982,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const FOLDER_SAVE_ERROR = 'ErrorFolderSave';
+    final public const FOLDER_SAVE_ERROR = 'ErrorFolderSave';
 
     /**
      * This error indicates that the folder could not be created or updated
@@ -992,7 +992,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const FOLDER_SAVE_FAILED = 'ErrorFolderSaveFailed';
+    final public const FOLDER_SAVE_FAILED = 'ErrorFolderSaveFailed';
 
     /**
      * This error indicates that the folder could not be created or updated
@@ -1004,7 +1004,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const FOLDER_SAVE_PROPERTY_ERROR = 'ErrorFolderSavePropertyError';
+    final public const FOLDER_SAVE_PROPERTY_ERROR = 'ErrorFolderSavePropertyError';
 
     /**
      * This error indicates that the maximum group member count has been reached
@@ -1014,7 +1014,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const FREE_BUSY_DL_LIMIT_REACHED = 'ErrorFreeBusyDLLimitReached';
+    final public const FREE_BUSY_DL_LIMIT_REACHED = 'ErrorFreeBusyDLLimitReached';
 
     /**
      * This error is returned when free/busy information cannot be retrieved
@@ -1024,7 +1024,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const FREE_BUSY_GENERATION_FAILED = 'ErrorFreeBusyGenerationFailed';
+    final public const FREE_BUSY_GENERATION_FAILED = 'ErrorFreeBusyGenerationFailed';
 
     /**
      * This response code is not used.
@@ -1033,7 +1033,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const GET_SERVER_SECURITY_DESCRIPTOR_FAILED = 'ErrorGetServerSecurityDescriptorFailed';
+    final public const GET_SERVER_SECURITY_DESCRIPTOR_FAILED = 'ErrorGetServerSecurityDescriptorFailed';
 
     /**
      * This error is returned when new instant messaging (IM) contacts cannot be
@@ -1043,7 +1043,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const IM_CONTACT_LIMIT_REACHED = 'ErrorImContactLimitReached';
+    final public const IM_CONTACT_LIMIT_REACHED = 'ErrorImContactLimitReached';
 
     /**
      * This error is returned when an attempt is made to add a group display
@@ -1053,7 +1053,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const IM_GROUP_DISPLAY_NAME_EXISTS = 'ErrorImGroupDisplayNameAlreadyExists';
+    final public const IM_GROUP_DISPLAY_NAME_EXISTS = 'ErrorImGroupDisplayNameAlreadyExists';
 
     /**
      * This error is returned when new IM groups cannot be added because the
@@ -1063,7 +1063,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const IM_GROUP_LIMIT_REACHED = 'ErrorImGroupLimitReached';
+    final public const IM_GROUP_LIMIT_REACHED = 'ErrorImGroupLimitReached';
 
     /**
      * The error is returned in the server-to-server authorization case for
@@ -1077,7 +1077,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const IMPERSONATE_USER_DENIED = 'ErrorImpersonateUserDenied';
+    final public const IMPERSONATE_USER_DENIED = 'ErrorImpersonateUserDenied';
 
     /**
      * This error is returned in the server-to-server authorization for Exchange
@@ -1092,7 +1092,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const IMPERSONATION_DENIED = 'ErrorImpersonationDenied';
+    final public const IMPERSONATION_DENIED = 'ErrorImpersonationDenied';
 
     /**
      * This error indicates that there was an unexpected error when an attempt
@@ -1107,7 +1107,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const IMPERSONATION_FAILED = 'ErrorImpersonationFailed';
+    final public const IMPERSONATION_FAILED = 'ErrorImpersonationFailed';
 
     /**
      * This error MUST be returned if any rule does not validate.
@@ -1116,7 +1116,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INBOX_RULES_VALIDATION_ERROR = 'ErrorInboxRulesValidationError';
+    final public const INBOX_RULES_VALIDATION_ERROR = 'ErrorInboxRulesValidationError';
 
     /**
      * This error indicates that the request was valid for the current Exchange
@@ -1127,7 +1127,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INCORRECT_SCHEMA_VERSION = 'ErrorIncorrectSchemaVersion';
+    final public const INCORRECT_SCHEMA_VERSION = 'ErrorIncorrectSchemaVersion';
 
     /**
      * This error indicates that each change description in the UpdateItem or
@@ -1137,7 +1137,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INCORRECT_UPDATE_PROPERTY_COUNT = 'ErrorIncorrectUpdatePropertyCount';
+    final public const INCORRECT_UPDATE_PROPERTY_COUNT = 'ErrorIncorrectUpdatePropertyCount';
 
     /**
      * This error occurs when the request contains too many attendees to
@@ -1147,7 +1147,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INDIVIDUAL_MAILBOX_LIMIT_REACHED = 'ErrorIndividualMailboxLimitReached';
+    final public const INDIVIDUAL_MAILBOX_LIMIT_REACHED = 'ErrorIndividualMailboxLimitReached';
 
     /**
      * This error occurs when the mailbox server is overloaded. Try your request
@@ -1157,7 +1157,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INSUFFICIENT_RESOURCES = 'ErrorInsufficientResources';
+    final public const INSUFFICIENT_RESOURCES = 'ErrorInsufficientResources';
 
     /**
      * This error indicates that Exchange Web Services encountered an error that
@@ -1168,7 +1168,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INTERNAL_SERVER_ERROR = 'ErrorInternalServerError';
+    final public const INTERNAL_SERVER_ERROR = 'ErrorInternalServerError';
 
     /**
      * This error indicates that an internal server error occurred and that you
@@ -1178,7 +1178,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INTERNAL_SERVER_TRANSIENT_ERROR = 'ErrorInternalServerTransientError';
+    final public const INTERNAL_SERVER_TRANSIENT_ERROR = 'ErrorInternalServerTransientError';
 
     /**
      * This error indicates that the level of access that the caller has on the
@@ -1188,7 +1188,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ACCESS_LEVEL = 'ErrorInvalidAccessLevel';
+    final public const INVALID_ACCESS_LEVEL = 'ErrorInvalidAccessLevel';
 
     /**
      * This error indicates that the requesting account is not a valid account
@@ -1198,7 +1198,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_AD_ACCOUNT = 'ErrorCallerIsInvalidADAccount';
+    final public const INVALID_AD_ACCOUNT = 'ErrorCallerIsInvalidADAccount';
 
     /**
      * This error indicates an error caused by all invalid arguments passed to
@@ -1216,7 +1216,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ARGUMENT = 'ErrorInvalidArgument';
+    final public const INVALID_ARGUMENT = 'ErrorInvalidArgument';
 
     /**
      * This error is returned by the GetAttachment Operation or the
@@ -1227,7 +1227,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ATTACHMENT_ID = 'ErrorInvalidAttachmentId';
+    final public const INVALID_ATTACHMENT_ID = 'ErrorInvalidAttachmentId';
 
     /**
      * This error occurs when you try to bind to an existing search folder by
@@ -1246,7 +1246,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ATTACHMENT_SUBFILTER = 'ErrorInvalidAttachmentSubfilter';
+    final public const INVALID_ATTACHMENT_SUBFILTER = 'ErrorInvalidAttachmentSubfilter';
 
     /**
      * This error occurs when you try to bind to an existing search folder by
@@ -1266,7 +1266,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ATTACHMENT_SUBFILTER_TEXT = 'ErrorInvalidAttachmentSubfilterTextFilter';
+    final public const INVALID_ATTACHMENT_SUBFILTER_TEXT = 'ErrorInvalidAttachmentSubfilterTextFilter';
 
     /**
      * This response code is not used.
@@ -1275,7 +1275,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ATTRIBUTE_VALUE = 'ErrorCalendarInvalidAttributeValue';
+    final public const INVALID_ATTRIBUTE_VALUE = 'ErrorCalendarInvalidAttributeValue';
 
     /**
      * This error indicates that the authorization procedure for the requester
@@ -1285,7 +1285,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_AUTHORIZATION_CONTEXT = 'ErrorInvalidAuthorizationContext';
+    final public const INVALID_AUTHORIZATION_CONTEXT = 'ErrorInvalidAuthorizationContext';
 
     /**
      * This error occurs when a consumer passes in a folder or item identifier
@@ -1297,7 +1297,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_CHANGE_KEY = 'ErrorInvalidChangeKey';
+    final public const INVALID_CHANGE_KEY = 'ErrorInvalidChangeKey';
 
     /**
      * This error indicates that a request to get a client access token was not
@@ -1307,7 +1307,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_CLIENT_ACCESS_TOKEN_REQUEST = 'ErrorInvalidClientAccessTokenRequest';
+    final public const INVALID_CLIENT_ACCESS_TOKEN_REQUEST = 'ErrorInvalidClientAccessTokenRequest';
 
     /**
      * This error indicates that there was an internal error when an attempt was
@@ -1317,7 +1317,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_CLIENT_SECURITY_CONTEXT = 'ErrorInvalidClientSecurityContext';
+    final public const INVALID_CLIENT_SECURITY_CONTEXT = 'ErrorInvalidClientSecurityContext';
 
     /**
      * This error is returned when an attempt is made to set the CompleteDate
@@ -1331,7 +1331,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_COMPLETE_DATE = 'ErrorInvalidCompleteDate';
+    final public const INVALID_COMPLETE_DATE = 'ErrorInvalidCompleteDate';
 
     /**
      * This error indicates that an invalid e-mail address was provided for a
@@ -1341,7 +1341,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_CONTACT_EMAIL_ADDRESS = 'ErrorInvalidContactEmailAddress';
+    final public const INVALID_CONTACT_EMAIL_ADDRESS = 'ErrorInvalidContactEmailAddress';
 
     /**
      * This error indicates that an invalid e-mail index value was provided for
@@ -1351,7 +1351,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_CONTACT_EMAIL_INDEX = 'ErrorInvalidContactEmailIndex';
+    final public const INVALID_CONTACT_EMAIL_INDEX = 'ErrorInvalidContactEmailIndex';
 
     /**
      * This error occurs when the credentials that are used to proxy a request
@@ -1361,7 +1361,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_CROSS_FOREST_CREDENTIALS = 'ErrorInvalidCrossForestCredentials';
+    final public const INVALID_CROSS_FOREST_CREDENTIALS = 'ErrorInvalidCrossForestCredentials';
 
     /**
      * This error occurs during a CreateItem or UpdateItem operation when
@@ -1372,7 +1372,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_DAY_FOR_TIME_CHANGE_PATTERN = 'ErrorCalendarInvalidDayForTimeChangePattern';
+    final public const INVALID_DAY_FOR_TIME_CHANGE_PATTERN = 'ErrorCalendarInvalidDayForTimeChangePattern';
 
     /**
      * This error occurs during a CreateItem or UpdateItem operation when
@@ -1383,7 +1383,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_DAY_FOR_WEEKLY_RECURRENCE = 'ErrorCalendarInvalidDayForWeeklyRecurrence';
+    final public const INVALID_DAY_FOR_WEEKLY_RECURRENCE = 'ErrorCalendarInvalidDayForWeeklyRecurrence';
 
     /**
      * This error indicates that the specified folder permissions are invalid.
@@ -1392,7 +1392,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_DELEGATE_PERMISSION = 'ErrorInvalidDelegatePermission';
+    final public const INVALID_DELEGATE_PERMISSION = 'ErrorInvalidDelegatePermission';
 
     /**
      * This error indicates that the specified delegate user ID is invalid.
@@ -1401,7 +1401,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_DELEGATE_USER_ID = 'ErrorInvalidDelegateUserId';
+    final public const INVALID_DELEGATE_USER_ID = 'ErrorInvalidDelegateUserId';
 
     /**
      * This error occurs when the bitmask that was passed into an Excludes
@@ -1411,7 +1411,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_EXCLUDES_RESTRICTION = 'ErrorInvalidExcludesRestriction';
+    final public const INVALID_EXCLUDES_RESTRICTION = 'ErrorInvalidExcludesRestriction';
 
     /**
      * This response code is not used.
@@ -1420,7 +1420,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_EXPRESSION_TYPE_FOR_SUBFILTER = 'ErrorInvalidExpressionTypeForSubFilter';
+    final public const INVALID_EXPRESSION_TYPE_FOR_SUBFILTER = 'ErrorInvalidExpressionTypeForSubFilter';
 
     /**
      * This error occurs when the following events take place:
@@ -1433,7 +1433,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_EXTENDED_PROPERTY = 'ErrorInvalidExtendedProperty';
+    final public const INVALID_EXTENDED_PROPERTY = 'ErrorInvalidExtendedProperty';
 
     /**
      * This error occurs when the value section of an extended property does not
@@ -1448,7 +1448,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_EXTENDED_PROPERTY_VALUE = 'ErrorInvalidExtendedPropertyValue';
+    final public const INVALID_EXTENDED_PROPERTY_VALUE = 'ErrorInvalidExtendedPropertyValue';
 
     /**
      * This error indicates that the sharing invitation sender did not create
@@ -1458,7 +1458,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_EXTERNAL_SHARING_INITIATOR = 'ErrorInvalidExternalSharingInitiator';
+    final public const INVALID_EXTERNAL_SHARING_INITIATOR = 'ErrorInvalidExternalSharingInitiator';
 
     /**
      * This error indicates that a sharing message is not intended for the
@@ -1468,7 +1468,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_EXTERNAL_SHARING_SUBSCRIBER = 'ErrorInvalidExternalSharingSubscriber';
+    final public const INVALID_EXTERNAL_SHARING_SUBSCRIBER = 'ErrorInvalidExternalSharingSubscriber';
 
     /**
      * This error indicates that the requester's organization federation objects
@@ -1478,7 +1478,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_FEDERATED_ORGANIZATION_ID = 'ErrorInvalidFederatedOrganizationId';
+    final public const INVALID_FEDERATED_ORGANIZATION_ID = 'ErrorInvalidFederatedOrganizationId';
 
     /**
      * This error occurs when the folder ID is corrupt.
@@ -1487,7 +1487,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_FOLDER_ID = 'ErrorInvalidFolderId';
+    final public const INVALID_FOLDER_ID = 'ErrorInvalidFolderId';
 
     /**
      * This error indicates that the specified folder type is invalid for the
@@ -1499,7 +1499,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_FOLDER_TYPE_FOR_OPERATION = 'ErrorInvalidFolderTypeForOperation';
+    final public const INVALID_FOLDER_TYPE_FOR_OPERATION = 'ErrorInvalidFolderTypeForOperation';
 
     /**
      * This error occurs in fractional paging when the user has specified one of
@@ -1512,7 +1512,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_FRACTIONAL_PAGING_PARAMS = 'ErrorInvalidFractionalPagingParameters';
+    final public const INVALID_FRACTIONAL_PAGING_PARAMS = 'ErrorInvalidFractionalPagingParameters';
 
     /**
      * This error occurs when the GetUserAvailability Operation is called with a
@@ -1522,7 +1522,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_FREE_BUSY_VIEW_TYPE = 'ErrorInvalidFreeBusyViewType';
+    final public const INVALID_FREE_BUSY_VIEW_TYPE = 'ErrorInvalidFreeBusyViewType';
 
     /**
      * This error indicates that the DataType and ShareFolderId elements are
@@ -1532,7 +1532,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_GET_SHARING_FOLDER_REQUEST = 'ErrorInvalidGetSharingFolderRequest';
+    final public const INVALID_GET_SHARING_FOLDER_REQUEST = 'ErrorInvalidGetSharingFolderRequest';
 
     /**
      * This error indicates that the ID and/or change key is malformed.
@@ -1541,7 +1541,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ID = 'ErrorInvalidId';
+    final public const INVALID_ID = 'ErrorInvalidId';
 
     /**
      * This error is returned when the specified IM contact identifier does not
@@ -1551,7 +1551,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ID_CONTACT_ID = 'ErrorInvalidImContactId';
+    final public const INVALID_ID_CONTACT_ID = 'ErrorInvalidImContactId';
 
     /**
      * This error occurs when the caller specifies an Id attribute that is
@@ -1561,7 +1561,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ID_EMPTY = 'ErrorInvalidIdEmpty';
+    final public const INVALID_ID_EMPTY = 'ErrorInvalidIdEmpty';
 
     /**
      * This error indicates that a folder or item ID that is using the Exchange
@@ -1575,7 +1575,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ID_MALFORMED_LEGACY_FORMAT = 'ErrorInvalidIdMalformedEwsLegacyIdFormat';
+    final public const INVALID_ID_MALFORMED_LEGACY_FORMAT = 'ErrorInvalidIdMalformedEwsLegacyIdFormat';
 
     /**
      * This error occurs when the caller specifies an Id attribute that is too
@@ -1585,7 +1585,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ID_MONIKER_TOO_LONG = 'ErrorInvalidIdMonikerTooLong';
+    final public const INVALID_ID_MONIKER_TOO_LONG = 'ErrorInvalidIdMonikerTooLong';
 
     /**
      * This error occurs when a contact in your mailbox is corrupt.
@@ -1594,7 +1594,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ID_RETURNED_BY_RESOLVE_NAMES = 'ErrorInvalidIdReturnedByResolveNames';
+    final public const INVALID_ID_RETURNED_BY_RESOLVE_NAMES = 'ErrorInvalidIdReturnedByResolveNames';
 
     /**
      * This response code is not used.
@@ -1603,7 +1603,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ID_XML = 'ErrorInvalidIdXml';
+    final public const INVALID_ID_XML = 'ErrorInvalidIdXml';
 
     /**
      * This error is returned when the specified IM distribution group SMTP
@@ -1613,7 +1613,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_IM_DISTRIBUTION_GROUP_SMTP_ADDRESS = 'ErrorInvalidImDistributionGroupSmtpAddress';
+    final public const INVALID_IM_DISTRIBUTION_GROUP_SMTP_ADDRESS = 'ErrorInvalidImDistributionGroupSmtpAddress';
 
     /**
      * This error is returned when the specified IM group identifier does not
@@ -1623,7 +1623,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_IM_GROUP_ID = 'ErrorInvalidImGroupId';
+    final public const INVALID_IM_GROUP_ID = 'ErrorInvalidImGroupId';
 
     /**
      * This error occurs during Exchange Impersonation when a caller does not
@@ -1636,7 +1636,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_IMPERSONATION_HEADER_DATA = 'ErrorInvalidExchangeImpersonationHeaderData';
+    final public const INVALID_IMPERSONATION_HEADER_DATA = 'ErrorInvalidExchangeImpersonationHeaderData';
 
     /**
      * This error occurs if the offset for indexed paging is negative.
@@ -1645,7 +1645,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_INDEXED_PAGING_PARAMS = 'ErrorInvalidIndexedPagingParameters';
+    final public const INVALID_INDEXED_PAGING_PARAMS = 'ErrorInvalidIndexedPagingParameters';
 
     /**
      * This response code is not used.
@@ -1654,7 +1654,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_INTERNET_HEADER_CHILD_NODES = 'ErrorInvalidInternetHeaderChildNodes';
+    final public const INVALID_INTERNET_HEADER_CHILD_NODES = 'ErrorInvalidInternetHeaderChildNodes';
 
     /**
      * This error occurs when an attempt is made to use an AcceptItem operation
@@ -1666,7 +1666,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ITEM_FOR_ACCEPT_ITEM = 'ErrorInvalidItemForOperationAcceptItem';
+    final public const INVALID_ITEM_FOR_ACCEPT_ITEM = 'ErrorInvalidItemForOperationAcceptItem';
 
     /**
      * Indicates that the item was invalid for an ArchiveItem operation.
@@ -1675,7 +1675,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ITEM_FOR_ARCHIVE_ITEM = 'ErrorInvalidItemForOperationArchiveItem';
+    final public const INVALID_ITEM_FOR_ARCHIVE_ITEM = 'ErrorInvalidItemForOperationArchiveItem';
 
     /**
      * This error occurs when an attempt is made to use a CancelItem operation
@@ -1685,7 +1685,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ITEM_FOR_CANCEL_ITEM = 'ErrorInvalidItemForOperationCancelItem';
+    final public const INVALID_ITEM_FOR_CANCEL_ITEM = 'ErrorInvalidItemForOperationCancelItem';
 
     /**
      * This error is returned when an attempt is made to create an item
@@ -1705,7 +1705,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ITEM_FOR_CREATE_ATTACHMENT = 'ErrorInvalidItemForOperationCreateItemAttachment';
+    final public const INVALID_ITEM_FOR_CREATE_ATTACHMENT = 'ErrorInvalidItemForOperationCreateItemAttachment';
 
     /**
      * This error is returned from a CreateItem Operation if the request
@@ -1726,7 +1726,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ITEM_FOR_CREATE_ITEM = 'ErrorInvalidItemForOperationCreateItem';
+    final public const INVALID_ITEM_FOR_CREATE_ITEM = 'ErrorInvalidItemForOperationCreateItem';
 
     /**
      * This error occurs when an attempt is made to use a DeclineItem operation
@@ -1738,7 +1738,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ITEM_FOR_DECLINE_ITEM = 'ErrorInvalidItemForOperationDeclineItem';
+    final public const INVALID_ITEM_FOR_DECLINE_ITEM = 'ErrorInvalidItemForOperationDeclineItem';
 
     /**
      * This error indicates that the ExpandDL Operation is valid only for
@@ -1748,7 +1748,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ITEM_FOR_EXPAND_DISTRIBUTION_LIST = 'ErrorInvalidItemForOperationExpandDL';
+    final public const INVALID_ITEM_FOR_EXPAND_DISTRIBUTION_LIST = 'ErrorInvalidItemForOperationExpandDL';
 
     /**
      * This error is returned from a RemoveItem operation if the request
@@ -1758,7 +1758,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ITEM_FOR_REMOVE_ITEM = 'ErrorInvalidItemForOperationRemoveItem';
+    final public const INVALID_ITEM_FOR_REMOVE_ITEM = 'ErrorInvalidItemForOperationRemoveItem';
 
     /**
      * This error is returned from a SendItem Operation if the request specifies
@@ -1768,7 +1768,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ITEM_FOR_SEND_ITEM = 'ErrorInvalidItemForOperationSendItem';
+    final public const INVALID_ITEM_FOR_SEND_ITEM = 'ErrorInvalidItemForOperationSendItem';
 
     /**
      * This error occurs when an attempt is made to use TentativelyAcceptItem
@@ -1780,7 +1780,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ITEM_FOR_TENTATIVE = 'ErrorInvalidItemForOperationTentative';
+    final public const INVALID_ITEM_FOR_TENTATIVE = 'ErrorInvalidItemForOperationTentative';
 
     /**
      * This error is for internal use only.
@@ -1791,7 +1791,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_LOGON_TYPE = 'ErrorInvalidLogonType';
+    final public const INVALID_LOGON_TYPE = 'ErrorInvalidLogonType';
 
     /**
      * This error indicates that the CreateItem Operation or the UpdateItem
@@ -1801,7 +1801,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_MAILBOX = 'ErrorInvalidMailbox';
+    final public const INVALID_MAILBOX = 'ErrorInvalidMailbox';
 
     /**
      * This error occurs when the structure of the managed folder is corrupted
@@ -1811,7 +1811,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_MANAGED_FOLDER_PROPERTY = 'ErrorInvalidManagedFolderProperty';
+    final public const INVALID_MANAGED_FOLDER_PROPERTY = 'ErrorInvalidManagedFolderProperty';
 
     /**
      * This error occurs when the quota that is set on the managed folder is
@@ -1821,7 +1821,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_MANAGED_FOLDER_QUOTE = 'ErrorInvalidManagedFolderQuota';
+    final public const INVALID_MANAGED_FOLDER_QUOTE = 'ErrorInvalidManagedFolderQuota';
 
     /**
      * This error occurs when the size that is set on the managed folder is less
@@ -1831,7 +1831,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_MANAGED_FOLDER_SIZE = 'ErrorInvalidManagedFolderSize';
+    final public const INVALID_MANAGED_FOLDER_SIZE = 'ErrorInvalidManagedFolderSize';
 
     /**
      * This error is returned if the ManagementRole header in the SOAP header is
@@ -1841,7 +1841,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_MANAGEMENT_ROLE_HEADER = 'ErrorInvalidManagementRoleHeader';
+    final public const INVALID_MANAGEMENT_ROLE_HEADER = 'ErrorInvalidManagementRoleHeader';
 
     /**
      * This error occurs when the supplied merged free/busy internal value is
@@ -1854,7 +1854,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_MERGED_FREE_BUSY_INTERVAL = 'ErrorInvalidMergedFreeBusyInterval';
+    final public const INVALID_MERGED_FREE_BUSY_INTERVAL = 'ErrorInvalidMergedFreeBusyInterval';
 
     /**
      * This error occurs when the name is invalid for the ResolveNames
@@ -1867,7 +1867,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_NAME_FOR_NAME_RESOLUTION = 'ErrorInvalidNameForNameResolution';
+    final public const INVALID_NAME_FOR_NAME_RESOLUTION = 'ErrorInvalidNameForNameResolution';
 
     /**
      * This error indicates an error in the Network Service account on the
@@ -1877,7 +1877,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_NETWORK_SERVICE_CONTEXT = 'ErrorInvalidNetworkServiceContext';
+    final public const INVALID_NETWORK_SERVICE_CONTEXT = 'ErrorInvalidNetworkServiceContext';
 
     /**
      * This response code is not used.
@@ -1886,7 +1886,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_OOF_PARAMETER = 'ErrorInvalidOofParameter';
+    final public const INVALID_OOF_PARAMETER = 'ErrorInvalidOofParameter';
 
     /**
      * This is a general error that is used when the requested operation is
@@ -1903,7 +1903,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_OPERATION = 'ErrorInvalidOperation';
+    final public const INVALID_OPERATION = 'ErrorInvalidOperation';
 
     /**
      * This error indicates that a caller requested free/busy information for a
@@ -1914,7 +1914,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ORG_RELATION_FOR_FREE_BUSY = 'ErrorInvalidOrganizationRelationshipForFreeBusy';
+    final public const INVALID_ORG_RELATION_FOR_FREE_BUSY = 'ErrorInvalidOrganizationRelationshipForFreeBusy';
 
     /**
      * This error occurs when a consumer passes in a zero or a negative value
@@ -1924,7 +1924,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PAGING_MAX_ROWS = 'ErrorInvalidPagingMaxRows';
+    final public const INVALID_PAGING_MAX_ROWS = 'ErrorInvalidPagingMaxRows';
 
     /**
      * This error occurs when a consumer passes in an invalid parent folder for
@@ -1937,7 +1937,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PARENT_FOLDER = 'ErrorInvalidParentFolder';
+    final public const INVALID_PARENT_FOLDER = 'ErrorInvalidParentFolder';
 
     /**
      * This error is returned when an attempt is made to set a task completion
@@ -1949,7 +1949,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PERCENT_COMPLETE = 'ErrorInvalidPercentCompleteValue';
+    final public const INVALID_PERCENT_COMPLETE = 'ErrorInvalidPercentCompleteValue';
 
     /**
      * This error indicates that the permission level is inconsistent with the
@@ -1959,7 +1959,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PERMISSION_SETTINGS = 'ErrorInvalidPermissionSettings';
+    final public const INVALID_PERMISSION_SETTINGS = 'ErrorInvalidPermissionSettings';
 
     /**
      * This error indicates that the caller identifier is not valid.
@@ -1968,7 +1968,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PHONE_CALL_ID = 'ErrorInvalidPhoneCallId';
+    final public const INVALID_PHONE_CALL_ID = 'ErrorInvalidPhoneCallId';
 
     /**
      * This error indicates that the telephone number is not correct or does not
@@ -1978,7 +1978,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PHONE_NUMBER = 'ErrorInvalidPhoneNumber';
+    final public const INVALID_PHONE_NUMBER = 'ErrorInvalidPhoneNumber';
 
     /**
      * This error is returned if an invalid photo size is requested from the
@@ -1988,7 +1988,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PHOTO_SIZE = 'ErrorInvalidPhotoSize';
+    final public const INVALID_PHOTO_SIZE = 'ErrorInvalidPhotoSize';
 
     /**
      * This error occurs when the property that you are trying to append to does
@@ -2008,7 +2008,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PROPERTY_APPEND = 'ErrorInvalidPropertyAppend';
+    final public const INVALID_PROPERTY_APPEND = 'ErrorInvalidPropertyAppend';
 
     /**
      * This error occurs if the delete operation is specified in an UpdateItem
@@ -2022,7 +2022,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PROPERTY_DELETE = 'ErrorInvalidPropertyDelete';
+    final public const INVALID_PROPERTY_DELETE = 'ErrorInvalidPropertyDelete';
 
     /**
      * This error occurs if the consumer passes in one of the flag properties in
@@ -2037,7 +2037,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PROPERTY_FOR_EXISTS = 'ErrorInvalidPropertyForExists';
+    final public const INVALID_PROPERTY_FOR_EXISTS = 'ErrorInvalidPropertyForExists';
 
     /**
      * This error occurs when the property that you are trying to manipulate
@@ -2047,7 +2047,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PROPERTY_FOR_OPERATION = 'ErrorInvalidPropertyForOperation';
+    final public const INVALID_PROPERTY_FOR_OPERATION = 'ErrorInvalidPropertyForOperation';
 
     /**
      * This error occurs if a property that is specified in the request is not
@@ -2067,7 +2067,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PROPERTY_REQUEST = 'ErrorInvalidPropertyRequest';
+    final public const INVALID_PROPERTY_REQUEST = 'ErrorInvalidPropertyRequest';
 
     /**
      * This error indicates that the property that you are trying to manipulate
@@ -2080,7 +2080,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PROPERTY_SET = 'ErrorInvalidPropertySet';
+    final public const INVALID_PROPERTY_SET = 'ErrorInvalidPropertySet';
 
     /**
      * This error occurs when the state of a calendar item recurrence binary
@@ -2090,7 +2090,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PROPERTY_STATE = 'ErrorCalendarInvalidPropertyState';
+    final public const INVALID_PROPERTY_STATE = 'ErrorCalendarInvalidPropertyState';
 
     /**
      * This error occurs during an UpdateItem Operation when a client tries to
@@ -2105,7 +2105,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PROPERTY_UPDATE_SENT_MESSAGE = 'ErrorInvalidPropertyUpdateSentMessage';
+    final public const INVALID_PROPERTY_UPDATE_SENT_MESSAGE = 'ErrorInvalidPropertyUpdateSentMessage';
 
     /**
      * This response code is not used.
@@ -2114,7 +2114,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PROPERTY_VALUE = 'ErrorCalendarInvalidPropertyValue';
+    final public const INVALID_PROPERTY_VALUE = 'ErrorCalendarInvalidPropertyValue';
 
     /**
      * This response code is not used.
@@ -2123,7 +2123,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PROXY_SECURITY_CONTEXT = 'ErrorInvalidProxySecurityContext';
+    final public const INVALID_PROXY_SECURITY_CONTEXT = 'ErrorInvalidProxySecurityContext';
 
     /**
      * This error occurs if you call the GetEvents Operation or the Unsubscribe
@@ -2137,7 +2137,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PULL_SUBSCRIPTION_ID = 'ErrorInvalidPullSubscriptionId';
+    final public const INVALID_PULL_SUBSCRIPTION_ID = 'ErrorInvalidPullSubscriptionId';
 
     /**
      * This error is returned by the Subscribe Operation when it creates a
@@ -2154,7 +2154,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_PUSH_SUBSCRIPTION_URL = 'ErrorInvalidPushSubscriptionUrl';
+    final public const INVALID_PUSH_SUBSCRIPTION_URL = 'ErrorInvalidPushSubscriptionUrl';
 
     /**
      * This error indicates that the search folder has a recipient table filter
@@ -2167,7 +2167,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_RECIPIENT_SUBFILTER = 'ErrorInvalidRecipientSubfilter';
+    final public const INVALID_RECIPIENT_SUBFILTER = 'ErrorInvalidRecipientSubfilter';
 
     /**
      * This error indicates that the search folder has a recipient table filter
@@ -2180,7 +2180,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_RECIPIENT_SUBFILTER_COMPARISON = 'ErrorInvalidRecipientSubfilterComparison';
+    final public const INVALID_RECIPIENT_SUBFILTER_COMPARISON = 'ErrorInvalidRecipientSubfilterComparison';
 
     /**
      * This error indicates that the search folder has a recipient table filter
@@ -2193,7 +2193,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_RECIPIENT_SUBFILTER_ORDER = 'ErrorInvalidRecipientSubfilterOrder';
+    final public const INVALID_RECIPIENT_SUBFILTER_ORDER = 'ErrorInvalidRecipientSubfilterOrder';
 
     /**
      * This error indicates that the search folder has a recipient table filter
@@ -2206,7 +2206,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_RECIPIENT_SUBFILTER_TEXT_FILTER = 'ErrorInvalidRecipientSubfilterTextFilter';
+    final public const INVALID_RECIPIENT_SUBFILTER_TEXT_FILTER = 'ErrorInvalidRecipientSubfilterTextFilter';
 
     /**
      * This error indicates that the recipient collection on your message or the
@@ -2219,7 +2219,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_RECIPIENTS = 'ErrorInvalidRecipients';
+    final public const INVALID_RECIPIENTS = 'ErrorInvalidRecipients';
 
     /**
      * This error occurs when the specified recurrence cannot be created.
@@ -2228,7 +2228,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_RECURRENCE = 'ErrorCalendarInvalidRecurrence';
+    final public const INVALID_RECURRENCE = 'ErrorCalendarInvalidRecurrence';
 
     /**
      * This error is returned from the CreateItem Operation for Forward and
@@ -2248,7 +2248,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_REFERENCE_ITEM = 'ErrorInvalidReferenceItem';
+    final public const INVALID_REFERENCE_ITEM = 'ErrorInvalidReferenceItem';
 
     /**
      * This error occurs when the SOAP request has a SOAP action header, but
@@ -2262,7 +2262,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_REQUEST = 'ErrorInvalidRequest';
+    final public const INVALID_REQUEST = 'ErrorInvalidRequest';
 
     /**
      * This response code is not used.
@@ -2271,7 +2271,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_RESTRICTION = 'ErrorInvalidRestriction';
+    final public const INVALID_RESTRICTION = 'ErrorInvalidRestriction';
 
     /**
      * Indicates that the retention tag GUID was invalid.
@@ -2280,7 +2280,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_RETENTION_TAG_ID_GUID = 'ErrorInvalidRetentionTagIdGuid';
+    final public const INVALID_RETENTION_TAG_ID_GUID = 'ErrorInvalidRetentionTagIdGuid';
 
     /**
      * This error is returned when an attempt is made to set an implicit tag on
@@ -2290,7 +2290,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_RETENTION_TAG_INHERITANCE = 'ErrorInvalidRetentionTagInheritance';
+    final public const INVALID_RETENTION_TAG_INHERITANCE = 'ErrorInvalidRetentionTagInheritance';
 
     /**
      * This error is returned when an attempt is made to set a nonexistent or
@@ -2300,7 +2300,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_RETENTION_TAG_INVISIBLE = 'ErrorInvalidRetentionTagInvisible';
+    final public const INVALID_RETENTION_TAG_INVISIBLE = 'ErrorInvalidRetentionTagInvisible';
 
     /**
      * This error indicates that no retention tags were found for this user.
@@ -2309,7 +2309,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_RETENTION_TAG_NONE = 'ErrorInvalidRetentionTagNone';
+    final public const INVALID_RETENTION_TAG_NONE = 'ErrorInvalidRetentionTagNone';
 
     /**
      * This error is returned when the specified retention tag has an incorrect
@@ -2319,7 +2319,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_RETENTION_TAG_TYPE_MISMATCH = 'ErrorInvalidRetentionTagTypeMismatch';
+    final public const INVALID_RETENTION_TAG_TYPE_MISMATCH = 'ErrorInvalidRetentionTagTypeMismatch';
 
     /**
      * This error occurs if the routing type that is passed for an
@@ -2332,7 +2332,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_ROUTING_TYPE = 'ErrorInvalidRoutingType';
+    final public const INVALID_ROUTING_TYPE = 'ErrorInvalidRoutingType';
 
     /**
      * This error occurs if the specified duration end time is not greater than
@@ -2342,7 +2342,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SCHEDULED_OOF_DURATION = 'ErrorInvalidScheduledOofDuration';
+    final public const INVALID_SCHEDULED_OOF_DURATION = 'ErrorInvalidScheduledOofDuration';
 
     /**
      * This error indicates that a proxy request that was sent to another server
@@ -2352,7 +2352,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SCHEMA_VERSION_FOR_MAILBOX_VERSION = 'ErrorInvalidSchemaVersionForMailboxVersion';
+    final public const INVALID_SCHEMA_VERSION_FOR_MAILBOX_VERSION = 'ErrorInvalidSchemaVersionForMailboxVersion';
 
     /**
      * This error indicates that the Exchange security descriptor on the
@@ -2362,7 +2362,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SECURITY_DESCRIPTOR = 'ErrorInvalidSecurityDescriptor';
+    final public const INVALID_SECURITY_DESCRIPTOR = 'ErrorInvalidSecurityDescriptor';
 
     /**
      * This error occurs during an attempt to send an item where the
@@ -2373,7 +2373,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SEND_ITEM_SAVE_SETTINGS = 'ErrorInvalidSendItemSaveSettings';
+    final public const INVALID_SEND_ITEM_SAVE_SETTINGS = 'ErrorInvalidSendItemSaveSettings';
 
     /**
      * This error indicates that the token that was passed in the header is
@@ -2384,7 +2384,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SERIALIZED_ACCESS_TOKEN = 'ErrorInvalidSerializedAccessToken';
+    final public const INVALID_SERIALIZED_ACCESS_TOKEN = 'ErrorInvalidSerializedAccessToken';
 
     /**
      * This error indicates that an invalid request server version was specified
@@ -2394,7 +2394,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SERVER_VERSION = 'ErrorInvalidServerVersion';
+    final public const INVALID_SERVER_VERSION = 'ErrorInvalidServerVersion';
 
     /**
      * This error indicates that the sharing metadata is not valid.
@@ -2405,7 +2405,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SHARING_DATA = 'ErrorInvalidSharingData';
+    final public const INVALID_SHARING_DATA = 'ErrorInvalidSharingData';
 
     /**
      * This error indicates that the sharing message is not valid.
@@ -2416,7 +2416,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SHARING_MESSAGE = 'ErrorInvalidSharingMessage';
+    final public const INVALID_SHARING_MESSAGE = 'ErrorInvalidSharingMessage';
 
     /**
      * This error occurs when an invalid SID is passed in a request.
@@ -2425,7 +2425,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SID = 'ErrorInvalidSid';
+    final public const INVALID_SID = 'ErrorInvalidSid';
 
     /**
      * This error indicates that the SIP name, dial plan, or the phone number
@@ -2435,7 +2435,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SIP_URI = 'ErrorInvalidSIPUri';
+    final public const INVALID_SIP_URI = 'ErrorInvalidSIPUri';
 
     /**
      * This error occurs when the SMTP address cannot be parsed.
@@ -2444,7 +2444,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SMTP_ADDRESS = 'ErrorInvalidSmtpAddress';
+    final public const INVALID_SMTP_ADDRESS = 'ErrorInvalidSmtpAddress';
 
     /**
      * This response code is not used.
@@ -2453,7 +2453,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SUBFILTER_TYPE = 'ErrorInvalidSubfilterType';
+    final public const INVALID_SUBFILTER_TYPE = 'ErrorInvalidSubfilterType';
 
     /**
      * This response code is not used.
@@ -2462,7 +2462,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SUBFILTER_TYPE_NOT_ATTENDEE_TYPE = 'ErrorInvalidSubfilterTypeNotAttendeeType';
+    final public const INVALID_SUBFILTER_TYPE_NOT_ATTENDEE_TYPE = 'ErrorInvalidSubfilterTypeNotAttendeeType';
 
     /**
      * This response code is not used.
@@ -2471,7 +2471,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SUBFILTER_TYPE_NOT_RECIPIENT_TYPE = 'ErrorInvalidSubfilterTypeNotRecipientType';
+    final public const INVALID_SUBFILTER_TYPE_NOT_RECIPIENT_TYPE = 'ErrorInvalidSubfilterTypeNotRecipientType';
 
     /**
      * This error indicates that the subscription is no longer valid.
@@ -2483,7 +2483,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SUBSCRIPTION = 'ErrorInvalidSubscription';
+    final public const INVALID_SUBSCRIPTION = 'ErrorInvalidSubscription';
 
     /**
      * This error indicates that the subscribe request included multiple public
@@ -2496,7 +2496,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SUBSCRIPTION_REQUEST = 'ErrorInvalidSubscriptionRequest';
+    final public const INVALID_SUBSCRIPTION_REQUEST = 'ErrorInvalidSubscriptionRequest';
 
     /**
      * This error is returned by SyncFolderItems or SyncFolderHierarchy if the
@@ -2510,7 +2510,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_SYNC_STATE_DATA = 'ErrorInvalidSyncStateData';
+    final public const INVALID_SYNC_STATE_DATA = 'ErrorInvalidSyncStateData';
 
     /**
      * This error indicates that the specified time interval is invalid.
@@ -2521,7 +2521,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_TIME_INTERVAL = 'ErrorInvalidTimeInterval';
+    final public const INVALID_TIME_INTERVAL = 'ErrorInvalidTimeInterval';
 
     /**
      * This error occurs when an invalid time zone is encountered.
@@ -2530,7 +2530,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_TIMEZONE = 'ErrorCalendarInvalidTimeZone';
+    final public const INVALID_TIMEZONE = 'ErrorCalendarInvalidTimeZone';
 
     /**
      * This error indicates that an internally inconsistent UserId was specified
@@ -2544,7 +2544,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_USER_INFO = 'ErrorInvalidUserInfo';
+    final public const INVALID_USER_INFO = 'ErrorInvalidUserInfo';
 
     /**
      * This error indicates that the user Out of Office (OOF) settings are
@@ -2554,7 +2554,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_USER_OOF_SETTINGS = 'ErrorInvalidUserOofSettings';
+    final public const INVALID_USER_OOF_SETTINGS = 'ErrorInvalidUserOofSettings';
 
     /**
      * This error occurs during Exchange Impersonation.
@@ -2566,7 +2566,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_USER_PRINCIPAL_NAME = 'ErrorInvalidUserPrincipalName';
+    final public const INVALID_USER_PRINCIPAL_NAME = 'ErrorInvalidUserPrincipalName';
 
     /**
      * This error occurs when an invalid SID is passed in a request.
@@ -2575,7 +2575,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_USER_SID = 'ErrorInvalidUserSid';
+    final public const INVALID_USER_SID = 'ErrorInvalidUserSid';
 
     /**
      * This response code is not used.
@@ -2584,7 +2584,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_USER_SID_MISSING_UPN = 'ErrorInvalidUserSidMissingUPN';
+    final public const INVALID_USER_SID_MISSING_UPN = 'ErrorInvalidUserSidMissingUPN';
 
     /**
      * This error indicates that the comparison value in the restriction is
@@ -2599,7 +2599,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_VALUE_FOR_PROPERTY = 'ErrorInvalidValueForProperty';
+    final public const INVALID_VALUE_FOR_PROPERTY = 'ErrorInvalidValueForProperty';
 
     /**
      * This error is caused by an invalid watermark.
@@ -2608,7 +2608,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const INVALID_WATERMARK = 'ErrorInvalidWatermark';
+    final public const INVALID_WATERMARK = 'ErrorInvalidWatermark';
 
     /**
      * This error indicates that a valid VoIP gateway is not available.
@@ -2617,7 +2617,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const IP_GATEWAY_NOT_FOUND = 'ErrorIPGatewayNotFound';
+    final public const IP_GATEWAY_NOT_FOUND = 'ErrorIPGatewayNotFound';
 
     /**
      * This error indicates that conflict resolution was unable to resolve
@@ -2630,7 +2630,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const IRRESOLVABLE_CONFLICT = 'ErrorIrresolvableConflict';
+    final public const IRRESOLVABLE_CONFLICT = 'ErrorIrresolvableConflict';
 
     /**
      * This error indicates that the AcceptItem element is invalid for a
@@ -2640,7 +2640,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ITEM_CANCELLED_FOR_ACCEPT = 'ErrorCalendarIsCancelledForAccept';
+    final public const ITEM_CANCELLED_FOR_ACCEPT = 'ErrorCalendarIsCancelledForAccept';
 
     /**
      * This error indicates that the DeclineItem element is invalid for a
@@ -2650,7 +2650,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ITEM_CANCELLED_FOR_DECLINE = 'ErrorCalendarIsCancelledForDecline';
+    final public const ITEM_CANCELLED_FOR_DECLINE = 'ErrorCalendarIsCancelledForDecline';
 
     /**
      * This error indicates that the RemoveItem element is invalid for a
@@ -2660,7 +2660,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ITEM_CANCELLED_FOR_REMOVE = 'ErrorCalendarIsCancelledForRemove';
+    final public const ITEM_CANCELLED_FOR_REMOVE = 'ErrorCalendarIsCancelledForRemove';
 
     /**
      * This error indicates that the TentativelyAcceptItem element is invalid
@@ -2670,7 +2670,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ITEM_CANCELLED_FOR_TENTATIVE = 'ErrorCalendarIsCancelledForTentative';
+    final public const ITEM_CANCELLED_FOR_TENTATIVE = 'ErrorCalendarIsCancelledForTentative';
 
     /**
      * This error indicates that the state of the object is corrupted and cannot
@@ -2684,7 +2684,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ITEM_CORRUPT = 'ErrorItemCorrupt';
+    final public const ITEM_CORRUPT = 'ErrorItemCorrupt';
 
     /**
      * This error indicates that the AcceptItem element is invalid for a
@@ -2694,7 +2694,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ITEM_DELEGATED_FOR_ACCEPT = 'ErrorCalendarIsDelegatedForAccept';
+    final public const ITEM_DELEGATED_FOR_ACCEPT = 'ErrorCalendarIsDelegatedForAccept';
 
     /**
      * This error indicates that the DeclineItem element is invalid for a
@@ -2704,7 +2704,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ITEM_DELEGATED_FOR_DECLINE = 'ErrorCalendarIsDelegatedForDecline';
+    final public const ITEM_DELEGATED_FOR_DECLINE = 'ErrorCalendarIsDelegatedForDecline';
 
     /**
      * This error indicates that the RemoveItem element is invalid for a meeting
@@ -2714,7 +2714,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ITEM_DELEGATED_FOR_REMOVE = 'ErrorCalendarIsDelegatedForRemove';
+    final public const ITEM_DELEGATED_FOR_REMOVE = 'ErrorCalendarIsDelegatedForRemove';
 
     /**
      * This error indicates that the TentativelyAcceptItem element is invalid
@@ -2724,7 +2724,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ITEM_DELEGATED_FOR_TENTATIVE = 'ErrorCalendarIsDelegatedForTentative';
+    final public const ITEM_DELEGATED_FOR_TENTATIVE = 'ErrorCalendarIsDelegatedForTentative';
 
     /**
      * This error occurs when the item was not found or you do not have
@@ -2734,7 +2734,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ITEM_NOT_FOUND = 'ErrorItemNotFound';
+    final public const ITEM_NOT_FOUND = 'ErrorItemNotFound';
 
     /**
      * This error occurs if a property request on an item fails. The property
@@ -2744,7 +2744,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ITEM_PROPERTY_REQUEST_FAILED = 'ErrorItemPropertyRequestFailed';
+    final public const ITEM_PROPERTY_REQUEST_FAILED = 'ErrorItemPropertyRequestFailed';
 
     /**
      * This error occurs when attempts to save the item or folder fail.
@@ -2753,7 +2753,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ITEM_SAVE = 'ErrorItemSave';
+    final public const ITEM_SAVE = 'ErrorItemSave';
 
     /**
      * This error occurs when attempts to save the item or folder fail because
@@ -2765,7 +2765,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ITEM_SAVE_PROPERTY_ERROR = 'ErrorItemSavePropertyError';
+    final public const ITEM_SAVE_PROPERTY_ERROR = 'ErrorItemSavePropertyError';
 
     /**
      * This response code is not used.
@@ -2774,7 +2774,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const LEGACY_MAILBOX_FREE_BUSY_VIEW_TYPE_NOT_MERGED = 'ErrorLegacyMailboxFreeBusyViewTypeNotMerged';
+    final public const LEGACY_MAILBOX_FREE_BUSY_VIEW_TYPE_NOT_MERGED = 'ErrorLegacyMailboxFreeBusyViewTypeNotMerged';
 
     /**
      * This response code is not used.
@@ -2783,7 +2783,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const LOCAL_SERVER_OBJECT_NOT_FOUND = 'ErrorLocalServerObjectNotFound';
+    final public const LOCAL_SERVER_OBJECT_NOT_FOUND = 'ErrorLocalServerObjectNotFound';
 
     /**
      * This error is intended for internal use only.
@@ -2792,7 +2792,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const LOCATION_SERVICES_DISABLED = 'ErrorLocationServicesDisabled';
+    final public const LOCATION_SERVICES_DISABLED = 'ErrorLocationServicesDisabled';
 
     /**
      * This error is intended for internal use only.
@@ -2801,7 +2801,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const LOCATION_SERVICES_INVALID_REQUEST = 'ErrorLocationServicesInvalidRequest';
+    final public const LOCATION_SERVICES_INVALID_REQUEST = 'ErrorLocationServicesInvalidRequest';
 
     /**
      * This error is intended for internal use only.
@@ -2810,7 +2810,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const LOCATION_SERVICES_REQUEST_FAILED = 'ErrorLocationServicesRequestFailed';
+    final public const LOCATION_SERVICES_REQUEST_FAILED = 'ErrorLocationServicesRequestFailed';
 
     /**
      * This error is intended for internal use only.
@@ -2819,7 +2819,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const LOCATION_SERVICES_REQUEST_TIMED_OUT = 'ErrorLocationServicesRequestTimedOut';
+    final public const LOCATION_SERVICES_REQUEST_TIMED_OUT = 'ErrorLocationServicesRequestTimedOut';
 
     /**
      * This error indicates that the Availability service was unable to log on
@@ -2832,7 +2832,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const LOGON_AS_NETWORK_SERVICE_FAILED = 'ErrorLogonAsNetworkServiceFailed';
+    final public const LOGON_AS_NETWORK_SERVICE_FAILED = 'ErrorLogonAsNetworkServiceFailed';
 
     /**
      * This error occurs if the MailboxData information cannot be mapped to a
@@ -2842,7 +2842,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MAIL_RECIPIENT_NOT_FOUND = 'ErrorMailRecipientNotFound';
+    final public const MAIL_RECIPIENT_NOT_FOUND = 'ErrorMailRecipientNotFound';
 
     /**
      * This error indicates that mail tips are disabled.
@@ -2851,7 +2851,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MAIL_TIPS_DISABLED = 'ErrorMailTipsDisabled';
+    final public const MAIL_TIPS_DISABLED = 'ErrorMailTipsDisabled';
 
     /**
      * This error indicates that the mailbox information in AD DS is configured
@@ -2861,7 +2861,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MAILBOX_CONFIGURATION_ERROR = 'ErrorMailboxConfiguration';
+    final public const MAILBOX_CONFIGURATION_ERROR = 'ErrorMailboxConfiguration';
 
     /**
      * This error indicates that the MailboxDataArray property in the request is
@@ -2873,7 +2873,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MAILBOX_DATA_ARRAY_EMPTY = 'ErrorMailboxDataArrayEmpty';
+    final public const MAILBOX_DATA_ARRAY_EMPTY = 'ErrorMailboxDataArrayEmpty';
 
     /**
      * This error occurs when more than 100 entries are supplied in a
@@ -2883,7 +2883,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MAILBOX_DATA_ARRAY_TOO_BIG = 'ErrorMailboxDataArrayTooBig';
+    final public const MAILBOX_DATA_ARRAY_TOO_BIG = 'ErrorMailboxDataArrayTooBig';
 
     /**
      * This error indicates that an attempt to access a mailbox failed because
@@ -2893,7 +2893,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MAILBOX_FAILOVER = 'ErrorMailboxFailover';
+    final public const MAILBOX_FAILOVER = 'ErrorMailboxFailover';
 
     /**
      * Indicates that the mailbox hold was not found.
@@ -2902,7 +2902,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MAILBOX_HOLD_NOT_FOUND = 'ErrorMailboxHoldNotFound';
+    final public const MAILBOX_HOLD_NOT_FOUND = 'ErrorMailboxHoldNotFound';
 
     /**
      * This error occurs when the connection to the mailbox to get the calendar
@@ -2912,7 +2912,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MAILBOX_LOGON_FAILED = 'ErrorMailboxLogonFailed';
+    final public const MAILBOX_LOGON_FAILED = 'ErrorMailboxLogonFailed';
 
     /**
      * This error indicates that the mailbox is being moved to a different
@@ -2925,7 +2925,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MAILBOX_MOVE_IN_PROGRESS = 'ErrorMailboxMoveInProgress';
+    final public const MAILBOX_MOVE_IN_PROGRESS = 'ErrorMailboxMoveInProgress';
 
     /**
      * This error is returned when a scoped search attempt is performed without
@@ -2939,7 +2939,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MAILBOX_SCOPE_NOT_ALLOWED_WITHOUT_QUERY_STRING = 'ErrorMailboxScopeNotAllowedWithoutQueryString';
+    final public const MAILBOX_SCOPE_NOT_ALLOWED_WITHOUT_QUERY_STRING = 'ErrorMailboxScopeNotAllowedWithoutQueryString';
 
     /**
      * This error indicates that the mailbox store is unavailable for one of
@@ -2958,7 +2958,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MAILBOX_STORE_UNAVAILABLE = 'ErrorMailboxStoreUnavailable';
+    final public const MAILBOX_STORE_UNAVAILABLE = 'ErrorMailboxStoreUnavailable';
 
     /**
      * This error occurs when the caller specifies an Id attribute that is
@@ -2968,7 +2968,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MALFORMED_ID = 'ErrorInvalidIdMalformed';
+    final public const MALFORMED_ID = 'ErrorInvalidIdMalformed';
 
     /**
      * This error occurs if the managed folder that you are trying to create
@@ -2978,7 +2978,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MANAGED_FOLDER_ALREADY_EXISTS = 'ErrorManagedFolderAlreadyExists';
+    final public const MANAGED_FOLDER_ALREADY_EXISTS = 'ErrorManagedFolderAlreadyExists';
 
     /**
      * This error occurs when the folder name that was specified in the request
@@ -2991,7 +2991,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MANAGED_FOLDER_NOT_FOUND = 'ErrorManagedFolderNotFound';
+    final public const MANAGED_FOLDER_NOT_FOUND = 'ErrorManagedFolderNotFound';
 
     /**
      * This error indicates that the managed folders root was deleted from the
@@ -3005,7 +3005,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MANAGED_FOLDERS_ROOT_FAILURE = 'ErrorManagedFoldersRootFailure';
+    final public const MANAGED_FOLDERS_ROOT_FAILURE = 'ErrorManagedFoldersRootFailure';
 
     /**
      * This error indicates that a meeting request is out-of-date and cannot be
@@ -3015,7 +3015,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MEETING_REQUEST_OUT_OF_DATE = 'ErrorCalendarMeetingRequestIsOutOfDate';
+    final public const MEETING_REQUEST_OUT_OF_DATE = 'ErrorCalendarMeetingRequestIsOutOfDate';
 
     /**
      * This error indicates that the suggestions engine encountered a problem
@@ -3025,7 +3025,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MEETING_SUGGESTION_GENERATION_FAILED = 'ErrorMeetingSuggestionGenerationFailed';
+    final public const MEETING_SUGGESTION_GENERATION_FAILED = 'ErrorMeetingSuggestionGenerationFailed';
 
     /**
      * This error occurs if the MessageDisposition attribute is not set.
@@ -3040,7 +3040,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MESSAGE_DISPOSITION_REQUIRED = 'ErrorMessageDispositionRequired';
+    final public const MESSAGE_DISPOSITION_REQUIRED = 'ErrorMessageDispositionRequired';
 
     /**
      * This error indicates that the message that you are trying to send exceeds
@@ -3050,7 +3050,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MESSAGE_SIZE_EXCEEDED = 'ErrorMessageSizeExceeded';
+    final public const MESSAGE_SIZE_EXCEEDED = 'ErrorMessageSizeExceeded';
 
     /**
      * This error indicates that the given domain cannot be found.
@@ -3059,7 +3059,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MESSAGE_TRACKING_NO_SUCH_DOMAIN = 'ErrorMessageTrackingNoSuchDomain';
+    final public const MESSAGE_TRACKING_NO_SUCH_DOMAIN = 'ErrorMessageTrackingNoSuchDomain';
 
     /**
      * This error indicates that the message tracking service cannot track the
@@ -3069,7 +3069,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MESSAGE_TRACKING_PERMANENT_ERROR = 'ErrorMessageTrackingPermanentError';
+    final public const MESSAGE_TRACKING_PERMANENT_ERROR = 'ErrorMessageTrackingPermanentError';
 
     /**
      * This error indicates that the message tracking service is either down or
@@ -3082,7 +3082,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MESSAGE_TRACKING_TRANSIENT_ERROR = 'ErrorMessageTrackingTransientError';
+    final public const MESSAGE_TRACKING_TRANSIENT_ERROR = 'ErrorMessageTrackingTransientError';
 
     /**
      * This error occurs when the MIME content is not a valid iCal for a
@@ -3095,7 +3095,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MIME_CONTENT_CONVERSATION_FAILED = 'ErrorMimeContentConversionFailed';
+    final public const MIME_CONTENT_CONVERSATION_FAILED = 'ErrorMimeContentConversionFailed';
 
     /**
      * This error occurs when the MIME content is invalid.
@@ -3104,7 +3104,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MIME_CONTENT_INVALID = 'ErrorMimeContentInvalid';
+    final public const MIME_CONTENT_INVALID = 'ErrorMimeContentInvalid';
 
     /**
      * This error occurs when the MIME content in the request is not a valid
@@ -3114,7 +3114,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MIME_CONTENT_INVALID_BASE_64_STRING = 'ErrorMimeContentInvalidBase64String';
+    final public const MIME_CONTENT_INVALID_BASE_64_STRING = 'ErrorMimeContentInvalidBase64String';
 
     /**
      * This error MUST be returned when event notifications are missed.
@@ -3123,7 +3123,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MISSED_NOTIFICATION_EVENTS = 'ErrorMissedNotificationEvents';
+    final public const MISSED_NOTIFICATION_EVENTS = 'ErrorMissedNotificationEvents';
 
     /**
      * This error indicates that a required argument was missing from the
@@ -3135,7 +3135,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MISSING_ARGUMENT = 'ErrorMissingArgument';
+    final public const MISSING_ARGUMENT = 'ErrorMissingArgument';
 
     /**
      * This error indicates that you specified a distinguished folder ID in the
@@ -3149,7 +3149,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MISSING_EMAIL_ADDRESS = 'ErrorMissingEmailAddress';
+    final public const MISSING_EMAIL_ADDRESS = 'ErrorMissingEmailAddress';
 
     /**
      * This error indicates that you specified a distinguished folder ID in the
@@ -3164,7 +3164,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MISSING_EMAIL_ADDRESS_FOR_MANAGED_FOLDER = 'ErrorMissingEmailAddressForManagedFolder';
+    final public const MISSING_EMAIL_ADDRESS_FOR_MANAGED_FOLDER = 'ErrorMissingEmailAddressForManagedFolder';
 
     /**
      * This error occurs if the EmailAddress element is missing.
@@ -3173,7 +3173,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MISSING_INFORMATION_EMAIL_ADDRESS = 'ErrorMissingInformationEmailAddress';
+    final public const MISSING_INFORMATION_EMAIL_ADDRESS = 'ErrorMissingInformationEmailAddress';
 
     /**
      * This error occurs if the ReferenceItemId is missing.
@@ -3182,7 +3182,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MISSING_INFORMATION_REFERENCE_ITEM_ID = 'ErrorMissingInformationReferenceItemId';
+    final public const MISSING_INFORMATION_REFERENCE_ITEM_ID = 'ErrorMissingInformationReferenceItemId';
 
     /**
      * This error code is never returned.
@@ -3191,7 +3191,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MISSING_INFORMATION_SHARING_FOLDER_ID = 'ErrorMissingInformationSharingFolderId';
+    final public const MISSING_INFORMATION_SHARING_FOLDER_ID = 'ErrorMissingInformationSharingFolderId';
 
     /**
      * This error is returned when an attempt is made to not include the item
@@ -3202,7 +3202,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MISSING_ITEM_FOR_CREATE_ITEM_ATTACHMENT = 'ErrorMissingItemForCreateItemAttachment';
+    final public const MISSING_ITEM_FOR_CREATE_ITEM_ATTACHMENT = 'ErrorMissingItemForCreateItemAttachment';
 
     /**
      * This error occurs when the policy IDs property, property tag 0x6732, for
@@ -3214,7 +3214,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MISSING_MANAGED_FOLDER_ID = 'ErrorMissingManagedFolderId';
+    final public const MISSING_MANAGED_FOLDER_ID = 'ErrorMissingManagedFolderId';
 
     /**
      * This error indicates that you tried to send an item without including
@@ -3228,7 +3228,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MISSING_RECIPIENTS = 'ErrorMissingRecipients';
+    final public const MISSING_RECIPIENTS = 'ErrorMissingRecipients';
 
     /**
      * This error indicates that a UserId has not been fully specified in a
@@ -3238,7 +3238,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MISSING_USER_ID_INFORMATION = 'ErrorMissingUserIdInformation';
+    final public const MISSING_USER_ID_INFORMATION = 'ErrorMissingUserIdInformation';
 
     /**
      * This error indicates that you have specified more than one
@@ -3248,7 +3248,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MORE_THAN_ONE_ACCESS_MODE_SPECIFIED = 'ErrorMoreThanOneAccessModeSpecified';
+    final public const MORE_THAN_ONE_ACCESS_MODE_SPECIFIED = 'ErrorMoreThanOneAccessModeSpecified';
 
     /**
      * This error indicates that the move or copy operation failed.
@@ -3262,7 +3262,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MOVE_COPY_FAILED = 'ErrorMoveCopyFailed';
+    final public const MOVE_COPY_FAILED = 'ErrorMoveCopyFailed';
 
     /**
      * This error occurs if you try to move a distinguished folder.
@@ -3271,7 +3271,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MOVE_DISTINGUISHED_FOLDER = 'ErrorMoveDistinguishedFolder';
+    final public const MOVE_DISTINGUISHED_FOLDER = 'ErrorMoveDistinguishedFolder';
 
     /**
      * This error occurs when a request attempts to access multiple mailbox
@@ -3281,7 +3281,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const MULTI_LEGACY_MAILBOX_ACCESS = 'ErrorMultiLegacyMailboxAccess';
+    final public const MULTI_LEGACY_MAILBOX_ACCESS = 'ErrorMultiLegacyMailboxAccess';
 
     /**
      * This error occurs if the ResolveNames Operation returns more than one
@@ -3294,7 +3294,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NAME_RESOLUTION_MULTIPLE_RESULTS = 'ErrorNameResolutionMultipleResults';
+    final public const NAME_RESOLUTION_MULTIPLE_RESULTS = 'ErrorNameResolutionMultipleResults';
 
     /**
      * This error indicates that the caller does not have a mailbox on the
@@ -3307,7 +3307,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NAME_RESOLUTION_NO_MAILBOX = 'ErrorNameResolutionNoMailbox';
+    final public const NAME_RESOLUTION_NO_MAILBOX = 'ErrorNameResolutionNoMailbox';
 
     /**
      * This error indicates that the ResolveNames Operation returns no results.
@@ -3316,7 +3316,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NAME_RESOLUTION_NO_RESULTS = 'ErrorNameResolutionNoResults';
+    final public const NAME_RESOLUTION_NO_RESULTS = 'ErrorNameResolutionNoResults';
 
     /**
      * This error MUST be returned to the first subscription connection if a
@@ -3326,7 +3326,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NEW_EVENT_STREAM_CONNECTION_OPENED = 'ErrorNewEventStreamConnectionOpened';
+    final public const NEW_EVENT_STREAM_CONNECTION_OPENED = 'ErrorNewEventStreamConnectionOpened';
 
     /**
      * This error code MUST be returned when the Web service cannot find a
@@ -3336,7 +3336,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NO_APPLICABLE_PROXY_CAS_SERVERS_AVAILABLE = 'ErrorNoApplicableProxyCASServersAvailable';
+    final public const NO_APPLICABLE_PROXY_CAS_SERVERS_AVAILABLE = 'ErrorNoApplicableProxyCASServersAvailable';
 
     /**
      * This error occurs if there is no Calendar folder for the mailbox.
@@ -3345,7 +3345,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NO_CALENDAR = 'ErrorNoCalendar';
+    final public const NO_CALENDAR = 'ErrorNoCalendar';
 
     /**
      * This error indicates that the request referred to a mailbox in another
@@ -3357,7 +3357,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NO_DESTINATION_CAS_DUE_TO_KERBEROS_REQUIREMENTS = 'ErrorNoDestinationCASDueToKerberosRequirements';
+    final public const NO_DESTINATION_CAS_DUE_TO_KERBEROS_REQUIREMENTS = 'ErrorNoDestinationCASDueToKerberosRequirements';
 
     /**
      * This error indicates that the request referred to a mailbox in another
@@ -3369,7 +3369,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NO_DESTINATION_CAS_DUE_TO_SSL_REQUIREMENTS = 'ErrorNoDestinationCASDueToSSLRequirements';
+    final public const NO_DESTINATION_CAS_DUE_TO_SSL_REQUIREMENTS = 'ErrorNoDestinationCASDueToSSLRequirements';
 
     /**
      * This error indicates that the request referred to a mailbox in another
@@ -3381,7 +3381,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NO_DESTINATION_CAS_DUE_TO_VERSION_MISMATCH = 'ErrorNoDestinationCASDueToVersionMismatch';
+    final public const NO_DESTINATION_CAS_DUE_TO_VERSION_MISMATCH = 'ErrorNoDestinationCASDueToVersionMismatch';
 
     /**
      * No error occurred for the request.
@@ -3390,7 +3390,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NO_ERROR = 'NoError';
+    final public const NO_ERROR = 'NoError';
 
     /**
      * This error indicates that the caller tried to grant permissions in its
@@ -3401,7 +3401,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NO_EXTERNAL_SHARING_ALLOWED_BY_POLICY = 'ErrorNotAllowedExternalSharingByPolicy';
+    final public const NO_EXTERNAL_SHARING_ALLOWED_BY_POLICY = 'ErrorNotAllowedExternalSharingByPolicy';
 
     /**
      * This error occurs if you set the FolderClass property when you are
@@ -3418,7 +3418,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NO_FOLDER_CLASS_OVERRIDE = 'ErrorNoFolderClassOverride';
+    final public const NO_FOLDER_CLASS_OVERRIDE = 'ErrorNoFolderClassOverride';
 
     /**
      * This error indicates that the caller does not have free/busy viewing
@@ -3428,7 +3428,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NO_FREE_BUSY_ACCESS = 'ErrorNoFreeBusyAccess';
+    final public const NO_FREE_BUSY_ACCESS = 'ErrorNoFreeBusyAccess';
 
     /**
      * This error indicates that MAPI properties in the custom range, 0x8000 and
@@ -3441,7 +3441,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NO_PROPERTY_TAG_FOR_CUSTOM_PROPERTIES = 'ErrorNoPropertyTagForCustomProperties';
+    final public const NO_PROPERTY_TAG_FOR_CUSTOM_PROPERTIES = 'ErrorNoPropertyTagForCustomProperties';
 
     /**
      * This response code is not used.
@@ -3450,7 +3450,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NO_PUBLIC_FOLDER_REPLICA_AVAILABLE = 'ErrorNoPublicFolderReplicaAvailable';
+    final public const NO_PUBLIC_FOLDER_REPLICA_AVAILABLE = 'ErrorNoPublicFolderReplicaAvailable';
 
     /**
      * This error code MUST be returned if no public folder server is available
@@ -3460,7 +3460,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NO_PUBLIC_FOLDER_SERVER_AVAILABLE = 'ErrorNoPublicFolderServerAvailable';
+    final public const NO_PUBLIC_FOLDER_SERVER_AVAILABLE = 'ErrorNoPublicFolderServerAvailable';
 
     /**
      * This error indicates that the request referred to a mailbox in another
@@ -3471,7 +3471,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NO_RESPONDING_CAS_IN_DESTINATION_SITE = 'ErrorNoRespondingCASInDestinationSite';
+    final public const NO_RESPONDING_CAS_IN_DESTINATION_SITE = 'ErrorNoRespondingCASInDestinationSite';
 
     /**
      * This error is intended for internal use only.
@@ -3480,7 +3480,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NO_SPEECH_DETECTED = 'ErrorNoSpeechDetected';
+    final public const NO_SPEECH_DETECTED = 'ErrorNoSpeechDetected';
 
     /**
      * This error occurs when a mailbox could not be found for an email address.
@@ -3495,7 +3495,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NON_EXISTENT_MAILBOX = 'ErrorNonExistentMailbox';
+    final public const NON_EXISTENT_MAILBOX = 'ErrorNonExistentMailbox';
 
     /**
      * This error occurs when a caller passes in a non-primary SMTP address. The
@@ -3505,7 +3505,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NON_PRIMARY_SMTP_ADDRESS = 'ErrorNonPrimarySmtpAddress';
+    final public const NON_PRIMARY_SMTP_ADDRESS = 'ErrorNonPrimarySmtpAddress';
 
     /**
      * This error is returned whenever an ID that is not an item attachment ID
@@ -3515,7 +3515,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NOT_AN_ITEM_ATTACHMENT_ID = 'ErrorInvalidIdNotAnItemAttachmentId';
+    final public const NOT_AN_ITEM_ATTACHMENT_ID = 'ErrorInvalidIdNotAnItemAttachmentId';
 
     /**
      * This error indicates that the user is not a delegate for the mailbox.
@@ -3528,7 +3528,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NOT_DELEGATE = 'ErrorNotDelegate';
+    final public const NOT_DELEGATE = 'ErrorNotDelegate';
 
     /**
      * This error indicates that the operation could not be completed because of
@@ -3538,7 +3538,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NOT_ENOUGH_MEMORY = 'ErrorNotEnoughMemory';
+    final public const NOT_ENOUGH_MEMORY = 'ErrorNotEnoughMemory';
 
     /**
      * This error indicates that the operation (currently CancelItem) on the
@@ -3549,7 +3549,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const NOT_ORGANIZER = 'ErrorCalendarIsNotOrganizer';
+    final public const NOT_ORGANIZER = 'ErrorCalendarIsNotOrganizer';
 
     /**
      * This error occurs if the object type changed.
@@ -3558,7 +3558,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const OBJECT_TYPE_CHANGED = 'ErrorObjectTypeChanged';
+    final public const OBJECT_TYPE_CHANGED = 'ErrorObjectTypeChanged';
 
     /**
      * This error occurs when the Start or End time of an occurrence is updated
@@ -3569,7 +3569,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const OCCURRENCE_CROSSING_BOUNDARY = 'ErrorOccurrenceCrossingBoundary';
+    final public const OCCURRENCE_CROSSING_BOUNDARY = 'ErrorOccurrenceCrossingBoundary';
 
     /**
      * This error indicates that the occurrence index does not point to an
@@ -3583,7 +3583,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const OCCURRENCE_INDEX_OUT_OF_RANGE = 'ErrorCalendarOccurrenceIndexIsOutOfRecurrenceRange';
+    final public const OCCURRENCE_INDEX_OUT_OF_RANGE = 'ErrorCalendarOccurrenceIndexIsOutOfRecurrenceRange';
 
     /**
      * This error indicates that any operation on a deleted occurrence
@@ -3593,7 +3593,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const OCCURRENCE_IS_DELETED = 'ErrorCalendarOccurrenceIsDeletedFromRecurrence';
+    final public const OCCURRENCE_IS_DELETED = 'ErrorCalendarOccurrenceIsDeletedFromRecurrence';
 
     /**
      * This error indicates that the time allotment for a given occurrence
@@ -3606,7 +3606,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const OCCURRENCE_TIME_SPAN_TOO_BIG = 'ErrorOccurrenceTimeSpanTooBig';
+    final public const OCCURRENCE_TIME_SPAN_TOO_BIG = 'ErrorOccurrenceTimeSpanTooBig';
 
     /**
      * This error indicates that the current operation is not valid for the
@@ -3616,7 +3616,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const OPERATION_NOT_ALLOWED_WITH_PUBLIC_FOLDER_ROOT = 'ErrorOperationNotAllowedWithPublicFolderRoot';
+    final public const OPERATION_NOT_ALLOWED_WITH_PUBLIC_FOLDER_ROOT = 'ErrorOperationNotAllowedWithPublicFolderRoot';
 
     /**
      * This error indicates that the requester's organization is not federated
@@ -3627,7 +3627,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ORGANIZATION_NOT_FEDERATED = 'ErrorOrganizationNotFederated';
+    final public const ORGANIZATION_NOT_FEDERATED = 'ErrorOrganizationNotFederated';
 
     /**
      * This error indicates that AcceptItem is invalid for the organizer’s
@@ -3637,7 +3637,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ORGANIZER_FOR_ACCEPT = 'ErrorCalendarIsOrganizerForAccept';
+    final public const ORGANIZER_FOR_ACCEPT = 'ErrorCalendarIsOrganizerForAccept';
 
     /**
      * This error indicates that DeclineItem is invalid for the organizer’s
@@ -3647,7 +3647,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ORGANIZER_FOR_DECLINE = 'ErrorCalendarIsOrganizerForDecline';
+    final public const ORGANIZER_FOR_DECLINE = 'ErrorCalendarIsOrganizerForDecline';
 
     /**
      * This error indicates that RemoveItem is invalid for the organizer’s
@@ -3658,7 +3658,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ORGANIZER_FOR_REMOVE = 'ErrorCalendarIsOrganizerForRemove';
+    final public const ORGANIZER_FOR_REMOVE = 'ErrorCalendarIsOrganizerForRemove';
 
     /**
      * This error indicates that TentativelyAcceptItem is invalid for the
@@ -3668,7 +3668,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const ORGANIZER_FOR_TENTATIVE = 'ErrorCalendarIsOrganizerForTentative';
+    final public const ORGANIZER_FOR_TENTATIVE = 'ErrorCalendarIsOrganizerForTentative';
 
     /**
      * This error MUST be returned when an attempt to manage Inbox rules occurs
@@ -3678,7 +3678,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const OUTLOOK_RULE_BLOB_EXISTS = 'ErrorOutlookRuleBlobExists';
+    final public const OUTLOOK_RULE_BLOB_EXISTS = 'ErrorOutlookRuleBlobExists';
 
     /**
      * This response code is not used.
@@ -3687,7 +3687,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PARENT_FOLDER_ID_REQUIRED = 'ErrorParentFolderIdRequired';
+    final public const PARENT_FOLDER_ID_REQUIRED = 'ErrorParentFolderIdRequired';
 
     /**
      * This error occurs in the CreateFolder Operation when the parent folder is
@@ -3697,7 +3697,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PARENT_FOLDER_NOT_FOUND = 'ErrorParentFolderNotFound';
+    final public const PARENT_FOLDER_NOT_FOUND = 'ErrorParentFolderNotFound';
 
     /**
      * This error indicates that you must change your password before you can
@@ -3712,7 +3712,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PASSWORD_CHANGE_REQUIRED = 'ErrorPasswordChangeRequired';
+    final public const PASSWORD_CHANGE_REQUIRED = 'ErrorPasswordChangeRequired';
 
     /**
      * This error indicates that the password has expired.
@@ -3724,7 +3724,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PASSWORD_EXPIRED = 'ErrorPasswordExpired';
+    final public const PASSWORD_EXPIRED = 'ErrorPasswordExpired';
 
     /**
      * This error indicates that the requester tried to grant permissions in its
@@ -3736,7 +3736,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PERMISSION_NOT_ALLOWED_BY_POLICY = 'ErrorPermissionNotAllowedByPolicy';
+    final public const PERMISSION_NOT_ALLOWED_BY_POLICY = 'ErrorPermissionNotAllowedByPolicy';
 
     /**
      * This error Indicates that the telephone number was not in the correct
@@ -3746,7 +3746,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PHONE_NUMBER_NOT_DIALABLE = 'ErrorPhoneNumberNotDialable';
+    final public const PHONE_NUMBER_NOT_DIALABLE = 'ErrorPhoneNumberNotDialable';
 
     /**
      * This error is intended for internal use only.
@@ -3755,7 +3755,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PROMPT_PUBLISHING_OPERATION_FAILED = 'ErrorPromptPublishingOperationFailed';
+    final public const PROMPT_PUBLISHING_OPERATION_FAILED = 'ErrorPromptPublishingOperationFailed';
 
     /**
      * This error indicates that the update failed because of invalid property
@@ -3767,7 +3767,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PROPERTY_UPDATE_ERROR = 'ErrorPropertyUpdate';
+    final public const PROPERTY_UPDATE_ERROR = 'ErrorPropertyUpdate';
 
     /**
      * This response code is not used.
@@ -3776,7 +3776,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PROPERTY_VALIDATION_FAILURE = 'ErrorPropertyValidationFailure';
+    final public const PROPERTY_VALIDATION_FAILURE = 'ErrorPropertyValidationFailure';
 
     /**
      * This error indicates that the request referred to a subscription that
@@ -3787,7 +3787,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PROXIED_SUBSCRIPTION_CALL_FAILURE = 'ErrorProxiedSubscriptionCallFailure';
+    final public const PROXIED_SUBSCRIPTION_CALL_FAILURE = 'ErrorProxiedSubscriptionCallFailure';
 
     /**
      * This response code is not used.
@@ -3796,7 +3796,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PROXY_CALL_FAILED = 'ErrorProxyCallFailed';
+    final public const PROXY_CALL_FAILED = 'ErrorProxyCallFailed';
 
     /**
      * This error indicates that the request referred to a mailbox in another
@@ -3807,7 +3807,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PROXY_GROUP_SID_LIMIT_EXCEEDED = 'ErrorProxyGroupSidLimitExceeded';
+    final public const PROXY_GROUP_SID_LIMIT_EXCEEDED = 'ErrorProxyGroupSidLimitExceeded';
 
     /**
      * This error indicates that the request that Exchange Web Services sent to
@@ -3822,7 +3822,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PROXY_REQUEST_NOT_ALLOWED = 'ErrorProxyRequestNotAllowed';
+    final public const PROXY_REQUEST_NOT_ALLOWED = 'ErrorProxyRequestNotAllowed';
 
     /**
      * This error indicates that Exchange Web Services tried to proxy an
@@ -3836,7 +3836,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PROXY_REQUEST_PROCESSING_FAILED = 'ErrorProxyRequestProcessingFailed';
+    final public const PROXY_REQUEST_PROCESSING_FAILED = 'ErrorProxyRequestProcessingFailed';
 
     /**
      * This error code must be returned if the Web service cannot determine
@@ -3847,7 +3847,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PROXY_SERVICE_DISCOVERY_FAILED = 'ErrorProxyServiceDiscoveryFailed';
+    final public const PROXY_SERVICE_DISCOVERY_FAILED = 'ErrorProxyServiceDiscoveryFailed';
 
     /**
      * This response code is not used.
@@ -3856,7 +3856,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PROXY_TOKEN_EXPIRED = 'ErrorProxyTokenExpired';
+    final public const PROXY_TOKEN_EXPIRED = 'ErrorProxyTokenExpired';
 
     /**
      * This error occurs when the public folder mailbox URL cannot be found.
@@ -3867,7 +3867,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PUBLIC_FOLDER_MAILBOX_DISCOVERY_FAILED = 'ErrorPublicFolderMailboxDiscoveryFailed';
+    final public const PUBLIC_FOLDER_MAILBOX_DISCOVERY_FAILED = 'ErrorPublicFolderMailboxDiscoveryFailed';
 
     /**
      * This error occurs when an attempt is made to access a public folder and
@@ -3877,7 +3877,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PUBLIC_FOLDER_OPERATION_FAILED = 'ErrorPublicFolderOperationFailed';
+    final public const PUBLIC_FOLDER_OPERATION_FAILED = 'ErrorPublicFolderOperationFailed';
 
     /**
      * This error occurs when the recipient that was passed to the
@@ -3890,7 +3890,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PUBLIC_FOLDER_REQUEST_PROCESSING_FAILED = 'ErrorPublicFolderRequestProcessingFailed';
+    final public const PUBLIC_FOLDER_REQUEST_PROCESSING_FAILED = 'ErrorPublicFolderRequestProcessingFailed';
 
     /**
      * This error occurs when the recipient that was passed to the
@@ -3904,7 +3904,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PUBLIC_FOLDER_SERVER_NOT_FOUND = 'ErrorPublicFolderServerNotFound';
+    final public const PUBLIC_FOLDER_SERVER_NOT_FOUND = 'ErrorPublicFolderServerNotFound';
 
     /**
      * This error occurs when a synchronization operation succeeds against the
@@ -3915,7 +3915,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const PUBLIC_FOLDER_SYNC_EXCEPTION = 'ErrorPublicFolderSyncException';
+    final public const PUBLIC_FOLDER_SYNC_EXCEPTION = 'ErrorPublicFolderSyncException';
 
     /**
      * This error indicates that the search folder restriction may be valid, but
@@ -3929,7 +3929,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const QUERY_FILTER_TOO_LONG = 'ErrorQueryFilterTooLong';
+    final public const QUERY_FILTER_TOO_LONG = 'ErrorQueryFilterTooLong';
 
     /**
      * This error occurs when the mailbox quota is exceeded.
@@ -3938,7 +3938,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const QUOTA_EXCEEDED = 'ErrorQuotaExceeded';
+    final public const QUOTA_EXCEEDED = 'ErrorQuotaExceeded';
 
     /**
      * This error is returned by the GetEvents Operation or push notifications
@@ -3951,7 +3951,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const READ_EVENTS_FAILED = 'ErrorReadEventsFailed';
+    final public const READ_EVENTS_FAILED = 'ErrorReadEventsFailed';
 
     /**
      * This error is returned by the CreateItem Operation if an attempt was made
@@ -3962,7 +3962,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const READ_RECEIPT_NOT_PENDING = 'ErrorReadReceiptNotPending';
+    final public const READ_RECEIPT_NOT_PENDING = 'ErrorReadReceiptNotPending';
 
     /**
      * This error is intended for internal use only.
@@ -3971,7 +3971,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const RECIPIENT_NOT_FOUND = 'ErrorRecipientNotFound';
+    final public const RECIPIENT_NOT_FOUND = 'ErrorRecipientNotFound';
 
     /**
      * This error is intended for internal use only.
@@ -3980,7 +3980,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const RECOGNIZER_NOT_INSTALLED = 'ErrorRecognizerNotInstalled';
+    final public const RECOGNIZER_NOT_INSTALLED = 'ErrorRecognizerNotInstalled';
 
     /**
      * This error occurs when the end date for the recurrence is after 9/1/4500.
@@ -3989,7 +3989,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const RECURRENCE_END_DATE_TOO_BIG = 'ErrorRecurrenceEndDateTooBig';
+    final public const RECURRENCE_END_DATE_TOO_BIG = 'ErrorRecurrenceEndDateTooBig';
 
     /**
      * This error occurs when the specified recurrence does not have any
@@ -3999,7 +3999,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const RECURRENCE_HAS_NO_OCCURRENCE = 'ErrorRecurrenceHasNoOccurrence';
+    final public const RECURRENCE_HAS_NO_OCCURRENCE = 'ErrorRecurrenceHasNoOccurrence';
 
     /**
      * This error indicates that the delegate list failed to be saved after
@@ -4009,7 +4009,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const REMOVE_DELEGATES_FAILED = 'ErrorRemoveDelegatesFailed';
+    final public const REMOVE_DELEGATES_FAILED = 'ErrorRemoveDelegatesFailed';
 
     /**
      * This response code is not used.
@@ -4018,7 +4018,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const REQUEST_ABORTED = 'ErrorRequestAborted';
+    final public const REQUEST_ABORTED = 'ErrorRequestAborted';
 
     /**
      * This error occurs when the request stream is larger than 400 KB.
@@ -4027,7 +4027,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const REQUEST_STREAM_TOO_BIG = 'ErrorRequestStreamTooBig';
+    final public const REQUEST_STREAM_TOO_BIG = 'ErrorRequestStreamTooBig';
 
     /**
      * This error is returned when a required property is missing in a
@@ -4039,7 +4039,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const REQUIRED_PROPERTY_MISSING = 'ErrorRequiredPropertyMissing';
+    final public const REQUIRED_PROPERTY_MISSING = 'ErrorRequiredPropertyMissing';
 
     /**
      * This error indicates that the caller has specified a folder that is not a
@@ -4049,7 +4049,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const RESOLVE_NAMES_INVALID_FOLDER_TYPE = 'ErrorResolveNamesInvalidFolderType';
+    final public const RESOLVE_NAMES_INVALID_FOLDER_TYPE = 'ErrorResolveNamesInvalidFolderType';
 
     /**
      * This error indicates that the caller has specified more than one contacts
@@ -4059,7 +4059,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const RESOLVE_NAMES_ONLY_ONE_CONTACTS_FOLDER_ALLOWED = 'ErrorResolveNamesOnlyOneContactsFolderAllowed';
+    final public const RESOLVE_NAMES_ONLY_ONE_CONTACTS_FOLDER_ALLOWED = 'ErrorResolveNamesOnlyOneContactsFolderAllowed';
 
     /**
      * This response code is not used.
@@ -4068,7 +4068,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const RESPONSE_SCHEMA_VALIDATION = 'ErrorResponseSchemaValidation';
+    final public const RESPONSE_SCHEMA_VALIDATION = 'ErrorResponseSchemaValidation';
 
     /**
      * This error occurs when the restriction cannot be evaluated by Exchange
@@ -4078,7 +4078,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const RESTRICTION_TOO_COMPLEX = 'ErrorRestrictionTooComplex';
+    final public const RESTRICTION_TOO_COMPLEX = 'ErrorRestrictionTooComplex';
 
     /**
      * This error occurs if the restriction contains more than 255 nodes.
@@ -4087,7 +4087,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const RESTRICTION_TOO_LONG = 'ErrorRestrictionTooLong';
+    final public const RESTRICTION_TOO_LONG = 'ErrorRestrictionTooLong';
 
     /**
      * This error indicates that the number of calendar entries for a given
@@ -4099,7 +4099,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const RESULT_SET_TOO_BIG = 'ErrorResultSetTooBig';
+    final public const RESULT_SET_TOO_BIG = 'ErrorResultSetTooBig';
 
     /**
      * This error MUST be returned when a user's rule quota has been exceeded.
@@ -4108,7 +4108,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const RULES_OVER_QUOTA = 'ErrorRulesOverQuota';
+    final public const RULES_OVER_QUOTA = 'ErrorRulesOverQuota';
 
     /**
      * This error occurs when the SavedItemFolderId is not found.
@@ -4117,7 +4117,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SAVED_ITEM_FOLDER_NOT_FOUND = 'ErrorSavedItemFolderNotFound';
+    final public const SAVED_ITEM_FOLDER_NOT_FOUND = 'ErrorSavedItemFolderNotFound';
 
     /**
      * This error occurs when the request cannot be validated against the
@@ -4127,7 +4127,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SCHEMA_VALIDATION = 'ErrorSchemaValidation';
+    final public const SCHEMA_VALIDATION = 'ErrorSchemaValidation';
 
     /**
      * This error indicates that the search folder was created, but the search
@@ -4142,7 +4142,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SEARCH_FOLDER_NOT_INITIALIZED = 'ErrorSearchFolderNotInitialized';
+    final public const SEARCH_FOLDER_NOT_INITIALIZED = 'ErrorSearchFolderNotInitialized';
 
     /**
      * This error is returned when an unexpected photo size is requested in a
@@ -4152,7 +4152,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SEARCH_QUERY_HAS_TOO_MANY_KEYWORDS = 'ErrorSearchQueryHasTooManyKeywords';
+    final public const SEARCH_QUERY_HAS_TOO_MANY_KEYWORDS = 'ErrorSearchQueryHasTooManyKeywords';
 
     /**
      * This error is returned when a SearchMailboxes operation request contains
@@ -4162,7 +4162,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SEARCH_TOO_MANY_MAILBOXES = 'ErrorSearchTooManyMailboxes';
+    final public const SEARCH_TOO_MANY_MAILBOXES = 'ErrorSearchTooManyMailboxes';
 
     /**
      * This error occurs when a an attempt to send a message as another user is
@@ -4181,7 +4181,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SEND_AS_DENIED = 'ErrorSendAsDenied';
+    final public const SEND_AS_DENIED = 'ErrorSendAsDenied';
 
     /**
      * This error is returned by the DeleteItem Operation if the
@@ -4192,7 +4192,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SEND_MEETING_CANCELLATIONS_REQUIRED = 'ErrorSendMeetingCancellationsRequired';
+    final public const SEND_MEETING_CANCELLATIONS_REQUIRED = 'ErrorSendMeetingCancellationsRequired';
 
     /**
      * This error is returned by the UpdateItem Operation if the
@@ -4203,7 +4203,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SEND_MEETING_INVITATIONS_OR_CANCELLATIONS_REQUIRED = 'ErrorSendMeetingInvitationsOrCancellationsRequired';
+    final public const SEND_MEETING_INVITATIONS_OR_CANCELLATIONS_REQUIRED = 'ErrorSendMeetingInvitationsOrCancellationsRequired';
 
     /**
      * This error is returned by the CreateItem Operation if the
@@ -4214,7 +4214,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SEND_MEETING_INVITATIONS_REQUIRED = 'ErrorSendMeetingInvitationsRequired';
+    final public const SEND_MEETING_INVITATIONS_REQUIRED = 'ErrorSendMeetingInvitationsRequired';
 
     /**
      * This error indicates that after the organizer sends a meeting request,
@@ -4226,7 +4226,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SENT_MEETING_REQUEST_UPDATE = 'ErrorSentMeetingRequestUpdate';
+    final public const SENT_MEETING_REQUEST_UPDATE = 'ErrorSentMeetingRequestUpdate';
 
     /**
      * This error indicates that after the task initiator sends a task request,
@@ -4236,7 +4236,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SENT_TASK_REQUEST_UPDATE = 'ErrorSentTaskRequestUpdate';
+    final public const SENT_TASK_REQUEST_UPDATE = 'ErrorSentTaskRequestUpdate';
 
     /**
      * This error occurs when the server is busy.
@@ -4245,7 +4245,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SERVER_BUSY = 'ErrorServerBusy';
+    final public const SERVER_BUSY = 'ErrorServerBusy';
 
     /**
      * This error indicates that Exchange Web Services tried to proxy a user
@@ -4257,7 +4257,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SERVICE_DISCOVERY_FAILED = 'ErrorServiceDiscoveryFailed';
+    final public const SERVICE_DISCOVERY_FAILED = 'ErrorServiceDiscoveryFailed';
 
     /**
      *  This error indicates that the sharing message is not supported.
@@ -4266,7 +4266,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SHARING_MESSAGE_NOT_SUPPORTED = 'ErrorNotSupportedSharingMessage';
+    final public const SHARING_MESSAGE_NOT_SUPPORTED = 'ErrorNotSupportedSharingMessage';
 
     /**
      * This error indicates that the external URL property has not been set in
@@ -4276,7 +4276,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SHARING_NO_EXTERNAL_EWS_AVAILABLE = 'ErrorSharingNoExternalEwsAvailable';
+    final public const SHARING_NO_EXTERNAL_EWS_AVAILABLE = 'ErrorSharingNoExternalEwsAvailable';
 
     /**
      * This error indicates that an attempt at synchronizing a sharing folder
@@ -4295,7 +4295,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SHARING_SYNCHRONIZATION_FAILED = 'ErrorSharingSynchronizationFailed';
+    final public const SHARING_SYNCHRONIZATION_FAILED = 'ErrorSharingSynchronizationFailed';
 
     /**
      * This error is intended for internal use only.
@@ -4304,7 +4304,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SPEECH_GRAMMAR_ERROR = 'ErrorSpeechGrammarError';
+    final public const SPEECH_GRAMMAR_ERROR = 'ErrorSpeechGrammarError';
 
     /**
      * This error occurs in an UpdateItem Operation or a SendItem Operation when
@@ -4317,7 +4317,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const STALE_OBJECT = 'ErrorStaleObject';
+    final public const STALE_OBJECT = 'ErrorStaleObject';
 
     /**
      * This error occurs when the caller specifies an Id attribute that is too
@@ -4327,7 +4327,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const STORE_OBJECT_ID_TOO_LONG = 'ErrorInvalidIdStoreObjectIdTooLong';
+    final public const STORE_OBJECT_ID_TOO_LONG = 'ErrorInvalidIdStoreObjectIdTooLong';
 
     /**
      * This error Indicates that a user cannot immediately send more requests
@@ -4337,7 +4337,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SUBMISSION_QUOTE_EXCEEDED = 'ErrorSubmissionQuotaExceeded';
+    final public const SUBMISSION_QUOTE_EXCEEDED = 'ErrorSubmissionQuotaExceeded';
 
     /**
      * This error occurs when you try to access a subscription by using an
@@ -4350,7 +4350,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SUBSCRIPTION_ACCESS_DENIED = 'ErrorSubscriptionAccessDenied';
+    final public const SUBSCRIPTION_ACCESS_DENIED = 'ErrorSubscriptionAccessDenied';
 
     /**
      * This error indicates that you cannot create a subscription if you are not
@@ -4360,7 +4360,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SUBSCRIPTION_DELEGATE_ACCESS_NOT_SUPPORTED = 'ErrorSubscriptionDelegateAccessNotSupported';
+    final public const SUBSCRIPTION_DELEGATE_ACCESS_NOT_SUPPORTED = 'ErrorSubscriptionDelegateAccessNotSupported';
 
     /**
      * This error occurs if the subscription that corresponds to the specified
@@ -4376,7 +4376,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SUBSCRIPTION_NOT_FOUND = 'ErrorSubscriptionNotFound';
+    final public const SUBSCRIPTION_NOT_FOUND = 'ErrorSubscriptionNotFound';
 
     /**
      * This error code must be returned when a request is made for a
@@ -4386,7 +4386,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SUBSCRIPTION_UNSUBSCRIBED = 'ErrorSubscriptionUnsubsribed';
+    final public const SUBSCRIPTION_UNSUBSCRIBED = 'ErrorSubscriptionUnsubsribed';
 
     /**
      * This error is returned by the SyncFolderItems Operation if the parent
@@ -4396,7 +4396,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const SYNC_FOLDER_NOT_FOUND = 'ErrorSyncFolderNotFound';
+    final public const SYNC_FOLDER_NOT_FOUND = 'ErrorSyncFolderNotFound';
 
     /**
      * This error code is not used.
@@ -4405,7 +4405,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const TEAM_MAILBOX_ACTIVE_TO_PENDING_DELETE = 'ErrorTeamMailboxActiveToPendingDelete';
+    final public const TEAM_MAILBOX_ACTIVE_TO_PENDING_DELETE = 'ErrorTeamMailboxActiveToPendingDelete';
 
     /**
      * This error indicates a general error that can occur when trying to access
@@ -4417,7 +4417,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const TEAM_MAILBOX_ERROR_UNKNOWN = 'ErrorTeamMailboxErrorUnknown';
+    final public const TEAM_MAILBOX_ERROR_UNKNOWN = 'ErrorTeamMailboxErrorUnknown';
 
     /**
      * This error indicates that an attempt to send a notification to the team
@@ -4427,7 +4427,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const TEAM_MAILBOX_FAILED_SENDING_NOTIFICATIONS = 'ErrorTeamMailboxFailedSendingNotifications';
+    final public const TEAM_MAILBOX_FAILED_SENDING_NOTIFICATIONS = 'ErrorTeamMailboxFailedSendingNotifications';
 
     /**
      * This error code is not used.
@@ -4436,7 +4436,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const TEAM_MAILBOX_NOT_AUTHORIZED_OWNER = 'ErrorTeamMailboxNotAuthorizedOwner';
+    final public const TEAM_MAILBOX_NOT_AUTHORIZED_OWNER = 'ErrorTeamMailboxNotAuthorizedOwner';
 
     /**
      * This error indicates that a team mailbox was not found.
@@ -4445,7 +4445,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const TEAM_MAILBOX_NOT_FOUND = 'ErrorTeamMailboxNotFound';
+    final public const TEAM_MAILBOX_NOT_FOUND = 'ErrorTeamMailboxNotFound';
 
     /**
      * This error indicates that a team mailbox was found but that it is not
@@ -4455,7 +4455,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const TEAM_MAILBOX_NOT_LINKED_TO_SHARE_POINT = 'ErrorTeamMailboxNotLinkedToSharePoint';
+    final public const TEAM_MAILBOX_NOT_LINKED_TO_SHARE_POINT = 'ErrorTeamMailboxNotLinkedToSharePoint';
 
     /**
      * This error indicates that a team mailbox was found but that the link to
@@ -4465,7 +4465,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const TEAM_MAILBOX_URL_VALIDATION_FAILED = 'ErrorTeamMailboxUrlValidationFailed';
+    final public const TEAM_MAILBOX_URL_VALIDATION_FAILED = 'ErrorTeamMailboxUrlValidationFailed';
 
     /**
      * This error indicates that the time window that was specified is larger
@@ -4477,7 +4477,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const TIME_INTERVAL_TOO_BIG = 'ErrorTimeIntervalTooBig';
+    final public const TIME_INTERVAL_TOO_BIG = 'ErrorTimeIntervalTooBig';
 
     /**
      * This error indicates that there is a time zone error.
@@ -4486,7 +4486,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const TIME_ZONE_ERROR = 'ErrorTimeZone';
+    final public const TIME_ZONE_ERROR = 'ErrorTimeZone';
 
     /**
      * This error occurs when there is not enough time to complete the
@@ -4496,7 +4496,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const TIMEOUT_EXPIRED = 'ErrorTimeoutExpired';
+    final public const TIMEOUT_EXPIRED = 'ErrorTimeoutExpired';
 
     /**
      * This error indicates that the destination folder does not exist.
@@ -4505,7 +4505,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const TO_FOLDER_NOT_FOUND = 'ErrorToFolderNotFound';
+    final public const TO_FOLDER_NOT_FOUND = 'ErrorToFolderNotFound';
 
     /**
      * This error occurs if the caller tries to do a Token serialization request
@@ -4516,7 +4516,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const TOKEN_SERIALIZATION_DENIED = 'ErrorTokenSerializationDenied';
+    final public const TOKEN_SERIALIZATION_DENIED = 'ErrorTokenSerializationDenied';
 
     /**
      * This error is returned when the attachment hierarchy on an item exceeds
@@ -4526,7 +4526,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const TOO_MANY_ATTACHMENT_LEVELS = 'ErrorInvalidIdTooManyAttachmentLevels';
+    final public const TOO_MANY_ATTACHMENT_LEVELS = 'ErrorInvalidIdTooManyAttachmentLevels';
 
     /**
      * This error is intended for internal use only.
@@ -4535,7 +4535,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UM_SERVER_UNAVAILABLE = 'ErrorUMServerUnavailable';
+    final public const UM_SERVER_UNAVAILABLE = 'ErrorUMServerUnavailable';
 
     /**
      * This response code is not used.
@@ -4544,7 +4544,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNABLE_TO_GET_USER_OOF_SETTINGS = 'ErrorUnableToGetUserOofSettings';
+    final public const UNABLE_TO_GET_USER_OOF_SETTINGS = 'ErrorUnableToGetUserOofSettings';
 
     /**
      * This error occurs when an unsuccessful attempt is made to remove an IM
@@ -4554,7 +4554,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNABLE_TO_REMOVE_IM_CONTACT_FROM_GROUP = 'ErrorUnableToRemoveImContactFromGroup';
+    final public const UNABLE_TO_REMOVE_IM_CONTACT_FROM_GROUP = 'ErrorUnableToRemoveImContactFromGroup';
 
     /**
      * This error indicates that a user's dial plan is not available.
@@ -4563,7 +4563,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNIFIED_MESSAGING_DIAL_PLAN_NOT_FOUND = 'ErrorUnifiedMessagingDialPlanNotFound';
+    final public const UNIFIED_MESSAGING_DIAL_PLAN_NOT_FOUND = 'ErrorUnifiedMessagingDialPlanNotFound';
 
     /**
      * This error is intended for internal use only.
@@ -4572,7 +4572,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNIFIED_MESSAGING_PROMPT_NOT_FOUND = 'ErrorUnifiedMessagingPromptNotFound';
+    final public const UNIFIED_MESSAGING_PROMPT_NOT_FOUND = 'ErrorUnifiedMessagingPromptNotFound';
 
     /**
      * This error is intended for internal use only.
@@ -4581,7 +4581,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNIFIED_MESSAGING_REPORT_DATA_NOT_FOUND = 'ErrorUnifiedMessagingReportDataNotFound';
+    final public const UNIFIED_MESSAGING_REPORT_DATA_NOT_FOUND = 'ErrorUnifiedMessagingReportDataNotFound';
 
     /**
      * This error indicates that the user could not be found.
@@ -4590,7 +4590,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNIFIED_MESSAGING_REQUEST_FAILED = 'ErrorUnifiedMessagingRequestFailed';
+    final public const UNIFIED_MESSAGING_REQUEST_FAILED = 'ErrorUnifiedMessagingRequestFailed';
 
     /**
      * This error indicates that a valid server for the dial plan could not be
@@ -4600,7 +4600,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNIFIED_MESSAGING_SERVER_NOT_FOUND = 'ErrorUnifiedMessagingServerNotFound';
+    final public const UNIFIED_MESSAGING_SERVER_NOT_FOUND = 'ErrorUnifiedMessagingServerNotFound';
 
     /**
      * This error occurs when you try to set the Culture property to a value
@@ -4610,7 +4610,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNSUPPORTED_CULTURE = 'ErrorUnsupportedCulture';
+    final public const UNSUPPORTED_CULTURE = 'ErrorUnsupportedCulture';
 
     /**
      * This error occurs when a caller tries to use extended properties of types
@@ -4620,7 +4620,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNSUPPORTED_MAPI_PROPERTY_TYPE = 'ErrorUnsupportedMapiPropertyType';
+    final public const UNSUPPORTED_MAPI_PROPERTY_TYPE = 'ErrorUnsupportedMapiPropertyType';
 
     /**
      * This error occurs when you are trying to retrieve or set MIME content for
@@ -4631,7 +4631,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNSUPPORTED_MIME_CONVERSION = 'ErrorUnsupportedMimeConversion';
+    final public const UNSUPPORTED_MIME_CONVERSION = 'ErrorUnsupportedMimeConversion';
 
     /**
      * This error occurs when the caller passes a property that is invalid for a
@@ -4643,7 +4643,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNSUPPORTED_PATH_FOR_QUERY = 'ErrorUnsupportedPathForQuery';
+    final public const UNSUPPORTED_PATH_FOR_QUERY = 'ErrorUnsupportedPathForQuery';
 
     /**
      * This error occurs when the caller passes a property that is invalid for a
@@ -4655,7 +4655,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNSUPPORTED_PATH_FOR_SORT_GROUP = 'ErrorUnsupportedPathForSortGroup';
+    final public const UNSUPPORTED_PATH_FOR_SORT_GROUP = 'ErrorUnsupportedPathForSortGroup';
 
     /**
      * This response code is not used.
@@ -4664,7 +4664,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNSUPPORTED_PROPERTY_DEFINITION = 'ErrorUnsupportedPropertyDefinition';
+    final public const UNSUPPORTED_PROPERTY_DEFINITION = 'ErrorUnsupportedPropertyDefinition';
 
     /**
      * This error indicates that the search folder restriction may be valid, but
@@ -4674,7 +4674,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNSUPPORTED_QUERY_FILTER = 'ErrorUnsupportedQueryFilter';
+    final public const UNSUPPORTED_QUERY_FILTER = 'ErrorUnsupportedQueryFilter';
 
     /**
      * This error indicates that the specified recurrence is not supported for
@@ -4684,7 +4684,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNSUPPORTED_RECURRENCE = 'ErrorUnsupportedRecurrence';
+    final public const UNSUPPORTED_RECURRENCE = 'ErrorUnsupportedRecurrence';
 
     /**
      * This response code is not used.
@@ -4693,7 +4693,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNSUPPORTED_SUBFILTER = 'ErrorUnsupportedSubFilter';
+    final public const UNSUPPORTED_SUBFILTER = 'ErrorUnsupportedSubFilter';
 
     /**
      * This error indicates that Exchange Web Services found a property type in
@@ -4703,7 +4703,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UNSUPPORTED_TYPE_FOR_CONVERSION = 'ErrorUnsupportedTypeForConversion';
+    final public const UNSUPPORTED_TYPE_FOR_CONVERSION = 'ErrorUnsupportedTypeForConversion';
 
     /**
      * This error indicates that the delegate list failed to be saved after
@@ -4713,7 +4713,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UPDATE_DELEGATES_FAILED = 'ErrorUpdateDelegatesFailed';
+    final public const UPDATE_DELEGATES_FAILED = 'ErrorUpdateDelegatesFailed';
 
     /**
      * This error occurs when the single property path that is listed in a
@@ -4724,7 +4724,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const UPDATE_PROPERTY_MISMATCH = 'ErrorUpdatePropertyMismatch';
+    final public const UPDATE_PROPERTY_MISMATCH = 'ErrorUpdatePropertyMismatch';
 
     /**
      * This error indicates that the requester tried to grant permissions in its
@@ -4736,7 +4736,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const USER_NOT_ALLOWED_BY_POLICY = 'ErrorUserNotAllowedByPolicy';
+    final public const USER_NOT_ALLOWED_BY_POLICY = 'ErrorUserNotAllowedByPolicy';
 
     /**
      * This error indicates that the requester is not enabled.
@@ -4745,7 +4745,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const USER_NOT_UNIFIED_MESSAGING_ENABLED = 'ErrorUserNotUnifiedMessagingEnabled';
+    final public const USER_NOT_UNIFIED_MESSAGING_ENABLED = 'ErrorUserNotUnifiedMessagingEnabled';
 
     /**
      * Indicates that the requester's organization has a set of federated
@@ -4756,7 +4756,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const USER_WITHOUT_FEDERATED_PROXY_ADDRESS = 'ErrorUserWithoutFederatedProxyAddress';
+    final public const USER_WITHOUT_FEDERATED_PROXY_ADDRESS = 'ErrorUserWithoutFederatedProxyAddress';
 
     /**
      * This error indicates that a calendar view start date or end date was set
@@ -4766,7 +4766,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const VALUE_OUT_OF_RANGE = 'ErrorValueOutOfRange';
+    final public const VALUE_OUT_OF_RANGE = 'ErrorValueOutOfRange';
 
     /**
      * This error occurs when Start to End range for the CalendarView element is
@@ -4776,7 +4776,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const VIEW_RANGE_TOO_BIG = 'ErrorCalendarViewRangeTooBig';
+    final public const VIEW_RANGE_TOO_BIG = 'ErrorCalendarViewRangeTooBig';
 
     /**
      * This error indicates that the Exchange store detected a virus in the
@@ -4786,7 +4786,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const VIRUS_DETECTED = 'ErrorVirusDetected';
+    final public const VIRUS_DETECTED = 'ErrorVirusDetected';
 
     /**
      * This error indicates that the Exchange store detected a virus in the
@@ -4796,7 +4796,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const VIRUS_MESSAGE_DELETED = 'ErrorVirusMessageDeleted';
+    final public const VIRUS_MESSAGE_DELETED = 'ErrorVirusMessageDeleted';
 
     /**
      * This response code is not used.
@@ -4805,7 +4805,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const VOICE_MAIL_NOT_IMPLEMENTED = 'ErrorVoiceMailNotImplemented';
+    final public const VOICE_MAIL_NOT_IMPLEMENTED = 'ErrorVoiceMailNotImplemented';
 
     /**
      * This response code is not used.
@@ -4814,7 +4814,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const WEB_REQUEST_IN_INVALID_STATE = 'ErrorWebRequestInInvalidState';
+    final public const WEB_REQUEST_IN_INVALID_STATE = 'ErrorWebRequestInInvalidState';
 
     /**
      * This error indicates that there was an internal failure during
@@ -4824,7 +4824,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const WIN32_INTEROP_ERROR = 'ErrorWin32InteropError';
+    final public const WIN32_INTEROP_ERROR = 'ErrorWin32InteropError';
 
     /**
      * This response code is not used.
@@ -4833,7 +4833,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const WORKING_HOURS_SAVE_FAILED = 'ErrorWorkingHoursSaveFailed';
+    final public const WORKING_HOURS_SAVE_FAILED = 'ErrorWorkingHoursSaveFailed';
 
     /**
      * This response code is not used.
@@ -4842,7 +4842,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const WORKING_HOURS_XML_MALFORMED = 'ErrorWorkingHoursXmlMalformed';
+    final public const WORKING_HOURS_XML_MALFORMED = 'ErrorWorkingHoursXmlMalformed';
 
     /**
      * This error indicates that a request can only be made to a server that is
@@ -4852,7 +4852,7 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const WRONG_SERVER_VERSION = 'ErrorWrongServerVersion';
+    final public const WRONG_SERVER_VERSION = 'ErrorWrongServerVersion';
 
     /**
      * This error indicates that a request was made by a delegate that has a
@@ -4862,5 +4862,5 @@ class ResponseCodeType extends Enumeration
      *
      * @var string
      */
-    const WRONG_SERVER_VERSION_DELEGATE = 'ErrorWrongServerVersionDelegate';
+    final public const WRONG_SERVER_VERSION_DELEGATE = 'ErrorWrongServerVersionDelegate';
 }
