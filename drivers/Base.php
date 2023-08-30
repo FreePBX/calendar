@@ -289,7 +289,7 @@ abstract class Base {
 			$event['RECURRENCE_INSTANCE'] = isset($event['RECURRENCE_INSTANCE']) ? $event['RECURRENCE_INSTANCE'] : 0;
 
 			$e = [
-				'name' => $event['SUMMARY'],
+				'name' => (array_key_exists('SUMMARY', $event) && $event['SUMMARY']) ? $event['SUMMARY'] : '',
 				'description' => isset($event['DESCRIPTION']) ? $event['DESCRIPTION'] : '',
 				'recurring' => isset($event['RECURRING']) ? $event['RECURRING'] : false,
 				'rrules' => [],
