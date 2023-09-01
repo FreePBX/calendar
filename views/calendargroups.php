@@ -6,7 +6,7 @@
 		<div class="col-sm-12">
 			<div class="fpbx-container">
 				<div class="display full-border">
-					<form action="config.php?display=calendargroups" method="post" class="fpbx-submit" id="cgform" name="cgform" data-fpbx-delete="config.php?display=calendargroups&amp;action=delete&amp;id=<?php echo $id?>">
+					<form action="config.php?display=calendargroups" method="post" class="fpbx-submit" id="cgform" name="cgform" data-fpbx-delete="config.php?display=calendargroups&amp;action=delete&amp;id=<?php echo $id ?? ''; ?>">
 					<input type="hidden" name='action' value="<?php echo isset($group['id']) ? 'edit' : 'add' ?>">
 					<input type="hidden" name='id' value="<?php echo $group['id'] ?? '' ?>">
 					<!--Description-->
