@@ -19,6 +19,7 @@ use BMO;
 use DB_Helper;
 use \FreePBX\modules\Calendar\Oauth;
 
+#[\AllowDynamicProperties]
 class Calendar extends \DB_Helper implements \BMO
 {
 	private ?array $guimessage = null;
