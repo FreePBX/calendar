@@ -7,6 +7,7 @@ use DateTime;
 use DateTimeZone;
 use Exception;
 
+#[\AllowDynamicProperties]
 class Frequency extends Freq
 {
 

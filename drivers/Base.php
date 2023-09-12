@@ -13,6 +13,7 @@ use Eluceo\iCal\Component\Event;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
 use Exception;
 
+#[\AllowDynamicProperties]
 abstract class Base
 {
 	protected $freepbx;

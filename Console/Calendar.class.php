@@ -17,6 +17,7 @@ use Symfony\Component\Console\Command\HelpCommand;
 
 use Carbon\Carbon;
 
+#[\AllowDynamicProperties]
 class Calendar extends Command
 {
 	protected function configure()
