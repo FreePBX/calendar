@@ -103,7 +103,7 @@ class Calendar extends \DB_Helper implements \BMO
 				$events = $_REQUEST['events'] ?? [];
 				switch ($action) {
 					case "add":
-						if (isset($_POST['name'])) {
+						if (isset($_POST['name']) && !empty($_POST['name'])) {
 							$name = !empty($_POST['name']) ? $_POST['name'] : [];
 							$calendars = !empty($_POST['calendars']) ? $_POST['calendars'] : [];
 							$categories = !empty($_POST['categories']) ? $_POST['categories'] : [];
@@ -113,9 +113,9 @@ class Calendar extends \DB_Helper implements \BMO
 						}
 						break;
 					case "edit":
-						if (isset($_POST['name'])) {
+						if (isset($_POST['name']) && !empty($_POST['name'])) {
 							$id = $_POST['id'];
-							$name = !empty($_POST['name']) ? $_POST['name'] : [];
+							$name = !empty($_POST['name']) ? $_POST['name'] : "";
 							$calendars = !empty($_POST['calendars']) ? $_POST['calendars'] : [];
 							$categories = !empty($_POST['categories']) ? $_POST['categories'] : [];
 							$events = !empty($_POST['events']) ? $_POST['events'] : [];
