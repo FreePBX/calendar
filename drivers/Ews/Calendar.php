@@ -30,7 +30,7 @@ use Carbon\Carbon;
 use Eluceo\iCal\Component\Calendar as iCalendar;
 use Eluceo\iCal\Component\Event;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
-
+#[\AllowDynamicProperties]
 class Calendar {
 	private $vesion;
 

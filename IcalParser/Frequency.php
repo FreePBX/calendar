@@ -11,23 +11,23 @@ use Exception;
 class Frequency extends Freq
 {
 
-    protected $weekdays = [
+    protected array $weekdays = [
         'MO' => 'monday', 'TU' => 'tuesday', 'WE' => 'wednesday', 'TH' => 'thursday', 'FR' => 'friday', 'SA' => 'saturday',
         'SU' => 'sunday',
     ];
-    protected $knownRules = [
+    protected array $knownRules = [
         'month', 'weekno', 'day', 'monthday', 'yearday', 'hour', 'minute',
     ]; //others : 'setpos', 'second'
-    protected $ruleModifiers = ['wkst'];
-    protected $simpleMode = true;
+    protected array $ruleModifiers = ['wkst'];
+    protected bool $simpleMode = true;
 
-    protected $rules = ['freq' => 'yearly', 'interval' => 1];
-    protected $freq = '';
+    protected array $rules = ['freq' => 'yearly', 'interval' => 1];
+    protected string $freq = '';
 
-    protected $excluded = []; //EXDATE
-    protected $added;    //RDATE
+    protected array $excluded = []; //EXDATE
+    protected array $added;    //RDATE
 
-    protected $cache; // getAllOccurrences()
+    protected array $cache; // getAllOccurrences()
 
     /**
      * Constructs a new Freqency-rule
@@ -153,7 +153,7 @@ class Frequency extends Freq
      * @return int|bool
      * @throws Exception
      */
-    public function findNext($offset)
+    public function findNext(int $offset): bool|int
     {
         if (!empty($this->cache)) {
             foreach ($this->cache as $ts) {
