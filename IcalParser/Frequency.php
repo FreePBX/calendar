@@ -38,7 +38,7 @@ class Frequency extends Freq
      * @param $added array of int (timestamps), see RDATE documentation
      * @throws Exception
      */
-    public function __construct($rule, protected $start, $excluded = [], $added = [])
+    public function __construct($rule, protected int $start, $excluded = [], $added = [])
     {
         $cache = [];
         $ts = null;
