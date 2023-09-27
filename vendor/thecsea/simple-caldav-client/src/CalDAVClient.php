@@ -17,7 +17,7 @@ use it\thecsea\simple_caldav_client\includes\XMLElement;
 
 
 
-
+#[\AllowDynamicProperties]
 class CalDAVClient {
   /**
   * Server, username, password, calendar
