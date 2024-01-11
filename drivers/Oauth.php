@@ -49,7 +49,7 @@ class Oauth extends Base {
 	 * @return boolean               true or false
 	 */
 	public function updateCalendar($data) {
-		$calendar = ["name" => $data['name'], "description" => $data['description'], "type" => "oauth", "email" => $data['email'], "version" => 'VERSION_2016', "url" => $data['url'], "username" => $data['username'], "password" => $data['password'], "calendars" => !empty($data['calendars']) ? $data['calendars'] : '', "next" => !empty($data['next']) ? $data['next'] : 300, "auth_settings" => !empty($data['auth_settings']) ? $data['auth_settings'] : '', "timezone" => !empty($data['timezone']) ? $data['timezone'] : date_default_timezone_get()];
+		$calendar = ["name" => $data['name'], "description" => $data['description'], "type" => "oauth", "email" => $data['email'], "version" => 'VERSION_2016', "url" => $data['url'] ??'', "username" => $data['username'], "password" => $data['password'] ?? '', "calendars" => !empty($data['calendars']) ? $data['calendars'] : '', "next" => !empty($data['next']) ? $data['next'] : 300, "auth_settings" => !empty($data['auth_settings']) ? $data['auth_settings'] : '', "timezone" => !empty($data['timezone']) ? $data['timezone'] : date_default_timezone_get()];
 		$ret = parent::updateCalendar($calendar);
 		$this->processCalendar();
 		return $ret;

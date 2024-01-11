@@ -278,7 +278,7 @@ if (strtolower((string) $action) == "add") {
 		if($("#username").val() !== "" && $("#password").val() !== "" && $("#url").val() !== "" && !updating) {
 			updating = true;
 			$("#unsetspan").text('<?php echo _("Attempting to load"); ?>...').show();
-			$("#setspan").addClass("hidden");
+			// $("#setspan").addClass("hidden");
 			$(".diswhenloading").addClass("disabled").attr("disabled", true);
 			$.post( "ajax.php?module=calendar&command=getewscals", {purl: $("#url").val(), username: $("#username").val(), password: $("#password").val(), version: $("#version").val()}, function( data ) {
 				console.log(data);

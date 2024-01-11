@@ -152,7 +152,7 @@
 												<select id="auth_settings" class="form-control" name="auth_settings">
 													<option value=""><?php echo _('Please select a Config'); ?></option>
 													<?php foreach ( $data['configs_list'] as $key => $value) { ?>
-														<option value="<?php echo $key; ?>" <?php echo $data['auth_settings'] == $key ? 'selected' : '' ?>><?php echo $value; ?></option>
+														<option value="<?php echo $key; ?>" <?php echo (isset($data['auth_settings']) && $data['auth_settings'] == $key) ? 'selected' : '' ?>><?php echo $value; ?></option>
 													<?php } ?>
 												</select>
 											</div>
