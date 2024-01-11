@@ -3,13 +3,13 @@
 # For licensing information, please see the file named LICENSE located in the module directory
 #
 # FreePBX language template for calendar
-# Copyright (C) 2008-2023 Sangoma Technologies, Inc.
+# Copyright (C) 2008-2024 Sangoma Technologies, Inc.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-28 05:16+0000\n"
+"POT-Creation-Date: 2024-01-11 04:17-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -228,6 +228,10 @@ msgstr ""
 msgid "Application (client) ID"
 msgstr ""
 
+#: calendar.i18n.php:6
+msgid "Applications"
+msgstr ""
+
 #: views/remote_ews_settings.php:280
 msgid "Attempting to load"
 msgstr ""
@@ -259,10 +263,16 @@ msgstr ""
 
 #: Calendar.class.php:1021
 #: Console/Calendar.class.php:26
+#: calendar.i18n.php:4
+#: calendar.i18n.php:10
 #: views/oauth_calendar_form.php:175
 #: views/remote_caldav_settings.php:133
 #: views/remote_ews_settings.php:194
 msgid "Calendar"
+msgstr ""
+
+#: calendar.i18n.php:12
+msgid "Calendar Event Groups"
 msgstr ""
 
 #: functions.inc.php:13
@@ -986,6 +996,11 @@ msgstr ""
 
 #: views/calendargroupgrid.php:12
 msgid "These groups can then be linked to various applications or utilities"
+msgstr ""
+
+#: calendar.i18n.php:8
+msgid ""
+"This module is used to manage calendar and time based events for FreePBX"
 msgstr ""
 
 #: views/calendar.php:224
