@@ -210,6 +210,9 @@ abstract class Base
 			$this->calendarClass->setConfig($this->calendar['id'], serialize($raw), 'calendar-cache');
 			$this->calendarClass->setConfig($this->calendar['id'], $start->getTimestamp(), 'calendar-cache_valid_notbefore');
 			$this->calendarClass->setConfig($this->calendar['id'], $end->getTimestamp(), 'calendar-cache_valid_notafter');
+			return true;
+		}else {
+			return false;
 		}
 	}
 
@@ -351,8 +354,11 @@ abstract class Base
 			}
 		} catch (Exception $ignored) {
 			//cache not built yet, build it for the first time. This should happen only once, then sync will take care
-			$this->buildCache();
-			goto checkrange;
+			if($this->buildCache()){
+				goto checkrange;
+			} else {
+				dbug(' No matching Data');
+			}
 		}
 
 		$cal->data = $cache;
