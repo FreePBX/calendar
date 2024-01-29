@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>16.0.27</version>
+	<version>16.0.28</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -14,6 +14,7 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
+		*16.0.28* Packaging of ver 16.0.28
 		*16.0.27* Packaging of ver 16.0.27
 		*16.0.26* FREEI-202 Fixing exception issue while adding local calendar 
 		*16.0.25* FREEI-100 local calendar timezome selected text fix 
