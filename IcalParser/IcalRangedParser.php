@@ -88,12 +88,11 @@ class IcalRangedParser extends \om\IcalParser
 			$DTSTARTTimeStamp = $event['DTSTART']->getTimestamp();
 
 			//calc end based on the shortest term
+			$end = $this->ranges['end']->getTimestamp();
 			if ($until !== false) {
 				$untilTm = $until->getTimestamp();
-				$endTm = $this->ranges['end']->getTimestamp();
-				$end = $untilTm < $this->ranges['end']->getTimestamp() ? $untilTm : $endTm;
-			} else
-				$end = $this->ranges['end']->getTimestamp();
+				if ($untilTm < $end) $end = $untilTm;
+			}
 
 			if ($this->fast) {
 				//end is not set on the recurring rule as it is not needed and would cause troubles in the current implementation
@@ -106,14 +105,16 @@ class IcalRangedParser extends \om\IcalParser
 
 				//keep pushing recurrences in the period
 				while (true) {
-					if ($startRange > $end)
-						break; //we are out of maximum range, exit the loop
+					if ($startRange > $end) break; //we are out of maximum range, exit the loop
 
 					$next = $frequency->nextOccurrence($startRange);
-					if ($next != null)
-						array_push($recurrences, $next);
 
-					$startRange = $next + 1; //go to the next recurrence
+					if (is_int($next)) {
+						if ($next < $startRange) break; //this may be an infinite loop! Escape right now!
+						array_push($recurrences, $next);
+						$startRange = $next + 1; //go to the next recurrence
+					} else
+						break; //retrieval failed, probably we are out of period or the recurrence is invalid
 				}
 
 				return $recurrences;
@@ -390,4 +391,3 @@ class IcalRangedParser extends \om\IcalParser
 		return false;
 	}
 }
-

@@ -201,7 +201,7 @@ abstract class Base
 		$start->sub(new \DateInterval(self::SUB_START));
 		$end->add(new \DateInterval(self::ADD_END));
 		$icalData = $this->getIcal();
-		if($icalData){
+		if ($icalData) {
 			$cal = new IcalRangedParser(true);
 			$cal->setStartRange($start);
 			$cal->setEndRange($end);
@@ -209,6 +209,9 @@ abstract class Base
 			$this->calendarClass->setConfig($this->calendar['id'], serialize($raw), 'calendar-cache');
 			$this->calendarClass->setConfig($this->calendar['id'], $start->getTimestamp(), 'calendar-cache_valid_notbefore');
 			$this->calendarClass->setConfig($this->calendar['id'], $end->getTimestamp(), 'calendar-cache_valid_notafter');
+			return true;
+		} else {
+			return false;
 		}
 	}
 
@@ -220,7 +223,7 @@ abstract class Base
 	public function getCache()
 	{
 		$raw = $this->calendarClass->getConfig($this->calendar['id'], 'calendar-cache');
-		return $raw ? unserialize($this->calendarClass->getConfig($this->calendar['id'], 'calendar-cache')) : null;
+		return $raw ? unserialize($raw) : null;
 	}
 
 	/**
@@ -329,7 +332,6 @@ abstract class Base
 		$now = $this->now->getTimestamp();
 
 		try {
-			checkrange:
 			if (!$this->isInCacheRange($now)) {
 				//if the time is not in range we calculate a short period in a temporary cache (then discarded).
 				//the side effect is that this slows down things very much like is not fast at all, but better than returning nothing.
@@ -344,15 +346,19 @@ abstract class Base
 				$cal->setEndRange($end);
 				$cache = $cal->parseString($this->getIcal());
 			} else {
-				//retrieve the cache if in range
-				$cache = $this->getCache();
-				if (!$cache)
-					throw new Exception(); //should never happen because of isInCacheRange(). Anyway lets build the cache if this happens
+				$cache = $this->getCache(); //retrieve the cache if in range
+				if (!$cache) throw new Exception(); //should never happen because of isInCacheRange(). Anyway lets build the cache if this happens
 			}
 		} catch (Exception) {
 			//cache not built yet, build it for the first time. This should happen only once, then sync will take care
-			$this->buildCache();
-			goto checkrange;
+			$this->processCalendar(); //we cannot rely on the return value of this call because every driver treat it differently (or return nothing at all)...
+
+			if ($this->buildCache()) //...so we call buildCache() again to get a consistent result
+				return $this->fastHandler();
+			else {
+				dbug(' No matching Data');
+				return false;
+			}
 		}
 
 		$cal->data = $cache;
@@ -570,4 +576,3 @@ abstract class Base
 		return false;
 	}
 }
-
