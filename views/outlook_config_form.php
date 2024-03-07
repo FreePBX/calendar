@@ -1,6 +1,6 @@
 <?php
     if(isset($outlookdata['authurl'])){
-        $button = '<a href="'.$outlookdata['authurl'] ?? ''.'" id="oauthbutton" class = "btn btn-danger">'._("Authorize access").'</a><p>Please click on Authorize access button if you are not redirected to outlook authorization page after saving the details.</p>';
+        $button = '<a href="'.($outlookdata['authurl'] ?? "").'" id="oauthbutton" class = "btn btn-danger">'._("Authorize access").'</a><p>Please click on Authorize access button if you are not redirected to outlook authorization page after saving the details.</p>';
     }
 ?>
 <div class = "display full-border">
