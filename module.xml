@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>17.0.4.5</version>
+	<version>17.0.4.6</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -14,7 +14,7 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
-		*17.0.4.5* Packaging of ver 17.0.4.5
+		*17.0.4.6* Packaging of ver 17.0.4.6
 		*17.0.1alpha1* 17.0.1 alpha release
 	</changelog>
 	<depends>
