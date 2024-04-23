@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-07 05:20-0500\n"
+"POT-Creation-Date: 2024-04-23 07:31-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,7 +34,6 @@ msgid "%s Local Calendar"
 msgstr ""
 
 #: views/oauth_calendar_form.php:7
-#: views/remote_ews_settings.php:7
 #, php-format
 msgid "%s Outlook Calendar"
 msgstr ""
@@ -61,70 +60,60 @@ msgstr ""
 
 #: views/oauth_calendar_form.php:128
 #: views/remote_caldav_settings.php:184
-#: views/remote_ews_settings.php:245
 #: views/remote_ical_settings.php:102
 msgid "1 Day"
 msgstr ""
 
 #: views/oauth_calendar_form.php:124
 #: views/remote_caldav_settings.php:180
-#: views/remote_ews_settings.php:241
 #: views/remote_ical_settings.php:98
 msgid "1 Hour"
 msgstr ""
 
 #: views/oauth_calendar_form.php:120
 #: views/remote_caldav_settings.php:176
-#: views/remote_ews_settings.php:237
 #: views/remote_ical_settings.php:94
 msgid "1 Minute"
 msgstr ""
 
 #: views/oauth_calendar_form.php:129
 #: views/remote_caldav_settings.php:185
-#: views/remote_ews_settings.php:246
 #: views/remote_ical_settings.php:103
 msgid "1 Week"
 msgstr ""
 
 #: views/oauth_calendar_form.php:122
 #: views/remote_caldav_settings.php:178
-#: views/remote_ews_settings.php:239
 #: views/remote_ical_settings.php:96
 msgid "10 Minutes"
 msgstr ""
 
 #: views/oauth_calendar_form.php:127
 #: views/remote_caldav_settings.php:183
-#: views/remote_ews_settings.php:244
 #: views/remote_ical_settings.php:101
 msgid "12 Hours"
 msgstr ""
 
 #: views/oauth_calendar_form.php:125
 #: views/remote_caldav_settings.php:181
-#: views/remote_ews_settings.php:242
 #: views/remote_ical_settings.php:99
 msgid "2 Hours"
 msgstr ""
 
 #: views/oauth_calendar_form.php:123
 #: views/remote_caldav_settings.php:179
-#: views/remote_ews_settings.php:240
 #: views/remote_ical_settings.php:97
 msgid "30 Minutes"
 msgstr ""
 
 #: views/oauth_calendar_form.php:121
 #: views/remote_caldav_settings.php:177
-#: views/remote_ews_settings.php:238
 #: views/remote_ical_settings.php:95
 msgid "5 Minutes"
 msgstr ""
 
 #: views/oauth_calendar_form.php:126
 #: views/remote_caldav_settings.php:182
-#: views/remote_ews_settings.php:243
 #: views/remote_ical_settings.php:100
 msgid "6 Hours"
 msgstr ""
@@ -185,15 +174,11 @@ msgstr ""
 msgid "Add Remote CalDAV Calendar"
 msgstr ""
 
-#: views/rnav.php:15
+#: views/rnav.php:14
 msgid "Add Remote Google Calendar"
 msgstr ""
 
 #: views/rnav.php:12
-msgid "Add Remote Outlook Calendar"
-msgstr ""
-
-#: views/rnav.php:13
 msgid "Add Remote Outlook Calendar using Oauth2"
 msgstr ""
 
@@ -232,10 +217,6 @@ msgstr ""
 msgid "Applications"
 msgstr ""
 
-#: views/remote_ews_settings.php:280
-msgid "Attempting to load"
-msgstr ""
-
 #: views/remote_caldav_settings.php:220
 msgid "Attempting to load..."
 msgstr ""
@@ -246,13 +227,8 @@ msgstr ""
 
 #: views/oauth_calendar_form.php:115
 #: views/remote_caldav_settings.php:171
-#: views/remote_ews_settings.php:232
 #: views/remote_ical_settings.php:89
 msgid "Auto Refresh"
-msgstr ""
-
-#: views/remote_ews_settings.php:142
-msgid "Autodetect"
 msgstr ""
 
 #: views/outlook_config_form.php:98
@@ -267,7 +243,6 @@ msgstr ""
 #: calendar.i18n.php:10
 #: views/oauth_calendar_form.php:175
 #: views/remote_caldav_settings.php:133
-#: views/remote_ews_settings.php:194
 msgid "Calendar"
 msgstr ""
 
@@ -401,7 +376,6 @@ msgstr ""
 #: views/outlook_config_form.php:46
 #: views/outlook_configs_grid.php:18
 #: views/remote_caldav_settings.php:44
-#: views/remote_ews_settings.php:47
 #: views/remote_ical_settings.php:45
 msgid "Description"
 msgstr ""
@@ -422,14 +396,6 @@ msgstr ""
 msgid "Duplicate calendar name."
 msgstr ""
 
-#: views/remote_ews_settings.php:135
-msgid "EWS Server URL"
-msgstr ""
-
-#: views/remote_ews_settings.php:162
-msgid "EWS Version"
-msgstr ""
-
 #: Calendar.class.php:524
 msgid "Edit"
 msgstr ""
@@ -439,7 +405,6 @@ msgid "Edit Settings"
 msgstr ""
 
 #: views/oauth_calendar_form.php:71
-#: views/remote_ews_settings.php:69
 msgid "Email"
 msgstr ""
 
@@ -551,7 +516,6 @@ msgstr ""
 
 #: views/oauth_calendar_form.php:138
 #: views/remote_caldav_settings.php:194
-#: views/remote_ews_settings.php:255
 #: views/remote_ical_settings.php:112
 msgid "How often this calendar will synchronize with the remote server"
 msgstr ""
@@ -641,9 +605,8 @@ msgstr ""
 #: views/outlook_config_form.php:24
 #: views/outlook_configs_grid.php:17
 #: views/remote_caldav_settings.php:22
-#: views/remote_ews_settings.php:25
 #: views/remote_ical_settings.php:23
-#: views/rnav.php:32
+#: views/rnav.php:31
 msgid "Name"
 msgstr ""
 
@@ -726,7 +689,6 @@ msgid "PBX URL"
 msgstr ""
 
 #: views/remote_caldav_settings.php:110
-#: views/remote_ews_settings.php:113
 msgid "Password"
 msgstr ""
 
@@ -736,7 +698,6 @@ msgstr ""
 
 #: views/oauth_calendar_form.php:192
 #: views/remote_caldav_settings.php:153
-#: views/remote_ews_settings.php:214
 msgid "Please enter valid credentials above"
 msgstr ""
 
@@ -767,10 +728,6 @@ msgstr ""
 
 #: drivers/Caldav.php:17
 msgid "Remote CalDAV Calendar"
-msgstr ""
-
-#: drivers/Ews.php:15
-msgid "Remote Outlook Calendar"
 msgstr ""
 
 #: drivers/Oauth.php:15
@@ -850,7 +807,6 @@ msgstr ""
 
 #: views/oauth_calendar_form.php:200
 #: views/remote_caldav_settings.php:161
-#: views/remote_ews_settings.php:222
 msgid "Select specific calendar"
 msgstr ""
 
@@ -940,20 +896,17 @@ msgstr ""
 #: views/local_settings.php:56
 #: views/oauth_calendar_form.php:61
 #: views/remote_caldav_settings.php:56
-#: views/remote_ews_settings.php:59
 #: views/remote_ical_settings.php:57
 msgid "The description of this calendar"
 msgstr ""
 
 #: views/oauth_calendar_form.php:83
-#: views/remote_ews_settings.php:81
 msgid "The email address of this calendar's user [Optional]"
 msgstr ""
 
 #: views/local_settings.php:34
 #: views/oauth_calendar_form.php:39
 #: views/remote_caldav_settings.php:34
-#: views/remote_ews_settings.php:37
 #: views/remote_ical_settings.php:35
 msgid "The name of this calendar"
 msgstr ""
@@ -962,26 +915,16 @@ msgstr ""
 msgid "The password for this calendar"
 msgstr ""
 
-#: views/remote_ews_settings.php:125
-msgid "The password of this calendar's user"
-msgstr ""
-
 #: views/remote_caldav_settings.php:78
 msgid "The principal url for this calendar"
 msgstr ""
 
-#: views/remote_ews_settings.php:152
-#: views/remote_ews_settings.php:184
 #: views/remote_ical_settings.php:79
 msgid "The remote url for this calendar"
 msgstr ""
 
 #: views/calendar.php:148
 msgid "The time to start the event"
-msgstr ""
-
-#: views/remote_ews_settings.php:103
-msgid "The username of this calendar's user"
 msgstr ""
 
 #: views/oauth_calendar_form.php:105
@@ -1034,7 +977,7 @@ msgstr ""
 
 #: Console/Calendar.class.php:73
 #: views/grid.php:33
-#: views/rnav.php:33
+#: views/rnav.php:32
 msgid "Type"
 msgstr ""
 
@@ -1073,7 +1016,6 @@ msgstr ""
 
 #: views/oauth_calendar_form.php:93
 #: views/remote_caldav_settings.php:88
-#: views/remote_ews_settings.php:91
 msgid "Username"
 msgstr ""
 
@@ -1137,11 +1079,6 @@ msgstr ""
 #: Console/Calendar.class.php:105
 #: views/ucp_config.php:13
 msgid "Yes"
-msgstr ""
-
-#: drivers/Ews.php:26
-#: drivers/Ews.php:57
-msgid "You are missing the PHP SoapClient library. Please install to continue"
 msgstr ""
 
 #: Calendar.class.php:390
