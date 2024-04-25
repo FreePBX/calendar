@@ -140,7 +140,7 @@ class Local extends Base {
 							case 0:
 								//date of month
 								//FREQ=MONTHLY;INTERVAL=1;BYMONTHDAY=16
-								$recurrenceRule->setByMonthDay($vEvent->getDtStart()->format('j'));
+								$recurrenceRule->setByMonthDay((int) $vEvent->getDtStart()->format('j'));
 							break;
 							case 1:
 								//day of month
@@ -160,7 +160,7 @@ class Local extends Base {
 								//date of year
 								//FREQ=YEARLY;INTERVAL=1;BYMONTH=05;BYMONTHDAY=16
 								$recurrenceRule->setByMonth((int)$vEvent->getDtStart()->format('n'));
-								$recurrenceRule->setByMonthDay($vEvent->getDtStart()->format('j'));
+								$recurrenceRule->setByMonthDay((int) $vEvent->getDtStart()->format('j'));
 							break;
 							case 1:
 								//day of month/year
