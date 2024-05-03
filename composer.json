@@ -1,4 +1,11 @@
 {
+	"repositories": [
+		{
+			"type": "github",
+			"url": "https://github.com/FreePBX/simpleCalDAV.git",
+			"canonical": false
+		}
+	],
 	"require": {
 		"om/icalparser": "^3.0",
 		"thecsea/simple-caldav-client": "0.1.5",
