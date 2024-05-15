@@ -57,7 +57,7 @@ class Caldav extends Base {
 	 * @return boolean               true or false
 	 */
 	public function updateCalendar($data) {
-		$calendar = ["name" => $data['name'], "description" => $data['description'], "type" => "caldav", "purl" => $data['purl'], "surl" => $data['surl'], "username" => $data['username'], "password" => $data['password'], "calendars" => !empty($data['calendars']) ? $data['calendars'] : [], "next" => !empty($data['next']) ? $data['next'] : 300];
+		$calendar = ["name" => $data['name'], "description" => $data['description'], "type" => "caldav", "purl" => $data['purl'] ?? '', "surl" => $data['surl'] ?? '', "username" => $data['username'], "password" => $data['password'], "calendars" => !empty($data['calendars']) ? $data['calendars'] : [], "next" => !empty($data['next']) ? $data['next'] : 300];
 		$ret = $this->processCalendar();
 		parent::updateCalendar($calendar);
 		return $ret;
