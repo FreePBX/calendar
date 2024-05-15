@@ -23,11 +23,7 @@ class Oauth extends Base {
 	 */
 	public static function getEditDisplay($data) {
 		$message = [];
-        $server = $data['url'];
-        $username = $data['username'];
-        $password = $data['password'];
-        $version = constant('\jamesiarmes\PhpEws\Client::VERSION_2016');
-        $ews = new EWSCalendar($server, $username, $password, $version);
+        $ews = new EWSCalendar();
         return load_view(dirname(__DIR__)."/views/oauth_calendar_form.php",['action' => 'edit', 'data' => $data, 'message' => $message]);
 	}
 
@@ -81,8 +77,7 @@ class Oauth extends Base {
 						}
 					}
 				}
-				$version = constant('\jamesiarmes\PhpEws\Client::VERSION_2016');
-				$ews = new EWSCalendar($this->calendar['url'], $this->calendar['username'], $this->calendar['password'], $version);
+				$ews = new EWSCalendar();
 				$finalical = $ews->formatiCalNew($events);
 				$this->saveiCal($finalical);
 			}

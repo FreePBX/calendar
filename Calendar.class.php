@@ -213,7 +213,6 @@ class Calendar extends \DB_Helper implements \BMO
 			case 'getcaldavcals':
 			case 'getewscals':
 			case 'updatesource':
-			case 'ewsautodetect':
 			case 'duplicate':
 			case 'generateical':
 			case 'checkical':
@@ -273,28 +272,6 @@ class Calendar extends \DB_Helper implements \BMO
 				$cal = $this->getDriverById($_REQUEST['id']);
 				$cal->updateiCalMapping($uuid);
 				return ["status" => true, "href" => "ajax.php?module=calendar&command=ical&token=" . $uuid];
-				break;
-			case 'ewsautodetect':
-				try {
-					$settings = EWSCalendar::autoDiscoverSettings($_POST['email'], $_POST['password']);
-				} catch (\Exception $e) {
-					return ["status" => false, "message" => $e->getMessage()];
-				}
-				$settings['status'] = true;
-				return $settings;
-				break;
-			case 'getewscals':
-				$server = $_POST['purl'];
-				$username = $_POST['username'];
-				$password = $_POST['password'];
-				$version = constant('\jamesiarmes\PhpEws\Client::' . $_POST['version']);
-				$ews = new EWSCalendar($server, $username, $password, $version);
-				$chtml = '';
-				foreach ($ews->getAllCalendars() as $c) {
-					$chtml .= '<option value="' . $c['id'] . '">' . $c['name'] . '</option>';
-				}
-				dbug($chtml);
-				return ["calshtml" => $chtml];
 				break;
 			case 'getcaldavcals':
 				$caldavClient = new SimpleCalDAVClient();
