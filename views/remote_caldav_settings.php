@@ -258,9 +258,5 @@ if (strtolower((string) $action) == "add") {
 		if($("#urlerror").length == 1) {
 			return warnInvalid($("#url"),_("Please check your URL and credentials."));
 		}
-		if($("#setspan").is(":d-none")) {
-			fpbxToast(_('Validation in progress. Please wait.'),'','warning');
-			return false;
-		}
 	});
 </script>
