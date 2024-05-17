@@ -1,14 +1,14 @@
 {
+	"minimum-stability": "dev",
 	"repositories": [
 		{
-			"type": "github",
-			"url": "https://github.com/FreePBX/simpleCalDAV.git",
-			"canonical": false
+			"type": "vcs",
+			"url": "https://github.com/FreePBX/simpleCalDAV.git"
 		}
 	],
 	"require": {
 		"om/icalparser": "^3.1.0",
-		"thecsea/simple-caldav-client": "0.1.14",
+		"thecsea/simple-caldav-client": "master as dev-master",
 		"eluceo/ical": "0.16.1"
 	},
 	"config": {
