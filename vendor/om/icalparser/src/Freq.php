@@ -37,7 +37,7 @@ use Exception;
 class Freq {
 
 	/** @var bool */
-	static bool $debug = false;
+	public static bool $debug = false;
 
 	protected array $weekdays = [
 		'MO' => 'monday',
@@ -212,12 +212,8 @@ class Freq {
 		//set the timestamp of the offset (ignoring hours and minutes unless we want them to be
 		//part of the calculations.
 		if (static::$debug) printf("O: %s\n", date('r', $offset));
-		$hour = (in_array($this->freq, ['hourly', 'minutely']) && $offset > $this->start) ? date('H', $offset) : date(
-			'H', $this->start
-		);
-		$minute = (($this->freq === 'minutely' || isset($this->rules['byminute'])) && $offset > $this->start) ? date(
-			'i', $offset
-		) : date('i', $this->start);
+		$hour = (in_array($this->freq, ['hourly', 'minutely']) && $offset>$this->start) ? date('H', $offset) : date('H', $this->start);
+		$minute = (($this->freq === 'minutely' || isset($this->rules['byminute'])) && $offset > $this->start) ? date('i', $offset) : date('i', $this->start);
 		$t = mktime($hour, $minute, date('s', $this->start), date('m', $offset), date('d', $offset), date('Y', $offset));
 		if (static::$debug) printf("START: %s\n", date('r', $t));
 
@@ -442,7 +438,7 @@ class Freq {
 		} else {
 			$ts = $this->start;
 			while (($t2 = $this->findNext($ts)) < $offset) {
-				if (!$t2) {
+				if ($t2 == false) {
 					break;
 				}
 				$ts = $t2;
@@ -469,8 +465,8 @@ class Freq {
 	/**
 	 * Finds the first occurrence of the rule.
 	 *
-	 * @return bool|int timestamp
-	 * @throws \Exception
+	 * @return int timestamp
+	 * @throws Exception
 	 */
 	public function firstOccurrence(): bool|int {
 		$t = $this->start;

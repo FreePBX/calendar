@@ -24,9 +24,15 @@
 namespace it\thecsea\simple_caldav_client;
 
 class CalDAVObject {
-	public function __construct(private $href, private $data, private $etag)
- {
- }
+	private $href;
+	private $data;
+	private $etag;
+	
+	public function __construct ($href, $data, $etag) {
+		$this->href = $href;
+		$this->data = $data;
+		$this->etag = $etag;
+	}
 	
 	
 	// Getter

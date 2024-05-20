@@ -25,16 +25,17 @@
 namespace it\thecsea\simple_caldav_client;
 
 class CalDAVFilter {
-	private array $mustIncludes = [];
+	private $resourceType;
+	private $mustIncludes = array();
     
     /*
      * @param $type The type of resource you want to get. Has to be either
      *               "VEVENT", "VTODO", "VJOURNAL", "VFREEBUSY" or "VALARM".
      *               You have to decide.
      */
-    public function __construct(private $resourceType)
-    {
-    }
+    public function __construct ( $type ) {
+		$this->resourceType = $type;
+	}
 	
 	/**
 	 * function mustInclude()
@@ -50,14 +51,14 @@ class CalDAVFilter {
      * have the LOCATION-property.
 	 * 
 	 * Arguments:
-	 * @param $field The name of the property. For a full list of valid
+	 * @param string $field The name of the property. For a full list of valid
      *               property names see http://www.rfcreader.com/#rfc5545_line3622
      *               Note that the server might not support all of them.
-     * @param $inverse Makes the effect inverse: The resource must NOT include
+     * @param bool $inverse Makes the effect inverse: The resource must NOT include
      *                 the property $field
 	 */
     public function mustInclude ( $field, $inverse = FALSE ) {
-        $this->mustIncludes[] = ["mustInclude", $field, $inverse];
+        $this->mustIncludes[] = array("mustInclude", $field, $inverse);
     }
     
     /**
@@ -73,15 +74,15 @@ class CalDAVFilter {
      * resource with "SUMMARY:This is a part of the".
 	 * 
 	 * Arguments:
-	 * @param $field The name of the property. For a full list of valid
+	 * @param string $field The name of the property. For a full list of valid
      *               property names see http://www.rfcreader.com/#rfc5545_line3622
      *               Note that the server might not support all of them.
-     * @param $substring Substring to match against the value of the property.
-     * @param $inverse Makes the effect inverse: The property value must NOT
+     * @param string $substring Substring to match against the value of the property.
+     * @param bool $inverse Makes the effect inverse: The property value must NOT
      *                 include the $substring
 	 */
     public function mustIncludeMatchSubstr ( $field, $substring, $inverse = FALSE ) {
-        $this->mustIncludes[] = ["mustIncludeMatchSubstr", $field, $substring, $inverse];
+        $this->mustIncludes[] = array("mustIncludeMatchSubstr", $field, $substring, $inverse);
     }
     
     /**
@@ -92,24 +93,26 @@ class CalDAVFilter {
      * Only call this function once per CalDAVFilter-object!
 	 * 
 	 * Arguments:
-	 * @param $start The starting point of the time interval. Must be in the format yyyymmddThhmmssZ and should be in
+	 * @param string $start The starting point of the time interval. Must be in the format yyyymmddThhmmssZ and should be in
 	 *              	GMT. If omitted the value is set to -infinity.
-	 * @param $end The end point of the time interval. Must be in the format yyyymmddThhmmssZ and should be in
+	 * @param string $end The end point of the time interval. Must be in the format yyyymmddThhmmssZ and should be in
 	 *              	GMT. If omitted the value is set to +infinity.
 	 */
     public function mustOverlapWithTimerange ( $start = NULL, $end = NULL) {
         // Are $start and $end in the correct format?
-		if ( ( isset($start) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', (string) $start, $matches ) )
-		  or ( isset($end) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', (string) $end, $matches ) ) )
+		if ( ( isset($start) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', $start, $matches ) )
+		  or ( isset($end) and ! preg_match( '#^\d\d\d\d\d\d\d\dT\d\d\d\d\d\dZ$#', $end, $matches ) ) )
 		{ trigger_error('$start or $end are in the wrong format. They must have the format yyyymmddThhmmssZ and should be in GMT', E_USER_ERROR); }
         
-        $this->mustIncludes[] = ["mustOverlapWithTimerange", $start, $end];
+        $this->mustIncludes[] = array("mustOverlapWithTimerange", $start, $end);
     }
     
     /**
      * Transforms the filter to xml-code for the server. Used to pass as
      * argument for SimpleCalDAVClient->getCustomReport()
      *
+     * @return string
+     * 
      * Example:
      * $simpleCalDAVClient->getCustomReport($filter->toXML());
      *
