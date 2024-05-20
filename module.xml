@@ -2,19 +2,19 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>17.0.4.9</version>
+	<version>17.0.4.10</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
 	<category>Applications</category>
 	<description>This module is used to manage calendar and time based events for FreePBX</description>
-	<more-info>https://wiki.freepbx.org/display/FPG/Calendar+Module</more-info>
+	<more-info>https://sangomakb.atlassian.net/wiki/spaces/PG/pages/21332158/Calendar+Module</more-info>
 	<menuitems>
 		<calendar needsenginedb="yes">Calendar</calendar>
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
-		*17.0.4.9* Packaging of ver 17.0.4.9
+		*17.0.4.10* Packaging of ver 17.0.4.10
 		*17.0.1alpha1* 17.0.1 alpha release
 	</changelog>
 	<depends>
