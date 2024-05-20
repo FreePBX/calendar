@@ -29,14 +29,25 @@
 
 namespace it\thecsea\simple_caldav_client;
 
-class CalDAVCalendar implements \Stringable {
+class CalDAVCalendar {
+	private $url;
+	private $displayname;
+	private $ctag;
+	private $calendar_id;
 	private $rgba_color;
+	private $rbg_color;
+	private $order;
 	
-	function __construct(private $url, private $displayname = null, private $ctag = null, private $calendar_id = null, private $rbg_color = null, private $order = null)
- {
- }
+	function __construct ( $url, $displayname = null, $ctag = null, $calendar_id = null, $rbg_color = null, $order = null ) {
+		$this->url = $url;
+		$this->displayname = $displayname;
+		$this->ctag = $ctag;
+		$this->calendar_id = $calendar_id;
+		$this->rbg_color = $rbg_color;
+		$this->order = $order;
+	}
 	
-	function __toString (): string {
+	function __toString () {
 		return( '(URL: '.$this->url.'   Ctag: '.$this->ctag.'   Displayname: '.$this->displayname .')'. "\n" );
 	}
 	
