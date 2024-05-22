@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-15 03:07-0400\n"
+"POT-Creation-Date: 2024-05-22 07:08-0400\n"
 "PO-Revision-Date: 2018-02-14 21:15+0200\n"
 "Last-Translator: jeremie <freepbx@famillecattan.com>\n"
 "Language-Team: French <http://weblate.freepbx.org/projects/freepbx/calendar/"
@@ -291,7 +291,7 @@ msgid "Check if match, value can be any timestamp"
 msgstr ""
 
 #: views/outlook_config_form.php:127
-msgid "Clent Secret Value"
+msgid "Client Secret Value"
 msgstr ""
 
 #: views/calendar.php:544
