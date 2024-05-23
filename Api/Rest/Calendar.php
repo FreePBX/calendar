@@ -18,9 +18,10 @@ class Calendar extends Base {
          * @returns - the calendar list
          * @uri     /calendar
          */
-        $app->get('/', function($request, $response, $args) {
+        $freepbx = $this->freepbx;
+        $app->get('/', function($request, $response, $args) use($freepbx) {
             $list = [];
-            $calendars = $this->freepbx->Calendar->listCalendars();
+            $calendars = $freepbx->Calendar->listCalendars();
 
             foreach ($calendars as $id => $calendar) {
                 $entry = new \stdClass();
@@ -30,7 +31,9 @@ class Calendar extends Base {
                 $list[$id] = $entry;
             }
 
-            return $response->withJson(!empty($list) ? $list : false);
+            $list = !empty($list)? $list : false;
+            $response->getBody()->write(json_encode($list));
+            return $response->withHeader('Content-Type', 'application/json');
         })->add($this->checkAllReadScopeMiddleware());
 
         /**
@@ -38,10 +41,11 @@ class Calendar extends Base {
          * @returns - the calendar data
          * @uri     /calendar/:id
          */
-        $app->get('/{id}', function($request, $response, $args) {
-            $calendar = $this->freepbx->Calendar->getCalendarById($args['id']);
+        $app->get('/{id}', function($request, $response, $args) use($freepbx) {
+            $calendar = $freepbx->Calendar->getCalendarById($args['id']);
             if (!$calendar) {
-                return $response->withJson(false);
+                $response->getBody()->write(json_encode(false));
+                return $response->withHeader('Content-Type', 'application/json');
             }
 
             $entry = new \stdClass();
@@ -70,7 +74,9 @@ class Calendar extends Base {
                     break;
             }
 
-            return $response->withJson(!empty($entry) ? $entry : false);
+            $entry = !empty($entry) ? $entry : false;
+            $response->getBody()->write(json_encode($entry));
+            return $response->withHeader('Content-Type', 'application/json');
         })->add($this->checkAllReadScopeMiddleware());
 
         /**
@@ -78,10 +84,11 @@ class Calendar extends Base {
          * @returns - edit result
          * @uri     /calendar/:id
          */
-        $app->put('/{id}', function($request, $response, $args) {
-            $calendar = $this->freepbx->Calendar->getCalendarById($args['id']);
+        $app->put('/{id}', function($request, $response, $args) use($freepbx) {
+            $calendar = $freepbx->Calendar->getCalendarById($args['id']);
             if (!$calendar) {
-                return $response->withJson(false);
+                $response->getBody()->write(json_encode(false));
+                return $response->withHeader('Content-Type', 'application/json');
             }
 
             $params = $request->getParsedBody();
@@ -142,8 +149,8 @@ class Calendar extends Base {
             } catch (\Exception) {
                 $ret = false;
             }
-
-            return $response->withJson($ret);
+            $response->getBody()->write(json_encode($ret));
+            return $response->withHeader('Content-Type', 'application/json');
         })->add($this->checkAllReadScopeMiddleware());
 
         /**
@@ -151,17 +158,19 @@ class Calendar extends Base {
          * @returns - a list of next events for a given date (or today)
          * @uri     /calendar/events/:id
          */
-        $app->get('/events/{id}', function($request, $response, $args) {
-            $calendar = $this->freepbx->Calendar->getCalendarById($args['id']);
+        $app->get('/events/{id}', function($request, $response, $args) use($freepbx) {
+            $calendar = $freepbx->Calendar->getCalendarById($args['id']);
             if (empty($calendar)) {
-                return $response->withJson(false);
+                $response->getBody()->write(json_encode(false));
+                return $response->withHeader('Content-Type', 'application/json');
             }
             $params = $request->getParsedBody();
             if (!empty($params['date'])) {
                 $calendar['calendar']->setNow($params['date']);
             }
             $events = $calendar['calendar']->getNextEvent();
-            return $response->withJson($events);
+            $response->getBody()->write(json_encode($events));
+            return $response->withHeader('Content-Type', 'application/json');
         })->add($this->checkAllReadScopeMiddleware());
 
         /**
@@ -169,10 +178,11 @@ class Calendar extends Base {
          * @returns - the result for adding/update an event for a calendar
          * @uri     /calendar/events/:id
          */
-        $app->put('/events/{id}', function($request, $response, $args) {
-            $calendar = $this->freepbx->Calendar->getCalendarById($args['id']);
+        $app->put('/events/{id}', function($request, $response, $args) use($freepbx) {
+            $calendar = $freepbx->Calendar->getCalendarById($args['id']);
             if (empty($calendar) || $calendar['type'] !== 'local') {
-                return $response->withJson(false);
+                $response->getBody()->write(json_encode(false));
+                return $response->withHeader('Content-Type', 'application/json');
             }
 
             $params = $request->getParsedBody();
@@ -188,8 +198,8 @@ class Calendar extends Base {
             } catch (\Exception) {
                 $ret = false;
             }
-
-            return $response->withJson($ret);
+            $response->getBody()->write(json_encode($ret));
+            return $response->withHeader('Content-Type', 'application/json');
         })->add($this->checkAllReadScopeMiddleware());
     }
 }
