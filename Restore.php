@@ -19,8 +19,13 @@ class Restore extends Base\RestoreBase{
 		foreach($kvstorecalendar as $calendar) {
 			$calevents = explode('\n',(string) $calendar['val']);
 			$calendar['val'] = implode("\n", $calevents);
-			$query = "INSERT INTO kvstore_FreePBX_modules_Calendar VALUES('".$calendar['key']."','".$calendar['val']."','".$calendar['type']."','".$calendar['id']."')";
-			$this->FreePBX->Database->query($query);
+			$query = "INSERT INTO kvstore_FreePBX_modules_Calendar (`key`, `val`, `type`, `id`) VALUES (:key, :val, :type, :id)";
+			$stmt = $this->FreePBX->Database->prepare($query);
+			$stmt->bindParam(':key', $calendar['key']);
+			$stmt->bindParam(':val', $calendar['val']);
+			$stmt->bindParam(':type', $calendar['type']);
+			$stmt->bindParam(':id', $calendar['id']);
+			$stmt->execute();
 		}
 	}
 
