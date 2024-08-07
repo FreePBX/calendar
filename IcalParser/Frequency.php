@@ -356,7 +356,7 @@ class Frequency extends Freq
             foreach ($days as $i => $k) {
                 $days[$i] = $this->weekdays[preg_replace('/[^A-Z]/', '', $k)];
             }
-            if (!in_array(strtolower(date('l', $t)), $days)) {
+            if (!in_array(strtolower(date('l', $t)), $days) && $this->rules['freq'] != 'YEARLY') {
                 return false;
             }
         }
