@@ -166,6 +166,10 @@ class Frequency extends Freq
         $debug = false;
 
         //make sure the offset is valid
+        if(!isset($this->rules['until'])) {
+            $timestamp = time(); // Current timestamp
+            $this->rules['until'] = strtotime('+2 months', $timestamp);
+        }
         if ($offset === false || (isset($this->rules['until']) && $offset > $this->rules['until'])) {
             if ($debug) echo 'STOP: ' . date('r', $offset) . "\n";
 
