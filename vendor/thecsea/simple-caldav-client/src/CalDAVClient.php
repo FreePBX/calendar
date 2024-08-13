@@ -930,7 +930,7 @@ EOXML;
                   $response['etag'] = preg_replace('/^"?([^"]+)"?/', '$1', $v['value']);
                   break;
               case 'urn:ietf:params:xml:ns:caldav:calendar-data':
-                        $response['data'] = $v['value'];
+                        $response['data'] = $v['value'] ?? '';
                         break;
           }
       }
