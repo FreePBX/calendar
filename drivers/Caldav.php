@@ -89,11 +89,11 @@ class Caldav extends Base {
 				foreach($events as $event) {
 					$ical = $event->getData();
 					if($i == 0){
-						preg_match_all("/^(.*)BEGIN:VEVENT/s",(string) $ical,$matches);
-						$headerSection = $matches[1][0];
+						preg_match_all("/^(.*)BEGIN:VEVENT/s",$ical,$matches);
+						$eventsSection .= ($matches[1][0] ?? '');
 					}
-					preg_match_all("/BEGIN:VEVENT(.*)END:VEVENT/s",(string) $ical,$matches);
-					$eventsSection .= $matches[0][0]."\n";
+					preg_match_all("/BEGIN:VEVENT(.*)END:VEVENT/s",$ical,$matches);
+					$eventsSection .= ($matches[0][0] ?? '')."\n";
 					$i++;
 				}
 			}
