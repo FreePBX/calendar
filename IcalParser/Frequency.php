@@ -249,6 +249,14 @@ class Frequency extends Freq
             }
         }
 
+        //https://sangoma.atlassian.net/browse/FREEI-1036 - fix for the issue
+        $monthDayjan = date("m-d", $t); 
+        if ($monthDayjan === "01-01" && $t == $offset) {
+            // Add 1 year to the timestamp as the start date and loop start date are same in case of allday event (Ex: recursive event of allday which occus on jan 1st year-01-01 00:00:00)
+            $t = strtotime("+1 year", $t);
+        }
+        //https://sangoma.atlassian.net/browse/FREEI-1036 - fix for the issue - end
+
         if ($offset < $this->start && $this->start < $t) {
             $ts = $this->start;
         } elseif ($found && ($t != $offset)) {
