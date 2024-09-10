@@ -356,7 +356,6 @@ abstract class Base
 			if ($this->buildCache()) //...so we call buildCache() again to get a consistent result
 				return $this->fastHandler();
 			else {
-				dbug(' No matching Data');
 				return false;
 			}
 		}
