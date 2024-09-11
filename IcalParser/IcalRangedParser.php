@@ -284,7 +284,11 @@ class IcalRangedParser extends IcalParser
 						$event = null; //this is an event that modifies another one. In every case (even if we weren't able to overwrite the original one for whatever reason) it should not end up in the output
 					} else {
 						//neither start nor end is within range so skip it
-						if (!$this->eventRangeInCalendarRange($event['DTSTART'], $event['DTEND'])) {
+						if(isset($event['DTSTART']) && isset($event['DTEND'])) {
+							if (!$this->eventRangeInCalendarRange($event['DTSTART'], $event['DTEND'])) {
+								$event = null;
+							}
+						} else {
 							$event = null;
 						}
 					}
