@@ -367,7 +367,7 @@ class IcalRangedParser extends \om\IcalParser
 					$eventDuration = $event['DTEND']->getTimestamp() - $event['DTSTART']->getTimestamp();
 
 					foreach ($recurrences as $recurrenceTimestamp) {
-						if ($now > $recurrenceTimestamp && $now < ($recurrenceTimestamp + $eventDuration)) {
+						if ($now > $recurrenceTimestamp->getTimestamp() && $now < ($recurrenceTimestamp->getTimestamp() + $eventDuration)) {
 							array_push($events, $event); //at least one recurrence is now, keep it
 							continue 2; //go to the next event
 						}
