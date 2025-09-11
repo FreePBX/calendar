@@ -55,6 +55,10 @@ class IcalRangedParser extends \om\IcalParser
 			//no need to do any fancy check here. See Frequency (or Freq) and you will find out that dates are only removed if the timestamp is EXACTLY the same.
 			//So it is enough to pass the array with timestamp without checking anything fancy
 			foreach ($event['EXDATES'] as $ex)
+				$flatEXDATES = array_reduce($event['EXDATES'], function($carry, $item) {
+									return array_merge($carry, is_array($item) ? $item : [$item]);
+								}, []);
+			foreach ($flatEXDATES as $ex)
 				array_push($exclusions, $ex->getTimestamp());
 		}
 
