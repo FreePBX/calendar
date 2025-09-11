@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-11 00:41-0400\n"
+"POT-Creation-Date: 2025-09-11 06:36-0400\n"
 "PO-Revision-Date: 2018-07-18 19:12+0000\n"
 "Last-Translator: Elvita Crespo <ecrespo@sangoma.com>\n"
 "Language-Team: Spanish <http://*/projects/freepbx/calendar/es/>\n"
@@ -110,7 +110,7 @@ msgstr ""
 msgid "6 Hours"
 msgstr ""
 
-#: IcalParser/IcalRangedParser.php:284 IcalParser/IcalRangedParser.php:358
+#: IcalParser/IcalRangedParser.php:288 IcalParser/IcalRangedParser.php:362
 #, php-format
 msgid ""
 "A calendar you have added has an event called \"%event\" that has a "
@@ -118,7 +118,7 @@ msgid ""
 "please consider changing this to Exceptions/Additions."
 msgstr ""
 
-#: IcalParser/IcalRangedParser.php:132
+#: IcalParser/IcalRangedParser.php:136
 msgid ""
 "A calendar you have added has an event that has a reoccuring rule of COUNT. "
 "When COUNT is used this slows down Calendar drastically. Please change your "
@@ -263,11 +263,11 @@ msgstr ""
 msgid "Calendar processed successfully"
 msgstr ""
 
-#: IcalParser/IcalRangedParser.php:132
+#: IcalParser/IcalRangedParser.php:136
 msgid "Calendar using COUNT"
 msgstr ""
 
-#: IcalParser/IcalRangedParser.php:284 IcalParser/IcalRangedParser.php:358
+#: IcalParser/IcalRangedParser.php:288 IcalParser/IcalRangedParser.php:362
 msgid "Calendar using RECURRENCE-ID"
 msgstr ""
 
