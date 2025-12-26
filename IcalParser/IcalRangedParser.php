@@ -133,7 +133,9 @@ class IcalRangedParser extends \om\IcalParser
 		} elseif (class_exists('FreePBX')) {
 			//fast is not implemented here for obvious reasons
 
-			\FreePBX::Notifications()->add_warning('calendar', 'RRULECOUNT', _('Calendar using COUNT'), _('A calendar you have added has an event that has a reoccuring rule of COUNT. When COUNT is used this slows down Calendar drastically. Please change your rule to another format'), "", true, true);
+			if( \FreePBX::Notifications()->exists('calendar', 'RRULECOUNT') === 0){
+				\FreePBX::Notifications()->('calendar', 'RRULECOUNT', _('Calendar using COUNT'), _('A calendar you have added has an event that has a reoccuring rule of COUNT. When COUNT is used this slows down Calendar drastically. Please change your rule to another format'), "", true, true);
+			}
 
 			/*
 			$period = CarbonPeriod::between($event['DTSTART'],$this->ranges['end']);
@@ -285,7 +287,9 @@ class IcalRangedParser extends \om\IcalParser
 							}
 							*/
 
-						\FreePBX::Notifications()->add_warning('calendar', 'RECURRENCEID', _('Calendar using RECURRENCE-ID'), str_replace('%event', $event['SUMMARY'], _('A calendar you have added has an event called "%event" that has a RECURRENCE-ID rule. Because there is no full support yet they are ignored, please consider changing this to Exceptions/Additions.')), "", true, true);
+						if( \FreePBX::Notifications()->exists('calendar', 'RECURRENCEID') === 0){
+							\FreePBX::Notifications()->add_warning('calendar', 'RECURRENCEID', _('Calendar using RECURRENCE-ID'), str_replace('%event', $event['SUMMARY'], _('A calendar you have added has an event called "%event" that has a RECURRENCE-ID rule. Because there is no full support yet they are ignored, please consider changing this to Exceptions/Additions.')), "", true, true);
+						}
 						$event = null; //this is an event that modifies another one. In every case (even if we weren't able to overwrite the original one for whatever reason) it should not end up in the output
 					} else {
 						//neither start nor end is within range so skip it
@@ -359,7 +363,9 @@ class IcalRangedParser extends \om\IcalParser
 
 				if (empty($event['RECURRENCES'])) {
 					if (!empty($event['RECURRENCE-ID']) && !empty($event['UID']) && isset($event['SEQUENCE'])) {
-						\FreePBX::Notifications()->add_warning('calendar', 'RECURRENCEID', _('Calendar using RECURRENCE-ID'), str_replace('%event', $event['SUMMARY'], _('A calendar you have added has an event called "%event" that has a RECURRENCE-ID rule. Because there is no full support yet they are ignored, please consider changing this to Exceptions/Additions.')), "", true, true);
+						if( \FreePBX::Notifications()->exists('calendar', 'RECURRENCEID') === 0){
+							\FreePBX::Notifications()->add_warning('calendar', 'RECURRENCEID', _('Calendar using RECURRENCE-ID'), str_replace('%event', $event['SUMMARY'], _('A calendar you have added has an event called "%event" that has a RECURRENCE-ID rule. Because there is no full support yet they are ignored, please consider changing this to Exceptions/Additions.')), "", true, true);
+						}
 					} else {
 						if ($event['DTSTART']->getTimestamp() < $now && $now < $event['DTEND']->getTimestamp())
 							array_push($events, $event); //event is now, keep it
