@@ -269,7 +269,15 @@ class Frequency extends Freq
             }
         } else {
             if ($debug) echo 'Not found' . "\n";
-            $ts = $this->findNext($this->findStartingPoint($offset, $this->rules['interval']));
+            $sp = $this->findStartingPoint($offset, $this->rules['interval']);
+            // om\Freq recursed findNext($sp), which skips the occurrence timestamp at $sp when it
+            // is itself a valid instance (e.g. MONTHLY;BYMONTHDAY=1: next after Mar 1 must be Apr 1,
+            // but findNext(Apr 1) searched strictly after Apr 1 and never returned Apr 1).
+            if ($this->validDate($sp) && $sp > $offset) {
+                $ts = $sp;
+            } else {
+                $ts = $this->findNext($sp);
+            }
         }
         if ($ts && in_array($ts, $this->excluded)) {
             return $this->findNext($ts);
