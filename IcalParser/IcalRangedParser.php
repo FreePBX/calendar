@@ -41,6 +41,65 @@ class IcalRangedParser extends \om\IcalParser
 	}
 
 	/**
+	 * Monthly events that end on the last calendar day of the template month (e.g. Mar 21–31) must not
+	 * reuse a fixed DateInterval on shorter months; otherwise Apr 21 + 11 days bleeds into May.
+	 * Applies to all-day (VALUE=DATE / midnight) and to timed events (e.g. end 31st at 22:55).
+	 */
+	private function isMonthlyEndingOnTemplateMonthLastDay(\DateTimeInterface $dtStart, \DateTimeInterface $dtEnd, array $rrule): bool
+	{
+		if (!isset($rrule['FREQ']) || strtoupper((string) $rrule['FREQ']) !== 'MONTHLY') {
+			return false;
+		}
+		$start = \DateTimeImmutable::createFromInterface($dtStart);
+		$endEx = \DateTimeImmutable::createFromInterface($dtEnd);
+		// iCal all-day: DTSTART/DTEND at midnight and DTEND is exclusive (day after last inclusive).
+		$useExclusiveEndMinusOne = ((int) $start->format('His') === 0 && (int) $endEx->format('His') === 0);
+		if ($useExclusiveEndMinusOne) {
+			$lastInclusive = $endEx->sub(new \DateInterval('P1D'));
+		} else {
+			$lastInclusive = $endEx;
+		}
+		if ($lastInclusive->format('Y-m') !== $start->format('Y-m')) {
+			return false;
+		}
+		return (int) $lastInclusive->format('j') === (int) $start->format('t');
+	}
+
+	/**
+	 * DTEND for one recurrence instance: last inclusive day is min(template last inclusive day, month length).
+	 * All-day: returns exclusive end (00:00 on the day after the last inclusive day). Timed: same clock as template end.
+	 */
+	private function getMonthlyClampedEnd(
+		\DateTimeInterface $instanceStart,
+		\DateTimeInterface $templateStart,
+		\DateTimeInterface $templateEnd
+	): \DateTime {
+		$start = \DateTimeImmutable::createFromInterface($templateStart);
+		$endEx = \DateTimeImmutable::createFromInterface($templateEnd);
+		$useExclusiveEndMinusOne = ((int) $start->format('His') === 0 && (int) $endEx->format('His') === 0);
+		if ($useExclusiveEndMinusOne) {
+			$templateLastInclusiveDay = (int) $endEx->sub(new \DateInterval('P1D'))->format('j');
+		} else {
+			$templateLastInclusiveDay = (int) $endEx->format('j');
+		}
+		$inst = \DateTimeImmutable::createFromInterface($instanceStart);
+		$year = (int) $inst->format('Y');
+		$month = (int) $inst->format('n');
+		$daysInMonth = (int) $inst->format('t');
+		$lastInclusiveDay = min($templateLastInclusiveDay, $daysInMonth);
+		$out = \DateTime::createFromInterface($inst);
+		$out->setDate($year, $month, $lastInclusiveDay);
+		if ($useExclusiveEndMinusOne) {
+			$out->setTime(0, 0, 0);
+			$out->add(new \DateInterval('P1D'));
+		} else {
+			$out->setTime((int) $endEx->format('H'), (int) $endEx->format('i'), (int) $endEx->format('s'));
+		}
+
+		return $out;
+	}
+
+	/**
 	 * @param $event
 	 * @return array
 	 * @throws \Exception
@@ -306,6 +365,11 @@ class IcalRangedParser extends \om\IcalParser
 					$event['RECURRING'] = true;
 					$event['DTEND'] = !empty($event['DTEND']) ? $event['DTEND'] : $event['DTSTART'];
 					$eventInterval = $event['DTSTART']->diff($event['DTEND']);
+					$clampMonthEnd = $this->isMonthlyEndingOnTemplateMonthLastDay(
+						$event['DTSTART'],
+						$event['DTEND'],
+						$event['RRULE'] ?? []
+					);
 
 					//TODO: at some point make the first event ALWAYS the earliest event as thats our starter
 					//$event['RECURRENCE_INSTANCE'] = 0;
@@ -321,8 +385,12 @@ class IcalRangedParser extends \om\IcalParser
 							];
 							unset($newEvent['RECURRENCES']);
 							$newEvent['DTSTART'] = $recurDate;
-							$newEvent['DTEND'] = clone ($recurDate);
-							$newEvent['DTEND']->add($eventInterval);
+							if ($clampMonthEnd) {
+								$newEvent['DTEND'] = $this->getMonthlyClampedEnd($recurDate, $event['DTSTART'], $event['DTEND']);
+							} else {
+								$newEvent['DTEND'] = clone ($recurDate);
+								$newEvent['DTEND']->add($eventInterval);
+							}
 						}
 
 						if ($this->eventRangeInCalendarRange($newEvent['DTSTART'], $newEvent['DTEND'])) {
@@ -369,9 +437,21 @@ class IcalRangedParser extends \om\IcalParser
 					$event['RECURRING'] = true;
 					$event['RECURRENCE_INSTANCE'] = 0; //TODO RECURRENCE_INSTANCE cannot be calculated in an easy and fast way here. But do we really need it? (see also Calendar.class.php)
 					$eventDuration = $event['DTEND']->getTimestamp() - $event['DTSTART']->getTimestamp();
+					$clampMonthEnd = $this->isMonthlyEndingOnTemplateMonthLastDay(
+						$event['DTSTART'],
+						$event['DTEND'],
+						$event['RRULE'] ?? []
+					);
 
 					foreach ($recurrences as $recurrenceTimestamp) {
-						if ($now > $recurrenceTimestamp && $now < ($recurrenceTimestamp + $eventDuration)) {
+						$duration = $eventDuration;
+						if ($clampMonthEnd) {
+							$rs = new \DateTime('@' . $recurrenceTimestamp);
+							$rs->setTimezone($event['DTSTART']->getTimezone());
+							$instEnd = $this->getMonthlyClampedEnd($rs, $event['DTSTART'], $event['DTEND']);
+							$duration = $instEnd->getTimestamp() - $recurrenceTimestamp;
+						}
+						if ($now > $recurrenceTimestamp && $now < ($recurrenceTimestamp + $duration)) {
 							array_push($events, $event); //at least one recurrence is now, keep it
 							continue 2; //go to the next event
 						}
