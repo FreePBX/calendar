@@ -1112,13 +1112,13 @@ class Calendar extends \DB_Helper implements \BMO
 			$cal = $this->getDriverById($calid);
 			$cal->setTimezone($timezone);
 			$cal->setNow($now);
-			$ev = $cal->getNextEvent($cal);
+			$ev = $cal->getNextEvent();
 			if (!empty($ev)) {
 				$events[$ev['startdate']] = $ev;
 			}
 		}
 		ksort($events);
-		return reset($events);
+		return !empty($events) ? reset($events) : [];
 	}
 
 	/**
