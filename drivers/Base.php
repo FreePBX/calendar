@@ -202,14 +202,36 @@ abstract class Base
 		$end->add(new \DateInterval(self::ADD_END));
 		$icalData = $this->getIcal();
 		if ($icalData) {
-			$cal = new IcalRangedParser(true);
-			$cal->setStartRange($start);
-			$cal->setEndRange($end);
-			$raw = $cal->parseString($icalData);
-			$this->calendarClass->setConfig($this->calendar['id'], serialize($raw), 'calendar-cache');
-			$this->calendarClass->setConfig($this->calendar['id'], $start->getTimestamp(), 'calendar-cache_valid_notbefore');
-			$this->calendarClass->setConfig($this->calendar['id'], $end->getTimestamp(), 'calendar-cache_valid_notafter');
-			return true;
+			try {
+				$cal = new IcalRangedParser(true);
+				$cal->setStartRange($start);
+				$cal->setEndRange($end);
+				$raw = $cal->parseString($icalData);
+				$this->calendarClass->setConfig($this->calendar['id'], serialize($raw), 'calendar-cache');
+				$this->calendarClass->setConfig($this->calendar['id'], $start->getTimestamp(), 'calendar-cache_valid_notbefore');
+				$this->calendarClass->setConfig($this->calendar['id'], $end->getTimestamp(), 'calendar-cache_valid_notafter');
+				return true;
+			} catch (\Throwable $e) {
+				if (class_exists('FreePBX')) {
+					$calName = htmlspecialchars($this->calendar['name'] ?? $this->calendar['id'], ENT_QUOTES, 'UTF-8');
+					$errMsg  = htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
+					\FreePBX::Notifications()->add_critical(
+						'calendar',
+						'PARSE_FAIL_' . $this->calendar['id'],
+						sprintf(_('Calendar parse failed: %s'), $calName),
+						sprintf(
+							_('The calendar "%s" could not be parsed at %s. This calendar\'s events will not be evaluated for time conditions or call routing until the problem is resolved. Error: %s'),
+							$calName,
+							date('Y-m-d H:i:s T'),
+							$errMsg
+						),
+						'',
+						false,
+						true
+					);
+				}
+				return false;
+			}
 		} else {
 			return false;
 		}

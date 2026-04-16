@@ -648,11 +648,33 @@ class Calendar extends \DB_Helper implements \BMO
 				$next = !empty($calendar['next']) ? $calendar['next'] : 300;
 				if ($force || ($last + $next) < time()) {
 					$calendar['id'] = $id;
-					$c = $cal->getDriverById($id);
-					$c->processCalendar($calendar);
-					$cal->setConfig($id, time(), 'calendar-sync');
-					$output->writeln("Done");
-					$this->FreePBX->Hooks->processHooks($calendar['id']);
+					try {
+						$c = $cal->getDriverById($id);
+						$c->processCalendar($calendar);
+						$cal->setConfig($id, time(), 'calendar-sync');
+						$output->writeln("Done");
+						$this->FreePBX->Hooks->processHooks($calendar['id']);
+						// Clear any previous failure notification for this calendar
+						\FreePBX::Notifications()->delete('calendar', 'SYNC_FAIL_' . $id);
+					} catch (\Throwable $e) {
+						$output->writeln("<error>FAILED: " . $e->getMessage() . "</error>");
+						$calName = htmlspecialchars($calendar['name'], ENT_QUOTES, 'UTF-8');
+						$errMsg  = htmlspecialchars($e->getMessage(), ENT_QUOTES, 'UTF-8');
+						\FreePBX::Notifications()->add_critical(
+							'calendar',
+							'SYNC_FAIL_' . $id,
+							sprintf(_('Calendar sync failed: %s'), $calName),
+							sprintf(
+								_('The calendar "%s" failed to sync at %s. Time conditions and call routing that depend on this calendar are using stale data and may route calls incorrectly. Error: %s'),
+								$calName,
+								date('Y-m-d H:i:s T'),
+								$errMsg
+							),
+							'',
+							false,
+							true
+						);
+					}
 				} else
 					$output->writeln("Skipping");
 			}
