@@ -180,6 +180,21 @@ class IcalRangedParser extends \om\IcalParser
 						break; //retrieval failed, probably we are out of period or the recurrence is invalid
 				}
 
+				// Filter occurrences that have been replaced by RECURRENCE-ID
+				// exception events (moved/cancelled instances). The non-fast
+				// path does this at the end of parseRecurrences; the fast path
+				// must do it here because it returns early.
+				if (!empty($this->data['_RECURRENCE_IDS'])) {
+					$tz = $event['DTSTART']->getTimezone();
+					$recurrences = array_values(array_filter($recurrences, function ($ts) use ($tz) {
+						$local = (new \DateTime('@' . $ts))->setTimezone($tz);
+						$utc   = new \DateTime('@' . $ts, new \DateTimeZone('UTC'));
+						return empty($this->data['_RECURRENCE_IDS'][$local->format('Ymd')])
+							&& empty($this->data['_RECURRENCE_IDS'][$local->format('Ymd\THis')])
+							&& empty($this->data['_RECURRENCE_IDS'][$utc->format('Ymd\THis\Z')]);
+					}));
+				}
+
 				return $recurrences;
 			} else {
 				//setting end to the one defined above and generating a new Frequency object
@@ -286,69 +301,23 @@ class IcalRangedParser extends \om\IcalParser
 				$event = $this->data['VEVENT'][$i];
 
 				if (empty($event['RECURRENCES'])) {
-					if (!empty($event['RECURRENCE-ID']) && !empty($event['UID']) && isset($event['SEQUENCE'])) {
-						/**
-						 * You may ask why I abandoned all this code, I will try to explain as clearly as possible:
-						 * 
-						 * First problem -> the recurring rule could have many formats, but as it is now only a specific one can be interpreted. This is not a big problem, we could generate a warning if we were unable to decode it. Here are some exmaples:
-						 * RECURRENCE-ID;RANGE=THISANDFUTURE:19960120T120000Z -> Becomes 19960120T120000Z (not matched becasue of the final "Z" + RANGE ignored)
-						 * RECURRENCE-ID;VALUE=DATE:19960401 -> Becomes 19960401 (not matched beacuse it is only a date)
-						 * RECURRENCE-ID;RANGE=THISANDFUTURE:TZID=UTC:20230531T120000 -> Becomes TZID=UTC:20230531T120000 (not matched because of the extra TZID)
-						 * RECURRENCE-ID;TZID=UTC:20230531T120000 -> Becomes 20230531T120000 (matched)
-						 * RECURRENCE-ID;VALUE=DATE-TIME:20210115T100000 -> Becomes 20230531T120000 (matched)
-						 * 
-						 * Second problem -> If we were able to overcome the first point and we get a match with the exact same DTSTART and an increased sequence (look at the first "if" below) the event is replaced entirely. Fine you'll say but there is a catch, recurrences are calculated on the original event and not updated causing all sort of problems (beside that, why don't you update the original event directly instead of using this quirks?)
-						 * 
-						 * Third problem -> If we instead fall into the second "if" we will search for recurrences to replace inside the original event. Perfect! But there is a catch! You see as soon as we find a recurrence that match we delete it and... nothing more! So the user is expecting this particular recurrence to be replaced by the new event but instead will find that recurrence completely deleted!
-						 * 
-						 * So all in all fixing all this is issues is too complicated, if someone wants to do it free to do so, but be careful of the speed too...
-						 */
+					if (!empty($event['RECURRENCE-ID']) && !empty($event['UID'])) {
+						// RECURRENCE-ID exception: this VEVENT replaces or cancels
+						// a single occurrence of a recurring series.  The original
+						// occurrence was already removed during parseRecurrences()
+						// (which filters timestamps matching _RECURRENCE_IDS).
+						// We include the replacement event if it is not cancelled
+						// and falls within the calendar range — no need to touch
+						// the parent series' recurrence list.
+						if (strtoupper($event['STATUS'] ?? '') === 'CANCELLED') {
+							$event = null;
+						}
+					}
 
-						/*
-							$modifiedEventUID = $event['UID'];
-							$modifiedEventRecurID = $event['RECURRENCE-ID'];
-							$modifiedEventSeq = intval($event['SEQUENCE'], 10);
-
-							if (isset($this->data["_RECURRENCE_COUNTERS_BY_UID"][$modifiedEventUID])) {
-								$counter = $this->data["_RECURRENCE_COUNTERS_BY_UID"][$modifiedEventUID];
-
-								$originalEvent = $this->data["VEVENT"][$counter];
-								if (isset($originalEvent['SEQUENCE'])) {
-									$originalEventSeq = intval($originalEvent['SEQUENCE'], 10);
-									$originalEventFormattedStartDate = $originalEvent['DTSTART']->format('Ymd\THis');
-									if ($modifiedEventRecurID === $originalEventFormattedStartDate && $modifiedEventSeq > $originalEventSeq) {
-										// this modifies the original event
-										$modifiedEvent = array_replace_recursive($originalEvent, $event);
-										$this->data["VEVENT"][$counter] = $modifiedEvent;
-										foreach ($events as $z => $event) {
-											if ($events[$z]['UID'] === $originalEvent['UID'] &&
-												$events[$z]['SEQUENCE'] === $originalEvent['SEQUENCE']) {
-												// replace the original event with the modified event
-												$events[$z] = $modifiedEvent;
-												break;
-											}
-										}
-										$event = null; // don't add this to the $events[] array again
-									} else if (!empty($originalEvent['RECURRENCES'])) {
-										for ($j = 0; $j < count($originalEvent['RECURRENCES']); $j++) {
-											$recurDate = $originalEvent['RECURRENCES'][$j];
-											$formattedStartDate = $recurDate->format('Ymd\THis');
-											if ($formattedStartDate === $modifiedEventRecurID) {
-												unset($this->data["VEVENT"][$counter]['RECURRENCES'][$j]);
-												$this->data["VEVENT"][$counter]['RECURRENCES'] = array_values($this->data["VEVENT"][$counter]['RECURRENCES']);
-												break;
-											}
-										}
-									}
-								}
-							}
-							*/
-
-						\FreePBX::Notifications()->add_warning('calendar', 'RECURRENCEID', _('Calendar using RECURRENCE-ID'), str_replace('%event', $event['SUMMARY'], _('A calendar you have added has an event called "%event" that has a RECURRENCE-ID rule. Because there is no full support yet they are ignored, please consider changing this to Exceptions/Additions.')), "", true, true);
-						$event = null; //this is an event that modifies another one. In every case (even if we weren't able to overwrite the original one for whatever reason) it should not end up in the output
-					} else {
-						//neither start nor end is within range so skip it
-						if(isset($event['DTSTART']) && isset($event['DTEND'])) {
+					// Range check for all non-recurring events (regular +
+					// RECURRENCE-ID replacements that survived the cancel check).
+					if (!empty($event)) {
+						if (isset($event['DTSTART']) && isset($event['DTEND'])) {
 							if (!$this->eventRangeInCalendarRange($event['DTSTART'], $event['DTEND'])) {
 								$event = null;
 							}
@@ -426,11 +395,15 @@ class IcalRangedParser extends \om\IcalParser
 				$event = $this->data['VEVENT'][$i];
 
 				if (empty($event['RECURRENCES'])) {
-					if (!empty($event['RECURRENCE-ID']) && !empty($event['UID']) && isset($event['SEQUENCE'])) {
-						\FreePBX::Notifications()->add_warning('calendar', 'RECURRENCEID', _('Calendar using RECURRENCE-ID'), str_replace('%event', $event['SUMMARY'], _('A calendar you have added has an event called "%event" that has a RECURRENCE-ID rule. Because there is no full support yet they are ignored, please consider changing this to Exceptions/Additions.')), "", true, true);
-					} else {
-						if ($event['DTSTART']->getTimestamp() < $now && $now < $event['DTEND']->getTimestamp())
-							array_push($events, $event); //event is now, keep it
+					// Skip cancelled RECURRENCE-ID exceptions (deleted instances)
+					if (!empty($event['RECURRENCE-ID']) && strtoupper($event['STATUS'] ?? '') === 'CANCELLED') {
+						continue;
+					}
+
+					// Include single events and RECURRENCE-ID replacements if happening now
+					if (isset($event['DTSTART']) && isset($event['DTEND'])
+						&& $event['DTSTART']->getTimestamp() < $now && $now < $event['DTEND']->getTimestamp()) {
+						array_push($events, $event);
 					}
 				} else {
 					$recurrences = $event['RECURRENCES'];
