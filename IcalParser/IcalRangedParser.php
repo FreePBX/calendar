@@ -451,6 +451,12 @@ class IcalRangedParser extends \om\IcalParser
 							$instEnd = $this->getMonthlyClampedEnd($rs, $event['DTSTART'], $event['DTEND']);
 							$duration = $instEnd->getTimestamp() - $recurrenceTimestamp;
 						}
+						if(
+							gettype($recurrenceTimestamp) === "object" &&
+							get_class($recurrenceTimestamp) === "DateTime"
+						){
+							$recurrenceTimestamp = $recurrenceTimestamp->getTimestamp();
+						}
 						if ($now > $recurrenceTimestamp && $now < ($recurrenceTimestamp + $duration)) {
 							array_push($events, $event); //at least one recurrence is now, keep it
 							continue 2; //go to the next event
