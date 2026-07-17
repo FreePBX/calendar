@@ -2,7 +2,7 @@
 	<rawname>calendar</rawname>
 	<repo>standard</repo>
 	<name>Calendar</name>
-	<version>17.0.4.24</version>
+	<version>18.0.1</version>
 	<publisher>Sangoma Technologies Corporation</publisher>
 	<license>GPLv3+</license>
 	<licenselink>http://www.gnu.org/licenses/gpl-3.0.txt</licenselink>
@@ -14,18 +14,13 @@
 		<calendargroups needsenginedb="yes">Calendar Event Groups</calendargroups>
 	</menuitems>
 	<changelog>
-		*17.0.4.24* FREEI-1894 calendar monthly recurring events issue fix 
-		*17.0.4.23* #836 importing distant calendar error 
-		*17.0.4.22* Github #717 - Reverting Github Issue #682 fix 
-		*17.0.4.21* Github #682 Fixing Reccurent Events do not work with local Calendar 
-		*17.0.4.20* FREEI-1133 Fixing google calendar in ical calendar event error. 
-		*17.0.1alpha1* 17.0.1 alpha release
+		*18.0.1* initial release
 	</changelog>
 	<depends>
-		<version>17.0.1</version>
+		<version>18.0</version>
 	</depends>
 	<supported>
-		<version>17.0</version>
+		<version>18.0</version>
 	</supported>
 	<console>
 		<command>
