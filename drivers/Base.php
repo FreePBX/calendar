@@ -13,12 +13,12 @@ use Eluceo\iCal\Component\Event;
 use Eluceo\iCal\Property\Event\RecurrenceRule;
 use Exception;
 
-#[\AllowDynamicProperties]
 abstract class Base
 {
 	protected $freepbx;
 	protected $calendarClass;
 	protected $calendar;
+	protected $timezone;
 	protected $now;
 
 	public function __construct($calendarClass, $calendar)

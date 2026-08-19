@@ -41,7 +41,7 @@ var caltype = "<?php echo $data['type']; ?>";
 						<div class="modal-content">
 							<div class="modal-header">
 								<h4 id="modalTitle" class="modal-title"><?php echo _("Event")?></h4>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<button type="button" class="close" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
@@ -540,8 +540,8 @@ var caltype = "<?php echo $data['type']; ?>";
 								</form>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-danger pull-left d-none" data-id='deletebutton' data-dismiss="modal" id="modalDelete"><?php echo _("Delete Event")?></button>
-								<button type="button" class="btn btn-default" data-dismiss="modal"><?php echo _("Close")?></button>
+								<button type="button" class="btn btn-danger pull-left d-none" data-id='deletebutton' data-dismiss="modal" data-bs-dismiss="modal" id="modalDelete"><?php echo _("Delete Event")?></button>
+								<button type="button" class="btn btn-default" data-dismiss="modal" data-bs-dismiss="modal"><?php echo _("Close")?></button>
 								<button type="submit" class="btn btn-default" form='eventForm' id="modalSubmit"><?php echo _("Submit")?></button>
 							</div>
 						</div>

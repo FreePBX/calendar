@@ -17,7 +17,6 @@ use it\thecsea\simple_caldav_client\includes\XMLElement;
 
 
 
-#[\AllowDynamicProperties]
 class CalDAVClient {
   /**
   * Server, username, password, calendar
@@ -77,6 +76,15 @@ class CalDAVClient {
 
   // First part of the full url
   public $first_url_part;
+
+  /** @var string|null URL used for the current request */
+  protected $request_url;
+
+  /** @var array|null Parsed XML nodes from last response */
+  public $xmlnodes;
+
+  /** @var array|null Parsed XML tag index from last response */
+  public $xmltags;
 
   /**
    * Constructor
@@ -179,10 +187,10 @@ class CalDAVClient {
       $headers = preg_split('/\r?\n/', $headers);
 
       // DAV header(s)
-      $dav_header = preg_grep('/^DAV:/', $headers);
+      $dav_header = preg_grep('/^DAV:/i', $headers);
       if (is_array($dav_header)) {
           $dav_header = array_values($dav_header);
-          $dav_header = preg_replace('/^DAV: /', '', $dav_header);
+          $dav_header = preg_replace('/^DAV: /i', '', $dav_header);
 
           $dav_options = array();
 
@@ -965,7 +973,7 @@ EOXML;
                   $response['etag'] = preg_replace('/^"?([^"]+)"?/', '$1', $v['value']);
                   break;
               case 'urn:ietf:params:xml:ns:caldav:calendar-data':
-                        $response['data'] = $v['value'] ?? '';
+                        $response['data'] = $v['value'];
                         break;
           }
       }

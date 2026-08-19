@@ -7,7 +7,7 @@
 		}
 	],
 	"require": {
-		"om/icalparser": "^3.1.0",
+		"om/icalparser": "^3.2.1",
 		"thecsea/simple-caldav-client": "master as dev-master",
 		"eluceo/ical": "0.16.1"
 	},

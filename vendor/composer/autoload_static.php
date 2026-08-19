@@ -7,22 +7,22 @@ namespace Composer\Autoload;
 class ComposerStaticInit678a1299a219628bd23671dbba7bffe5
 {
     public static $prefixLengthsPsr4 = array (
-        'i' => 
+        'i' =>
         array (
             'it\\thecsea\\simple_caldav_client\\' => 32,
         ),
-        'E' => 
+        'E' =>
         array (
             'Eluceo\\iCal\\' => 12,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'it\\thecsea\\simple_caldav_client\\' => 
+        'it\\thecsea\\simple_caldav_client\\' =>
         array (
             0 => __DIR__ . '/..' . '/thecsea/simple-caldav-client/src',
         ),
-        'Eluceo\\iCal\\' => 
+        'Eluceo\\iCal\\' =>
         array (
             0 => __DIR__ . '/..' . '/eluceo/ical/src',
         ),

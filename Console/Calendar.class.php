@@ -17,44 +17,50 @@ use Symfony\Component\Console\Command\HelpCommand;
 
 use Carbon\Carbon;
 
-#[\AllowDynamicProperties]
 class Calendar extends Command
 {
-	protected function configure()
+	protected function configure(): void
 	{
 		$this->setName('calendar')
 			->setDescription(_('Calendar'))
 			->setDefinition([new InputOption('sync', null, InputOption::VALUE_NONE, _('Syncronize all Calendars')), new InputOption('force', null, InputOption::VALUE_NONE, _('Force command')), new InputOption('list', null, InputOption::VALUE_NONE, _('List Events')), new InputOption('export', null, InputOption::VALUE_REQUIRED, _('Export Calendar by ID')), new InputOption('import', null, InputOption::VALUE_REQUIRED, _('Import Calendar by ID')), new InputOption('reset', null, InputOption::VALUE_REQUIRED, _('Reset Calendar by ID')), new InputOption('file', null, InputOption::VALUE_REQUIRED, _('File location of the ics to import')), new InputOption('match', null, InputOption::VALUE_REQUIRED, _('Check if match, value can be any timestamp')), new InputOption('type', null, InputOption::VALUE_REQUIRED, _('One of: calendar | event | group')), new InputOption('id', null, InputOption::VALUE_REQUIRED, _('One of: calendar id | event id | group id'))]);
 	}
-	protected function execute(InputInterface $input, OutputInterface $output)
+	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$calendar = \FreePBX::create()->Calendar;
 		if ($input->getOption('sync')) {
-			return $this->sync($calendar, $input, $output);
+			$this->sync($calendar, $input, $output);
+			return 0;
 		}
 
 		if ($input->getOption('export')) {
-			return $this->export($calendar, $input, $output);
+			$this->export($calendar, $input, $output);
+			return 0;
 		}
 
 		if ($input->getOption('import')) {
-			return $this->import($calendar, $input, $output);
+			$this->import($calendar, $input, $output);
+			return 0;
 		}
 
 		if ($input->getOption('reset')) {
-			return $this->reset($calendar, $input, $output);
+			$this->reset($calendar, $input, $output);
+			return 0;
 		}
 
 		if ($input->getOption('match') && $input->getOption('type')) {
-			return $this->match($calendar, $input, $output);
+			$this->match($calendar, $input, $output);
+			return 0;
 		}
 
 		if ($input->getOption('list')) {
 			if ($input->getOption('id')) {
-				return $this->listCalendarEvents($calendar, $input, $output);
+				$this->listCalendarEvents($calendar, $input, $output);
+				return 0;
 			}
 
-			return $this->listAllCalendar($calendar, $input, $output);
+			$this->listAllCalendar($calendar, $input, $output);
+			return 0;
 		}
 
 		/*
@@ -63,7 +69,7 @@ class Calendar extends Command
 		}
 		*/
 
-		$this->outputHelp($input, $output);
+		return $this->outputHelp($input, $output);
 	}
 
 	private function listAllCalendar($calendar, InputInterface $input, OutputInterface $output)

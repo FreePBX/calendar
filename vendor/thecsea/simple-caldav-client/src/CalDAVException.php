@@ -20,7 +20,7 @@ class CalDAVException extends \Exception {
 	private $responseHeader;
 	private $responseBody;
 	
-	public function __construct($message, $client, $code = 0, Exception $previous = null) {
+	public function __construct($message, $client, $code = 0, ?Exception $previous = null) {
     	parent::__construct($message, $code, $previous);
     	
     	$this->requestHeader = $client->GetHttpRequest();

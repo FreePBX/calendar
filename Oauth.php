@@ -2,7 +2,7 @@
 namespace FreePBX\modules\Calendar;
 
 class Oauth {
-    private $access_token = null;
+	private $token = null;
 	private $tenant = null;
 	private $key = null;
 	private $secret = null;
