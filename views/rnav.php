@@ -2,7 +2,7 @@
 	<a href="?display=calendar" class="btn btn-default"><i class="fa fa-list"></i> <?php echo _("List Calendars")?></a>
 	<a  href = "?display=calendar&amp;action=oauthsettings" class="btn btn-default"><i class="fa fa-list"></i> <?php echo _("Outlook Oauth2 Config")?></a>
 	<div class="dropdown">
-		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
 			<i class="fa fa-plus">&nbsp;</i><?php echo _("Add Calendar")?> <span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" role="menu">

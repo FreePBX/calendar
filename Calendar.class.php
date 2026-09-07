@@ -14,14 +14,17 @@ use it\thecsea\simple_caldav_client\SimpleCalDAVClient;
 use om\IcalParser;
 use \jamesiarmes\PhpEws\Client;
 use \FreePBX\modules\Calendar\drivers\Ews\Calendar as EWSCalendar;
-use malkusch\lock\mutex\FlockMutex;
+use Malkusch\Lock\Mutex\FlockMutex;
 use BMO;
 use DB_Helper;
 use \FreePBX\modules\Calendar\Oauth;
 
-#[\AllowDynamicProperties]
 class Calendar extends \DB_Helper implements \BMO
 {
+	/** Accessed by driver Base via $calendarClass->FreePBX */
+	public $FreePBX;
+	private $db;
+	private $systemtz = null;
 	private ?array $guimessage = null;
 	private $oauth = null;
 

@@ -18,7 +18,6 @@ namespace it\thecsea\simple_caldav_client\includes;
 *
 * @package   awl
 */
-#[\AllowDynamicProperties]
 class XMLDocument {
 
   /**#@+
@@ -41,6 +40,12 @@ class XMLDocument {
   * @var root
   */
   private $root;
+
+  /**
+  * Next generated namespace prefix counter
+  * @var int
+  */
+  private $next_prefix = 0;
 
   /**
   * Simple XMLDocument constructor

@@ -10,7 +10,7 @@ if(!empty($message)) { ?>
 <?php } ?>
 <div id="toolbar-all">
 	<div class="dropdown" style="display: inline-block !important;">
-		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false">
 			<i class="fa fa-plus">&nbsp;</i><?php echo _("Add Calendar")?> <span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" role="menu">

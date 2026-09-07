@@ -9,7 +9,6 @@ use om\EventsList;
 use Carbon\CarbonPeriod;
 use Exception;
 
-#[\AllowDynamicProperties]
 class IcalRangedParser extends \om\IcalParser
 {
 	private $ranges = [
