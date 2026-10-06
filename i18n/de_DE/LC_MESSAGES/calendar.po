@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-22 06:52-0400\n"
+"POT-Creation-Date: 2026-10-06 06:15-0400\n"
 "PO-Revision-Date: 2018-07-18 19:12+0000\n"
 "Last-Translator: Bastian Mertgen <b.mertgen@bastian-mertgen.de>\n"
 "Language-Team: German <http://*/projects/freepbx/calendar/de/>\n"
@@ -199,6 +199,10 @@ msgstr "zugelassene Kalender"
 msgid "Application (client) ID"
 msgstr ""
 
+#: calendar.i18n.php:6
+msgid "Applications"
+msgstr "Anwendungen"
+
 #: views/remote_caldav_settings.php:220
 msgid "Attempting to load..."
 msgstr "Versuche, zu laden..."
@@ -218,10 +222,15 @@ msgid ""
 "while registering your application"
 msgstr ""
 
-#: Calendar.class.php:1001 Console/Calendar.class.php:25
-#: views/oauth_calendar_form.php:175 views/remote_caldav_settings.php:133
+#: Calendar.class.php:1001 Console/Calendar.class.php:25 calendar.i18n.php:4
+#: calendar.i18n.php:10 views/oauth_calendar_form.php:175
+#: views/remote_caldav_settings.php:133
 msgid "Calendar"
 msgstr "Kalender"
+
+#: calendar.i18n.php:12
+msgid "Calendar Event Groups"
+msgstr "Kalender Ereignisgruppen"
 
 #: functions.inc.php:13 functions.inc.php:23
 #, php-format
@@ -877,6 +886,11 @@ msgstr ""
 msgid "These groups can then be linked to various applications or utilities"
 msgstr ""
 
+#: calendar.i18n.php:8
+msgid ""
+"This module is used to manage calendar and time based events for FreePBX"
+msgstr ""
+
 #: views/calendar.php:224
 msgid "Time event starts"
 msgstr ""
@@ -1026,12 +1040,6 @@ msgstr ""
 #: Calendar.class.php:358
 msgid "to"
 msgstr ""
-
-#~ msgid "Applications"
-#~ msgstr "Anwendungen"
-
-#~ msgid "Calendar Event Groups"
-#~ msgstr "Kalender Ereignisgruppen"
 
 #~ msgid "No settings were discovered"
 #~ msgstr "Es wurden keine Einstellungen gefunden"
