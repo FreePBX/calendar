@@ -2,10 +2,10 @@ $(document).ready(function() {
 	$('#events').multiselect({
 			enableFiltering: true,
 			enableFullValueFiltering: true,
-			enableClickableOptGroups: true,
-			enableCollapsibleOptGroups: true,
 			includeSelectAllOption: true,
 			enableCaseInsensitiveFiltering: true,
+			enableClickableOptGroups: false,
+			enableCollapsibleOptGroups: false,
 			buttonWidth: '50%',
 			nonSelectedText: _('Use All Events'),
 			buttonContainer: '<div class="btn-group ok"><span class="radioset" id="expand"><input type="checkbox" id="expandcheck" name="expand" class="form-control"><label for="expandcheck">'+_('Expand Recurring Dates')+'</label></span><div>'
@@ -19,10 +19,10 @@ $(document).ready(function() {
 	$('#categories').multiselect({
 			enableFiltering: true,
 			enableFullValueFiltering: true,
-			enableClickableOptGroups: true,
-			enableCollapsibleOptGroups: true,
 			includeSelectAllOption: true,
 			enableCaseInsensitiveFiltering: true,
+			enableClickableOptGroups: false,
+			enableCollapsibleOptGroups: false,
 			buttonWidth: '50%',
 			nonSelectedText: _('Use All Categories')
 	});
