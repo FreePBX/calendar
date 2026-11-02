@@ -209,14 +209,12 @@ class Frequency extends Freq
         }
 
         //EOP needs to have the same TIME as START ($t)
-        $tO = new DateTime('@' . $t, new DateTimeZone('UTC'));
-
+        // The wall-clock time must be applied in the local (event) timezone, not UTC. Doing it in UTC
+        // shifts EOP by an hour when the period crosses a DST change: after the autumn change, EOP ends
+        // an hour before the next occurrence, so it is skipped (e.g. weekly BYDAY=MO dropped the first
+        // Monday of November, issue-tracker #538).
         $eop = $this->findEndOfPeriod($offset);
-        $eopO = new DateTime('@' . $eop, new DateTimeZone('UTC'));
-        $eopO->setTime($tO->format('H'), $tO->format('i'), $tO->format('s'));
-        $eop = $eopO->getTimestamp();
-        unset($eopO);
-        unset($tO);
+        $eop = mktime(date('H', $t), date('i', $t), date('s', $t), date('m', $eop), date('d', $eop), date('Y', $eop));
 
         if ($debug) echo 'EOP: ' . date('r', $eop) . "\n";
 
@@ -249,14 +247,6 @@ class Frequency extends Freq
             }
         }
 
-        //https://sangoma.atlassian.net/browse/FREEI-1036 - fix for the issue
-        $monthDayjan = date("m-d", $t); 
-        if ($monthDayjan === "01-01" && $t == $offset) {
-            // Add 1 year to the timestamp as the start date and loop start date are same in case of allday event (Ex: recursive event of allday which occus on jan 1st year-01-01 00:00:00)
-            $t = strtotime("+1 year", $t);
-        }
-        //https://sangoma.atlassian.net/browse/FREEI-1036 - fix for the issue - end
-
         if ($offset < $this->start && $this->start < $t) {
             $ts = $this->start;
         } elseif ($found && ($t != $offset)) {
@@ -273,7 +263,15 @@ class Frequency extends Freq
             // om\Freq recursed findNext($sp), which skips the occurrence timestamp at $sp when it
             // is itself a valid instance (e.g. MONTHLY;BYMONTHDAY=1: next after Mar 1 must be Apr 1,
             // but findNext(Apr 1) searched strictly after Apr 1 and never returned Apr 1).
-            if ($this->validDate($sp) && $sp > $offset) {
+            // That only happens for events starting at midnight (e.g. all-day events): $sp is midnight, so
+            // for a timed event findNext($sp) searches from the event's start time on $sp's day and finds it.
+            // validDate() ignores BYDAY ordinals (2MO, -1FR), BYYEARDAY and BYSETPOS, so on its own it would
+            // accept e.g. June 1 for MONTHLY;BYDAY=2MO. Check the ordinal and year-day here and leave BYSETPOS
+            // to findNext().
+            $useShortcut = $sp > $offset && date('His', $this->start) === '000000'
+                && !isset($this->rules['bysetpos'])
+                && $this->validDate($sp) && $this->matchesByday($sp) && $this->matchesByyearday($sp);
+            if ($useShortcut) {
                 $ts = $sp;
             } else {
                 $ts = $this->findNext($sp);
@@ -355,6 +353,61 @@ class Frequency extends Freq
         return $d;
     }
 
+    /**
+     * Whether $t is one of the BYDAY days, including the "Nth" part (e.g. 2MO = 2nd Monday).
+     * ruleByday() works out where the Nth weekday falls in $t's month (or year).
+     *
+     * @param int $t
+     * @return bool
+     */
+    private function matchesByday($t)
+    {
+        if (!isset($this->rules['byday'])) {
+            return true;
+        }
+        foreach (explode(',', (string) $this->rules['byday']) as $entry) {
+            $entry = trim($entry);
+            if (strtolower(date('l', $t)) === $this->weekdays[substr($entry, -2)]
+                && (strlen($entry) === 2 || $this->ruleByday($entry, $t) === $t)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Midnight at the start of $t's week. Weeks start on WKST (Monday unless the rule says otherwise).
+     *
+     * @param int $t
+     * @return int
+     */
+    private function startOfWeek($t)
+    {
+        $wkst = $this->weekdays[strtoupper((string) ($this->rules['wkst'] ?? 'MO'))] ?? 'monday';
+        return strtotime(strtolower(date('l', $t)) === $wkst ? 'today' : 'last ' . $wkst, $t);
+    }
+
+    /**
+     * Whether $t is one of the BYYEARDAY days (1 = Jan 1, -1 = Dec 31).
+     *
+     * @param int $t
+     * @return bool
+     */
+    private function matchesByyearday($t)
+    {
+        if (!isset($this->rules['byyearday'])) {
+            return true;
+        }
+        $day = (int) date('z', $t) + 1;
+        $daysInYear = 365 + (int) date('L', $t);
+        foreach (explode(',', (string) $this->rules['byyearday']) as $n) {
+            if ((int) $n === $day || (int) $n === $day - $daysInYear - 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private function validDate($t)
     {
         if (isset($this->rules['until']) && $t > $this->rules['until']) {
@@ -377,6 +430,14 @@ class Frequency extends Freq
                 $days[$i] = $this->weekdays[preg_replace('/[^A-Z]/', '', $k)];
             }
             if (!in_array(strtolower(date('l', $t)), $days) && $this->rules['freq'] != 'YEARLY') {
+                return false;
+            }
+        }
+        // Weekly with INTERVAL (e.g. every 2nd week): only weeks that are a multiple of INTERVAL weeks after
+        // the start's week. findNext() steps from one BYDAY weekday to the next and doesn't skip weeks itself.
+        if ($this->freq === 'weekly' && (int) $this->rules['interval'] > 1) {
+            $weeks = (int) round(($this->startOfWeek($t) - $this->startOfWeek($this->start)) / 604800);
+            if ($weeks % (int) $this->rules['interval'] !== 0) {
                 return false;
             }
         }
